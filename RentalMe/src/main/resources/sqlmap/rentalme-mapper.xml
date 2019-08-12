@@ -6,7 +6,7 @@
 <mapper namespace="rentalme">
 	<select id="selectAll" resultType="com.me.rentalme.model.entity.RentalMeVo">
 		SELECT * 
-		  FROM day09 
+		  FROM testqe
 		 ORDER 
 		    BY NUM
 	</select>
