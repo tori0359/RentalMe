@@ -9,9 +9,9 @@
 <body>
 	<table>
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>날짜</th>
+			<th>번호1</th>
+			<th>제목1</th>
+			<th>날짜1</th>
 		</tr>
 		<c:forEach items="${alist }" var="bean">
 		<tr>
