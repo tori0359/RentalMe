@@ -17,6 +17,8 @@ import com.me.rentalme.model.entity.UserVo;
 * @author 황인준
 * @version ver1.0
 * @see 
+* 등록일자 : 2019.08.12
+* 수정일자 : 2019.08.13
 */
 @Controller
 @RequestMapping(value="/join")
@@ -24,15 +26,14 @@ public class JoinController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
-	//회원가입 서비스 객체 주입
 	@Inject
-	JoinService joinService;
+	JoinService joinService; 
 	
 	/**
 	* 회원가입 페이지 
 	* 
 	* @param  none
-	* @return String - 약관동의 페이지로 이동
+	* @return String 
 	* @author 황인준
 	* @exception none
 	*/
@@ -40,14 +41,14 @@ public class JoinController {
 	public String getSignUp() {
 		log.debug("회원가입 컨트롤러 페이지...");
 		
-		return "join/terms";
+		return "join/joinus";
 	}
 	
 	/**
 	* 약관동의 페이지 
 	* 
 	* @param  none
-	* @return String - 회원정보 입력 페이지로 이동
+	* @return String 
 	* @author 황인준
 	* @exception none
 	*/
@@ -55,7 +56,7 @@ public class JoinController {
 	public String getTerms() {
 		log.debug("약관동의 컨트롤러...");
 		
-		return "join/info";
+		return "join/terms";
 	}
 	
 	/**
@@ -66,7 +67,7 @@ public class JoinController {
 	* @author 황인준
 	* @exception None
 	*/
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "/info", method = RequestMethod.POST)
 	public String registerInfo(UserVo bean) {
 		log.debug("회원정보 입력 컨트롤러...");
 		
@@ -89,7 +90,7 @@ public class JoinController {
 	* @author 황인준
 	* @exception None
 	*/
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/compl", method = RequestMethod.POST)
 	public String getCompl() {
 		log.debug("가입완료 컨트롤러...");
 	
