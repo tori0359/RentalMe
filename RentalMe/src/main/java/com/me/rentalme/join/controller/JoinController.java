@@ -60,6 +60,21 @@ public class JoinController {
 	}
 	
 	/**
+	* 회원정보 등록 폼
+	* 
+	* @param  None 
+	* @return String 
+	* @author 황인준
+	* @exception None
+	*/
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String info() {
+		log.debug("회원정보 등록 폼 컨트롤러");
+		
+		return "join/info";
+	}
+	
+	/**
 	* 회원정보 입력
 	* 
 	* @param  UserVo 
