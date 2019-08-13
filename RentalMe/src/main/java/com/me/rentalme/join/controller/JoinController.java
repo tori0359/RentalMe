@@ -12,7 +12,7 @@ import com.me.rentalme.join.service.JoinService;
 import com.me.rentalme.model.entity.UserVo;
 
 /**
-* @brief 회원가입 컨트롤러
+* 회원가입 컨트롤러
 * 
 * @author 황인준
 * @version ver1.0

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.me.rentalme.model.entity.UserVo;
 
 /**
-* @brief 회원가입 Dao 
+* 회원가입 Dao
 * 
 * @author 황인준
 * @version ver1.0

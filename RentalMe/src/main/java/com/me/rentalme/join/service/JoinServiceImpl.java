@@ -10,7 +10,7 @@ import com.me.rentalme.join.model.JoinDao;
 import com.me.rentalme.model.entity.UserVo;
 
 /**
-* @brief 회원가입 서비스
+* 회원가입 서비스
 * 
 * @author 황인준
 * @version ver1.0
