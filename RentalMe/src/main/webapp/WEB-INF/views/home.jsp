@@ -212,7 +212,7 @@
        <div class="col-md-12">
       <p class="navbar-text navbar-right"> 
       <a href="#" class="navbar-link">로그인</a> ㅣ
-      <a href="#" class="navbar-link">회원가입</a></p>
+      <a href="/" class="navbar-link">회원가입</a></p>
       </div>
     </div>
      <div class="navtitle">
@@ -316,7 +316,6 @@
 </div>
 
 <div class="hr">
-   
    
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
