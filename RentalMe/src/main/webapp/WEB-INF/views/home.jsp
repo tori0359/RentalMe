@@ -21,5 +21,6 @@
 		</tr>
 		</c:forEach>		
 	</table>
+	<a href="join/signup">회원가입</a>	
 </body>
 </html>
