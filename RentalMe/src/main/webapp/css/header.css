@@ -1,0 +1,224 @@
+ /*占쎈？占쎈뱜占쎄퐬占쎌젟*/
+        @font-face {
+            font-family: "altair";
+            src: url("../fonts/Altair-bold Trial.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {
+            font-family: "hanserif";
+            src: url("../fonts/SourceHanSerifK-Medium.otf") format("opentype");
+            font-style: normal;
+        }
+		
+		@font-face {
+            font-family: "nanumR";
+            src: url("../fonts/NanumSquare_acL.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {/*占쎈립疫뀐옙 筌욊쑵釉� 占쎈？占쎈뱜*/
+            font-family: "nanumB";
+            src: url("../fonts/NanumSquare_acR.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {/*占쎈립疫뀐옙 占쎈쐭占쎈あ�댆�눘�뒲 占쎈？占쎈뱜*/
+            font-family: "nanumEB";
+            src: url("../fonts/NanumSquare_acEB.ttf") format("truetype");
+            font-style: normal;
+        }
+		
+		.hr {
+			height: 1px;
+			width: 100%;
+			background-color: lightgrey;
+		}
+		
+		#subtitle>a{
+			font-family: "altair";
+			color:lightblue;
+			font-size: 45pt;
+			font-style: italic;
+		}
+		body{
+			width:1600px;
+			overflow-x:scroll;
+		}
+		#subtitle>a:hover{
+			text-decoration: none;
+		}
+		
+		#subtitle>h4{
+			font-family: "hanserif";
+			color: lightgrey;
+		}
+		
+		.navbar-link:hover,.navbar-link:active{
+			font-weight: bolder;
+			text-decoration: none;
+		}
+		
+		.navbar-link:visited,.navbar-link:link{
+			text-decoration: none;
+		}
+		.navtitle{
+			padding: 1px;
+			background-color: black;
+			width:100%;
+		}
+		.menu{
+			width:100%;
+			height:45px;
+			position: relative;
+         z-index:2;
+		}
+		
+		#topMenu { 
+			height: 50px;
+			width:1400px;
+		} 
+	
+		#topMenu ul { 
+			list-style-type: none;
+			margin: 0px; /* 筌롫뗄�뵥 筌롫뗀�뤀 占쎈툧占쎌벥 ul占쎌벥 margin占쎌뱽 占쎈씨占쎈퉲 */ 
+			padding: 0px; /* 筌롫뗄�뵥 筌롫뗀�뤀 占쎈툧占쎌벥 ul占쎌벥 padding占쎌뱽 占쎈씨占쎈퉲 */
+		} 
+		
+		#topMenu ul li { 
+			color: black; 
+			background-color: ; 
+			float: left;
+			line-height: 30px;
+			vertical-align: middle; 
+			text-align: center;
+			position: relative; /* 占쎈퉸占쎈뼣 li 占쎄묶域뱄옙 占쎄땀�겫占쏙옙�벥 top/left 占쎈７筌욑옙占쎈�� �룯�뜃由곤옙�넅 */ 
+		} 
+		.navbar-text>a{
+			font-family: nanumB;
+			color:black;
+		}
+		
+		.menuLink, .submenu a {
+			text-decoration:none;
+			display: block;
+			width: 140px; 
+			font-size: 14px; 
+			font-weight: bold; 
+			font-family: "nanumB";
+			padding: 8px;
+			
+		} 
+		
+		.menuLink { /* 占쎄맒占쎌맄 筌롫뗀�뤀占쎌벥 疫뀐옙占쎈뎁占쎄퉳占쎌뱽 占쎌뵛占쎄퉳占쎌몵嚥∽옙 占쎄퐬占쎌젟 */ 
+			color: black; 
+		} 
+	
+		.topMenuLi>a{
+			color: black;
+			text-decoration: none;
+			font-family: "nanumB";
+		}
+		
+		.topMenuLi:hover .menuLink{ /* 占쎄맒占쎌맄 筌롫뗀�뤀占쎌벥 li占쎈퓠 筌띾뜆�뒭占쎈뮞占쎌궎甕곤옙 占쎈┷占쎈�占쎌뱽 占쎈르 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */
+			color: white;
+			font-weight: bolder;
+			background-color: #4d4d4d; 
+			text-decoration: none;
+		} 
+		.topMenuLi2>a{
+			color: black;
+			text-decoration: none;
+		}
+		
+		.topMenuLi2>a:hover,.topMenuLi2>a:active{ /* 餓λ쵌�у쳞怨뺤삋 筌롫뗀�뤀占쎌벥 li占쎈퓠 筌띾뜆�뒭占쎈뮞占쎌궎甕곤옙 占쎈┷占쎈�占쎌뱽 占쎈르 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */
+			color: white;
+			font-weight: bolder;
+			background-color: #E7A602; 
+			text-decoration: none;
+		} 
+		
+		.submenu a { /* 占쎈릭占쎌맄 筌롫뗀�뤀占쎌벥 a 占쎄묶域뱄옙 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */ 
+			color: #2d2d2d;
+			background-color: white;
+			margin-top: -1px;
+		} 
+		
+		.submenu { /* 占쎈릭占쎌맄 筌롫뗀�뤀 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */ 
+			position: absolute; /* html占쎌벥 flow占쎈퓠 占쎌겫占쎈샨占쎌뱽 沃섎챷�뒄筌욑옙 占쎈륫野껓옙 absolute 占쎄퐬占쎌젟 */ 
+			height: 0px; /* �룯�뜃由� 占쎈꼥占쎌뵠占쎈뮉 0px嚥∽옙 占쎄퐬占쎌젟 */ 
+			overflow: hidden; /* 占쎈뼄 占쎄땀占쎌뒠占쎌뵠 占쎈꼥占쎌뵠癰귣��뼄 �뚣끉占쏙쭖占� 占쎈퉸占쎈뼣 占쎄땀占쎌뒠 揶쏅Ŋ�븘 */ transition: height .3s;
+			-webkit-transition: height .3s; /* (�뤃�됱쒔占쎌읈 占쎄쾿嚥∽옙/占쎄텢占쎈솁�뵳占�) */ 
+			-moz-transition: height .3s; /* (�뤃�됱쒔占쎌읈 占쎈솁占쎈：) */ 
+			-o-transition: height .3s; /* (�뤃�됱쒔占쎌읈 占쎌궎占쎈읂占쎌뵬) */ 
+		} 
+		.row{
+			width:100%;
+			margin:0px;
+		}
+
+		.topMenuLi:hover .submenu { 
+			/* 占쎄맒占쎌맄 筌롫뗀�뤀占쎈퓠 筌띾뜆�뒭占쎈뮞 筌뤴뫀苡�占쎈립 野껋럩�뒭 域뱄옙 占쎈툧占쎌벥 占쎈릭占쎌맄 筌롫뗀�뤀 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */ 
+			height: 580px;
+		} 
+		
+		.submenu a:hover{/* 占쎈릭占쎌맄 筌롫뗀�뤀占쎌벥 a 占쎄묶域밸챷�벥 筌띾뜆�뒭占쎈뮞 占쎌궎甕곤옙 占쎈뮞占쏙옙占쎌뵬 占쎄퐬占쎌젟 */
+			color: black; 
+			background-color: #dddddd; /* 獄쏄퀗瑗랃옙�뱽 RGB(DDDDDD)嚥∽옙 占쎄퐬占쎌젟 */ 
+		}
+		
+		#content{
+			font-family: "nanumB";
+			font-size: 15px;
+			color: black;
+			/*border: 1px solid black;*/ /*占쎄돌餓λ쵐肉� 雅뚯눘苑랃㎗�꼶�봺 占쎈퉸占쎈튊占쎈맙*/
+			padding-top: 50px;
+			height:100%;
+			position: relative;
+           z-index:1;
+			
+		}
+
+		/*�⑥쥒而쇽옙苑깍옙苑� 筌롫뗀�뤀 獄쏉옙*/
+		#noticeBar table{
+			margin-top: 80px;
+			font-size:20px;
+		}
+		#noticeBar td:nth-child(1){
+			border-bottom-left-radius: 10px;
+			border-top-left-radius: 10px;
+			color:white;
+			background:black;
+			width:34%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(2){
+			background:white;
+			border-left:0.1px solid;
+			border-right:0.1px solid;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(3){
+			border-bottom-right-radius: 10px;
+			border-top-right-radius: 10px;
+			background:white;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar>table{
+			width:100%;
+			height:50px;
+		}
+		#content>table>tr>th:nth-child(1){
+			width:20%;
+			background:blue;
+		}
+		#content>table>tr>th:nth-child(2){
+			width:60%;
+		}
+		#content>table>tr>th:nth-child(3){
+			width:20%;
+		}
+		
+			
+		
+
+		
