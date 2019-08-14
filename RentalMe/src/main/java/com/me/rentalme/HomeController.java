@@ -28,4 +28,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "userActList", method = RequestMethod.GET)
+	public String view(Model model) throws SQLException {
+		
+		return "/mp/user/userActList";
+	}
+	
+	
 }

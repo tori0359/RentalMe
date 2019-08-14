@@ -3589,19 +3589,22 @@ tbody.collapse.in {
 }
 .dropup,
 .dropdown {
-  position: relative;
+	position: relative;
+	width: 123px;
+	margin-top: 0px;
+	padding: 0px;
 }
 .dropdown-toggle:focus {
-  outline: 0;
+  	outline: 0;
 }
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 1000;
   display: none;
-  float: left;
-  min-width: 160px;
+  min-width: 123px;
   padding: 5px 0;
   margin: 2px 0 0;
   font-size: 14px;
@@ -3615,6 +3618,7 @@ tbody.collapse.in {
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
+
 .dropdown-menu.pull-right {
   right: 0;
   left: auto;
@@ -3700,7 +3704,7 @@ tbody.collapse.in {
   content: "";
   border-top: 0;
   border-bottom: 4px dashed;
-  border-bottom: 4px solid \9;
+  border-bottom: 4px solid;
 }
 .dropup .dropdown-menu,
 .navbar-fixed-bottom .dropdown .dropdown-menu {
@@ -4417,7 +4421,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-nav .open .dropdown-menu > li > a,
   .navbar-nav .open .dropdown-menu .dropdown-header {
-    padding: 5px 15px 5px 25px;
+    padding: 5px 15px 5px 15px;
   }
   .navbar-nav .open .dropdown-menu > li > a {
     line-height: 20px;
@@ -4426,6 +4430,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-nav .open .dropdown-menu > li > a:focus {
     background-image: none;
   }
+	.dropdown{
+		width:400px;
+	}
+	.dropdown-menu>li:last-child a{
+		border-bottom: 1px solid grey;
+	}
+	
 }
 @media (min-width: 768px) {
   .navbar-nav {
@@ -4603,11 +4614,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #ccc;
   background-color: transparent;
 }
-.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a {
+  	color: white;
+	background: yellow;
+}
+
 .navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  color: #555;
-  background-color: #e7e7e7;
+.navbar-default .navbar-nav > .open > a:focus{
+	color:white;
+	background: #4d4d4d;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
