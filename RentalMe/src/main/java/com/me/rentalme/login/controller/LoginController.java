@@ -34,7 +34,7 @@ public class LoginController {
 	* @param  UserVo
 	* @return String 
 	* @author 황인준
-	* @exception return("namespace.id명", 파라미터)
+	* @exception 
 	*/
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(UserVo bean, HttpServletRequest req) {
