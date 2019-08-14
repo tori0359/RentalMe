@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 * 등록일자 : 2019.08.14
 */
 @Controller
-@RequestMapping("/mp/mng")
+@RequestMapping("/mp")
 public class MngAppliController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
@@ -29,7 +29,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/", method = RequestMethod.POST)
 	public ModelAndView getMainList() {
 		log.debug("마이페이지(관리자) 메인 컨트롤러");
 		
@@ -46,7 +46,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/lg", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/lg", method = RequestMethod.GET)
 	public ModelAndView getLgList() {
 		log.debug("대형가전 리스트 컨트롤러");
 		
@@ -63,7 +63,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/sm", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/sm", method = RequestMethod.GET)
 	public ModelAndView getSmList() {
 		log.debug("소형가전 리스트 컨트롤러");
 		
@@ -80,7 +80,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/kitc", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/kitc", method = RequestMethod.GET)
 	public ModelAndView getKitcList() {
 		log.debug("주방 리스트 컨트롤러");
 		
@@ -97,7 +97,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/furn", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/furn", method = RequestMethod.GET)
 	public ModelAndView getFurnList() {
 		log.debug("가구 리스트 컨트롤러");
 		
@@ -114,7 +114,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/rest", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/rest", method = RequestMethod.GET)
 	public ModelAndView getRestList() {
 		log.debug("기타 리스트 컨트롤러");
 		
@@ -131,7 +131,7 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/Appli/pkg", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/Appli/pkg", method = RequestMethod.GET)
 	public ModelAndView getPkgList() {
 		log.debug("패키지 리스트 컨트롤러");
 		

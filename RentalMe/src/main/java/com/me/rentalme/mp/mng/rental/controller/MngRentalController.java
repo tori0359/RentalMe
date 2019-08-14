@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 * 등록일자 : 2019.08.14
 */
 @Controller
-@RequestMapping("/mp/mng")
+@RequestMapping("/mp")
 public class MngRentalController {
 
 	Logger log = LoggerFactory.getLogger(getClass());
@@ -29,7 +29,7 @@ public class MngRentalController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/mng/", method = RequestMethod.GET)
 	public String getPrdRegisterForm() {
 		log.debug("마이페이지(관리자) 상품 등록 폼 컨트롤러");
 		
@@ -44,7 +44,7 @@ public class MngRentalController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/rental/{prdDiv}", method = RequestMethod.POST)
+	@RequestMapping(value = "/mng/rental/{prdDiv}", method = RequestMethod.POST)
 	public ModelAndView getRentalList(@PathVariable String prdDiv) {
 		log.debug("마이페이지(관리자) 상품 등록 컨트롤러");
 		

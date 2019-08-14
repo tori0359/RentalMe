@@ -1,6 +1,5 @@
 package com.me.rentalme.login.controller;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.me.rentalme.login.service.LoginService;
 import com.me.rentalme.model.entity.UserVo;
 
 /**
@@ -24,8 +22,8 @@ import com.me.rentalme.model.entity.UserVo;
 @Controller
 public class LoginController {
 	
-	@Inject
-	LoginService loginService;
+//	@Inject
+//	LoginService loginService;
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -58,7 +56,7 @@ public class LoginController {
 		log.debug("로그인 컨트롤러...");
 		
 		//Service에서 세션 처리 
-		int result = loginService.login(bean, req);
+		//int result = loginService.login(bean, req);
 		
 		return "redirect:/";
 	}

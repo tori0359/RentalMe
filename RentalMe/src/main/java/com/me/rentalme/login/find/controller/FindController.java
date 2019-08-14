@@ -18,6 +18,7 @@ import com.me.rentalme.model.entity.UserVo;
 * 등록일자 : 2019.08.14
 */
 @Controller
+@RequestMapping("/login")
 public class FindController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
@@ -31,7 +32,7 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findId", method = RequestMethod.GET)
+	@RequestMapping(value = "/email/findId", method = RequestMethod.GET)
 	public String findEmailId() {
 		log.debug("등록된 이메일로 아이디 찾기 폼 컨트롤러...");
 		
@@ -47,7 +48,7 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findId", method = RequestMethod.POST)
+	@RequestMapping(value = "/email/findId", method = RequestMethod.POST)
 	public ModelAndView findEmailId(String email) {
 		log.debug("등록된 이메일로 아이디 찾기 컨트롤러 ...");
 		
@@ -71,7 +72,7 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findPw", method = RequestMethod.GET)
+	@RequestMapping(value = "/email/findPw", method = RequestMethod.GET)
 	public String findEmailPw() {
 		log.debug("등록된 이메일로 비밀번호 찾기 폼 컨트롤러");
 		
@@ -87,7 +88,7 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findPw", method = RequestMethod.POST)
+	@RequestMapping(value = "/email/findPw", method = RequestMethod.POST)
 	public String findEmailPw(UserVo bean) {
 		log.debug("등록된 이메일로 비밀번호 찾기 컨트롤러");
 		
