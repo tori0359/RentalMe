@@ -204,6 +204,34 @@
 	</style>
    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
    <script type="text/javascript" src="js/bootstrap.js"></script>
+   <script type="text/javascript">
+   var sel_files = [];
+   
+   $(document).ready(function() {
+       $("#input_imgs").on("change", handleImgsFilesSelect);
+   }); 
+
+   function handleImgsFilesSelect(e) {
+       var files = e.target.files;
+       var filesArr = Array.prototype.slice.call(files);
+
+       filesArr.forEach(function(f) {
+           if(!f.type.match("image.*")) {
+               alert("확장자는 이미지 확장자만 가능합니다.");
+               return;
+           }
+
+           sel_files.push(f);
+
+           var reader = new FileReader();
+           reader.onload = function(e) {
+               var img_html = "<img src=\"" + e.target.result + "\" />";
+               $(".imgs_wrap").append(img_html);
+           }
+           reader.readAsDataURL(f);
+       });
+   }
+   </script>
 </head>
 <body>
 <div>
@@ -310,7 +338,7 @@
       </ul> 
       
    </nav>
-   </div>
+   </div>cheerupseaau heregroupc
  </div>
 </div>
 </div>
@@ -320,11 +348,20 @@
    
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
-   <div id="joinus">
-        <h3>회원가입</h3>
-        <p>안녕하세요 렌탈미입니다.</p>
-        <a href="#" class="btn btn-default btn-lg btn-block" id="join_btn" role="button">가입하기</a>
-        </div>
-    </div>
+<form action="upload" method="post" enctype="multipart/form-data">
+	<div>
+		sub:<input type="text" name="sub" />
+	</div>
+	<div>
+		file:<input type="file" id="input_imgs" name="file1" multiple="multiple"/>
+	</div>
+	<button>전송</button>
+</form>
+<div>
+<div class="imgs_wrap">
+	
+</div>
+</div>
+</div>
 </body>
 </html>
