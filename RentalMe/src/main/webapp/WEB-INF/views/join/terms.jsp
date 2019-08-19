@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>약관동의 페이지</h1>
 </body>
 </html>
