@@ -1,36 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-   <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
-   <jsp:include page="../template/header.jsp"></jsp:include>
-   <style type="text/css">
-      /*폰트설정*/
-        @font-face {
-            font-family: "altair";
-            src: url("../fonts/altair.extrabold-italic.ttf") format("truetype");
-            font-style: normal;
-        }
-      @font-face {
-            font-family: "hanserif";
-            src: url("../fonts/SourceHanSerifK-Medium.otf") format("opentype");
-            font-style: normal;
-        }
-      @font-face {
-            font-family: "NanumB";
-            src: url("../fonts/NanumSquare_acR.ttf") format("truetype");
-            font-style: normal;
-        }
-      @font-face {
-            font-family: "NanumEB";
-            src: url("../fonts/NanumSquare_acEB.ttf") format("truetype");
-            font-style: normal;
-        }
-      
-     
-       #mp{
+<meta charset="UTF-8">
+<style type="text/css">
+
+	   #wrap{
+	      	min-height:100%;
+	      	position:relative;
+	      }
+	      
+		.contentDiv{
+			padding-bottom: 200px;
+		}
+		
+		#mp{
             margin: 50px 0px 10px 30px;
         }
         
@@ -49,6 +35,7 @@
             -webkit-border-radius: 15px 15px 0 0;
             border-radius: 15px 15px 0 0;
 			font-family: "nanumR";
+			text-align: center;
         }
         
         .mpTable>tbody tr{
@@ -83,35 +70,26 @@
             -webkit-border-radius: 0 0 10px 15px;
             border-radius: 0 0 15px 15;            
         } 
-	   #mpDiv{
+        
+	   .mpdiv{
 		   position: relative;
 		   z-index:1;
-	   }
-	   #mpContent{
-		   /*border: 1px solid black;*/
-		   height: 100%;
-	   }
-	   .row{
-		   margin: 0px;
+		   margin-top:100px;
+		   margin-bottom: 100px;
 	   }
 	
-        @media screen and (max-width: 768px){
-		   #mp{
-		   		margin:0px auto;
-		   		text-align: center;
-		   }
-		   .contentDiv{
-		   		margin:0px auto;
-		   }
-   </style>
-   <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
-   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-
+	   .row{
+		   margin: 0px;
+	   
+        
+</style>
+<jsp:include page="./headerRe.jsp"></jsp:include>
 </head>
 <body>
- <div class="contentDiv">
+<div id="wrap">
+<div class="contentDiv">
    <div id="mp" class="row">
-      <div class="col-md-2 coll-md-offset-1">
+      <div class="mpdiv col-md-2">
        <table class="mpTable">
            <thead>
             <tr class="active">
@@ -164,16 +142,10 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">거래 내역</a></td>
            </tr>
        </table>
-                   
-                   
        </div>
-       <div style="border: 1px solid red; margin-top:20px;" id="mpContent" class="col-md-8">
-       
-       	내용쓰는칸
-       </div>
+		<div id="mpContent" class="col-md-9">
   
-      </div>
-  </div>
+     
 
 </body>
 </html>
