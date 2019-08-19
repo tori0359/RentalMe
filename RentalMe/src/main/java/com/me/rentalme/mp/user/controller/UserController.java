@@ -54,7 +54,7 @@ public class UserController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mp/user/userOrdList");
+		mav.setViewName("mp/user/userCartList");
 		return mav;
 	}	
 	
@@ -119,7 +119,7 @@ public class UserController {
 	public String modifyInfo(UserVo bean) {
 		log.debug("내 정보 수정 컨트롤러...");
 	
-		return "mp/user/userUpdateInfo";
+		return "mp/user/userUpdInfo";
 	}
 	
 	/**

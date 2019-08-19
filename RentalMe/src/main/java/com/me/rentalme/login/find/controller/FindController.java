@@ -107,7 +107,7 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findPw", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/email/findPw", method = RequestMethod.PUT)
 	public String modifyChgPw(String chgPw1, String chgPw2) {
 		log.debug("비밀번호 변경 컨트롤러...");
 		
