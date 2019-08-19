@@ -247,7 +247,6 @@
 	</script>
 </head>
 <body>
-<div>
  <div class="row">
     <div style="background-color: black; width:100%;" class="container">
        <div class="col-md-11">

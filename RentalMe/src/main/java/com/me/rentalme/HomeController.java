@@ -29,9 +29,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "userActList", method = RequestMethod.GET)
-	public String view(Model model) throws SQLException {
+	public String getActList(Model model) throws SQLException {
 		
 		return "/mp/user/userActList";
+	}
+	
+	@RequestMapping(value = "userOrdList", method = RequestMethod.GET)
+	public String getOrderList(Model model) throws SQLException {
+		
+		return "/mp/user/userOrdList";
 	}
 	
 	

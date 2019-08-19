@@ -6,7 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-.mpTable{
+
+	   #wrap{
+	      	min-height:100%;
+	      	position:relative;
+	      }
+	      
+		.contentDiv{
+			padding-bottom: 200px;
+		}
+		
+		#mp{
+            margin: 50px 0px 10px 30px;
+        }
+        
+       .mpTable{
             width: 160px;
             border-radius: 6px;
         }
@@ -55,12 +69,27 @@
             -webkit-border-radius: 0 0 10px 15px;
             border-radius: 0 0 15px 15;            
         } 
+	   #mpDiv{
+		   position: relative;
+		   z-index:1;
+	   }
+	   #mpContent{
+		   /*border: 1px solid black;*/
+		   height: 100%;
+	   }
+	   .row{
+		   margin: 0px;
+	   }
+        
 </style>
 <jsp:include page="../../template/headerRe.jsp"></jsp:include>
 </head>
 <body>
-<div class="container">
-	<table class="mpTable">
+<div id="wrap">
+<div class="contentDiv">
+   <div id="mp" class="row">
+      <div class="col-md-2">
+       <table class="mpTable">
            <thead>
             <tr class="active">
                 <th style="color:white;"class="text-center">마이페이지</th>
@@ -82,7 +111,46 @@
                 <td class="text-center"><a href="#">내 정보 수정</a></td>
            </tr>
        </table>
-</div>
+        <table style="margin-top:30px; " class="mpTable">
+           <thead>
+            <tr class="active">
+                <th style="color:white;"class="text-center">나의 활동</th>
+           </tr>
+           </thead>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">내 문의 보기</a></td>
+           </tr>
+       </table>
+		<table style="margin-top:30px; " class="mpTable">
+           <thead>
+            <tr class="active">
+                <th style="color:white;"class="text-center">중고거래</th>
+           </tr>
+           </thead>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">내 중고 상품</a></td>
+           </tr>
+       </table>
+       <table style="margin-top:30px; " class="mpTable">
+           <thead>
+            <tr class="active">
+                <th style="color:white;"class="text-center">경매</th>
+           </tr>
+           </thead>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">거래 내역</a></td>
+           </tr>
+       </table>
+                   
+                   
+       </div>
+       <div style="border: 1px solid red ; "id="mpContent" class="col-md-9">
+       
+       	여기 내용쓰는 부분
+       </div>
+  
+      </div>
+  </div>
 </body>
 <jsp:include page="../../template/footer.jsp"></jsp:include>
 </html>

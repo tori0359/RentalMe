@@ -25,17 +25,18 @@
             src: url("fonts/NanumSquare_acEB.ttf") format("truetype");
             font-style: normal;
         }
+        
 		.footer{
 			background: black;
 			width:100%;
 			padding: 40px 0;
 			height: 200px;
 			position: absolute;
-		    left: 0;
-		    bottom: 0;
+		    left: 0px;
+		    bottom: 0px;
 			text-align: center;
-			
 		}
+		
 		.footer p{
 			font-family: NanumB;
 			color: lightgrey;
@@ -55,7 +56,6 @@
 </head>
 <body>
 <div class="footer">
-	<div class="col-md-12 text-center">
 		<div class="footerLink">
 			<p><a href="#">개인정보취급방침</a>&emsp;&emsp;<a href="#">이용약관</a>&emsp;&emsp;<a href="#">고객센터</a></p>
 		</div>
@@ -64,9 +64,7 @@
 			<p>
 			Copyright©2019 주식회사 렌탈미 All right reserved. Design by 렌탈미
 			</p>
-			
-	
-	</div>
+</div>
 </div>
 </body>
 </html>
