@@ -3,41 +3,45 @@
 <html>
 <head>
     <meta charset="UTF-8">
-   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-   <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
    <style type="text/css">
        /*폰트설정*/
         @font-face {
             font-family: "altair";
-            src: url("fonts/altair.extrabold-italic.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/altair.extrabold-italic.ttf") format("truetype");
             font-style: normal;
         }
       @font-face {
             font-family: "hanserif";
-            src: url("fonts/SourceHanSerifK-Medium.otf") format("opentype");
+            src: url("${pageContext.request.contextPath}/fonts/SourceHanSerifK-Medium.otf") format("opentype");
             font-style: normal;
         }
       
       @font-face {/*한글 보통 폰트*/
             font-family: "nanumR";
-            src: url("fonts/NanumSquare_acL.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/NanumSquare_acL.ttf") format("truetype");
             font-style: normal;
         }
       @font-face {/*한글 진한 폰트*/
             font-family: "nanumB";
-            src: url("fonts/NanumSquare_acR.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/NanumSquare_acR.ttf") format("truetype");
             font-style: normal;
         }
       @font-face {/*한글 더두꺼운 폰트*/
             font-family: "nanumEB";
-            src: url("fonts/NanumSquare_acEB.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/NanumSquare_acEB.ttf") format("truetype");
             font-style: normal;
         }
       #wrap{
 	      	min-height:100%;
 	      	position:relative;
 	  }
-	      
+	  .navbar-default .navbar-nav > .open > a {
+			color: black;
+			background: white;
+		}
+		    
       .hr {
          height: 1px;
          width: 100%;
@@ -195,8 +199,8 @@
 
    
    </style>
-   <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-   <script type="text/javascript" src="js/bootstrap.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 </head>
 <body>
 <div>
