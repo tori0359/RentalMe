@@ -7,22 +7,22 @@
 		/*폰트 설정*/
         @font-face {
             font-family: "altair";
-            src: url("fonts/Altair-bold Trial.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/Altair-bold Trial.ttf") format("truetype");
             font-style: normal;
         }
 		@font-face {
             font-family: "hanserif";
-            src: url("fonts/SourceHanSerifK-Medium.otf") format("opentype");
+            src: url("${pageContext.request.contextPath}/fonts/SourceHanSerifK-Medium.otf") format("opentype");
             font-style: normal;
         }
 		@font-face {
             font-family: "NanumB";
-            src: url("fonts/NanumSquare_acR.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/NanumSquare_acR.ttf") format("truetype");
             font-style: normal;
         }
 		@font-face {
             font-family: "NanumEB";
-            src: url("fonts/NanumSquare_acEB.ttf") format("truetype");
+            src: url("${pageContext.request.contextPath}/fonts/NanumSquare_acEB.ttf") format("truetype");
             font-style: normal;
         }
         
