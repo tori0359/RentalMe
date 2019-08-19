@@ -86,7 +86,7 @@
 <jsp:include page="./headerRe.jsp"></jsp:include>
 </head>
 <body>
-<div id="wrap">
+
 <div class="contentDiv">
    <div id="mp" class="row">
       <div class="mpdiv col-md-2">

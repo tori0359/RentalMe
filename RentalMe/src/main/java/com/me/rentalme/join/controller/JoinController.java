@@ -86,7 +86,8 @@ public class JoinController {
 	public String registerInfo(UserVo bean) {
 		log.debug("회원정보 입력 컨트롤러...");
 		
-		int result = joinService.addInfo(bean);
+		//int result = joinService.addInfo(bean);
+		int result = 1; //임시...
 		
 		//회원정보 입력 성공 시 가입완료 페이지로 이동
 		if(result > 0) {
