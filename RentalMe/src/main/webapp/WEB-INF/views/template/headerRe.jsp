@@ -33,7 +33,11 @@
             src: url("fonts/NanumSquare_acEB.ttf") format("truetype");
             font-style: normal;
         }
-      
+      #wrap{
+	      	min-height:100%;
+	      	position:relative;
+	  }
+	      
       .hr {
          height: 1px;
          width: 100%;
@@ -310,10 +314,8 @@
 </div>
 </div>
 
-<div class="hr">
-   
-   
-</div>
+<div class="wrap">
+
 
 </body>
 </html>
