@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
 <style type="text/css">
+
 /*폰트설정*/
 @font-face {
 	font-family: "altair";
@@ -90,7 +91,10 @@
 	text-decoration: none;
 	color: white;
 }
-
+ #wrap{
+            min-height:100%;
+            position:relative;
+         }
 .navtitle {
 	padding: 1px;
 	background-color: black;

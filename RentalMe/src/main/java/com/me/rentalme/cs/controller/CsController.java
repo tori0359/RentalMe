@@ -1,9 +1,16 @@
 package com.me.rentalme.cs.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.cs.service.CsService;
 
 
 /**
@@ -17,8 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/cs")
 public class CsController {
-
+	@Inject
+	CsService csService; 
+	
 	/**
+	 * @throws SQLException 
 	* 고객센터 리스트 
 	* 
 	* @param  None
@@ -26,12 +36,24 @@ public class CsController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView getCsList() {
+	@RequestMapping(value="/csInquiry")
+	public String inquery(Model model) throws SQLException {
+		System.out.println("질문");
+		csService.getList(model);
+		return "cs/csInquiry";
 		
-		
-		ModelAndView mav = new ModelAndView("cs/csList");
-		return mav;
+	}
+	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
+	public String home(Model model) throws SQLException {
+		System.out.println("mapping..");
+		csService.getList(model);
+		return "cs/csNotice";
+	}
+	@RequestMapping(value="/csFAQ")
+	public String csfaq(Model model) throws SQLException {
+		System.out.println("자주묻는질문");
+		csService.getList(model);
+		return "cs/csFAQ";
 	}
 	
 	/**
@@ -42,13 +64,12 @@ public class CsController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/csQuest", method = RequestMethod.GET)
-	public ModelAndView getCsQuestForm() {
-		
-		
-		ModelAndView mav = new ModelAndView("cs/csQuestAdd");
-		return mav;
-	}
+	
+	  @RequestMapping(value = "/csQuestAdd", method = RequestMethod.GET) public
+	  String getCsQuestForm() {
+		  return "cs/csQuestAdd"; 
+	  }
+	 
 	
 	/**
 	* 고객센터 - 문의 등록 

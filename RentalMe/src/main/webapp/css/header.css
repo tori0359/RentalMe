@@ -1,0 +1,224 @@
+ /*�뜝�럥竊잌뜝�럥諭쒎뜝�럡�맟�뜝�럩�젧*/
+       /*  @font-face {
+            font-family: "altair";
+            src: url("../fonts/Altair-bold Trial.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {
+            font-family: "hanserif";
+            src: url("../fonts/SourceHanSerifK-Medium.otf") format("opentype");
+            font-style: normal;
+        }
+		
+		@font-face {
+            font-family: "nanumR";
+            src: url("../fonts/NanumSquare_acL.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {�뜝�럥由썹뼨�먯삕 嶺뚯쉳�뫓�뇡占� �뜝�럥竊잌뜝�럥諭�
+            font-family: "nanumB";
+            src: url("../fonts/NanumSquare_acR.ttf") format("truetype");
+            font-style: normal;
+        }
+		@font-face {�뜝�럥由썹뼨�먯삕 �뜝�럥�맠�뜝�럥�걗占쎈뙀占쎈닔占쎈뮧 �뜝�럥竊잌뜝�럥諭�
+            font-family: "nanumEB";
+            src: url("../fonts/NanumSquare_acEB.ttf") format("truetype");
+            font-style: normal;
+        }
+		
+		.hr {
+			height: 1px;
+			width: 100%;
+			background-color: lightgrey;
+		}
+		
+		#subtitle>a{
+			font-family: "altair";
+			color:lightblue;
+			font-size: 45pt;
+			font-style: italic;
+		}
+		body{
+			width:1600px;
+			overflow-x:scroll;
+		}
+		#subtitle>a:hover{
+			text-decoration: none;
+		}
+		
+		#subtitle>h4{
+			font-family: "hanserif";
+			color: lightgrey;
+		}
+		
+		.navbar-link:hover,.navbar-link:active{
+			font-weight: bolder;
+			text-decoration: none;
+		}
+		
+		.navbar-link:visited,.navbar-link:link{
+			text-decoration: none;
+		}
+		.navtitle{
+			padding: 1px;
+			background-color: black;
+			width:100%;
+		}
+		.menu{
+			width:100%;
+			height:45px;
+			position: relative;
+         z-index:2;
+		}
+		
+		#topMenu { 
+			height: 50px;
+			width:1400px;
+		} 
+	
+		#topMenu ul { 
+			list-style-type: none;
+			margin: 0px; 嶺뚮∥�뾼占쎈데 嶺뚮∥��占쎈� �뜝�럥�닱�뜝�럩踰� ul�뜝�럩踰� margin�뜝�럩諭� �뜝�럥�뵪�뜝�럥�돯 
+			padding: 0px; 嶺뚮∥�뾼占쎈데 嶺뚮∥��占쎈� �뜝�럥�닱�뜝�럩踰� ul�뜝�럩踰� padding�뜝�럩諭� �뜝�럥�뵪�뜝�럥�돯
+		} 
+		
+		#topMenu ul li { 
+			color: black; 
+			background-color: ; 
+			float: left;
+			line-height: 30px;
+			vertical-align: middle; 
+			text-align: center;
+			position: relative; �뜝�럥�돵�뜝�럥堉� li �뜝�럡臾뜹윜諭꾩삕 �뜝�럡��占쎄껀�뜝�룞�삕占쎈꺄 top/left �뜝�럥竊쀧춯�쉻�삕�뜝�럥占쏙옙 占쎈／占쎈쐝�뵳怨ㅼ삕占쎈꼨 
+		} 
+		.navbar-text>a{
+			font-family: nanumB;
+			color:black;
+		}
+		
+		.menuLink, .submenu a {
+			text-decoration:none;
+			display: block;
+			width: 140px; 
+			font-size: 14px; 
+			font-weight: bold; 
+			font-family: "nanumB";
+			padding: 8px;
+			
+		} 
+		
+		.menuLink { �뜝�럡留믣뜝�럩留� 嶺뚮∥��占쎈��뜝�럩踰� �뼨�먯삕�뜝�럥�럞�뜝�럡�돰�뜝�럩諭� �뜝�럩逾쎾뜝�럡�돰�뜝�럩紐드슖�댙�삕 �뜝�럡�맟�뜝�럩�젧 
+			color: black; 
+		} 
+	
+		.topMenuLi>a{
+			color: black;
+			text-decoration: none;
+			font-family: "nanumB";
+		}
+		
+		.topMenuLi:hover .menuLink{ �뜝�럡留믣뜝�럩留� 嶺뚮∥��占쎈��뜝�럩踰� li�뜝�럥�뱺 嶺뚮씭�쐠占쎈뮡�뜝�럥裕욃뜝�럩沅롧뵓怨ㅼ삕 �뜝�럥�뵹�뜝�럥占썲뜝�럩諭� �뜝�럥瑜� �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧
+			color: white;
+			font-weight: bolder;
+			background-color: #4d4d4d; 
+			text-decoration: none;
+		} 
+		.topMenuLi2>a{
+			color: black;
+			text-decoration: none;
+		}
+		
+		.topMenuLi2>a:hover,.topMenuLi2>a:active{ 繞벿살탪占싼껋퀪�⑤벡�굥 嶺뚮∥��占쎈��뜝�럩踰� li�뜝�럥�뱺 嶺뚮씭�쐠占쎈뮡�뜝�럥裕욃뜝�럩沅롧뵓怨ㅼ삕 �뜝�럥�뵹�뜝�럥占썲뜝�럩諭� �뜝�럥瑜� �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧
+			color: white;
+			font-weight: bolder;
+			background-color: #E7A602; 
+			text-decoration: none;
+		} 
+		
+		.submenu a { �뜝�럥由��뜝�럩留� 嶺뚮∥��占쎈��뜝�럩踰� a �뜝�럡臾뜹윜諭꾩삕 �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧 
+			color: #2d2d2d;
+			background-color: white;
+			margin-top: -1px;
+		} 
+		
+		.submenu { �뜝�럥由��뜝�럩留� 嶺뚮∥��占쎈� �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧 
+			position: absolute; html�뜝�럩踰� flow�뜝�럥�뱺 �뜝�럩寃ュ뜝�럥�깿�뜝�럩諭� 亦껋꼶梨뤄옙�뭵嶺뚯쉻�삕 �뜝�럥瑜ラ뇦猿볦삕 absolute �뜝�럡�맟�뜝�럩�젧 
+			height: 0px; 占쎈／占쎈쐝�뵳占� �뜝�럥瑗ε뜝�럩逾졾뜝�럥裕� 0px�슖�댙�삕 �뜝�럡�맟�뜝�럩�젧 
+			overflow: hidden; �뜝�럥堉� �뜝�럡���뜝�럩�뮔�뜝�럩逾� �뜝�럥瑗ε뜝�럩逾좂솻洹ｏ옙占쎈펲 占쎈슔�걠�뜝�룞彛뽩뜝占� �뜝�럥�돵�뜝�럥堉� �뜝�럡���뜝�럩�뮔 �뤆�룆흮占쎈툡 transition: height .3s;
+			-webkit-transition: height .3s; (占쎈쨨占쎈맩�뮅�뜝�럩�쓧 �뜝�럡苡욕슖�댙�삕/�뜝�럡�뀬�뜝�럥�냱占쎈뎨�뜝占�) 
+			-moz-transition: height .3s; (占쎈쨨占쎈맩�뮅�뜝�럩�쓧 �뜝�럥�냱�뜝�럥竊�) 
+			-o-transition: height .3s; (占쎈쨨占쎈맩�뮅�뜝�럩�쓧 �뜝�럩沅롥뜝�럥�쓡�뜝�럩逾�) 
+		} 
+		.row{
+			width:100%;
+			margin:0px;
+		}
+
+		.topMenuLi:hover .submenu { 
+			�뜝�럡留믣뜝�럩留� 嶺뚮∥��占쎈��뜝�럥�뱺 嶺뚮씭�쐠占쎈뮡�뜝�럥裕� 嶺뚮ㅄ維��떋占썲뜝�럥由� �뇦猿뗫윪占쎈뮡 �윜諭꾩삕 �뜝�럥�닱�뜝�럩踰� �뜝�럥由��뜝�럩留� 嶺뚮∥��占쎈� �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧 
+			height: 580px;
+		} 
+		
+		.submenu a:hover{�뜝�럥由��뜝�럩留� 嶺뚮∥��占쎈��뜝�럩踰� a �뜝�럡臾뜹윜諛몄굣占쎈꺄 嶺뚮씭�쐠占쎈뮡�뜝�럥裕� �뜝�럩沅롧뵓怨ㅼ삕 �뜝�럥裕욃뜝�룞�삕�뜝�럩逾� �뜝�럡�맟�뜝�럩�젧
+			color: black; 
+			background-color: #dddddd; �뛾�룄�쀧몭�엪�삕占쎈굵 RGB(DDDDDD)�슖�댙�삕 �뜝�럡�맟�뜝�럩�젧 
+		}
+		
+		#content{
+			font-family: "nanumB";
+			font-size: 15px;
+			color: black;
+			border: 1px solid black; �뜝�럡�룎繞벿살탳�굢占� �썒�슣�닔�땻�엪�럸占쎄섬占쎈뉴 �뜝�럥�돵�뜝�럥�뒍�뜝�럥留�
+			padding-top: 50px;
+			height:100%;
+			position: relative;
+           z-index:1;
+			
+		}
+
+		占썩뫁伊믦�뚯눦�삕�땻源띿삕�땻占� 嶺뚮∥��占쎈� �뛾�룊�삕
+		#noticeBar table{
+			margin-top: 80px;
+			font-size:20px;
+		}
+		#noticeBar td:nth-child(1){
+			border-bottom-left-radius: 10px;
+			border-top-left-radius: 10px;
+			color:white;
+			background:black;
+			width:34%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(2){
+			background:white;
+			border-left:0.1px solid;
+			border-right:0.1px solid;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(3){
+			border-bottom-right-radius: 10px;
+			border-top-right-radius: 10px;
+			background:white;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar>table{
+			width:100%;
+			height:50px;
+		}
+		#content>table>tr>th:nth-child(1){
+			width:20%;
+			background:blue;
+		}
+		#content>table>tr>th:nth-child(2){
+			width:60%;
+		}
+		#content>table>tr>th:nth-child(3){
+			width:20%;
+		}
+		
+			
+		
+ */
+		

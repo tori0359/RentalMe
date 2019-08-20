@@ -3,11 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="rentalme">
+<mapper namespace="com.me.rentalme.cs.dao.CsDao">
+	<select id="selectAll" resultType="com.me.rentalme.cs.entity.CsVo">
+		SELECT * FROM MINMIN
+  	</select>
+</mapper> 
+<!-- <mapper namespace="rentalme">
 	<select id="selectAll" resultType="com.me.rentalme.model.entity.RentalMeVo">
 		SELECT * 
 		  FROM testqe 
 		 ORDER 
 		    BY NUM
 	</select>
-</mapper>
+>>>>>>> refs/remotes/origin/hij -->
