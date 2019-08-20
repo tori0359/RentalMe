@@ -101,7 +101,7 @@
 			color:white;
 		}
 		#csContent{
-			height:800px;
+			height:700px;
 		}
 	</style>
 </head>
