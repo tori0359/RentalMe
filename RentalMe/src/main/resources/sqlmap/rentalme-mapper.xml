@@ -5,7 +5,14 @@
 
 <mapper namespace="com.me.rentalme.cs.dao.CsDao">
 	<select id="selectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-		SELECT * FROM MINMIN
-  		
+		SELECT * FROM CSNOTICE
   	</select>
-</mapper>
+</mapper> 
+<!-- <mapper namespace="rentalme">
+	<select id="selectAll" resultType="com.me.rentalme.model.entity.RentalMeVo">
+		SELECT * 
+		  FROM testqe 
+		 ORDER 
+		    BY NUM
+	</select>
+>>>>>>> refs/remotes/origin/hij -->

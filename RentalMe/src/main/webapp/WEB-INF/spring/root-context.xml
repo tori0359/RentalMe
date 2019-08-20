@@ -6,12 +6,11 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- dataSource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-	   <property name="driverClassName" value="org.gjt.mm.mysql.Driver"/>
-	   <property name="url" value="jdbc:mysql://rentalmedb.ce5uzsth0zm9.ap-northeast-2.rds.amazonaws.com:3306/rental"></property>
+	   <property name="url" value="jdbc:mysql://rentalmedb.ce5uzsth0zm9.ap-northeast-2.rds.amazonaws.com"></property>
 	   <property name="username" value="rentalme" />
 	   <property name="password" value="rentalme" />
 	    
-	</bean>	
+	</bean>	 
 	
 	<!-- sqlSession config -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -25,7 +24,5 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
-	
-
 	
 </beans>

@@ -1,45 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<!doctype html>
+<!Doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/header.css">
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/rentalme/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/rentalme/css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="/rentalme/css/header.css">
+	<script type="text/javascript" src="/rentalme/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/rentalme/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#noticeBar td:nth-child(1)").css("background","white").css("color","black");
-			$("#noticeBar td:nth-child(3)").css("background","black").css("color","white");
-			$("#noticeBar td:nth-child(1)").mouseover(function(){
+			$("#noticeBar td:nth-child(2)").mouseover(function(){
 			  $(this).css("background", "black").css("color","white");
 				
 			}).mouseout(function(){
-				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(3)").css("background","black").css("color","white");
+				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(1)").css("background","black").css("color","white");
 			});
-			
-			$("#noticeBar td:nth-child(2)").mouseover(function(){
+			$("#noticeBar td:nth-child(3)").mouseover(function(){
 			  $(this).css("background", "black").css("color","white");
 			}).mouseout(function(){
-				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(3)").css("background","black").css("color","white");
+				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(1)").css("background","black").css("color","white");
 			});
-			$("#noticeBar td:nth-child(1)").click(function(){
-				location.replace("/rentalme/");
+			$("#noticeBar td:nth-child(3)").click(function(){
+				location.replace("/rentalme/cs/csInquiry");
 			});
 			$("#noticeBar td:nth-child(2)").click(function(){
-				location.replace("/rentalme/csFAQ");
+				location.replace("/rentalme/cs/csFAQ");
 			});
 		})
 	</script>
 	<style type="text/css">
-
+		#noticeBar table{
+			margin-top: 80px;
+			font-size:20px;
+		}
+		#noticeBar td:nth-child(1){
+			border-bottom-left-radius: 10px;
+			border-top-left-radius: 10px;
+			color:white;
+			background:black;
+			width:34%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(2){
+			background:white;
+			border-left:0.1px solid;
+			border-right:0.1px solid;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(3){
+			border-bottom-right-radius: 10px;
+			border-top-right-radius: 10px;
+			background:white;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar>table{
+			width:100%;
+			height:50px;
+		}
+		#content>table>tr>th:nth-child(1){
+			width:20%;
+			background:blue;
+		}
+		#content>table>tr>th:nth-child(2){
+			width:60%;
+		}
+		#content>table>tr>th:nth-child(3){
+			width:20%;
+		}
 	</style>
 </head>
 <body>
-<div>
  <div class="row">
   <div>
 
@@ -52,17 +87,19 @@
 	 </div>
 	  <div class="navtitle">
 				  <div id="title" class="text-center">
-				  
+				 
 						<div id="subtitle">
 							<!--<h4>자취생들을 위한</h4>-->
 							<a href="#">Rental<br/>Me</a>
-						</div>
+						</div> 
+				  	
 				  </div>
 		</div>
 	<div>
 	</div>
   </div>
-</div>
+  </div>
+
 <div class="menu" >
 <div class="container-fluid">
 
@@ -148,36 +185,37 @@
 	</div>
  </div>
 </div>
-</div>
 
 <div class="hr">
-	
 	
 </div>
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
 	<table>
 		<tr>
 			<td>공지사항</td>
-			<td>FAQ</td>
-			<td>1:1문의</td>
+			<td><form action="">FAQ</form></td>
+			<td><form action="csInquiry">1:1문의</form></td>
 		</tr>
 	</table>
 	
 </div>
-<div id="content" class="col-md-10 col-md-offset-2">
-	<h1>1:1문의</h1>
-	<br/><br/><br/><br/><br/><br/>
+<div id="content" class="col-md-10 col-md-offset-1">
+	<table class="table table-hover">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
+		</tr>
+			<c:forEach items='${alist}' var="bean">
+				<tr>
+					<td>${bean.num }</td>
+					<td>${bean.sub }</td>
+					<td>${bean.nalja }</td>
+				</tr>
+			</c:forEach>
+	</table>
 </div>
-<div>
-	
-</div>
-<div id="conetent1" class="col-md-6 col-md-offset-2">
-	FAQ를 통해 충분한 답변을 얻지 못하셨다면 '문의하기'버튼을 클릭하세요<br/>
-	1:1문의를 통해 상세히 답변드리겠습니다.
-</div>
-<div class="col-md-2">
-	<button type="button" class="btn btn-default btn-lg">문의하기</button>
-</div>
+
 </body>
 </html>
 
