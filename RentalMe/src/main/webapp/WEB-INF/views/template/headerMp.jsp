@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -35,6 +35,7 @@
             -webkit-border-radius: 15px 15px 0 0;
             border-radius: 15px 15px 0 0;
 			font-family: "nanumR";
+			text-align: center;
         }
         
         .mpTable>tbody tr{
@@ -69,26 +70,26 @@
             -webkit-border-radius: 0 0 10px 15px;
             border-radius: 0 0 15px 15;            
         } 
-	   #mpDiv{
+        
+	   .mpdiv{
 		   position: relative;
 		   z-index:1;
+		   margin-top:100px;
+		   margin-bottom: 100px;
 	   }
-	   #mpContent{
-		   /*border: 1px solid black;*/
-		   height: 100%;
-	   }
+	
 	   .row{
 		   margin: 0px;
-	   }
+	   
         
 </style>
-<jsp:include page="../../template/headerRe.jsp"></jsp:include>
+<jsp:include page="./headerRe.jsp"></jsp:include>
 </head>
 <body>
-<div id="wrap">
+
 <div class="contentDiv">
    <div id="mp" class="row">
-      <div class="col-md-2">
+      <div class="mpdiv col-md-2">
        <table class="mpTable">
            <thead>
             <tr class="active">
@@ -141,16 +142,10 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">거래 내역</a></td>
            </tr>
        </table>
-                   
-                   
        </div>
-       <div style="border: 1px solid red ; "id="mpContent" class="col-md-9">
-       
-       	여기 내용쓰는 부분
-       </div>
+		<div id="mpContent" class="col-md-9">
   
-      </div>
-  </div>
+     
+
 </body>
-<jsp:include page="../../template/footer.jsp"></jsp:include>
 </html>

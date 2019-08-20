@@ -18,10 +18,10 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<!-- 2019.08.12 : css+fonts+js mapping add -->
+	<!-- 2019.08.14 : imgs mapping add -->
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/fonts/**" location="/fonts/" />
-	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/js/**" location="/js/"/>
 	<resources mapping="/imgs/**" location="/imgs/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -30,7 +30,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.me.rentalme" />
+	<context:component-scan base-package="com.me.rentalme"  />
 	
 	<!-- upload limmit size: 5mb -> 1024*1024*5 -->
 	<beans:bean id="multipartResolver"

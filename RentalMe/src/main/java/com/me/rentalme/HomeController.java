@@ -36,69 +36,17 @@ public class HomeController {
 		model.addAttribute("alist", rentalmeService.list());
 		return "home";
 	}
-
-	@RequestMapping(value = "/upload"
-			,method = RequestMethod.POST)
-	public String upload(Model model,MultipartFile file1,String sub){
-		logger.debug(sub);
-		logger.debug(file1.getOriginalFilename());
-		long time=System.currentTimeMillis();
-		String origin=file1.getOriginalFilename();
-		String newName=time+origin;
+	
+	@RequestMapping(value = "userActList", method = RequestMethod.GET)
+	public String getActList(Model model) throws SQLException {
 		
-		File file=new File(uploadDir+newName);
-
-		try {
-			file1.transferTo(file);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("filename", newName);
-		model.addAttribute("origin", origin);
-		return "upload";
+		return "/mp/user/userActList";
 	}
 	
-	@RequestMapping("/download/{filename:.+}")
-	public void download(String origin,HttpServletResponse resp,@PathVariable String filename) {
-		logger.debug("down:"+filename);
-		logger.debug("down:"+origin);
-		// target="_blank"
-		// 파일을 브라우저가 직접 처리하지 못하도록 모르는 형식으로 전달
-		//resp.setContentType("application/octet-stream;charset=\"utf-8\"");
-		//
+	@RequestMapping(value = "userOrdList", method = RequestMethod.GET)
+	public String getOrderList(Model model) throws SQLException {
 		
-		// 파일의 오리지날 이름으로 돌려놓기
-		//resp.setHeader("Content-Disposition"
-		//		, "attachment; filename=\""+origin+"\"");
-		//
-		
-		File file=new File(uploadDir+filename);
-		OutputStream os=null;
-		InputStream is=null;
-		
-		try {
-			os=resp.getOutputStream();
-			is=new FileInputStream(file);
-			int temp=0;
-			while((temp=is.read())!=-1) {
-				os.write(temp);
-			}
-			os.flush();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(os!=null)os.close();
-				if(is!=null)is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
+		return "/mp/user/userOrdList";
 	}
+	
 }
