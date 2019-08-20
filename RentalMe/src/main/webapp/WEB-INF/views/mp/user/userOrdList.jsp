@@ -59,7 +59,7 @@
        			<td>B123</td>
        			<td>6개월</td>
        			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn btn-default">후기쓰기</button></td>
+       			<td><button type="button" class="btn" style="font-size: 9pt;">후기쓰기</button></td>
        		</tr>
        		<tr>
        			<td>2019/06/27</td>
@@ -67,11 +67,12 @@
        			<td>B123</td>
        			<td>6개월</td>
        			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn btn-default">후기쓰기</button></td>
+       			<td><button type="button" class="btn" style="font-size: 9pt;">후기쓰기</button></td>
        		</tr>
        	</tbody>
        	</table>
        </div>
+       <div class="hr"></div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

@@ -220,7 +220,7 @@
                  <h1>
                   <div id="subtitle">
                      <!--<h4>자취생들을 위한</h4>-->
-                     <a href="#">Rental<br/>Me</a>
+                     <a href="main">Rental<br/>Me</a>
                   </div>
                  </h1>
 			 </div>

@@ -82,7 +82,7 @@
 	   }
         
 </style>
-<jsp:include page="../../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../../template/header.jsp"></jsp:include>
 </head>
 <body>
 <div id="wrap">

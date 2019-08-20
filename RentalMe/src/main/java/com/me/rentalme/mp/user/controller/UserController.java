@@ -18,6 +18,7 @@ import com.me.rentalme.model.entity.UserVo;
 * 등록일자 : 2019.08.14
 */
 @Controller
+@RequestMapping("/mp")
 public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
@@ -30,7 +31,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView getOrderList() {
 		log.debug("주문내역 리스트 컨트롤러...");
 		
@@ -48,7 +49,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/cart", method = RequestMethod.GET)
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public ModelAndView getCartList() {
 		log.debug("장바구니 컨트롤러...");
 		
@@ -66,7 +67,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/wish", method = RequestMethod.GET)
+	@RequestMapping(value = "/wish", method = RequestMethod.GET)
 	public ModelAndView getWishList() {
 		log.debug("찜한상품 컨트롤러...");
 	
@@ -83,7 +84,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/deposit", method = RequestMethod.GET)
+	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
 	public ModelAndView getDeposit() {
 		log.debug("예치금 컨트롤러...");
 	
@@ -100,7 +101,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/updInfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/updInfo", method = RequestMethod.GET)
 	public String modifyInfo() {
 		log.debug("내 정보 수정 폼 컨트롤러...");
 	
@@ -115,7 +116,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/updInfo", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updInfo", method = RequestMethod.PUT)
 	public String modifyInfo(UserVo bean) {
 		log.debug("내 정보 수정 컨트롤러...");
 	
@@ -147,7 +148,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/used", method = RequestMethod.GET)
+	@RequestMapping(value = "/used", method = RequestMethod.GET)
 	public ModelAndView getUsedList() {
 		log.debug("나의 중고 상점 컨트롤러...");
 		
@@ -164,7 +165,7 @@ public class UserController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mp/act", method = RequestMethod.GET)
+	@RequestMapping(value = "/act", method = RequestMethod.GET)
 	public ModelAndView getActList() {
 		log.debug("내 문의 보기 컨트롤러...");
 		

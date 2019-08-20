@@ -81,7 +81,7 @@
 	   .row{
 		   margin: 0px;
 	   
-        }
+       }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
 </head>
@@ -93,56 +93,69 @@
        <table class="mpTable">
            <thead>
             <tr class="active">
-                <th style="color:white;"class="text-center">마이페이지</th>
+                <th style="color:white;"class="text-center">주문관리</th>
            </tr>
            </thead>
            <tr>
-                <td class="text-center"><a href="/mp/">주문내역</a></td>
+                <td class="text-center"><a href="./">주문관리</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="/mp/cart">장바구니</a></td>
+                <td class="text-center"><a href="./cart">반품관리</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
-           </tr>
-            <tr>
-                <td class="text-center"><a href="/mp/deposit">예치금</a></td>
-           </tr>
-            <tr>
-                <td class="text-center"><a href="#">나의정보</a></td>
+                <td class="text-center"><a href="#">예치금관리</a></td>
            </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
-                <th style="color:white;"class="text-center">중고거래</th>
+                <th style="color:white;"class="text-center">상품관리</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">나의 중고상점</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">렌탈상품 관리</a></td>
+           </tr>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매상품 관리</a></td>
            </tr>
        </table>
 		<table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
-                <th style="color:white;"class="text-center">이벤트 경매</th>
+                <th style="color:white;"class="text-center">중고거래관리</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매내역</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">중고거래 관리</a></td>
+           </tr>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고접수 관리</a></td>
            </tr>
        </table>
        <table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
-                <th style="color:white;"class="text-center">나의활동</th>
+                <th style="color:white;"class="text-center">고객센터관리</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">공지사항/FAQ관리</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">1:1문의</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">1:1문의 관리</a></td>
+           </tr>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">상담예약 관리</a></td>
+           </tr>
+       </table>
+        <table style="margin-top:30px; " class="mpTable">
+           <thead>
+            <tr class="active">
+                <th style="color:white;"class="text-center">사용자관리</th>
+           </tr>
+           </thead>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">사용자관리</a></td>
            </tr>
        </table>
        </div>
