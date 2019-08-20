@@ -5,7 +5,7 @@
 
 <mapper namespace="com.me.rentalme.cs.dao.CsDao">
 	<select id="selectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-		SELECT * FROM CSNOTICE
+		SELECT * FROM MINMIN
   	</select>
 </mapper> 
 <!-- <mapper namespace="rentalme">

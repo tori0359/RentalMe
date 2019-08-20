@@ -6,11 +6,6 @@
 <head>
 <jsp:include page="../template/headerRe.jsp"></jsp:include>
     <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/header.css">
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#noticeBar td:nth-child(1)").mouseover(function(){
@@ -30,10 +25,39 @@
 			$("#noticeBar td:nth-child(3)").click(function(){
 				location.replace("/rentalme/cs/csInquiry");
 			});
-			
 		})
 	</script>
 	<style type="text/css">
+		#noticeBar table{
+			margin-top: 80px;
+			font-size:20px;
+		}
+		#noticeBar td:nth-child(1){
+			border-bottom-left-radius: 10px;
+			border-top-left-radius: 10px;
+			color:white;
+			background:black;
+			width:34%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(2){
+			background:white;
+			border-left:0.1px solid;
+			border-right:0.1px solid;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar td:nth-child(3){
+			border-bottom-right-radius: 10px;
+			border-top-right-radius: 10px;
+			background:white;
+			width:33%;
+			text-align: center;
+		}
+		#noticeBar>table{
+			width:100%;
+			height:50px;
+		}
 		#noticeBar td:nth-child(2){
 			background:black;
 			color:white;
@@ -42,8 +66,17 @@
 			background:white;
 			color:black;
 		}
-		#csContent{
-			height:800px;
+		
+		
+		#contentList>table>tr>th:nth-child(1){
+			width:20%;
+			background:blue;
+		}
+		#contentList>table>tr>th:nth-child(2){
+			width:60%;
+		}
+		#contentList>table>tr>th:nth-child(3){
+			width:20%;
 		}
 		
 		#noticeMenuBar button{
@@ -67,13 +100,12 @@
 			background: black;
 			color:white;
 		}
+		#csContent{
+			height:800px;
+		}
 	</style>
 </head>
 <body>
-<div class="hr">
-	
-	
-</div>
 <div id="csContent">
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
 	<table>
@@ -99,7 +131,7 @@
 		</tr>
 	</table>
 </div>
-<div id="content" class="col-md-10 col-md-offset-1">
+<div id="contentList" class="col-md-10 col-md-offset-1">
 	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
@@ -113,68 +145,12 @@
 				<td>${bean.sub }</td>
 			</tr>
 		</c:forEach>
-	
 	</table>
 </div>
 </div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -64,13 +64,12 @@ public class CsController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/csQuest", method = RequestMethod.GET)
-	public ModelAndView getCsQuestForm() {
-		
-		
-		ModelAndView mav = new ModelAndView("cs/csQuestAdd");
-		return mav;
-	}
+	
+	  @RequestMapping(value = "/csQuestAdd", method = RequestMethod.GET) public
+	  String getCsQuestForm() {
+		  return "cs/csQuestAdd"; 
+	  }
+	 
 	
 	/**
 	* 고객센터 - 문의 등록 

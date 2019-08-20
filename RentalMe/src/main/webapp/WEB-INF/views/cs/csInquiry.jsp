@@ -5,14 +5,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/header.css">
-	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <jsp:include page="../template/header.jsp"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#noticeBar td:nth-child(1)").css("background","white").css("color","black");
+			$("#noticeBar td:nth-child(2)").css("background","white").css("color","black");
 			$("#noticeBar td:nth-child(3)").css("background","black").css("color","white");
 			$("#noticeBar td:nth-child(1)").mouseover(function(){
 			  $(this).css("background", "black").css("color","white");
@@ -65,20 +62,23 @@
 			width:100%;
 			height:50px;
 		}
-		#content>table>tr>th:nth-child(1){
-			width:20%;
-			background:blue;
+		#noticeBar td:nth-child(2){
+			background:black;
+			color:white;
 		}
-		#content>table>tr>th:nth-child(2){
-			width:60%;
+		#noticeBar td:nth-child(1){
+			background:white;
+			color:black;
 		}
-		#content>table>tr>th:nth-child(3){
-			width:20%;
+		#csContent{
+			
 		}
+	
+	
 	</style>
-	<jsp:include page="../template/headerRe.jsp"></jsp:include>
 </head>
 <body>
+<div id="csContent">
 <div class="hr">
 	
 	
@@ -105,39 +105,9 @@
 	1:1문의를 통해 상세히 답변드리겠습니다.
 </div>
 <div class="col-md-2">
-	<button type="button" class="btn btn-default btn-lg">문의하기</button>
+	<a href="./csQuestAdd"><button type="button" class="btn btn-default btn-lg">문의하기</button></a>
 </div>
-
-
+</div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

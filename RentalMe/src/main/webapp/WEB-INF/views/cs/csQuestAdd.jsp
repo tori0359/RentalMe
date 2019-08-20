@@ -1,13 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="../template/header.jsp"></jsp:include>
-<style type="text/css">
-#dae{
+<jsp:include page="../template/headerRe.jsp"></jsp:include>
+    <meta charset="UTF-8">
+	<script type="text/javascript">
+	/* 	$(document).ready(function(){
+			$("#daeButton>button:nth-child(1)").click(function(){
+					window.history.back();
+				})
+			
+			})
+	 */
+	</script>
+	<style type="text/css">
+        #dae{
             font-size:30pt;
         }
         #daeContent tr>td:nth-child(1){
@@ -20,16 +29,22 @@
             float:right;
             margin:5px 10px 5px 10px;
         }
+        #daeButton>button:nth-child(1){
+        
+        }
         textarea{
             width:100%;
-            height:350px;
+            height:250px;
         }
-
-</style>
+        #csContent{
+        	height:800px;
+        }
+	</style>
 </head>
 <body>
+<div id="csContent">
+
 <div id="dae" class="col-md-4 col-md-offset-2">
-   
 <br/><br/>
     1:1문의
     
@@ -39,8 +54,8 @@
     <form action="">
         <table class="table" id="daeContent">
             <tr>
-                <td><label for="id">아 이 디</label></td>
-                <td><input type="text" value=""></td>
+                <td><label for="id" >아 이 디</label></td>
+                <td><input type="text" name="id"></td>
             </tr>
             <tr>
                 <td><label for="category">분류</label></td>
@@ -59,12 +74,12 @@
            </td>
             </tr>
             <tr>
-                <td><label for="sub">제목</label></td>
-                <td><input type="text" value=""></td>
+                <td><label for="sub" >제목</label></td>
+                <td><input type="text" name="sub"></td>
             </tr>
             <tr>
-                <td><label for="id">내용</label></td>
-                <td><textarea rows="" cols=""></textarea></td>
+                <td><label for="id" >내용</label></td>
+                <td><textarea name="conetent"></textarea></td>
             </tr>
             <tr>
                 <td></td>
@@ -74,7 +89,9 @@
                 </td>
             </tr>
         </table>
+        
     </form>
+</div>
 </div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
