@@ -3260,7 +3260,7 @@ fieldset[disabled] .btn-primary.focus {
   border-color: #2e6da4;
 }
 .btn-primary .badge {
-  color: #337ab7;
+  color: #777777;
   background-color: #fff;
 }
 .btn-success {
@@ -4084,7 +4084,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #337ab7;
+  border-color:  #777777;
 }
 .nav .nav-divider {
   height: 1px;
@@ -4142,6 +4142,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .nav-tabs.nav-justified > li > a {
     margin-bottom: 0;
+    color: black;
   }
 }
 .nav-tabs.nav-justified > li > a {
@@ -4177,7 +4178,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #777777;
 }
 .nav-stacked > li {
   float: none;
@@ -5047,11 +5048,11 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #F8D253;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5076,8 +5077,8 @@ a.badge:focus {
 }
 @media screen and (min-width: 768px) {
   .jumbotron {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   .container .jumbotron,
   .container-fluid .jumbotron {

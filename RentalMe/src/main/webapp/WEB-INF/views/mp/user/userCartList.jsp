@@ -41,18 +41,26 @@
 	   .ordimg{
 	   		width:150px;
 	   }
-	  
 	   
-	   .btnn{
-	   		background-color: #4d4d4d;
-	   		color: white;
-	   		font-family: "nanumB";
-	   		font-size:10pt;
-	   		height: 20pt;
-	   		text-align: center;
+	    .delete_btn1{
+	   		background-color: #D8D8D8;
+	   		color:black;
+	   		height:30px;
+	   		font-family: "nanumB";	
+	   		font-weight: border;	
 	   }
-	   .btnn.hover{
-	   		
+	   
+	   .delete_btn2{
+	   		background-color: #4d4d4d;
+	   		color:white;
+	   		height:30px;
+	   		font-family: "nanumB";
+	   		font-weight: border;		
+	   }
+	   
+	   .btn:hover,
+	   .btn:focus{
+	   		background-color: #D8D8D8;
 	   }
 	
 	   .cartresult{
@@ -66,6 +74,13 @@
 	   		font-size: 15pt;
 	   		font-family: "nanumB";
 	   		line-height: 100px;
+	   }
+	   
+	   .cartbtn{
+	   		width:180px;
+	   		height:50px;
+	   		float:right;
+	   		margin-top:25px;
 	   }
 	   
 	   
@@ -92,10 +107,10 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-	<p id="title">찜한상품</p>
+	<p id="title">장바구니</p>
 	<div>
 	<div>
-       <p id="path">마이페이지> 찜한상품</p>
+       <p id="path">마이페이지> 장바구니</p>
        	<a href="#" id="choose" onclik="delete()">선택삭제</a>
      </div>
        	<table class="ordtable table">
@@ -103,30 +118,38 @@
        		<tr class="active">
        			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
        			<th>상품명/선택사항</th>
+       			<th>수량</th>
        			<th>렌탈기간</th>
        			<th>상품금액</th>
-       			<th>장바구니</th>
        		</tr>
        	</thead>
        	<tbody>
        		<tr>  
        			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
+       			<td>1</td>
        			<td>6개월</td>
        			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn" style="font-size: 9pt;">장바구니담기</button></td>
        		</tr>
        		<tr>  
        			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
+       			<td>1</td>
        			<td>6개월</td>
        			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn" style="font-size: 9pt;">장바구니담기</button></td>
        		</tr>
        	</tbody>
        	</table>
        </div>
-       <div class="hr"></div>
+       <div class="hr" style="height:2px;"></div>
+       <div class="cartresult">
+       	<p>총 주문 금액: 90,000원</p>
+       </div>
+       <div class="hr" style="height:2px; margin-top:100px;"></div>
+		<div class="cartbtn">
+			<button type="button" class="delete_btn1 btn">계속 쇼핑하기</button>
+			<button type="button" class="delete_btn2 btn">주문하기</button>
+		</div>
       
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
