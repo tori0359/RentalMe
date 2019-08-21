@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="../template/header.jsp"></jsp:include>
+    <jsp:include page="../template/headerRe.jsp"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#noticeBar td:nth-child(1)").css("background","white").css("color","black");
@@ -32,6 +32,9 @@
 		})
 	</script>
 	<style type="text/css">
+		#noticeBar{
+			height:250px;
+		}
 		#noticeBar table{
 			margin-top: 80px;
 			font-size:20px;
@@ -71,10 +74,8 @@
 			color:black;
 		}
 		#csContent{
-			
+			height:700px;
 		}
-	
-	
 	</style>
 </head>
 <body>

@@ -28,6 +28,9 @@
 		})
 	</script>
 	<style type="text/css">
+		#noticeBar{
+			height:250px;
+		}
 		#noticeBar table{
 			margin-top: 80px;
 			font-size:20px;
@@ -83,11 +86,10 @@
 	<table>
 		<tr>
 			<td>공지사항</td>
-			<td><form action="">FAQ</form></td>
-			<td><form action="csInquiry">1:1문의</form></td>
+			<td>FAQ</td>
+			<td>1:1문의</td>
 		</tr>
 	</table>
-	
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
 	<table class="table table-hover">
@@ -98,9 +100,9 @@
 		</tr>
 			<c:forEach items='${alist}' var="bean">
 				<tr>
-					<td>${bean.num }</td>
-					<td>${bean.sub }</td>
-					<td>${bean.nalja }</td>
+					<td>${bean.FAQ_NO }</td>
+					<td>${bean.SUB }</td>
+					<td>${bean.REG_DT }</td>
 				</tr>
 			</c:forEach>
 	</table>
