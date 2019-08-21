@@ -203,7 +203,6 @@
    </style>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-   <script src="jquery-1.12.4.min.js"></script>
 </head>
 <body>
 <div>

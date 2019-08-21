@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="mpUser">
+  	<select id="selectAll" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS chgDt,USED_GDS_NO AS usedGdsNo FROM TB_CALL100 ORDER BY REG_DT;
+  	</select>
+  
+  </mapper>

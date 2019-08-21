@@ -79,10 +79,59 @@
 	height:100px;
 	float: right;
 }
-
+.usetable{
+	text-align:center;
+}
+#deposituse{
+	margin-top: 50px;
+}
 
 </style>
+
+
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
+<script>
+	$(document).ready(function(){
+		$('#menuuse').attr('class','active');
+		$('#menucharge').attr('class','noactive');
+		$('#menurefund').attr('class','noactive');
+		$('#deposituse').show();
+		$('#depositcharge').hide();
+		$('#depositrefund').hide();
+
+		$('#menuuse').click(function(){
+			$('#menuuse').attr('class','active');
+			$('#menucharge').attr('class','noactive');
+			$('#menurefund').attr('class','noactive');
+			
+			$('#deposituse').show();
+			$('#depositcharge').hide();
+			$('#depositrefund').hide();
+		});
+
+		$('#menucharge').click(function(){
+			$('#menucharge').attr('class','active');
+			$('#menuuse').attr('class','noactive');
+			$('#menurefund').attr('class','noactive');
+			
+			$('#depositcharge').show();
+			$('#deposituse').hide();
+			$('#depositrefund').hide();
+		});
+
+		$('#menurefund').click(function(){
+			$('#menurefund').attr('class','active');
+			$('#menucharge').attr('class','noactive');
+			$('#menuuse').attr('class','noactive');
+
+			$('#depositrefund').show();
+			$('#deposituse').hide();
+			$('#depositcharge').hide();
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 <div style="margin-top:100px;" class="jumbotron">
@@ -99,20 +148,38 @@
 	  </div>
   </div>
 </div>
-<ul class="nav nav-tabs nav-justified">
-  <li role="presentation" ><a href="#">예치금 사용내역</a></li>
-  <li role="presentation" class="active"><a href="#">예치금 충전</a></li>
-  <li role="presentation"><a href="#">예치금 환불</a></li>
+<ul class="depositmenu nav nav-tabs nav-justified">
+  <li role="presentation" id="menuuse" class="noactive"><a href="#">예치금 사용내역</a></li>
+  <li role="presentation" id="menucharge" class="noactive"><a href="#">예치금 충전</a></li>
+  <li role="presentation" id="menurefund" class="noactive"><a href="#">예치금 환불</a></li>
 </ul>
-<div class="col-md-12">
+<div class="hr" style="height:3px; background-color: black;"></div>
+<div id="deposituse">
+	<table class="usetable table">
+		<thead>
+		<tr>
+			<th class="active" style="text-align:center;">사용내역</th>
+			<th class="active" style="text-align:center;">사용금액</th>
+			<th class="active" style="text-align:center;">사용날짜</th>
+		</tr>
+		</thead>
+		<tr>
+			<td>경매 참여금</td>
+			<td>20,000 원</td>
+			<td>2019/08/20</td>
+		</tr>
+	</table>
+</div>
+
+<div id="depositcharge" class="col-md-12">
 	<table class="chargetable table">
+			<tr>
+       			<th class="active" style="text-align:center;">현재 예치금</th>
+       			<td>5,000원</td>
+       		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금인</th>
        			<td><input type="text"></td>
-       		</tr>
-       		<tr>
-       			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td>5,000원</td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금 금액(원)</th>
@@ -120,13 +187,44 @@
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">결제수단</th>
-       			<td><input type="radio" name="pay" vale="계좌이체">계좌이체 &nbsp;
-       			<input type="radio" name="pay" vale="신용카드">신용카드</td>
+       			<td><input type="radio" name="pay" value="계좌이체">계좌이체 &nbsp;
+       			<input type="radio" name="pay" value="신용카드">신용카드</td>
        		</tr>
        	</table>
        	<div class="chargediv">
-       		<button style="width:150px;" type="button" class="btn btn-default">충천하기</button>
+       		<button style="width:150px;" type="button" class="btn btn-danger">충천하기</button>
        	</div>
+</div>
+
+<div id="depositrefund" class="col-md-12">
+	<table class="chargetable table">
+			<tr>
+       			<th class="active" style="text-align:center;">현재 예치금</th>
+       			<td>5,000원</td>
+       		</tr>
+			<tr>
+       			<th class="active" style="text-align:center;">환불요청 금액(원)</th>
+       			<td><input type="text"></td>
+       		</tr>
+       		<tr>
+       			<th class="active" style="text-align:center;">환불수단</th>
+       			<td>
+       				<input type="radio" name="refund" value="계좌이체">무통장입금 &nbsp;
+       				<input type="radio" name="refund" value="신용카드">카드취소<br>
+       				<div style="margin-top:10px;">
+       					<input type="text" placeholder="예금주명"/>
+       					<input type="text" placeholder="은행명"/>
+       				</div>
+       			
+	       			<div>
+	       				<input style="width:352px; margin-top:3px;" type="text" placeholder="계좌번호"/>
+	       			</div>
+       			</td>
+       		</tr>
+	</table>
+	<div class="chargediv">
+       		<button style="width:150px; margin-left:50px;" type="button" class="btn btn-danger">환불 신청하기</button>
+    </div>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

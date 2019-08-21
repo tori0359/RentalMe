@@ -102,14 +102,11 @@
            <tr>
                 <td class="text-center"><a href="/mp/cart">장바구니</a></td>
            </tr>
-           <tr>
-                <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
-           </tr>
             <tr>
                 <td class="text-center"><a href="/mp/deposit">예치금</a></td>
            </tr>
             <tr>
-                <td class="text-center"><a href="#">나의정보</a></td>
+                <td class="text-center"><a href="/mp/updInfo">나의정보</a></td>
            </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
@@ -120,6 +117,9 @@
            </thead>
            <tr>
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">나의 중고상점</a></td>
+           </tr>
+           <tr>
+                <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
            </tr>
        </table>
 		<table style="margin-top:30px; " class="mpTable">
