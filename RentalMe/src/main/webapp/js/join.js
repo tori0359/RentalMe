@@ -52,6 +52,8 @@ $(function() {
 		RegExp(/^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/); //비밀번호 정규식(8~20자 영문소문자,대문자,숫자,특수문자 사용가능)
 	var regexHp =
 		RegExp(/^[0-9]{10,11}$/); //연락처 정규식 (10~11자 숫자만 사용가능)
+	var regexEmail = 
+		RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); //이메일 정규식(영문+숫자@영문+숫자가 아닐경우)
 	var flagId = false;
 	var flagPw = false;
 	var flagHp = false;
@@ -63,7 +65,8 @@ $(function() {
     $('#pw-danger').hide();
     $('#pw-danger2').hide();
     $('#hp-danger').hide();
-    $('#joinBtn').attr('disabled', true);
+    $('#email-danger').hide();
+    //$('#joinBtn').attr('disabled', true);
     
     /*유효성 검사*/
     
@@ -153,11 +156,20 @@ $(function() {
     
     //4. 이메일 
     $('#email').focus(function(){
-	    if(flagId && flagPw && flagHp){
-			$('#joinBtn').attr('disabled', false);
-	    }else{
-	    	$('#joinBtn').attr('disabled', true);
-	    }        
+//	    if(flagId && flagPw && flagHp){
+//			$('#joinBtn').attr('disabled', false);
+//	    }else{
+//	    	$('#joinBtn').attr('disabled', true);
+//	    } 
+    	$('#email-danger').hide();
+    }).blur(function(){
+    	if($('#email').val()!=""){
+    		if(regexEmail.test($('#email').val())){//이메일 정규식 체크에서 정상일경우 패스
+    			$('#email-danger').hide();
+    		}else{
+    			$('#email-danger').show();
+    		}
+    	}
     });
     //인증코드받기 버튼 클릭한 경우
     $('#send_code').click(function(){

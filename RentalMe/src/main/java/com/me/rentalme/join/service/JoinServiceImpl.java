@@ -1,5 +1,7 @@
 package com.me.rentalme.join.service;
 
+import java.text.SimpleDateFormat;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -36,8 +38,16 @@ public class JoinServiceImpl implements JoinService{
 	public int addInfo(UserVo bean) {
 		log.debug("회원정보 입력 서비스...");
 		
-		int result = joinDao.insertJoin(bean);
-		return result;
+		String levelGbCd = "1"; //일반회원
+		
+		bean.setlevelGbCd(levelGbCd); //일반회원으로 등록
+		
+		//생년월일(yyyy-mm-dd to yyyymmdd)로 변경
+		String birthDay = bean.getBirthDay(); 
+		birthDay = birthDay.replace("-", "");
+		bean.setBirthDay(birthDay);
+		
+		return joinDao.insertJoin(bean);
 	}
 
 }

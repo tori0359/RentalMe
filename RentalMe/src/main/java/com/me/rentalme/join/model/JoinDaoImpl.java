@@ -1,5 +1,8 @@
 package com.me.rentalme.join.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,9 +40,48 @@ public class JoinDaoImpl implements JoinDao {
 		
 		log.debug("회원정보 입력 Dao...");
 		
-		int result = sqlSession.insert("join.insertOne", bean);
 		
-		return result;
+		return sqlSession.insert("join.insertOne", bean);
+	}
+
+	/**
+	* 이메일 인증 난수 생성
+	* 
+	* @param  
+	* @return 
+	* @author 황인준
+	* @exception return("namespace.id명", 파라미터)
+	*/
+	@Override
+	public int getKey(String userId, String key) {
+		
+		log.debug("이메일 인증 난수 생성 Dao...");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("emailKey", key);
+		
+		return sqlSession.update("join.updateKeyOne", map);
+	}
+
+	/**
+	* 이메일 인증하기 완료 (이메일인증확인 컬럼 Y로 업데이트)
+	* 
+	* @param  
+	* @return 
+	* @author 황인준
+	* @exception return("namespace.id명", 파라미터)
+	*/
+	@Override
+	public int updEmailKey(String userId, String key) {
+		
+		log.debug("이메일 인증하기 상태(Y) 업데이트 Dao...");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("emailKey", key);
+		
+		return sqlSession.update("join.updateKeyYn", map);
 	}
 
 }

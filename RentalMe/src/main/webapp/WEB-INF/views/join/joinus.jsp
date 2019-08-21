@@ -18,5 +18,4 @@
 	
 	<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
-<jsp:include page="../template/footer.jsp"></jsp:include>
 </html>
