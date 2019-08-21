@@ -1,12 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="">
-	<title>Home</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.content {
+		height: 800px;
+	}
+</style>
+<jsp:include page="./template/headerRe.jsp"></jsp:include>
 </head>
 <body>
+<<<<<<< HEAD
 	<table>
 		<tr>
 			<th>번호1</th>
@@ -21,5 +28,11 @@
 		</tr>
 		</c:forEach>		
 	</table>
+=======
+	<div class="content">
+		<h1>메인페이지</h1>
+	</div>
+>>>>>>> refs/remotes/origin/hij
 </body>
+<jsp:include page="./template/footer.jsp"></jsp:include>
 </html>

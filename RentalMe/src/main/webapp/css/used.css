@@ -1,0 +1,77 @@
+@charset "UTF-8";
+#usedMng{
+/*                border: 1px solid red;*/
+                width: 60%;
+                height: 1500px;
+                margin: 100px auto;
+            }
+            #usedMng_title{
+                background-color: lightgray;
+                text-align: center;
+                margin: 50px;
+            }
+            #usedMng_title div{
+                display: inline-block;
+                margin: 10px;
+            }
+            #usedMng_frame{
+/*                border: 1px solid blue;*/
+                width: 80%;
+                margin: auto;
+            }
+            #usedMng_content{
+/*                border: 1px solid red;*/
+                width: 80%;
+                margin: auto;
+            }
+            #used_imgUpload{
+                text-align: right;
+            }
+            #used_main_img{
+                border: 1px solid black;
+                margin: auto;
+                width: 400px;
+                height: 200px;
+            }
+            #used_sub_img_group{
+                width: 400px;
+                margin: auto;
+            }
+            .used_sub_img{
+                display: inline-block;
+                border: 1px solid black;
+                width: 100px;
+                height: 100px;
+            }
+            .used_sub_img>img{
+                position: absolute;
+            }
+            #category{
+            	margin-left: 1px;
+            }
+            #status{
+            	margin-left: 1px;
+            }
+            #used_exp{
+                display: inline-block;
+            }
+            .form-control{
+                margin-left: -15px;
+            }
+            #explain{
+                margin-left: 0px;
+            }
+            #submit_btn{
+                margin-left: -55px;
+            }
+            #imgfile_label{
+                border: 1px solid black;
+                width: 120px;
+                height: 33px;
+                text-align: center;
+                line-height: 30px;
+                background-color: gray;
+                color: white;
+            }
+            #imgfile{
+            }
