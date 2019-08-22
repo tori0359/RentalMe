@@ -1,6 +1,5 @@
 package com.me.rentalme.model.entity;
 
-import java.util.Date;
 
 public class CallVo {
 	private String usedGdsNo;
@@ -10,7 +9,79 @@ public class CallVo {
 	private String chgDt;
 	private String regId;
 	private String regDt;
+	private String modelNm;
+	private String usedGdsPrice;
+	private String odrDt;
+	private String gdsPrice;
+	private int odrQty;
+	private int odrAmt;
+	private String agreeTem;
+	private String odrStsGbCd;
 	
+	public String getOdrStsGbCd() {
+		return odrStsGbCd;
+	}
+
+	public void setOdrStsGbCd(String odrStsGbCd) {
+		this.odrStsGbCd = odrStsGbCd;
+	}
+
+	public String getOdrDt() {
+		return odrDt;
+	}
+
+	public void setOdrDt(String odrDt) {
+		this.odrDt = odrDt;
+	}
+
+	public String getGdsPrice() {
+		return gdsPrice;
+	}
+
+	public void setGdsPrice(String gdsPrice) {
+		this.gdsPrice = gdsPrice;
+	}
+
+	public int getOdrQty() {
+		return odrQty;
+	}
+
+	public void setOdrQty(int odrQty) {
+		this.odrQty = odrQty;
+	}
+
+	public int getOdrAmt() {
+		return odrAmt;
+	}
+
+	public void setOdrAmt(int odrAmt) {
+		this.odrAmt = odrAmt;
+	}
+
+	public String getAgreeTem() {
+		return agreeTem;
+	}
+
+	public void setAgreeTem(String agreeTem) {
+		this.agreeTem = agreeTem;
+	}
+
+	public String getModelNm() {
+		return modelNm;
+	}
+
+	public void setModelNm(String modelNm) {
+		this.modelNm = modelNm;
+	}
+
+	public String getUsedGdsPrice() {
+		return usedGdsPrice;
+	}
+
+	public void setUsedGdsPrice(String usedGdsPrice) {
+		this.usedGdsPrice = usedGdsPrice;
+	}
+
 	public CallVo() {
 		
 	}
@@ -123,7 +194,9 @@ public class CallVo {
 	@Override
 	public String toString() {
 		return "CallVo [usedGdsNo=" + usedGdsNo + ", mbNo=" + mbNo + ", callStsCd=" + callStsCd + ", chgId=" + chgId
-				+ ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + "]";
+				+ ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", modelNm=" + modelNm
+				+ ", usedGdsPrice=" + usedGdsPrice + ", odrDt=" + odrDt + ", gdsPrice=" + gdsPrice + ", odrQty="
+				+ odrQty + ", odrAmt=" + odrAmt + ", agreeTem=" + agreeTem + ", odrStsGbCd=" + odrStsGbCd + "]";
 	}
 	
 }

@@ -20,12 +20,31 @@ public class MpUserServiceImpl implements MpUserService{
 	@Inject
 	MpUserDao mpUserDao;
 	
+	
+	//주문내역 리스트
 	@Override
-	public List<CallVo> list() throws SQLException {
-		log.debug("마이페이지(찜한상품) 서비스");
+	public List<CallVo> ordList() throws SQLException {
+		log.debug("주문내역 서비스");
 		
-		return mpUserDao.selectAll();
+		return mpUserDao.selectOrd();
 	}
+	
+	//찜한상품 리스트
+	@Override
+	public List<CallVo> wishList() throws SQLException {
+		//log.debug("마이페이지(찜한상품) 서비스");
+		
+		return mpUserDao.selectWish();
+	}
+	
+	//찜한상품 삭제
+	@Override
+	public void deleteWish(CallVo callVo) throws SQLException {
+		
+		mpUserDao.deleteWish(callVo);
+	}
+	
+	
 
 
 }

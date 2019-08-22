@@ -4,8 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="mpUser">
-  	<select id="selectAll" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS chgDt,USED_GDS_NO AS usedGdsNo FROM TB_CALL100 ORDER BY REG_DT;
+  	<select id="selectWish" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT DATE_FORMAT(TB_CALL100.CHG_DT, '%Y-%m-%d') AS chgDt, TB_USED100.MODEL_NM AS modelNm, TB_USED100.USED_GDS_PRICE as usedGdsPrice 
+		FROM TB_CALL100 
+		INNER JOIN TB_USED100 
+		ON TB_CALL100.USED_GDS_NO = TB_USED100.USED_GDS_NO 
+		WHERE CALL_STS_CD=1;
   	</select>
+  	
+  	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt, tb_odr110.ODR_QTY AS odrQty, tb_odr110.AGREE_TEM AS agreeTem, tb_odr110.GDS_PRICE AS gdsPrice, tb_odr100.ODR_STS_GB_CD AS odrStsGbCd
+		FROM tb_odr110
+		INNER JOIN tb_odr100
+		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO;
+  	</select>
+  	
+  	<update id="delete" >
+  		UPDATE TB_CALL100
+		SET CALL_STS_CD=2
+		WHERE USED_GDS_NO=#{USEDGDSNO};
+  	</update>
   
   </mapper>

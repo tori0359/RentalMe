@@ -21,12 +21,26 @@ public class MpUserDaoImpl implements MpUserDao{
 	@Inject
 	SqlSession sqlSession;
 	
+	
 	@Override
-	public List<CallVo> selectAll() throws SQLException {
-		log.debug("마이페이지(찜한상품) Dao");
-		
-		
-		return sqlSession.selectList("mpUser.selectAll");
+	public List<CallVo> selectOrd() throws SQLException {
+		return sqlSession.selectList("mpUser.selectOrd");
 	}
+	
+	
+	@Override
+	public List<CallVo> selectWish() throws SQLException {
+		//log.debug("마이페이지(찜한상품) Dao");
+		
+		return sqlSession.selectList("mpUser.selectWish");
+	}
+
+	@Override
+	public void deleteWish(CallVo callVo) throws SQLException {
+		
+		sqlSession.update("mpUser.delete");
+	}
+
+	
 
 }
