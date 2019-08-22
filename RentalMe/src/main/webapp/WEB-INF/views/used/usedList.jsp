@@ -69,7 +69,7 @@
 	}
 	
 
-	#used_thing{
+	.used_thing{
 		width: 95%;
 		border: 1px solid black;
 		margin: 15px auto;
@@ -115,52 +115,41 @@
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			bigApc();
+			moveTab(0);
 		});
 		$('.tab').eq(1).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			smlApc();
+			moveTab(1);
 		});
 		$('.tab').eq(2).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			kitApc();
+			moveTab(2);
 		});
 		$('.tab').eq(3).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			furniture();
+			moveTab(3);
 		});
 		$('.tab').eq(4).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			etc();
+			moveTab(4);
 		});
-		function removeCls(who){
+		function removeCls(who){ //탭활성화
 			$('.tabs').find('li').removeClass('active');
 			who.addClass('active');
 		}
+		function moveTab(num){ //탭옮김시 화면바뀜
+			$('.used_thing').not($('.used_thing').eq(num)).hide();
+			$('.used_thing').eq(num).show();
+		}
 		
-		function bigApc(){ 		//대형가전
-			
-		}
-		function smlApc(){ 		//소형가전
-
-		}
-		function kitApc(){ 		//주방가전
-
-		}
-		function furniture(){ 	//가구
-
-		}
-		function etc(){ 		//기타
-
-		}
 		function numberWithCommas(x) { //숫자 3자리 콤마
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
@@ -195,9 +184,48 @@
 		<li class="tab">가구</li>		
 		<li class="tab">기타</li>		
 	</ul>
-	
-	<div id="used_thing">
-	<c:forEach items="${alist }" var="bean">
+	<div class="used_thing">
+	<c:forEach items="${alist1 }" var="bean">
+		<div class="line_thing">
+			<div class="used_thing_img"></div>
+			<div><a href="#">${bean.BRAND_NM }</a></div>
+			<div><a href="#">${bean.MODEL_NM }</a></div>
+			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+		</div>
+	</c:forEach>
+	</div>
+	<div class="used_thing">
+	<c:forEach items="${alist2 }" var="bean">
+		<div class="line_thing">
+			<div class="used_thing_img"></div>
+			<div><a href="#">${bean.BRAND_NM }</a></div>
+			<div><a href="#">${bean.MODEL_NM }</a></div>
+			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+		</div>
+	</c:forEach>
+	</div>
+	<div class="used_thing">
+	<c:forEach items="${alist3 }" var="bean">
+		<div class="line_thing">
+			<div class="used_thing_img"></div>
+			<div><a href="#">${bean.BRAND_NM }</a></div>
+			<div><a href="#">${bean.MODEL_NM }</a></div>
+			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+		</div>
+	</c:forEach>
+	</div>
+	<div class="used_thing">
+	<c:forEach items="${alist4 }" var="bean">
+		<div class="line_thing">
+			<div class="used_thing_img"></div>
+			<div><a href="#">${bean.BRAND_NM }</a></div>
+			<div><a href="#">${bean.MODEL_NM }</a></div>
+			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+		</div>
+	</c:forEach>
+	</div>
+	<div class="used_thing">
+	<c:forEach items="${alist5 }" var="bean">
 		<div class="line_thing">
 			<div class="used_thing_img"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>

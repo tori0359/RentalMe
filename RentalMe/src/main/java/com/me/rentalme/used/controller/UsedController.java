@@ -42,21 +42,19 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getUsedList(Model model) throws SQLException {
 		
 		log.debug("중고거래 컨트롤러");
-//		if(GDS_MCLASS_CD==10 || GDS_MCLASS_CD==20 || GDS_MCLASS_CD==30 || GDS_MCLASS_CD==40 || GDS_MCLASS_CD==50) {
-//			model.addAttribute("alist", usedService.oneList(GDS_MCLASS_CD));
-//		} else if (GDS_MCLASS_CD==0){
-//			model.addAttribute("alist", usedService.list());
-//		} else {
-//			return "redirect:used/0";
-//		}
-		model.addAttribute("alist", usedService.list());
+		model.addAttribute("alist1", usedService.oneList(10));
+		model.addAttribute("alist2", usedService.oneList(20));
+		model.addAttribute("alist3", usedService.oneList(30));
+		model.addAttribute("alist4", usedService.oneList(40));
+		model.addAttribute("alist5", usedService.oneList(50));
+		
 		return "used/usedList";
 	}
-	
+
 	/**
 	* 중고거래 상세보기
 	* 
@@ -65,7 +63,7 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/{idx}", method = RequestMethod.GET)
+	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
 	public ModelAndView getUsedDetail(@PathVariable("idx") int idx) {
 		
 		
