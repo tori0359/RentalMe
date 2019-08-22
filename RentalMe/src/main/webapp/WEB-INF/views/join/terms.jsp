@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/join.css">
-<jsp:include page="../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/join.js"></script>
 </head>

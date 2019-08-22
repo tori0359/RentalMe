@@ -4,7 +4,7 @@
 <!doctype html>
 <html>
 <head>
-<jsp:include page="../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../template/header.jsp"></jsp:include>
     <meta charset="UTF-8">
 	<script type="text/javascript">
 		$(document).ready(function(){

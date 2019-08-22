@@ -4,12 +4,17 @@
 #join_btn{background-color: black;color: white;font-weight: bold;}
 #joinus>a:hover{background-color: darkblue;}
 /*약관동의*/
-#join_terms{width: 700px;text-align: center;margin: 100px auto; height: 100%; padding-bottom: 150px;}
+#join_terms{width: 700px;text-align: center;margin: 100px auto; height: 1000px; padding-bottom: 150px;}
 #join_terms h3{text-align: left;}
 #join_terms .checkbox{text-align: left;}
 .join_terms_content{border: 1px solid;height: 250px;margin-top: 20px;}
 #join_terms #active_tab {background-color: lightgray;}
 /*정보입력*/
+#join_info{width: 700px;text-align: center;margin: 100px auto; height: 600px; padding-bottom: 150px;}
+#option_select{text-align: left;}
+#join_info h3{text-align: left;}
+#join_info .checkbox{text-align: left;}
+#join_info #active_tab {background-color: lightgray;}
 #join_input{width: 50%;margin: 20px auto;}
 #join_input input{margin-bottom: 10px;}
 /*#join_input #email{display: inline-block;width: 66%;}*/

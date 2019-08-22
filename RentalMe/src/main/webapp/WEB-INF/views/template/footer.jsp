@@ -49,11 +49,8 @@
 		}
 		.footerLink>p>a:hover{
 			text-decoration: underline;
-		}
-		
-		
-
 	</style>
+
 </head>
 <body>
 <div id="wrap">

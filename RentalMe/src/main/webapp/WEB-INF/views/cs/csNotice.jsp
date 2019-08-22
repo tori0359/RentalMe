@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-	<jsp:include page="../template/headerRe.jsp"></jsp:include>
+	<jsp:include page="../template/header.jsp"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#noticeBar td:nth-child(2)").mouseover(function(){

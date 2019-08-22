@@ -210,7 +210,7 @@
        <div class="col-md-11">
       <p class="navbar-text navbar-right"> 
       <a href="#" class="navbar-link">로그인</a> ㅣ
-      <a href="#" class="navbar-link">회원가입</a></p>
+      <a href="/join/signup" class="navbar-link">회원가입</a></p>
       </div>
     </div>
      <div class="navtitle">

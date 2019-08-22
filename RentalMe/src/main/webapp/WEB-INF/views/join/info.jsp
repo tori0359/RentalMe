@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <!-- datepicker 라이브러리(3개) -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -16,7 +16,7 @@
 	src="${pageContext.request.contextPath}/js/join.js"></script>
 </head>
 <body>
-	<div id="join_terms">
+	<div id="join_info">
 		<ul id="myTab8" class="nav nav-tabs nav-justified" role="tablist">
 			<li role="presentation" class="disabled"><a href="#">약관동의</a></li>
 			<li role="presentation" class="active"><a href="#"

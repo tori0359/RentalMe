@@ -58,7 +58,6 @@
 </div>
 </div>
 </div>
-<div id="wrap">
 <div class="footer">
 		<div class="footerLink">
 			<p><a href="#">개인정보취급방침</a>&emsp;&emsp;<a href="#">이용약관</a>&emsp;&emsp;<a href="#">고객센터</a></p>
