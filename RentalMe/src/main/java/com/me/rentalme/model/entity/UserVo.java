@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class UserVo {
 	private String 	userId;			// 아이디
-	private int		mbNo;			// 회원번호
+	private String	mbNo;			// 회원번호
 	private String	userNM;			// 이름
 	private String	birthDay;		// 생년월일
 	private String	genderGbCd;		// 성별구분코드(1:남자, 2:여자)
@@ -33,7 +33,7 @@ public class UserVo {
 	}
 
 
-	public UserVo(String userId, int mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
+	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
 			String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
 			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, Date joinDt, String userStsCd,
 			String chgId, Date chgDt, String regId, Date regDt) {
@@ -74,12 +74,12 @@ public class UserVo {
 	}
 
 
-	public int getMbNo() {
+	public String getMbNo() {
 		return mbNo;
 	}
 
 
-	public void setMbNo(int mbNo) {
+	public void setMbNo(String mbNo) {
 		this.mbNo = mbNo;
 	}
 
@@ -294,11 +294,16 @@ public class UserVo {
 	}
 
 
+	
+
+
+	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((levelGbCd == null) ? 0 : levelGbCd.hashCode());
 		result = prime * result + ((addr == null) ? 0 : addr.hashCode());
 		result = prime * result + ((addrDetail == null) ? 0 : addrDetail.hashCode());
 		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
@@ -310,7 +315,8 @@ public class UserVo {
 		result = prime * result + ((hp == null) ? 0 : hp.hashCode());
 		result = prime * result + ((hpYn == null) ? 0 : hpYn.hashCode());
 		result = prime * result + ((joinDt == null) ? 0 : joinDt.hashCode());
-		result = prime * result + mbNo;
+		result = prime * result + ((levelGbCd == null) ? 0 : levelGbCd.hashCode());
+		result = prime * result + ((mbNo == null) ? 0 : mbNo.hashCode());
 		result = prime * result + ((pwAdjDt == null) ? 0 : pwAdjDt.hashCode());
 		result = prime * result + ((pwFailCnt == null) ? 0 : pwFailCnt.hashCode());
 		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
@@ -332,11 +338,6 @@ public class UserVo {
 		if (getClass() != obj.getClass())
 			return false;
 		UserVo other = (UserVo) obj;
-		if (levelGbCd == null) {
-			if (other.levelGbCd != null)
-				return false;
-		} else if (!levelGbCd.equals(other.levelGbCd))
-			return false;
 		if (addr == null) {
 			if (other.addr != null)
 				return false;
@@ -392,7 +393,15 @@ public class UserVo {
 				return false;
 		} else if (!joinDt.equals(other.joinDt))
 			return false;
-		if (mbNo != other.mbNo)
+		if (levelGbCd == null) {
+			if (other.levelGbCd != null)
+				return false;
+		} else if (!levelGbCd.equals(other.levelGbCd))
+			return false;
+		if (mbNo == null) {
+			if (other.mbNo != null)
+				return false;
+		} else if (!mbNo.equals(other.mbNo))
 			return false;
 		if (pwAdjDt == null) {
 			if (other.pwAdjDt != null)

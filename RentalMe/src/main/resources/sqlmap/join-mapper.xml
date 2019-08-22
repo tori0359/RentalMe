@@ -5,20 +5,34 @@
   
 <mapper namespace="join">
 	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UserVo">
-		 insert 
-		   into tb_user100(user_id,pw,hp,email,birthday,gender_gb_cd,join_dt,level_gb_cd) 
-		 values(#{userId},#{userPw},#{hp},#{email},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd})
+		 INSERT 
+		   INTO TB_USER100(USER_ID,PW,PW_ADJ_DT,HP,EMAIL,BIRTHDAY,GENDER_GB_CD,JOIN_DT,LEVEL_GB_CD,mb_no) 
+		 VALUES(#{userId},#{userPw},DATE_FORMAT(NOW(),'%Y%m%d'),#{hp},#{email},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd}, #{mbNo})
+	</insert>
+	<insert id="insertMemNoSeq">
+		INSERT
+		  INTO SEQ_MB100
+		VALUES(NULL)
 	</insert>
 	<update id="updateKeyOne">
-		update tb_user100 
-		   set email_key=#{emailKey}
-		 where user_id=#{userId}
+		UPDATE TB_USER100 
+		   SET EMAIL_KEY=#{emailKey}
+		 WHERE USER_ID=#{userId}
 	</update>
 	<update id="updateKeyYn">
-		update tb_user100
-		   set email_key = 'Y'
-		     , chg_id = 'system'
-		     , chg_dt = now()
-		 where user_id=#{userId} and email_key=#{emailKey}
+		UPDATE TB_USER100
+		   SET EMAIL_KEY = 'Y'
+		     , CHG_ID = 'system'
+		     , CHG_DT = now()
+		 WHERE USER_ID=#{userId} AND EMAIL_KEY=#{emailKey}
 	</update>
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT COUNT(USER_ID) AS CNT
+		  FROM TB_USER100
+		 WHERE USER_ID=#{userId}
+	</select>
+	<select id="getMemNo" resultType="String">
+		SELECT MAX(CONCAT(RIGHT(DATE_FORMAT(NOW(),'%Y'),2), LPAD(SEQ,6,0))) AS mbNo
+		  FROM SEQ_MB100
+	</select>
 </mapper>

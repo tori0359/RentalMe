@@ -11,7 +11,9 @@ import com.me.rentalme.model.entity.UserVo;
 */
 public interface JoinService {
 
-	int addInfo(UserVo bean); //회원등록
+	int 	addInfo(UserVo bean);  	//회원등록
+	String 	getId(String userId); 	//아이디 중복체크
+	void 	addMemNoSeq();			//회원번호 시퀀스 추가
+	String 	getMemNo();				//회원번호 가져오기
 	
-
 }

@@ -24,20 +24,21 @@
 			<li role="presentation" class="disabled"><a href="#">가입완료</a></li>
 		</ul>
 		<div id="join_input">
-			<form action="info" method="post">
+			<form name="frm" action="info" method="post">
 				<div>
 					<input type="text" class="form-control" id="id" name="userId"
 						placeholder="아이디">
 				</div>
 				<div id="id-success">아이디 사용가능</div>
 				<div id="id-danger">5~20자 영문소문자,대문자,숫자만 사용가능</div>
+				<div id="idCheck-danger">아이디가 사용중입니다.</div>
 				
 				<div>
 					<input type="password" class="form-control" id="pw" name="userPw"
 						placeholder="비밀번호">
 				</div>
 				<div>
-					<input type="password" class="form-control" id="pwf"
+					<input type="password" class="form-control" id="pwf" name="pwf"
 						placeholder="비밀번호 확인">
 				</div>
 				<div class="pw-chk" id="pw-success">비밀번호가 일치합니다</div>
@@ -67,7 +68,7 @@
 						value="2"> 여
 					</label>
 				</div>
-				<button type="submit"  id="joinBtn" class="btn btn-default">가입하기</button>
+				<button id="joinBtn" type="button" class="btn btn-default" onclick="joinCheck();return false;">가입하기</button>
 			</form>
 		</div>
 	</div>
