@@ -81,9 +81,9 @@
 	   .row{
 		   margin: 0px;
 	   
-        
+        }
 </style>
-<jsp:include page="./headerRe.jsp"></jsp:include>
+<jsp:include page="./header.jsp"></jsp:include>
 </head>
 <body>
 
@@ -97,49 +97,52 @@
            </tr>
            </thead>
            <tr>
-                <td class="text-center"><a href="#">주문내역</a></td>
+                <td class="text-center"><a href="/mp/">주문내역</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="#">장바구니</a></td>
+                <td class="text-center"><a href="/mp/cart">장바구니</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="#">찜한상품</a></td>
+                <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
            </tr>
             <tr>
-                <td class="text-center"><a href="#">예치금</a></td>
+                <td class="text-center"><a href="/mp/deposit">예치금</a></td>
            </tr>
             <tr>
-                <td class="text-center"><a href="#">내 정보 수정</a></td>
+                <td class="text-center"><a href="#">나의정보</a></td>
            </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
-           <thead>
-            <tr class="active">
-                <th style="color:white;"class="text-center">나의 활동</th>
-           </tr>
-           </thead>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">내 문의 보기</a></td>
-           </tr>
-       </table>
-		<table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
                 <th style="color:white;"class="text-center">중고거래</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">내 중고 상품</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">나의 중고상점</a></td>
+           </tr>
+       </table>
+		<table style="margin-top:30px; " class="mpTable">
+           <thead>
+            <tr class="active">
+                <th style="color:white;"class="text-center">이벤트 경매</th>
+           </tr>
+           </thead>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매내역</a></td>
            </tr>
        </table>
        <table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
-                <th style="color:white;"class="text-center">경매</th>
+                <th style="color:white;"class="text-center">나의활동</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">거래 내역</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고</a></td>
+           </tr>
+           <tr>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">1:1문의</a></td>
            </tr>
        </table>
        </div>

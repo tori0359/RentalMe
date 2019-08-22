@@ -1,13 +1,19 @@
 package com.me.rentalme.join.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.auth.service.MailAuthService;
 import com.me.rentalme.join.service.JoinService;
 import com.me.rentalme.model.entity.UserVo;
 
@@ -28,6 +34,9 @@ public class JoinController {
 	
 	@Inject
 	JoinService joinService; 
+	
+	@Inject
+	MailAuthService mailAuthService;
 	
 	/**
 	* 회원가입 페이지 
@@ -83,21 +92,35 @@ public class JoinController {
 	* @exception None
 	*/
 	@RequestMapping(value = "/info", method = RequestMethod.POST)
-	public String registerInfo(UserVo bean) {
+	public ModelAndView registerInfo(UserVo userVo, HttpServletRequest req) {
 		log.debug("회원정보 입력 컨트롤러...");
 		
-		//int result = joinService.addInfo(bean);
-		int result = 1; //임시...
+		//회원가입
+		joinService.addInfo(userVo);
 		
-		//회원정보 입력 성공 시 가입완료 페이지로 이동
-		if(result > 0) {
-			return "join/compl";		
-		}
-		//회원정보 입력 실패 시 입력페이지로 다시 이동 (비밀번호만 초기화 되고 나머지 값 유지)
-		return null;
+		//인증 메일 보내기 
+		mailAuthService.mailSendWithUserKey(userVo.getEmail(), userVo.getUserId(), req);
 		
+		
+		return new ModelAndView("join/compl");
 	}
 	
+	/**
+	* 회원가입 후 인증상태(Y) 업데이트
+	* 
+	* @param  UserVo 
+	* @return String 
+	* @author 황인준
+	* @exception None
+	*/
+	@RequestMapping(value = "/key_alter", method = RequestMethod.GET)
+	public String updateEmailConfirm(@RequestParam String userId,@RequestParam String emailKey) {
+		log.debug("회원가입 후 인증상태(Y) 업데이트 컨트롤러");
+		
+		mailAuthService.updateEamilConfirm(userId, emailKey);
+		
+		return "join/authRegCompl";
+	}
 	/**
 	* 가입완료 페이지
 	* 

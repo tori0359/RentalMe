@@ -12,5 +12,6 @@ import com.me.rentalme.model.entity.UserVo;
 public interface JoinService {
 
 	int addInfo(UserVo bean); //회원등록
+	
 
 }
