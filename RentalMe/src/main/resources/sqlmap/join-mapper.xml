@@ -5,6 +5,20 @@
   
 <mapper namespace="join">
 	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UserVo">
-		 
+		 insert 
+		   into tb_user100(user_id,pw,hp,email,birthday,gender_gb_cd,join_dt,level_gb_cd) 
+		 values(#{userId},#{userPw},#{hp},#{email},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd})
 	</insert>
+	<update id="updateKeyOne">
+		update tb_user100 
+		   set email_key=#{emailKey}
+		 where user_id=#{userId}
+	</update>
+	<update id="updateKeyYn">
+		update tb_user100
+		   set email_key = 'Y'
+		     , chg_id = 'system'
+		     , chg_dt = now()
+		 where user_id=#{userId} and email_key=#{emailKey}
+	</update>
 </mapper>

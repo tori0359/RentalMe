@@ -12,12 +12,12 @@
 /*정보입력*/
 #join_input{width: 50%;margin: 20px auto;}
 #join_input input{margin-bottom: 10px;}
-#join_input #email{display: inline-block;width: 66%;}
+/*#join_input #email{display: inline-block;width: 66%;}*/
 #join_terms #option_select{text-align: left;}
 #myInput{text-align: center;}
 #birth{display: inline-block;width: 82%;}
 #id{margin-right:20px;}
-#pw-danger,#pw-danger2,#id-danger,#hp-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
+#pw-danger,#pw-danger2,#id-danger,#hp-danger,#email-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
 #pw-success,#id-success{color:blue;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
 /*회원가입완료*/
 #joinus>h3{text-align: center;}
