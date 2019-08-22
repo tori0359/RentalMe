@@ -11,6 +11,10 @@
 	src="${pageContext.request.contextPath}/js/used.js"></script>
 </head>
 <body>
+<!-- 상품번호,회원번호,등록일자,상품대분류코드,중분류,소분류,상품구분코드, 
+	브랜드명, 모델명, 중고상품가격, 제목, 내용, 중고상품결과상태, 삭제여부, 이미지1,2,3,4
+	
+-->
 	<div id="usedMng">
 	    <h2 id="usedMng_title">
 	        <div id="top">물품등록</div>
@@ -26,7 +30,7 @@
 	           최대 지원 사이즈인 640x640으로 리사이즈 해서 올려주세요<br/>
 	           (개당 이미지 최대 10M)
 	            </p>
-	            <form action="#" class="form-horizontal">
+	            <form action="#" class="form-horizontal" enctype="multipart/form-data" method="post">
                     <div id="used_imgUpload">
                         <label for="imgfile" id="imgfile_label">이미지 업로드</label>
                         <input type="file" id="imgfile" multiple accept=".jpg,.jpeg,.png,.gif,.bmp">
@@ -48,10 +52,10 @@
                     </div>
                     <div class="form-group">
                     	<label for="category" class="col-sm-2 control-label">카테고리</label>
-                        <select class="form-control" id="category" name="category" style="width:200px">
+                        <select class="form-control" id="category" name="GDS_MCLASS_CD" style="width:200px">
 						  <option>대형가전</option>
-						  <option>중형가전</option>
 						  <option>소형가전</option>
+						  <option>주방가전</option>
 						  <option>가구</option>
 						  <option>기타</option>
 						</select>
@@ -66,9 +70,21 @@
 						</select>
                     </div>
                   <div class="form-group">
-                    <label for="sub" class="col-sm-2 control-label">제목</label>
+                    <label for="BRAND_NM" class="col-sm-2 control-label">브랜드명</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="sub" id="sub" placeholder="제목">
+                      <input type="text" class="form-control" name="BRAND_NM" id="sub" placeholder="브랜드명">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="MODEL_NM" class="col-sm-2 control-label">모델명</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="MODEL_NM" id="sub" placeholder="모델명">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="SUB" class="col-sm-2 control-label">제목</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="SUB" id="sub" placeholder="제목">
                     </div>
                   </div>
                   <div class="form-group">
@@ -77,14 +93,8 @@
                       <input type="text" class="form-control" name="price" id="price" placeholder="숫자로만 입력">
                     </div>
                   </div>
-                  <textarea class="form-control" id="explain" rows="5" placeholder="설명"></textarea>
+                  <textarea class="form-control" id="explain" name="content" rows="5" placeholder="설명"></textarea>
                   <br>
-                  <div class="form-group">
-                    <label for="sub" class="col-sm-2 control-label">연관태그</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" name="tag" id="tag" placeholder="#세탁기#냉장고 형식">
-                    </div>
-                  </div>
                   
                   <div class="form-group">
                     <div class="col-sm-offset-11">

@@ -1,10 +1,18 @@
 package com.me.rentalme.used.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.used.service.UsedService;
 
 
 /**
@@ -19,7 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/used")
 public class UsedController {
 
+	@Inject
+	UsedService usedService;
 	/**
+	 * @throws SQLException 
 	* 중고거래 리스트
 	* 
 	* @param  None
@@ -27,12 +38,11 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView getUsedList() {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getUsedList(Model model) throws SQLException {
+//		model.addAttribute("alist", usedService.list());
 		
-		
-		ModelAndView mav = new ModelAndView("used/usedList");
-		return mav;
+		return "home";
 	}
 	
 	/**

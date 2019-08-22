@@ -62,7 +62,9 @@
                 margin-left: 0px;
             }
             #submit_btn{
-                margin-left: -55px;
+                float: right;
+                clear: both;
+                margin-bottom: 100px;
             }
             #imgfile_label{
                 border: 1px solid black;
