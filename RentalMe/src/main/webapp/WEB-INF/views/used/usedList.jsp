@@ -179,7 +179,7 @@
 	</form>
 	</div>
 	
-	<a href="#" id="goUsedManager">중고거래 관리</a>
+	<a href="/used/store" id="goUsedManager">중고거래 관리</a>
 	
 	<select id="align">
 		<option>인기순</option>

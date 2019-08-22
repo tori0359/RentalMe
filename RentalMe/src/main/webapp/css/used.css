@@ -1,5 +1,6 @@
 @charset "UTF-8";
-#usedMng{
+/* usedMng start */
+			#usedMng{
 /*                border: 1px solid red;*/
                 width: 60%;
                 height: 1500px;
@@ -49,8 +50,8 @@
             #category{
             	margin-left: 1px;
             }
-            #status{
-            	margin-left: 1px;
+            #radiog{
+            	background-color: #ebebeb;
             }
             #used_exp{
                 display: inline-block;
@@ -77,3 +78,4 @@
             }
             #imgfile{
             }
+/*  usedMng end */

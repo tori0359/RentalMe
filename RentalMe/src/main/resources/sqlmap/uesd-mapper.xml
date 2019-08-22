@@ -8,4 +8,8 @@
 		 SELECT BRAND_NM,MODEL_NM,USED_GDS_PRICE 
 		 FROM tb_used100
 	</select>
+	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UsedVo">
+		 INSERT INTO tb_used100 (GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,BRAND_NM,MODEL_NM,SUB,USED_GDS_PRICE,CONTENT)
+		 VALUES (#{GDS_LCLASS_CD},#{GDS_MCLASS_CD},#{GDS_SCLASS_CD},#{BRAND_NM},#{MODEL_NM},#{SUB},#{USED_GDS_PRICE},#{CONTENT})
+	</insert>
 </mapper>
