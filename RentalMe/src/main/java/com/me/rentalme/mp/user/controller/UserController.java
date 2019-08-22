@@ -1,13 +1,20 @@
 package com.me.rentalme.mp.user.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.model.entity.UserVo;
+import com.me.rentalme.mp.user.service.MpUserService;
+import com.me.rentalme.mp.user.service.MpUserServiceImpl;
 
 /**
 * 마이페이지 컨트롤러
@@ -22,6 +29,9 @@ import com.me.rentalme.model.entity.UserVo;
 public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Inject
+	MpUserService mpUserService;
 	
 	/**
 	* 주문내역
@@ -60,6 +70,7 @@ public class UserController {
 	}	
 	
 	/**
+	 * @throws SQLException 
 	* 찜한 상품
 	* 
 	* @param  
@@ -68,10 +79,13 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/wish", method = RequestMethod.GET)
-	public ModelAndView getWishList() {
+	public ModelAndView getWishList(Model model) throws SQLException {
 		log.debug("찜한상품 컨트롤러...");
-	
+		
+		
+		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist", mpUserService.list());
 		mav.setViewName("mp/user/userWishList");
 		return mav;
 	}
@@ -107,6 +121,7 @@ public class UserController {
 	
 		return "mp/user/userUpdInfo";
 	}
+
 	
 	/**
 	* 내 정보 수정

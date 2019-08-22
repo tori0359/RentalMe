@@ -41,6 +41,7 @@
 	<p id="title">주문내역</p>
 	<div>
        <p id="path">마이페이지> 주문내역</p>
+       <div class="hr" style="height:3px; background-color: black;"></div>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
