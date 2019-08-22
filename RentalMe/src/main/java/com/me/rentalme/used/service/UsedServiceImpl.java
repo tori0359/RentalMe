@@ -27,4 +27,23 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.selectAll();
 	}
 
+	@Override
+	public List<UsedVo> oneList(int GDS_MCLASS_CD) throws SQLException {
+		log.debug("중고거래 탭...");
+		return usedDao.selectOne(GDS_MCLASS_CD);
+	}
+	
+	@Override
+	public int seqUp() throws SQLException {
+		log.debug("기본키 1증가");
+		return usedDao.seqInsert();
+	}
+
+	@Override
+	public int addUsed(UsedVo bean) throws SQLException {
+		log.debug("중고물품 입력...");
+		return usedDao.InsertOne(bean);
+	}
+
+
 }

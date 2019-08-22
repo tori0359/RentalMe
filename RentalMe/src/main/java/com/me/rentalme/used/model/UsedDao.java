@@ -7,4 +7,7 @@ import com.me.rentalme.model.entity.UsedVo;
 
 public interface UsedDao {
 	List<UsedVo> selectAll() throws SQLException;
+	List<UsedVo> selectOne(int GDS_MCLASS_CD) throws SQLException;
+	int seqInsert() throws SQLException;
+	int InsertOne(UsedVo bean) throws SQLException;
 }
