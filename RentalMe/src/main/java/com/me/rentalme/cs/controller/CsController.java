@@ -65,8 +65,8 @@ public class CsController {
 	* @exception 
 	*/
 	
-	  @RequestMapping(value = "/csQuestAdd", method = RequestMethod.GET) public
-	  String getCsQuestForm() {
+	  @RequestMapping(value = "/csQuestAdd", method = RequestMethod.GET) 
+	  public String getCsQuestForm() {
 		  return "cs/csQuestAdd"; 
 	  }
 	 
