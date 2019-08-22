@@ -103,6 +103,12 @@
 </head>
 <script type="text/javascript">
 	$(function(){
+		var classnum=$('.used_price');
+		var price;
+		for(var i=0; i<classnum.length; i++){
+			price=$('.used_price').eq(i).text();
+			$('.used_price').eq(i).text(numberWithCommas(price));	
+		}
 		$('.tab:first-child').addClass('active');
 		var who;	// 클릭한 탭이 누군지
 		$('.tab').eq(0).click(function(e){
@@ -155,6 +161,9 @@
 		function etc(){ 		//기타
 
 		}
+		function numberWithCommas(x) { //숫자 3자리 콤마
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	});
 
 	
@@ -193,7 +202,7 @@
 			<div class="used_thing_img"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#">${bean.USED_GDS_PRICE }</a>
+			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
 		</div>
 	</c:forEach>
 	</div>

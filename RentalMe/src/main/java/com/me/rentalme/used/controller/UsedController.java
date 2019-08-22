@@ -4,7 +4,8 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,8 @@ import com.me.rentalme.used.service.UsedService;
 @RequestMapping("/used")
 public class UsedController {
 
+	Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Inject
 	UsedService usedService;
 	/**
@@ -38,11 +41,13 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getUsedList(Model model) throws SQLException {
-//		model.addAttribute("alist", usedService.list());
 		
-		return "home";
+		log.debug("중고거래 컨트롤러");
+		
+		model.addAttribute("alist", usedService.list());
+		return "used/usedList";
 	}
 	
 	/**
