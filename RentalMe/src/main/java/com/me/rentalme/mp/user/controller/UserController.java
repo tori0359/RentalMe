@@ -1,13 +1,26 @@
 package com.me.rentalme.mp.user.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
+import com.me.rentalme.mp.user.service.MpUserService;
+import com.me.rentalme.mp.user.service.MpUserServiceImpl;
 
 /**
 * 마이페이지 컨트롤러
@@ -23,7 +36,11 @@ public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
+	@Inject
+	MpUserService mpUserService;
+	
 	/**
+	 * @throws SQLException 
 	* 주문내역
 	* 
 	* @param  
@@ -32,10 +49,11 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView getOrderList() {
+	public ModelAndView getOrderList() throws SQLException {
 		log.debug("주문내역 리스트 컨트롤러...");
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist",mpUserService.ordList());
 		mav.setViewName("mp/user/userOrdList");
 		
 		return mav;
@@ -60,6 +78,7 @@ public class UserController {
 	}	
 	
 	/**
+	 * @throws SQLException 
 	* 찜한 상품
 	* 
 	* @param  
@@ -68,14 +87,48 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/wish", method = RequestMethod.GET)
-	public ModelAndView getWishList() {
-		log.debug("찜한상품 컨트롤러...");
-	
+	public ModelAndView getWishList(Model model) throws SQLException {
+		//log.debug("찜한상품 컨트롤러...");
+		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist", mpUserService.wishList());
 		mav.setViewName("mp/user/userWishList");
 		return mav;
 	}
 	
+	/**
+	 * @throws SQLException 
+	* 찜한 상품 삭제 (너무 어려움......보류)
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
+//	@RequestMapping(value = "/wish/delete", method = RequestMethod.POST)
+//	public int deleTeWish(HttpSession session, @RequestParam(value="checkRow[]") List<String> chArr, CallVo callVo) throws Exception{
+//		
+//		log.debug("delete wish");
+//		
+//		int result=0;
+//		String usedGdsNo = "";
+//		
+//		for(String i : chArr) {
+//			callVo.setUsedGdsNo(usedGdsNo);
+//			mpUserService.deleteWish(callVo);
+//		}
+//		
+//		result=1;
+//		return result;
+//	}
+	
+//	@RequestMapping(value = "/wish/delete", method = RequestMethod.POST)
+//	public String deleteWish(@PathVariable("used")) {
+//		
+//		return null;
+//		
+//	}
+//	
 	/**
 	* 예치금
 	* 
@@ -107,6 +160,7 @@ public class UserController {
 	
 		return "mp/user/userUpdInfo";
 	}
+
 	
 	/**
 	* 내 정보 수정

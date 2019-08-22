@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +21,7 @@
 	   		float:left;
 	   }
 	   
-	   #choose{
+	   #choosedel{
 	   		font-family: "nanumR";
 	   		width:55px;
 	   		height:30px;
@@ -67,8 +69,9 @@
 	   		font-family: "nanumB";
 	   		line-height: 100px;
 	   }
-	   
-	   
+	   .pathdiv{
+	   		height:30px;
+	   }
 </style>
 <script type="text/javascript">
 
@@ -80,11 +83,36 @@
 		    }
 		}
 
-		function comma(num){//숫자가 3자리가 넘을때 , 찍는 함수
-		  
-		 
+		window.onload = function () {
+			 $('#choosedel').click(function(){
+					var confirm_val=confirm("찜목록에서 삭제하시겠습니까?");
+
+					if(confirm_val){
+						var checkArr = new Array();
+
+						$('input[class="checkRow"]:checked').each(function(){
+							checkArr.push($(this).attr("data-wishNum"));
+						});
+
+						$.ajax({
+							url : "/mp/wish/delete",
+							type : "post",
+							data : {checkRow : checkArr},
+							success : function(result){
+
+								if(result == 1){
+									location.href="/mp/wish";
+								} else{
+									alert("삭제실패");
+								}
+							}
+							
+						});
+					}
+				});
 		}
 
+		
 
 
 
@@ -92,37 +120,33 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-	<p id="title">찜한상품</p>
+	<p id="title">♥ 찜한상품</p>
 	<div>
-	<div>
+	<div class="pathdiv">
        <p id="path">마이페이지> 찜한상품</p>
-       	<a href="#" id="choose" onclik="delete()">선택삭제</a>
+       	<a href="#" id="choosedel">선택삭제</a>
      </div>
+     <div class="hr" style="height:3px; background-color: black;"></div>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
        			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
-       			<th>상품명/선택사항</th>
-       			<th>렌탈기간</th>
+       			<th>상품명</th>
+       			<th>찜한 날짜</th>
        			<th>상품금액</th>
-       			<th>장바구니</th>
        		</tr>
        	</thead>
        	<tbody>
-       		<tr>  
-       			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
-       			<td>6개월</td>
-       			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn" style="font-size: 9pt;">장바구니담기</button></td>
+       	
+       	<c:forEach items="${alist}" var="bean">
+       		<tr data-tr_value="${bean.usedGdsNo}">  
+       			<td><input type="checkbox" class="checkRow" name="checkRow" value="${content.IDX}" data-wishNum="${bean.usedGdsNo}"></td>
+       			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.modelNm}</td>
+       			<td>${bean.chgDt}</td>
+       			<td><fmt:formatNumber value="${bean.usedGdsPrice}" pattern="#,###.##"/>원</td>
        		</tr>
-       		<tr>  
-       			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
-       			<td>6개월</td>
-       			<td>월30,000원 x 6</td>
-       			<td><button type="button" class="btn" style="font-size: 9pt;">장바구니담기</button></td>
-       		</tr>
+       	</c:forEach>
+       	
        	</tbody>
        	</table>
        </div>

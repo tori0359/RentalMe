@@ -5163,7 +5163,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .nav-tabs.nav-justified > li > a {
     margin-bottom: 0;
-    color: black;
+    color: #777777;
   }
 }
 .nav-tabs.nav-justified > li > a {

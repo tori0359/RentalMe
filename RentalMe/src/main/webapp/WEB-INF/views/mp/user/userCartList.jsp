@@ -19,7 +19,7 @@
 	   		float:left;
 	   }
 	   
-	   #choose{
+	   #choosedel{
 	   		font-family: "nanumR";
 	   		width:55px;
 	   		height:30px;
@@ -82,6 +82,9 @@
 	   		float:right;
 	   		margin-top:25px;
 	   }
+	   .pathdiv{
+	   		height:30px;
+	   }
 	   
 	   
 </style>
@@ -95,11 +98,6 @@
 		    }
 		}
 
-		function comma(num){//숫자가 3자리가 넘을때 , 찍는 함수
-		  
-		 
-		}
-
 
 
 
@@ -109,10 +107,11 @@
 <body>
 	<p id="title">장바구니</p>
 	<div>
-	<div>
+	<div class="pathdiv">
        <p id="path">마이페이지> 장바구니</p>
-       	<a href="#" id="choose" onclik="delete()">선택삭제</a>
+       	<a href="#" id="choosedel" onclik="delete()">선택삭제</a>
      </div>
+     <div class="hr" style="height:3px; background-color: black;"></div>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
