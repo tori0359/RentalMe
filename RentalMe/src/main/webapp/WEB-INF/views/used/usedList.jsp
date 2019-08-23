@@ -103,13 +103,14 @@
 </head>
 <script type="text/javascript">
 	$(function(){
+		
 		var classnum=$('.used_price');
 		var price;
 		for(var i=0; i<classnum.length; i++){
 			price=$('.used_price').eq(i).text();
 			$('.used_price').eq(i).text(numberWithCommas(price));	
 		}
-		$('.tab:first-child').addClass('active');
+		/* $('.tab:first-child').addClass('active'); */
 		var who;	// 클릭한 탭이 누군지
 		$('.tab').eq(0).click(function(e){
 			e.preventDefault();
@@ -162,8 +163,8 @@
 
 	<h3>중고제품</h3>
 	<div id="search">
-	<form action="#">
-		<input type="text" id="search" placeholder="검색">
+	<form action="/used/search">
+		<input type="text" name="MODEL_NM" id="search" placeholder="검색">
 		<button type="submit">검색</button>
 	</form>
 	</div>

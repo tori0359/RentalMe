@@ -11,7 +11,7 @@
 	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo">
 		 SELECT BRAND_NM,MODEL_NM,USED_GDS_PRICE 
 		 FROM tb_used100
-		 WHERE GDS_MCLASS_CD=#{GDS_MCLASS_CD}
+		 WHERE GDS_MCLASS_CD=#{GDS_MCLASS_CD} AND MODEL_NM LIKE CONCAT('%',#{MODEL_NM},'%')
 	</select>
 	
 	<insert id="seqInsert" parameterType="com.me.rentalme.model.entity.UsedVo">

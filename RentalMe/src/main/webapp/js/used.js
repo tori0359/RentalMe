@@ -3,6 +3,13 @@
 	        $(function(){ 
                 $("#imgfile").on("change", handleImgsFilesSelect);
                 
+                $("#category").change(function(){
+                	if($(this).val().equals("10")){
+                		$('intput[type=radio]').not($('.mclass1')).hide();
+                	}
+                	
+                });
+                
                 //가격: 숫자만 입력
                 $("#price").on("keyup", function() { 
                     $(this).val($(this).val().replace(/[^0-9]/g,"")); 
