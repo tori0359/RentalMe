@@ -20,10 +20,10 @@
 				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(1)").css("background","black").css("color","white");
 			});
 			$("#noticeBar td:nth-child(3)").click(function(){
-				location.replace("/rentalme/cs/csInquiry");
+				location.replace("/cs/csInquiry");
 			});
 			$("#noticeBar td:nth-child(2)").click(function(){
-				location.replace("/rentalme/cs/csFAQ");
+				location.replace("/cs/csFAQ");
 			});
 		})
 	</script>

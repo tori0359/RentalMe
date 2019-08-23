@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.cs.service.CsService;
@@ -55,6 +56,21 @@ public class CsController {
 		csService.getList(model);
 		return "cs/csFAQ";
 	}
+	/*
+	 * @RequestMapping(value="/csFAQ") public String csbtn(@RequestParam int num,
+	 * Model model) throws SQLException{ csService.selectListOne(model,num); return
+	 * "cs/csFAQ"; }
+	 */
+	
+	
+	
+	@RequestMapping(value="/csDetail", method=RequestMethod.GET)
+	public ModelAndView csdetail() throws Exception{
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("cs/csDetail");
+		return mav;
+	}
 	
 	/**
 	* 고객센터 - 문의 등록 폼 
@@ -70,7 +86,6 @@ public class CsController {
 		  return "cs/csQuestAdd"; 
 	  }
 	 
-	
 	/**
 	* 고객센터 - 문의 등록 
 	* 
