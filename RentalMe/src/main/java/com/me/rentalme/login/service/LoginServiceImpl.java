@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
-	@Inject
+	//@Inject
 	//LoginDao loginDao; 
 	
 	/**
@@ -37,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int login(UserVo bean, HttpServletRequest req) {
 		
-		HttpSession session = req.getSession();
+		//HttpSession session = req.getSession();
 		
 		//로그인 다오 이동
 		
