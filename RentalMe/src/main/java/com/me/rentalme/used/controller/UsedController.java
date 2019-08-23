@@ -63,10 +63,12 @@ public class UsedController {
 		
 		return "used/usedList";
 	}
+	
+	//검색기능
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String getUsedListNM(Model model,@RequestParam("MODEL_NM") String MODEL_NM) throws SQLException {
 		
-		log.debug("중고거래 컨트롤러");
+		log.debug("중고거래 검색 컨트롤러");
 		UsedVo bean=new UsedVo();
 		if(MODEL_NM==null) {
 			MODEL_NM="";

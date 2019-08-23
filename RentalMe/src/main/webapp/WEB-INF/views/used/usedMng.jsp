@@ -59,6 +59,7 @@
 						  <option value="30">주방가전</option>
 						  <option value="40">가구</option>
 						  <option value="50">기타</option>
+						  <option value="60">패키지</option>
 						</select>
                     </div>
                    	<label class="col-sm-2 control-label">소그룹</label><br>
