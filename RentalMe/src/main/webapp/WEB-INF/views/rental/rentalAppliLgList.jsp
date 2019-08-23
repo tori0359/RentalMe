@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,10 @@
 .content-inner-menu {
 	text-align: center;
 }
+
+/* ---------- 소메뉴 영역 시작 -------- */
+
+/* ---------- 소메뉴 영역 끝 -------- */
 
 /* ---------- 옵션 영역 시작 ---------- */
 #option-menu {
@@ -77,6 +82,9 @@ li.col-sm-3:hover {
 	font-size: 0.75rem;
 	color: #999;
 }
+.caption-box {
+	text-align: center;
+}
 .btn.btn-mini {
 	font-size: 0.63rem;
 }
@@ -121,7 +129,24 @@ input::-moz-focus-inner { border: 0; }
 /* --------- BEST 영역 끝 --------- */
 
 </style>
+<script type="text/javascript">
 
+	$(function() {
+		var temp = "<c:out value="${num}" />";
+		alert(temp);
+	})
+
+	function menu_btn_click(num) {
+		if(num == 1) {
+			alert(num + "버튼누름");
+		} else if(num == 2) {
+			alert(num + "버튼누름");
+		} else {
+			alert("기타");
+		}
+		
+	}
+</script>
 <jsp:include page=".././template/headerRe.jsp"></jsp:include>
 </head>
 <body>
@@ -136,12 +161,12 @@ input::-moz-focus-inner { border: 0; }
 				<!-- **************** -->
 				<!-- 소메뉴 영역 시작 -->
 				<!-- **************** -->
-				<div class="btn-group btn-group-justified" role="group"aria-label="...">
+				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$에어컨</button>
+						<button type="button" class="btn btn-default" id="menu-btn1" onclick="menu_btn_click(1);">$에어컨</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$냉난방기</button>
+						<button type="button" class="btn btn-default" id="menu-btn2" onclick="menu_btn_click(2);">$냉난방기</button>
 					</div>
 					<div class="btn-group" role="group">
 						<button type="button" class="btn btn-default">$냉장고</button>
@@ -520,6 +545,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ************** -->
 				<!-- 리스트 영역 끝 -->
 				<!-- ************** -->
+				 ${num }
 			</div>
 		</div>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	

@@ -5,7 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 
-<jsp:include page="../template/header.jsp"></jsp:include>
+<jsp:include page="../template/headerRe.jsp"></jsp:include>
 
 <style type="text/css">
 	.maincar{

@@ -31,6 +31,8 @@ public class RentalAppliController {
 	* @author 황인준
 	* @exception 
 	*/
+	
+	/*
 	@RequestMapping(value = "/lg", method = RequestMethod.GET)
 	public ModelAndView getLgList() {
 		log.debug("대형가전렌탈 리스트 컨트롤러...");
@@ -38,6 +40,19 @@ public class RentalAppliController {
 		ModelAndView mav = new ModelAndView("rental/rentalAppliLgList");
 		return mav;
 	}	
+	*/
+	
+	@RequestMapping(value = "/lg/{menu}", method = RequestMethod.GET)
+	public ModelAndView getLgList(@PathVariable("menu") String path ) {
+		log.debug("대형가전렌탈 리스트 컨트롤러...");
+		System.out.println("menu value = " + path);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("rental/rentalAppliLgList");
+		mav.addObject("num", path);
+		return mav;
+	}	
+	
 	
 	/**
 	 * 대형가전렌탈 상세보기
@@ -47,13 +62,15 @@ public class RentalAppliController {
 	 * @author 황인준
 	 * @exception 
 	 */
+	/*
 	@RequestMapping(value = "/lg/{idx}", method = RequestMethod.GET)
 	public ModelAndView getLgDeatail(@PathVariable("idx") int idx) {
 		log.debug("대형가전렌탈 상세보기 컨트롤러...");
 		
 		ModelAndView mav = new ModelAndView("rental/rentalDetail");
 		return mav;
-	}	
+	}
+	*/
 	
 	/**
 	 * 소형가전렌탈 리스트
