@@ -13,7 +13,7 @@
   	</select>
   	
   	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt, tb_odr110.ODR_QTY AS odrQty, tb_odr110.AGREE_TEM AS agreeTem, tb_odr110.GDS_PRICE AS gdsPrice, tb_odr100.ODR_STS_GB_CD AS odrStsGbCd
+  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,FN_NM('GDS_NM',GDS_CD) AS gdsNm, tb_odr110.ODR_QTY AS odrQty, tb_odr110.AGREE_TEM AS agreeTem, tb_odr110.GDS_PRICE AS gdsPrice, tb_odr100.ODR_STS_GB_CD AS odrStsGbCd
 		FROM tb_odr110
 		INNER JOIN tb_odr100
 		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO;

@@ -87,10 +87,46 @@
 	   .pathdiv{
 	   		height:30px;
 	   }
-	   
-	   
+	   .starR{
+		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+		  background-size: auto 100%;
+		  width: 30px;
+		  height: 30px;
+		  display: inline-block;
+		  text-indent: -9999px;
+		  cursor: pointer;
+		}
+		.starR.on{
+			background-position:0 0;
+			color:red;
+		}
+	  
 </style>
 <script type="text/javascript">
+ 	window.onload = function (){
+		$('.starRev span').click(function(){
+		  $(this).parent().children('span').removeClass('on');
+		  $(this).addClass('on').prevAll('span').addClass('on');
+		  return false;
+		}); 
+	/* 	var class_by_name = document.getElementsByName('test_name')[0].className;
+		if(($('.starR')[2].className!="on")
+			 */
+
+	} 
+
+	
+
+	$('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').focus()
+		  
+	});
+
+	
+	
+	
+</script>
+<script>
 
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
@@ -120,7 +156,7 @@
        	<c:forEach items="${alist}" var="bean">
        		<tr>  
        			<td>${bean.odrDt}</td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/>상품명</td>
+       			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.odrQty}</td>
        			<td>${bean.agreeTem}개월</td>
        			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</td>
@@ -138,13 +174,47 @@
        					반품확정
        				</c:if>
        			</td>
-       			<td><button type="button" class="btn" style="font-size: 9pt;">후기쓰기</button></td>
+       			<td><button type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal">후기쓰기</button></td>
+       			<c:set var="gdsNm" value="${bean.gdsNm}"></c:set>
        		</tr>
        	</c:forEach>
        	</tbody>
        	</table>
        </div>
       <div class="hr"></div>
+     <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">후기 쓰기</h4>
+      </div>
+      
+      <div class="modal-body">
+       	<label>상품명</label> <div>${gdsNm}</div>
+       	<br>
+       	<div class="hr"></div>
+       	<br>
+       	<label>후기</label><br>
+		<div class="starRev">
+		  <span class="starR on">별1</span>
+		  <span class="starR">별2</span>
+		  <span class="starR">별3</span>
+		  <span class="starR">별4</span>
+		  <span class="starR">별5</span>
+		</div>
+		<textarea style="width:100%; height:200px;"  placeholder="후기를 입력해주세요."></textarea>
+       	
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+	</div>
+    </div>
+    </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>
