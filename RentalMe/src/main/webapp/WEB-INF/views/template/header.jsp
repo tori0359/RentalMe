@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
    <style type="text/css">
        /*폰트설정*/
         @font-face {
@@ -210,7 +211,7 @@
     <div class="login container-fluid">
        <div class="col-md-11">
       <p class="navbar-text navbar-right"> 
-      <a href="#" class="navbar-link">로그인</a> ㅣ
+      <a href="/login" class="navbar-link">로그인</a> ㅣ
       <a href="/join/signup" class="navbar-link">회원가입</a></p>
       </div>
     </div>
