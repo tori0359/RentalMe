@@ -146,7 +146,7 @@ input::-moz-focus-inner { border: 0; }
 		
 	}
 </script>
-<jsp:include page=".././template/headerRe.jsp"></jsp:include>
+<jsp:include page=".././template/header.jsp"></jsp:include>
 </head>
 <body>
 	<div class="content">
@@ -162,53 +162,36 @@ input::-moz-focus-inner { border: 0; }
 				<!-- **************** -->
 				<div class="btn-group btn-group-justified" role="group">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default" id="menu-btn1" onclick="menu_btn_click(1);">$에어컨</button>
+						<button type="button" class="btn btn-default" id="menu-btn1" onclick="menu_btn_click(1);">에어컨</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default" id="menu-btn2" onclick="menu_btn_click(2);">$냉난방기</button>
+						<button type="button" class="btn btn-default" id="menu-btn2" onclick="menu_btn_click(2);">냉난방기</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$냉장고</button>
+						<button type="button" class="btn btn-default">냉장고</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$4</button>
+						<button type="button" class="btn btn-default">TV</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$5</button>
-					</div>
-				</div>
-				<div class="btn-group btn-group-justified" role="group"aria-label="...">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$6</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$7</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$8</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$9</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$10</button>
+						<button type="button" class="btn btn-default">세탁기</button>
 					</div>
 				</div>
 				<div class="btn-group btn-group-justified" role="group"aria-label="...">
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$11</button>
+						<button type="button" class="btn btn-default">빨래건조기</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$12</button>
+						<button type="button" class="btn btn-default">정수기</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$13</button>
+						<button type="button" class="btn btn-default">공기청정기</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$14</button>
+						<button type="button" class="btn btn-default">복합기/프린터기</button>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">$15</button>
+						<button type="button" class="btn btn-default">&nbsp;</button>
 					</div>
 				</div>
 				<!-- ************** -->
@@ -309,7 +292,7 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample1.jpg" alt=""></a>
+													<a href="#"><img src="../../../../imgs/sample1.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨1</h4>
@@ -319,7 +302,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample2.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample2.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨2</h4>
@@ -329,7 +312,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample3.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample3.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨3</h4>
@@ -339,7 +322,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample4.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample4.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨4</h4>
@@ -354,7 +337,7 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample5.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample5.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨5</h4>
@@ -364,7 +347,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample6.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample6.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨6</h4>
@@ -374,7 +357,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample7.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample7.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨7</h4>
@@ -384,7 +367,7 @@ input::-moz-focus-inner { border: 0; }
 											</li>
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src="../../imgs/sample8.jpg" alt=""></a>
+													<a href="#"><img src="../../../imgs/sample8.jpg" alt=""></a>
 												</div>
 												<div class="caption-box">
 													<h4>에어컨8</h4>
@@ -448,7 +431,7 @@ input::-moz-focus-inner { border: 0; }
 									<ul class="thumbnails">
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample1.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample1.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨1</h4>
@@ -458,7 +441,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample2.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample2.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨2</h4>
@@ -468,7 +451,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample3.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample3.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨3</h4>
@@ -478,7 +461,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample4.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample4.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨4</h4>
@@ -494,7 +477,7 @@ input::-moz-focus-inner { border: 0; }
 									<ul class="thumbnails">
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample5.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample5.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨5</h4>
@@ -504,7 +487,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample6.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample6.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨6</h4>
@@ -514,7 +497,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample7.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample7.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨7</h4>
@@ -524,7 +507,7 @@ input::-moz-focus-inner { border: 0; }
 										</li>
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src="../../imgs/sample8.jpg" alt=""></a>
+												<a href="#"><img src="../../../imgs/sample8.jpg" alt=""></a>
 											</div>
 											<div class="caption-box">
 												<h4>에어컨8</h4>
@@ -544,7 +527,10 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ************** -->
 				<!-- 리스트 영역 끝 -->
 				<!-- ************** -->
-				 ${num }
+				${list1 }
+				<c:forEach items="${list1}" var="bean">
+					${bean.brandNm}
+				</c:forEach>
 			</div>
 		</div>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
