@@ -45,7 +45,7 @@ $(function() {
 		location.href = 'info';
 	});
 	
-	/*정보입력*/
+	/*회원가입 - 정보입력*/
 	var regexId = 
 		RegExp(/^[a-zA-Z0-9]{5,20}$/); //아이디 정규식(5~20자 영문소문자, 대문자 숫자 사용가능)
 	var regexPw = 
@@ -54,44 +54,63 @@ $(function() {
 		RegExp(/^[0-9]{10,11}$/); //연락처 정규식 (10~11자 숫자만 사용가능)
 	var regexEmail = 
 		RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); //이메일 정규식(영문+숫자@영문+숫자가 아닐경우)
-	var flagId = false;
-	var flagPw = false;
-	var flagHp = false;
-	
+		
 	//회원가입-정보입력 화면 초기화
 	$('#id-success').hide();
 	$('#id-danger').hide();
+	$('#idCheck-danger').hide();
 	$('#pw-success').hide();
     $('#pw-danger').hide();
     $('#pw-danger2').hide();
     $('#hp-danger').hide();
     $('#email-danger').hide();
-    //$('#joinBtn').attr('disabled', true);
+    $('#joinBtn').attr('disabled', true);
     
     /*유효성 검사*/
-    
-    //1. 아이디 - 중복체크 추가해야함
+    //1. 아이디 
     //아이디가 아이디 입력란안에 있을 경우
     $('#id').focus(function(){
     	//아이디 메시지를 가려준다.
         $('#id-success').hide();
         $('#id-danger').hide();
+        $('#idCheck-danger').hide();
+        $('#joinBtn').attr('disabled', true);
+        
     }).blur(function(){//아이디가 포커스 외부에 있을 경우
+    	
     	//아이디가 공백이 아닌경우
     	if($('#id').val()!=""){
-    		
-    	    if(flagId && flagPw && flagHp){
-    			$('#joinBtn').attr('disabled', false);
-    	    }
-    		
     		if(regexId.test($('#id').val())){//아이디 정규식 체크에서 정상일경우 "아이디 사용가능" 메시지 출력
-                $('#id-success').show();
-                $('#id-danger').hide();
-                flagId = true;
+    			
+            	//아이디 중복체크
+            	var userId = $('form div input[name=userId]').val();
+            	var allData = {"userId":userId}
+            	$.ajax({
+            		url: 'checkId',
+            		type:'GET',
+            		data:allData,
+            		success:function(data){
+            			if(data == 'dupl'){
+	            			$('#id-success').hide();
+	                        $('#id-danger').hide();
+	                        $('#idCheck-danger').show();
+	                        $('#joinBtn').attr('disabled', true);
+            			}else if(data=='notDupl'){
+	            			$('#id-success').show();
+	                        $('#id-danger').hide();
+	                        $('#idCheck-danger').hide();       
+	                        $('#joinBtn').attr('disabled', false);
+            			}
+            		},
+            		error:function(request, status, error){
+            			alert("code="+request.status+", message="+request.responseText+", error="+error)
+            		}
+            	});
     		}else{//정규식체크에서 잘못되었을 경우 "5~20자 영문,숫자를 조합하여 입력해주세요." 메시지 출력
                 $('#id-success').hide();
+                $('#idCheck-danger').hide();
                 $('#id-danger').show();
-                flagId = false;
+                $('#joinBtn').attr('disabled', true);
     		}
     	}
     });
@@ -103,13 +122,10 @@ $(function() {
         $('#pw-success').hide();
         $('#pw-danger').hide();
         $('#pw-danger2').hide();
+        $('#joinBtn').attr('disabled', true);
     }).blur(function(){//비밀번호, 비밀번호확인 포커스가 외부에 있을 경우
     	//비밀번호 또는 비밀번호 확인의 값이 공백이 아닐경우
         if($('#pw').val()!="" || $('#pwf').val()!=""){
-            if(flagId && flagPw && flagHp){
-        		$('#joinBtn').attr('disabled', false);
-            }
-        	
         	//비밀번호, 비밀번호확인 정규식 체크
         	if(regexPw.test($('#pw').val()) || regexPw.test($('#pwf').val())){
 	        	//비밀번호와 비밀번호확인의 값이 같을 경우 "비밀번호가 일치합니다." 메시지 출력
@@ -117,19 +133,18 @@ $(function() {
 	                $('#pw-success').show();
 	                $('#pw-danger').hide();
 	                $('#pw-danger2').hide();
-	                flagPw = true;
+	                $('#joinBtn').attr('disabled', false);
 	            } else {//비밀번호와 비밀번호확인의 값이 같지 않을 경우 "비밀번호가 다릅니다." 메시지 출력
 	                $('#pw-success').hide();
 	                $('#pw-danger').show();
 	                $('#pw-danger2').hide();
-	                flagPw = false;
+	                $('#joinBtn').attr('disabled', true);
 	            }
         	}else{
         		//정규식 체크가 맞지 않는 경우 - "8~20자 영문+숫자+특수문자 조합하여 입력해주세요." 메시지 출력
                 $('#pw-success').hide();
                 $('#pw-danger').hide();
                 $('#pw-danger2').show();
-                flagPw =false;
         	}
         }
     });
@@ -139,35 +154,28 @@ $(function() {
     	$('#hp-danger').hide();
     }).blur(function(){
     	//연락처가 공백이 아닌경우
-    	if($('#hp').val()!=""){
-    	    if(flagId && flagPw && flagHp){
-    			$('#joinBtn').attr('disabled', false);
-    	    }
-    		
+    	if($('#hp').val()!=""){    		
     		if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
                 $('#hp-danger').hide();
-                flagHp = true;
+                $('#joinBtn').attr('disabled', false);
     		}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
                 $('#hp-danger').show();
-                flagHp = false;
+                $('#joinBtn').attr('disabled', true);
     		}
     	}
     });
     
     //4. 이메일 
     $('#email').focus(function(){
-//	    if(flagId && flagPw && flagHp){
-//			$('#joinBtn').attr('disabled', false);
-//	    }else{
-//	    	$('#joinBtn').attr('disabled', true);
-//	    } 
     	$('#email-danger').hide();
     }).blur(function(){
     	if($('#email').val()!=""){
     		if(regexEmail.test($('#email').val())){//이메일 정규식 체크에서 정상일경우 패스
     			$('#email-danger').hide();
+    			$('#joinBtn').attr('disabled', false);
     		}else{
     			$('#email-danger').show();
+    			$('#joinBtn').attr('disabled', true);
     		}
     	}
     });
@@ -190,3 +198,30 @@ $(function() {
         dateFormat: "yy-mm-dd",
     }).datepicker('setDate', new Date());
 });
+
+//회원가입
+//회원가입 버튼 이벤트 (유효성 체크)
+function joinCheck(){
+	var frm = document.frm;
+	
+	if(frm.userId.value==""){
+		alert("아이디를 입력 바랍니다.");
+		return frm.userId.focus();
+	}else if(frm.userPw.value == ""){
+		alert("비밀번호를 입력 바랍니다.");
+		return frm.userPw.focus();
+	}else if(frm.pwf.value == ""){
+		alert("비밀번호를 입력 바랍니다.");
+		return frm.pwf.focus();
+	}else if(frm.hp.value == ""){
+		alert("휴대전화를 입력 바랍니다.");
+		return frm.hp.focus();
+	}else if(frm.email.value == ""){
+		alert("이메일을 입력 바랍니다.");
+		return frm.email.focus();
+	}
+	
+	
+	frm.submit();
+	
+}

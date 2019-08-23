@@ -1,9 +1,8 @@
 package com.me.rentalme.join.service;
 
-import java.text.SimpleDateFormat;
-
 import javax.inject.Inject;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,38 @@ public class JoinServiceImpl implements JoinService{
 	
 	@Inject
 	JoinDao joinDao;
+	
+	/**
+	* 회원정보 시퀀스 추가
+	* 
+	* @param   
+	* @return void
+	* @author 황인준
+	* @exception None
+	*/
+	@Override
+	public void addMemNoSeq() {
+		log.debug("회원번호 시퀀스 서비스");
+		
+		joinDao.insertMemnoSeq();
+	}
+	
+	/**
+	* 회원번호 조회
+	* 
+	* @param   
+	* @return void
+	* @author 황인준
+	* @exception None
+	*/
+	@Override
+	public String getMemNo() {
+		log.debug("회원번호 조회 서비스");
+		
+		String memNo = joinDao.getMemNo();
+		System.out.println("service - 회원번호"+memNo);
+		return memNo;
+	}
 
 	/**
 	* 회원정보 입력
@@ -38,6 +69,14 @@ public class JoinServiceImpl implements JoinService{
 	public int addInfo(UserVo bean) {
 		log.debug("회원정보 입력 서비스...");
 		
+		//회원번호 등록
+		String memNo = getMemNo();
+		bean.setMbNo(memNo);
+		
+		//비밀번호 암호화
+		String hashPw = BCrypt.hashpw(bean.getUserPw(), BCrypt.gensalt());
+		bean.setUserPw(hashPw);
+		
 		String levelGbCd = "1"; //일반회원
 		
 		bean.setlevelGbCd(levelGbCd); //일반회원으로 등록
@@ -49,5 +88,31 @@ public class JoinServiceImpl implements JoinService{
 		
 		return joinDao.insertJoin(bean);
 	}
+	
+	/**
+	* 아이디 중복체크
+	*
+	* @param  String userId 
+	* @return String msg (dupl - 중복, notDupl - 중복x)
+	* @author 황인준
+	* @exception None
+	*/
+	@Override
+	public String getId(String userId) {
+		log.debug("아이디 중복체크 서비스...");
+		
+		String msg = "";
+		
+		int result = joinDao.selectId(userId);
+		if(result > 0) {
+			msg = "dupl";		// 아이디 중복
+		}else {
+			msg = "notDupl";	// 아이디 중복 x
+		}
+		return msg;
+	}
+
+
+
 
 }

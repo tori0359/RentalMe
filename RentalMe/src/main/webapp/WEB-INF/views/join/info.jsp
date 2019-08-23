@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <!-- datepicker 라이브러리(3개) -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -16,7 +16,7 @@
 	src="${pageContext.request.contextPath}/js/join.js"></script>
 </head>
 <body>
-	<div id="join_terms">
+	<div id="join_info">
 		<ul id="myTab8" class="nav nav-tabs nav-justified" role="tablist">
 			<li role="presentation" class="disabled"><a href="#">약관동의</a></li>
 			<li role="presentation" class="active"><a href="#"
@@ -24,20 +24,21 @@
 			<li role="presentation" class="disabled"><a href="#">가입완료</a></li>
 		</ul>
 		<div id="join_input">
-			<form action="info" method="post">
+			<form name="frm" action="info" method="post">
 				<div>
 					<input type="text" class="form-control" id="id" name="userId"
 						placeholder="아이디">
 				</div>
 				<div id="id-success">아이디 사용가능</div>
 				<div id="id-danger">5~20자 영문소문자,대문자,숫자만 사용가능</div>
+				<div id="idCheck-danger">아이디가 사용중입니다.</div>
 				
 				<div>
 					<input type="password" class="form-control" id="pw" name="userPw"
 						placeholder="비밀번호">
 				</div>
 				<div>
-					<input type="password" class="form-control" id="pwf"
+					<input type="password" class="form-control" id="pwf" name="pwf"
 						placeholder="비밀번호 확인">
 				</div>
 				<div class="pw-chk" id="pw-success">비밀번호가 일치합니다</div>
@@ -67,7 +68,7 @@
 						value="2"> 여
 					</label>
 				</div>
-				<button type="submit"  id="joinBtn" class="btn btn-default">가입하기</button>
+				<button id="joinBtn" type="button" class="btn btn-default" onclick="joinCheck();return false;">가입하기</button>
 			</form>
 		</div>
 	</div>

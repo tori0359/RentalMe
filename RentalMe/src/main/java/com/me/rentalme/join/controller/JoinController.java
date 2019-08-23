@@ -1,12 +1,13 @@
 package com.me.rentalme.join.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,7 +87,8 @@ public class JoinController {
 	/**
 	* 회원정보 입력
 	* 
-	* @param  UserVo 
+	* @param  UserVo userVo 
+	* @param  HttpServletREquest req  
 	* @return String 
 	* @author 황인준
 	* @exception None
@@ -94,6 +96,12 @@ public class JoinController {
 	@RequestMapping(value = "/info", method = RequestMethod.POST)
 	public ModelAndView registerInfo(UserVo userVo, HttpServletRequest req) {
 		log.debug("회원정보 입력 컨트롤러...");
+		
+		//회원번호 시퀀스추가
+		joinService.addMemNoSeq();
+		
+		//회원번호 조회
+		joinService.getMemNo();
 		
 		//회원가입
 		joinService.addInfo(userVo);
@@ -104,11 +112,35 @@ public class JoinController {
 		
 		return new ModelAndView("join/compl");
 	}
+
+	/**
+	* 아이디 중복체크
+	* 
+	* @param  String uesrId - 사용자 아이디
+	* @return String 
+	* @author 황인준
+	* @exception None
+	*/
+	@RequestMapping(value = "/checkId", method = RequestMethod.GET)
+	public void checkId (@RequestParam("userId")String userId, HttpServletResponse res) {
+		log.debug("아이디 중복체크 컨트롤러");
+		
+		//아이디 중복체크
+		String msg = joinService.getId(userId);
+		
+		try {
+			res.getWriter().write(msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+
+	}
 	
 	/**
 	* 회원가입 후 인증상태(Y) 업데이트
 	* 
-	* @param  UserVo 
+	* @param  String userId   : 사용자아이디
+	* @param  String emailKey : 사용자 이메일 키(난수)
 	* @return String 
 	* @author 황인준
 	* @exception None

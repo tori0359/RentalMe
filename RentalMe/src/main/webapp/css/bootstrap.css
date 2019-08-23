@@ -3588,9 +3588,10 @@ tbody.collapse.in {
   border-left: 4px solid transparent;
 }
 .dropup,
-.dropdown {
-<<<<<<< HEAD
-  position: relative;
+.dropdown {	position: relative;
+	width: 123px;
+	margin-top: 0px;
+	padding: 0px;
 }
 .dropdown-toggle:focus {
   outline: 0;
@@ -4609,11 +4610,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a:focus {
   color: #555;
   background-color: #e7e7e7;
-=======
-	position: relative;
-	width: 123px;
-	margin-top: 0px;
-	padding: 0px;
+  position: relative;
+  width: 123px;
+  margin-top: 0px;
+	
 }
 .dropdown-toggle:focus {
   	outline: 0;

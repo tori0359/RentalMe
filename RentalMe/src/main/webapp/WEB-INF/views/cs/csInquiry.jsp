@@ -32,6 +32,9 @@
 		})
 	</script>
 	<style type="text/css">
+		#noticeBar{
+			height:250px;
+		}
 		#noticeBar table{
 			margin-top: 80px;
 			font-size:20px;
@@ -71,10 +74,8 @@
 			color:black;
 		}
 		#csContent{
-			
+			height:700px;
 		}
-	
-	
 	</style>
 </head>
 <body>

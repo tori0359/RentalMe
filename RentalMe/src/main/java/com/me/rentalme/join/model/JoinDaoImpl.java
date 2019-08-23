@@ -28,6 +28,35 @@ public class JoinDaoImpl implements JoinDao {
 	SqlSession sqlSession;
 	
 	/**
+	* 회원번호 시퀀스 추가
+	* 
+	* @param   
+	* @return void
+	* @author 황인준
+	* @exception None
+	*/
+	@Override
+	public void insertMemnoSeq() {
+		log.debug("회원번호 시퀀스 추가 dao");
+		
+		sqlSession.insert("join.insertMemNoSeq");
+	}
+
+	/**
+	* 회원번호 조회
+	* 
+	* @param   
+	* @return void
+	* @author 황인준
+	* @exception None
+	*/
+	@Override
+	public String getMemNo() {
+		log.debug("회원번호 조회 dao");
+		
+		return sqlSession.selectOne("join.getMemNo"); //mbNo
+	}
+	/**
 	* 회원정보 입력
 	* 
 	* @param  UserVo 
@@ -83,5 +112,23 @@ public class JoinDaoImpl implements JoinDao {
 		
 		return sqlSession.update("join.updateKeyYn", map);
 	}
+
+	/**
+	* 아이디중복체크
+	* 
+	* @param  String userId - 사용자 아이디
+	* @return int
+	* @author 황인준
+	* @exception 
+	*/
+	@Override
+	public int selectId(String userId) {
+		log.debug("아이디중복체크 Dao...");
+		
+		int result = sqlSession.selectOne("join.checkId", userId);
+		
+		return result;
+	}
+
 
 }
