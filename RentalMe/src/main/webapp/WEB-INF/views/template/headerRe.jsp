@@ -260,8 +260,8 @@
 							<li class="dropdown"><a href="#" id="bigmenu"
 								class="dropdown-toggle" data-toggle="dropdown">대형가전 렌탈</a>
 								<ul class="dropdown-menu">
-									<li><a href="#">에어컨</a></li>
-									<li><a href="#">냉난방기</a></li>
+									<li><a href="/rental/Appli/lg/s11">에어컨</a></li>
+									<li><a href="/rental/Appli/lg/s12">냉난방기</a></li>
 									<li><a href="#">냉장고</a></li>
 									<li><a href="#">TV</a></li>
 									<li><a href="#">세탁기</a></li>
