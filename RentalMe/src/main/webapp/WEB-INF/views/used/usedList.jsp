@@ -188,7 +188,7 @@
 	<div class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"></div>
+			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
 			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
@@ -198,8 +198,8 @@
 	<div class="used_thing">
 	<c:forEach items="${alist2 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
+			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/detail/${bean.USED_GDS_NO }">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
 			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
 		</div>
@@ -208,7 +208,7 @@
 	<div class="used_thing">
 	<c:forEach items="${alist3 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"></div>
+			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
 			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
@@ -218,7 +218,7 @@
 	<div class="used_thing">
 	<c:forEach items="${alist4 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"></div>
+			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
 			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
@@ -228,7 +228,7 @@
 	<div class="used_thing">
 	<c:forEach items="${alist5 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"></div>
+			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
 			<div><a href="#">${bean.BRAND_NM }</a></div>
 			<div><a href="#">${bean.MODEL_NM }</a></div>
 			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
