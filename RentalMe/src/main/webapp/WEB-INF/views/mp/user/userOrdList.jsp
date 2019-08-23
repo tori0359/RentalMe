@@ -100,27 +100,97 @@
 			background-position:0 0;
 			color:red;
 		}
+		.satis h4{
+			font-family:"nanumEB";
+		}
+		.satis p{
+			font-family:"nanumB";
+		}
+		#red{
+			color:red;
+		}
+		span em.warning{
+		  color:#f00;
+		  fontweight: bold;
+		}
 	  
 </style>
 <script type="text/javascript">
  	window.onload = function (){
+		//점수출력 초기화
+		$('#0').hide();
+		$('#1').hide();
+		$('#2').hide();
+		$('#3').hide();
+		$('#4').hide();
+		
 		$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  return false;
-		}); 
-	/* 	var class_by_name = document.getElementsByName('test_name')[0].className;
-		if(($('.starR')[2].className!="on")
-			 */
 
+			$(this).parent().children('span').removeClass('on');
+			$(this).addClass('on').prevAll('span').addClass('on');
+
+			//클릭된 요소가 몇번째인지 알아내기
+			var index=($('.starR').index($(this)));
+			
+			if(index=='0'){
+				$('#0').show();
+				$('#1').hide();
+				$('#2').hide();
+				$('#3').hide();
+				$('#4').hide();
+				
+			}else if(index=='1'){
+				$('#1').show();
+				$('#0').hide();
+				$('#2').hide();
+				$('#3').hide();
+				$('#4').hide();
+				
+			}else if(index=='2'){
+				$('#2').show();
+				$('#0').hide();
+				$('#1').hide();
+				$('#3').hide();
+				$('#4').hide();
+				
+			}else if(index=='3'){
+				$('#3').show();
+				$('#1').hide();
+				$('#2').hide();
+				$('#0').hide();
+				$('#4').hide();
+				
+			}else if(index=='4'){
+				$('#4').show();
+				$('#1').hide();
+				$('#2').hide();
+				$('#3').hide();
+				$('#0').hide();
+			}
+		});
+
+		$("textarea").keydown(function(){
+ 		    var numChar = $(this).val().length;
+ 		    var maxNum = 200;
+ 		    var charRemain = numChar;
+ 		    $("span > em").text(charRemain);
+ 		    if(charRemain > 200){
+ 	 		  alert("200자 이하로 작성해주세요.");
+ 		      $("span > em").addClass("warning");
+ 		      $(".submit").prop("disabled", true);
+ 		    } else {
+ 		      $(".submit").prop("disabled", false);
+ 		    }
+ 		  });
 	} 
 
-	
 
-	$('#myModal').on('shown.bs.modal', function () {
-		  $('#myInput').focus()
-		  
-	});
+ 		  
+
+
+ 	$('#myModal').on('shown.bs.modal', function () {
+ 		  $('#myInput').focus()
+ 		})
 
 	
 	
@@ -192,25 +262,33 @@
       </div>
       
       <div class="modal-body">
-       	<label>상품명</label> <div>${gdsNm}</div>
+       	<label>상품명</label> <div name="gdsNm">${gdsNm}</div>
+       	<input type="hidden" name="gdsNm" value="${gdsNm}">
        	<br>
        	<div class="hr"></div>
        	<br>
        	<label>후기</label><br>
 		<div class="starRev">
-		  <span class="starR on">별1</span>
-		  <span class="starR">별2</span>
-		  <span class="starR">별3</span>
-		  <span class="starR">별4</span>
-		  <span class="starR">별5</span>
+		  <span class="starR on"></span>
+		  <span class="starR"></span>
+		  <span class="starR"></span>
+		  <span class="starR"></span>
+		  <span class="starR"></span>
 		</div>
-		<textarea style="width:100%; height:200px;"  placeholder="후기를 입력해주세요."></textarea>
+		<br>
+		<div class="satis" id="0"><h4>만족도 1점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
+		<div class="satis" id="1"><h4>만족도 2점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
+		<div class="satis" id="2"><h4>만족도 3점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+		<div class="satis" id="3"><h4>만족도 4점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+		<div class="satis" id="4"><h4>만족도 5점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+		<textarea name="content" style="width:100%; height:200px;"  placeholder="후기를 입력해주세요."></textarea>
+		<span style="float:right;"><em>0</em>/ 200</span>
        	
       </div>
      
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">저장</button>
+        <button type="reset" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-primary submit">저장</button>
       </div>
 	</div>
     </div>
