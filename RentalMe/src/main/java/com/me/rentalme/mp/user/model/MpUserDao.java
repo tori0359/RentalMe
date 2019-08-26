@@ -17,6 +17,9 @@ public interface MpUserDao {
 	//주문내역 리스트 출력
 	List<CallVo> selectOrd() throws SQLException;
 	
+	//장바구니 리스트 출력
+	List<CallVo> selectCart() throws SQLException;
+	
 	//찜한상품 리스트 출력
 	List<CallVo> selectWish() throws SQLException;
 	

@@ -85,7 +85,9 @@
 #deposituse{
 	margin-top: 50px;
 }
-
+#menuuse{
+	border-color: red red red;
+}
 </style>
 
 
@@ -100,6 +102,7 @@
 		$('#depositrefund').hide();
 
 		$('#menuuse').click(function(){
+			
 			$('#menuuse').attr('class','active');
 			$('#menucharge').attr('class','noactive');
 			$('#menurefund').attr('class','noactive');
@@ -107,8 +110,10 @@
 			$('#deposituse').show();
 			$('#depositcharge').hide();
 			$('#depositrefund').hide();
-		});
 
+			
+		});
+		
 		$('#menucharge').click(function(){
 			$('#menucharge').attr('class','active');
 			$('#menuuse').attr('class','noactive');
@@ -149,9 +154,9 @@
   </div>
 </div>
 <ul class="depositmenu nav nav-tabs nav-justified">
-  <li role="presentation" id="menuuse" class="noactive"><a href="#">예치금 사용내역</a></li>
-  <li role="presentation" id="menucharge" class="noactive"><a href="#">예치금 충전</a></li>
-  <li role="presentation" id="menurefund" class="noactive"><a href="#">예치금 환불</a></li>
+  <li role="presentation" id="menuuse" class="noactive"><a href="javascript:void(0)">예치금 사용내역</a></li>
+  <li role="presentation" id="menucharge" class="noactive"><a href="javascript:void(0)">예치금 충전</a></li>
+  <li role="presentation" id="menurefund" class="noactive"><a href="javascript:void(0)">예치금 환불</a></li>
 </ul>
 <div class="hr" style="height:3px; background-color: black;"></div>
 <div id="deposituse">

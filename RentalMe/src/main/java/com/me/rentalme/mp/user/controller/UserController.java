@@ -60,6 +60,7 @@ public class UserController {
 	}
 	
 	/**
+	 * @throws SQLException 
 	* 장바구니
 	* 
 	* @param  
@@ -68,11 +69,12 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ModelAndView getCartList() {
+	public ModelAndView getCartList() throws SQLException {
 		log.debug("장바구니 컨트롤러...");
 		
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist",mpUserService.cartList());
 		mav.setViewName("mp/user/userCartList");
 		return mav;
 	}	

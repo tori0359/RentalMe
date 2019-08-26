@@ -12,10 +12,14 @@ public interface MpUserService {
 	//주문내역 리스트 출력
 	List<CallVo> ordList() throws SQLException;
 	
+	//장바구니 리스트 출력
+	List<CallVo> cartList() throws SQLException;
+	
 	//찜한상품 리스트 출력
 	List<CallVo> wishList() throws SQLException;
 	
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
 	public void deleteWish(CallVo callVo) throws SQLException;
+
 
 }

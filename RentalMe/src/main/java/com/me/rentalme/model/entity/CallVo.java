@@ -17,7 +17,25 @@ public class CallVo {
 	private int odrAmt;
 	private String agreeTem;
 	private String odrStsGbCd;
+	private String gdsNm;
+	private String gdsCd;
 	
+	public String getGdsCd() {
+		return gdsCd;
+	}
+
+	public void setGdsCd(String gdsCd) {
+		this.gdsCd = gdsCd;
+	}
+
+	public String getGdsNm() {
+		return gdsNm;
+	}
+
+	public void setGdsNm(String gdsNm) {
+		this.gdsNm = gdsNm;
+	}
+
 	public String getOdrStsGbCd() {
 		return odrStsGbCd;
 	}

@@ -27,6 +27,10 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.selectList("mpUser.selectOrd");
 	}
 	
+	@Override
+	public List<CallVo> selectCart() throws SQLException {
+		return sqlSession.selectList("mpUser.selectCart");
+	}
 	
 	@Override
 	public List<CallVo> selectWish() throws SQLException {
@@ -40,6 +44,9 @@ public class MpUserDaoImpl implements MpUserDao{
 		
 		sqlSession.update("mpUser.delete");
 	}
+
+
+	
 
 	
 
