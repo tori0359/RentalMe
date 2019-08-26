@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedVo;
 
 /**
@@ -53,6 +54,8 @@ public class UsedDaoImpl implements UsedDao {
 	@Override
 	public List<UsedVo> selectOne(UsedVo bean) throws SQLException {
 		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");
+		System.out.println(bean.getGdsMclassCd());
+		System.out.println(bean.getAlign());
 		return sqlSession.selectList("used.selectOne",bean);
 	}
 	
@@ -97,6 +100,23 @@ public class UsedDaoImpl implements UsedDao {
 	@Override
 	public UsedVo DetailOne(String usedGdsNo) throws SQLException {
 		return (UsedVo) sqlSession.selectOne("used.detailOne", usedGdsNo);
+	}
+	/**
+	 * 중고거래 댓글
+	 * 
+	 * @param   
+	 * @return 
+	 * @author 박재환
+	 * @exception return("namespace.id명")
+	 */
+	@Override
+	public List<UsedCmtVo> selectCmtAll(String usedGdsNo) throws SQLException {
+		return sqlSession.selectList("used.seletCmt", usedGdsNo);
+	}
+
+	@Override
+	public int cmtInsert(UsedCmtVo bean) throws SQLException {
+		return sqlSession.insert("used.insertCmt", bean);
 	}
 
 

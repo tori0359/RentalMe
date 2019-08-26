@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.service.UsedService;
 
@@ -71,7 +72,7 @@ public class UsedController {
 	
 	//검색기능
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String getUsedListNM(Model model,@RequestParam("modelNm") String modelNm) throws SQLException {
+	public String getUsedListNM(Model model,@RequestParam("modelNm") String modelNm,@RequestParam("align") String align) throws SQLException {
 		
 		log.debug("중고거래 검색 컨트롤러");
 		UsedVo bean=new UsedVo();
@@ -79,6 +80,7 @@ public class UsedController {
 			modelNm="";
 		}
 		bean.setModelNm(modelNm);
+		bean.setAlign(align);
 		bean.setGdsMclassCd("10");
 		model.addAttribute("alist1", usedService.oneList(bean));
 		bean.setGdsMclassCd("20");
@@ -104,9 +106,17 @@ public class UsedController {
 	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
 	public String getUsedDetail(Model model, @PathVariable("idx") String usedGdsNo) throws SQLException {
 		
-		model.addAttribute("UsedVo", usedService.detail(usedGdsNo));		
+		model.addAttribute("UsedVo", usedService.detail(usedGdsNo));
+		model.addAttribute("cmt", usedService.cmtList(usedGdsNo));
 		return "used/usedDetail";
 	}
+	@RequestMapping(value = "/cmtAdd", method = RequestMethod.POST)
+	public String getUsedCmtAdd(@ModelAttribute UsedCmtVo bean) throws SQLException {
+		
+		usedService.addCmt(bean);
+		return "redirect:/used/detail/"+bean.getUsedGdsNo();
+	}
+	
 	
 	/**
 	* 나의 중고상점 리스트
@@ -122,6 +132,13 @@ public class UsedController {
 		
 		ModelAndView mav = new ModelAndView("used/usedMyStore");
 		return mav;
+	}
+	
+	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.GET)
+	public String getUsedMyStroeReviewInsert() {
+		
+		
+		return "redirect:/used/store";
 	}
 	
 	/**

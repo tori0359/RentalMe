@@ -208,13 +208,13 @@
 		</ul>
 	</div>
 	<div id="myUsedReview">
-		<form action="#" method="post">
+		<form action="/used/store/reviewinsert" method="post">
+			<input type="hidden" value="">
 			<textarea class="form-control" rows="3"></textarea>
 			<button type="submit">후기등록</button>
 		</form>
-		
 	</div>
-	
+	<div></div>
   <ul class="pagination">
     <li>
       <a href="#" aria-label="Previous">

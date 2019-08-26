@@ -162,20 +162,20 @@
 <div class="usedList">
 
 	<h3>중고제품</h3>
-	<div id="search">
 	<form action="/used/search">
+	<div id="search">
 		<input type="text" name="modelNm" id="search" placeholder="검색">
 		<button type="submit">검색</button>
-	</form>
 	</div>
+		<select name="align" id="align">
+			<option value="1">등록순</option>
+			<option value="2">낮은 가격순</option>
+			<option value="3">높은 가격순</option>
+		</select>
+	</form>
 	
 	<a href="/used/store" id="goUsedManager">중고거래 관리</a>
 	
-	<select id="align">
-		<option>등록순</option>
-		<option>낮은 가격순</option>
-		<option>높은 가격순</option>
-	</select>
 	
 	<ul class="tabs">
 		<li class="tab">대형가전</li>

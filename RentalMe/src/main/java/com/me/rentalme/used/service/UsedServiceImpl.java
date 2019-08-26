@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.model.entity.RentalMeVo;
+import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.model.UsedDao;
 
@@ -49,6 +50,16 @@ public class UsedServiceImpl implements UsedService {
 	public UsedVo detail(String usedGdsNo) throws SQLException {
 		log.debug("중고물품 상세보기...");
 		return usedDao.DetailOne(usedGdsNo);
+	}
+
+	@Override
+	public List<UsedCmtVo> cmtList(String usedGdsNo) throws SQLException {
+		return usedDao.selectCmtAll(usedGdsNo);
+	}
+
+	@Override
+	public int addCmt(UsedCmtVo bean) throws SQLException {
+		return usedDao.cmtInsert(bean);
 	}
 
 

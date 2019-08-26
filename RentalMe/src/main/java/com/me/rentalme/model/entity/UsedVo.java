@@ -4,27 +4,29 @@ import java.sql.Date;
 
 public class UsedVo {
 	private String usedGdsNo;            // 중고상품번호
-	private String mbNo;                  // 회원번호
+	private String mbNo;                 // 회원번호
 	private String usedGdsDt;            // 중고상품등록일자
 	private String gdsLclassCd;          // 상품대분류코드
 	private String gdsMclassCd;          // 상품중분류코드
 	private String gdsSclassCd;          // 상품소분류코드
 	private String gdsGbCd;              // 상품구분코드
-	private String brandNm;             	// 브랜드명
+	private String brandNm;              // 브랜드명
 	private String modelNm;              // 모델명
-	private int usedGdsPrice;         	// 중고상품가격
-	private String sub;                   // 제목
-	private String content;                // 내용
-	private String usedGdsResStsCd;    // 중고상품결과상태코드
-	private String delYn;                 // 삭제여부
-	private String img1;                   // 이미지1
-	private String img2;               // 이미지2
-	private String img3;                   // 이미지3
-	private String img4;                   // 이미지4
-	private String chgId;                 // 변경아이디
-	private Date chgDt;                 	// 변경일자
-	private String regId;                 // 등록아이디
-	private Date regDt;                 	// 등록일자
+	private int usedGdsPrice;         	 // 중고상품가격
+	private String sub;                  // 제목
+	private String content;              // 내용
+	private String usedGdsResStsCd;    	 // 중고상품결과상태코드
+	private String delYn;                // 삭제여부
+	private String img1;                 // 이미지1
+	private String img2;              	 // 이미지2
+	private String img3;                 // 이미지3
+	private String img4;                 // 이미지4
+	private String chgId;                // 변경아이디
+	private Date chgDt;                	 // 변경일자
+	private String regId;                // 등록아이디
+	private Date regDt;                  // 등록일자
+	private String mcnm;				 //모델명
+	private String align;					 // list 순서
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -233,6 +235,26 @@ public class UsedVo {
 
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
+	}
+	
+
+	public String getMcnm() {
+		return mcnm;
+	}
+
+	public void setMcnm(String mcnm) {
+		this.mcnm = mcnm;
+	}
+	
+
+
+
+	public String getAlign() {
+		return align;
+	}
+
+	public void setAlign(String align) {
+		this.align = align;
 	}
 
 	@Override
