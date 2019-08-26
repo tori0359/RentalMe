@@ -1,5 +1,9 @@
 package com.me.rentalme.rental.Appli.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -7,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 
 /**
@@ -22,6 +28,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class RentalAppliController {
 
 	Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Inject
+	RentalAppliService rentalAppliService; 
 	
 	/**
 	* 대형가전렌탈 리스트
@@ -43,13 +52,16 @@ public class RentalAppliController {
 	*/
 	
 	@RequestMapping(value = "/lg/{menu}", method = RequestMethod.GET)
-	public ModelAndView getLgList(@PathVariable("menu") String path ) {
+	public ModelAndView getLgList(@PathVariable("menu") String gdsSclassCd ) {
 		log.debug("대형가전렌탈 리스트 컨트롤러...");
-		System.out.println("menu value = " + path);
 		
+		System.out.println("menu value = " + gdsSclassCd);
+		System.out.println("hty111");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("list1",rentalAppliService.rentalList1(gdsSclassCd));
+		System.out.println("hty444");
 		mav.setViewName("rental/rentalAppliLgList");
-		mav.addObject("num", path);
+		
 		return mav;
 	}	
 	
