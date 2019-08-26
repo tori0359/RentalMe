@@ -4,15 +4,25 @@ import java.sql.Date;
 
 public class CsVo {
 
-	private String faqNo;
-	private String csGbCd;
-	private String csClassGbCd;
-	private String sub;
-	private String content;
-	private String chgId;
+	private String faqNo;  //faq 게시판 번호
+	private String csGbCd; // 게시판 분류 번호
+	private String csClassGbCd;  //faq유형 번호
+	private String sub;    //제목
+	private String content;//내용
+	private String chgId;  //
 	private Date cghDt;
-	private String regId;
-	private Date regDt;
+	private String regId;  //작성아이디
+	private Date regDt;	
+	private String noticNo; //notic 게시판 번호
+	
+	
+	
+	public String getNoticNo() {
+		return noticNo;
+	}
+	public void setNoticNo(String noticNo) {
+		this.noticNo = noticNo;
+	}
 	public String getFaqNo() {
 		return faqNo;
 	}
@@ -77,6 +87,7 @@ public class CsVo {
 		result = prime * result + ((csClassGbCd == null) ? 0 : csClassGbCd.hashCode());
 		result = prime * result + ((csGbCd == null) ? 0 : csGbCd.hashCode());
 		result = prime * result + ((faqNo == null) ? 0 : faqNo.hashCode());
+		result = prime * result + ((noticNo == null) ? 0 : noticNo.hashCode());
 		result = prime * result + ((regDt == null) ? 0 : regDt.hashCode());
 		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
 		result = prime * result + ((sub == null) ? 0 : sub.hashCode());
@@ -121,6 +132,11 @@ public class CsVo {
 				return false;
 		} else if (!faqNo.equals(other.faqNo))
 			return false;
+		if (noticNo == null) {
+			if (other.noticNo != null)
+				return false;
+		} else if (!noticNo.equals(other.noticNo))
+			return false;
 		if (regDt == null) {
 			if (other.regDt != null)
 				return false;
@@ -142,9 +158,8 @@ public class CsVo {
 	public String toString() {
 		return "CsVo [faqNo=" + faqNo + ", csGbCd=" + csGbCd + ", csClassGbCd=" + csClassGbCd + ", sub=" + sub
 				+ ", content=" + content + ", chgId=" + chgId + ", cghDt=" + cghDt + ", regId=" + regId + ", regDt="
-				+ regDt + "]";
+				+ regDt + ", noticNo=" + noticNo + "]";
 	}
-
 	
 	
 }

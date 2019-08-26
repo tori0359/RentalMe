@@ -32,7 +32,7 @@ public class MngCsController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/cs", method = RequestMethod.GET)
+	@RequestMapping(value = "/csNoticeList", method = RequestMethod.GET)
 	public ModelAndView getCs(String code) {
 		log.debug("공지/FAQ 컨트롤러");
 		

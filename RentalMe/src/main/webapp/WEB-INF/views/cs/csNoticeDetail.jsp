@@ -54,16 +54,16 @@
                 <td>관리자</td>
             </tr>
             <tr>
-                <td><label for="category">분류</label></td>
-                <td>${list.csClassGbCd}</td>
+            	<td><label>작성일</label></td>
+            	<td>${adetail.regDt}</td>
             </tr>
             <tr>
-                <td><label for="sub" >제목</label></td>
-                <td>${list.sub }</td>
+                <td><label for="" >제목</label></td>
+                <td>${adetail.sub}</td>
             </tr>
             <tr>
-                <td><label for="id" >내용</label></td>
-                <td>${list.content}</td>
+                <td><label for="" >내용</label></td>
+                <td>${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>

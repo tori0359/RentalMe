@@ -19,40 +19,67 @@ public class CsDaoImpl implements CsDao {
 	SqlSession sqlSession; 
 	
 	@Override
-	public List<CsVo> selectAll() throws SQLException {
+	public List<CsVo> faqSelectAll() throws SQLException {
 		
-		return sqlSession.selectList("csCenter.selectAll");
+		return sqlSession.selectList("csCenter.faqSelectAll");
 	}
 
+	
+
 	@Override
-	public List<CsVo> selectAll(Map<String, Integer> map) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertOne(CsVo bean) throws SQLException {
+		return sqlSession.insert("csCenter.csInsert", bean);
 	}
 
-	@Override
-	public void insertOne(CsVo bean) throws SQLException {
-		// TODO Auto-generated method stub
 
+	@Override
+	public CsVo csFaqDetail(Map<String, Object> map) throws SQLException {
+		System.out.println(map.get("faqNo"));
+		System.out.println(map.get("csClassGbCd"));
+		return sqlSession.selectOne("csCenter.csFaqDetail", map);
+		
 	}
 
 	@Override
 	public int updateOne(CsVo bean) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
-
+	
 	@Override
 	public int deleteOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
+
 	@Override
-	public CsVo csDetail(String faqNo) throws SQLException {
-		
-		return sqlSession.selectOne("csCenter.csDetail", faqNo);
-		
+	public List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+
+
+	@Override
+	public List<CsVo> noticeSelectAll() throws SQLException {
+		return sqlSession.selectList("csCenter.noticeSelectAll");
+	}
+
+
+
+	@Override
+	public List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public CsVo csNoticeDetail(Map<String, Object> map) throws SQLException {
+		System.out.println(map.get("faqNo"));
+		System.out.println(map.get("csClassGbCd"));
+		return sqlSession.selectOne("csCenter.csNoticeDetail", map);
+	}
 }
