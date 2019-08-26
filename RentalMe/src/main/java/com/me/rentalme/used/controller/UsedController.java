@@ -54,42 +54,41 @@ public class UsedController {
 		
 		log.debug("중고거래 컨트롤러");
 		UsedVo bean=new UsedVo();
-		bean.setMODEL_NM("");
-		bean.setGDS_MCLASS_CD("10");
+		bean.setModelNm("");
+		bean.setGdsMclassCd("10");
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("20");
+		bean.setGdsMclassCd("20");
 		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("30");
+		bean.setGdsMclassCd("30");
 		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("40");
+		bean.setGdsMclassCd("40");
 		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("50");
+		bean.setGdsMclassCd("50");
 		model.addAttribute("alist5", usedService.oneList(bean));
-		
+		System.out.println(bean.getBrandNm());
 		return "used/usedList";
 	}
 	
 	//검색기능
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String getUsedListNM(Model model,@RequestParam("MODEL_NM") String MODEL_NM) throws SQLException {
+	public String getUsedListNM(Model model,@RequestParam("modelNm") String modelNm) throws SQLException {
 		
 		log.debug("중고거래 검색 컨트롤러");
 		UsedVo bean=new UsedVo();
-		if(MODEL_NM==null) {
-			MODEL_NM="";
+		if(modelNm==null) {
+			modelNm="";
 		}
-		bean.setMODEL_NM(MODEL_NM);
-		bean.setGDS_MCLASS_CD("10");
+		bean.setModelNm(modelNm);
+		bean.setGdsMclassCd("10");
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("20");
+		bean.setGdsMclassCd("20");
 		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("30");
+		bean.setGdsMclassCd("30");
 		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("40");
+		bean.setGdsMclassCd("40");
 		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("50");
+		bean.setGdsMclassCd("50");
 		model.addAttribute("alist5", usedService.oneList(bean));
-		System.out.println(bean.getUSED_GDS_NO());
 		return "used/usedList";
 	}
 
@@ -184,16 +183,16 @@ public class UsedController {
                 e.printStackTrace();
             }
             if(cnt==1) {
-            	bean.setIMG1(img);
+            	bean.setImg1(img);
             	cnt++;
             }else if(cnt==2) {
-            	bean.setIMG2(img);
+            	bean.setImg2(img);
             	cnt++;
             }else if(cnt==3) {
-            	bean.setIMG3(img);
+            	bean.setImg3(img);
             	cnt++;
             }else if(cnt==4) {
-            	bean.setIMG4(img);
+            	bean.setImg4(img);
             }
         }
         

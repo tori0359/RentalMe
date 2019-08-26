@@ -164,7 +164,7 @@
 	<h3>중고제품</h3>
 	<div id="search">
 	<form action="/used/search">
-		<input type="text" name="MODEL_NM" id="search" placeholder="검색">
+		<input type="text" name="modelNm" id="search" placeholder="검색">
 		<button type="submit">검색</button>
 	</form>
 	</div>
@@ -188,50 +188,50 @@
 	<div class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
+			<div><a href="#">${bean.modelNm }</a></div>
+			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist2 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/detail/${bean.USED_GDS_NO }">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
+			<div><a href="#">${bean.modelNm }</a></div>
+			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist3 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
+			<div><a href="#">${bean.modelNm }</a></div>
+			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist4 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
+			<div><a href="#">${bean.modelNm }</a></div>
+			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist5 }" var="bean">
 		<div class="line_thing">
-			<div class="used_thing_img"><img src="${bean.IMG1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
+			<div><a href="#">${bean.modelNm }</a></div>
+			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
 		</div>
 	</c:forEach>
 	</div>
