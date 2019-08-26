@@ -203,6 +203,11 @@
    </style>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+   <script type="text/javascript">
+		$('#rjfo').click(function(){
+			windows.location.href="/used";
+		});
+   </script>
 </head>
 <body>
 <div>
@@ -242,7 +247,7 @@
         <li class="dropdown">
           <a href="#" id="bigmenu" class="dropdown-toggle" data-toggle="dropdown" >대형가전 렌탈</a>
           <ul class="dropdown-menu">
-              <li><a href="#">에어컨</a></li> 
+              <li><a href="/used">에어컨</a></li> 
               <li><a href="#">냉난방기</a></li> 
               <li><a href="#">냉장고</a></li>
               <li><a href="#">TV</a></li>
@@ -256,7 +261,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">소형가전 렌탈</a>
           <ul class="dropdown-menu">
-                <li><a href="#">커피머신</a></li> 
+                <li><a href="/used">커피머신</a></li> 
               <li><a href="#">제습기</a></li> 
               <li><a href="#">청소기</a></li>
               <li><a href="#">드라이어</a></li>
@@ -304,8 +309,8 @@
           </ul>
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">중고거래</a>
+        <li class="dropdown" id="rjfo">
+          <a href="/used" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">중고거래</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
