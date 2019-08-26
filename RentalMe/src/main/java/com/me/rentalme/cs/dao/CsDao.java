@@ -13,5 +13,4 @@ public interface CsDao {
 	void insertOne(CsVo bean) throws SQLException;
 	int updateOne(CsVo bean) throws SQLException;
 	int deleteOne(int idx) throws SQLException;
-	int selectOne(int idx) throws SQLException;
 }

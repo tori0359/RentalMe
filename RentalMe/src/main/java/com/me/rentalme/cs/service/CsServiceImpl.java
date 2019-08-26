@@ -24,6 +24,7 @@ public class CsServiceImpl implements CsService {
 		System.out.println("service...");
 		model.addAttribute("alist", sqlSession.getMapper(CsDao.class).selectAll());
 	}
+	
 	@Override
 	public void add(CsVo bean) throws SQLException {
 
@@ -38,5 +39,6 @@ public class CsServiceImpl implements CsService {
 	public void delete(int num) throws SQLException {
 
 	}
+	
 
 }
