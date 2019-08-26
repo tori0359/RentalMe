@@ -16,10 +16,20 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 	RentalAppliDao rentalAppliDao;
 	
 	@Override
-	public List<RentalAppliVo> rentalList1(String gdsSclassCd) {
-		System.out.println("hty222");
-		return rentalAppliDao.rentalOptionList(gdsSclassCd);
+	public List<RentalAppliVo> rentalPath(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalPath(rentalAppliVo);
 	}
+	
+	@Override
+	public List<RentalAppliVo> rentalList1(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalMenuList(rentalAppliVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> rentalList2(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalOptionList(rentalAppliVo);
+	}
+
 
 
 

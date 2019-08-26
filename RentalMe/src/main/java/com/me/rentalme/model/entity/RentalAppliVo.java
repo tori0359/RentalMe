@@ -13,6 +13,10 @@ public class RentalAppliVo {
 	private String gdsStsCd    ;		// 상품상태코드
 	private String delYn       ;		// 삭제여부
 	
+	private String gdsLclassNm ; 		// 상품소분류명
+	private String gdsMclassNm ; 		// 상품소분류명
+	private String gdsSclassNm ; 		// 상품소분류명
+	
 	public String getGdsCd() {
 		return gdsCd;
 	}
@@ -72,6 +76,24 @@ public class RentalAppliVo {
 	}
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
+	}
+	public String getGdsLclassNm() {
+		return gdsLclassNm;
+	}
+	public void setGdsLclassNm(String gdsLclassNm) {
+		this.gdsLclassNm = gdsLclassNm;
+	}
+	public String getGdsMclassNm() {
+		return gdsMclassNm;
+	}
+	public void setGdsMclassNm(String gdsMclassNm) {
+		this.gdsMclassNm = gdsMclassNm;
+	}
+	public String getGdsSclassNm() {
+		return gdsSclassNm;
+	}
+	public void setGdsSclassNm(String gdsSclassNm) {
+		this.gdsSclassNm = gdsSclassNm;
 	}
 	
 }

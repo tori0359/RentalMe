@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +22,22 @@
 	margin-left:200px;
 	margin-right:200px;
 }
+#cip {
+	font-weight: bolder;
+    font-size: 35pt;
+}
 .content-inner-path {
-
+	text-align: center;
 }
 .content-inner-menu {
 	text-align: center;
+}
+.content-inner-menu-path {
+	font-style: italic;
+	text-align: right;
+}
+#menu-btn11 {
+
 }
 
 /* ---------- 소메뉴 영역 시작 -------- */
@@ -59,6 +72,11 @@
 
 .content-inner-best {
 	text-align: center;
+}
+.content-inner-best-path {
+	font-weight: bolder;
+	font-size: 20pt;
+	color: blue;
 }
 
 /* --------- BEST 영역 시작 --------- */
@@ -130,16 +148,17 @@ input::-moz-focus-inner { border: 0; }
 
 </style>
 <script type="text/javascript">
-	$(function() {
-		var temp = "<c:out value="${num}" />";
-		alert(temp);
+
+	$('.btn .btn-default').on('click', function() {
+		$(this).addClass('active');
 	})
 
 	function menu_btn_click(num) {
-		if(num == 1) {
-			alert(num + "버튼누름");
-		} else if(num == 2) {
-			alert(num + "버튼누름");
+
+		if(num == 11) {
+			alert("11번");
+		} else if(num == 12) {
+			alert("12번");
 		} else {
 			alert("기타");
 		}
@@ -152,48 +171,69 @@ input::-moz-focus-inner { border: 0; }
 	<div class="content">
 	<br>
 		<div class="content-inner">
-			<div class="content-inner-path">
-				<h1>$PATH경로</h1>
+			<div class="content-inner-path" id="cip">
+				<c:forEach items="${path }" var="path1">
+					<br>${path1.gdsMclassNm }<br>
+				</c:forEach>
 			</div>
-			<div class="content-inner-menu">
-				<h1>$PATH대형가전렌탈</h1>
+			<div class="content-inner-menu" id="cim">
+				<div class="content-inner-menu-path">
+					<c:forEach items="${path }" var="path2">
+						<br><h4>홈 &nbsp; > &nbsp; ${path2.gdsMclassNm } &nbsp; > &nbsp; ${path2.gdsSclassNm }</h4>
+					</c:forEach>
+				</div>
 				<!-- **************** -->
 				<!-- 소메뉴 영역 시작 -->
 				<!-- **************** -->
-				<div class="btn-group btn-group-justified" role="group">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default" id="menu-btn1" onclick="menu_btn_click(1);">에어컨</button>
+				<c:set var="list1Length" value="${fn:length(list1)}"></c:set>
+				<c:set var="list1Q" value="${list1Length/5 }"></c:set>
+				<c:set var="list1R" value="${list1Length%5 }"></c:set>
+				<c:set var="roopCnt" value="1"></c:set>
+				<c:set var="list1QR" value="${5 - list1R }"></c:set>
+				
+				<!-- 임시 test용 
+				<c:out value="${list1Length }"></c:out>
+				<c:out value="${list1Q }"></c:out>
+				<c:out value="${list1R }"></c:out>	
+				<c:out value="${list1QR }"></c:out>						
+				 -->
+				
+				<!-- 소메뉴 list 반복문 -->						
+				<c:forEach items="${list1}" var="list1Row" begin="0" end="${list1Length }" step="5" varStatus="status1Row">
+					<div class="btn-group btn-group-justified" role="group">
+					<c:if test="${roopCnt == 1 }">
+						<c:set var="roopCnt" value="${roopCnt+1 }"></c:set>
+					</c:if>
+					<c:if test="${status1Row.count <= 2 }">
+						<c:forEach items="${list1}" var="list1Co1" begin="0" end="10" varStatus="status1Col">
+							<c:if test="${status1Row.count == 1 && status1Col.count <= 5}">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default" id="menu-btn${list1Co1.gdsSclassCd }" onclick="menu_btn_click(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								</div>
+							</c:if>
+							<c:if test="${status1Row.count == 2 && status1Col.count >=6 }">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default" id="menu-btn${list1Co1.gdsSclassCd }" onclick="menu_btn_click(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								</div>
+							</c:if>
+							<c:if test="${list1Q < 1 && status1Col.count == list1Length }">
+								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-default" id="menu-btn${list1Co1.gdsSclassCd }" onclick="menu_btn_click(${list1Co1.gdsSclassCd });"><h4><br></h4></button>
+									</div>
+								</c:forEach>
+							</c:if>
+							<c:if test="${list1Q > 1 && list1Q < 2 && status1Row.count == 2 && status1Col.count == list1Length }">
+								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-default" id="menu-btn${list1Co1.gdsSclassCd }" onclick="menu_btn_click(${list1Co1.gdsSclassCd });"><h4><br></h4></button>
+									</div>
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+					</c:if>
 					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default" id="menu-btn2" onclick="menu_btn_click(2);">냉난방기</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">냉장고</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">TV</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">세탁기</button>
-					</div>
-				</div>
-				<div class="btn-group btn-group-justified" role="group"aria-label="...">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">빨래건조기</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">정수기</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">공기청정기</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">복합기/프린터기</button>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-default">&nbsp;</button>
-					</div>
-				</div>
+				</c:forEach>
 				<!-- ************** -->
 				<!-- 소메뉴 영역 끝 -->
 				<!-- ************** -->
@@ -208,10 +248,9 @@ input::-moz-focus-inner { border: 0; }
 					<tr>
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
-							<a href="#">$에어컨</a>
-							<a href="#">$냉난방기</a>
-							<a href="#">$DTV</a>
-							<a href="#">$세탁기...</a>
+							<c:forEach items="${list2}" var="bean2">
+									<a href="#">${bean2.brandNm}</a>
+							</c:forEach>
 						</td>
 					</tr>
 					<tr>
@@ -277,7 +316,11 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-best">
 				<h1>BEST 인기상품</h1>
-				<h1>$에어컨</h1>
+				<div class="content-inner-best-path">
+					<c:forEach items="${path }" var="path3">
+						${path3.gdsSclassNm }
+					</c:forEach>
+				</div>
 				<br>
 				<!-- ********************* -->
 				<!-- BEST 캐러셀 영역 시작 -->
@@ -401,7 +444,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ******************* -->
 			</div>
 			<div class="content-inner-sort">
-			<br><br>
+			<br><br><br>
 				<!-- ******************* -->
 				<!-- 정렬 메뉴 영역 시작 -->
 				<!-- ******************* -->
@@ -527,10 +570,22 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ************** -->
 				<!-- 리스트 영역 끝 -->
 				<!-- ************** -->
-				${list1 }
-				<c:forEach items="${list1}" var="bean">
-					${bean.brandNm}
+				<table>
+				<c:forEach items="${list1}" var="bean1">
+				<tr>
+					<td>${bean1.gdsSclassCd}</td>
+					<td>${bean1.gdsSclassNm}</td>
+				</tr>
 				</c:forEach>
+				<tr>
+					<td>-경계-</td>
+				</tr>
+				<c:forEach items="${list2}" var="bean2">
+				<tr>
+					<td>${bean2.brandNm}</td>
+				</tr>
+				</c:forEach>
+				</table>
 			</div>
 		</div>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	

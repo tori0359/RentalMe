@@ -18,10 +18,19 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<RentalAppliVo> rentalOptionList(String gdsSclassCd) {
-		System.out.println("hty333");
-		System.out.println(gdsSclassCd);
-		return sqlSession.selectList("rentalAppli.selectOptionListRetrive", gdsSclassCd);
+	public List<RentalAppliVo> rentalPath(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.selectPathRetrive", rentalAppliVo);
 	}
+	
+	@Override
+	public List<RentalAppliVo> rentalMenuList(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.selectMenuListRetrive", rentalAppliVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.selectOptionListRetrive", rentalAppliVo);
+	}
+
 
 }

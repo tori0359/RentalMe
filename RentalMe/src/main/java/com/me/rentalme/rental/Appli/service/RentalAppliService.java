@@ -8,6 +8,8 @@ import com.me.rentalme.model.entity.RentalAppliVo;
 
 public interface RentalAppliService {
 
-	List<RentalAppliVo> rentalList1(String gdsSclassCd);
+	List<RentalAppliVo> rentalPath(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalList1(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalList2(RentalAppliVo rentalAppliVo);
 
 }
