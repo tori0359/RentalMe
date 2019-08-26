@@ -3,6 +3,26 @@
 	        $(function(){ 
                 $("#imgfile").on("change", handleImgsFilesSelect);
                 
+                $('input[type=radio]').not($('.mclass1')).parents('label').hide();
+                
+                $("#category").change(function(){
+                	$('input[type=radio]').parents('label').show();
+                	if(($('#category').val())=="10"){
+                		$('input[type=radio]').not($('.mclass1')).parents('label').hide();
+                	}else if(($('#category').val())=="20"){
+                		$('input[type=radio]').not($('.mclass2')).parents('label').hide();
+                	}else if(($('#category').val())=="30"){
+                		$('input[type=radio]').not($('.mclass3')).parents('label').hide();
+                	}else if(($('#category').val())=="40"){
+                		$('input[type=radio]').not($('.mclass4')).parents('label').hide();
+                	}else if(($('#category').val())=="50"){
+                		$('input[type=radio]').not($('.mclass5')).parents('label').hide();
+                	}else if(($('#category').val())=="60"){
+                		$('input[type=radio]').not($('.mclass6')).parents('label').hide();
+                	}
+                	
+                });
+                
                 //가격: 숫자만 입력
                 $("#price").on("keyup", function() { 
                     $(this).val($(this).val().replace(/[^0-9]/g,"")); 

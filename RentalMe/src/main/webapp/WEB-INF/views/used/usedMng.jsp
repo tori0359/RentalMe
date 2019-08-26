@@ -33,7 +33,7 @@
 	            <form action="/used/mng" class="form-horizontal" enctype="multipart/form-data" method="post">
                     <div id="used_imgUpload">
                         <label for="imgfile" id="imgfile_label">이미지 업로드</label>
-                        <input type="file" id="imgfile" multiple accept=".jpg,.jpeg,.png,.gif,.bmp">
+                        <input type="file" id="imgfile" name="imgfile" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp">
                     </div>
                     <br/>
                     <div id="used_main_img">
@@ -59,111 +59,112 @@
 						  <option value="30">주방가전</option>
 						  <option value="40">가구</option>
 						  <option value="50">기타</option>
+						  <option value="60">패키지</option>
 						</select>
                     </div>
                    	<label class="col-sm-2 control-label">소그룹</label><br>
                     <div class="form-group" id="radiog">
                     	<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="11"> 에어컨
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="11"> 에어컨
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="12"> 냉낭반기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="12"> 냉낭반기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="13"> 냉장고
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="13"> 냉장고
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="14"> TV
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="14"> TV
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="15"> 세탁기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="15"> 세탁기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="16"> 빨래건조기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="16"> 빨래건조기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="17"> 정수기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="17"> 정수기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="18"> 공기청정기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="18"> 공기청정기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="19"> 복합기/프린터
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass1" value="19"> 복합기/프린터
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="21"> 커피머신
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="21"> 커피머신
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="22"> 제습기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="22"> 제습기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="23"> 청소기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="23"> 청소기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="24"> 드라이어
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="24"> 드라이어
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="25"> 빔프로젝터
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="25"> 빔프로젝터
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="26"> 컴퓨터/노트북
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="26"> 컴퓨터/노트북
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="27"> 무선스피커
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="27"> 무선스피커
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="28"> 비데
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="28"> 비데
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="29"> 면도기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass2" value="29"> 면도기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="31"> 음식물처리기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass3" value="31"> 음식물처리기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="32"> 제빙기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass3" value="32"> 제빙기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="33"> 전자레인지
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass3" value="33"> 전자레인지
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="34"> 에어프라이어
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass3" value="34"> 에어프라이어
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="35"> 오븐
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass3" value="35"> 오븐
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="41"> 침대(매트리스+프레임)
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass4" value="41"> 침대(매트리스+프레임)
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="42"> 매트리스
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass4" value="42"> 매트리스
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="43"> 쇼파
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass4" value="43"> 쇼파
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="44"> 책상
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass4" value="44"> 책상
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="51"> 악기
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass5" value="51"> 악기
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="52"> 명품
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass5" value="52"> 명품
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="53"> 귀금속
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass5" value="53"> 귀금속
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="61"> 침실패키지
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass6" value="61"> 침실패키지
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="62"> 주방패키지
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass6" value="62"> 주방패키지
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="63"> 욕실패키지
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass6" value="63"> 욕실패키지
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" value="64"> 기타패키지
+						<input type="radio" name="GDS_SCLASS_CD" id="inlineRadio1" class="mclass6" value="64"> 기타패키지
 						</label>
                     </div>
                   <div class="form-group">
