@@ -52,7 +52,7 @@
 				<div id="hp-danger">10~11자 숫자만 사용가능</div>
 				<div>
 					<input type="email" class="form-control" id="email" name="email"
-						placeholder="이메일">
+						placeholder="이메일(입력한 메일로 인증 메일을 발송합니다.)">
 				</div>
 				<div id="email-danger">email은 영문+숫자만 가능합니다.</div>
 				<div>
