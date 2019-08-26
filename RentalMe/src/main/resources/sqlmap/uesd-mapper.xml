@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="used">
+	<select id="selectAll" resultType="com.me.rentalme.model.entity.UsedVo">
+		 SELECT BRAND_NM,MODEL_NM,USED_GDS_PRICE 
+		 FROM tb_used100
+	</select>
+	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo">
+		 SELECT BRAND_NM,MODEL_NM,USED_GDS_PRICE 
+		 FROM tb_used100
+		 WHERE GDS_MCLASS_CD=#{GDS_MCLASS_CD}
+	</select>
+	
+	<insert id="seqInsert" parameterType="com.me.rentalme.model.entity.UsedVo">
+		INSERT INTO SEQ_USED100 VALUES(NULL)
+	</insert>
+	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UsedVo">
+		 INSERT INTO tb_used100 (USED_GDS_NO,USED_GDS_DT,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_GB_CD,BRAND_NM,MODEL_NM,SUB,USED_GDS_PRICE,CONTENT) 
+		 SELECT MAX(LPAD(SEQ,8,0)),DATE_FORMAT(now(), '%Y%m%d'),#{GDS_LCLASS_CD},#{GDS_MCLASS_CD},#{GDS_SCLASS_CD},#{GDS_GB_CD},#{BRAND_NM},#{MODEL_NM},#{SUB},#{USED_GDS_PRICE},#{CONTENT} 
+		 FROM SEQ_USED100
+	</insert>
+</mapper>

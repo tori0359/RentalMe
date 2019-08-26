@@ -1,10 +1,20 @@
 package com.me.rentalme.used.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.model.entity.UsedVo;
+import com.me.rentalme.used.service.UsedService;
 
 
 /**
@@ -19,7 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/used")
 public class UsedController {
 
+	Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Inject
+	UsedService usedService;
 	/**
+	 * @throws SQLException 
 	* 중고거래 리스트
 	* 
 	* @param  None
@@ -27,14 +42,19 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView getUsedList() {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getUsedList(Model model) throws SQLException {
 		
+		log.debug("중고거래 컨트롤러");
+		model.addAttribute("alist1", usedService.oneList(10));
+		model.addAttribute("alist2", usedService.oneList(20));
+		model.addAttribute("alist3", usedService.oneList(30));
+		model.addAttribute("alist4", usedService.oneList(40));
+		model.addAttribute("alist5", usedService.oneList(50));
 		
-		ModelAndView mav = new ModelAndView("used/usedList");
-		return mav;
+		return "used/usedList";
 	}
-	
+
 	/**
 	* 중고거래 상세보기
 	* 
@@ -43,7 +63,7 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/{idx}", method = RequestMethod.GET)
+	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
 	public ModelAndView getUsedDetail(@PathVariable("idx") int idx) {
 		
 		
@@ -84,6 +104,7 @@ public class UsedController {
 	}
 	
 	/**
+	 * @throws SQLException 
 	* 중고거래 상품등록 
 	* 
 	* @param  None
@@ -92,8 +113,11 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/mng", method = RequestMethod.POST)
-	public ModelAndView addUsedPrd() {
+	public ModelAndView addUsedPrd(UsedVo bean) throws SQLException {
 		
+		// 시퀀스 1증가
+		usedService.seqUp();
+		usedService.addUsed(bean);
 		
 		ModelAndView mav = new ModelAndView("used/usedMyStore");
 		return mav;

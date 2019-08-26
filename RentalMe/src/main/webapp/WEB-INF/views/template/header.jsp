@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
@@ -5,6 +6,7 @@
     <meta charset="UTF-8">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
    <style type="text/css">
        /*폰트설정*/
         @font-face {
@@ -209,8 +211,8 @@
     <div class="login container-fluid">
        <div class="col-md-11">
       <p class="navbar-text navbar-right"> 
-      <a href="#" class="navbar-link">로그인</a> ㅣ
-      <a href="#" class="navbar-link">회원가입</a></p>
+      <a href="/login" class="navbar-link">로그인</a> ㅣ
+      <a href="/join/signup" class="navbar-link">회원가입</a></p>
       </div>
     </div>
      <div class="navtitle">
@@ -242,15 +244,15 @@
         <li class="dropdown">
           <a href="#" id="bigmenu" class="dropdown-toggle" data-toggle="dropdown" >대형가전 렌탈</a>
           <ul class="dropdown-menu">
-              <li><a href="#">에어컨</a></li> 
-              <li><a href="#">냉난방기</a></li> 
-              <li><a href="#">냉장고</a></li>
-              <li><a href="#">TV</a></li>
-              <li><a href="#">세탁기</a></li>
-              <li><a href="#">빨래건조기</a></li>
-              <li><a href="#">정수기</a></li>
-              <li><a href="#">공기청정기</a></li>
-              <li><a href="#">복합기,프린터</a></li>
+              <li><a href="/rental/Appli/lg/11">에어컨</a></li> 
+              <li><a href="/rental/Appli/lg/12">냉난방기</a></li> 
+              <li><a href="/rental/Appli/lg/13">냉장고</a></li>
+              <li><a href="/rental/Appli/lg/14">TV</a></li>
+              <li><a href="/rental/Appli/lg/15">세탁기</a></li>
+              <li><a href="/rental/Appli/lg/16">빨래건조기</a></li>
+              <li><a href="/rental/Appli/lg/17">정수기</a></li>
+              <li><a href="/rental/Appli/lg/18">공기청정기</a></li>
+              <li><a href="/rental/Appli/lg/19">복합기,프린터</a></li>
           </ul>
         </li>
         <li class="dropdown">

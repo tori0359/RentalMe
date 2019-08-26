@@ -1,5 +1,9 @@
 package com.me.rentalme.rental.Appli.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -7,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 
 /**
@@ -23,6 +29,9 @@ public class RentalAppliController {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 	
+	@Inject
+	RentalAppliService rentalAppliService; 
+	
 	/**
 	* 대형가전렌탈 리스트
 	* 
@@ -31,6 +40,8 @@ public class RentalAppliController {
 	* @author 황인준
 	* @exception 
 	*/
+	
+	/*
 	@RequestMapping(value = "/lg", method = RequestMethod.GET)
 	public ModelAndView getLgList() {
 		log.debug("대형가전렌탈 리스트 컨트롤러...");
@@ -38,6 +49,22 @@ public class RentalAppliController {
 		ModelAndView mav = new ModelAndView("rental/rentalAppliLgList");
 		return mav;
 	}	
+	*/
+	
+	@RequestMapping(value = "/lg/{menu}", method = RequestMethod.GET)
+	public ModelAndView getLgList(@PathVariable("menu") String gdsSclassCd ) {
+		log.debug("대형가전렌탈 리스트 컨트롤러...");
+		
+		System.out.println("menu value = " + gdsSclassCd);
+		System.out.println("hty111");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list1",rentalAppliService.rentalList1(gdsSclassCd));
+		System.out.println("hty444");
+		mav.setViewName("rental/rentalAppliLgList");
+		
+		return mav;
+	}	
+	
 	
 	/**
 	 * 대형가전렌탈 상세보기
@@ -47,13 +74,15 @@ public class RentalAppliController {
 	 * @author 황인준
 	 * @exception 
 	 */
+	/*
 	@RequestMapping(value = "/lg/{idx}", method = RequestMethod.GET)
 	public ModelAndView getLgDeatail(@PathVariable("idx") int idx) {
 		log.debug("대형가전렌탈 상세보기 컨트롤러...");
 		
 		ModelAndView mav = new ModelAndView("rental/rentalDetail");
 		return mav;
-	}	
+	}
+	*/
 	
 	/**
 	 * 소형가전렌탈 리스트

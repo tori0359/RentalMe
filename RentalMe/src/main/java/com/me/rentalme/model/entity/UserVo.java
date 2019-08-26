@@ -3,220 +3,331 @@ package com.me.rentalme.model.entity;
 import java.sql.Date;
 
 public class UserVo {
-	private String 	userid;			// 아이디
-	private int		memNo;			// 회원번호
-	private String	userPw;			// 비밀번호
-	private String	userName;		// 이름
-	private String	birth;			// 생년월일
-	private String	sex;			// 성별
+	private String 	userId;			// 아이디
+	private String	mbNo;			// 회원번호
+	private String	userNM;			// 이름
+	private String	birthDay;		// 생년월일
+	private String	genderGbCd;		// 성별구분코드(1:남자, 2:여자)
+	private String	hp;				// 휴대전화
+	private String	hpYn;			// 휴대전화 수신여부
 	private String 	email;			// 이메일
-	private String	emailCheck;		// 이메일 수신여부
-	private String	phone;			// 휴대전화
-	private String	phoneCheck;		// 휴대전화 수신여부
-	private String  addr1;			// 주소1
-	private String  addr2;			// 주소2
+	private String	emailYn;		// 이메일 수신여부
+	private String	emailKey;		// 이메일 사용자 키 (인증 전 : 난수 생성된 키값이 입력, 인증 후 Y 입력)
+	private String  addr;			// 주소
+	private String  addrDetail;		// 상세주소
 	private String  zipCode;		// 우편번호
-	private String  pwErrCnt;		// 비밀번호 오류횟수
-	private Date	pwEffDate;		// 비밀번호	적용일자
-	private Date    joinRegDate;	// 가입일자
-	private String  useStatus;		// 사용여부
-	private String  memStatus;		// 회원상태
+	private String	userPw;			// 비밀번호
+	private String  pwFailCnt;		// 비밀번호 오류횟수
+	private Date	pwAdjDt;		// 비밀번호	적용일자
+	private String	levelGbCd;		// 레벨구분코드(1:일반, 2:관리자)
+	private Date    joinDt;			// 가입일자
+	private String  userStsCd;		// 사용자상태코드(1:정상, 2:휴면, 3:삭제)
+	private String  chgId;			// 변경아이디
+	private Date  	chgDt;			// 변경일자	
+	private String  regId;			// 등록아이디
+	private Date	regDt;			// 등록일자
+	
 	
 	public UserVo() {
 
 	}
 
-	public UserVo(String userid, int memNo, String userPw, String userName, String birth, String sex, String email,
-			String emailCheck, String phone, String phoneCheck, String addr1, String addr2, String zipCode,
-			String pwErrCnt, Date pwEffDate, Date joinRegDate, String useStatus, String memStatus) {
+
+	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
+			String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
+			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, Date joinDt, String userStsCd,
+			String chgId, Date chgDt, String regId, Date regDt) {
 		super();
-		this.userid = userid;
-		this.memNo = memNo;
-		this.userPw = userPw;
-		this.userName = userName;
-		this.birth = birth;
-		this.sex = sex;
+		this.userId = userId;
+		this.mbNo = mbNo;
+		this.userNM = userNM;
+		this.birthDay = birthDay;
+		this.genderGbCd = genderGbCd;
+		this.hp = hp;
+		this.hpYn = hpYn;
 		this.email = email;
-		this.emailCheck = emailCheck;
-		this.phone = phone;
-		this.phoneCheck = phoneCheck;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
+		this.emailYn = emailYn;
+		this.emailKey = emailKey;
+		this.addr = addr;
+		this.addrDetail = addrDetail;
 		this.zipCode = zipCode;
-		this.pwErrCnt = pwErrCnt;
-		this.pwEffDate = pwEffDate;
-		this.joinRegDate = joinRegDate;
-		this.useStatus = useStatus;
-		this.memStatus = memStatus;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((addr1 == null) ? 0 : addr1.hashCode());
-		result = prime * result + ((addr2 == null) ? 0 : addr2.hashCode());
-		result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((emailCheck == null) ? 0 : emailCheck.hashCode());
-		result = prime * result + memNo;
-		result = prime * result + ((memStatus == null) ? 0 : memStatus.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((phoneCheck == null) ? 0 : phoneCheck.hashCode());
-		result = prime * result + ((pwErrCnt == null) ? 0 : pwErrCnt.hashCode());
-		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
-		result = prime * result + ((useStatus == null) ? 0 : useStatus.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result + ((userPw == null) ? 0 : userPw.hashCode());
-		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
-		return result;
-	}
-	
-	//getter, setter
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public int getMemNo() {
-		return memNo;
-	}
-
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
-	}
-
-	public String getUserPw() {
-		return userPw;
-	}
-
-	public void setUserPw(String userPw) {
 		this.userPw = userPw;
+		this.pwFailCnt = pwFailCnt;
+		this.pwAdjDt = pwAdjDt;
+		this.levelGbCd = levelGbCd;
+		this.joinDt = joinDt;
+		this.userStsCd = userStsCd;
+		this.chgId = chgId;
+		this.chgDt = chgDt;
+		this.regId = regId;
+		this.regDt = regDt;
 	}
 
-	public String getUserName() {
-		return userName;
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getBirth() {
-		return birth;
+
+	public String getMbNo() {
+		return mbNo;
 	}
 
-	public void setBirth(String birth) {
-		this.birth = birth;
+
+	public void setMbNo(String mbNo) {
+		this.mbNo = mbNo;
 	}
 
-	public String getSex() {
-		return sex;
+
+	public String getUserNM() {
+		return userNM;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+
+	public void setUserNM(String userNM) {
+		this.userNM = userNM;
 	}
+
+
+	public String getBirthDay() {
+		return birthDay;
+	}
+
+
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
+
+
+	public String getGenderGbCd() {
+		return genderGbCd;
+	}
+
+
+	public void setGenderGbCd(String genderGbCd) {
+		this.genderGbCd = genderGbCd;
+	}
+
+
+	public String getHp() {
+		return hp;
+	}
+
+
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
+
+
+	public String getHpYn() {
+		return hpYn;
+	}
+
+
+	public void setHpYn(String hpYn) {
+		this.hpYn = hpYn;
+	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getEmailCheck() {
-		return emailCheck;
+
+	public String getEmailYn() {
+		return emailYn;
 	}
 
-	public void setEmailCheck(String emailCheck) {
-		this.emailCheck = emailCheck;
+
+	public void setEmailYn(String emailYn) {
+		this.emailYn = emailYn;
 	}
 
-	public String getPhone() {
-		return phone;
+
+	public String getEmailKey() {
+		return emailKey;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setEmailKey(String emailKey) {
+		this.emailKey = emailKey;
 	}
 
-	public String getPhoneCheck() {
-		return phoneCheck;
+
+	public String getAddr() {
+		return addr;
 	}
 
-	public void setPhoneCheck(String phoneCheck) {
-		this.phoneCheck = phoneCheck;
+
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 
-	public String getAddr1() {
-		return addr1;
+
+	public String getAddrDetail() {
+		return addrDetail;
 	}
 
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
 
-	public String getAddr2() {
-		return addr2;
-	}
-
-	public void setAddr2(String addr2) {
-		this.addr2 = addr2;
-	}
 
 	public String getZipCode() {
 		return zipCode;
 	}
 
+
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
-	public String getPwErrCnt() {
-		return pwErrCnt;
+
+	public String getUserPw() {
+		return userPw;
 	}
 
-	public void setPwErrCnt(String pwErrCnt) {
-		this.pwErrCnt = pwErrCnt;
+
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 
-	public Date getPwEffDate() {
-		return pwEffDate;
+
+	public String getPwFailCnt() {
+		return pwFailCnt;
 	}
 
-	public void setPwEffDate(Date pwEffDate) {
-		this.pwEffDate = pwEffDate;
+
+	public void setPwFailCnt(String pwFailCnt) {
+		this.pwFailCnt = pwFailCnt;
 	}
 
-	public Date getJoinRegDate() {
-		return joinRegDate;
+
+	public Date getPwAdjDt() {
+		return pwAdjDt;
 	}
 
-	public void setJoinRegDate(Date joinRegDate) {
-		this.joinRegDate = joinRegDate;
+
+	public void setPwAdjDt(Date pwAdjDt) {
+		this.pwAdjDt = pwAdjDt;
 	}
 
-	public String getUseStatus() {
-		return useStatus;
+
+	public String getlevelGbCd() {
+		return levelGbCd;
 	}
 
-	public void setUseStatus(String useStatus) {
-		this.useStatus = useStatus;
+
+	public void setlevelGbCd(String levelGbCd) {
+		this.levelGbCd = levelGbCd;
 	}
 
-	public String getMemStatus() {
-		return memStatus;
+
+	public Date getJoinDt() {
+		return joinDt;
 	}
 
-	public void setMemStatus(String memStatus) {
-		this.memStatus = memStatus;
+
+	public void setJoinDt(Date joinDt) {
+		this.joinDt = joinDt;
 	}
+
+
+	public String getUserStsCd() {
+		return userStsCd;
+	}
+
+
+	public void setUserStsCd(String userStsCd) {
+		this.userStsCd = userStsCd;
+	}
+
+
+	public String getChgId() {
+		return chgId;
+	}
+
+
+	public void setChgId(String chgId) {
+		this.chgId = chgId;
+	}
+
+
+	public Date getChgDt() {
+		return chgDt;
+	}
+
+
+	public void setChgDt(Date chgDt) {
+		this.chgDt = chgDt;
+	}
+
+
+	public String getRegId() {
+		return regId;
+	}
+
+
+	public void setRegId(String regId) {
+		this.regId = regId;
+	}
+
+
+	public Date getRegDt() {
+		return regDt;
+	}
+
+
+	public void setRegDt(Date regDt) {
+		this.regDt = regDt;
+	}
+
+
+	
+
+
+	
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addr == null) ? 0 : addr.hashCode());
+		result = prime * result + ((addrDetail == null) ? 0 : addrDetail.hashCode());
+		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
+		result = prime * result + ((chgId == null) ? 0 : chgId.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((emailKey == null) ? 0 : emailKey.hashCode());
+		result = prime * result + ((emailYn == null) ? 0 : emailYn.hashCode());
+		result = prime * result + ((genderGbCd == null) ? 0 : genderGbCd.hashCode());
+		result = prime * result + ((hp == null) ? 0 : hp.hashCode());
+		result = prime * result + ((hpYn == null) ? 0 : hpYn.hashCode());
+		result = prime * result + ((joinDt == null) ? 0 : joinDt.hashCode());
+		result = prime * result + ((levelGbCd == null) ? 0 : levelGbCd.hashCode());
+		result = prime * result + ((mbNo == null) ? 0 : mbNo.hashCode());
+		result = prime * result + ((pwAdjDt == null) ? 0 : pwAdjDt.hashCode());
+		result = prime * result + ((pwFailCnt == null) ? 0 : pwFailCnt.hashCode());
+		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userNM == null) ? 0 : userNM.hashCode());
+		result = prime * result + ((userPw == null) ? 0 : userPw.hashCode());
+		result = prime * result + ((userStsCd == null) ? 0 : userStsCd.hashCode());
+		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
+		return result;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -227,77 +338,105 @@ public class UserVo {
 		if (getClass() != obj.getClass())
 			return false;
 		UserVo other = (UserVo) obj;
-		if (addr1 == null) {
-			if (other.addr1 != null)
+		if (addr == null) {
+			if (other.addr != null)
 				return false;
-		} else if (!addr1.equals(other.addr1))
+		} else if (!addr.equals(other.addr))
 			return false;
-		if (addr2 == null) {
-			if (other.addr2 != null)
+		if (addrDetail == null) {
+			if (other.addrDetail != null)
 				return false;
-		} else if (!addr2.equals(other.addr2))
+		} else if (!addrDetail.equals(other.addrDetail))
 			return false;
-		if (birth == null) {
-			if (other.birth != null)
+		if (birthDay == null) {
+			if (other.birthDay != null)
 				return false;
-		} else if (!birth.equals(other.birth))
+		} else if (!birthDay.equals(other.birthDay))
+			return false;
+		if (chgId == null) {
+			if (other.chgId != null)
+				return false;
+		} else if (!chgId.equals(other.chgId))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (emailCheck == null) {
-			if (other.emailCheck != null)
+		if (emailKey == null) {
+			if (other.emailKey != null)
 				return false;
-		} else if (!emailCheck.equals(other.emailCheck))
+		} else if (!emailKey.equals(other.emailKey))
 			return false;
-		if (memNo != other.memNo)
-			return false;
-		if (memStatus == null) {
-			if (other.memStatus != null)
+		if (emailYn == null) {
+			if (other.emailYn != null)
 				return false;
-		} else if (!memStatus.equals(other.memStatus))
+		} else if (!emailYn.equals(other.emailYn))
 			return false;
-		if (phone == null) {
-			if (other.phone != null)
+		if (genderGbCd == null) {
+			if (other.genderGbCd != null)
 				return false;
-		} else if (!phone.equals(other.phone))
+		} else if (!genderGbCd.equals(other.genderGbCd))
 			return false;
-		if (phoneCheck == null) {
-			if (other.phoneCheck != null)
+		if (hp == null) {
+			if (other.hp != null)
 				return false;
-		} else if (!phoneCheck.equals(other.phoneCheck))
+		} else if (!hp.equals(other.hp))
 			return false;
-		if (pwErrCnt == null) {
-			if (other.pwErrCnt != null)
+		if (hpYn == null) {
+			if (other.hpYn != null)
 				return false;
-		} else if (!pwErrCnt.equals(other.pwErrCnt))
+		} else if (!hpYn.equals(other.hpYn))
 			return false;
-		if (sex == null) {
-			if (other.sex != null)
+		if (joinDt == null) {
+			if (other.joinDt != null)
 				return false;
-		} else if (!sex.equals(other.sex))
+		} else if (!joinDt.equals(other.joinDt))
 			return false;
-		if (useStatus == null) {
-			if (other.useStatus != null)
+		if (levelGbCd == null) {
+			if (other.levelGbCd != null)
 				return false;
-		} else if (!useStatus.equals(other.useStatus))
+		} else if (!levelGbCd.equals(other.levelGbCd))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (mbNo == null) {
+			if (other.mbNo != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!mbNo.equals(other.mbNo))
+			return false;
+		if (pwAdjDt == null) {
+			if (other.pwAdjDt != null)
+				return false;
+		} else if (!pwAdjDt.equals(other.pwAdjDt))
+			return false;
+		if (pwFailCnt == null) {
+			if (other.pwFailCnt != null)
+				return false;
+		} else if (!pwFailCnt.equals(other.pwFailCnt))
+			return false;
+		if (regId == null) {
+			if (other.regId != null)
+				return false;
+		} else if (!regId.equals(other.regId))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (userNM == null) {
+			if (other.userNM != null)
+				return false;
+		} else if (!userNM.equals(other.userNM))
 			return false;
 		if (userPw == null) {
 			if (other.userPw != null)
 				return false;
 		} else if (!userPw.equals(other.userPw))
 			return false;
-		if (userid == null) {
-			if (other.userid != null)
+		if (userStsCd == null) {
+			if (other.userStsCd != null)
 				return false;
-		} else if (!userid.equals(other.userid))
+		} else if (!userStsCd.equals(other.userStsCd))
 			return false;
 		if (zipCode == null) {
 			if (other.zipCode != null)
@@ -307,16 +446,34 @@ public class UserVo {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "UserVo [userid=" + userid + ", memNo=" + memNo + ", userPw=" + userPw + ", userName=" + userName
-				+ ", birth=" + birth + ", sex=" + sex + ", email=" + email + ", emailCheck=" + emailCheck + ", phone="
-				+ phone + ", phoneCheck=" + phoneCheck + ", addr1=" + addr1 + ", addr2=" + addr2 + ", zipCode="
-				+ zipCode + ", pwErrCnt=" + pwErrCnt + ", pwEffDate=" + pwEffDate + ", joinRegDate=" + joinRegDate
-				+ ", useStatus=" + useStatus + ", memStatus=" + memStatus + ", hashCode()=" + hashCode()
-				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+		return "UserVo [userId=" + userId + ", mbNo=" + mbNo + ", userNM=" + userNM + ", birthDay=" + birthDay
+				+ ", genderGbCd=" + genderGbCd + ", hp=" + hp + ", hpYn=" + hpYn + ", email=" + email + ", emailYn="
+				+ emailYn + ", emailKey=" + emailKey + ", addr=" + addr + ", addrDetail=" + addrDetail + ", zipCode="
+				+ zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt=" + pwAdjDt + ", levelGbCd="
+				+ levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId=" + chgId + ", chgDt="
+				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + "]";
 	}
 	
+	
+	
+	
+
+
+
+
+
+
+	
+	
+	
+
+	
+	
+
+
 	
 	
 	
