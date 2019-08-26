@@ -25,6 +25,7 @@ import com.me.rentalme.cs.service.CsService;
 @Controller
 @RequestMapping("/cs")
 public class CsController {
+	
 	@Inject
 	CsService csService; 
 	
@@ -40,21 +41,24 @@ public class CsController {
 	@RequestMapping(value="/csInquiry")
 	public String inquery(Model model) throws SQLException {
 		System.out.println("질문");
-		csService.getList(model);
 		return "cs/csInquiry";
 		
 	}
 	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
-	public String home(Model model) throws SQLException {
+	public ModelAndView home() throws SQLException {
 		System.out.println("mapping..");
-		csService.getList(model);
-		return "cs/csNotice";
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("alist", csService.csList());
+		mav.setViewName("cs/csNotice");
+		return mav;
 	}
 	@RequestMapping(value="/csFAQ")
-	public String csfaq(Model model) throws SQLException {
+	public ModelAndView csfaq(Model model) throws SQLException {
 		System.out.println("자주묻는질문");
-		csService.getList(model);
-		return "cs/csFAQ";
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("alist", csService.csList());
+		mav.setViewName("cs/csFAQ");
+		return mav;
 	}
 	/*
 	 * @RequestMapping(value="/csFAQ") public String csbtn(@RequestParam int num,
@@ -65,11 +69,13 @@ public class CsController {
 	
 	
 	@RequestMapping(value="/csDetail", method=RequestMethod.GET)
-	public ModelAndView csdetail() throws Exception{
+	public String csDetail(String faqNo,Model model) throws Exception{
 		
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("cs/csDetail");
-		return mav;
+		System.out.println("detail start"+faqNo);
+		model.addAttribute("list",csService.csDetail(faqNo));
+		System.out.println("detail end");
+		return "cs/csDetail";
+		
 	}
 	
 	/**

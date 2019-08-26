@@ -100,9 +100,9 @@
 		</tr>
 			<c:forEach items='${alist}' var="bean">
 				<tr>
-					<td>${bean.FAQ_NO }</td>
-					<td>${bean.SUB }</td>
-					<td>${bean.REG_DT }</td>
+					<td>${bean.faqNo }</td>
+					<td>${bean.sub }</td>
+					<td>${bean.regDt }</td>
 				</tr>
 			</c:forEach>
 	</table>

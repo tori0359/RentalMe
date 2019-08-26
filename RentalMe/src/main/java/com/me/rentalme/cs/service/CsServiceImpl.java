@@ -1,13 +1,11 @@
 package com.me.rentalme.cs.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
@@ -17,28 +15,19 @@ import com.me.rentalme.cs.entity.CsVo;
 public class CsServiceImpl implements CsService {
 
 	@Inject
-	SqlSession sqlSession;
+	CsDao csDao;
 	
 	@Override
-	public void getList(Model model) throws SQLException {
-		System.out.println("service...");
-		model.addAttribute("alist", sqlSession.getMapper(CsDao.class).selectAll());
-	}
-	
-	@Override
-	public void add(CsVo bean) throws SQLException {
-
+	public List<CsVo> csList() throws SQLException {
+		
+		return csDao.selectAll();
 	}
 
 	@Override
-	public void edit(CsVo bean) throws SQLException {
-
+	public CsVo csDetail(String faqNo) throws SQLException {
+		
+		return csDao.csDetail(faqNo);
 	}
 
-	@Override
-	public void delete(int num) throws SQLException {
-
-	}
-	
 
 }
