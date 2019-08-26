@@ -85,6 +85,19 @@ public class UsedDaoImpl implements UsedDao {
 		
 		return sqlSession.insert("used.insertOne", bean);
 	}
+	/**
+	 * 중고거래 상세
+	 * 
+	 * @param   
+	 * @return 
+	 * @author 박재환
+	 * @exception return("namespace.id명", 파라미터)
+	 */
+
+	@Override
+	public UsedVo DetailOne(String usedGdsNo) throws SQLException {
+		return (UsedVo) sqlSession.selectOne("used.detailOne", usedGdsNo);
+	}
 
 
 

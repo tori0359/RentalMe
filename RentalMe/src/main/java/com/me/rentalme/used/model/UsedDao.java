@@ -10,4 +10,5 @@ public interface UsedDao {
 	List<UsedVo> selectOne(UsedVo bean) throws SQLException;
 	int seqInsert() throws SQLException;
 	int InsertOne(UsedVo bean) throws SQLException;
+	UsedVo DetailOne(String usedGdsNo) throws SQLException;
 }

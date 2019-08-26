@@ -93,6 +93,7 @@ public class UsedController {
 	}
 
 	/**
+	 * @throws SQLException 
 	* 중고거래 상세보기
 	* 
 	* @param  int idx
@@ -101,11 +102,10 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
-	public ModelAndView getUsedDetail(@PathVariable("idx") int idx) {
+	public String getUsedDetail(Model model, @PathVariable("idx") String usedGdsNo) throws SQLException {
 		
-		
-		ModelAndView mav = new ModelAndView("used/usedDetail");
-		return mav;
+		model.addAttribute("UsedVo", usedService.detail(usedGdsNo));		
+		return "used/usedDetail";
 	}
 	
 	/**

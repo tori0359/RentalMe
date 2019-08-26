@@ -67,7 +67,7 @@
 		background-color: black;
 		color: white;
 	}
-	
+
 
 	.used_thing{
 		width: 95%;
@@ -81,7 +81,7 @@
 		margin-left: 20px;
 		margin-bottom: 40px;
 		display: inline-block;
-		
+		cursor: pointer;
 	}
 	.used_thing_img{
 		border: 1px solid black;
@@ -142,6 +142,7 @@
 			removeCls(who);
 			moveTab(4);
 		});
+	});
 		function removeCls(who){ //탭활성화
 			$('.tabs').find('li').removeClass('active');
 			who.addClass('active');
@@ -154,7 +155,6 @@
 		function numberWithCommas(x) { //숫자 3자리 콤마
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
-	});
 
 	
 </script>
@@ -172,10 +172,9 @@
 	<a href="/used/store" id="goUsedManager">중고거래 관리</a>
 	
 	<select id="align">
-		<option>인기순</option>
-		<option>조회순</option>
-		<option>저가순</option>
-		<option>고가순</option>
+		<option>등록순</option>
+		<option>낮은 가격순</option>
+		<option>높은 가격순</option>
 	</select>
 	
 	<ul class="tabs">
@@ -187,51 +186,51 @@
 	</ul>
 	<div class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
-		<div class="line_thing">
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
-			<div><a href="#">${bean.modelNm }</a></div>
-			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
+			<div>${bean.brandNm }</div>
+			<div>${bean.modelNm }</div>
+			<span>${bean.usedGdsPrice }원</span>
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist2 }" var="bean">
-		<div class="line_thing">
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
-			<div><a href="#">${bean.modelNm }</a></div>
-			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
+			<div>${bean.brandNm }</div>
+			<div>${bean.modelNm }</div>
+			<span>${bean.usedGdsPrice }원</span>
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist3 }" var="bean">
-		<div class="line_thing">
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
-			<div><a href="#">${bean.modelNm }</a></div>
-			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
+			<div>${bean.brandNm }</div>
+			<div>${bean.modelNm }</div>
+			<span>${bean.usedGdsPrice }원</span>
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist4 }" var="bean">
-		<div class="line_thing">
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
-			<div><a href="#">${bean.modelNm }</a></div>
-			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
+			<div>${bean.brandNm }</div>
+			<div>${bean.modelNm }</div>
+			<span>${bean.usedGdsPrice }원</span>
 		</div>
 	</c:forEach>
 	</div>
 	<div class="used_thing">
 	<c:forEach items="${alist5 }" var="bean">
-		<div class="line_thing">
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div><a href="/used/detail/${bean.usedGdsNo }">${bean.brandNm }</a></div>
-			<div><a href="#">${bean.modelNm }</a></div>
-			<a href="#" class="used_price">${bean.usedGdsPrice }</a>원
+			<div>${bean.brandNm }</div>
+			<div>${bean.modelNm }</div>
+			<span>${bean.usedGdsPrice }원</span>
 		</div>
 	</c:forEach>
 	</div>

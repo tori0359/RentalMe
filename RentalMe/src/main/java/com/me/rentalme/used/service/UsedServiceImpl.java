@@ -45,5 +45,11 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.InsertOne(bean);
 	}
 
+	@Override
+	public UsedVo detail(String usedGdsNo) throws SQLException {
+		log.debug("중고물품 상세보기...");
+		return usedDao.DetailOne(usedGdsNo);
+	}
+
 
 }

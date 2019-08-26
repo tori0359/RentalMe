@@ -1,12 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../template/header.jsp"></jsp:include>
+<style type="text/css">
+	#usedDetail{
+		height: 1500px;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+	});
+</script>
 </head>
 <body>
+<div id="usedDetail">
+	<h3>중고거래>가구</h3>
+	<span id="subDetail">${UsedVo.usedGdsNo }</span>
+	${UsedVo.gdsMclassCd }
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
@@ -42,5 +57,7 @@
 	    <span class="sr-only">Next</span>
 	  </a>
 	</div>
+	</div>
+<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
