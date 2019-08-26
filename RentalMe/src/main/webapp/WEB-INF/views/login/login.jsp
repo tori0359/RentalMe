@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -12,15 +13,18 @@
 <body>
 	<div id="login_main">
 		<h3>로그인</h3>
-		<form action="#" method="post">
+		<form action="/login" method="post">
 			<div class="form-group">
-				<input type="text" class="form-control" id="exampleInputEmail3"
+				<input type="text" class="form-control" name="userId" id="userId" value="${userId}"
 					placeholder="아이디">
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control"
-					id="exampleInputPassword3" placeholder="비밀번호">
+				<input type="password" class="form-control" id="userPw"
+					name="userPw" placeholder="비밀번호">
 			</div>
+			<c:if test="${msg == 'pwFail'}">
+				<div id="pwCheck-danger">아이디와 비밀번호가 일치하지 않습니다.</div>
+			</c:if>
 			
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
@@ -36,7 +40,7 @@
 
 			<button type="submit" class="btn btn-default btn-lg btn-block">로그인</button>
 		</form>
-		<button type="button" class="btn btn-default btn-lg btn-block">회원가입</button>
+		<button id="signup" type="button" class="btn btn-default btn-lg btn-block">회원가입</button>
 	</div>
 
 	<!-- modal -->
@@ -46,15 +50,11 @@
 			<div class="modal-content">
 				<div id="modal-header">
 					<h4 class="modal-title" id="idPwFindTitle">계정 정보 찾기</h4>
-					<!-- <button type="button" class="close" data-dismiss="modal"aria-label="Close">
-						<span aria-hidden="true">x</span>
-					</button> -->
 				</div>
 				<div class="modal-body">
 					<div id="find_tab">
-						<button id="id_tab" type="button" class="btn btn-default" disabled>아이디
-							찾기</button>
-						<button id="pw_tab" type="button" class="btn btn-default">비밀번호찾기</button>
+						<button id="id_tab" type="button" class="btn btn-default" disabled>아이디 찾기</button>
+						<button id="pw_tab" type="button" class="btn btn-default">비밀번호 찾기</button>
 					</div>
 					<div class="radio">
 						<label> <input type="radio" name="optionsRadios"

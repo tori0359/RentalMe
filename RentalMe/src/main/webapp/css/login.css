@@ -21,6 +21,10 @@
      background-color: black;
      color: white;
  }
+ #idPwFindTitle{
+ 	margin-top: 10px;
+ }
+ 
  #id_pw_find{
  	text-align:center;
  }
@@ -41,6 +45,8 @@
  #find_id_modal table>tr>td:first-child{
      background-color: aliceblue;
  }
+ 
+ #pwCheck-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
  
  /* modal css*/\
  .modal-body{

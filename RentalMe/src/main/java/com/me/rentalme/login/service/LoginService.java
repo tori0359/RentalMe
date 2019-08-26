@@ -1,7 +1,5 @@
 package com.me.rentalme.login.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.me.rentalme.model.entity.UserVo;
 
 /**
@@ -13,6 +11,9 @@ import com.me.rentalme.model.entity.UserVo;
 * 등록일자 : 2019.08.13
 */
 public interface LoginService {
+
+	//입력한 로그인 아이디 체크
+	UserVo getId(String userId);
 	
-	int login(UserVo bean, HttpServletRequest req); //로그인;
+	
 }
