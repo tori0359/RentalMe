@@ -2,6 +2,7 @@ package com.me.rentalme.mp.user.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -58,6 +59,29 @@ public class UserController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @throws SQLException 
+	* 주문내역> 후기등록
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
+	public ModelAndView addReview(CallVo callVo) throws SQLException {
+		log.debug("후기등록 컨트롤러...");
+		
+		mpUserService.addReview(callVo);
+		
+		
+
+		ModelAndView mav = new ModelAndView("redirect:/mp/");
+		
+		return mav;
+	}
+	
 	
 	/**
 	 * @throws SQLException 

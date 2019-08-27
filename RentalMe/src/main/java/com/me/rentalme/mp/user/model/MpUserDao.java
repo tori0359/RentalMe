@@ -17,6 +17,9 @@ public interface MpUserDao {
 	//주문내역 리스트 출력
 	List<CallVo> selectOrd() throws SQLException;
 	
+	//후기 등록
+	int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException;
+	
 	//장바구니 리스트 출력
 	List<CallVo> selectCart() throws SQLException;
 	
@@ -25,6 +28,7 @@ public interface MpUserDao {
 	
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
 	public void deleteWish(CallVo callVo) throws SQLException;
+
 	
 	
 }
