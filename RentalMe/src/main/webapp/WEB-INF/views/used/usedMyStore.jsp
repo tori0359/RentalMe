@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
 		width: 80%;
 		margin: 100px auto;
 		margin-bottom: 300px;
+		height: 2000px;
 	}
 	.usedStore #search{
 		display: inline-block;
@@ -83,27 +85,32 @@
 	#myUsedList ul>li{
 		display: inline-block;
 		border-bottom: 1px solid #dedede;
-		width: 14.27%;
-		height: 30px;
-		line-height: 30px;
+		width: 16.66%;
+		height: 100px;
+		line-height: 100px;
 		float: left;
 		text-align: center;
 	}
 	#myUsedList ul:first-child>li{
 		border-top: 1px solid #dedede;
 		font-weight: bold;
+		height: 30px;
+		line-height: 30px;
 	}
 	#myUsedList ul{
 		cursor: default;
 	}
-	
+	.myUsedLt div{
+		width: 100px;
+		height: 100px;
+	}
 	
 	#myUsedList .used_del{
 		display: block;
 		background-color: lightgray;
 		width: 50px;
-		height: 29px;
-		margin: auto;
+		height: 100%;
+		margin: 0px auto;
 		text-decoration: none;
 		color: black;
 		border-radius: 5px;
@@ -193,41 +200,35 @@
 			<li>상태</li>
 			<li>물품명</li>
 			<li>가격</li>
-			<li>찜&#47;댓글</li>
 			<li>최근수령일</li>
 			<li>삭제</li>
 		</ul>
+		<c:forEach items="${alist }" var="bean">
 		<ul class="myUsedLt">
-			<li>ㅁ</li>
-			<li>ㅁ</li>
-			<li>ㅁ</li>
-			<li>ㅁ</li>
-			<li>ㅁ</li>
-			<li>ㅁ</li>
+			<li><div><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div></li>
+			<li>${bean.usedGdsResStsCd }</li>
+			<li>${bean.modelNm }</li>
+			<li>${bean.usedGdsPrice }</li>
+			<li>${bean.chgDt }</li>
 			<li><a href="#" class="used_del">삭제</a></li>
 		</ul>
+		</c:forEach>
 	</div>
 	<div id="myUsedReview">
 		<form action="/used/store/reviewinsert" method="post">
-			<input type="hidden" value="">
-			<textarea class="form-control" rows="3"></textarea>
+			<input type="hidden" name="storeNo" value="111">
+			<input type="hidden" name="mbNo" value="${loginMbNo }">
+			<input type="hidden" name="grade" value="1">
+			<textarea class="form-control" name="content" rows="3"></textarea>
 			<button type="submit">후기등록</button>
 		</form>
+		<c:forEach items="${cmtlist }" var="bean">
+		<div>회원번호: ${bean.mbNo }</div>
+		<div>코멘트: ${bean.content }</div>
+		<div>날짜: ${bean.chgDt }</div>
+		<div><a href="#">신고</a></div>
+		</c:forEach>
 	</div>
-	<div></div>
-  <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="active"><a href="#">1</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
 	
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>

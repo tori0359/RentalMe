@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.service.UsedService;
 
@@ -51,46 +54,36 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getUsedList(Model model) throws SQLException {
+	public String getUsedList(Model model,HttpSession session,
+			@RequestParam("gdsLclassCd") String gdsLclassCd,
+			@RequestParam(value = "gdsMclassCd", required = false) String gdsMclassCd,
+			@RequestParam("modelNm") String modelNm,
+			@RequestParam("align") String align) throws SQLException {
 		
 		log.debug("중고거래 컨트롤러");
 		UsedVo bean=new UsedVo();
-		bean.setModelNm("");
-		bean.setGdsMclassCd("10");
+		bean.setGdsLclassCd(gdsLclassCd);
+		bean.setGdsMclassCd(gdsMclassCd);
+		bean.setModelNm(modelNm);
+		session.setAttribute("gdsMclassCd", gdsMclassCd);
+		session.setAttribute("listsize", (usedService.oneList(bean).size()-1)/10+1);
+		bean.setAlign(align);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGdsMclassCd("20");
-		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGdsMclassCd("30");
-		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGdsMclassCd("40");
-		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGdsMclassCd("50");
-		model.addAttribute("alist5", usedService.oneList(bean));
-		System.out.println(bean.getBrandNm());
 		return "used/usedList";
 	}
-	
-	//검색기능
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String getUsedListNM(Model model,@RequestParam("modelNm") String modelNm,@RequestParam("align") String align) throws SQLException {
+	@RequestMapping(value = "/{idx}", method = RequestMethod.GET)
+	public String getUsedListP(HttpSession session,Model model,@PathVariable("idx") String gdsMclassCd) throws SQLException {
 		
-		log.debug("중고거래 검색 컨트롤러");
+		log.debug("중고거래 컨트롤러");
 		UsedVo bean=new UsedVo();
-		if(modelNm==null) {
-			modelNm="";
-		}
-		bean.setModelNm(modelNm);
-		bean.setAlign(align);
-		bean.setGdsMclassCd("10");
+		bean.setGdsLclassCd("20");
+		bean.setModelNm("");
+		bean.setGdsMclassCd(gdsMclassCd);
+		session.removeAttribute("gdsMclassCd");
+		session.removeAttribute("listsize");
+		session.setAttribute("gdsMclassCd", gdsMclassCd);
+		session.setAttribute("listsize", (usedService.oneList(bean).size()-1)/10+1);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGdsMclassCd("20");
-		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGdsMclassCd("30");
-		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGdsMclassCd("40");
-		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGdsMclassCd("50");
-		model.addAttribute("alist5", usedService.oneList(bean));
 		return "used/usedList";
 	}
 
@@ -119,6 +112,7 @@ public class UsedController {
 	
 	
 	/**
+	 * @throws SQLException 
 	* 나의 중고상점 리스트
 	* 
 	* @param  None
@@ -126,19 +120,19 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/store", method = RequestMethod.GET)
-	public ModelAndView getUsedMyStroe() {
-		
-		
-		ModelAndView mav = new ModelAndView("used/usedMyStore");
-		return mav;
+	@RequestMapping(value = "/store/{idx}", method = RequestMethod.GET)
+	public String getUsedMyStroe(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+		model.addAttribute("alist", usedService.myUsedAll(mbNo));
+		model.addAttribute("cmtlist", usedService.listMyStoreCmt(mbNo));
+		return "used/usedMyStore";
 	}
 	
-	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.GET)
-	public String getUsedMyStroeReviewInsert() {
+	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.POST)
+	public String getUsedMyStroeReviewInsert(HttpSession session,@ModelAttribute UsedStoreVo bean) throws SQLException {
 		
+		usedService.addMyStoreCmt(bean);
 		
-		return "redirect:/used/store";
+		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 	
 	/**
@@ -167,7 +161,7 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/mng", method = RequestMethod.POST)
-	public String addUsedPrd(MultipartHttpServletRequest mtfRequest,@ModelAttribute UsedVo bean) throws SQLException {
+	public String addUsedPrd(HttpSession session,MultipartHttpServletRequest mtfRequest,@ModelAttribute UsedVo bean) throws SQLException {
 		
 		int cnt=1; //이미지 카운트
 		
@@ -217,7 +211,7 @@ public class UsedController {
 		usedService.seqUp();
 		usedService.addUsed(bean);
 		
-		return "used/usedMyStore";
+		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 //	@RequestMapping(value = "/mng", method = RequestMethod.POST)
 //	public String addUsedPrd(MultipartHttpServletRequest mtfRequest,UsedVo bean,

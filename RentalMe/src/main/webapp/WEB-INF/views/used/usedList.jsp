@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +104,7 @@
 </head>
 <script type="text/javascript">
 	$(function(){
-		
+		$('.tab').eq(0).addClass('active');
 		var classnum=$('.used_price');
 		var price;
 		for(var i=0; i<classnum.length; i++){
@@ -116,31 +117,26 @@
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			moveTab(0);
 		});
 		$('.tab').eq(1).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			moveTab(1);
 		});
 		$('.tab').eq(2).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			moveTab(2);
 		});
 		$('.tab').eq(3).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			moveTab(3);
 		});
 		$('.tab').eq(4).click(function(e){
 			e.preventDefault();
 			who=$(this);
 			removeCls(who);
-			moveTab(4);
 		});
 	});
 		function removeCls(who){ //탭활성화
@@ -162,90 +158,57 @@
 <div class="usedList">
 
 	<h3>중고제품</h3>
-	<form action="/used/search">
+	<form action="/used">
 	<div id="search">
+		<input type="hidden" name="gdsLclassCd" value="20">
+		<input type="hidden" name="gdsMclassCd" value="90">
 		<input type="text" name="modelNm" id="search" placeholder="검색">
-		<button type="submit">검색</button>
-	</div>
 		<select name="align" id="align">
 			<option value="1">등록순</option>
 			<option value="2">낮은 가격순</option>
 			<option value="3">높은 가격순</option>
 		</select>
+		<button type="submit">검색</button>
+	</div>
 	</form>
 	
-	<a href="/used/store" id="goUsedManager">중고거래 관리</a>
-	
-	
-	<ul class="tabs">
-		<li class="tab">대형가전</li>
-		<li class="tab">소형가전</li>
-		<li class="tab">주방가전</li>
-		<li class="tab">가구</li>		
-		<li class="tab">기타</li>		
+	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
+<div>
+	<a href="/used/10">대형가전</a>
+	<a href="/used/20">소형가전</a>
+	<a href="/used/30">주방가전</a>
+	<a href="/used/40">가구</a>
+	<a href="/used/50">기타</a>
+</div>
+<!-- 	<ul class="tabs">
+		<li class="tab" id="bigApp" value="10">대형가전</li>
+		<li class="tab" id="smlApp" value="20">소형가전</li>
+		<li class="tab" id="kitApp" value="30">주방가전</li>
+		<li class="tab" id="furniture" value="40">가구</li>		
+		<li class="tab" id="etc" value="50">기타</li>	
 	</ul>
+	 -->
 	<div class="used_thing">
-	<c:forEach items="${alist1 }" var="bean">
+	<c:forEach items="${alist1 }" var="bean" begin="1" end="10">
 		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
 			<div>${bean.brandNm }</div>
 			<div>${bean.modelNm }</div>
 			<span>${bean.usedGdsPrice }원</span>
+			<div>탭종류:${bean.gdsMclassCd }</div>
 		</div>
 	</c:forEach>
 	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist2 }" var="bean">
-		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
-			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div>${bean.brandNm }</div>
-			<div>${bean.modelNm }</div>
-			<span>${bean.usedGdsPrice }원</span>
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist3 }" var="bean">
-		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
-			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div>${bean.brandNm }</div>
-			<div>${bean.modelNm }</div>
-			<span>${bean.usedGdsPrice }원</span>
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist4 }" var="bean">
-		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
-			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div>${bean.brandNm }</div>
-			<div>${bean.modelNm }</div>
-			<span>${bean.usedGdsPrice }원</span>
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist5 }" var="bean">
-		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
-			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
-			<div>${bean.brandNm }</div>
-			<div>${bean.modelNm }</div>
-			<span>${bean.usedGdsPrice }원</span>
-		</div>
-	</c:forEach>
-	</div>
-	
+	<!-- 1~10 11~20 21~30 -->
   <ul class="pagination">
     <li>
       <a href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+    <c:forEach begin="1" end="${listsize }" var="x">
+    <li><a href="#"><c:out value="${x }"/></a></li>
+    </c:forEach>
     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

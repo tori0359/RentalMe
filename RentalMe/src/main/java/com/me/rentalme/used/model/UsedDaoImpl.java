@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 
 /**
@@ -102,21 +103,50 @@ public class UsedDaoImpl implements UsedDao {
 		return (UsedVo) sqlSession.selectOne("used.detailOne", usedGdsNo);
 	}
 	/**
-	 * 중고거래 댓글
+	 * 중고거래 댓글 불러오기
 	 * 
 	 * @param   
 	 * @return 
 	 * @author 박재환
-	 * @exception return("namespace.id명")
+	 * @exception return("namespace.id명", 파라미터)
 	 */
 	@Override
 	public List<UsedCmtVo> selectCmtAll(String usedGdsNo) throws SQLException {
 		return sqlSession.selectList("used.seletCmt", usedGdsNo);
 	}
-
+	/**
+	 * 중고거래 댓글 달기
+	 * 
+	 * @param   
+	 * @return 
+	 * @author 박재환
+	 * @exception return("namespace.id명", 파라미터)
+	 */
 	@Override
 	public int cmtInsert(UsedCmtVo bean) throws SQLException {
 		return sqlSession.insert("used.insertCmt", bean);
+	}
+	/**
+	 * 내 상점물품 불러오기
+	 * 
+	 * @param   
+	 * @return 
+	 * @author 박재환
+	 * @exception return("namespace.id명", 파라미터)
+	 */
+	@Override
+	public List<UsedVo> mySelectAll(String mbNo) throws SQLException {
+		return sqlSession.selectList("used.mySelectAll", mbNo);
+	}
+
+	@Override
+	public int myStoreCmtInsert(UsedStoreVo bean) throws SQLException {
+		return sqlSession.insert("used.storeCmt", bean);
+	}
+
+	@Override
+	public List<UsedStoreVo> myStoreCmtSelect(String storeNo) throws SQLException {
+		return sqlSession.selectList("used.myStoreCmtSelectAll", storeNo);
 	}
 
 

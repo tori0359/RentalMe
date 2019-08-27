@@ -34,10 +34,9 @@
 	<div>택배비: 택배비 별도</div>
 	<div>카테고리: ${UsedVo.mcnm }</div>
 	<div>상품내용: ${UsedVo.content }</div>
-	<a href="#">찜하기</a>
 	<form action="/used/cmtAdd" method="post">
 		<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
-		<input type="hidden" name="mbNo" value="101">
+		<input type="hidden" name="mbNo" value="${loginMbNo }">
 		<input type="hidden" name="usedReGbCd" value="1">	
 		<input type="hidden" name="delYn" value="N">
 		<textarea name="content"></textarea>

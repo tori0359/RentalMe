@@ -27,6 +27,7 @@ public class UsedVo {
 	private Date regDt;                  // 등록일자
 	private String mcnm;				 //모델명
 	private String align;					 // list 순서
+	private int startPage;			// 시작 페이지
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -245,9 +246,6 @@ public class UsedVo {
 	public void setMcnm(String mcnm) {
 		this.mcnm = mcnm;
 	}
-	
-
-
 
 	public String getAlign() {
 		return align;
@@ -255,6 +253,15 @@ public class UsedVo {
 
 	public void setAlign(String align) {
 		this.align = align;
+	}
+	
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
 	}
 
 	@Override

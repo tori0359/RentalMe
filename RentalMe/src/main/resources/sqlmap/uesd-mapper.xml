@@ -11,8 +11,14 @@
 	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고list 검색 USED_GDS_NO,BRAND_NM,MODEL_NM,USED_GDS_PRICE,IMG1 -->
 		 SELECT * 
 		 FROM tb_used100
-		 WHERE GDS_MCLASS_CD=#{gdsMclassCd} AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
-
+		 WHERE GDS_LCLASS_CD=#{gdsLclassCd} 
+		 <if test="gdsMclassCd != 90">
+		 AND GDS_MCLASS_CD=#{gdsMclassCd}
+		 </if>
+		  AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
+			<if test="align == null">
+			 	ORDER BY REG_DT DESC
+			</if>
 		 	<if test="align == 1">
 		 		ORDER BY REG_DT DESC
 		 	</if>
@@ -22,6 +28,7 @@
 		 	<if test="align == 3">
 		 		ORDER BY USED_GDS_PRICE DESC
 		 	</if>
+		 <!-- LIMIT #{startPage},10 -->
 	</select>
 	<select id="detailOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고detail -->
 		SELECT *, FN_NM('GDS_MCLASS_NM',GDS_MCLASS_CD) AS mcnm
@@ -33,14 +40,29 @@
 		FROM tb_used110 
 		WHERE USED_GDS_NO=#{usedGdsNo}
 	</select>
+	<select id="mySelectAll" resultType="com.me.rentalme.model.entity.UsedVo">
+		SELECT *
+		FROM tb_used100
+		WHERE MB_NO=#{mbNo}
+	</select>
+	<select id="myStoreCmtSelectAll" resultType="com.me.rentalme.model.entity.UsedStoreVo">
+		SELECT *
+		FROM tb_used200
+		WHERE MB_NO=#{mbNo}
+	</select>
+	<select id="storeReCmtSelect" resultType="com.me.rentalme.model.entity.UsedReCmtVo">
+		SELECT *
+		FROM tb_used120
+		WHERE USED_GDS_NO=#{usedGdsNo} AND USER_GDS_COMT_NO=#{usedGdsComtNo}
+	</select>
 	
 	
 	<insert id="seqInsert" parameterType="com.me.rentalme.model.entity.UsedVo"> <!-- 시퀀스 번호 1증가 -->
 		INSERT INTO SEQ_USED100 VALUES(NULL)
 	</insert>
 	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고물품 추가 -->
-		 INSERT INTO tb_used100 (USED_GDS_NO,USED_GDS_DT,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_GB_CD,BRAND_NM,MODEL_NM,SUB,USED_GDS_PRICE,CONTENT,IMG1,IMG2,IMG3,IMG4) 
-		 SELECT MAX(LPAD(SEQ,8,0)),DATE_FORMAT(now(), '%Y%m%d'),#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},'U',#{brandNm},#{modelNm},#{sub},#{usedGdsPrice},#{content},#{img1},#{img2},#{img3},#{img4} 
+		 INSERT INTO tb_used100 (USED_GDS_NO,USED_GDS_DT,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_GB_CD,BRAND_NM,MODEL_NM,SUB,USED_GDS_PRICE,CONTENT,IMG1,IMG2,IMG3,IMG4,MB_NO) 
+		 SELECT MAX(LPAD(SEQ,8,0)),DATE_FORMAT(now(), '%Y%m%d'),#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},'U',#{brandNm},#{modelNm},#{sub},#{usedGdsPrice},#{content},#{img1},#{img2},#{img3},#{img4},#{mbNo} 
 		 FROM SEQ_USED100
 	</insert>
 	
@@ -49,10 +71,12 @@
 	</insert>
 	<insert id="insertCmt" parameterType="com.me.rentalme.model.entity.UsedCmtVo">
 		INSERT INTO tb_used110 (USED_GDS_NO,USED_GDS_COMT_NO,USED_GDS_COMT_DT,MB_NO,CONTENT,SECRET_YN,USED_RE_GB_CD,DEL_YN)
-		SELECT #{usedGdsNo},MAX(USED_GDS_COMT_NO)+1, DATE_FORMAT(now(), '%Y%m%d'), #{mbNo},#{content},#{secretYn},#{usedReGbCd},#{delYn}
+		SELECT #{usedGdsNo},COUNT(USED_GDS_COMT_NO)+1, DATE_FORMAT(now(), '%Y%m%d'), #{mbNo},#{content},#{secretYn},#{usedReGbCd},#{delYn}
 		FROM tb_used110 WHERE USED_GDS_NO=#{usedGdsNo}
 	</insert>
 	<insert id="storeCmt" parameterType="com.me.rentalme.model.entity.UsedStoreVo">
-		INSERT INTO tb_used200
+		INSERT INTO tb_used200 (STORE_NO,STORE_REVIEW_NO,STORE_REVIEW_DT,MB_NO,CONTENT,GRADE) 
+		SELECT #{storeNo},COUNT(STORE_REVIEW_NO)+1,DATE_FORMAT(now(), '%Y%m%d'),#{mbNo},#{content},#{grade}
+		FROM tb_used200 WHERE STORE_NO=#{storeNo}
 	</insert>
 </mapper>

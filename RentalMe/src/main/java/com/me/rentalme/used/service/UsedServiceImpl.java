@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.me.rentalme.model.entity.RentalMeVo;
 import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.model.UsedDao;
 
@@ -60,6 +61,21 @@ public class UsedServiceImpl implements UsedService {
 	@Override
 	public int addCmt(UsedCmtVo bean) throws SQLException {
 		return usedDao.cmtInsert(bean);
+	}
+
+	@Override
+	public List<UsedVo> myUsedAll(String mbNo) throws SQLException {
+		return usedDao.mySelectAll(mbNo);
+	}
+
+	@Override
+	public int addMyStoreCmt(UsedStoreVo bean) throws SQLException {
+		return usedDao.myStoreCmtInsert(bean);
+	}
+
+	@Override
+	public List<UsedStoreVo> listMyStoreCmt(String storeNo) throws SQLException {
+		return usedDao.myStoreCmtSelect(storeNo);
 	}
 
 

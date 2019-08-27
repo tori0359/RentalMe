@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 
 public interface UsedDao {
@@ -14,4 +15,7 @@ public interface UsedDao {
 	UsedVo DetailOne(String usedGdsNo) throws SQLException; // 중고 디테일
 	List<UsedCmtVo> selectCmtAll(String usedGdsNo) throws SQLException;
 	int cmtInsert(UsedCmtVo bean) throws SQLException;
+	List<UsedVo> mySelectAll(String mbNo) throws SQLException; //내 상점 물품들
+	int myStoreCmtInsert(UsedStoreVo bean) throws SQLException; //내 상점 후기올리기
+	List<UsedStoreVo> myStoreCmtSelect(String storeNo) throws SQLException; // 내 상점 후기보기
 }

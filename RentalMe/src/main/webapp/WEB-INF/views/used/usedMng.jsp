@@ -31,6 +31,7 @@
 	           (개당 이미지 최대 10M)
 	            </p>
 	            <form action="/used/mng" class="form-horizontal" enctype="multipart/form-data" method="post">
+	            <input type="hidden" name="mbNo" value="${loginMbNo }">
                     <div id="used_imgUpload">
                         <label for="imgfile" id="imgfile_label">이미지 업로드</label>
                         <input type="file" id="imgfile" name="imgfile" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp">
