@@ -54,9 +54,7 @@ public class UsedDaoImpl implements UsedDao {
 	*/
 	@Override
 	public List<UsedVo> selectOne(UsedVo bean) throws SQLException {
-		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");
-		System.out.println(bean.getGdsMclassCd());
-		System.out.println(bean.getAlign());
+		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");		
 		return sqlSession.selectList("used.selectOne",bean);
 	}
 	

@@ -103,6 +103,7 @@
 	src="${pageContext.request.contextPath}/js/used.js"></script>
 </head>
 <script type="text/javascript">
+
 	$(function(){
 		$('.tab').eq(0).addClass('active');
 		var classnum=$('.used_price');
@@ -158,10 +159,10 @@
 <div class="usedList">
 
 	<h3>중고제품</h3>
-	<form action="/used">
+	<form action="/used/search">
 	<div id="search">
 		<input type="hidden" name="gdsLclassCd" value="20">
-		<input type="hidden" name="gdsMclassCd" value="90">
+		<input type="hidden" name="gdsMclassCd" value="${gdsMclassCd }">
 		<input type="text" name="modelNm" id="search" placeholder="검색">
 		<select name="align" id="align">
 			<option value="1">등록순</option>

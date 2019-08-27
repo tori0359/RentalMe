@@ -55,34 +55,36 @@ public class UsedController {
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getUsedList(Model model,HttpSession session,
-			@RequestParam("gdsLclassCd") String gdsLclassCd,
-			@RequestParam(value = "gdsMclassCd", required = false) String gdsMclassCd,
-			@RequestParam("modelNm") String modelNm,
-			@RequestParam("align") String align) throws SQLException {
+			@ModelAttribute UsedVo bean) throws SQLException {
 		
-		log.debug("중고거래 컨트롤러");
-		UsedVo bean=new UsedVo();
-		bean.setGdsLclassCd(gdsLclassCd);
-		bean.setGdsMclassCd(gdsMclassCd);
-		bean.setModelNm(modelNm);
-		session.setAttribute("gdsMclassCd", gdsMclassCd);
+		log.debug("중고거래 처음들어올때 컨트롤러");
+		session.setAttribute("gdsMclassCd", bean.getGdsMclassCd());
 		session.setAttribute("listsize", (usedService.oneList(bean).size()-1)/10+1);
-		bean.setAlign(align);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
 	@RequestMapping(value = "/{idx}", method = RequestMethod.GET)
-	public String getUsedListP(HttpSession session,Model model,@PathVariable("idx") String gdsMclassCd) throws SQLException {
+	public String getUsedList2(HttpSession session,Model model,@PathVariable("idx") String gdsMclassCd) throws SQLException {
 		
-		log.debug("중고거래 컨트롤러");
+		log.debug("중고거래 탭눌렀을때 컨트롤러");
 		UsedVo bean=new UsedVo();
 		bean.setGdsLclassCd("20");
-		bean.setModelNm("");
 		bean.setGdsMclassCd(gdsMclassCd);
+		bean.setModelNm("");
 		session.removeAttribute("gdsMclassCd");
-		session.removeAttribute("listsize");
-		session.setAttribute("gdsMclassCd", gdsMclassCd);
-		session.setAttribute("listsize", (usedService.oneList(bean).size()-1)/10+1);
+		session.setAttribute("gdsMclassCd", bean.getGdsMclassCd());
+		model.addAttribute("alist1", usedService.oneList(bean));
+		return "used/usedList";
+	}
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String getUsedListS(HttpSession session,Model model,@ModelAttribute UsedVo bean) throws SQLException {
+		
+		log.debug("중고거래 검색 컨트롤러");
+		System.out.println("okok1="+bean.getGdsMclassCd());
+		System.out.println("okok2="+bean.getModelNm());
+		System.out.println("okok3="+bean.getAlign());
+		session.removeAttribute("gdsMclassCd");
+		session.setAttribute("gdsMclassCd", bean.getGdsMclassCd());
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
