@@ -19,7 +19,37 @@ public class CallVo {
 	private String odrStsGbCd;
 	private String gdsNm;
 	private String gdsCd;
+	private String userId;
+	private String content;
+	private String grade;
 	
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getGdsCd() {
 		return gdsCd;
 	}

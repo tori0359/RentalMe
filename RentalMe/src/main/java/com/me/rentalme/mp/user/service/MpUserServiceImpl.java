@@ -29,6 +29,16 @@ public class MpUserServiceImpl implements MpUserService{
 		return mpUserDao.selectOrd();
 	}
 	
+	//후기 등록
+		@Override
+		public int addReview(CallVo callVo) throws SQLException {
+			log.debug("후기 등록 서비스...");
+			
+			
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade());
+		}
+	
+	
 	//장바구니 리스트
 	@Override
 	public List<CallVo> cartList() throws SQLException {
@@ -50,6 +60,8 @@ public class MpUserServiceImpl implements MpUserService{
 		
 		mpUserDao.deleteWish(callVo);
 	}
+	
+	
 
 	
 

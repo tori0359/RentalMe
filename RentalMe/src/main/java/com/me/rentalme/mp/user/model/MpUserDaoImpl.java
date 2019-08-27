@@ -2,7 +2,9 @@ package com.me.rentalme.mp.user.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -43,6 +45,20 @@ public class MpUserDaoImpl implements MpUserDao{
 	public void deleteWish(CallVo callVo) throws SQLException {
 		
 		sqlSession.update("mpUser.delete");
+	}
+
+
+	@Override
+	public int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("gdsCd", gdsCd);
+		map.put("userId", userId);
+		map.put("content", content);
+		map.put("grade", grade);
+		
+		log.debug("gdscd="+gdsCd+", userId="+userId+", content="+content+", grade="+grade+ " 후기 입력 DaoImpl...");
+		
+		return sqlSession.insert("mpUser.insertReview",map);
 	}
 
 

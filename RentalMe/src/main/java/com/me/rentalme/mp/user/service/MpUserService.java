@@ -12,6 +12,9 @@ public interface MpUserService {
 	//주문내역 리스트 출력
 	List<CallVo> ordList() throws SQLException;
 	
+	//후기 등록
+	int addReview(CallVo callVo) throws SQLException;
+	
 	//장바구니 리스트 출력
 	List<CallVo> cartList() throws SQLException;
 	
