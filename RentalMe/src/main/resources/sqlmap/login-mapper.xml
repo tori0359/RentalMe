@@ -5,10 +5,31 @@
   
 <mapper namespace="login">
 	<select id="checkId" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
-		SELECT USER_ID  AS userId,
-			   PW		AS userPw,
-			   MB_NO    AS mbNo
+		SELECT USER_ID  	AS userId,		
+			   PW			AS userPw,
+			   MB_NO    	AS mbNo,
+			   EMAIL_KEY	AS emailKey,
+			   USER_STS_CD  AS userStsCd,
+			   PW_FAIL_CNT	AS pwFailCnt
 		  FROM TB_USER100
 		 WHERE USER_ID=#{userId}
 	</select>
+	<update id="pwFailCntAdd">
+		UPDATE TB_USER100
+		   SET PW_FAIL_CNT = #{pwFailCnt}
+		     , CHG_DT = NOW()
+		 WHERE USER_ID = #{userId}
+	</update>
+	<update id="updUserBann">
+		UPDATE TB_USER100
+		   SET USER_STS_CD = '2'
+		     , CHG_DT = NOW()
+		 WHERE USER_ID = #{userId}
+	</update>
+	<update id="initPwFailCnt">
+		UPDATE TB_USER100
+		   SET PW_FAIL_CNT = 0
+		     , CHG_DT = NOW()
+		 WHERE USER_ID = #{userId}
+	</update>
 </mapper>

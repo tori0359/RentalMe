@@ -41,8 +41,9 @@
     	location.href='join/signup';
     });
     
-    //아이디 체크
+    //비밀번호 체크
     $('#userPw').focus(function(){
-    	$('#pwCheck-danger').hide();
+    	$('#errCheck-danger').hide();
     });
+
 });

@@ -46,7 +46,7 @@
      background-color: aliceblue;
  }
  
- #pwCheck-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
+ #errCheck-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
  
  /* modal css*/\
  .modal-body{

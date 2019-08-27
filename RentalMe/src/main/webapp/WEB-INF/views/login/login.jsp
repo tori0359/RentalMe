@@ -23,7 +23,22 @@
 					name="userPw" placeholder="비밀번호">
 			</div>
 			<c:if test="${msg == 'pwFail'}">
-				<div id="pwCheck-danger">아이디와 비밀번호가 일치하지 않습니다.</div>
+				<div id="errCheck-danger">아이디와 비밀번호가 일치하지 않습니다.</div>
+			</c:if>
+			<c:if test="${msg == 'notEmailKey'}">
+				<div id="errCheck-danger">이메일 인증을 진행하여 주시기 바랍니다.</div>
+			</c:if>
+			<c:if test="${msg == 'bannedId'}">
+				<div id="errCheck-danger">사용정지 계정입니다.</div>
+			</c:if>
+			<c:if test="${msg == 'kickId'}">
+				<div id="errCheck-danger">사용불가 계정입니다.</div>
+			</c:if>
+			<c:if test="${msg == 'notUserId'}">
+				<div id="errCheck-danger">등록된 사용자가 아닙니다.</div>
+			</c:if>
+			<c:if test="${msg == 'pwFailCntOver'}">
+				<div id="errCheck-danger">비밀번호 5회 입력오류로 계정이 정지되었습니다.</div>
 			</c:if>
 			
 			<div class="row row-no-gutters">

@@ -225,7 +225,7 @@
       	</c:when>
       	<c:otherwise>
       		<a href="#" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
-	      	<a href="#" class="navbar-link">로그아웃</a></p>
+	      	<a href="/logout" class="navbar-link">로그아웃</a></p>
       	</c:otherwise>
       </c:choose>
       </div>

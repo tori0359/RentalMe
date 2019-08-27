@@ -16,7 +16,7 @@ import com.me.rentalme.model.entity.UserVo;
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.13
-* 수정일자 : 2019.08.26
+* 수정일자 : 2019.08.27
 */
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -39,6 +39,52 @@ public class LoginServiceImpl implements LoginService {
 		log.debug("로그인 아이디 체크");
 		
 		return loginDao.getId(userId);
+	}
+
+	/**
+	* 비밀번호 오류횟수 1회 카운트
+	* 
+	* @param  int pwFailCnt
+	* @param  String userId
+	* @return String 
+	* @author 황인준
+	* @exception none
+	*/
+	@Override
+	public int addPwFailCnt(int pwFailCnt, String userId) {
+		log.debug("비밀번호 입력실패 오류횟수 1회 카운트 service");
+		
+		return loginDao.addPwFailCnt(pwFailCnt, userId);
+	}
+
+	/**
+	* 정지사용자로 변경
+	* 
+	* @param  String userId
+	* @return None 
+	* @author 황인준
+	* @exception none
+	*/
+	@Override
+	public void setUserBann(String userId) {
+		log.debug("정지 사용자로 변경 service");
+		
+		loginDao.setUserBann(userId);
+	}
+
+	/**
+	* 비밀번호 오류횟수 초기화
+	* 
+	* @param  String userId
+	* @return None 
+	* @author 황인준
+	* @exception none
+	*/
+	@Override
+	public void initPwFailCnt(String userId) {
+		log.debug("비밀번호 오류횟수 초기화 service");
+		
+		loginDao.initPwFailCnt(userId);
 	}
 
 
