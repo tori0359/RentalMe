@@ -16,13 +16,18 @@ public interface CsDao {
 	List<CsVo> noticeSelectAll() throws SQLException;
 	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
 	
-	int insertOne(CsVo bean) throws SQLException;
-	int updateOne(CsVo bean) throws SQLException;
-	int deleteOne(int idx) throws SQLException;
 	
 	//faq 상세
 	CsVo csFaqDetail(Map<String,Object> map) throws SQLException;	
 	
 	//공지 상세
-	CsVo csNoticeDetail(Map<String,Object> map) throws SQLException;	
+	CsVo csNoticeDetail(Map<String,Object> map) throws SQLException;
+	
+	int seqNocInsert() throws SQLException;
+	int seqFaqInsert() throws SQLException;
+	
+	int insertOne(CsVo csVo) throws SQLException;
+	int updateOne(CsVo bean) throws SQLException;
+	int noticDel(int num) throws SQLException;
+	
 }

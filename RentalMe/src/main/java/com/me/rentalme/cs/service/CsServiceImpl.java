@@ -51,11 +51,32 @@ public class CsServiceImpl implements CsService {
 	public CsVo csNoticeDetail(String noticNo, String csGbCd) throws SQLException {
 		System.out.println("notice 상세 mapping");
 		map=new HashMap<>();
-		map.put("noticNo", noticNo);
+		map.put("noticNo",noticNo);
 		map.put("csGbCd",csGbCd);
 		
 		System.out.println("notice 상세 mapping end");
 		return csDao.csNoticeDetail(map);
+	}
+	@Override
+	public int addfaq(CsVo csVo) throws SQLException {
+		return csDao.insertOne(csVo);
+		
+	}
+	@Override
+	public int seqNocUp() throws SQLException {
+		
+		return csDao.seqNocInsert();
+	}
+	@Override
+	public int seqFaqUp() throws SQLException {
+		// TODO Auto-generated method stub
+		return csDao.seqFaqInsert();
+	}
+	
+	@Override
+	public int noticDel(int num) throws SQLException {
+		
+		return csDao.noticDel(num);
 	}
 
 
