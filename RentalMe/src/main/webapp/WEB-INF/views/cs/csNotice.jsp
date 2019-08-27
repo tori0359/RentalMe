@@ -98,11 +98,11 @@
 			<th>제목</th>
 			<th>작성일</th>
 		</tr>
-			<c:forEach items='${alist}' var="bean">
+			<c:forEach items="${alist}" var="bean">
 				<tr>
-					<td>${bean.FAQ_NO }</td>
-					<td>${bean.SUB }</td>
-					<td>${bean.REG_DT }</td>
+					<td>${bean.noticNo }</td>
+					<td><a href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td>${bean.regDt }</td>
 				</tr>
 			</c:forEach>
 	</table>

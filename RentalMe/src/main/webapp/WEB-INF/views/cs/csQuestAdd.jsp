@@ -42,7 +42,7 @@
             height:250px;
         }
         #csContent{
-        	height:700px;
+        	height:900px;
         }
         
 	</style>
@@ -57,7 +57,7 @@
 <br/><br/>
 </div>
 <div class="col-md-8 col-md-offset-2">
-    <form action="mp/quest" method="post">
+    <form action="mp/userQuestList" method="post">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >아 이 디</label></td>

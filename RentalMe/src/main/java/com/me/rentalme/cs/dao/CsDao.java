@@ -8,9 +8,21 @@ import com.me.rentalme.cs.entity.CsVo;
 
 public interface CsDao {
 
-	List<CsVo> selectAll() throws SQLException;
-	List<CsVo> selectAll(Map<String, Integer> map) throws SQLException;
-	void insertOne(CsVo bean) throws SQLException;
+	//faq 리스트
+	List<CsVo> faqSelectAll() throws SQLException;
+	List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException;
+	
+	//공지 리스트
+	List<CsVo> noticeSelectAll() throws SQLException;
+	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
+	
+	int insertOne(CsVo bean) throws SQLException;
 	int updateOne(CsVo bean) throws SQLException;
 	int deleteOne(int idx) throws SQLException;
+	
+	//faq 상세
+	CsVo csFaqDetail(Map<String,Object> map) throws SQLException;	
+	
+	//공지 상세
+	CsVo csNoticeDetail(Map<String,Object> map) throws SQLException;	
 }
