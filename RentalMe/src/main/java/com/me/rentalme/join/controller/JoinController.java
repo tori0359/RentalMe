@@ -106,8 +106,8 @@ public class JoinController {
 		//회원가입
 		joinService.addInfo(userVo);
 		
-		//인증 메일 보내기 
-		mailAuthService.mailSendWithUserKey(userVo.getEmail(), userVo.getUserId(), req);
+		//인증 메일 보내기 (2019-08-27 : 회원가입 양식에서 인증하는 방식으로 변경으로 인한 삭제)
+		//mailAuthService.mailSendWithUserKey(userVo.getEmail(), userVo.getUserId(), req);
 		
 		
 		return new ModelAndView("join/compl");
@@ -137,7 +137,29 @@ public class JoinController {
 	}
 	
 	/**
-	* 회원가입 후 인증상태(Y) 업데이트
+	* 인증코드 발송
+	* 
+	* @param  String uesrId - 사용자 아이디
+	* @return String 
+	* @author 황인준
+	* @exception None
+	*/
+	@RequestMapping(value = "/emailCodeSend", method = RequestMethod.GET)
+	public void sendEmailCode (@RequestParam("email") String email, HttpServletResponse res) {
+		log.debug("인증코드 발송 컨트롤러");
+		
+		//인증 메일 보내기 
+		String key = mailAuthService.mailSendWithUserEmail(email);
+		
+		try {
+			res.getWriter().write(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	* 회원가입 후 인증상태(Y) 업데이트 (2019-08-27 : 회원가입 양식에서 인증하는 방식으로 변경으로 인한 삭제)
 	* 
 	* @param  String userId   : 사용자아이디
 	* @param  String emailKey : 사용자 이메일 키(난수)
@@ -145,14 +167,14 @@ public class JoinController {
 	* @author 황인준
 	* @exception None
 	*/
-	@RequestMapping(value = "/key_alter", method = RequestMethod.GET)
-	public String updateEmailConfirm(@RequestParam String userId,@RequestParam String emailKey) {
-		log.debug("회원가입 후 인증상태(Y) 업데이트 컨트롤러");
-		
-		mailAuthService.updateEamilConfirm(userId, emailKey);
-		
-		return "join/authRegCompl";
-	}
+//	@RequestMapping(value = "/key_alter", method = RequestMethod.GET)
+//	public String updateEmailConfirm(@RequestParam String userId,@RequestParam String emailKey) {
+//		log.debug("회원가입 후 인증상태(Y) 업데이트 컨트롤러");
+//		
+//		mailAuthService.updateEamilConfirm(userId, emailKey);
+//		
+//		return "join/authRegCompl";
+//	}
 	/**
 	* 가입완료 페이지
 	* 

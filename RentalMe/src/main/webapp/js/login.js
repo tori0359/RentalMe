@@ -37,4 +37,13 @@
     $('#pw_find_btn').click(function(){
         $('#id_pw_find').modal('hide');
     });
+    $('#signup').click(function(){
+    	location.href='join/signup';
+    });
+    
+    //비밀번호 체크
+    $('#userPw').focus(function(){
+    	$('#errCheck-danger').hide();
+    });
+
 });

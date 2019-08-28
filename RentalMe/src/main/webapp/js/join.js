@@ -64,6 +64,8 @@ $(function() {
     $('#pw-danger2').hide();
     $('#hp-danger').hide();
     $('#email-danger').hide();
+    $('#emailCode-success').hide();
+    $('#emailCode-danger').hide();
     $('#joinBtn').attr('disabled', true);
     
     /*유효성 검사*/
@@ -179,11 +181,43 @@ $(function() {
     		}
     	}
     });
-    //인증코드받기 버튼 클릭한 경우
-    $('#send_code').click(function(){
+    
+    //이메일 인증코드받기 버튼 클릭한 경우
+    $('#emailSend').click(function(){
+    	var email = $('#email').val();
+    	var dataOne = {"email":email}
     	
-        $('#myInput').modal();
+    	$.ajax({
+    		url: 'emailCodeSend',
+    		type:'GET',
+    		data:dataOne,
+    		success:function(data){
+    			var codeValue = data;
+    			var emailCode = $('#emailCode').val(codeValue);
+    		},
+    		error:function(request, status, error){
+    			alert("code="+request.status+", message="+request.responseText+", error="+error)
+    		}
+        });        
     });
+    
+    //입력한 인증코드와 서버에서 받은 인증코드와 비교하여 메시지 표시
+	$('#emailKey').focus(function(){
+		$('#emailCode-success').hide();
+		$('#emailCode-danger').hide();
+	}).blur(function(){
+		if($('#emailKey').val()!=""){
+			var inputCode = $('#emailKey').val();
+			var emailCode = $('#emailCode').val();
+			if(inputCode == emailCode){
+				$('#emailCode-success').show();
+				$('#emailCode-danger').hide();
+			}else{
+				$('#emailCode-success').hide();
+				$('#emailCode-danger').show();
+			}
+		}
+	});
     
     //5. 생년월일
     //선언한 TextBox에 DatePicker 위젯을 적용
@@ -219,6 +253,9 @@ function joinCheck(){
 	}else if(frm.email.value == ""){
 		alert("이메일을 입력 바랍니다.");
 		return frm.email.focus();
+	}else if(frm.emailCode.value == ""){
+		alert("인증코드를 입력 바랍니다.");
+		return frm.emailCode.focus();
 	}
 	
 	

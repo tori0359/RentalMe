@@ -1,6 +1,7 @@
 package com.me.rentalme.cs.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,7 @@ import com.me.rentalme.cs.service.CsService;
 @Controller
 @RequestMapping("/cs")
 public class CsController {
+	
 	@Inject
 	CsService csService; 
 	
@@ -37,41 +39,58 @@ public class CsController {
 	* @author 황인준
 	* @exception 
 	*/
+	
+	//1:1문의
 	@RequestMapping(value="/csInquiry")
 	public String inquery(Model model) throws SQLException {
 		System.out.println("질문");
-		csService.getList(model);
 		return "cs/csInquiry";
 		
 	}
+/////////////////////////////////////////////////////////////////////////////	
+	//공지게시판
 	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
-	public String home(Model model) throws SQLException {
+	public ModelAndView home() throws SQLException {
 		System.out.println("mapping..");
-		csService.getList(model);
-		return "cs/csNotice";
-	}
-	@RequestMapping(value="/csFAQ")
-	public String csfaq(Model model) throws SQLException {
-		System.out.println("자주묻는질문");
-		csService.getList(model);
-		return "cs/csFAQ";
-	}
-	/*
-	 * @RequestMapping(value="/csFAQ") public String csbtn(@RequestParam int num,
-	 * Model model) throws SQLException{ csService.selectListOne(model,num); return
-	 * "cs/csFAQ"; }
-	 */
-	
-	
-	
-	@RequestMapping(value="/csDetail", method=RequestMethod.GET)
-	public ModelAndView csdetail() throws Exception{
-		
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("cs/csDetail");
+		mav.addObject("alist", csService.csNoticeList());
+		mav.setViewName("cs/csNotice");
 		return mav;
 	}
 	
+	//faq게시판
+	@RequestMapping(value="/csFAQ")
+	public ModelAndView csfaq(Model model) throws SQLException {
+		System.out.println("자주묻는질문");
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("blist", csService.csFaqList());
+		mav.setViewName("cs/csFAQ");
+		return mav;
+	}
+/////////////////////////////////////////////////////////////////////////////		
+	//notice상세게시판
+	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
+	public String csNoticeDetail(@RequestParam("noticNo") String noticNo, @RequestParam("csGbCd") String  csGbCd ,Model model) throws Exception{
+		
+		System.out.println("detail..start");
+		model.addAttribute("adetail", csService.csNoticeDetail(noticNo,csGbCd));
+		System.out.println("detail...end");
+		return "cs/csNoticeDetail";
+		
+	}
+	
+	//faq상세게시판
+	@RequestMapping(value="/csFaqDetail",method=RequestMethod.GET)
+	public String csFaqDetail(@RequestParam("csGbCd") String csGbCd, @RequestParam("faqNo") String  faqNo,@RequestParam("csClassGbCd")String csClassGbCd,Model model) throws Exception{
+		
+		System.out.println("detail..start");
+		model.addAttribute("bdetail", csService.csFaqDetail(csGbCd,faqNo, csClassGbCd));
+		System.out.println("detail...end");
+		return "cs/csFaqDetail";
+		
+	}
+	
+/////////////////////////////////////////////////////////////////////////////		
 	/**
 	* 고객센터 - 문의 등록 폼 
 	* 
@@ -96,7 +115,6 @@ public class CsController {
 	*/
 	@RequestMapping(value = "/csQuest", method = RequestMethod.POST)
 	public ModelAndView setCsQuestAdd() {
-		
 		
 		ModelAndView mav = new ModelAndView("cs/csList");
 		return mav;
