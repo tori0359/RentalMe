@@ -10,6 +10,9 @@ public interface RentalAppliDao {
 
 	List<RentalAppliVo> rentalPath(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalMenuList(RentalAppliVo rentalAppliVo);
-	List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo, String option);
+	List<RentalAppliVo> rentalBestList(RentalAppliVo rentalAppliVo);
+	
+	List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo);
 
 }

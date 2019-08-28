@@ -51,9 +51,9 @@ public class UsedDaoImpl implements UsedDao {
 	* @exception return("namespace.id명")
 	*/
 	@Override
-	public List<UsedVo> selectOne(int GDS_MCLASS_CD) throws SQLException {
+	public List<UsedVo> selectOne(UsedVo bean) throws SQLException {
 		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");
-		return sqlSession.selectList("used.selectOne",GDS_MCLASS_CD);
+		return sqlSession.selectList("used.selectOne",bean);
 	}
 	
 	/**

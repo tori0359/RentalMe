@@ -28,9 +28,9 @@ public class UsedServiceImpl implements UsedService {
 	}
 
 	@Override
-	public List<UsedVo> oneList(int GDS_MCLASS_CD) throws SQLException {
+	public List<UsedVo> oneList(UsedVo bean) throws SQLException {
 		log.debug("Áß°í°Å·¡ ÅÇ...");
-		return usedDao.selectOne(GDS_MCLASS_CD);
+		return usedDao.selectOne(bean);
 	}
 	
 	@Override
