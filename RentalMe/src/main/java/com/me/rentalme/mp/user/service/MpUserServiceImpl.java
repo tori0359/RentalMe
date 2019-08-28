@@ -24,9 +24,26 @@ public class MpUserServiceImpl implements MpUserService{
 	//주문내역 리스트
 	@Override
 	public List<CallVo> ordList() throws SQLException {
-		log.debug("주문내역 서비스");
+		//log.debug("주문내역 서비스");
 		
 		return mpUserDao.selectOrd();
+	}
+	
+	//후기 등록
+		@Override
+		public int addReview(CallVo callVo) throws SQLException {
+			log.debug("후기 등록 서비스...");
+			
+			
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade());
+		}
+	
+	
+	//장바구니 리스트
+	@Override
+	public List<CallVo> cartList() throws SQLException {
+		// TODO Auto-generated method stub
+		return mpUserDao.selectCart();
 	}
 	
 	//찜한상품 리스트
@@ -43,7 +60,27 @@ public class MpUserServiceImpl implements MpUserService{
 		
 		mpUserDao.deleteWish(callVo);
 	}
+
+	//예치금 리스트
+	@Override
+	public List<CallVo> depositList() throws SQLException {
+		
+		return mpUserDao.selectDeposit();
+	}
+
+	@Override
+	public int insertCharge(CallVo callVo) throws SQLException {
+
+		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit());
+	}
 	
+
+	
+
+	
+
+	
+
 	
 
 

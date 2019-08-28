@@ -140,7 +140,7 @@
        	
        	<c:forEach items="${alist}" var="bean">
        		<tr data-tr_value="${bean.usedGdsNo}">  
-       			<td><input type="checkbox" class="checkRow" name="checkRow" value="${content.IDX}" data-wishNum="${bean.usedGdsNo}"></td>
+       			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.modelNm}</td>
        			<td>${bean.chgDt}</td>
        			<td><fmt:formatNumber value="${bean.usedGdsPrice}" pattern="#,###.##"/>원</td>

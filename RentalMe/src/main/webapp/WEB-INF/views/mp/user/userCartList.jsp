@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -98,9 +100,6 @@
 		    }
 		}
 
-
-
-
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
@@ -109,7 +108,7 @@
 	<div>
 	<div class="pathdiv">
        <p id="path">마이페이지> 장바구니</p>
-       	<a href="#" id="choosedel" onclik="delete()">선택삭제</a>
+       	<a href="#" id="choosedel">선택삭제</a>
      </div>
      <div class="hr" style="height:3px; background-color: black;"></div>
        	<table class="ordtable table">
@@ -123,26 +122,24 @@
        		</tr>
        	</thead>
        	<tbody>
-       		<tr>  
-       			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
-       			<td>1</td>
-       			<td>6개월</td>
-       			<td>월30,000원 x 6</td>
+   		 <c:set var="sumPrice" value="0"/>
+       	<c:forEach items="${alist}" var="bean">
+       		<tr data-tr_value="${bean.usedGdsNo}">  
+       			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
+       			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
+       			<td>${bean.odrQty}</td>
+       			<td>${bean.agreeTem}개월</td>
+       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       			</td>
        		</tr>
-       		<tr>  
-       			<td><input type="checkbox"/ name="checkRow" value="${content.IDX}"></td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/></td>
-       			<td>1</td>
-       			<td>6개월</td>
-       			<td>월30,000원 x 6</td>
-       		</tr>
+       	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
+       	</c:forEach>
        	</tbody>
        	</table>
        </div>
        <div class="hr" style="height:2px;"></div>
        <div class="cartresult">
-       	<p>총 주문 금액: 90,000원</p>
+       	<p>총 주문 금액: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> 원</p>
        </div>
        <div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">

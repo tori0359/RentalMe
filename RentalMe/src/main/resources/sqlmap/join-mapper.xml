@@ -6,14 +6,14 @@
 <mapper namespace="join">
 	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UserVo">
 		 INSERT 
-		   INTO TB_USER100(USER_ID,PW,PW_ADJ_DT,HP,EMAIL,BIRTHDAY,GENDER_GB_CD,JOIN_DT,LEVEL_GB_CD,mb_no) 
-		 VALUES(#{userId},#{userPw},DATE_FORMAT(NOW(),'%Y%m%d'),#{hp},#{email},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd}, #{mbNo})
+		   INTO TB_USER100(USER_ID,PW,PW_ADJ_DT,HP,EMAIL,email_key,BIRTHDAY,GENDER_GB_CD,JOIN_DT,LEVEL_GB_CD,mb_no) 
+		 VALUES(#{userId},#{userPw},DATE_FORMAT(NOW(),'%Y%m%d'),#{hp},#{email},#{emailKey},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd}, #{mbNo})
 	</insert>
 	<insert id="insertMemNoSeq">
 		INSERT
 		  INTO SEQ_MB100
 		VALUES(NULL)
-	</insert>
+	</insert> 
 	<update id="updateKeyOne">
 		UPDATE TB_USER100 
 		   SET EMAIL_KEY=#{emailKey}

@@ -2,7 +2,9 @@ package com.me.rentalme.mp.user.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -27,6 +29,10 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.selectList("mpUser.selectOrd");
 	}
 	
+	@Override
+	public List<CallVo> selectCart() throws SQLException {
+		return sqlSession.selectList("mpUser.selectCart");
+	}
 	
 	@Override
 	public List<CallVo> selectWish() throws SQLException {
@@ -40,6 +46,41 @@ public class MpUserDaoImpl implements MpUserDao{
 		
 		sqlSession.update("mpUser.delete");
 	}
+
+
+	@Override
+	public int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("gdsCd", gdsCd);
+		map.put("userId", userId);
+		map.put("content", content);
+		map.put("grade", grade);
+		
+		log.debug("gdscd="+gdsCd+", userId="+userId+", content="+content+", grade="+grade+ " 후기 입력 DaoImpl...");
+		
+		return sqlSession.insert("mpUser.insertReview",map);
+	}
+
+	@Override
+	public List<CallVo> selectDeposit() throws SQLException {
+		
+		return sqlSession.selectList("mpUser.selectDeposit");
+	}
+
+	@Override
+	public int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("depositGbCd", depositGbCd);
+		map.put("chargeDeposit", chargeDeposit);
+		
+		log.debug("userId="+userId+", depositGbCd="+depositGbCd+", chargeDeposit="+chargeDeposit+" 예치금 충전 입력 DaoImpl...");
+		
+		return sqlSession.insert("mpUser.inserDeposit",map);
+	}
+
+
+	
 
 	
 

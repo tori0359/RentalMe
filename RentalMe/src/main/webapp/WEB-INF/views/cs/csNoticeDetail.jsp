@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../template/headerRe.jsp"></jsp:include>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <script type="text/javascript">
 	 	$(document).ready(function(){
 			$("#cancel").click(function(){
@@ -41,7 +41,7 @@
             height:250px;
         }
         #content{
-        	height:400px;
+        	height:600px;
         }
 	</style>
 </head>
@@ -50,20 +50,20 @@
 	<div class="col-md-10 col-md-offset-1"> 
         <table class="table" id="daeContent">
             <tr>
-                <td><label for="id" >아 이 디</label></td>
-                <td>admin</td>
+                <td><label for="id" >작 성 자</label></td>
+                <td>관리자</td>
             </tr>
             <tr>
-                <td><label for="category">분류</label></td>
-                <td>${bean.category}</td>
+            	<td><label>작성일</label></td>
+            	<td>${adetail.regDt}</td>
             </tr>
             <tr>
-                <td><label for="sub" >제목</label></td>
-                <td>${bean.sub }</td>
+                <td><label for="" >제목</label></td>
+                <td>${adetail.sub}</td>
             </tr>
             <tr>
-                <td><label for="id" >내용</label></td>
-                <td>${bean.content}</td>
+                <td><label for="" >내용</label></td>
+                <td>${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>
