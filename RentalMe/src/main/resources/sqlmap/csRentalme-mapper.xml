@@ -7,14 +7,15 @@
 		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
   	</select>
   	<select id="csFaqDetail" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_FAQ100 WHERE CS_GB_CD=#{csGbCd} AND FAQ_NO=#{faqNo} AND CS_CLASS_GB_CD=#{csClassGbCd} 
+  		SELECT * FROM TB_FAQ100 WHERE CS_GB_CD=#{csGbCd} AND FAQ_NO=#{faqNo}
   	</select>
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
   	</select>
   	<select id="csNoticeDetail" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo} AND CS_GB_CD=#{csGbCd} 
+  		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo}
   	</select>
+  	
   	<insert id="csInsertNocOne" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO tb_notic100 (notic_no,sub,content,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_notic100;
   	</insert>
@@ -27,11 +28,19 @@
 	<insert id="seqFaqInsert" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO SEQ_FAQ100 VALUES(NULL)
 	</insert>
+	
 	<delete id="csNoticeDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
 		DELETE FROM TB_NOTIC100 WHERE NOTIC_NO=#{NUM}
 	</delete>
+	<delete id="csFaqDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
+		DELETE FROM TB_FAQ100 WHERE FAQ_NO=#{NUM}
+	</delete>
+	
 	<update id="csNoticeUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
 		UPDATE TB_NOTIC100 SET SUB=#{sub}, CONTENT=#{content} WHERE NOTIC_NO=#{noticNo}
+	</update>
+	<update id="csFaqUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
+		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAC_NO=#{faqNo}
 	</update>
   </mapper>
   

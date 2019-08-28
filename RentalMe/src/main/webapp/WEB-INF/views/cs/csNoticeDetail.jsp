@@ -48,7 +48,7 @@
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
-	<form action="/cs/csNoticeUpdatePage">
+	<form action="/mp/mng/csNoticeUpdatePage">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >작 성 자</label></td>
@@ -57,6 +57,7 @@
             <tr>
                 <td><label for="id" >글 번 호</label></td>
                 <td><input type="hidden" name="noticNo" value="${adetail.noticNo}">${adetail.noticNo}</td>
+                <td><input type="hidden" name="csGbCd" value="${adetail.csGbCd}"></td>
             </tr>
             <tr>
             	<td><label>작성일</label></td>

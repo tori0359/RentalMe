@@ -39,24 +39,33 @@ public class CsDaoImpl implements CsDao {
 			System.out.println(csVo.getCsClassGbCd());
 			return sqlSession.insert("csCenter.csInsertFaqOne",csVo);
 		}else {
+			
 		System.out.println(csVo.getCsGbCd()+2);
 		return 0;
 		}
 	}
 
-
 	@Override
-	public CsVo csFaqDetail(Map<String, Object> map) throws SQLException {
-		System.out.println(map.get("faqNo"));
-		System.out.println(map.get("csClassGbCd"));
-		return sqlSession.selectOne("csCenter.csFaqDetail", map);
-		
+	public CsVo csFaqDetail(CsVo csVo) throws SQLException {
+		System.out.println("dao.csFaqDetail..."+csVo.getFaqNo());
+		System.out.println("dao.csFaqDetail..."+csVo.getCsGbCd());
+		System.out.println("dao.csFaqDetail..."+csVo.getCsClassGbCd());
+		return sqlSession.selectOne("csCenter.csFaqDetail", csVo);
 	}
 
 	@Override
 	public int updateOne(CsVo csVo) throws SQLException {
-		
-		return sqlSession.update("csCenter.csNoticeUpdate", csVo);
+		System.out.println("불러온다"+csVo.getCsGbCd()+"dd");
+		System.out.println("??");
+		if(csVo.getCsGbCd().equals("10")){
+			System.out.println("notice수정으로");
+			return sqlSession.update("csCenter.csNoticeUpdate", csVo);
+		}
+		else if(csVo.getCsGbCd().equals("20")){
+			System.out.println("faq수정으로");
+			return sqlSession.update("csCenter.csFaqUpdate", csVo);
+		}
+		return 0;
 	}
 
 
@@ -84,8 +93,8 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public CsVo csNoticeDetail(Map<String, Object> map) throws SQLException {
-		return sqlSession.selectOne("csCenter.csNoticeDetail", map);
+	public CsVo csNoticeDetail(CsVo csVo) throws SQLException {
+		return sqlSession.selectOne("csCenter.csNoticeDetail", csVo);
 	}
 
 
@@ -104,9 +113,17 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public int noticDel(int num) throws SQLException {
+	public int noticDel(String num) throws SQLException {
 		
 		return sqlSession.delete("csCenter.csNoticeDelete", num);
+	}
+
+
+
+	@Override
+	public int faqDel(String num) throws SQLException {
+		
+		return sqlSession.delete("csCenter.csFaqDelete", num);
 	}
 
 

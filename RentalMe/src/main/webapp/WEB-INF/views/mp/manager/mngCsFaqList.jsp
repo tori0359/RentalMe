@@ -27,7 +27,6 @@
 <h1>공지/FAQ</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
 <div align="right"><a href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
-<form action="${pageContext.request.contextPath}/mp/mng/noticeDelete" method="post">
 	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
@@ -38,15 +37,16 @@
 		</tr>
 			<c:forEach items="${blist}" var="bean">
 				<tr>
+				<form action="${pageContext.request.contextPath}/mp/mng/faqDelete" method="post">
 					<td><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
 					<td>FAQ</td>
 					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					<td>${bean.regDt}</td>
 					<td><input type="submit" value="삭제"/></td>
+				</form>
 				</tr>
 			</c:forEach>
 	</table>
-</form>
 	<div align="center" width="100%">
 				<nav aria-label="Page navigation">
 				  <ul class="pagination">

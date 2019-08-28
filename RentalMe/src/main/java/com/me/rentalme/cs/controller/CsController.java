@@ -73,44 +73,31 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////		
 	//notice상세게시판
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
-	public String csNoticeDetail(@RequestParam("noticNo") String noticNo, @RequestParam("csGbCd") String  csGbCd ,Model model) throws Exception{
+	public ModelAndView csNoticeDetail(CsVo csVo) throws Exception{
 		
+		ModelAndView mav=new ModelAndView();
 		System.out.println("detail..start");
-		model.addAttribute("adetail", csService.csNoticeDetail(noticNo,csGbCd));
+		csService.csNoticeDetail(csVo);
+		mav.addObject("adetail", csService.csNoticeDetail(csVo));
+		
 		System.out.println("detail...end");
-		return "cs/csNoticeDetail";
+		return mav;
 		
 	}
 	
 	//faq상세게시판
 	@RequestMapping(value="/csFaqDetail",method=RequestMethod.GET)
-	public String csFaqDetail(@RequestParam("csGbCd") String csGbCd, @RequestParam("faqNo") String  faqNo,@RequestParam("csClassGbCd")String csClassGbCd,Model model) throws Exception{
+	public ModelAndView csFaqDetail(CsVo csVo) throws Exception{
 		
-		System.out.println("detail..start");
-		model.addAttribute("bdetail", csService.csFaqDetail(csGbCd,faqNo, csClassGbCd));
-		System.out.println("detail...end");
-		return "cs/csFaqDetail";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bdetail", csService.csFaqDetail(csVo));
+		
+		return mav;
 	}
 	
 /////////////////////////////////////////////////////////////////////////////	
-	@RequestMapping(value="/csNoticeUpdatePage")
-	public ModelAndView noticup(CsVo csVo) throws SQLException{
-		
-		ModelAndView mav=new ModelAndView();
-		System.out.println(csVo.getNoticNo());
-		mav.setViewName("cs/csNoticeUpdate");
-		return mav;
-	}
-	
-	@RequestMapping(value="/csNoticeUpdate")
-	public ModelAndView noticupdae(CsVo csVo) throws SQLException {
-		System.out.println("/cs/csNoticeUpdate");
-		System.out.println(csVo.getSub());
-		csService.csUpdateOne(csVo);
-		ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
-		
-		return mav;
-	}
+
 	/**
 	* 고객센터 - 문의 등록 폼 
 	* 

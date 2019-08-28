@@ -37,25 +37,17 @@ public class CsServiceImpl implements CsService {
 	 */
 
 	@Override
-	public CsVo csFaqDetail(String csGbCd, String faqNo, String csClassGbCd) throws SQLException {
-		map=new HashMap<>();
-		map.put("csGbCd",csGbCd);
-		map.put("faqNo", faqNo);
-		map.put("csClassGbCd", csClassGbCd);
-
-		
-		return csDao.csFaqDetail(map);
+	public CsVo csFaqDetail(CsVo csVo) throws SQLException {
+		System.out.println("serviceImpl faq deta"+csVo.getFaqNo());
+		return csDao.csFaqDetail(csVo);
 	}
 	
 	@Override
-	public CsVo csNoticeDetail(String noticNo, String csGbCd) throws SQLException {
+	public CsVo csNoticeDetail(CsVo csVo) throws SQLException {
 		System.out.println("notice 상세 mapping");
-		map=new HashMap<>();
-		map.put("noticNo",noticNo);
-		map.put("csGbCd",csGbCd);
-		
+
 		System.out.println("notice 상세 mapping end");
-		return csDao.csNoticeDetail(map);
+		return csDao.csNoticeDetail(csVo);
 	}
 	@Override
 	public int addfaq(CsVo csVo) throws SQLException {
@@ -74,15 +66,20 @@ public class CsServiceImpl implements CsService {
 	}
 	
 	@Override
-	public int noticDel(int num) throws SQLException {
+	public int noticDel(String num) throws SQLException {
 		
 		return csDao.noticDel(num);
 	}
 	@Override
 	public int csUpdateOne(CsVo csVo) throws SQLException {
 		
-		
+		System.out.println("service"+csVo.getCsGbCd());
 		return csDao.updateOne(csVo);
+	}
+	@Override
+	public int faqDel(String num) throws SQLException {
+		// TODO Auto-generated method stub
+		return csDao.faqDel(num);
 	}
 
 

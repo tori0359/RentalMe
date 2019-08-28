@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../template/headerMp.jsp"></jsp:include>
+<jsp:include page="../../template/headerMp.jsp"></jsp:include>
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
@@ -51,7 +53,7 @@
 <body>
 <div id="csContent">
 		<h2>공지/FAQ수정</h2>
-<form action="/cs/csNoticeUpdate" method="get">
+<form action="/mp/mng/csNoticeUpdate" method="get">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="" >작 성 자</label></td>
@@ -82,7 +84,7 @@
             </tr>
             <tr>
             	<td><label>글 번 호</label></td>
-            	<td></td>
+            	<td><input type="hidden" value="${detail.noticNo}" name="noticNo">${detail.noticNo}</td>
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
@@ -103,5 +105,5 @@
 </form>
 </div>
 </body>
-<jsp:include page="../template/footerMp.jsp"></jsp:include>
+<jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

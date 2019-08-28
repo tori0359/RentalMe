@@ -12,11 +12,12 @@ public interface CsService {
 	List<CsVo> csFaqList() throws SQLException;    //faq리스트페이지
 	List<CsVo> csNoticeList() throws SQLException;	//공지 리스트페이지
 
-	CsVo csFaqDetail(String csGbCd, String faqNo, String csClassGbCd) throws SQLException;  //faq 상세페이지
-	CsVo csNoticeDetail(String noticNo,String csGbCd) throws SQLException;					//공지 상세페이지
+	CsVo csFaqDetail(CsVo csVo) throws SQLException;  //faq 상세페이지
+	CsVo csNoticeDetail(CsVo csVo) throws SQLException;					//공지 상세페이지
 
 	int csUpdateOne(CsVo csVo) throws SQLException;
-	int noticDel(int num) throws SQLException;
+	int noticDel(String num) throws SQLException;
+	int faqDel(String num) throws SQLException;
 	
 	int seqNocUp() throws SQLException;
 	int seqFaqUp() throws SQLException;
