@@ -81,6 +81,10 @@
 			      </td>
             </tr>
             <tr>
+            	<td><label>글 번 호</label></td>
+            	<td></td>
+            </tr>
+            <tr>
                 <td><label for="sub" >제목</label></td>
                 <td><input type="text" name="sub" id="text"></td>
             </tr>

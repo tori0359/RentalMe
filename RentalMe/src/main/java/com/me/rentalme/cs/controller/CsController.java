@@ -75,7 +75,7 @@ public class CsController {
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
 	public String csNoticeDetail(@RequestParam("noticNo") String noticNo, @RequestParam("csGbCd") String  csGbCd ,Model model) throws Exception{
 		
-		System.out.println("deta il..start");
+		System.out.println("detail..start");
 		model.addAttribute("adetail", csService.csNoticeDetail(noticNo,csGbCd));
 		System.out.println("detail...end");
 		return "cs/csNoticeDetail";
@@ -95,7 +95,9 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////	
 	@RequestMapping(value="/csNoticeUpdatePage")
 	public ModelAndView noticup(CsVo csVo) throws SQLException{
+		
 		ModelAndView mav=new ModelAndView();
+		System.out.println(csVo.getNoticNo());
 		mav.setViewName("cs/csNoticeUpdate");
 		return mav;
 	}

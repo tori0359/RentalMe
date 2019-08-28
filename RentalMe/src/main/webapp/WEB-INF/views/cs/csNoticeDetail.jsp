@@ -11,9 +11,7 @@
 			$("#cancel").click(function(){
 					window.history.back();
 				})
-			$("#updae").click(function(){
-				window.location.replace("/cs/csNoticeUpdatePage");
-			})
+			
 		})
 	</script>
 <style type="text/css">
@@ -50,6 +48,7 @@
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
+	<form action="/cs/csNoticeUpdatePage">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >작 성 자</label></td>
@@ -65,11 +64,11 @@
             </tr>
             <tr>
                 <td><label for="" >제목</label></td>
-                <td><input type="hidden" name="sub" value="${adetail.sub}">${adetail.sub}</td>
+                <td><input type="hidden" value="${adetail.sub}">${adetail.sub}</td>
             </tr>
             <tr>
                 <td><label for="" >내용</label></td>
-                <td><input type="hidden" name="content" value="${adetail.content}">${adetail.content}</td>
+                <td><input type="hidden" value="${adetail.content}">${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>
@@ -79,6 +78,7 @@
                 </td>
             </tr>
         </table>
+	</form>
 	</div>
 </div>
 </body>
