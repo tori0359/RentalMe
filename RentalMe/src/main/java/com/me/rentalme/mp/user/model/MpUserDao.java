@@ -32,8 +32,12 @@ public interface MpUserDao {
 	//예치금 리스트 출력
 	List<CallVo> selectDeposit() throws SQLException;
 
-	//에치금 충전
+	//예치금 충전
 	int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException;
-	
+
+	//현재 예치금 update
+	public void updateDeposit() throws SQLException;
+
+	public CallVo selectUserInfo() throws SQLException;
 	
 }

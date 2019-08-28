@@ -79,8 +79,18 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.inserDeposit",map);
 	}
 
+	@Override
+	public void updateDeposit() throws SQLException {
+		
+		sqlSession.selectList("mpUser.updateDeposit");
+		
+	}
 
-	
+	@Override
+	public CallVo selectUserInfo() {
+		System.out.println("Áö¿µÀÌ");
+		return sqlSession.selectOne("mpUser.selectInfoUser");
+	}
 
 	
 

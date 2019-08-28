@@ -43,7 +43,16 @@
 		USE_DEPOSIT,
 		REFUND_DEPOSIT,
 		DATE_FORMAT(DEPOSIT_DT, '%Y-%m-%d') AS DEPOSIT_DT,
-		(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO='19000002') AS REMN_DEPOSIT, (SELECT USER_ID FROM TB_USER100 WHERE MB_NO='19000002') AS USER_ID FROM TB_MB110;
+		(
+			SELECT REMN_DEPOSIT 
+			FROM TB_MB100 
+			WHERE MB_NO='19000002'
+		) AS REMN_DEPOSIT, 
+		(
+			SELECT USER_ID FROM TB_USER100 
+			WHERE MB_NO='19000002'
+		) AS USER_ID 
+		FROM TB_MB110;
   	</select>
   	
   	<insert id="inserDeposit">
@@ -55,6 +64,17 @@
 			"1")
   	</insert>
 
+	<update id="updateDeposit">
+		UPDATE TB_MB100 SET REMN_DEPOSIT = 
+		(SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT) FROM TB_MB110 WHERE TB_MB100.MB_NO = TB_MB110.MB_NO)
+	</update>
+	
+	<select id="selectInfoUser" resultType="com.me.rentalme.model.entity.CallVo">
+		SELECT REMN_DEPOSIT 
+			FROM TB_MB100 
+			WHERE MB_NO='19000002'
+	</select>
+	
   	<update id="delete" >
   		UPDATE TB_CALL100
 		SET CALL_STS_CD=2

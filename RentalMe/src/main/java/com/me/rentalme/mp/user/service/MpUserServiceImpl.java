@@ -67,19 +67,28 @@ public class MpUserServiceImpl implements MpUserService{
 		
 		return mpUserDao.selectDeposit();
 	}
-
+	
+	//예치금 충전
 	@Override
 	public int insertCharge(CallVo callVo) throws SQLException {
 
 		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit());
 	}
-	
 
-	
+	//현재 예치금 update
+	@Override
+	public void updateDeposit() throws SQLException {
+		
+		mpUserDao.updateDeposit();
+		
+	}
 
-	
+	@Override
+	public CallVo userInfoList() throws SQLException {
+		log.debug("정보 출력 서비스...");
+		return mpUserDao.selectUserInfo();
+	}
 
-	
 
 	
 

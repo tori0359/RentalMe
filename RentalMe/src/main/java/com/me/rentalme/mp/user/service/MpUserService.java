@@ -27,6 +27,11 @@ public interface MpUserService {
 	//예치금 사용내역 리스트 출력
 	List<CallVo> depositList() throws SQLException;
 
+	//예치금 충전
 	int insertCharge(CallVo callVo) throws SQLException;
 
+	//현재 예치금 update
+	public void updateDeposit() throws SQLException;
+
+	public CallVo userInfoList() throws SQLException;
 }
