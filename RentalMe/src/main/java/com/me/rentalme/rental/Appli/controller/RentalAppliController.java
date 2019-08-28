@@ -1,12 +1,20 @@
 package com.me.rentalme.rental.Appli.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.me.rentalme.model.entity.RentalAppliVo;
+import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 
 /**
@@ -23,36 +31,30 @@ public class RentalAppliController {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 	
+	@Inject
+	RentalAppliService rentalAppliService; 
+	
 	/**
 	* 대형가전렌탈 리스트
 	* 
 	* @param  
-	* @return ModelAndView 
-	* @author 황인준
+	* @return String 
+	* @author 황태연
 	* @exception 
 	*/
 	
-	/*
-	@RequestMapping(value = "/lg", method = RequestMethod.GET)
-	public ModelAndView getLgList() {
-		log.debug("대형가전렌탈 리스트 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliLgList");
-		return mav;
-	}	
-	*/
-	
 	@RequestMapping(value = "/lg/{menu}", method = RequestMethod.GET)
-	public ModelAndView getLgList(@PathVariable("menu") String path ) {
-		log.debug("대형가전렌탈 리스트 컨트롤러...");
-		System.out.println("menu value = " + path);
+	public String getLgList(@PathVariable("menu") String gdsSclassCd, RentalAppliVo rentalAppliVo, Model model) {
+		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
+		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);	//	PATH 경로
+		List<RentalAppliVo> list1 = rentalAppliService.rentalList1(rentalAppliVo);	//	소메뉴명 리스트
+		List<RentalAppliVo> list2 = rentalAppliService.rentalList2(rentalAppliVo);	//	옵션 브랜드명 리스트
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("rental/rentalAppliLgList");
-		mav.addObject("num", path);
-		return mav;
-	}	
-	
+		model.addAttribute("path", path);
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
+		return "rental/rentalAppliLgList";
+	}
 	
 	/**
 	 * 대형가전렌탈 상세보기

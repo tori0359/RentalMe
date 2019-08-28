@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rentalAppli">
+	
+	<!-- 렌탈 Path 조회 -->
+	<select id="selectPathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT /* Path 조회 */
+			DISTINCT 
+			(
+				SELECT	/* 대분류명 조회 */
+					CONCAT(CD_NM,'렌탈')
+				FROM TB_COM100
+				WHERE GRP_CD_ID = 'GDS_MCLASS_CD'
+				<if test="gdsSclassCd != null">
+					<if test="gdsSclassCd gte 11 and gdsSclassCd lte 19">
+						AND CD_ID = '10'
+					</if>
+					<if test="gdsSclassCd gte 21 and gdsSclassCd lte 29">
+						AND CD_ID = '20'
+					</if>
+					<if test="gdsSclassCd gte 31 and gdsSclassCd lte 39">
+						AND CD_ID = '30'
+					</if>
+					<if test="gdsSclassCd gte 41 and gdsSclassCd lte 49">
+						AND CD_ID = '40'
+					</if>
+					<if test="gdsSclassCd gte 51 and gdsSclassCd lte 59">
+						AND CD_ID = '50'
+					</if>
+					<if test="gdsSclassCd gte 61 and gdsSclassCd lte 69">
+						AND CD_ID = '60'
+					</if>
+				</if>
+			) AS GDS_MCLASS_NM						-- 상품중분류명
+			,(
+				SELECT /* 소분류명 조회 */
+					CD_NM
+				FROM TB_COM100
+				WHERE GRP_CD_ID = 'GDS_SCLASS_CD'
+				<if test="gdsSclassCd != null">
+					AND CD_ID = #{gdsSclassCd}
+				</if>
+			) AS GDS_SCLASS_NM						-- 상품소분류명
+		FROM TB_COM100
+	</select>
+	
+	<!-- 렌탈 메뉴 리스트 조회 -->
+	<select id="selectMenuListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT /* 메뉴 리스트 조회 */
+			CD_ID	AS GDS_SCLASS_CD		-- 상품소분류코드
+		  , CD_NM	AS GDS_SCLASS_NM		-- 상품소분류명
+		FROM TB_COM100
+		WHERE GRP_CD_ID = 'GDS_SCLASS_CD'
+		<if test="gdsSclassCd != null">
+			<if test="gdsSclassCd gte 11 and gdsSclassCd lte 19">
+				AND CD_ID BETWEEN '11' AND '19'
+			</if>
+			<if test="gdsSclassCd gte 21 and gdsSclassCd lte 29">
+				AND CD_ID BETWEEN '21' AND '29'
+			</if>
+			<if test="gdsSclassCd gte 31 and gdsSclassCd lte 39">
+				AND CD_ID BETWEEN '31' AND '39'
+			</if>
+			<if test="gdsSclassCd gte 41 and gdsSclassCd lte 49">
+				AND CD_ID BETWEEN '41' AND '49'
+			</if>
+			<if test="gdsSclassCd gte 51 and gdsSclassCd lte 59">
+				AND CD_ID BETWEEN '51' AND '59'
+			</if>
+			<if test="gdsSclassCd gte 61 and gdsSclassCd lte 69">
+				AND CD_ID BETWEEN '61' AND '69'
+			</if>
+		</if>
+	</select>
+	
+	<!-- 렌탈 옵션 브랜드명 조회 -->
+	<select id="selectOptionListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT /* 브랜드명 조회 */
+			DISTINCT BRAND_NM				-- 브랜드명
+		FROM TB_GDS100
+		WHERE GDS_SCLASS_CD = #{gdsSclassCd} 
+	</select>
+</mapper>

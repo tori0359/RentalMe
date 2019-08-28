@@ -1,0 +1,99 @@
+#login_main{
+     width: 450px;
+     height: 500px;
+     margin: 100px auto;
+ }
+
+#login_main h3{
+ 	 margin-top: 50px;
+ 	 margin-bottom:20px;
+ 	 text-align:left;
+ 	 font-weight:bold;
+ }
+ #login_main .checkbox{
+     display: inline;
+ }
+ #login_main #right_align{
+     text-align: right;
+ }
+ #login_main button{
+ 	 margin-top: 15px;
+     background-color: black;
+     color: white;
+ }
+ #idPwFindTitle{
+ 	margin-top: 10px;
+ }
+ 
+ #id_pw_find{
+ 	text-align:center;
+ }
+ #id_pw_find button{
+ 	 margin-top:10px;
+     background-color: black;
+     color: white;
+
+ }
+ #id_pw_find .radio{
+     display: inline-block;
+ }
+ #find_id_modal table{
+     margin: auto;
+     width: 50%;
+     text-align: center;
+ }
+ #find_id_modal table>tr>td:first-child{
+     background-color: aliceblue;
+ }
+ 
+ #errCheck-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
+ 
+ /* modal css*/\
+ .modal-body{
+ 	margin-top: 50px;
+ }
+ 
+ .modal-dialog-centered {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: calc(100% - (0.5rem * 2));
+}
+
+.modal-dialog-centered::before {
+  display: block;
+  height: calc(100vh - (0.5rem * 2));
+  content: "";
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+  .modal-dialog-centered {
+    min-height: calc(100% - (1.75rem * 2));
+  }
+  .modal-dialog-centered::before {
+    height: calc(100vh - (1.75rem * 2));
+  }
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}

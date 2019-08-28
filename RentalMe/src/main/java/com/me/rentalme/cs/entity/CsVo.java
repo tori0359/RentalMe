@@ -4,42 +4,95 @@ import java.sql.Date;
 
 public class CsVo {
 
-	private String FAQ_NO;
-	private String CS_GB_CD;
-	private String CS_CLASS_GB_CD;
-	private String SUB;
-	private String CONTENT;
-	private String CHG_ID;
-	private Date CGH_DT;
-	private String REG_ID;
-	private Date REG_DT;
+	private String faqNo;  //faq 게시판 번호
+	private String csGbCd; // 게시판 분류 번호
+	private String csClassGbCd;  //faq유형 번호
+	private String sub;    //제목
+	private String content;//내용
+	private String chgId;  //
+	private Date cghDt;
+	private String regId;  //작성아이디
+	private Date regDt;	
+	private String noticNo; //notic 게시판 번호
 	
-	public CsVo() {
-		// TODO Auto-generated constructor stub
+	
+	
+	public String getNoticNo() {
+		return noticNo;
 	}
-	
-	
-	
+	public void setNoticNo(String noticNo) {
+		this.noticNo = noticNo;
+	}
+	public String getFaqNo() {
+		return faqNo;
+	}
+	public void setFaqNo(String faqNo) {
+		this.faqNo = faqNo;
+	}
+	public String getCsGbCd() {
+		return csGbCd;
+	}
+	public void setCsGbCd(String csGbCd) {
+		this.csGbCd = csGbCd;
+	}
+	public String getCsClassGbCd() {
+		return csClassGbCd;
+	}
+	public void setCsClassGbCd(String csClassGbCd) {
+		this.csClassGbCd = csClassGbCd;
+	}
+	public String getSub() {
+		return sub;
+	}
+	public void setSub(String sub) {
+		this.sub = sub;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getChgId() {
+		return chgId;
+	}
+	public void setChgId(String chgId) {
+		this.chgId = chgId;
+	}
+	public Date getCghDt() {
+		return cghDt;
+	}
+	public void setCghDt(Date cghDt) {
+		this.cghDt = cghDt;
+	}
+	public String getRegId() {
+		return regId;
+	}
+	public void setRegId(String regId) {
+		this.regId = regId;
+	}
+	public Date getRegDt() {
+		return regDt;
+	}
+	public void setRegDt(Date regDt) {
+		this.regDt = regDt;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((CGH_DT == null) ? 0 : CGH_DT.hashCode());
-		result = prime * result + ((CHG_ID == null) ? 0 : CHG_ID.hashCode());
-		result = prime * result + ((CONTENT == null) ? 0 : CONTENT.hashCode());
-		result = prime * result + ((CS_CLASS_GB_CD == null) ? 0 : CS_CLASS_GB_CD.hashCode());
-		result = prime * result + ((CS_GB_CD == null) ? 0 : CS_GB_CD.hashCode());
-		result = prime * result + ((FAQ_NO == null) ? 0 : FAQ_NO.hashCode());
-		result = prime * result + ((REG_DT == null) ? 0 : REG_DT.hashCode());
-		result = prime * result + ((REG_ID == null) ? 0 : REG_ID.hashCode());
-		result = prime * result + ((SUB == null) ? 0 : SUB.hashCode());
+		result = prime * result + ((cghDt == null) ? 0 : cghDt.hashCode());
+		result = prime * result + ((chgId == null) ? 0 : chgId.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((csClassGbCd == null) ? 0 : csClassGbCd.hashCode());
+		result = prime * result + ((csGbCd == null) ? 0 : csGbCd.hashCode());
+		result = prime * result + ((faqNo == null) ? 0 : faqNo.hashCode());
+		result = prime * result + ((noticNo == null) ? 0 : noticNo.hashCode());
+		result = prime * result + ((regDt == null) ? 0 : regDt.hashCode());
+		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
+		result = prime * result + ((sub == null) ? 0 : sub.hashCode());
 		return result;
 	}
-
-
-
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,123 +102,64 @@ public class CsVo {
 		if (getClass() != obj.getClass())
 			return false;
 		CsVo other = (CsVo) obj;
-		if (CGH_DT == null) {
-			if (other.CGH_DT != null)
+		if (cghDt == null) {
+			if (other.cghDt != null)
 				return false;
-		} else if (!CGH_DT.equals(other.CGH_DT))
+		} else if (!cghDt.equals(other.cghDt))
 			return false;
-		if (CHG_ID == null) {
-			if (other.CHG_ID != null)
+		if (chgId == null) {
+			if (other.chgId != null)
 				return false;
-		} else if (!CHG_ID.equals(other.CHG_ID))
+		} else if (!chgId.equals(other.chgId))
 			return false;
-		if (CONTENT == null) {
-			if (other.CONTENT != null)
+		if (content == null) {
+			if (other.content != null)
 				return false;
-		} else if (!CONTENT.equals(other.CONTENT))
+		} else if (!content.equals(other.content))
 			return false;
-		if (CS_CLASS_GB_CD == null) {
-			if (other.CS_CLASS_GB_CD != null)
+		if (csClassGbCd == null) {
+			if (other.csClassGbCd != null)
 				return false;
-		} else if (!CS_CLASS_GB_CD.equals(other.CS_CLASS_GB_CD))
+		} else if (!csClassGbCd.equals(other.csClassGbCd))
 			return false;
-		if (CS_GB_CD == null) {
-			if (other.CS_GB_CD != null)
+		if (csGbCd == null) {
+			if (other.csGbCd != null)
 				return false;
-		} else if (!CS_GB_CD.equals(other.CS_GB_CD))
+		} else if (!csGbCd.equals(other.csGbCd))
 			return false;
-		if (FAQ_NO == null) {
-			if (other.FAQ_NO != null)
+		if (faqNo == null) {
+			if (other.faqNo != null)
 				return false;
-		} else if (!FAQ_NO.equals(other.FAQ_NO))
+		} else if (!faqNo.equals(other.faqNo))
 			return false;
-		if (REG_DT == null) {
-			if (other.REG_DT != null)
+		if (noticNo == null) {
+			if (other.noticNo != null)
 				return false;
-		} else if (!REG_DT.equals(other.REG_DT))
+		} else if (!noticNo.equals(other.noticNo))
 			return false;
-		if (REG_ID == null) {
-			if (other.REG_ID != null)
+		if (regDt == null) {
+			if (other.regDt != null)
 				return false;
-		} else if (!REG_ID.equals(other.REG_ID))
+		} else if (!regDt.equals(other.regDt))
 			return false;
-		if (SUB == null) {
-			if (other.SUB != null)
+		if (regId == null) {
+			if (other.regId != null)
 				return false;
-		} else if (!SUB.equals(other.SUB))
+		} else if (!regId.equals(other.regId))
+			return false;
+		if (sub == null) {
+			if (other.sub != null)
+				return false;
+		} else if (!sub.equals(other.sub))
 			return false;
 		return true;
 	}
-
-
-
-
-
 	@Override
 	public String toString() {
-		return "CsVo [FAQ_NO=" + FAQ_NO + ", CS_GB_CD=" + CS_GB_CD + ", CS_CLASS_GB_CD=" + CS_CLASS_GB_CD + ", SUB="
-				+ SUB + ", CONTENT=" + CONTENT + ", CHG_ID=" + CHG_ID + ", CGH_DT=" + CGH_DT + ", REG_ID=" + REG_ID
-				+ ", REG_DT=" + REG_DT + "]";
+		return "CsVo [faqNo=" + faqNo + ", csGbCd=" + csGbCd + ", csClassGbCd=" + csClassGbCd + ", sub=" + sub
+				+ ", content=" + content + ", chgId=" + chgId + ", cghDt=" + cghDt + ", regId=" + regId + ", regDt="
+				+ regDt + ", noticNo=" + noticNo + "]";
 	}
-
-
-
-	public String getFAQ_NO() {
-		return FAQ_NO;
-	}
-	public void setFAQ_NO(String fAQ_NO) {
-		FAQ_NO = fAQ_NO;
-	}
-	public String getCS_GB_CD() {
-		return CS_GB_CD;
-	}
-	public void setCS_GB_CD(String cS_GB_CD) {
-		CS_GB_CD = cS_GB_CD;
-	}
-	public String getCS_CLASS_GB_CD() {
-		return CS_CLASS_GB_CD;
-	}
-	public void setCS_CLASS_GB_CD(String cS_CLASS_GB_CD) {
-		CS_CLASS_GB_CD = cS_CLASS_GB_CD;
-	}
-	public String getSUB() {
-		return SUB;
-	}
-	public void setSUB(String sUB) {
-		SUB = sUB;
-	}
-	public String getCONTENT() {
-		return CONTENT;
-	}
-	public void setCONTENT(String cONTENT) {
-		CONTENT = cONTENT;
-	}
-	public String getCHG_ID() {
-		return CHG_ID;
-	}
-	public void setCHG_ID(String cHG_ID) {
-		CHG_ID = cHG_ID;
-	}
-	public Date getCGH_DT() {
-		return CGH_DT;
-	}
-	public void setCGH_DT(Date cGH_DT) {
-		CGH_DT = cGH_DT;
-	}
-	public String getREG_ID() {
-		return REG_ID;
-	}
-	public void setREG_ID(String rEG_ID) {
-		REG_ID = rEG_ID;
-	}
-	public Date getREG_DT() {
-		return REG_DT;
-	}
-	public void setREG_DT(Date rEG_DT) {
-		REG_DT = rEG_DT;
-	}
-	
-	
 	
 	
 }

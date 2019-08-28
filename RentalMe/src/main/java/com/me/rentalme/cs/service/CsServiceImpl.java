@@ -1,13 +1,12 @@
 package com.me.rentalme.cs.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
@@ -17,26 +16,72 @@ import com.me.rentalme.cs.entity.CsVo;
 public class CsServiceImpl implements CsService {
 
 	@Inject
-	SqlSession sqlSession;
+	CsDao csDao;
+	
+	HashMap<String, Object> map;
 	
 	@Override
-	public void getList(Model model) throws SQLException {
-		System.out.println("service...");
-		model.addAttribute("alist", sqlSession.getMapper(CsDao.class).selectAll());
+	public List<CsVo> csFaqList() throws SQLException {
+		
+		return csDao.faqSelectAll();
 	}
 	@Override
-	public void add(CsVo bean) throws SQLException {
-
+	public List<CsVo> csNoticeList() throws SQLException {
+		return csDao.noticeSelectAll();
 	}
+
+	/*
+	 * @Override public CsVo csDetail(String faqNo) throws SQLException {
+	 * 
+	 * return csDao.csDetail(faqNo); }
+	 */
 
 	@Override
-	public void edit(CsVo bean) throws SQLException {
+	public CsVo csFaqDetail(String csGbCd, String faqNo, String csClassGbCd) throws SQLException {
+		map=new HashMap<>();
+		map.put("csGbCd",csGbCd);
+		map.put("faqNo", faqNo);
+		map.put("csClassGbCd", csClassGbCd);
 
+		
+		return csDao.csFaqDetail(map);
 	}
-
+	
 	@Override
-	public void delete(int num) throws SQLException {
-
+	public CsVo csNoticeDetail(String noticNo, String csGbCd) throws SQLException {
+		System.out.println("notice 상세 mapping");
+		map=new HashMap<>();
+		map.put("noticNo",noticNo);
+		map.put("csGbCd",csGbCd);
+		
+		System.out.println("notice 상세 mapping end");
+		return csDao.csNoticeDetail(map);
 	}
+	@Override
+	public int addfaq(CsVo csVo) throws SQLException {
+		return csDao.insertOne(csVo);
+		
+	}
+	@Override
+	public int seqNocUp() throws SQLException {
+		
+		return csDao.seqNocInsert();
+	}
+	@Override
+	public int seqFaqUp() throws SQLException {
+		// TODO Auto-generated method stub
+		return csDao.seqFaqInsert();
+	}
+	
+	@Override
+	public int noticDel(int num) throws SQLException {
+		
+		return csDao.noticDel(num);
+	}
+
+
+
+	
+
 
 }

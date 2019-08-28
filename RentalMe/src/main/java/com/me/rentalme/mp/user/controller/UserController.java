@@ -2,6 +2,7 @@ package com.me.rentalme.mp.user.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -60,6 +61,30 @@ public class UserController {
 	}
 	
 	/**
+	 * @throws SQLException 
+	* 주문내역> 후기등록
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
+	public ModelAndView addReview(CallVo callVo) throws SQLException {
+		log.debug("후기등록 컨트롤러...");
+		
+		mpUserService.addReview(callVo);
+		
+		
+
+		ModelAndView mav = new ModelAndView("redirect:/mp/");
+		
+		return mav;
+	}
+	
+	
+	/**
+	 * @throws SQLException 
 	* 장바구니
 	* 
 	* @param  
@@ -68,11 +93,12 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ModelAndView getCartList() {
+	public ModelAndView getCartList() throws SQLException {
 		log.debug("장바구니 컨트롤러...");
 		
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist",mpUserService.cartList());
 		mav.setViewName("mp/user/userCartList");
 		return mav;
 	}	
@@ -130,6 +156,7 @@ public class UserController {
 //	}
 //	
 	/**
+	 * @throws SQLException 
 	* 예치금
 	* 
 	* @param  
@@ -138,11 +165,24 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public ModelAndView getDeposit() {
+	public ModelAndView getDeposit(CallVo callVo) throws SQLException {
 		log.debug("예치금 컨트롤러...");
 	
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist", mpUserService.depositList());
+		
+		
 		mav.setViewName("mp/user/userDeposit");
+		return mav;
+		
+	}	
+	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
+	public ModelAndView insertDeposit(CallVo callVo) throws SQLException {
+		log.debug("예치금 충전 컨트롤러...");
+	
+		mpUserService.insertCharge(callVo);
+		
+		ModelAndView mav = new ModelAndView("redirect:/mp/deposit");
 		return mav;
 	}	
 	

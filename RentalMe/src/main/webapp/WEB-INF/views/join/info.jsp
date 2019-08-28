@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,7 @@
 		</ul>
 		<div id="join_input">
 			<form name="frm" action="info" method="post">
+				<input type="hidden" id="emailCode" value=""/>
 				<div>
 					<input type="text" class="form-control" id="id" name="userId"
 						placeholder="아이디">
@@ -32,7 +34,6 @@
 				<div id="id-success">아이디 사용가능</div>
 				<div id="id-danger">5~20자 영문소문자,대문자,숫자만 사용가능</div>
 				<div id="idCheck-danger">아이디가 사용중입니다.</div>
-				
 				<div>
 					<input type="password" class="form-control" id="pw" name="userPw"
 						placeholder="비밀번호">
@@ -52,11 +53,19 @@
 				<div id="hp-danger">10~11자 숫자만 사용가능</div>
 				<div>
 					<input type="email" class="form-control" id="email" name="email"
-						placeholder="이메일">
+						placeholder="입력한 메일로 인증 메일을 발송합니다.">
+					<button type="button" class="form-cotrol btn btn-default" id="emailSend" name="emailSend">인증번호발송</button>
 				</div>
 				<div id="email-danger">email은 영문+숫자만 가능합니다.</div>
 				<div>
-					<label for="birth">생년월일</label> 
+					<input type="text" class="form-control" id="emailKey" name="emailKey"
+						placeholder="인증번호 입력">
+				</div>
+				<div id="emailCode-success">이메일 인증 완료</div>
+				<div id="emailCode-danger">이메일 인증 실패</div>
+				
+				<div>
+					<label for="birth">생년월일</label>
 					<input type="text" class="form-control" id="birth" name="birthDay" />
 				</div>
 				<div id="option_select">

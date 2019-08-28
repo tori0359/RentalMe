@@ -20,10 +20,10 @@
 				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(1)").css("background","black").css("color","white");
 			});
 			$("#noticeBar td:nth-child(3)").click(function(){
-				location.replace("/rentalme/cs/csInquiry");
+				location.replace("/cs/csInquiry");
 			});
 			$("#noticeBar td:nth-child(2)").click(function(){
-				location.replace("/rentalme/cs/csFAQ");
+				location.replace("/cs/csFAQ");
 			});
 		})
 	</script>
@@ -98,11 +98,11 @@
 			<th>제목</th>
 			<th>작성일</th>
 		</tr>
-			<c:forEach items='${alist}' var="bean">
+			<c:forEach items="${alist}" var="bean">
 				<tr>
-					<td>${bean.FAQ_NO }</td>
-					<td>${bean.SUB }</td>
-					<td>${bean.REG_DT }</td>
+					<td>${bean.noticNo }</td>
+					<td><a href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td>${bean.regDt }</td>
 				</tr>
 			</c:forEach>
 	</table>

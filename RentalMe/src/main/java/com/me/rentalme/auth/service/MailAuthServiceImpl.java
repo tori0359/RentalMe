@@ -7,7 +7,6 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -29,8 +28,8 @@ public class MailAuthServiceImpl implements MailAuthService {
 	@Inject
 	private JavaMailSender mailSender;
 
-	@Inject
-	private JoinDao joinDao;
+//	@Inject
+//	private JoinDao joinDao;
 	
 	// 난수를 이용한 키 생성
 	private boolean lowerCheck;
@@ -83,7 +82,7 @@ public class MailAuthServiceImpl implements MailAuthService {
 	}
 
 	/**
-	* 회원가입 발송 이메일(인증키 발송)
+	* 회원가입 발송 이메일(인증키 발송) - (2019.08.27 회원가입폼에서 인증하기로 방식이 변경되어 삭제)
 	* 
 	* @param  String email	- 가입한 메일주소
 	* @param  String userId	- 가입아이디
@@ -92,34 +91,75 @@ public class MailAuthServiceImpl implements MailAuthService {
 	* @author 황인준
 	* @exception none
 	*/
-	@Override
-	public void mailSendWithUserKey(String email, String userId, HttpServletRequest req){
+//	@Override
+//	public void mailSendWithUserKey(String email, String userId, HttpServletRequest req){
+//
+//		String key = getKey(false, 20);
+//		joinDao.getKey(userId, key); 
+//		MimeMessage mail = mailSender.createMimeMessage();
+//		String htmlStr = "<h2>안녕하세요. RentalMe 관리자입니다.</h2><br/><br/>";
+//		htmlStr+="<h3>"+userId+"님</h3><p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다. : ";
+//		htmlStr+="<a href='http://localhost:8080"+req.getContextPath()+"/join/key_alter?userId="+userId+"&emailKey="+key+"'>인증하기</a></p>";
+//		htmlStr+="(혹시 잘못 전달된 메일이라면 이 이메일을 무시하시기 바랍니다.)";
+//		
+//		try {
+//			mail.setSubject("[본인인증] RentalMe 중고거래 회원가입 인증메일 입니다.", "utf-8");
+//			mail.setText(htmlStr, "utf-8", "html");
+//			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+//			mailSender.send(mail);
+//		}catch(MessagingException e) {
+//			e.printStackTrace();
+//		}
+//		 
+//	}
 
-		String key = getKey(false, 20);
-		joinDao.getKey(userId, key); 
+	/**
+	* 인증된 이메일 Y로 업데이트 - (2019.08.27 회원가입 폼에서 인증하는 방식으로 변경되어 삭제)
+	* 
+	* @param  String userId	- 이메일 주소
+	* @param String emailKey - 난수코드
+	* @return String emailKey - 난수코드
+	* 
+	* @author 황인준
+	* @exception none
+	*/	
+//	@Override
+//	public int updateEamilConfirm(String userId, String emailKey) {
+//		int result = 0;
+//		
+//		result = joinDao.updEmailKey(userId, emailKey);
+//		return result;
+//	}
+
+	/**
+	* 이메일 인증키 발송
+	* 
+	* @param  String email	- 이메일 주소
+	* @return String key - 난수코드
+	* @author 황인준
+	* @exception none
+	*/
+	@Override
+	public String mailSendWithUserEmail(String email) {
+
+		String key = getKey(false, 10);
+		
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요. RentalMe 관리자입니다.</h2><br/><br/>";
-		htmlStr+="<h3>"+userId+"님</h3><p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다. : ";
-		htmlStr+="<a href='http://localhost:8080"+req.getContextPath()+"/join/key_alter?userId="+userId+"&emailKey="+key+"'>인증하기</a></p>";
+		htmlStr+="<h3>인증코드 : "+key+"</h3>";
 		htmlStr+="(혹시 잘못 전달된 메일이라면 이 이메일을 무시하시기 바랍니다.)";
 		
 		try {
-			mail.setSubject("[본인인증] RentalMe 중고거래 회원가입 인증메일 입니다.", "utf-8");
+			mail.setSubject("[본인인증] RentalMe 중고거래 회원가입 이메일 인증코드 발송 합니다.", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
 			mailSender.send(mail);
 		}catch(MessagingException e) {
 			e.printStackTrace();
-		}
-		 
-	}
-
-	@Override
-	public int updateEamilConfirm(String userId, String emailKey) {
-		int result = 0;
+		}	
 		
-		result = joinDao.updEmailKey(userId, emailKey);
-		return result;
+		return key;
+		
 	}
 
 
