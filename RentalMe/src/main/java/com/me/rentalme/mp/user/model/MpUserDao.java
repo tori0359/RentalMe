@@ -29,6 +29,11 @@ public interface MpUserDao {
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
 	public void deleteWish(CallVo callVo) throws SQLException;
 
+	//예치금 리스트 출력
+	List<CallVo> selectDeposit() throws SQLException;
+
+	//에치금 충전
+	int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException;
 	
 	
 }

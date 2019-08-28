@@ -60,7 +60,23 @@ public class MpUserServiceImpl implements MpUserService{
 		
 		mpUserDao.deleteWish(callVo);
 	}
+
+	//예치금 리스트
+	@Override
+	public List<CallVo> depositList() throws SQLException {
+		
+		return mpUserDao.selectDeposit();
+	}
+
+	@Override
+	public int insertCharge(CallVo callVo) throws SQLException {
+
+		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit());
+	}
 	
+
+	
+
 	
 
 	

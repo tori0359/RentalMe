@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,28 +171,58 @@
 			<th class="active" style="text-align:center;">사용금액</th>
 			<th class="active" style="text-align:center;">사용날짜</th>
 		</tr>
+		
+		
 		</thead>
+		<c:forEach items="${alist}" var="bean" >
 		<tr>
-			<td>경매 참여금</td>
-			<td>20,000 원</td>
-			<td>2019/08/20</td>
+			<td>
+				<c:if test="${bean.depositGbCd eq '1'}">
+					예치금 충전
+				</c:if>
+				<c:if test="${bean.depositGbCd eq '2'}">
+					예치금 사용
+				</c:if>
+				<c:if test="${bean.depositGbCd eq '3'}">
+					예치금 환불
+				</c:if>
+			</td> 
+			<td>
+				<c:if test="${bean.depositGbCd eq '1'}">
+					<fmt:formatNumber pattern="##,###.##">${bean.chargeDeposit}</fmt:formatNumber> 원
+				</c:if>
+				<c:if test="${bean.depositGbCd eq '2'}">
+					<fmt:formatNumber pattern="##,###.##">${bean.useDeposit}</fmt:formatNumber> 원
+				</c:if>
+				<c:if test="${bean.depositGbCd eq '3'}">
+					<fmt:formatNumber pattern="##,###.##">${bean.refundDeposit}</fmt:formatNumber> 원
+				</c:if>
+			</td>
+			<td>${bean.depositDt}</td>
 		</tr>
+		<c:set var="remnDeposit" value="${bean.remnDeposit}"/>
+		<c:set var="userId" value="${bean.userId}"/>
+		<c:set var="mbNo" value="${bean.mbNo }"/>
+		</c:forEach>
 	</table>
 </div>
 
+<form action="/mp/deposit" method="post">
 <div id="depositcharge" class="col-md-12">
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td>5,000원</td>
+       			<td>${remnDeposit}</td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금인</th>
-       			<td><input type="text"></td>
+       			<td>${userId}
+       			<input type="hidden" name="mbno" value="${mbNo }"/>
+       			</td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금 금액(원)</th>
-       			<td><input type="text"></td>
+       			<td><input type="text" name="chargeDeposit"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">결제수단</th>
@@ -200,15 +231,16 @@
        		</tr>
        	</table>
        	<div class="chargediv">
-       		<button style="width:150px;" type="button" class="btn btn-danger">충천하기</button>
+       		<button style="width:150px;" type="submit" class="btn btn-danger">충천하기</button>
        	</div>
 </div>
+</form>
 
 <div id="depositrefund" class="col-md-12">
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td>5,000원</td>
+       			<td>${remnDeposit}</td>
        		</tr>
 			<tr>
        			<th class="active" style="text-align:center;">환불요청 금액(원)</th>

@@ -24,5 +24,9 @@ public interface MpUserService {
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
 	public void deleteWish(CallVo callVo) throws SQLException;
 
+	//예치금 사용내역 리스트 출력
+	List<CallVo> depositList() throws SQLException;
+
+	int insertCharge(CallVo callVo) throws SQLException;
 
 }

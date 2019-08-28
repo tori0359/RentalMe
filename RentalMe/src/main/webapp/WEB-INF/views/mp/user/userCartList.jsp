@@ -122,21 +122,24 @@
        		</tr>
        	</thead>
        	<tbody>
+   		 <c:set var="sumPrice" value="0"/>
        	<c:forEach items="${alist}" var="bean">
        		<tr data-tr_value="${bean.usedGdsNo}">  
        			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.odrQty}</td>
        			<td>${bean.agreeTem}개월</td>
-       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</td>
+       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       			</td>
        		</tr>
+       	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
        	</c:forEach>
        	</tbody>
        	</table>
        </div>
        <div class="hr" style="height:2px;"></div>
        <div class="cartresult">
-       	<p>총 주문 금액: 90,000원</p>
+       	<p>총 주문 금액: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> 원</p>
        </div>
        <div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">
