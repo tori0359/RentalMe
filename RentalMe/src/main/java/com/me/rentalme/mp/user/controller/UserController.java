@@ -169,8 +169,10 @@ public class UserController {
 		log.debug("예치금 컨트롤러...");
 	
 		ModelAndView mav = new ModelAndView();
+		mpUserService.updateDeposit();
 		mav.addObject("alist", mpUserService.depositList());
 		
+		mav.addObject("callVo",mpUserService.userInfoList());
 		
 		mav.setViewName("mp/user/userDeposit");
 		return mav;
@@ -181,6 +183,7 @@ public class UserController {
 		log.debug("예치금 충전 컨트롤러...");
 	
 		mpUserService.insertCharge(callVo);
+		
 		
 		ModelAndView mav = new ModelAndView("redirect:/mp/deposit");
 		return mav;

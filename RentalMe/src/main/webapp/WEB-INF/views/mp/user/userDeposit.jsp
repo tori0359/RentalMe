@@ -152,7 +152,7 @@
 	  	</div>
 	  <div class="deposit col-md-3 col-md-offset-2">
 		  <h2>현재 예치금</h2>
-		  <h2>5,000 원</h2>
+		  <h2><fmt:formatNumber pattern="#,###.##">${callVo.remnDeposit}</fmt:formatNumber> 원</h2>
 	  </div>
 	  </div>
   </div>
@@ -212,7 +212,8 @@
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td>${remnDeposit}</td>
+       			<td><fmt:formatNumber pattern="#,###.##">${remnDeposit}</fmt:formatNumber> 원
+       			<input type="hidden" name="" value="${remnDeposit}"/></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금인</th>
