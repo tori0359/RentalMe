@@ -36,11 +36,11 @@
 			<th>등록일</th>
 			<th></th>
 		</tr>
-			<c:forEach items="${alist}" var="bean">
+			<c:forEach items="${blist}" var="bean">
 				<tr>
-					<td><input type="hidden" name="num" value="${bean.noticNo}"/>${bean.noticNo}</td>
-					<td>공지</td>
-					<td><a href="${pageContext.request.contextPath}/cs/csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub}</a></td>
+					<td><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
+					<td>FAQ</td>
+					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					<td>${bean.regDt}</td>
 					<td><input type="submit" value="삭제"/></td>
 				</tr>

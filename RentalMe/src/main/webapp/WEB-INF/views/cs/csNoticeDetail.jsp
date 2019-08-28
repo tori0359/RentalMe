@@ -50,7 +50,7 @@
 	<div class="col-md-10 col-md-offset-1"> 
         <table class="table" id="daeContent">
             <tr>
-                <td><label for="id" >아 이 디</label></td>
+                <td><label for="id" >작 성 자</label></td>
                 <td>관리자</td>
             </tr>
             <tr>

@@ -15,5 +15,10 @@ public interface CsService {
 	CsVo csFaqDetail(String csGbCd, String faqNo, String csClassGbCd) throws SQLException;  //faq 상세페이지
 	CsVo csNoticeDetail(String noticNo,String csGbCd) throws SQLException;					//공지 상세페이지
 
-
+	int noticDel(int num) throws SQLException;
+	
+	int seqNocUp() throws SQLException;
+	int seqFaqUp() throws SQLException;
+	
+	int addfaq(CsVo csVo) throws SQLException;
 }
