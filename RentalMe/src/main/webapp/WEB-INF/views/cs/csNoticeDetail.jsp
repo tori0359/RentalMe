@@ -11,12 +11,14 @@
 			$("#cancel").click(function(){
 					window.history.back();
 				})
-			
+			$("#updae").click(function(){
+				window.location.replace("/cs/csNoticeUpdatePage");
+			})
 		})
 	</script>
 <style type="text/css">
         #daeContent{
-        	margin-top:100px;
+        	margin-top:70px;
         }
        
         #daeContent tr>td:nth-child(1){
@@ -54,21 +56,26 @@
                 <td>관리자</td>
             </tr>
             <tr>
+                <td><label for="id" >글 번 호</label></td>
+                <td><input type="hidden" name="noticNo" value="${adetail.noticNo}">${adetail.noticNo}</td>
+            </tr>
+            <tr>
             	<td><label>작성일</label></td>
             	<td>${adetail.regDt}</td>
             </tr>
             <tr>
                 <td><label for="" >제목</label></td>
-                <td>${adetail.sub}</td>
+                <td><input type="hidden" name="sub" value="${adetail.sub}">${adetail.sub}</td>
             </tr>
             <tr>
                 <td><label for="" >내용</label></td>
-                <td>${adetail.content}</td>
+                <td><input type="hidden" name="content" value="${adetail.content}">${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                  <input id="cancel" type="reset" value="취소">
+                  <input id="cancel" type="reset" value="뒤로"/>
+                  <input id="updae" type="submit" value="수정"/>
                 </td>
             </tr>
         </table>

@@ -5,7 +5,8 @@ import java.sql.Date;
 public class CsVo {
 
 	private String faqNo;  //faq 게시판 번호
-	private String csGbCd; // 게시판 분류 번호
+	private String noticNo; //notic 게시판 번호
+	private String csGbCd; //게시판 분류 번호
 	private String csClassGbCd;  //faq유형 번호
 	private String sub;    //제목
 	private String content;//내용
@@ -13,7 +14,6 @@ public class CsVo {
 	private Date cghDt;
 	private String regId;  //작성아이디
 	private Date regDt;	
-	private String noticNo; //notic 게시판 번호
 	
 	
 	

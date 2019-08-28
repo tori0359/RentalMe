@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../../template/headerMp.jsp"></jsp:include>
+<jsp:include page="../template/headerMp.jsp"></jsp:include>
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
@@ -44,13 +44,14 @@
 		$("#cancel").click(function(){
 			history.back();
 		})
+		
 	});
 </script>
 </head>
 <body>
 <div id="csContent">
-<form action="/mp/mng/csNoticeAdd" method="post">
-		<h2>공지/FAQ등록</h2>
+		<h2>공지/FAQ수정</h2>
+<form action="/cs/csNoticeUpdate" method="get">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="" >작 성 자</label></td>
@@ -90,7 +91,7 @@
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                   <input type="submit" value="등록"/>
+                   <input id="update" type="submit" value="수정"/>
                    <input id="cancel" type="reset" value="취소">
                 </td>
             </tr>
@@ -98,5 +99,5 @@
 </form>
 </div>
 </body>
-<jsp:include page="../../template/footerMp.jsp"></jsp:include>
+<jsp:include page="../template/footerMp.jsp"></jsp:include>
 </html>

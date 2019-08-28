@@ -27,7 +27,7 @@ public interface CsDao {
 	int seqFaqInsert() throws SQLException;
 	
 	int insertOne(CsVo csVo) throws SQLException;
-	int updateOne(CsVo bean) throws SQLException;
+	int updateOne(CsVo csVo) throws SQLException;
 	int noticDel(int num) throws SQLException;
 	
 }

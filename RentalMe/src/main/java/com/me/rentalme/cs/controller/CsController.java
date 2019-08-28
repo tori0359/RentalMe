@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.service.CsService;
 
 
@@ -47,6 +48,7 @@ public class CsController {
 		return "cs/csInquiry";
 		
 	}
+	
 /////////////////////////////////////////////////////////////////////////////	
 	//공지게시판
 	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
@@ -57,6 +59,7 @@ public class CsController {
 		mav.setViewName("cs/csNotice");
 		return mav;
 	}
+	
 	
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
@@ -72,7 +75,7 @@ public class CsController {
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
 	public String csNoticeDetail(@RequestParam("noticNo") String noticNo, @RequestParam("csGbCd") String  csGbCd ,Model model) throws Exception{
 		
-		System.out.println("detail..start");
+		System.out.println("deta il..start");
 		model.addAttribute("adetail", csService.csNoticeDetail(noticNo,csGbCd));
 		System.out.println("detail...end");
 		return "cs/csNoticeDetail";
@@ -87,10 +90,25 @@ public class CsController {
 		model.addAttribute("bdetail", csService.csFaqDetail(csGbCd,faqNo, csClassGbCd));
 		System.out.println("detail...end");
 		return "cs/csFaqDetail";
-		
 	}
 	
-/////////////////////////////////////////////////////////////////////////////		
+/////////////////////////////////////////////////////////////////////////////	
+	@RequestMapping(value="/csNoticeUpdatePage")
+	public ModelAndView noticup(CsVo csVo) throws SQLException{
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("cs/csNoticeUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value="/csNoticeUpdate")
+	public ModelAndView noticupdae(CsVo csVo) throws SQLException {
+		System.out.println("/cs/csNoticeUpdate");
+		System.out.println(csVo.getSub());
+		csService.csUpdateOne(csVo);
+		ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
+		
+		return mav;
+	}
 	/**
 	* 고객센터 - 문의 등록 폼 
 	* 

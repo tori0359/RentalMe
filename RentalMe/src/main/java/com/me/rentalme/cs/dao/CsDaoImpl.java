@@ -36,6 +36,7 @@ public class CsDaoImpl implements CsDao {
 			return sqlSession.insert("csCenter.csInsertNocOne",csVo);
 		}else if(csVo.getCsGbCd().equals("20")){
 			System.out.println(csVo.getCsGbCd());
+			System.out.println(csVo.getCsClassGbCd());
 			return sqlSession.insert("csCenter.csInsertFaqOne",csVo);
 		}else {
 		System.out.println(csVo.getCsGbCd()+2);
@@ -53,9 +54,9 @@ public class CsDaoImpl implements CsDao {
 	}
 
 	@Override
-	public int updateOne(CsVo bean) throws SQLException {
+	public int updateOne(CsVo csVo) throws SQLException {
 		
-		return 0;
+		return sqlSession.update("csCenter.csNoticeUpdate", csVo);
 	}
 
 
@@ -84,8 +85,6 @@ public class CsDaoImpl implements CsDao {
 
 	@Override
 	public CsVo csNoticeDetail(Map<String, Object> map) throws SQLException {
-		System.out.println(map.get("faqNo"));
-		System.out.println(map.get("csClassGbCd"));
 		return sqlSession.selectOne("csCenter.csNoticeDetail", map);
 	}
 

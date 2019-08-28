@@ -64,12 +64,12 @@ public class CsServiceImpl implements CsService {
 	}
 	@Override
 	public int seqNocUp() throws SQLException {
-		
+		//공지사항 게시글 시퀀스
 		return csDao.seqNocInsert();
 	}
 	@Override
 	public int seqFaqUp() throws SQLException {
-		// TODO Auto-generated method stub
+		//faq게시글 시퀀스
 		return csDao.seqFaqInsert();
 	}
 	
@@ -77,6 +77,12 @@ public class CsServiceImpl implements CsService {
 	public int noticDel(int num) throws SQLException {
 		
 		return csDao.noticDel(num);
+	}
+	@Override
+	public int csUpdateOne(CsVo csVo) throws SQLException {
+		
+		
+		return csDao.updateOne(csVo);
 	}
 
 
