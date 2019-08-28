@@ -61,6 +61,24 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.insertReview",map);
 	}
 
+	@Override
+	public List<CallVo> selectDeposit() throws SQLException {
+		
+		return sqlSession.selectList("mpUser.selectDeposit");
+	}
+
+	@Override
+	public int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("depositGbCd", depositGbCd);
+		map.put("chargeDeposit", chargeDeposit);
+		
+		log.debug("userId="+userId+", depositGbCd="+depositGbCd+", chargeDeposit="+chargeDeposit+" 예치금 충전 입력 DaoImpl...");
+		
+		return sqlSession.insert("mpUser.inserDeposit",map);
+	}
+
 
 	
 

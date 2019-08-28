@@ -156,6 +156,7 @@ public class UserController {
 //	}
 //	
 	/**
+	 * @throws SQLException 
 	* 예치금
 	* 
 	* @param  
@@ -164,11 +165,24 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public ModelAndView getDeposit() {
+	public ModelAndView getDeposit(CallVo callVo) throws SQLException {
 		log.debug("예치금 컨트롤러...");
 	
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist", mpUserService.depositList());
+		
+		
 		mav.setViewName("mp/user/userDeposit");
+		return mav;
+		
+	}	
+	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
+	public ModelAndView insertDeposit(CallVo callVo) throws SQLException {
+		log.debug("예치금 충전 컨트롤러...");
+	
+		mpUserService.insertCharge(callVo);
+		
+		ModelAndView mav = new ModelAndView("redirect:/mp/deposit");
 		return mav;
 	}	
 	

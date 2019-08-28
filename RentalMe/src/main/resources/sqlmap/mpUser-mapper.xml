@@ -37,6 +37,24 @@
 		WHERE CALL_STS_CD=1;
   	</select>
   	
+  	<select id="selectDeposit" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT DEPOSIT_GB_CD, 
+		CHARGE_DEPOSIT,
+		USE_DEPOSIT,
+		REFUND_DEPOSIT,
+		DATE_FORMAT(DEPOSIT_DT, '%Y-%m-%d') AS DEPOSIT_DT,
+		(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO='19000002') AS REMN_DEPOSIT, (SELECT USER_ID FROM TB_USER100 WHERE MB_NO='19000002') AS USER_ID FROM TB_MB110;
+  	</select>
+  	
+  	<insert id="inserDeposit">
+  			INSERT INTO TB_MB110 (MB_NO, DEPOSIT_SEQ, DEPOSIT_DT, CHARGE_DEPOSIT, DEPOSIT_GB_CD) 
+			VALUES ('19000002',
+			(SELECT LPAD((SELECT COUNT(MB_NO)+1 FROM TB_MB110 A WHERE MB_NO="19000002"),6,'0')),
+			(SELECT DATE_FORMAT(NOW(),'%Y-%m-%d')),
+			#{chargeDeposit},
+			"1")
+  	</insert>
+
   	<update id="delete" >
   		UPDATE TB_CALL100
 		SET CALL_STS_CD=2

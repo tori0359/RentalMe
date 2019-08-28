@@ -22,7 +22,83 @@ public class CallVo {
 	private String userId;
 	private String content;
 	private String grade;
+	private String sumPrice;
+	private String depositSeq;
+	private String depositDt;
+	private String chargeDeposit;
+	private String useDeposit;
+	private String refundDeposit;
+	private String depositGbCd;
+	private String remnDeposit;
 	
+	
+
+
+
+	public String getRemnDeposit() {
+		return remnDeposit;
+	}
+
+	public void setRemnDeposit(String remnDeposit) {
+		this.remnDeposit = remnDeposit;
+	}
+
+	public String getDepositSeq() {
+		return depositSeq;
+	}
+
+	public void setDepositSeq(String depositSeq) {
+		this.depositSeq = depositSeq;
+	}
+
+	public String getDepositDt() {
+		return depositDt;
+	}
+
+	public void setDepositDt(String depositDt) {
+		this.depositDt = depositDt;
+	}
+
+	public String getChargeDeposit() {
+		return chargeDeposit;
+	}
+
+	public void setChargeDeposit(String chargeDeposit) {
+		this.chargeDeposit = chargeDeposit;
+	}
+
+	public String getUseDeposit() {
+		return useDeposit;
+	}
+
+	public void setUseDeposit(String useDeposit) {
+		this.useDeposit = useDeposit;
+	}
+
+	public String getRefundDeposit() {
+		return refundDeposit;
+	}
+
+	public void setRefundDeposit(String refundDeposit) {
+		this.refundDeposit = refundDeposit;
+	}
+
+	public String getDepositGbCd() {
+		return depositGbCd;
+	}
+
+	public void setDepositGbCd(String depositGbCd) {
+		this.depositGbCd = depositGbCd;
+	}
+
+	public String getSumPrice() {
+		return sumPrice;
+	}
+
+	public void setSumPrice(String sumPrice) {
+		this.sumPrice = sumPrice;
+	}
+
 	public String getGrade() {
 		return grade;
 	}

@@ -210,7 +210,7 @@
        });
 
        $('#review').click(function(){
-    	   swal("Hello world!");
+    	   alert("후기가 등록되었습니다!");
        }); 
 
    } 
