@@ -53,7 +53,6 @@ public class JoinServiceImpl implements JoinService{
 		log.debug("회원번호 조회 서비스");
 		
 		String memNo = joinDao.getMemNo();
-		System.out.println("service - 회원번호"+memNo);
 		return memNo;
 	}
 
@@ -78,8 +77,11 @@ public class JoinServiceImpl implements JoinService{
 		bean.setUserPw(hashPw);
 		
 		String levelGbCd = "1"; //일반회원
-		
 		bean.setlevelGbCd(levelGbCd); //일반회원으로 등록
+		
+		//이메일 키 난수코드 -> Y
+		String emailKey = "Y";
+		bean.setEmailKey(emailKey);
 		
 		//생년월일(yyyy-mm-dd to yyyymmdd)로 변경
 		String birthDay = bean.getBirthDay(); 

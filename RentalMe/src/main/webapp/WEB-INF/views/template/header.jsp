@@ -1,5 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -217,9 +217,17 @@
 <div>
     <div class="login container-fluid">
        <div class="col-md-11">
-      <p class="navbar-text navbar-right"> 
-      <a href="/login" class="navbar-link">로그인</a> ㅣ
-      <a href="/join/signup" class="navbar-link">회원가입</a></p>
+      <p class="navbar-text navbar-right">
+      <c:choose>
+      	<c:when test="${loginUserId == null }">
+	      	<a href="/login" class="navbar-link">로그인</a> ㅣ
+	      	<a href="/join/signup" class="navbar-link">회원가입</a></p>
+      	</c:when>
+      	<c:otherwise>
+      		<a href="#" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+	      	<a href="/logout" class="navbar-link">로그아웃</a></p>
+      	</c:otherwise>
+      </c:choose>
       </div>
     </div>
      <div class="navtitle">
@@ -320,7 +328,7 @@
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">중고거래</a>
+          <a href="/mp/cs" class="dropdown-toggle" role="button" aria-haspopup="true" data-toggle="dropdown">중고거래</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
