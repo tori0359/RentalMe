@@ -24,9 +24,9 @@ public class UsedServiceImpl implements UsedService {
 	UsedDao usedDao;
 	
 	@Override
-	public List<UsedVo> list() throws SQLException {
+	public List<UsedVo> list(UsedVo bean) throws SQLException {
 		log.debug("중고거래 서비스...");
-		return usedDao.selectAll();
+		return usedDao.selectAll(bean);
 	}
 
 	@Override
@@ -76,6 +76,11 @@ public class UsedServiceImpl implements UsedService {
 	@Override
 	public List<UsedStoreVo> listMyStoreCmt(String storeNo) throws SQLException {
 		return usedDao.myStoreCmtSelect(storeNo);
+	}
+
+	@Override
+	public int usedcount(UsedVo bean) throws SQLException {
+		return usedDao.usedcount(bean);
 	}
 
 

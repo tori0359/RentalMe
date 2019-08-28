@@ -15,12 +15,11 @@
 <body>
 	<div class="content">
 		<h1>메인페이지</h1>
-		<form action="/used">
-			<input type="hidden" name="gdsLclassCd" value="20">
-			<input type="hidden" name="gdsMclassCd" value="10">
-			<input type="hidden" name="modelNm" value="">			
+		<form action="/used/big">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm" value="">
 			<input type="hidden" name="align" value="1">			
-			<button type="submit">중고거래</button>
+			<input type="submit" value="중고">
 		</form>
 	</div>
 </body>

@@ -4,17 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="used">
-	<select id="selectAll" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고거래 테스트용 -->
-		 SELECT BRAND_NM,MODEL_NM,USED_GDS_PRICE 
-		 FROM tb_used100
+	<select id="usedcount" resultType="int">
+		select count(*) from tb_used100 where GDS_MCLASS_CD=#{gdsMclassCd} AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
 	</select>
-	<select id="selectOne" parameterType="java.util.ArrayList" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고list 검색 USED_GDS_NO,BRAND_NM,MODEL_NM,USED_GDS_PRICE,IMG1 -->
+	<select id="selectAll" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고거래 테스트용 -->
+		 SELECT *
+		 FROM tb_used100
+		 WHERE DEL_YN='N'
+		 <if test="gdsMclassCd !=null">
+		 AND GDS_MCLASS_CD=#{gdsMclassCd}
+		 </if> 
+		 <if test="modelNm !=null">
+		 AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
+		 </if>
+		 ORDER BY REG_DT DESC
+	</select>
+	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고list 검색 USED_GDS_NO,BRAND_NM,MODEL_NM,USED_GDS_PRICE,IMG1 -->
 		 SELECT * 
 		 FROM tb_used100
-		 WHERE GDS_LCLASS_CD=#{gdsLclassCd} 
-		 <if test="gdsMclassCd != 90">
-		 AND GDS_MCLASS_CD=#{gdsMclassCd}
-		 </if>
+		 WHERE GDS_MCLASS_CD=#{gdsMclassCd}
 		  AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
 			<if test="align == null">
 			 	ORDER BY REG_DT DESC
@@ -28,7 +36,7 @@
 		 	<if test="align == 3">
 		 		ORDER BY USED_GDS_PRICE DESC
 		 	</if>
-		 <!-- LIMIT #{startPage},10 -->
+		 LIMIT #{startPage},10
 	</select>
 	<select id="detailOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고detail -->
 		SELECT *, FN_NM('GDS_MCLASS_NM',GDS_MCLASS_CD) AS mcnm

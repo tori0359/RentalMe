@@ -13,8 +13,8 @@
 	.usedList{
 		width: 80%;
 		margin: 100px auto;
-		border: 1px solid black;
 		margin-bottom: 300px;
+		font-family: "nanumB";
 	}
 	.usedList #search{
 		display: inline-block;
@@ -26,7 +26,7 @@
 	}
 	.usedList select{
 		display: inline-block;
-		float: right;
+		float: left;
 		width: 10%;
 		height: 30px;
 		min-width: 100px;
@@ -42,41 +42,29 @@
 		margin-left: 5px;
 		font-size: 15px;
 		font-weight: bold;
+		clear: both;
+		margin-bottom: 10px;
 	}
-	.usedList .tabs{
-		margin-top: 40px;
-		width: 100%;
-		border-bottom: 5px solid black;
+	#form_tab{
+		clear: both;
 	}
-	.usedList .tabs>li{
+	.tabcl{
 		display: inline-block;
-		width: 20.5%;
-		height: 30px;
-		line-height: 30px;
-		background-color: lightgray;
-		text-align: center;
-		cursor:pointer;
-		margin-left: -2px;
+		width: 19.3%;
 	}
-	.usedList .tabs>li:first-child{
-		margin-left: -40px;
-	}
-	.usedList .tabs>li:not(.active):hover{
-		background-color: white;
-	}
-	.usedList .tabs> .active{
-		background-color: black;
-		color: white;
+	.tabcl>.tab_btn{
+		width: 100%;
+		background-color: white; 
+		outline: 0;
+		border: 1px solid black; 
 	}
 
 
 	.used_thing{
 		width: 95%;
-		border: 1px solid black;
 		margin: 15px auto;
 	}
 	.line_thing{
-		border: 1px solid black;
 		width: 200px;
 		height: 300px;
 		margin-left: 20px;
@@ -85,7 +73,6 @@
 		cursor: pointer;
 	}
 	.used_thing_img{
-		border: 1px solid black;
 		width: 200px;
 		height: 200px;
 		margin: auto;
@@ -105,40 +92,43 @@
 <script type="text/javascript">
 
 	$(function(){
-		$('.tab').eq(0).addClass('active');
+		var mclass=${gdsMclassCd};
+		var gdsnm='big';
+		if(mclass==20){
+			gdsnm='sml';
+		}else if(mclass==30){
+			gdsnm='kit';
+		}else if(mclass==40){
+			gdsnm='app';
+		}else if(mclass==50){
+			gdsnm='etc';
+		}
+		/* var link=$('.pagelink').attr('href'); */
+		var arrlink=new Array($('.pagelink').length);
+		var link;
+		var link2;
+		var link3;
+		var mat='startPage='+${page};
+		for(var i=0; i<$('.pagelink').length; i++){
+			link=$('.pagelink').eq(i).attr('href');
+			link2=link.replace(/modelNm=&align=1/gi,'modelNm=${modelNm}&align=${align}');
+			arrlink[i]=link2.replace('big',gdsnm);
+			if(arrlink[i].match(mat) !== null){
+				$('.pagelink').eq(i).parent().addClass('active');
+			}
+			$('.pagelink').eq(i).attr('href',arrlink[i]);
+		}
+		//${pageContext.request.contextPath }/used/big?startPage=${chg }&modelNm=&align=1
 		var classnum=$('.used_price');
 		var price;
 		for(var i=0; i<classnum.length; i++){
 			price=$('.used_price').eq(i).text();
 			$('.used_price').eq(i).text(numberWithCommas(price));	
 		}
-		/* $('.tab:first-child').addClass('active'); */
-		var who;	// 클릭한 탭이 누군지
-		$('.tab').eq(0).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-		});
-		$('.tab').eq(1).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-		});
-		$('.tab').eq(2).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-		});
-		$('.tab').eq(3).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-		});
-		$('.tab').eq(4).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-		});
+
+		for(var i=0; i<$('.whattab').length; i++){
+			$('.whattab').eq(i).text();
+		}
 	});
 		function removeCls(who){ //탭활성화
 			$('.tabs').find('li').removeClass('active');
@@ -152,7 +142,6 @@
 		function numberWithCommas(x) { //숫자 3자리 콤마
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
-
 	
 </script>
 <body>
@@ -161,7 +150,6 @@
 	<h3>중고제품</h3>
 	<form action="/used/search">
 	<div id="search">
-		<input type="hidden" name="gdsLclassCd" value="20">
 		<input type="hidden" name="gdsMclassCd" value="${gdsMclassCd }">
 		<input type="text" name="modelNm" id="search" placeholder="검색">
 		<select name="align" id="align">
@@ -172,50 +160,69 @@
 		<button type="submit">검색</button>
 	</div>
 	</form>
-	
+	<div>
 	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
-<div>
-	<a href="/used/10">대형가전</a>
-	<a href="/used/20">소형가전</a>
-	<a href="/used/30">주방가전</a>
-	<a href="/used/40">가구</a>
-	<a href="/used/50">기타</a>
+	</div>
+<div id="form_tab">
+	<form class="tabcl" action="/used/big">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">대형가전</button>
+	</form>
+	<form class="tabcl" action="/used/sml">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">소형가전</button>
+	</form>
+	<form class="tabcl" action="/used/kit">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">주방가전</button>
+	</form>
+	<form class="tabcl" action="/used/app">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">가구</button>
+	</form>
+	<form class="tabcl" action="/used/etc">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">기타</button>
+	</form>
 </div>
-<!-- 	<ul class="tabs">
-		<li class="tab" id="bigApp" value="10">대형가전</li>
-		<li class="tab" id="smlApp" value="20">소형가전</li>
-		<li class="tab" id="kitApp" value="30">주방가전</li>
-		<li class="tab" id="furniture" value="40">가구</li>		
-		<li class="tab" id="etc" value="50">기타</li>	
-	</ul>
-	 -->
 	<div class="used_thing">
-	<c:forEach items="${alist1 }" var="bean" begin="1" end="10">
+	<c:forEach items="${alist1 }" var="bean">
 		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
 			<div>${bean.brandNm }</div>
 			<div>${bean.modelNm }</div>
-			<span>${bean.usedGdsPrice }원</span>
-			<div>탭종류:${bean.gdsMclassCd }</div>
+			<span class="used_price">${bean.usedGdsPrice }원</span>
+			<div class="whattab">${bean.gdsMclassCd }</div>
 		</div>
 	</c:forEach>
 	</div>
-	<!-- 1~10 11~20 21~30 -->
   <ul class="pagination">
-    <li>
+ <!--    <li>
       <a href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
-    </li>
+    </li> -->
     <c:forEach begin="1" end="${listsize }" var="x">
-    <li><a href="#"><c:out value="${x }"/></a></li>
-    </c:forEach>
-    <li>
+    <c:set var="chg" value="10"/>
+    <c:set var="chg" value="${x*chg-chg }"/>
+    <li><a class="pagelink" href="${pageContext.request.contextPath }/used/big?startPage=${chg }&modelNm=&align=1"><c:out value="${x }"/></a></li>
+    </c:forEach> 
+<!--     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
-    </li>
-  </ul>
+    </li> -->
+  </ul>  
 	
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>

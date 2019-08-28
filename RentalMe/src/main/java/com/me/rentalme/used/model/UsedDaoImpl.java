@@ -38,7 +38,7 @@ public class UsedDaoImpl implements UsedDao {
 	* @exception return("namespace.id명", 파라미터)
 	*/
 	@Override
-	public List<UsedVo> selectAll() throws SQLException {
+	public List<UsedVo> selectAll(UsedVo bean) throws SQLException {
 		log.debug("중고거래 리스트 출력...");
 		
 		return sqlSession.selectList("used.selectAll");
@@ -145,6 +145,11 @@ public class UsedDaoImpl implements UsedDao {
 	@Override
 	public List<UsedStoreVo> myStoreCmtSelect(String storeNo) throws SQLException {
 		return sqlSession.selectList("used.myStoreCmtSelectAll", storeNo);
+	}
+
+	@Override
+	public int usedcount(UsedVo bean) throws SQLException {
+		return sqlSession.selectOne("used.usedcount", bean);
 	}
 
 
