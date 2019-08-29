@@ -47,12 +47,19 @@ public class RentalAppliController {
 	*/
 	
 	@RequestMapping(value = "/{menu}", method = RequestMethod.GET)
-	public String getLgList(@PathVariable("menu") String gdsSclassCd, @RequestParam(value="brandNm", required = false, defaultValue="") String brandNm
+	public String getLgList(@PathVariable("menu") String gdsSclassCd, @RequestParam(value="brandNm", required = false, defaultValue="") List<String> brandNm
 			, @RequestParam(value="priceMin", required = false, defaultValue="") String priceMin, @RequestParam(value="priceMax", required = false, defaultValue="") String priceMax
 			, @RequestParam(value="priceHalf", required = false, defaultValue="") String priceHalf, @RequestParam(value="sts", required = false, defaultValue = "") String sts
+			, @RequestParam(value="search", required = false, defaultValue = "") String search, @RequestParam(value="searchPriceSt", required = false, defaultValue = "" ) String searchPriceSt
+			, @RequestParam(value="searchPriceEd", required = false, defaultValue = "" ) String searchPriceEd
 			, RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
 		
 		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
+		
+//		System.out.println(brandNm.size());
+//		for(int i=0; i<brandNm.size(); i++) {
+//			System.out.println(brandNm.get(i));
+//		}
 		
 		session.removeAttribute("menu");
 		session.setAttribute("menu", gdsSclassCd);
@@ -66,6 +73,12 @@ public class RentalAppliController {
 		session.setAttribute("priceHalf", priceHalf);
 		session.removeAttribute("sts");
 		session.setAttribute("sts", sts);
+		session.removeAttribute("search");
+		session.setAttribute("search", search);
+		session.removeAttribute("searchPriceSt");
+		session.setAttribute("searchPriceSt", searchPriceSt);
+		session.removeAttribute("searchPriceEd");
+		session.setAttribute("searchPriceEd", searchPriceEd);
 		
 		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);	//	PATH 경로
 		List<RentalAppliVo> list1 = rentalAppliService.rentalMenu(rentalAppliVo);	//	소메뉴명 리스트
@@ -82,12 +95,17 @@ public class RentalAppliController {
 //		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
 		
 //		session test
+		System.out.println("-----------------session start ----------------------");
 		System.out.println("sessionMenu			== " + session.getAttribute("menu"));
 		System.out.println("sessionBrandnm  	== " + session.getAttribute("brandNm"));
 		System.out.println("sessionPriceMin  	== " + session.getAttribute("priceMin"));
 		System.out.println("sessionPriceMax  	== " + session.getAttribute("priceMax"));
 		System.out.println("sessionPriceHalf  	== " + session.getAttribute("priceHalf"));
 		System.out.println("sessionSts  		== " + session.getAttribute("sts"));
+		System.out.println("search  			== " + session.getAttribute("search"));
+		System.out.println("searchPriceSt  		== " + session.getAttribute("searchPriceSt"));
+		System.out.println("searchPriceEd  		== " + session.getAttribute("searchPriceEd"));
+		System.out.println("-----------------session end ----------------------");
 		
 //		gds test
 //		System.out.println("gdsCd				== " + list5.get(0).getGdsCd());
@@ -116,6 +134,9 @@ public class RentalAppliController {
 		model.addAttribute("priceMax", session.getAttribute("priceMax"));
 		model.addAttribute("priceHalf", session.getAttribute("priceHalf"));
 		model.addAttribute("sts", session.getAttribute("sts"));
+		model.addAttribute("search", session.getAttribute("search"));
+		model.addAttribute("searchPriceSt", session.getAttribute("searchPriceSt"));
+		model.addAttribute("searchPriceEd", session.getAttribute("searchPriceEd"));
 		
 		return "rental/rentalAppliLgList";
 	}
