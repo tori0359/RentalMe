@@ -3,23 +3,28 @@ package com.me.rentalme.used.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.service.UsedService;
 
@@ -40,6 +45,7 @@ public class UsedController {
 	
 	@Inject
 	UsedService usedService;
+
 	/**
 	 * @throws SQLException 
 	* 중고거래 리스트
@@ -49,51 +55,67 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getUsedList(Model model) throws SQLException {
-		
-		log.debug("중고거래 컨트롤러");
-		UsedVo bean=new UsedVo();
-		bean.setMODEL_NM("");
-		bean.setGDS_MCLASS_CD("10");
+	@RequestMapping(value = "/big", method = RequestMethod.GET)
+	public String getUsedListB(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+		log.debug("중고거래 대형가전");
+		bean.setGdsMclassCd("10");
+		sessionFunc(session,bean);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("20");
-		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("30");
-		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("40");
-		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("50");
-		model.addAttribute("alist5", usedService.oneList(bean));
-		
+		return "used/usedList";
+	}
+	@RequestMapping(value = "/sml", method = RequestMethod.GET)
+	public String getUsedListS(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+		log.debug("중고거래 소형가전");
+		bean.setGdsMclassCd("20");
+		sessionFunc(session,bean);
+		model.addAttribute("alist1", usedService.oneList(bean));
+		return "used/usedList";
+	}
+	@RequestMapping(value = "/kit", method = RequestMethod.GET)
+	public String getUsedListK(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+		log.debug("중고거래 주방가전");
+		bean.setGdsMclassCd("30");
+		sessionFunc(session,bean);
+		model.addAttribute("alist1", usedService.oneList(bean));
+		return "used/usedList";
+	}
+	@RequestMapping(value = "/app", method = RequestMethod.GET)
+	public String getUsedListA(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+		log.debug("중고거래 가구");
+		bean.setGdsMclassCd("40");
+		sessionFunc(session,bean);
+		model.addAttribute("alist1", usedService.oneList(bean));
+		return "used/usedList";
+	}
+	@RequestMapping(value = "/etc", method = RequestMethod.GET)
+	public String getUsedListE(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+		log.debug("중고거래 기타");
+		bean.setGdsMclassCd("50");
+		sessionFunc(session,bean);
+		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
 	
-	//검색기능
+	public void sessionFunc(HttpSession session,UsedVo bean) throws SQLException {
+		session.setAttribute("gdsMclassCd", bean.getGdsMclassCd());
+		session.setAttribute("align", bean.getAlign());
+		session.setAttribute("modelNm", bean.getModelNm());
+		session.setAttribute("page",bean.getStartPage());
+		int page=(usedService.usedcount(bean)-1)/10+1;
+		session.setAttribute("listsize", page);
+	}
+	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String getUsedListNM(Model model,@RequestParam("MODEL_NM") String MODEL_NM) throws SQLException {
+	public String getUsedListS(HttpSession session,Model model,@ModelAttribute UsedVo bean) throws SQLException {
 		
 		log.debug("중고거래 검색 컨트롤러");
-		UsedVo bean=new UsedVo();
-		if(MODEL_NM==null) {
-			MODEL_NM="";
-		}
-		bean.setMODEL_NM(MODEL_NM);
-		bean.setGDS_MCLASS_CD("10");
+		sessionFunc(session,bean);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("20");
-		model.addAttribute("alist2", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("30");
-		model.addAttribute("alist3", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("40");
-		model.addAttribute("alist4", usedService.oneList(bean));
-		bean.setGDS_MCLASS_CD("50");
-		model.addAttribute("alist5", usedService.oneList(bean));
-		System.out.println(bean.getUSED_GDS_NO());
 		return "used/usedList";
 	}
 
 	/**
+	 * @throws SQLException 
 	* 중고거래 상세보기
 	* 
 	* @param  int idx
@@ -102,14 +124,22 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
-	public ModelAndView getUsedDetail(@PathVariable("idx") int idx) {
+	public String getUsedDetail(Model model, @PathVariable("idx") String usedGdsNo) throws SQLException {
 		
+		model.addAttribute("UsedVo", usedService.detail(usedGdsNo));
+		model.addAttribute("cmt", usedService.cmtList(usedGdsNo));
+		return "used/usedDetail";
+	}
+	@RequestMapping(value = "/cmtAdd", method = RequestMethod.POST)
+	public String getUsedCmtAdd(@ModelAttribute UsedCmtVo bean) throws SQLException {
 		
-		ModelAndView mav = new ModelAndView("used/usedDetail");
-		return mav;
+		usedService.addCmt(bean);
+		return "redirect:/used/detail/"+bean.getUsedGdsNo();
 	}
 	
+	
 	/**
+	 * @throws SQLException 
 	* 나의 중고상점 리스트
 	* 
 	* @param  None
@@ -117,12 +147,19 @@ public class UsedController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/store", method = RequestMethod.GET)
-	public ModelAndView getUsedMyStroe() {
+	@RequestMapping(value = "/store/{idx}", method = RequestMethod.GET)
+	public String getUsedMyStroe(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+		model.addAttribute("alist", usedService.myUsedAll(mbNo));
+		model.addAttribute("cmtlist", usedService.listMyStoreCmt(mbNo));
+		return "used/usedMyStore";
+	}
+	
+	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.POST)
+	public String getUsedMyStroeReviewInsert(HttpSession session,@ModelAttribute UsedStoreVo bean) throws SQLException {
 		
+		usedService.addMyStoreCmt(bean);
 		
-		ModelAndView mav = new ModelAndView("used/usedMyStore");
-		return mav;
+		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 	
 	/**
@@ -144,14 +181,14 @@ public class UsedController {
 	/**
 	 * @throws SQLException 
 	* 중고거래 상품등록 
-	* 
-	* @param  None
-	* @return ModelAndView 
+//	* 
+//	* @param  None
+//	* @return ModelAndView 
 	* @author 황인준
 	* @exception 
 	*/
 	@RequestMapping(value = "/mng", method = RequestMethod.POST)
-	public String addUsedPrd(MultipartHttpServletRequest mtfRequest,@ModelAttribute UsedVo bean) throws SQLException {
+	public String addUsedPrd(HttpSession session,MultipartHttpServletRequest mtfRequest,@ModelAttribute UsedVo bean) throws SQLException {
 		
 		int cnt=1; //이미지 카운트
 		
@@ -184,16 +221,16 @@ public class UsedController {
                 e.printStackTrace();
             }
             if(cnt==1) {
-            	bean.setIMG1(img);
+            	bean.setImg1(img);
             	cnt++;
             }else if(cnt==2) {
-            	bean.setIMG2(img);
+            	bean.setImg2(img);
             	cnt++;
             }else if(cnt==3) {
-            	bean.setIMG3(img);
+            	bean.setImg3(img);
             	cnt++;
             }else if(cnt==4) {
-            	bean.setIMG4(img);
+            	bean.setImg4(img);
             }
         }
         
@@ -201,91 +238,9 @@ public class UsedController {
 		usedService.seqUp();
 		usedService.addUsed(bean);
 		
-		return "used/usedMyStore";
+		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
-//	@RequestMapping(value = "/mng", method = RequestMethod.POST)
-//	public String addUsedPrd(MultipartHttpServletRequest mtfRequest,UsedVo bean,
-//			@RequestParam("GDS_LCLASS_CD") String gDS_LCLASS_CD,
-//			@RequestParam("GDS_MCLASS_CD") String gDS_MCLASS_CD,
-//			@RequestParam("GDS_SCLASS_CD") String gDS_SCLASS_CD,
-//			@RequestParam("BRAND_NM") String bRAND_NM,
-//			@RequestParam("MODEL_NM") String mODEL_NM,
-//			@RequestParam("SUB") String sUB,
-//			@RequestParam("USED_GDS_PRICE") int uSED_GDS_PRICE,
-//			@RequestParam("CONTENT") String cONTENT) throws SQLException {
-//		
-//		bean=new UsedVo();
-//		
-//		bean.setGDS_LCLASS_CD(gDS_LCLASS_CD);
-//		bean.setGDS_MCLASS_CD(gDS_MCLASS_CD);
-//		bean.setGDS_SCLASS_CD(gDS_SCLASS_CD);
-//		bean.setBRAND_NM(bRAND_NM);
-//		bean.setMODEL_NM(mODEL_NM);
-//		bean.setSUB(sUB);
-//		bean.setUSED_GDS_PRICE(uSED_GDS_PRICE);
-//		bean.setCONTENT(cONTENT);
-//		
-//		int cnt=1; //이미지 카운트
-//		
-//		String currentTime=System.currentTimeMillis()+"";
-//		String uploadDir="C:\\Users\\USER\\git\\RentalMe\\RentalMe\\src\\main\\webapp\\imgs\\";
-//		String uploadRDS="/imgs/";
-//		List<MultipartFile> fileList = mtfRequest.getFiles("imgfile");
-//		String src = mtfRequest.getParameter("src");
-//		System.out.println("src value : " + src);
-//		
-//		for (MultipartFile mf : fileList) {
-//			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//			long fileSize = mf.getSize(); // 파일 사이즈
-//			
-//			System.out.println("originFileName : " + originFileName);
-//			System.out.println("fileSize : " + fileSize);
-//			
-//			String fName=currentTime + originFileName;
-//			
-//			String safeFile = uploadDir+fName;
-//			String img=uploadRDS+fName;
-//			try {
-//				mf.transferTo(new File(safeFile));
-//			} catch (IllegalStateException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			if(cnt==1) {
-//				bean.setIMG1(img);
-//				cnt++;
-//			}else if(cnt==2) {
-//				bean.setIMG2(img);
-//				cnt++;
-//			}else if(cnt==3) {
-//				bean.setIMG3(img);
-//				cnt++;
-//			}else if(cnt==4) {
-//				bean.setIMG4(img);
-//			}
-//		}
-//		
-//		// 시퀀스 1증가
-//		usedService.seqUp();
-//		usedService.addUsed(bean);
-//		
-//		return "used/usedMyStore";
-//	}
-	
-	
-//	@RequestMapping(value = "/mng", method = RequestMethod.POST)
-//	public ModelAndView addUsedPrd(UsedVo bean) throws SQLException {
-//		
-//		// 시퀀스 1증가
-//		usedService.seqUp();
-//		usedService.addUsed(bean);
-//		
-//		ModelAndView mav = new ModelAndView("used/usedMyStore");
-//		return mav;
-//	}
+
 	
 	/**
 	 * 중고거래 상품수정

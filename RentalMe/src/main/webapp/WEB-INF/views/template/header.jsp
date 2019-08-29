@@ -212,6 +212,11 @@
    </style>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+   <script type="text/javascript">
+		$('#rjfo').click(function(){
+			windows.location.href="/used";
+		});
+   </script>
 </head>
 <body>
 <div>
