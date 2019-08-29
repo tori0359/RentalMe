@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="csCenter">
+  
 	<select id="faqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
 		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
   	</select>
@@ -15,6 +16,10 @@
   	<select id="csNoticeDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo}
   	</select>
+  	<select id="myQuestList" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT * FROM TB_PQUEST100 INNER JOIN TB_USER100 ON TB_PQUEST100.MB_NO=TB_USER100.MB_NO WHERE TB_USER100.MB_NO=#{mbNo}
+  	</select>
+  	
   	
   	<insert id="csInsertNocOne" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO tb_notic100 (notic_no,sub,content,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_notic100;
@@ -22,12 +27,21 @@
   	<insert id="csInsertFaqOne" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO tb_faq100 (faq_no,CS_CLASS_GB_CD,sub,content,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{csClassGbCd},#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_faq100;
   	</insert>
+  	<insert id="csInsertInqOne" parameterType="com.me.rentalme.cs.entity.CsVo">
+  		INSERT INTO tb_pquest100 (PQUEST_NO,MB_NO,CS_CLASS_GB_CD,SUB,CONTENT,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{mbNo},#{csClassGbCd},#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_pquest100;
+  	</insert>
+  	
+  	
   	<insert id="seqNocInsert" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO SEQ_NOTIC100 VALUES(NULL)
 	</insert>
 	<insert id="seqFaqInsert" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO SEQ_FAQ100 VALUES(NULL)
 	</insert>
+	<insert id="seqInqInsert" parameterType="com.me.rentalme.cs.entity.CsVo">
+		INSERT INTO SEQ_PQUEST100 VALUES(NULL)
+	</insert>
+	
 	
 	<delete id="csNoticeDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
 		DELETE FROM TB_NOTIC100 WHERE NOTIC_NO=#{NUM}
@@ -35,6 +49,7 @@
 	<delete id="csFaqDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
 		DELETE FROM TB_FAQ100 WHERE FAQ_NO=#{NUM}
 	</delete>
+	
 	
 	<update id="csNoticeUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
 		UPDATE TB_NOTIC100 SET SUB=#{sub}, CONTENT=#{content} WHERE NOTIC_NO=#{noticNo}

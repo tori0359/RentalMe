@@ -3,7 +3,9 @@ package com.me.rentalme.mp.user.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 
 
@@ -28,5 +30,6 @@ public interface MpUserService {
 	List<CallVo> depositList() throws SQLException;
 
 	int insertCharge(CallVo callVo) throws SQLException;
-
+	
+	List<CsVo> myList(CsVo csVo,HttpSession session) throws SQLException;
 }

@@ -4,11 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.mp.user.model.MpUserDao;
 
@@ -73,6 +75,15 @@ public class MpUserServiceImpl implements MpUserService{
 
 		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit());
 	}
+	
+	//개인 1:1문의보기
+	@Override
+	public List<CsVo> myList(CsVo csVo,HttpSession session) throws SQLException {
+		System.out.println("dao로...");
+		return  mpUserDao.myQuestList(csVo,session);
+	}
+
+	
 	
 
 	

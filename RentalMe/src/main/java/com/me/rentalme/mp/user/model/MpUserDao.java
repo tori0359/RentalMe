@@ -3,6 +3,10 @@ package com.me.rentalme.mp.user.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 
 /**
@@ -35,5 +39,7 @@ public interface MpUserDao {
 	//에치금 충전
 	int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException;
 	
+	//1:1문의내역리스트
+	List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException;
 	
 }

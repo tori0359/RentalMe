@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 
 @Repository
@@ -77,6 +80,18 @@ public class MpUserDaoImpl implements MpUserDao{
 		log.debug("userId="+userId+", depositGbCd="+depositGbCd+", chargeDeposit="+chargeDeposit+" 예치금 충전 입력 DaoImpl...");
 		
 		return sqlSession.insert("mpUser.inserDeposit",map);
+	}
+
+	@Override
+	public List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		String mbNo=(String)session.getAttribute("loginMbNo");
+		System.out.println(mbNo+"dd");
+		map.put("mbNo",mbNo);
+		csVo.setMbNo(mbNo);
+		System.out.println(csVo.getMbNo());
+		System.out.println("sql로..");
+		return sqlSession.selectList("csCenter.myQuestList",map);
 	}
 
 

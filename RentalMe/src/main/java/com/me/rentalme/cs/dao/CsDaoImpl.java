@@ -26,11 +26,12 @@ public class CsDaoImpl implements CsDao {
 	}
 
 	
-
+	//공지, faq 게시글 등록
 	@Override
 	public int insertOne(CsVo csVo) throws SQLException {
 	
 		System.out.println("mapping..");
+		System.out.println("getcsGbCd:"+csVo.getCsGbCd());
 		if(csVo.getCsGbCd().equals("10")){
 			System.out.println(csVo.getCsGbCd());
 			return sqlSession.insert("csCenter.csInsertNocOne",csVo);
@@ -38,12 +39,19 @@ public class CsDaoImpl implements CsDao {
 			System.out.println(csVo.getCsGbCd());
 			System.out.println(csVo.getCsClassGbCd());
 			return sqlSession.insert("csCenter.csInsertFaqOne",csVo);
+		}else if(csVo.getCsGbCd().equals("30")){
+			System.out.println(csVo.getCsGbCd());
+			System.out.println(csVo.getCsClassGbCd());
+			return sqlSession.insert("csCenter.csInsertInqOne", csVo);
 		}else {
 			
-		System.out.println(csVo.getCsGbCd()+2);
-		return 0;
+			System.out.println(csVo.getCsGbCd()+2);
 		}
+		return 0;
 	}
+	
+	//1대1문의 게시글 등록
+	
 
 	@Override
 	public CsVo csFaqDetail(CsVo csVo) throws SQLException {
@@ -99,15 +107,23 @@ public class CsDaoImpl implements CsDao {
 
 
 
+	//notice시퀀스
 	@Override
 	public int seqNocInsert() throws SQLException {
-		//notice시퀀스
 		return sqlSession.insert("csCenter.seqNocInsert");
 	}
+	
+	// faq시퀀스
 	@Override
 	public int seqFaqInsert() throws SQLException {
-		// faq시퀀스
 		return sqlSession.insert("csCenter.seqFaqInsert");
+	}
+	
+	//Inq시퀀스
+	@Override
+	public int seqInqInsert() throws SQLException {
+		System.out.println("inq시퀀스 동작");
+		return sqlSession.insert("csCenter.seqInqInsert");
 	}
 
 
@@ -125,6 +141,9 @@ public class CsDaoImpl implements CsDao {
 		
 		return sqlSession.delete("csCenter.csFaqDelete", num);
 	}
+
+
+
 
 
 

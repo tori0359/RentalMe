@@ -334,7 +334,7 @@
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">고객센터</a>
+          <a href="${pageContext.request.contextPath}/cs/csFAQ" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" >고객센터</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

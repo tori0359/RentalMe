@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.user.service.MpUserService;
@@ -197,7 +198,7 @@ public class UserController {
 	@RequestMapping(value = "/updInfo", method = RequestMethod.GET)
 	public String modifyInfo() {
 		log.debug("내 정보 수정 폼 컨트롤러...");
-	
+		
 		return "mp/user/userUpdInfo";
 	}
 
@@ -218,19 +219,26 @@ public class UserController {
 	}
 	
 	/**
+	 * @throws SQLException 
 	* 내 문의 보기
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/mp/quest", method = RequestMethod.GET)
-	public ModelAndView getQuestList() {
+	public ModelAndView getQuestList(CsVo csVo,HttpSession session) throws SQLException {
 		log.debug("내 문의 보기 컨트롤러...");
-		
+		String useId=(String)session.getAttribute("loginUserId");
 		ModelAndView mav = new ModelAndView();
+			System.out.println("dd");
+		mpUserService.myList(csVo, session);
+		
+		mav.addObject("mylist", mpUserService.myList(csVo, session));
+		System.out.println("list뽑고 넘기기");
 		mav.setViewName("mp/user/userQuestList");
+		
 		return mav;
 	}
 	
@@ -261,7 +269,7 @@ public class UserController {
 	*/
 	@RequestMapping(value = "/act", method = RequestMethod.GET)
 	public ModelAndView getActList() {
-		log.debug("내 문의 보기 컨트롤러...");
+		log.debug("내 활동 보기 컨트롤러...");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mp/user/userActList");
