@@ -25,9 +25,10 @@ public class UsedVo {
 	private Date chgDt;                	 // 변경일자
 	private String regId;                // 등록아이디
 	private Date regDt;                  // 등록일자
-	private String mcnm;				 //모델명
-	private String align;					 // list 순서
-	private int startPage;			// 시작 페이지
+	private String mcnm;				 // 모델명
+	private String align;				 // list 순서
+	private int startPage;				 // 시작 페이지
+	private String userId;				 // 유저 아이디
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -262,6 +263,14 @@ public class UsedVo {
 
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	@Override

@@ -151,7 +151,7 @@ public class UsedDaoImpl implements UsedDao {
 	public int usedcount(UsedVo bean) throws SQLException {
 		return sqlSession.selectOne("used.usedcount", bean);
 	}
-
+	
 
 
 	

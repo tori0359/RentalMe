@@ -15,6 +15,7 @@ public class UsedCmtVo {
 	private Date chgDt;				// 변경일자
 	private String regId;			// 등록아이디
 	private Date regDt;				// 등록일자
+	private String userId;			// 유저 아이디
 	
 	public UsedCmtVo() {
 		// TODO Auto-generated constructor stub
@@ -131,6 +132,15 @@ public class UsedCmtVo {
 
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
+	}
+
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	@Override
