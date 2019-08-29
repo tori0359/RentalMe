@@ -109,14 +109,67 @@ public class MngCsController {
 	}
 	
 	@RequestMapping(value="/noticeDelete", method=RequestMethod.POST)
-	public ModelAndView listdel(@RequestParam("num") int num) throws SQLException {
-		
-		csService.noticDel(num);
+	public ModelAndView nolistdel(@RequestParam("num") String num) throws SQLException {
 		System.out.println(num);
+		csService.noticDel(num);
 		ModelAndView  mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
 		return mav;
 	}
 	
+	@RequestMapping(value="/faqDelete", method=RequestMethod.POST)
+	public ModelAndView falistdel(@RequestParam("num") String num) throws SQLException {
+		System.out.println(num);
+		csService.faqDel(num);
+		ModelAndView  mav=new ModelAndView("redirect:/mp/mng/csFaqList");
+		return mav;
+	}
+	
+	
+	
+	//notic수정페이지로 이동
+	@RequestMapping(value="/csNoticeUpdatePage")
+	public ModelAndView noticup(CsVo csVo) throws SQLException{
+		
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("detail",csService.csNoticeDetail(csVo));
+		mav.setViewName("/mp/manager/mngCsNoticeUpdate");
+		return mav;
+	}
+	
+	//fac수정페이지로 이동
+		@RequestMapping(value="/csFaqUpdatePage")
+		public ModelAndView faqup(CsVo csVo) throws SQLException{
+			
+			ModelAndView mav=new ModelAndView();
+			System.out.println("ㅠㅠ"+csVo.getFaqNo());
+			mav.addObject("qdetail",csService.csFaqDetail(csVo));
+			
+			mav.setViewName("/mp/manager/mngCsFaqUpdate");
+			return mav;
+		}
+	
+	//notic수정페이지 파라미터 넣기
+	@RequestMapping(value="/csNoticeUpdate")
+	public ModelAndView noticupdae(CsVo csVo) throws SQLException {
+		System.out.println("/cs/csNoticeUpdate");
+		csService.csUpdateOne(csVo);
+		System.out.println(csVo.getNoticNo()+"+"+csVo.getSub());
+		ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
+		
+		return mav;
+	}
+	
+	//faq수정페이지 파라미터 넣기
+		@RequestMapping(value="/csFaqUpdate")
+		public ModelAndView faqupdae(CsVo csVo) throws SQLException {
+			System.out.println("/cs/csFaqUpdate");
+			csService.csUpdateOne(csVo);
+			System.out.println(csVo.getNoticNo()+"+"+csVo.getSub());
+			ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
+			
+			return mav;
+		}
 	/**
 	* 1:1 문의
 	* 

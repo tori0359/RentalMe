@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.service.CsService;
 
 
@@ -47,6 +48,7 @@ public class CsController {
 		return "cs/csInquiry";
 		
 	}
+	
 /////////////////////////////////////////////////////////////////////////////	
 	//공지게시판
 	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
@@ -57,6 +59,7 @@ public class CsController {
 		mav.setViewName("cs/csNotice");
 		return mav;
 	}
+	
 	
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
@@ -70,27 +73,31 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////		
 	//notice상세게시판
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
-	public String csNoticeDetail(@RequestParam("noticNo") String noticNo, @RequestParam("csGbCd") String  csGbCd ,Model model) throws Exception{
+	public ModelAndView csNoticeDetail(CsVo csVo) throws Exception{
 		
+		ModelAndView mav=new ModelAndView();
 		System.out.println("detail..start");
-		model.addAttribute("adetail", csService.csNoticeDetail(noticNo,csGbCd));
+		csService.csNoticeDetail(csVo);
+		mav.addObject("adetail", csService.csNoticeDetail(csVo));
+		
 		System.out.println("detail...end");
-		return "cs/csNoticeDetail";
+		return mav;
 		
 	}
 	
 	//faq상세게시판
 	@RequestMapping(value="/csFaqDetail",method=RequestMethod.GET)
-	public String csFaqDetail(@RequestParam("csGbCd") String csGbCd, @RequestParam("faqNo") String  faqNo,@RequestParam("csClassGbCd")String csClassGbCd,Model model) throws Exception{
+	public ModelAndView csFaqDetail(CsVo csVo) throws Exception{
 		
-		System.out.println("detail..start");
-		model.addAttribute("bdetail", csService.csFaqDetail(csGbCd,faqNo, csClassGbCd));
-		System.out.println("detail...end");
-		return "cs/csFaqDetail";
 		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bdetail", csService.csFaqDetail(csVo));
+		
+		return mav;
 	}
 	
-/////////////////////////////////////////////////////////////////////////////		
+/////////////////////////////////////////////////////////////////////////////	
+
 	/**
 	* 고객센터 - 문의 등록 폼 
 	* 

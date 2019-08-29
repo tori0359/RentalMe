@@ -16,7 +16,7 @@
 	</script>
 <style type="text/css">
         #daeContent{
-        	margin-top:100px;
+        	margin-top:70px;
         }
        
         #daeContent tr>td:nth-child(1){
@@ -47,11 +47,17 @@
 </head>
 <body>
 <div id="content">
+<form action="/mp/mng/csFaqUpdatePage">
 	<div class="col-md-10 col-md-offset-1"> 
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >작 성 자</label></td>
                 <td>관리자</td>
+            </tr>
+            <tr>
+                <td><label for="id" >글 번 호</label></td>
+                <td><input type="hidden" name="faqNo" value="${bdetail.faqNo}">${bdetail.faqNo}</td>
+                <td><input type="hidden" name="csGbCd" value="${bdetail.csGbCd}"></td>
             </tr>
             <tr>
                 <td><label for="">분류</label></td>
@@ -86,10 +92,12 @@
                 <td></td>
                 <td id="daeButton" >
                   <input id="cancel" type="reset" value="취소">
+                  <input id="updae" type="submit" value="수정">
                 </td>
             </tr>
         </table>
 	</div>
+ </form>
 </div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>

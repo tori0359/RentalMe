@@ -16,7 +16,7 @@
 	</script>
 <style type="text/css">
         #daeContent{
-        	margin-top:100px;
+        	margin-top:70px;
         }
        
         #daeContent tr>td:nth-child(1){
@@ -48,10 +48,16 @@
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
+	<form action="/mp/mng/csNoticeUpdatePage">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >작 성 자</label></td>
                 <td>관리자</td>
+            </tr>
+            <tr>
+                <td><label for="id" >글 번 호</label></td>
+                <td><input type="hidden" name="noticNo" value="${adetail.noticNo}">${adetail.noticNo}</td>
+                <td><input type="hidden" name="csGbCd" value="${adetail.csGbCd}"></td>
             </tr>
             <tr>
             	<td><label>작성일</label></td>
@@ -59,19 +65,21 @@
             </tr>
             <tr>
                 <td><label for="" >제목</label></td>
-                <td>${adetail.sub}</td>
+                <td><input type="hidden" value="${adetail.sub}">${adetail.sub}</td>
             </tr>
             <tr>
                 <td><label for="" >내용</label></td>
-                <td>${adetail.content}</td>
+                <td><input type="hidden" value="${adetail.content}">${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                  <input id="cancel" type="reset" value="취소">
+                  <input id="cancel" type="reset" value="뒤로"/>
+                  <input id="updae" type="submit" value="수정"/>
                 </td>
             </tr>
         </table>
+	</form>
 	</div>
 </div>
 </body>
