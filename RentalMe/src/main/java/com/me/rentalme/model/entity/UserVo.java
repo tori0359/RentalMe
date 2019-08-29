@@ -20,7 +20,7 @@ public class UserVo {
 	private String  pwFailCnt;		// 비밀번호 오류횟수
 	private Date	pwAdjDt;		// 비밀번호	적용일자
 	private String	levelGbCd;		// 레벨구분코드(1:일반, 2:관리자)
-	private Date    joinDt;			// 가입일자
+	private String  joinDt;			// 가입일자
 	private String  userStsCd;		// 사용자상태코드(1:정상, 2:휴면, 3:삭제)
 	private String  chgId;			// 변경아이디
 	private Date  	chgDt;			// 변경일자	
@@ -35,7 +35,7 @@ public class UserVo {
 
 	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
 			String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
-			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, Date joinDt, String userStsCd,
+			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, String joinDt, String userStsCd,
 			String chgId, Date chgDt, String regId, Date regDt) {
 		super();
 		this.userId = userId;
@@ -234,12 +234,12 @@ public class UserVo {
 	}
 
 
-	public Date getJoinDt() {
+	public String getJoinDt() {
 		return joinDt;
 	}
 
 
-	public void setJoinDt(Date joinDt) {
+	public void setJoinDt(String joinDt) {
 		this.joinDt = joinDt;
 	}
 

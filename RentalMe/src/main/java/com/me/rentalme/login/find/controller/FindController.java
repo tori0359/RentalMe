@@ -1,12 +1,22 @@
 package com.me.rentalme.login.find.controller;
 
+import java.sql.Date;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.login.find.service.LoginFindService;
 import com.me.rentalme.model.entity.UserVo;
 
 /**
@@ -18,26 +28,12 @@ import com.me.rentalme.model.entity.UserVo;
 * 등록일자 : 2019.08.14
 */
 @Controller
-@RequestMapping("/login")
 public class FindController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
-
-	/**
-	* 등록된 이메일로 아이디 찾기 폼
-	* 
-	* @param  
-	* @return String 
-	* @author 황인준
-	* @exception
-	* 등록일자 : 2019-08-14 
-	*/
-	@RequestMapping(value = "/email/findId", method = RequestMethod.GET)
-	public String findEmailId() {
-		log.debug("등록된 이메일로 아이디 찾기 폼 컨트롤러...");
-		
-		return "login/find/emailId";
-	}
+	
+	@Inject
+	LoginFindService loginFindService; 
 	
 	/**
 	* 등록된 이메일로 아이디 찾기
@@ -48,35 +44,17 @@ public class FindController {
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/email/findId", method = RequestMethod.POST)
-	public ModelAndView findEmailId(String email) {
+	
+	@RequestMapping(value = "/emailFindId", method = RequestMethod.GET)
+	public @ResponseBody List<UserVo> findEmailId(@RequestParam("email") String email, Model model) {
 		log.debug("등록된 이메일로 아이디 찾기 컨트롤러 ...");
 		
-		//Service 작성 - return : bean, parameter : email
-		//UserVo bean = findService.findEmailId(email);
 		
-		ModelAndView mav = new ModelAndView();
-		//성공 : 등록된 이메일 아이디찾기 결과
-		//mav.addObject("bean", bean); // 아이디, 가입일자 전송
-		mav.setViewName("login/find/resultId");
+		//등록한 이메일로 사용자 정보를 가지고온다.
+		List<UserVo> infoList = loginFindService.getId(email);
+
+		return infoList;
 		
-		return mav;
-	}
-	
-	/**
-	* 등록된 이메일로 비밀번호 찾기 폼
-	* 
-	* @param  
-	* @return String 
-	* @author 황인준
-	* @exception
-	* 등록일자 : 2019-08-14 
-	*/
-	@RequestMapping(value = "/email/findPw", method = RequestMethod.GET)
-	public String findEmailPw() {
-		log.debug("등록된 이메일로 비밀번호 찾기 폼 컨트롤러");
-		
-		return "login/find/emailPw";
 	}
 	
 	/**

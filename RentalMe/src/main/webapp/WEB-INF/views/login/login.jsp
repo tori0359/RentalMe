@@ -86,15 +86,18 @@
 							<input type="text" placeholder="번호입력" />
 						</div>
 						<div id="id_email_find">
-							<input type="text" placeholder="메일주소입력" />
+							<input type="text" placeholder="메일주소입력" name="inputEmail" id="inputEmail" />
 						</div>
+						
+						<div id="email-danger">email은 영문+숫자만 가능합니다.</div>
+						<div id="empty-danger">이메일을 입력해주시기 바랍니다.</div>
+						<div id="noEmail-danger">등록된 이메일이 아닙니다.</div>						
 					</div>
 				</div>				
 				<div id="modal-footer">
 					<div>
 						<button id="id_find_btn" type="button"
-							class="btn btn-default btn-block" data-toggle="modal"
-							data-target="#find_id_modal" data-ismiss="modal">찾기</button>
+							class="btn btn-default btn-block" >찾기</button>
 					</div>
 				</div>
 
@@ -111,7 +114,7 @@
 					<div>
 						<button id="pw_find_btn" type="button"
 							class="btn btn-default btn-block" data-toggle="modal"
-							data-target="#find_pw_modal" data-dismiss="modal">찾기</button>
+							data-target="#find_pw_modal" data-ismiss="modal">찾기</button>
 					</div>
 				</div>
 
@@ -133,17 +136,8 @@
 					</button>
 					<h4 class="modal-title">아이디 찾기</h4>
 				</div>
-				<div class="modal-body">
-					<table border="1">
-						<tr>
-							<td>아이디</td>
-							<td>asdzxc</td>
-						</tr>
-						<tr>
-							<td>가입일자</td>
-							<td>2019-00-00</td>
-						</tr>
-					</table>
+				<div class="modal-body" id="find_id_body" style="overflow: auto; height: 500px;">
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -183,6 +177,7 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+	
 	<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
