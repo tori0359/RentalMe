@@ -1,8 +1,6 @@
 package com.me.rentalme.mp.user.controller;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -10,23 +8,19 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.user.service.MpUserService;
-import com.me.rentalme.mp.user.service.MpUserServiceImpl;
 
 /**
 * 마이페이지 컨트롤러
 * 
-* @author 황인준
+* @author 신지영
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.14
@@ -46,15 +40,18 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView getOrderList() throws SQLException {
+	public ModelAndView getOrderList(HttpSession session) throws SQLException {
 		log.debug("주문내역 리스트 컨트롤러...");
 		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("alist",mpUserService.ordList());
+		mav.addObject("alist",mpUserService.ordList(mbNo));
+		mav.addObject("userVo",mpUserService.getName(mbNo));
 		mav.setViewName("mp/user/userOrdList");
 		
 		return mav;
@@ -89,15 +86,19 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ModelAndView getCartList() throws SQLException {
+	public ModelAndView getCartList(HttpSession session) throws SQLException {
 		log.debug("장바구니 컨트롤러...");
 		
-		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("userVo",mpUserService.getName(mbNo));
+		
+		
 		mav.addObject("alist",mpUserService.cartList());
 		mav.setViewName("mp/user/userCartList");
 		return mav;
@@ -109,7 +110,7 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/wish", method = RequestMethod.GET)
@@ -161,17 +162,22 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public ModelAndView getDeposit(CallVo callVo) throws SQLException {
+	public ModelAndView getDeposit(CallVo callVo, HttpSession session) throws SQLException {
 		log.debug("예치금 컨트롤러...");
 	
 		ModelAndView mav = new ModelAndView();
-		mpUserService.updateDeposit();
-		mav.addObject("alist", mpUserService.depositList());
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
+		
+		//현재 예치금금액으로 update
+		mpUserService.updateDeposit();
+		
+		mav.addObject("alist", mpUserService.depositList());
 		mav.addObject("callVo",mpUserService.userInfoList());
 		
 		mav.setViewName("mp/user/userDeposit");
@@ -190,34 +196,86 @@ public class UserController {
 	}	
 	
 	/**
+	 * @throws SQLException 
 	* 내 정보 수정 폼
 	* 
 	* @param  
 	* @return String 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/updInfo", method = RequestMethod.GET)
-	public String modifyInfo() {
+	public ModelAndView modifyInfo(UserVo userVo, HttpSession session) throws SQLException {
 		log.debug("내 정보 수정 폼 컨트롤러...");
-	
-		return "mp/user/userUpdInfo";
+		
+		//세션에 저장되어있는 회원번호를 변수에 저장
+		String mbNo= (String) session.getAttribute("loginMbNo");
+		
+		
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("userVo",mpUserService.userInfo(mbNo));
+		
+		
+		
+		
+		
+		
+		mav.setViewName("mp/user/userUpdInfo");
+		
+		return mav;
 	}
 
 	
 	/**
+	 * @throws SQLException 
 	* 내 정보 수정
 	* 
 	* @param  UserVo
 	* @return String 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
-	@RequestMapping(value = "/updInfo", method = RequestMethod.PUT)
-	public String modifyInfo(UserVo bean) {
+	@RequestMapping(value = "/updInfo", method = RequestMethod.POST)
+	public String modifyInfo2(UserVo userVo,HttpSession session ) throws SQLException {
 		log.debug("내 정보 수정 컨트롤러...");
-	
-		return "mp/user/userUpdInfo";
+		
+		//세션에 저장되어있는 회원번호를 변수에 저장
+		String mbNo= (String) session.getAttribute("loginMbNo");
+		System.out.println(mbNo);
+		
+		mpUserService.myinfo(mbNo,userVo);
+		//이름 등록시 세션에 이름 저장하기
+		session.setAttribute("loginUserNM", userVo.getUserNM());
+		
+		
+		
+		return "redirect:/mp/updInfo";
+	}
+	/**
+	 * @throws SQLException 
+	* 경매내역
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
+	@RequestMapping(value = "/auctList", method = RequestMethod.GET)
+	public ModelAndView getAuctList(HttpSession session) throws SQLException {
+		log.debug("경매내역 보기 컨트롤러...");
+		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userVo",mpUserService.getName(mbNo));
+		
+		
+		mav.addObject("alist",mpUserService.AuctList(mbNo));
+		
+		mav.setViewName("mp/user/userAuctList");
+		return mav;
 	}
 	
 	/**
@@ -225,12 +283,14 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/mp/quest", method = RequestMethod.GET)
 	public ModelAndView getQuestList() {
 		log.debug("내 문의 보기 컨트롤러...");
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mp/user/userQuestList");
@@ -242,7 +302,7 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/used", method = RequestMethod.GET)
@@ -259,7 +319,7 @@ public class UserController {
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value = "/act", method = RequestMethod.GET)

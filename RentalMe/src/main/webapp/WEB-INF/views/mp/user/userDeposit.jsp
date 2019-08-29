@@ -8,8 +8,9 @@
 <meta charset="UTF-8">
 <style type="text/css">
 .name{
-	width:300px;
+	width:400px;
 	height:100px;
+	display:inline-block;
 }
 
 .name>div>h2{
@@ -44,7 +45,6 @@
 .select{
 	width:100px;
 	height: 100px;
-	border:1px solid red;
 }
 
 .select>div>p{
@@ -88,9 +88,6 @@
 }
 #menuuse{
 	border-color: red red red;
-}
-.jumbotron{
-	background-color:red;
 }
 </style>
 
@@ -139,15 +136,30 @@
 		});
 		
 	});
+	window.onload=function(){
+		$('#charge_button').click(function(){
+			alert("충전이 완료되었습니다!");
+		});
+	}
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 <body>
 <div style="margin-top:100px;" class="jumbotron">
   <div class="container">
 	  <div class="row">
-	  	<div class="name col-md-2 col-md-offset-3">
-		  	<div><h2>오남매</h2></div>
+	  	<div class="name col-md-3 col-md-offset-3">
+		  	<div>
+		  	
+		  	<input type="hidden" value="${loginMbNo}">
+		     <c:if test="${empty userVo.userNM}">
+		     	<h2>${userVo.userNM}</h2>
+		     </c:if>
+		     <c:if test="${!empty userVo.userNM }">
+		     	<h2>${userVo.userNM}</h2>
+		     </c:if>
+		  	</div>
 		  	<div><p>님</p></div>
 	  	</div>
 	  <div class="deposit col-md-3 col-md-offset-2">
@@ -198,7 +210,9 @@
 					<fmt:formatNumber pattern="##,###.##">${bean.refundDeposit}</fmt:formatNumber> 원
 				</c:if>
 			</td>
-			<td>${bean.depositDt}</td>
+			<td>${bean.depositDt}
+			<input type="hidden" name="depositSeq" value="${bean.depositSeq}"/>
+			</td>
 		</tr>
 		<c:set var="remnDeposit" value="${bean.remnDeposit}"/>
 		<c:set var="userId" value="${bean.userId}"/>
@@ -232,7 +246,7 @@
        		</tr>
        	</table>
        	<div class="chargediv">
-       		<button style="width:150px;" type="submit" class="btn btn-danger">충천하기</button>
+       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충천하기</button>
        	</div>
 </div>
 </form>
@@ -241,7 +255,7 @@
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td>${remnDeposit}</td>
+       			<td><fmt:formatNumber pattern="#,###.##">${remnDeposit}</fmt:formatNumber> 원</td>
        		</tr>
 			<tr>
        			<th class="active" style="text-align:center;">환불요청 금액(원)</th>

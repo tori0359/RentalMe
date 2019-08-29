@@ -30,10 +30,25 @@ public class CallVo {
 	private String refundDeposit;
 	private String depositGbCd;
 	private String remnDeposit;
-	
+	private String bidPrice;
+	private String bidTime;
 	
 
+	public String getBidPrice() {
+		return bidPrice;
+	}
 
+	public void setBidPrice(String bidPrice) {
+		this.bidPrice = bidPrice;
+	}
+
+	public String getBidTime() {
+		return bidTime;
+	}
+
+	public void setBidTime(String bidTime) {
+		this.bidTime = bidTime;
+	}
 
 	public String getRemnDeposit() {
 		return remnDeposit;
