@@ -1,6 +1,6 @@
+<%@page import="javax.mail.Session"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <!doctype html>
 <html>
 <head>
@@ -15,6 +15,10 @@
 		
 		})
 	</script>
+	<%
+		String userId=(String)session.getAttribute("userId");
+	
+	%>
 	<style type="text/css">
         #dae{
             font-size:30pt;
@@ -41,6 +45,9 @@
             width:100%;
             height:250px;
         }
+        #text{
+        	width:100%;
+        }
         #csContent{
         	height:900px;
         }
@@ -57,35 +64,36 @@
 <br/><br/>
 </div>
 <div class="col-md-8 col-md-offset-2">
-    <form action="mp/userQuestList" method="post">
+    <form action="/cs/csInquiryAdd" method="post">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="id" >아 이 디</label></td>
-                <td>admin</td>
+                <td><input type="hidden"/>${id}</td>
+                <td><input type="hidden" name="csGbCd" value="30"/></td>
             </tr>
             <tr>
                 <td><label for="category">분류</label></td>
                 <td>
         <div>
-        	<select style="height:26px;"  name="select">
-        		<option value="">분류선택</option>
-        		<option value="order">주문</option>
-        		<option value="delivery">배송</option>
-        		<option value="payment">결제</option>
-        		<option value="exchange">교환/취소</option>
-        		<option value="userinfo">회원정보</option>
-        		<option value="guitar">기타</option>
+        	<select style="height:26px;"  name="csClassGbCd">
+        		<option value="" selected="selected">분류선택</option>
+        		<option value="1">주문</option>
+        		<option value="2">배송</option>
+        		<option value="3">결제</option>
+        		<option value="4">교환/취소</option>
+        		<option value="5">회원정보</option>
+        		<option value="6">기타</option>
         	</select>
         </div>
            </td>
             </tr>
             <tr>
-                <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub"></td>
+                <td><label>제목</label></td>
+                <td><input id="text" type="text" name="sub"></td>
             </tr>
             <tr>
-                <td><label for="id" >내용</label></td>
-                <td><textarea name="conetent" style="resize:none;"></textarea></td>
+                <td><label>내용</label></td>
+                <td><textarea name="content" style="resize:none;"></textarea></td>
             </tr>
             <tr>
                 <td></td>

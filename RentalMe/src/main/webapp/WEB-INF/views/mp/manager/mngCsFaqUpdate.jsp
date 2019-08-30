@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@
 <body>
 <div id="csContent">
 		<h2>공지/FAQ수정</h2>
-<form action="/mp/mng/csFaqUpdate" method="get">
+<form action="/mp/mng/csFaqUpdate" method="post">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="" >작 성 자</label></td>
@@ -85,11 +85,10 @@
             <tr>
             	<td><label>글 번 호</label></td>
 		        <td><input type="hidden" value="${qdetail.faqNo}" name="faqNo">${qdetail.faqNo}</td>
-		        <td>${qdetail.faqNo}</td>
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td><input type="text" name="sub" id="text" value="${qdetail.sub}"></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>

@@ -17,12 +17,16 @@
 	#btn00{
 		text-align:right;
 	}
-	
+	#uptext{
+		height:130px;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 </head>
 <body>
+<c:choose>
+<c:when test="${id eq 'minminad'}">
 <!-- 관리자 공지게시판 리스트 -->
 <h1>공지/FAQ</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
@@ -70,6 +74,11 @@
 	</div>
 				<div id="btn00"><a href="/mp/mng/csAdd"><input type="button" id="btn00" value="등록"></a></div>
 </div>
+</c:when>
+<c:otherwise>
+<h1>관리자 전용</h1>
+</c:otherwise>
+</c:choose>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

@@ -7,16 +7,16 @@
 <meta charset="UTF-8">
 <style type="text/css">
 
-	   #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	      }
-	      
-		.contentDiv{
-			padding-bottom: 200px;
-		}
-		
-		#mp{
+      #wrap{
+            min-height:100%;
+            position:relative;
+         }
+         
+      .contentDiv{
+         padding-bottom: 200px;
+      }
+      
+      #mp{
             margin: 50px 0px 10px 30px;
         }
         
@@ -34,8 +34,8 @@
             -moz-border-radius: 15px 15px 0 0;
             -webkit-border-radius: 15px 15px 0 0;
             border-radius: 15px 15px 0 0;
-			font-family: "nanumR";
-			text-align: center;
+         font-family: "nanumR";
+         text-align: center;
         }
         
         .mpTable>tbody tr{
@@ -53,17 +53,17 @@
             -ms-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
         }
-	   .mpTable>tbody>tr a{
-		   color: black;
-		   font-family: "nanumB";
-		   display: block;
-		   text-decoration: none;
-	   }
-	   
-	   .mpTable>tbody>tr a:hover{
-		   text-decoration: none;
-		   
-	   }
+      .mpTable>tbody>tr a{
+         color: black;
+         font-family: "nanumB";
+         display: block;
+         text-decoration: none;
+      }
+      
+      .mpTable>tbody>tr a:hover{
+         text-decoration: none;
+         
+      }
         
        .mpTable>tbody>tr:last-child td{
             -moz-border-radius: 0 0 15px 15px;
@@ -71,16 +71,16 @@
             border-radius: 0 0 15px 15;            
         } 
         
-	   .mpdiv{
-		   position: relative;
-		   z-index:1;
-		   margin-top:100px;
-		   margin-bottom: 100px;
-	   }
-	
-	   .row{
-		   margin: 0px;
-	   
+      .mpdiv{
+         position: relative;
+         z-index:1;
+         margin-top:100px;
+         margin-bottom: 100px;
+      }
+   
+      .row{
+         margin: 0px;
+      
        }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
@@ -119,7 +119,7 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매상품 관리</a></td>
            </tr>
        </table>
-		<table style="margin-top:30px; " class="mpTable">
+      <table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
                 <th style="color:white;"class="text-center">중고거래관리</th>
@@ -139,13 +139,10 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">공지사항/FAQ관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/csNoticeList">공지사항/FAQ관리</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">1:1문의 관리</a></td>
-           </tr>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">상담예약 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/InqList">1:1문의 관리</a></td>
            </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
@@ -159,9 +156,7 @@
            </tr>
        </table>
        </div>
-		<div id="mpContent" class="col-md-9">
+      <div id="mpContent" class="col-md-9">
   
-     
-
 </body>
 </html>

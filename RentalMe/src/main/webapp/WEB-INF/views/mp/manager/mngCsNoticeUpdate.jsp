@@ -53,7 +53,7 @@
 <body>
 <div id="csContent">
 		<h2>공지/FAQ수정</h2>
-<form action="/mp/mng/csNoticeUpdate" method="get">
+<form action="/mp/mng/csNoticeUpdate" method="post">
         <table class="table" id="daeContent">
             <tr>
                 <td><label for="" >작 성 자</label></td>
@@ -88,7 +88,7 @@
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td><input type="text" name="sub" id="text" value="${detail.sub}"></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>

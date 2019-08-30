@@ -226,13 +226,14 @@
       <c:choose>
       	<c:when test="${loginUserId == null }">
 	      	<a href="/login" class="navbar-link">로그인</a> ㅣ
-	      	<a href="/join/signup" class="navbar-link">회원가입</a></p>
+	      	<a href="/join/signup" class="navbar-link">회원가입</a>
       	</c:when>
       	<c:otherwise>
       		<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
-	      	<a href="/logout" class="navbar-link">로그아웃</a></p>
+	      	<a href="/logout" class="navbar-link">로그아웃</a>
       	</c:otherwise>
       </c:choose>
+      </p>
       </div>
     </div>
      <div class="navtitle">
@@ -339,7 +340,7 @@
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">고객센터</a>
+          <a href="${pageContext.request.contextPath}/cs/csFAQ" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" >고객센터</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
+<%@ page session="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="../template/header.jsp"></jsp:include>
+<jsp:include page="../../template/header.jsp"></jsp:include>
 <script type="text/javascript">
 	 	$(document).ready(function(){
 			$("#cancel").click(function(){
 					window.history.back();
 				})
-			
 		})
 	</script>
 <style type="text/css">
@@ -43,64 +42,83 @@
         #content{
         	height:600px;
         }
+        #answer{
+        	margin-top:20px;
+        	margin-right:10px;
+        	padding-top:-20px;
+        	margin-bottom:-55px;
+        	
+        }
+        #answer button{
+        	border-radius:5px;
+        	background:white;
+        	color:red;
+        	border-radius:5px;
+        	
+        }
 	</style>
 </head>
 <body>
 <div id="content">
-<form action="/mp/mng/csFaqUpdatePage">
 	<div class="col-md-10 col-md-offset-1"> 
+		<c:if test="${id == 'minminad' }">
+			<c:if test="${bean.questStsCd eq '1' }">
+	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
+			</c:if>
+		</c:if>
+			<form action="/mp/mp/QuestDelete" method="get">
         <table class="table" id="daeContent">
-            <tr>
+           <%--  <tr>
                 <td><label for="id" >작 성 자</label></td>
-                <td>관리자</td>
-            </tr>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo }">일반회원</td>
+            </tr> --%>
             <tr>
                 <td><label for="id" >글 번 호</label></td>
-                <td><input type="hidden" name="faqNo" value="${bdetail.faqNo}">${bdetail.faqNo}</td>
-                <td><input type="hidden" name="csGbCd" value="${bdetail.csGbCd}"></td>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo }"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+               
             </tr>
             <tr>
                 <td><label for="">분류</label></td>
-                <c:if test="${bdetail.csClassGbCd eq '1'}">
+                <c:if test="${bean.csClassGbCd eq '1'}">
                 <td>주문</td>
                 </c:if>
-                <c:if test="${bdetail.csClassGbCd eq '2'}">
+                <c:if test="${bean.csClassGbCd eq '2'}">
                 <td>배송</td>
                 </c:if>
-                <c:if test="${bdetail.csClassGbCd eq '3'}">
+                <c:if test="${bean.csClassGbCd eq '3'}">
                 <td>결제</td>
                 </c:if>
-                <c:if test="${bdetail.csClassGbCd eq '4'}">
+                <c:if test="${bean.csClassGbCd eq '4'}">
                 <td>교환취소</td>
                 </c:if>
-                <c:if test="${bdetail.csClassGbCd eq '5'}">
+                <c:if test="${bean.csClassGbCd eq '5'}">
                 <td>회원정보</td>
                 </c:if>
-                <c:if test="${bdetail.csClassGbCd eq'6'}">
+                <c:if test="${bean.csClassGbCd eq'6'}">
                 <td>기타</td>
                 </c:if>
             </tr>
             <tr>
                 <td><label for="" >제목</label></td>
-                <td>${bdetail.sub}</td>
+                <td>${bean.sub}</td>
             </tr>
             <tr>
                 <td><label for="" >내용</label></td>
-                <td>${bdetail.content}</td>
+                <td>${bean.content}</td>
             </tr>
             <tr>
                 <td></td>
                 <td id="daeButton" >
                   <input id="cancel" type="reset" value="뒤로">
-                  <c:if test="${id eq 'minminad'}">
-                	  <input id="updae" type="submit" value="수정">
+                  <c:if test="${id ne 'minminad'}">
+                 	 <input  type="submit" value="삭제"/>
                   </c:if>
                 </td>
             </tr>
         </table>
+			</form>
 	</div>
- </form>
 </div>
 </body>
-<jsp:include page="../template/footer.jsp"></jsp:include>
+<jsp:include page="../../template/footer.jsp"></jsp:include>
 </html>
