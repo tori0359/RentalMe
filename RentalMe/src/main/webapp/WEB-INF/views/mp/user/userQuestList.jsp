@@ -14,7 +14,12 @@
 	#upmenu{
 		text-align:center;
 	}
-	
+	#ansNo{
+		color:red;
+	}
+	#ansYe{
+		color:blue;
+	}
 </style>
 </head>
 <body>
@@ -32,12 +37,17 @@
 			<td>답변유무</td>
 		</tr>
 			<!-- <form action="" method="get"> -->
-			<c:forEach items="${mylist }" var="bean">
+			<c:forEach items="${mylist}" var="bean">
 				<tr align="center">
 						<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
-						<td><a href="${pageContext.request.contextPath}/cs/csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+						<td><a href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
 						<td>${bean.regDt}</td>
-						<td>Y</td>
+						<c:if test="${bean.questStsCd eq '1'}">
+							<td id="ansNo">N</td>
+						</c:if>
+						<c:if test="${bean.questStsCd eq '2'}">
+							<td id="ansYe">Y</td>
+						</c:if>
 				</tr>
 			</c:forEach>
 			<!-- </form> -->

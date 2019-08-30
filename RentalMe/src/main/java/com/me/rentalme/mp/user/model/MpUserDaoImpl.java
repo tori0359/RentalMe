@@ -94,6 +94,22 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.selectList("csCenter.myQuestList",map);
 	}
 
+	@Override
+	public CsVo myQuestDetail(CsVo csVo) throws SQLException {
+		System.out.println("questDetail로..");
+		
+		return sqlSession.selectOne("csCenter.myQuestDetail", csVo);
+	}
+
+	@Override
+	public int myQuestDel(CsVo csVo) throws SQLException {
+		System.out.println("inq delete dao..");
+		System.out.println("회원번호:"+csVo.getMbNo());
+		System.out.println("게시물번호:"+csVo.getPquestNo());
+		
+		return sqlSession.delete("csCenter.myQuestDel", csVo);
+	}
+
 
 	
 

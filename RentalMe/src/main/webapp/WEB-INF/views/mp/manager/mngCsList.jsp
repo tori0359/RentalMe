@@ -17,7 +17,9 @@
 	#btn00{
 		text-align:right;
 	}
-	
+	#uptext{
+		height:130px;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>

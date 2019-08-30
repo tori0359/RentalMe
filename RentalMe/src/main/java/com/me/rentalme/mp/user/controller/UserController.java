@@ -237,11 +237,50 @@ public class UserController {
 		
 		mav.addObject("mylist", mpUserService.myList(csVo, session));
 		System.out.println("list뽑고 넘기기");
-		mav.setViewName("mp/user/userQuestList");
 		
+		mav.setViewName("mp/user/userQuestList");
 		return mav;
 	}
 	
+	/**
+	 * @throws SQLException 
+	* 내 문의 상세
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
+	@RequestMapping(value="/mp/questDetail")
+	public ModelAndView myQuestDetail(HttpSession session,CsVo csVo) throws SQLException{
+		String user=(String)session.getAttribute("loginUserId");
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bean",mpUserService.myInqDetail(csVo));
+		mav.addObject("id", user);
+		mav.setViewName("mp/user/userQuestDetail");
+		return mav;
+	}
+	
+	/**
+	 * @throws SQLException 
+	* 내 문의 삭제
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
+	@RequestMapping(value="/mp/QuestDelete")
+	public ModelAndView myQuestDe(@RequestParam("pquestNo") String pquestNo, @RequestParam("mbNo") String mbNo,HttpSession session) throws SQLException{
+		
+		CsVo csVo=new CsVo();
+		csVo.setMbNo(mbNo);
+		csVo.setPquestNo(pquestNo);
+		ModelAndView mav=new ModelAndView();
+		mpUserService.myQuestDel(csVo);
+		mav.setViewName("redirect:/mp//mp/quest");
+		return mav;
+	}
 	/**
 	* 나의 중고 상점
 	* 

@@ -88,7 +88,7 @@
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td><input type="text" name="sub" id="text" value="${detail.sub}"></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>

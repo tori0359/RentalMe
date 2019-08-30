@@ -42,4 +42,7 @@ public interface MpUserDao {
 	//1:1문의내역리스트
 	List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException;
 	
+	CsVo myQuestDetail(CsVo csVo) throws SQLException;
+	
+	int myQuestDel(CsVo csVo) throws SQLException;
 }

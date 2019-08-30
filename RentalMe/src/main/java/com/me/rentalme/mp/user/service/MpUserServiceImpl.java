@@ -82,6 +82,20 @@ public class MpUserServiceImpl implements MpUserService{
 		System.out.println("dao로...");
 		return  mpUserDao.myQuestList(csVo,session);
 	}
+ 
+	//개인 1:1문의 상세
+	@Override
+	public CsVo myInqDetail(CsVo csVo) throws SQLException {
+		System.out.println("1대1 상세 service");
+		return mpUserDao.myQuestDetail(csVo);
+	}
+
+	//내 문의 삭제
+	@Override
+	public int myQuestDel(CsVo csVo) throws SQLException {
+		
+			return mpUserDao.myQuestDel(csVo);	
+	}
 
 	
 	

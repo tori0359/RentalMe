@@ -7,16 +7,16 @@
 <meta charset="UTF-8">
 <style type="text/css">
 
-	   #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	      }
-	      
-		.contentDiv{
-			padding-bottom: 200px;
-		}
-		
-		#mp{
+      #wrap{
+            min-height:100%;
+            position:relative;
+         }
+         
+      .contentDiv{
+         padding-bottom: 200px;
+      }
+      
+      #mp{
             margin: 50px 0px 10px 30px;
         }
         
@@ -27,25 +27,26 @@
         
         .mpTable>thead tr{
             height:35px;
-            background-color: #4d4d4d;
+            background-color: #2E2E2E;
         }
         
         .mpTable>thead>tr>th{
             -moz-border-radius: 15px 15px 0 0;
             -webkit-border-radius: 15px 15px 0 0;
             border-radius: 15px 15px 0 0;
-			font-family: "nanumR";
-			text-align: center;
+         font-family: "nanumR";
+         text-align: center;
         }
         
         .mpTable>tbody tr{
             height:30px;
             margin: 10px;
-            background-color:#EBEBEA;
+            background-color: #F1F0EE;
         }
         
         
         .mpTable>tbody tr:hover {
+           font-size: 11pt;
             background-color: lightgrey;
             -o-transition: all 0.2s ease-in-out;
             -webkit-transition: all 0.2s ease-in-out;
@@ -53,17 +54,18 @@
             -ms-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
         }
-	   .mpTable>tbody>tr a{
-		   color: black;
-		   font-family: "nanumB";
-		   display: block;
-		   text-decoration: none;
-	   }
-	   
-	   .mpTable>tbody>tr a:hover{
-		   text-decoration: none;
-		   
-	   }
+      .mpTable>tbody>tr a{
+         color: black;
+         font-family: "nanumB";
+         display: block;
+         text-decoration: none;
+      }
+      
+      .mpTable>tbody>tr a:hover{
+         text-decoration: none;
+         
+         
+      }
         
        .mpTable>tbody>tr:last-child td{
             -moz-border-radius: 0 0 15px 15px;
@@ -71,16 +73,15 @@
             border-radius: 0 0 15px 15;            
         } 
         
-	   .mpdiv{
-		   position: relative;
-		   z-index:1;
-		   margin-top:100px;
-		   margin-bottom: 100px;
-	   }
-	
-	   .row{
-		   margin: 0px;
-	   
+      .mpdiv{
+         position: relative;
+         z-index:1;
+         margin:100px 0 100px 0;
+      }
+   
+      .row{
+         margin: 0px;
+      
         }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
@@ -89,7 +90,7 @@
 <div id="wrap">
 <div class="contentDiv">
    <div id="mp" class="row">
-      <div class="mpdiv col-md-2">
+      <div style="margin-right:0" class="mpdiv col-md-2 col-md-offset-1">
        <table class="mpTable">
            <thead>
             <tr class="active">
@@ -122,14 +123,14 @@
                 <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
            </tr>
        </table>
-		<table style="margin-top:30px; " class="mpTable">
+      <table style="margin-top:30px; " class="mpTable">
            <thead>
             <tr class="active">
                 <th style="color:white;"class="text-center">이벤트 경매</th>
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매내역</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/auctList">경매내역</a></td>
            </tr>
        </table>
        <table style="margin-top:30px; " class="mpTable">
@@ -146,7 +147,7 @@
            </tr>
        </table>
        </div>
-		<div id="mpContent" class="col-md-9">
+      <div id="mpContent" class="col-md-8">
   
      
 

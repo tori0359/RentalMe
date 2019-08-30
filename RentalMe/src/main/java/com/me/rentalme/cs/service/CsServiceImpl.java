@@ -106,5 +106,18 @@ public class CsServiceImpl implements CsService {
 		return 1;
 	}
 
+	//¹®ÀÇ
+	@Override
+	public List<CsVo> csInqList() throws SQLException {
+		
+		return csDao.inqSelectAll();
+	}
+
+	@Override
+	public int inqAnswer(String num) throws SQLException {
+		// TODO Auto-generated method stub
+		return csDao.inqAnswer(num);
+	}
+
 
 }

@@ -31,5 +31,12 @@ public interface MpUserService {
 
 	int insertCharge(CallVo callVo) throws SQLException;
 	
+	//개인 1:1문의 리스트 출력
 	List<CsVo> myList(CsVo csVo,HttpSession session) throws SQLException;
+	
+	//내 문의 상세 페이지
+	CsVo myInqDetail(CsVo csVo) throws SQLException;
+	
+	//내 문의 삭제
+	int myQuestDel(CsVo csVo) throws SQLException;
 }

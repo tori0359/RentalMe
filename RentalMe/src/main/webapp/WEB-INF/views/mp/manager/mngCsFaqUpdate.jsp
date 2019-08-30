@@ -85,11 +85,10 @@
             <tr>
             	<td><label>글 번 호</label></td>
 		        <td><input type="hidden" value="${qdetail.faqNo}" name="faqNo">${qdetail.faqNo}</td>
-		        <td>${qdetail.faqNo}</td>
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td><input type="text" name="sub" id="text" value="${qdetail.sub}"></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>

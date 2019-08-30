@@ -91,6 +91,11 @@ public class CsDaoImpl implements CsDao {
 	}
 
 
+	@Override
+	public List<CsVo> inqSelectAll() throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("csCenter.inqSelectAll");
+	}
 
 	@Override
 	public List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException {
@@ -141,6 +146,16 @@ public class CsDaoImpl implements CsDao {
 		
 		return sqlSession.delete("csCenter.csFaqDelete", num);
 	}
+
+
+	@Override
+	public int inqAnswer(String num) throws SQLException {
+		
+		String pquestNo=num;
+		return sqlSession.update("csCenter.inqAnswer", pquestNo);
+	}
+
+
 
 
 

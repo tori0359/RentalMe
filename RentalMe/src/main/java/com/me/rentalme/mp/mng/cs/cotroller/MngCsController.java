@@ -3,6 +3,7 @@ package com.me.rentalme.mp.mng.cs.cotroller;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,8 +70,28 @@ public class MngCsController {
 		mav.setViewName("/mp/manager/mngCsFaqList");
 		return mav;
 	}
-	
 
+	/**
+	 * @throws SQLException 
+	 * 회원 문의 보기
+	 * 
+	 * @param  
+	 * @return ModelAndView 
+	 * @author 강민수
+	 * @exception 
+	 */
+	@RequestMapping(value = "/InqList", method = RequestMethod.GET)
+	public ModelAndView getQuestList(CsVo csVo) throws SQLException {
+		log.debug("내 문의 보기 컨트롤러...");
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("inqlist", csService.csInqList());
+		System.out.println("list뽑고 넘기기");
+		
+		mav.setViewName("mp/manager/mngCsQuestList");
+		return mav;
+	}
+	
 	/**
 	 * @throws SQLException 
 	*  공지/FAQ 등록
@@ -97,6 +118,7 @@ public class MngCsController {
 		return mav;
 	}
 	
+	
 	@RequestMapping(value = "/csAdd")
 	public ModelAndView addCs() {
 		log.debug("공지/FAQ 등록 컨트롤러");
@@ -108,6 +130,15 @@ public class MngCsController {
 		return mav;
 	}
 	
+	/**
+	 * @throws SQLException 
+	*  공지/FAQ 삭제
+	* 
+	* @param  ProductVo - 상품
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
 	@RequestMapping(value="/noticeDelete", method=RequestMethod.POST)
 	public ModelAndView nolistdel(@RequestParam("num") String num) throws SQLException {
 		System.out.println(num);
@@ -125,7 +156,15 @@ public class MngCsController {
 	}
 	
 	
-	
+	/**
+	 * @throws SQLException 
+	*  공지/FAQ 수정
+	* 
+	* @param  ProductVo - 상품
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
 	//notic수정페이지로 이동
 	@RequestMapping(value="/csNoticeUpdatePage")
 	public ModelAndView noticup(CsVo csVo) throws SQLException{
@@ -153,10 +192,14 @@ public class MngCsController {
 	@RequestMapping(value="/csNoticeUpdate")
 	public ModelAndView noticupdae(CsVo csVo) throws SQLException {
 		System.out.println("/cs/csNoticeUpdate");
-		csService.csUpdateOne(csVo);
-		System.out.println(csVo.getNoticNo()+"+"+csVo.getSub());
-		ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
+		ModelAndView mav=new ModelAndView();
+		System.out.println(csVo.getNoticNo());
 		
+		
+		csService.csUpdateOne(csVo);
+		mav.addObject(csVo.getNoticNo());
+		System.out.println(csVo.getNoticNo()+"+"+csVo.getSub());
+		mav.setViewName("redirect:/mp/mng/csNoticeList");
 		return mav;
 	}
 	
@@ -164,10 +207,30 @@ public class MngCsController {
 		@RequestMapping(value="/csFaqUpdate")
 		public ModelAndView faqupdae(CsVo csVo) throws SQLException {
 			System.out.println("/cs/csFaqUpdate");
+			ModelAndView mav=new ModelAndView();
+			
 			csService.csUpdateOne(csVo);
 			System.out.println(csVo.getNoticNo()+"+"+csVo.getSub());
-			ModelAndView mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
-			
+			mav.setViewName("redirect:/mp/mng/csFaqList");
+			return mav;
+		}
+		
+		
+		/**
+		 * @throws SQLException 
+		* 회원 문의 답변유무
+		* 
+		* @param  
+		* @return ModelAndView 
+		* @author 강민수
+		* @exception 
+		*/
+		@RequestMapping(value="/answer")
+		public ModelAndView questAnswer(@RequestParam("pquestNo") String num) throws SQLException{
+			System.out.println(num);
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("answer",csService.inqAnswer(num));
+			mav.setViewName("redirect:/mp/mng/InqList");
 			return mav;
 		}
 	/**

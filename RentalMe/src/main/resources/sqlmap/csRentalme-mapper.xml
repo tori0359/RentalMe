@@ -13,11 +13,18 @@
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
   	</select>
+  	<select id="inqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT * FROM TB_PQUEST100 ORDER BY PQUEST_NO DESC
+  	</select>
+  	
   	<select id="csNoticeDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo}
   	</select>
   	<select id="myQuestList" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_PQUEST100 INNER JOIN TB_USER100 ON TB_PQUEST100.MB_NO=TB_USER100.MB_NO WHERE TB_USER100.MB_NO=#{mbNo}
+  		SELECT * FROM TB_PQUEST100 INNER JOIN TB_USER100 ON TB_PQUEST100.MB_NO=TB_USER100.MB_NO WHERE TB_USER100.MB_NO=#{mbNo} ORDER BY PQUEST_NO DESC
+  	</select>
+  	<select id="myQuestDetail" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT * FROM TB_PQUEST100 WHERE MB_NO=#{mbNo} and PQUEST_NO=#{pquestNo}
   	</select>
   	
   	
@@ -42,15 +49,19 @@
 		INSERT INTO SEQ_PQUEST100 VALUES(NULL)
 	</insert>
 	
-	
 	<delete id="csNoticeDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
 		DELETE FROM TB_NOTIC100 WHERE NOTIC_NO=#{NUM}
 	</delete>
 	<delete id="csFaqDelete" parameterType="com.me.rentalme.cs.entity.CsVo">
 		DELETE FROM TB_FAQ100 WHERE FAQ_NO=#{NUM}
 	</delete>
+	<delete id="myQuestDel" parameterType="com.me.rentalme.cs.entity.CsVo">
+		DELETE FROM TB_PQUEST100 WHERE PQUEST_NO=#{pquestNo} AND MB_NO=#{mbNo}
+	</delete>
 	
-	
+	<update id="inqAnswer" parameterType="com.me.rentalme.cs.entity.CsVo">
+		UPDATE TB_PQUEST100 SET QUEST_STS_CD='2' WHERE PQUEST_NO=#{pquestNo}
+	</update>
 	<update id="csNoticeUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
 		UPDATE TB_NOTIC100 SET SUB=#{sub}, CONTENT=#{content} WHERE NOTIC_NO=#{noticNo}
 	</update>
