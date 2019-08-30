@@ -49,7 +49,7 @@
 }
 #option-price-search {
 	width: 400px;
-	text-align: right;
+	text-align: left;
 	border-left: none;
 }
 #priceSearchSt {
@@ -65,6 +65,9 @@
 }
 #option-select {
 	text-align: center;
+}
+h6 {
+	display: inline;
 }
 /* ---------- 옵션 영역 끝 ---------- */
 
@@ -216,6 +219,7 @@ input::-moz-focus-inner { border: 0; }
 		$('#optionSts'+sSts).attr('class', 'label label-primary');
 		if(!sSts) {
 		} else {
+			alert(sSts);
 			document.getElementsByName("stsCheckBox"+sSts)[0].checked = true;
 		}
 
@@ -250,7 +254,7 @@ input::-moz-focus-inner { border: 0; }
 	alert("바깥쪽");
 
 	/**************************/
-	/****** 전역변수 선언 *****/
+	/**** 전역변수 선언시작 ***/
 	/**************************/
 	var loc = "/rental/Appli/lg/";	// 기본주소 URL 셋팅
 	var vMenu = "${menu}"+"?";		// 소메뉴
@@ -267,8 +271,30 @@ input::-moz-focus-inner { border: 0; }
 	var vPriceMax = "${priceMax}"+"&";
 	var vSts = "${sts}"+"&";
 	var vSearchValue = "${search}"+"&";
-	var vSearchPriceSt ="${searchPriceSt}"+"&";
-	var vSearchPriceEd ="${searchPriceEd}"+"&";
+	var vSearchPriceSt ="${searchPriceSt}";
+	var vSearchPriceEd ="${searchPriceEd}";
+	var vSearchPrice = "&";
+
+	/**************************/
+	/**** 전역변수 선언끝 *****/
+	/**************************/
+	
+	if(vSearchPriceSt != 0) {
+		if((!vSearchPriceEd) || (vSearchPriceEd == 0)) {
+			vSearchPrice = "&searchPriceSt="+vSearchPriceSt;
+		}
+	}
+
+	if(vSearchPriceEd != 0) {
+		if((!vSearchPriceSt) || (vSearchPriceSt == 0)) {
+			vSearchPrice = "&searchPriceEd="+vSearchPriceEd;
+		}
+	}
+	
+	if((vSearchPriceSt != 0) && (vSearchPriceEd != 0)) {
+		vSearchPrice = "&searchPriceSt="+vSearchPriceSt+"&searchPriceEd="+vSearchPriceEd;
+	}
+
 	
 	// 소메뉴 선택
 	function menuBtnClick(menu) {
@@ -290,7 +316,6 @@ input::-moz-focus-inner { border: 0; }
 
 	// 브랜드 선택
 	function optionBrandBtnClick(brandNm) {
-
 		var locGo;					// URL 주소저장
 		var vvBrandNmTemp="";		// brandNm 임시저장
 
@@ -311,58 +336,56 @@ input::-moz-focus-inner { border: 0; }
 						vvBrandNmTemp += "brandNm="+brandNm;
 					}
 				}
-				alert(vvBrandNmTemp);
 			}
 		}
 
 		if(vvBrandNm.length > 0) {
-			alert(vvBrandNm.length);
 			if(vPriceMin != "&") {
 				if(vSts != "&") {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
 				if(vSts != "&") {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
 					}
 				}
 			} else {
 				if(vSts != "&") {
 					brandRoop()
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp;
+						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
 					}
 				}
 			}
@@ -371,32 +394,32 @@ input::-moz-focus-inner { border: 0; }
 				if(vSts != "&") {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
 				if(vSts != "&") {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
 					}
 				}
 			} else {
@@ -405,14 +428,14 @@ input::-moz-focus-inner { border: 0; }
 					if(vSts.replace("&","") != vSts) {
 						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice;
 					}
 				} else {
 					brandRoop();
 					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
 					} else {
-						locGo = loc+vMenu+vvBrandNmTemp;
+						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
 					}
 				}
 			}
@@ -450,7 +473,6 @@ input::-moz-focus-inner { border: 0; }
 					vvBrandNmTemp += "brandNm="+brandNm;
 				}
 			}
-			alert(vvBrandNmTemp);
 		}
 
 		if(vvBrandNm.length > 0) {
@@ -581,9 +603,10 @@ input::-moz-focus-inner { border: 0; }
 	// 상태 선택
 	function optionStsBtnClick(sts) {
 
+		alert("check");
 		var locGo;					// URL 주소저장
 		var vvBrandNmTemp="";		// brandNm 임시저장
-
+		
 		// 상태 브랜드명 중복검사
 		function stsRoop() {
 			for(var i=0; i<vvBrandNm.length+flg; i++) {
@@ -604,25 +627,25 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
 						}
 					}
 				} else {
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					} else {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
@@ -630,25 +653,25 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax;
+							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
 						}
 					}
 				} else {
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					} else {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
 					}
 				}
 			} else {
@@ -656,25 +679,25 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue;
+							locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts;
+							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+vvBrandNmTemp;
+							locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
 						}
 					}
 				} else {
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					} else {
 						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice;
 					}
 				}
 			}
@@ -684,25 +707,25 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&search="+vSearchValue;
+							locGo = loc+vMenu+"priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts;
+							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+"priceMin="+vPriceMin;
+							locGo = loc+vMenu+"priceMin="+vPriceMin+vSearchPrice;
 						}
 					}
 				} else {
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					} else {
 						stsRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
@@ -710,25 +733,25 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+vSearchValue;
+							locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts;
+							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+"priceMax="+vPriceMax;
+							locGo = loc+vMenu+"priceMax="+vPriceMax+vSearchPrice;
 						}
 					}
 				} else {
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					} else {
 						stsRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
 					}
 				}
 			} else {
@@ -736,25 +759,26 @@ input::-moz-focus-inner { border: 0; }
 					if(vSearchValue != "&") {
 						stsRoop();
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue;
+							locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue+vSearchPrice;
 						} else {
-							locGo = loc+vMenu+"search="+vSearchValue;
+							locGo = loc+vMenu+"search="+vSearchValue+vSearchPrice;
 						}
 					} else {
 						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"sts="+sts;
+							locGo = loc+vMenu+"sts="+sts+vSearchPrice;
 						} else {
-							locGo = loc+vMenu;
+							locGo = loc+vMenu+vSearchPrice;
 						}
 					}
 				} else {
+					alert(vSearchPrice);
 					if(vSearchValue != "&") {
 						stsRoop();
-						locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue;
+						locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue+vSearchPrice;
 					}
 					else {
 						stsRoop();
-						locGo = loc+vMenu+"sts="+sts;
+						locGo = loc+vMenu+"sts="+sts+vSearchPrice;
 					}
 				}
 			}
@@ -792,54 +816,54 @@ input::-moz-focus-inner { border: 0; }
 				if(vSts != "&") {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
 				if(vSts != "&") {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				}
 			} else {
 				if(vSts != "&") {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				}
 			}
@@ -848,54 +872,54 @@ input::-moz-focus-inner { border: 0; }
 				if(vSts != "&") {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				}
 			} else if(vPriceMax != "&") {
 				if(vSts != "&")  {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue;
+						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue+vSearchPrice;
 					}
 				}
 			} else {
 				if(vSts != "&") {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue;
+						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue+vSearchPrice;
 					}
 				} else {
 					if(vSearchValue != "&") {
 						searchRoop();
-						locGo = loc+vMenu+"search="+searchValue;
+						locGo = loc+vMenu+"search="+searchValue+vSearchPrice;
 					} else {
 						searchRoop();
-						locGo = loc+vMenu+"search="+searchValue;
+						locGo = loc+vMenu+"search="+searchValue+vSearchPrice;
 					}
 				}
 			}
@@ -917,8 +941,6 @@ input::-moz-focus-inner { border: 0; }
 		*/
 		var searchPriceSt = document.getElementById("priceSearchSt").value;
 		var searchPriceEd = document.getElementById("priceSearchEd").value;
-		alert(searchPriceSt);
-		alert(searchPriceEd);
 
 		var locGo;					// URL 주소저장
 		var vvBrandNmTemp="";		// brandNm 임시저장
@@ -927,24 +949,24 @@ input::-moz-focus-inner { border: 0; }
 		
 		if(searchPriceSt != 0) {
 			if((!searchPriceEd) || (searchPriceEd == 0)) {
-				alert("앞단 가격만있음");
+				//alert("앞단 가격만있음");
 				searchPrice = "&searchPriceSt="+searchPriceSt;
 			}
 		}
 
 		if(searchPriceEd != 0) {
 			if((!searchPriceSt) || (searchPriceSt == 0)) {
-				alert("뒷단 가격만있음");
+				//alert("뒷단 가격만있음");
 				searchPrice = "&searchPriceEd="+searchPriceEd;
 			}
 		}
 		
 		if((searchPriceSt != 0) && (searchPriceEd != 0)) {
 			if(searchPriceSt > searchPriceEd) {
-				alert("최소가격이 더 큽니다.");
+				//alert("최소가격이 더 큽니다.");
 				return false;
 			} else {
-				alert("앞뒷단 가격 다있음");
+				//alert("앞뒷단 가격 다있음");
 				searchPrice = "&searchPriceSt="+searchPriceSt+"&searchPriceEd="+searchPriceEd;
 			}
 		}
@@ -1179,12 +1201,13 @@ input::-moz-focus-inner { border: 0; }
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
 							<c:forEach items="${list2}" var="list2" varStatus="status">
-								<span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.5";/>${list2.brandNm }</label></span>
+								<h6><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.5";/>${list2.brandNm }</label></span></h6>
 							</c:forEach>
 						</td>
 					</tr>
 					<tr>
 						<th class="active" id="option-price">가격</th>
+						<!-- 
 						<td>
 							<c:forEach items="${list3}" var="list3">
 								<span class="label label-default" id="optionPriceMin${list3.priceMin }" ><label ><input class="checkBox" type="checkbox" name="priceMinCheckBox${list3.priceMin }" onClick="priceMinCheckBox('${list3.priceMin}')" style="opacity: 0.5";/>~ <fmt:setLocale value="ko_KR"></fmt:setLocale>
@@ -1200,7 +1223,8 @@ input::-moz-focus-inner { border: 0; }
 								</span>
 							</c:forEach>
 						</td>
-						<td id="option-price-search">
+						 -->
+						<td id="option-price-search" colspan="2">
 							<form class="form-inline">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
@@ -1219,7 +1243,7 @@ input::-moz-focus-inner { border: 0; }
 					</tr>
 					<tr>
 						<th class="active" id="option-status">상태</th>
-							<td>
+							<td colspan="2">
 								<span class="label label-default" id="optionStsN" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxN" style="opacity: 0.5" onClick="stsCheckBox('N');"/>새상품</label></span>
 								<span class="label label-default" id="optionStsU" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxU" style="opacity: 0.5" onClick="stsCheckBox('U');"/>중고상품</label></span>
 							</td>
