@@ -8,6 +8,9 @@
 		width: 980px;
 		margin: auto;
 	}
+	#hiddenMyId{
+		visibility: hidden;
+	}
 	#carouselD{
 		display: inline-block;
 		width: 490px;
@@ -15,7 +18,6 @@
 	#showInfo{
 		display: inline-block;
 		vertical-align: top;
-		border: 1px solid black;
 		min-width: 470px;
 		margin-left: 10px;
 	}
@@ -23,6 +25,14 @@
 		font-weight: bold;
 		font-size: xx-large;
 	}
+	#doQuest{
+		background-color: #ffff00;
+		border: none;
+		font-size: 1.5em;
+		float: right;
+		padding: 20px;
+	}
+
 	.cmtContent{
 		border-top: 1px solid black;
 		height: 100px;
@@ -35,7 +45,6 @@
 		float: right;
 	}
 	#bigInfo{
-	 border: 1px solid black;
 	}
 	#detailInfo{
 		display: inline-block;
@@ -56,12 +65,44 @@
 		border: 1px solid black;
 		margin: auto;
 		width: 95%;
+		cursor: pointer;
+	}
+	#hiddenNM{
+		display: none;
+	}
+	#subImgF img:hover{
+		animation-duration: 0.3s;
+	  	animation-name: imgopac;
+	  	animation-fill-mode: forwards;
+		cursor: pointer;
+	}
+	@keyframes imgopac {
+	  from {
+	    opacity: 1;
+	  }
+	  to {
+	    opacity: 0.3;
+	  }
+	}
+	#storeReviewList .inpList{
+		float: right;
+	}
+	
+	#bigInfo>div{
+		font-size: 3em;
+		font-weight: bold;
+	}
+	#storeReviewList button{
+		margin-left: -25px;
+		width: 75px;
+		height: 75px;
 	}
 	
 	#usedFoot{
 		clear: both;
 		height: 300px;
 	}
+	
 /*Detail end*/
 
 /*나의 상점 시작*/
@@ -171,6 +212,11 @@
 		color: black;
 		border-radius: 5px;
 	}
+	#myUsedList ul>li:last-child{
+		display: none;
+		width: 0px;
+		height: 0px;
+	}
 	#myUsedReview textarea{
 		margin-left: 0px;
 	}
@@ -178,85 +224,93 @@
 		float: right;
 		clear: both;
 	}
+	.storeCmtList{
+		border-top: 1px solid black;
+	}
+	
 /*나의 상점 끝*/
 
 /* usedMng start */
-			#usedMng{
+#usedMng{
 /*                border: 1px solid red;*/
-                width: 60%;
-                height: 1500px;
-                margin: 100px auto;
-            }
-            #usedMng_title{
-                background-color: lightgray;
-                text-align: center;
-                margin: 50px;
-            }
-            #usedMng_title div{
-                display: inline-block;
-                margin: 10px;
-            }
-            #usedMng_frame{
+               width: 60%;
+               height: 1500px;
+               margin: 100px auto;
+           }
+           #usedMng_title{
+               background-color: lightgray;
+               text-align: center;
+               margin: 50px;
+           }
+           #usedMng_title div{
+               display: inline-block;
+               margin: 10px;
+           }
+           #radiog{
+           		display:inline-block;
+           	border: 1px solid black;
+           }
+           #usedMng_frame{
 /*                border: 1px solid blue;*/
-                width: 80%;
-                margin: auto;
-            }
-            #usedMng_content{
+               width: 80%;
+               margin: auto;
+           }
+           #usedMng_content{
 /*                border: 1px solid red;*/
-                width: 80%;
-                margin: auto;
-            }
-            #used_imgUpload{
-                text-align: right;
-            }
-            #used_main_img{
-                border: 1px solid black;
-                margin: auto;
-                width: 400px;
-                height: 200px;
-            }
-            #used_sub_img_group{
-                width: 400px;
-                margin: auto;
-            }
-            .used_sub_img{
-                display: inline-block;
-                border: 1px solid black;
-                width: 100px;
-                height: 100px;
-            }
-            .used_sub_img>img{
-                position: absolute;
-            }
-            #category{
-            	margin-left: 1px;
-            }
-            #radiog{
-            	background-color: #ebebeb;
-            }
-            #used_exp{
-                display: inline-block;
-            }
-            #usedMng .form-control{
-                margin-left: -15px;
-            }
-            #explain{
-                margin-left: 0px;
-            }
-            #submit_btn{
-                float: right;
-                clear: both;
-                margin-bottom: 100px;
-            }
-            #imgfile_label{
-                border: 1px solid black;
-                width: 120px;
-                height: 33px;
-                text-align: center;
-                line-height: 30px;
-                background-color: gray;
-                color: white;
-            }
-            #imgfile{
-            }
+               width: 80%;
+               margin: auto;
+           }
+           #used_imgUpload{
+               text-align: right;
+           }
+           #used_main_img{
+               border: 1px solid black;
+               margin: auto;
+               width: 400px;
+               height: 200px;
+           }
+           #used_sub_img_group{
+               width: 400px;
+               margin: auto;
+           }
+           .used_sub_img{
+               display: inline-block;
+               border: 1px solid black;
+               width: 100px;
+               height: 100px;
+           }
+           .used_sub_img>img{
+               position: absolute;
+           }
+           #category{
+           	margin-left: 1px;
+           }
+           #status{
+           	margin-left: 1px;
+           }
+           #used_exp{
+               display: inline-block;
+           }
+           .form-control{
+               margin-left: -15px;
+           }
+           #explain{
+               margin-left: 0px;
+           }
+           #submit_btn{
+               float: right;
+               clear: both;
+               margin-bottom: 100px;
+           }
+           #imgfile_label{
+               border: 1px solid black;
+               width: 120px;
+               height: 33px;
+               text-align: center;
+               line-height: 30px;
+               background-color: gray;
+               color: white;
+           }
+           #imgfile{
+           }
 /*  usedMng end */

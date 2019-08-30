@@ -13,13 +13,19 @@
 </head>
 <body>
 <div class="usedStore">
-	<h2>님의 상점</h2>
+	<h2>상점</h2>
 	<div>
-		<select>
-			<option>전체</option>
-			<option>판매중</option>
-			<option>판매완료</option>		
+		<div class="hideenMbNo">${mbNo }</div>
+		<div class="hiddenLoginId">${loginMbNo}</div>
+		<div id="hiddenStsCd">${usedGdsResStsCd}</div>
+		<form action="/used/store/now">
+		<input type="hidden" name="mbNo" value="${mbNo }">
+		<select id="usedGdsResStsCd" name="usedGdsResStsCd" onchange="this.form.submit()">
+			<option value="0">전체</option>
+			<option value="1">판매중</option>
+			<option value="2">판매완료</option>		
 		</select>
+		</form>
 	</div><br><br>
 	
 	<a href="/used/mng" id="insertThing">물품등록</a>
@@ -29,12 +35,13 @@
 	</ul>
 	<div id="myUsedList">
 		<ul>
-			<li>사진</li>
+			<li>이미지</li>
 			<li>상태</li>
 			<li>물품명</li>
 			<li>가격</li>
-			<li>최근수령일</li>
-			<li>삭제</li>
+			<li>업로드날짜</li>
+			<li></li>
+			<li></li>
 		</ul>
 		<c:forEach items="${alist }" var="bean">
 		<ul class="myUsedLt">
@@ -43,7 +50,10 @@
 			<li>${bean.modelNm }</li>
 			<li>${bean.usedGdsPrice }</li>
 			<li>${bean.chgDt }</li>
-			<li><a href="#" class="used_del">삭제</a></li>
+			<li><form action="/used/store/del/${bean.usedGdsNo }" method="POST">
+			<button type="submit" class="used_del">삭제</button>
+			</form></li>
+			<li id="hiddenNo">${bean.usedGdsNo }</il>
 		</ul>
 		</c:forEach>
 	</div>
@@ -52,14 +62,18 @@
 			<input type="hidden" name="storeNo" value="111">
 			<input type="hidden" name="mbNo" value="${loginMbNo }">
 			<input type="hidden" name="grade" value="1">
+			<div id="textAreaInput" >
 			<textarea class="form-control" name="content" rows="3"></textarea>
+			</div>
 			<button type="submit">후기등록</button>
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
-		<div>회원번호: ${bean.mbNo }</div>
-		<div>코멘트: ${bean.content }</div>
-		<div>날짜: ${bean.chgDt }</div>
-		<div><a href="#">신고</a></div>
+		<div class="storeCmtList">
+			<div>${bean.mbNo }님</div>
+			<div>${bean.content }</div>
+			<div>${bean.storeReviewDt }</div>
+			<div><a href="#">신고</a></div>
+		</div>
 		</c:forEach>
 	</div>
 	

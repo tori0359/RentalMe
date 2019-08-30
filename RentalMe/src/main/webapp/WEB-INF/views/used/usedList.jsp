@@ -84,6 +84,10 @@
 	.pagination>li>a{
 		float: none;
 	}
+	.tabcl>.activeTab{
+		background-color: black;
+		color: white;
+	}
 
 </style>
 <script type="text/javascript"
@@ -91,17 +95,23 @@
 </head>
 <script type="text/javascript">
 
-	$(function(){
+	$(function(){		
 		var mclass=${gdsMclassCd};
-		var gdsnm='big';
-		if(mclass==20){
+		if(mclass==10){
+			var gdsnm='big';
+			$('.tabcl').eq(0).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==20){
 			gdsnm='sml';
+			$('.tabcl').eq(1).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==30){
 			gdsnm='kit';
+			$('.tabcl').eq(2).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==40){
 			gdsnm='app';
+			$('.tabcl').eq(3).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==50){
 			gdsnm='etc';
+			$('.tabcl').eq(4).find('.tab_btn').addClass('activeTab');
 		}
 		/* var link=$('.pagelink').attr('href'); */
 		var arrlink=new Array($('.pagelink').length);
