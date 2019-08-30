@@ -44,11 +44,16 @@
         }
         #answer{
         	margin-top:20px;
+        	margin-right:10px;
         	padding-top:-20px;
         	margin-bottom:-55px;
+        	
         }
-        #answer>button{
+        #answer button{
+        	border-radius:5px;
         	background:white;
+        	color:red;
+        	border-radius:5px;
         	
         }
 	</style>
@@ -56,18 +61,21 @@
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
-		<c:if test="${bean.questStsCd eq '1' }">
-        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
+		<c:if test="${id == 'minminad' }">
+			<c:if test="${bean.questStsCd eq '1' }">
+	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
+			</c:if>
 		</c:if>
 			<form action="/mp/mp/QuestDelete" method="get">
         <table class="table" id="daeContent">
-            <tr>
+           <%--  <tr>
                 <td><label for="id" >작 성 자</label></td>
-                <td><input type="hidden" name="mbNo" value="${bean.mbNo }">${id}</td>
-            </tr>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo }">일반회원</td>
+            </tr> --%>
             <tr>
                 <td><label for="id" >글 번 호</label></td>
-                <td><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo }"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+               
             </tr>
             <tr>
                 <td><label for="">분류</label></td>
@@ -102,7 +110,9 @@
                 <td></td>
                 <td id="daeButton" >
                   <input id="cancel" type="reset" value="뒤로">
-                  <input  type="submit" value="삭제"/>
+                  <c:if test="${id ne 'minminad'}">
+                 	 <input  type="submit" value="삭제"/>
+                  </c:if>
                 </td>
             </tr>
         </table>

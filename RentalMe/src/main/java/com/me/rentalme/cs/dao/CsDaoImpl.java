@@ -63,7 +63,7 @@ public class CsDaoImpl implements CsDao {
 
 	@Override
 	public int updateOne(CsVo csVo) throws SQLException {
-		System.out.println("불러온다"+csVo.getCsGbCd()+"dd");
+		System.out.println("불러온다"+csVo.getCsGbCd());
 		System.out.println("??");
 		if(csVo.getCsGbCd().equals("10")){
 			System.out.println("notice수정으로");

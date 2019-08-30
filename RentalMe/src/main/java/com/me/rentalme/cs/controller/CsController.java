@@ -50,10 +50,10 @@ public class CsController {
 		ModelAndView mav=new ModelAndView();
 		
 		String user=(String)session.getAttribute("loginUserId");
+		mav.addObject("UserId",(String)session.getAttribute("loginUserId"));
 		System.out.println(user);
 		
 	
-		mav.addObject("UserId",(String)session.getAttribute("loginUserId"));
 		mav.setViewName("cs/csInquiry");
 		return mav;
 		
@@ -133,9 +133,11 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////		
 	//notice상세게시판
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
-	public ModelAndView csNoticeDetail(CsVo csVo) throws Exception{
+	public ModelAndView csNoticeDetail(HttpSession session,CsVo csVo) throws Exception{
 		
 		ModelAndView mav=new ModelAndView();
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		System.out.println("detail..start");
 		csService.csNoticeDetail(csVo);
 		mav.addObject("adetail", csService.csNoticeDetail(csVo));
@@ -147,10 +149,12 @@ public class CsController {
 	
 	//faq상세게시판
 	@RequestMapping(value="/csFaqDetail",method=RequestMethod.GET)
-	public ModelAndView csFaqDetail(CsVo csVo) throws Exception{
+	public ModelAndView csFaqDetail(HttpSession session,CsVo csVo) throws Exception{
 		
 		
 		ModelAndView mav=new ModelAndView();
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		mav.addObject("bdetail", csService.csFaqDetail(csVo));
 		
 		return mav;

@@ -143,7 +143,7 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">1:1문의</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mp/quest">1:1문의</a></td>
            </tr>
        </table>
        </div>

@@ -46,12 +46,16 @@ public class MngCsController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/csNoticeList", method = RequestMethod.GET)
-	public ModelAndView getCsNotice() throws SQLException {
+	public ModelAndView getCsNotice(HttpSession session) throws SQLException {
 		log.debug("공지/FAQ 컨트롤러");
-		
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("mapping..");
+		
+		// 세션받아오기
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
+		//
 		mav.addObject("alist", csService.csNoticeList());
 		
 		mav.setViewName("/mp/manager/mngCsList");
@@ -59,11 +63,12 @@ public class MngCsController {
 	}
 	
 	@RequestMapping(value = "/csFaqList", method = RequestMethod.GET)
-	public ModelAndView getCsFaq() throws SQLException {
+	public ModelAndView getCsFaq(HttpSession session) throws SQLException {
 		log.debug("공지/FAQ 컨트롤러");
 		
 		ModelAndView mav = new ModelAndView();
-		
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		System.out.println("mapping..");
 		mav.addObject("blist", csService.csFaqList());
 		
@@ -81,13 +86,14 @@ public class MngCsController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/InqList", method = RequestMethod.GET)
-	public ModelAndView getQuestList(CsVo csVo) throws SQLException {
+	public ModelAndView getQuestList(HttpSession session,CsVo csVo) throws SQLException {
 		log.debug("내 문의 보기 컨트롤러...");
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("inqlist", csService.csInqList());
 		System.out.println("list뽑고 넘기기");
-		
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		mav.setViewName("mp/manager/mngCsQuestList");
 		return mav;
 	}
@@ -167,10 +173,11 @@ public class MngCsController {
 	*/
 	//notic수정페이지로 이동
 	@RequestMapping(value="/csNoticeUpdatePage")
-	public ModelAndView noticup(CsVo csVo) throws SQLException{
+	public ModelAndView noticup(HttpSession session,CsVo csVo) throws SQLException{
 		
-		
+		String userId=(String)session.getAttribute("loginUserId");
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("id", userId);
 		mav.addObject("detail",csService.csNoticeDetail(csVo));
 		mav.setViewName("/mp/manager/mngCsNoticeUpdate");
 		return mav;
@@ -178,18 +185,19 @@ public class MngCsController {
 	
 	//fac수정페이지로 이동
 		@RequestMapping(value="/csFaqUpdatePage")
-		public ModelAndView faqup(CsVo csVo) throws SQLException{
+		public ModelAndView faqup(HttpSession session,CsVo csVo) throws SQLException{
 			
 			ModelAndView mav=new ModelAndView();
 			System.out.println("ㅠㅠ"+csVo.getFaqNo());
 			mav.addObject("qdetail",csService.csFaqDetail(csVo));
-			
+			String userId=(String)session.getAttribute("loginUserId");
+			mav.addObject("id", userId);
 			mav.setViewName("/mp/manager/mngCsFaqUpdate");
 			return mav;
 		}
 	
 	//notic수정페이지 파라미터 넣기
-	@RequestMapping(value="/csNoticeUpdate")
+	@RequestMapping(value="/csNoticeUpdate", method=RequestMethod.POST)
 	public ModelAndView noticupdae(CsVo csVo) throws SQLException {
 		System.out.println("/cs/csNoticeUpdate");
 		ModelAndView mav=new ModelAndView();
@@ -204,7 +212,7 @@ public class MngCsController {
 	}
 	
 	//faq수정페이지 파라미터 넣기
-		@RequestMapping(value="/csFaqUpdate")
+		@RequestMapping(value="/csFaqUpdate",method=RequestMethod.POST)
 		public ModelAndView faqupdae(CsVo csVo) throws SQLException {
 			System.out.println("/cs/csFaqUpdate");
 			ModelAndView mav=new ModelAndView();
@@ -226,9 +234,11 @@ public class MngCsController {
 		* @exception 
 		*/
 		@RequestMapping(value="/answer")
-		public ModelAndView questAnswer(@RequestParam("pquestNo") String num) throws SQLException{
+		public ModelAndView questAnswer(@RequestParam("pquestNo") String num,HttpSession session) throws SQLException{
 			System.out.println(num);
 			ModelAndView mav=new ModelAndView();
+			String userId=(String)session.getAttribute("loginUserId");
+			mav.addObject("id", userId);
 			mav.addObject("answer",csService.inqAnswer(num));
 			mav.setViewName("redirect:/mp/mng/InqList");
 			return mav;

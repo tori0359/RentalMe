@@ -144,9 +144,6 @@
            <tr>
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/InqList">1:1문의 관리</a></td>
            </tr>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">상담예약 관리</a></td>
-           </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
            <thead>
@@ -161,7 +158,5 @@
        </div>
       <div id="mpContent" class="col-md-9">
   
-     
-
 </body>
 </html>

@@ -23,6 +23,8 @@
 </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${id eq 'minminad'}">
 <div id="content" class="col-md-10 col-md-offset-1">
 <div  id="uptext"align="center"><h1>1:1 문의 관리</h1></div>
 	<div>
@@ -77,6 +79,11 @@
 	</div>
 			
 </div>
+</c:when>
+<c:otherwise>
+<h1>관리자 전용</h1>
+</c:otherwise>
+</c:choose>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

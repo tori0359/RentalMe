@@ -66,7 +66,7 @@
 		UPDATE TB_NOTIC100 SET SUB=#{sub}, CONTENT=#{content} WHERE NOTIC_NO=#{noticNo}
 	</update>
 	<update id="csFaqUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
-		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAC_NO=#{faqNo}
+		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAQ_NO=#{faqNo}
 	</update>
   </mapper>
   
