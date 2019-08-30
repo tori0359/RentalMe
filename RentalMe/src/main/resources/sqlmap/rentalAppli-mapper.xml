@@ -140,6 +140,11 @@
 				,B.GDS_PRICE
 				,B.IMG1
 				,A.REG_DT
+				,A.GDS_GB_CD
+				,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+					  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+					  ELSE '누락'
+				END AS GDS_GB_NM
 				,COUNT(C.GDS_CD) AS CNT
 				,SUM(C.GRADE) AS TOT_GRD_SUM
 				,ROUND(SUM(C.GRADE) / COUNT(C.GDS_CD),2) AS TOT_GRD_AVG
@@ -160,109 +165,126 @@
 	
 	<!-- 렌탈 상품 리스트 조회 -->
 	<select id="gdsListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-	SELECT
-		*
-	FROM (	
-			SELECT /* 상품 조회 */
-					 A.GDS_CD
-				    ,A.GDS_LCLASS_CD
-					,A.GDS_MCLASS_CD
-					,A.GDS_SCLASS_CD
-					,A.GDS_NM
-					,A.BRAND_NM
-					,A.MODEL_NM
-					,B.IMG1
-					,A.REG_DT
-					,B.GDS_PRICE
-					<if test="sortGbCd != null">
-						<if test='sortGbCd.equals("1")'>
-							,COUNT(C.GDS_CD) AS CNT
-							,SUM(C.GRADE) AS TOT_GRD_SUM
-							,ROUND(SUM(C.GRADE) / COUNT(C.GDS_CD),2) AS TOT_GRD_AVG
+	<if test='sortGbCd != null'>
+		<if test='sortGbCd.equals("2") or sortGbCd.equals("3") or sortGbCd.equals("4")'>
+			SELECT
+				*
+			FROM (	
+					SELECT /* 상품 조회 */
+							 A.GDS_CD
+						    ,A.GDS_LCLASS_CD
+							,A.GDS_MCLASS_CD
+							,A.GDS_SCLASS_CD
+							,A.GDS_NM
+							,A.BRAND_NM
+							,A.MODEL_NM
+							,B.IMG1
+							,A.REG_DT
+							,B.GDS_PRICE
+							,A.GDS_GB_CD
+							,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+								  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+								  ELSE '누락'
+							END AS GDS_GB_NM
+							<if test="sortGbCd != null">
+								<if test='sortGbCd.equals("1")'>
+									,COUNT(C.GDS_CD) AS CNT
+									,SUM(C.GRADE) AS TOT_GRD_SUM
+									,ROUND(SUM(C.GRADE) / COUNT(C.GDS_CD),2) AS TOT_GRD_AVG
+								</if>
+								<if test='sortGbCd.equals("5")'>
+									,COUNT(C.ODR_QTY) AS ODR_QTY
+								</if>
+								<if test='sortGbCd.equals("6")'>
+									,COUNT(C.GDS_CD) AS CNT
+								</if>
+							</if>
+						FROM TB_GDS100 A
+							,TB_GDS200 B
+							<if test="sortGbCd != null">
+								<if test='sortGbCd.equals("1")'>
+									,TB_GDS210 C
+								</if>
+								<if test='sortGbCd.equals("5")'>
+									,TB_ODR110 C
+								</if>
+								<if test='sortGbCd.equals("6")'>
+									,TB_GDS210 C
+								</if>
+							</if>
+						WHERE A.GDS_CD = B.GDS_CD
+						/* 중분류냐 소분류냐 선택에 따라 */
+						<choose> 
+							<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
+															   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
+								AND A.GDS_MCLASS_CD = #{gdsSclassCd}
+							</when> 
+							<otherwise>
+								AND A.GDS_SCLASS_CD = #{gdsSclassCd}
+							</otherwise>
+						</choose>
+						/* 브랜드명 리스트 반복문 */
+						<if test='brandNm2 != null'>
+							AND
+							<foreach collection="brandNm2" item="list" open="(" close=")" separator="OR">
+								A.BRAND_NM LIKE #{list}
+							</foreach>
 						</if>
-						<if test='sortGbCd.equals("5")'>
-							,COUNT(C.ODR_QTY) AS ODR_QTY
+						/* 가격범위 */
+						<if test='searchPriceSt != null and searchPriceSt != ""'>
+							AND B.GDS_PRICE <![CDATA[ >= ]]> #{searchPriceSt}
 						</if>
-						<if test='sortGbCd.equals("6")'>
-							,COUNT(C.GDS_CD) AS CNT
+						<if test='searchPriceEd != null and searchPriceEd != ""'>
+							AND B.GDS_PRICE <![CDATA[ <= ]]> #{searchPriceEd}
 						</if>
-					</if>
-				FROM TB_GDS100 A
-					,TB_GDS200 B
-					<if test="sortGbCd != null">
-						<if test='sortGbCd.equals("1")'>
-							,TB_GDS210 C
+						/* 상품상태 */
+						<if test='sts != null and sts != ""'>
+							AND A.GDS_GB_CD = #{sts}
 						</if>
-						<if test='sortGbCd.equals("5")'>
-							,TB_ODR110 C
+						/* 결과내검색 */
+						<if test='search != null and search != ""'>
+							AND A.GDS_NM LIKE CONCAT('%', #{search},'%')
 						</if>
-						<if test='sortGbCd.equals("6")'>
-							,TB_GDS210 C
+						<if test="sortGbCd != null">
+							<if test='sortGbCd.equals("1")'>
+								AND B.GDS_CD = C.GDS_CD
+								GROUP BY A.GDS_CD
+							</if>
+							<if test='sortGbCd.equals("5")'>
+								AND B.GDS_CD = C.GDS_CD
+							</if>
+							<if test='sortGbCd.equals("6")'>
+								AND B.GDS_CD = C.GDS_CD
+								GROUP BY A.GDS_CD
+							</if>
 						</if>
-					</if>
-				WHERE A.GDS_CD = B.GDS_CD
-				/* 중분류냐 소분류냐 선택에 따라 */
-				<choose> 
-					<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
-													   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
-						AND A.GDS_MCLASS_CD = #{gdsSclassCd}
-					</when> 
-					<otherwise>
-						AND A.GDS_SCLASS_CD = #{gdsSclassCd}
-					</otherwise>
-				</choose>
-				/* 브랜드명 리스트 반복문 */
-				<if test='brandNm2 != null'>
-					AND
-					<foreach collection="brandNm2" item="list" open="(" close=")" separator="OR">
-						A.BRAND_NM LIKE #{list}
-					</foreach>
-				</if>
-				/* 가격조건 */
-				<if test='searchPriceSt != null and searchPriceSt != ""'>
-					AND B.GDS_PRICE <![CDATA[ >= ]]> #{searchPriceSt}
-				</if>
-				<if test='searchPriceEd != null and searchPriceEd != ""'>
-					AND B.GDS_PRICE <![CDATA[ <= ]]> #{searchPriceEd}
-				</if>
+				) AA
 				<if test="sortGbCd != null">
 					<if test='sortGbCd.equals("1")'>
-						AND B.GDS_CD = C.GDS_CD
-						GROUP BY A.GDS_CD
+						ORDER BY AA.TOT_GRD_AVG DESC
+								,AA.CNT DESC
+								,AA.REG_DT DESC
+					</if>
+					<if test='sortGbCd.equals("2")'>
+						ORDER BY AA.REG_DT DESC
+					</if>
+					<if test='sortGbCd.equals("3")'>
+						ORDER BY AA.GDS_PRICE
+								,AA.REG_DT DESC
+					</if>
+					<if test='sortGbCd.equals("4")'>
+						ORDER BY AA.GDS_PRICE DESC
+								,AA.REG_DT DESC
 					</if>
 					<if test='sortGbCd.equals("5")'>
-						AND B.GDS_CD = C.GDS_CD
+						ORDER BY AA.ODR_QTY
+								,AA.REG_DT DESC
 					</if>
 					<if test='sortGbCd.equals("6")'>
-						AND B.GDS_CD = C.GDS_CD
-						GROUP BY A.GDS_CD
+						ORDER BY AA.CNT DESC
+								,AA.REG_DT DESC
 					</if>
 				</if>
-		) AA
-		<if test="sortGbCd != null">
-			<if test='sortGbCd.equals("1")'>
-				ORDER BY AA.TOT_GRD_AVG DESC
-						,AA.CNT DESC
-						,AA.REG_DT DESC
-			</if>
-			<if test='sortGbCd.equals("2")'>
-				ORDER BY AA.REG_DT DESC
-			</if>
-			<if test='sortGbCd.equals("3")'>
-				ORDER BY AA.GDS_PRICE
-						,AA.REG_DT DESC
-			</if>
-			<if test='sortGbCd.equals("4")'>
-				ORDER BY AA.GDS_PRICE DESC
-						,AA.REG_DT DESC
-			</if>
-			<if test='sortGbCd.equals("5")'>
-				ORDER BY AA.ODR_QTY
-						,AA.REG_DT DESC
-			</if>
-			<if test='sortGbCd.equals("6")'>
-				ORDER BY AA.CNT DESC
-						,AA.REG_DT DESC
 			</if>
 		</if>
 	</select>
