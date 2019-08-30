@@ -1,16 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" 
+
+encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="mpUser">
   	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,FN_NM('GDS_NM',GDS_CD) AS gdsNm, tb_odr110.GDS_CD AS gdsCd, tb_odr110.ODR_QTY AS odrQty, tb_odr110.AGREE_TEM AS agreeTem, tb_odr110.GDS_PRICE AS gdsPrice, tb_odr100.ODR_STS_GB_CD AS odrStsGbCd
-		FROM tb_odr110
-		INNER JOIN tb_odr100
-		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO;
-  	</select>
-  	
+  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,
+			FN_NM('GDS_NM',GDS_CD) AS gdsNm, 
+			tb_odr110.GDS_CD AS gdsCd, 
+			tb_odr110.ODR_QTY AS odrQty, 
+			tb_odr110.AGREE_TEM AS agreeTem, 
+			tb_odr110.GDS_PRICE AS gdsPrice, 
+			tb_odr100.ODR_STS_GB_CD AS odrStsGbCd, 
+			tb_user100.USER_NM AS userNM
+				FROM tb_odr110
+				INNER JOIN tb_odr100
+				ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
+				INNER JOIN tb_user100
+				ON tb_odr100.MB_NO = tb_user100.MB_NO
+				WHERE tb_user100.MB_NO=#{mbNo}
+	</select>
   	<insert id="insertReview">
   		INSERT INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
 		VALUES (#{gdsCd},
@@ -38,12 +49,16 @@
   	</select>
   	
   	<select id="selectDeposit" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DEPOSIT_GB_CD, 
+		SELECT DEPOSIT_GB_CD, 
 		CHARGE_DEPOSIT,
 		USE_DEPOSIT,
 		REFUND_DEPOSIT,
+		DEPOSIT_SEQ,
 		DATE_FORMAT(DEPOSIT_DT, '%Y-%m-%d') AS DEPOSIT_DT,
-		(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO='19000002') AS REMN_DEPOSIT, (SELECT USER_ID FROM TB_USER100 WHERE MB_NO='19000002') AS USER_ID FROM TB_MB110;
+		(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO='19000002') AS REMN_DEPOSIT, 
+		(SELECT USER_ID FROM TB_USER100 WHERE MB_NO='19000002') AS USER_ID 
+		FROM TB_MB110
+		ORDER BY DEPOSIT_SEQ DESC;
   	</select>
   	
   	<insert id="inserDeposit">
@@ -55,10 +70,41 @@
 			"1")
   	</insert>
 
+	<update id="updateDeposit">
+		UPDATE TB_MB100 SET REMN_DEPOSIT = 
+		(SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT) FROM TB_MB110 WHERE TB_MB100.MB_NO = TB_MB110.MB_NO)
+	</update>
+	
+	<select id="selectInfoUser" resultType="com.me.rentalme.model.entity.CallVo">
+		SELECT REMN_DEPOSIT 
+			FROM TB_MB100 
+			WHERE MB_NO='19000002'
+	</select>
+	
   	<update id="delete" >
   		UPDATE TB_CALL100
 		SET CALL_STS_CD=2
 		WHERE USED_GDS_NO=#{USEDGDSNO};
   	</update>
+  	
+  	<select id="selectMyInfo" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo" >
+  		SELECT USER_NM,EMAIL,ADDR,ADDR_DETAIL FROM TB_USER100 WHERE MB_NO=#{mbNo};
+
+  	</select>
+  	
+  	<update id="updateMyinfo">
+  		UPDATE TB_USER100 SET USER_NM=#{userNm}, ADDR=#{addr}, ADDR_DETAIL=#{addrDetail} WHERE MB_NO=#{mbNo};
+  	</update>
+  	
+  	<select id="checkName" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
+  		SELECT USER_NM FROM TB_USER100 WHERE mb_no=#{mbNo};
+  	</select>
+  	
+  	<select id="selectAuct" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT FN_NM('GDS_NM',GDS_CD) AS gdsNm, 
+		BID_TIME,BID_PRICE
+		FROM TB_ACT100 WHERE MB_NO=#{mbNo};
+  	</select>
+  	
   
   </mapper>

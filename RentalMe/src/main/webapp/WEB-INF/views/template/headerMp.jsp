@@ -74,8 +74,7 @@
 	   .mpdiv{
 		   position: relative;
 		   z-index:1;
-		   margin-top:100px;
-		   margin-bottom: 100px;
+		   margin:100px 0 100px 0;
 	   }
 	
 	   .row{
@@ -89,7 +88,7 @@
 <div id="wrap">
 <div class="contentDiv">
    <div id="mp" class="row">
-      <div class="mpdiv col-md-2">
+      <div style="margin-right:0" class="mpdiv col-md-2 col-md-offset-1">
        <table class="mpTable">
            <thead>
             <tr class="active">
@@ -129,7 +128,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매내역</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/auctList">경매내역</a></td>
            </tr>
        </table>
        <table style="margin-top:30px; " class="mpTable">
@@ -146,7 +145,7 @@
            </tr>
        </table>
        </div>
-		<div id="mpContent" class="col-md-9">
+		<div id="mpContent" class="col-md-8">
   
      
 

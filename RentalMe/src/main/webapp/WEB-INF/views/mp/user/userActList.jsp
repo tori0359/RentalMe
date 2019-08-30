@@ -1,156 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style type="text/css">
-
-	   #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	      }
-	      
-		.contentDiv{
-			padding-bottom: 200px;
-		}
-		
-		#mp{
-            margin: 50px 0px 10px 30px;
-        }
-        
-       .mpTable{
-            width: 160px;
-            border-radius: 6px;
-        }
-        
-        .mpTable>thead tr{
-            height:35px;
-            background-color: #4d4d4d;
-        }
-        
-        .mpTable>thead>tr>th{
-            -moz-border-radius: 15px 15px 0 0;
-            -webkit-border-radius: 15px 15px 0 0;
-            border-radius: 15px 15px 0 0;
-			font-family: "nanumR";
-        }
-        
-        .mpTable>tbody tr{
-            height:30px;
-            margin: 10px;
-            background-color:#EBEBEA;
-        }
-        
-        
-        .mpTable>tbody tr:hover {
-            background-color: lightgrey;
-            -o-transition: all 0.2s ease-in-out;
-            -webkit-transition: all 0.2s ease-in-out;
-            -moz-transition: all 0.2s ease-in-out;
-            -ms-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-	   .mpTable>tbody>tr a{
-		   color: black;
-		   font-family: "nanumB";
-		   display: block;
-		   text-decoration: none;
-	   }
-	   
-	   .mpTable>tbody>tr a:hover{
-		   text-decoration: none;
-		   
-	   }
-        
-       .mpTable>tbody>tr:last-child td{
-            -moz-border-radius: 0 0 15px 15px;
-            -webkit-border-radius: 0 0 10px 15px;
-            border-radius: 0 0 15px 15;            
-        } 
-	   #mpDiv{
-		   position: relative;
-		   z-index:1;
-	   }
-	   #mpContent{
-		   /*border: 1px solid black;*/
-		   height: 100%;
-	   }
-	   .row{
-		   margin: 0px;
-	   }
-        
-</style>
-<jsp:include page="../../template/header.jsp"></jsp:include>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-<div id="wrap">
-<div class="contentDiv">
-   <div id="mp" class="row">
-      <div class="col-md-2">
-       <table class="mpTable">
-           <thead>
-            <tr class="active">
-                <th style="color:white;"class="text-center">ë§ˆì´í˜ì´ì§€</th>
-           </tr>
-           </thead>
-           <tr>
-                <td class="text-center"><a href="#">ì£¼ë¬¸ë‚´ì—­</a></td>
-           </tr>
-           <tr>
-                <td class="text-center"><a href="#">ì¥ë°”êµ¬ë‹ˆ</a></td>
-           </tr>
-           <tr>
-                <td class="text-center"><a href="#">ì°œí•œìƒí’ˆ</a></td>
-           </tr>
-            <tr>
-                <td class="text-center"><a href="#">ì˜ˆì¹˜ê¸ˆ</a></td>
-           </tr>
-            <tr>
-                <td class="text-center"><a href="#">ë‚´ ì •ë³´ ìˆ˜ì •</a></td>
-           </tr>
-       </table>
-        <table style="margin-top:30px; " class="mpTable">
-           <thead>
-            <tr class="active">
-                <th style="color:white;"class="text-center">ë‚˜ì˜ í™œë™</th>
-           </tr>
-           </thead>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">ë‚´ ë¬¸ì˜ ë³´ê¸°</a></td>
-           </tr>
-       </table>
-		<table style="margin-top:30px; " class="mpTable">
-           <thead>
-            <tr class="active">
-                <th style="color:white;"class="text-center">ì¤‘ê³ ê±°ë˜</th>
-           </tr>
-           </thead>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">ë‚´ ì¤‘ê³  ìƒí’ˆ</a></td>
-           </tr>
-       </table>
-       <table style="margin-top:30px; " class="mpTable">
-           <thead>
-            <tr class="active">
-                <th style="color:white;"class="text-center">ê²½ë§¤</th>
-           </tr>
-           </thead>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">ê±°ë˜ ë‚´ì—­</a></td>
-           </tr>
-       </table>
-                   
-                   
+	<div>
+	<div class="titlediv">
+       <p id="title">°æ¸Å³»¿ª</p>
+     </div>
+     <div class="hr" style="height:3px; background-color: black;"></div>
+       	 <div id="info">
+       	 <p>
+	       	 <input type="hidden" value="${loginMbNo}">
+		     <c:if test="${empty loginUserNM}">
+		     	${loginUserId} ´ÔÀÇ °æ¸Å³»¿ªÀÔ´Ï´Ù.
+		     </c:if>
+		     <c:if test="${!empty loginUserNM }">
+		     	${loginUserNM} ´ÔÀÇ °æ¸Å³»¿ªÀÔ´Ï´Ù.
+		     </c:if>
+		  </p>
+       	 </div>
+       <a href="#" id="choosedel">¼±ÅÃ»èÁ¦</a>
+       	<table class="ordtable table">
+       	<thead>
+       		<tr class="active">
+       			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
+       			<th>»óÇ°¸í/¼±ÅÃ»çÇ×</th>
+       			<th>¼ö·®</th>
+       			<th>·»Å»±â°£</th>
+       			<th>»óÇ°±İ¾×</th>
+       		</tr>
+       	</thead>
+       	<tbody>
+   		 <c:set var="sumPrice" value="0"/>
+       	<c:forEach items="${alist}" var="bean">
+       		<tr data-tr_value="${bean.usedGdsNo}">  
+       			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
+       			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
+       			<td>${bean.odrQty}</td>
+       			<td>${bean.agreeTem}°³¿ù</td>
+       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>¿ø
+       			</td>
+       		</tr>
+       	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
+       	</c:forEach>
+       	</tbody>
+       	</table>
        </div>
-       <div style="border: 1px solid red ; "id="mpContent" class="col-md-9">
-       
-       	ì—¬ê¸° ë‚´ìš©ì“°ëŠ” ë¶€ë¶„
+       <div class="hr" style="height:2px;"></div>
+       <div class="cartresult">
+       	<p>ÃÑ ÁÖ¹® ±İ¾×: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> ¿ø</p>
        </div>
-  
-      </div>
-  </div>
+       <div class="hr" style="height:2px; margin-top:100px;"></div>
+		<div class="cartbtn">
+			<button type="button" class="delete_btn1 btn">°è¼Ó ¼îÇÎÇÏ±â</button>
+			<button type="button" class="delete_btn2 btn">ÁÖ¹®ÇÏ±â</button>
+		</div>
+      
 </body>
-<jsp:include page="../../template/footer.jsp"></jsp:include>
 </html>

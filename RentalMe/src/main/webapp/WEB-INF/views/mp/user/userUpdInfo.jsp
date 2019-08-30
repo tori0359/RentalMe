@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,16 +8,10 @@
 <meta charset="UTF-8">
 <style type="text/css">
 		#title{
-	   		font-size: 18pt;
-	   		font-weight: bolder;
-	   		text-align: center;
-	   		font-family: "nanumB";
-	   		margin: 50px;
-	   }
-	   #path{
+	   		font-size: 15pt;
 	   		font-weight: bolder;
 	   		font-family: "nanumB";
-	   		float:left;
+	   		margin: 60px 0 50px 0;
 	   }
 	 
 	   .delete_btn2{
@@ -41,8 +36,7 @@
 	   }
 	   
 	   #infodiv{
-	   		padding-top:30px;
-	   		padding-botton:30px;
+	   		padding-bottom:30px;
 	   }
 	   
 	    .delete_btn1{
@@ -52,6 +46,20 @@
 	   		font-family: "nanumB";	
 	   		font-weight: border;	
 	   }
+	   #info{
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
+      }
+      
+      #info p{
+      	line-height:20px;
+      	font-family:"nanumB";
+      }
+      .titlediv{
+            height:40px;
+      }
 </style>
 <script type="text/javascript">
 
@@ -103,35 +111,57 @@
             }
         }).open();
     }
+
+    window.onload=function(){
+    	$('#update').click(function(){
+			alert("수정되었습니다!");
+       	});
+
+     }
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-	<p id="title">나의 정보</p>
-	<div>
-       <p id="path">마이페이지> 나의정보</p>
+	
+	<div class="titlediv">
+       <p id="title">나의 정보</p>
      </div>
+     <form action="/mp/updInfo" method="post">
      <div id="infodiv">
      <div class="hr" style="height:3px; background-color: black;"></div>
+     <div id="info">
+     <p>
+	     <c:if test="${empty userVo.userNM}">
+	     	${userVo.userNM} 님의 개인정보입니다.
+	     </c:if>
+	     <c:if test="${!empty userVo.userNM }">
+	     	${userVo.userNM} 님의 개인정보입니다.
+	     </c:if>
+     </p>
+     </div>
      <table class="table">
      	<tr>
      		<th class="active" style="text-align: center">이름</th>
-     		<td><input style="width:300px;" type="text" readonly="readonly" value="오남매"></td>
+     		<td><p>※ 마이페이지에서 이름으로 보고싶다면 이름을 설정해주세요.</p>
+     		<input style="width:300px;" type="text" name="userNM" value="${userVo.userNM}" placeholder="이름을 입력해주세요">
+     		</td>
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">아이디</th>
-     		<td><input style="width:300px;" type="text" readonly="readonly" value="gyshin"></td>
+     		<td><input style="width:300px;" type="text" readonly="readonly" value="${loginUserId}">
+     		<input type="hidden" name="mbNo" value="${loginMbNo}"/>
+     		</td>
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">이메일</th>
-     		<td><input style="width:300px;" type="text" readonly="readonly" value="gyshin@naver.com"></td>
+     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value="${userVo.email}"></td>
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">비밀번호 변경</th>
      		<td>
      			<div>
      				<p>※ 최소 8자 ~ 최대 20자 이내로 입력합니다.</p>
-     				<p>※ 반드시 영문,숫자가 1자리 이상 포함되어야 합니다.</p>
+     				<p>※ 반드시 영문,숫자,특수문자가 1자리 이상 포함되어야 합니다.</p>
      				
      			</div>
 	     		<div>
@@ -151,19 +181,19 @@
      	<tr>
      		<th class="active" style="text-align: center">배송지</th>
      		<td>
-				<input style="width:300px;" type="text" id="sample6_address" placeholder="주소">
+				<input style="width:300px;" type="text" id="sample6_address" name="addr" value="${userVo.addr}">
 				<button type="button" class="delete_btn1 btn" onclick="sample6_execDaumPostcode()">주소 검색</button><br>
-				<input style="width:300px;" type="text" id="sample6_detailAddress" placeholder="상세주소">
+				<input style="width:300px;" type="text" id="sample6_detailAddress" name="addrDetail" value="${userVo.addrDetail}">
      		</td>
      		
      	</tr>
      </table>
      </div>
      <div id="infobtn">
-	     <button type="button" class="delete_btn2 btn">수정</button>
-	     <button type="button" class="delete_btn2 btn">확인</button>
+	     <button type="submit" id="update" class="delete_btn2 btn">확인</button>
      </div>
-       	
+     </form>
+      
       
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
