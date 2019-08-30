@@ -219,7 +219,6 @@ input::-moz-focus-inner { border: 0; }
 		$('#optionSts'+sSts).attr('class', 'label label-primary');
 		if(!sSts) {
 		} else {
-			alert(sSts);
 			document.getElementsByName("stsCheckBox"+sSts)[0].checked = true;
 		}
 
@@ -245,8 +244,13 @@ input::-moz-focus-inner { border: 0; }
 		}
 		
 		// 상품 정렬
-		var sSort = "1";
-		$('#sort-btn'+sSort).attr('class','active');
+		var sSort = "${sort}";
+		// 소팅1번 자동셋팅
+		if(!sSort) {
+			$('#sort-btn'+1).attr('class','active');
+		} else {
+			$('#sort-btn'+sSort).attr('class','active');
+		}
 
 		alert("안쪽마지막");
 	}
@@ -258,43 +262,63 @@ input::-moz-focus-inner { border: 0; }
 	/**************************/
 	var loc = "/rental/Appli/lg/";	// 기본주소 URL 셋팅
 	var vMenu = "${menu}"+"?";		// 소메뉴
-	//var vBrandNm = "${brandNm}"+"&";
-
-	var vvBrandNm = new Array();
+	var vvBrandNm = new Array();	// 옵션 브랜드
 	<c:forEach items="${brandNm}" var="brandNm" varStatus="status">
 		vvBrandNm[${status.index}] = "${brandNm}";
 	</c:forEach>
 	var flg;
-	
-	var vPriceMin = "${priceMin}"+"&";
-	var vPriceHalf;
-	var vPriceMax = "${priceMax}"+"&";
-	var vSts = "${sts}"+"&";
-	var vSearchValue = "${search}"+"&";
-	var vSearchPriceSt ="${searchPriceSt}";
-	var vSearchPriceEd ="${searchPriceEd}";
-	var vSearchPrice = "&";
+	//var vPriceMin = "${priceMin}"+"&";	// 옵션 최소가격	
+	//var vPriceMax = "${priceMax}"+"&";	// 옵션 최대가격
+	var vSts = "${sts}"+"&";	// 옵션 상태
+	var vSearchValue = "${search}"+"&";	// 옵션 검색value
+	var vSearchPriceSt ="${searchPriceSt}";	// 옵션 가격검색 st
+	var vSearchPriceEd ="${searchPriceEd}";	// 옵션 가격검색 ed
+	var vSearchPrice = "&";	// 가격 st+ed 변수
+	var vSort = "${sort}";	// 정렬기준
+	if(!vSort) {
+		vSort = "1";	// sort값 자동 셋팅
+	}
 
-	/**************************/
-	/**** 전역변수 선언끝 *****/
-	/**************************/
-	
+	var vMasterLoc;	// 마스터 URL 셋팅
+
+	// 최소가격 셋팅
 	if(vSearchPriceSt != 0) {
 		if((!vSearchPriceEd) || (vSearchPriceEd == 0)) {
 			vSearchPrice = "&searchPriceSt="+vSearchPriceSt;
 		}
 	}
 
+	// 최대가격 셋팅
 	if(vSearchPriceEd != 0) {
 		if((!vSearchPriceSt) || (vSearchPriceSt == 0)) {
 			vSearchPrice = "&searchPriceEd="+vSearchPriceEd;
 		}
 	}
-	
+
+	// 최소&최대가격 셋팅
 	if((vSearchPriceSt != 0) && (vSearchPriceEd != 0)) {
 		vSearchPrice = "&searchPriceSt="+vSearchPriceSt+"&searchPriceEd="+vSearchPriceEd;
 	}
 
+	// 브랜드명 셋팅
+	if(vvBrandNm.length > 0) {
+		var vvBrandNmTemp = "";
+		for(var i=0; i<vvBrandNm.length; i++) {
+			vvBrandNmTemp += ("brandNm=" + (vvBrandNm[i]+"&") );
+		}	
+		vMasterLoc = loc + vMenu + vvBrandNmTemp;
+	}
+	else {
+		vMasterLoc = loc + vMenu;
+	}
+
+	// 마스터변수
+	vMasterLoc = vMasterLoc + ("&sts="+vSts) + ("&search="+vSearchValue) + vSearchPrice;
+	
+	/**************************/
+	/**** 전역변수 선언끝 *****/
+	/**************************/
+	
 	
 	// 소메뉴 선택
 	function menuBtnClick(menu) {
@@ -340,109 +364,42 @@ input::-moz-focus-inner { border: 0; }
 		}
 
 		if(vvBrandNm.length > 0) {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+vSearchPrice;
-					}
+			if(vSts != "&") {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+vSearchPrice;
-					}
-				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
-					}
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					brandRoop()
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice;
-					}
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
-					}
+					locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		} else {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+vSearchPrice;
-					}
+			if(vSts != "&") {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+vSearchPrice;
-					}
-				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
-					}
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice;
-					}
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					brandRoop();
-					if(vSts.replace("&","") != vSts) {
-						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
-					}
+					locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		}
 		location.href = locGo;
 	}
 
+	/*
 	// 최소가격 checkBox 선택시
 	function priceMinCheckBox(price) {
 		// 체크박스가 선택되었을 때
@@ -586,6 +543,7 @@ input::-moz-focus-inner { border: 0; }
 		}
 		location.href = locGo; 
 	}
+	*/
 
 	// 상태 checkBox 선택시
 	function stsCheckBox(sts) {
@@ -603,7 +561,6 @@ input::-moz-focus-inner { border: 0; }
 	// 상태 선택
 	function optionStsBtnClick(sts) {
 
-		alert("check");
 		var locGo;					// URL 주소저장
 		var vvBrandNmTemp="";		// brandNm 임시저장
 		
@@ -622,164 +579,55 @@ input::-moz-focus-inner { border: 0; }
 		}
 		
 		if(vvBrandNm.length > 0) {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
-						}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 					} else {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+vSearchPrice;
-						}
+						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 					}
 				} else {
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice+"&sort="+vSort;
 					} else {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
-						}
-					} else {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+vSearchPrice;
-						}
-					}
-				} else {
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
+						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
 					}
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice;
-						}
-					} else {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice;
-						}
-					}
+				if(vSearchValue != "&") {
+					stsRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						stsRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice;
-					}
+					stsRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		} else {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&search="+vSearchValue+vSearchPrice;
-						}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 					} else {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+"priceMin="+vPriceMin+vSearchPrice;
-						}
+						locGo = loc+vMenu+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 					}
 				} else {
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+"&sts="+sts+vSearchPrice+"&sort="+vSort;
 					} else {
-						stsRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+sts+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+vSearchValue+vSearchPrice;
-						}
-					} else {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+"priceMax="+vPriceMax+vSearchPrice;
-						}
-					}
-				} else {
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+"&search="+vSearchValue+vSearchPrice;
-					} else {
-						stsRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+sts+vSearchPrice;
+						locGo = loc+vMenu+vSearchPrice;
 					}
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						stsRoop();
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+"search="+vSearchValue+vSearchPrice;
-						}
-					} else {
-						if(vSts.replace("&","") != sts) {
-							locGo = loc+vMenu+"sts="+sts+vSearchPrice;
-						} else {
-							locGo = loc+vMenu+vSearchPrice;
-						}
-					}
+				if(vSearchValue != "&") {
+					stsRoop();
+					locGo = loc+vMenu+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					alert(vSearchPrice);
-					if(vSearchValue != "&") {
-						stsRoop();
-						locGo = loc+vMenu+"sts="+sts+"&search="+vSearchValue+vSearchPrice;
-					}
-					else {
-						stsRoop();
-						locGo = loc+vMenu+"sts="+sts+vSearchPrice;
-					}
+					stsRoop();
+					locGo = loc+vMenu+"&sts="+sts+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		}
@@ -812,115 +660,39 @@ input::-moz-focus-inner { border: 0; }
 		}
 		
 		if(vvBrandNm.length > 0) {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
-				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		} else {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&")  {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
-				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+searchValue+vSearchPrice;
-					}
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+searchValue+vSearchPrice;
-					}
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						searchRoop();
-						locGo = loc+vMenu+"search="+searchValue+vSearchPrice;
-					} else {
-						searchRoop();
-						locGo = loc+vMenu+"search="+searchValue+vSearchPrice;
-					}
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
 				}
 			}
 		}
@@ -930,15 +702,7 @@ input::-moz-focus-inner { border: 0; }
 
 	// 가격 직접입력 (검색버튼)
 	function search2() { 
-		alert("씨불!");
-		
-		/*
-		alert(vSearchValue);
-		var searchValue = document.getElementById("contentSearch").value;
-		searchValue = searchValue.replace(/(\s*)/g,"");
-		searchValue += "&";
-		alert(searchValue);
-		*/
+
 		var searchPriceSt = document.getElementById("priceSearchSt").value;
 		var searchPriceEd = document.getElementById("priceSearchEd").value;
 
@@ -987,134 +751,56 @@ input::-moz-focus-inner { border: 0; }
 		}
 		
 		if(vvBrandNm.length > 0) {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
-				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				}
 			}
 		} else {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"priceMin="+vPriceMin+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
-				}
-			} else if(vPriceMax != "&") {
-				if(vSts != "&")  {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
-				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"priceMax="+vPriceMax+"&search="+vSearchValue+searchPrice;
-					}
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				}
 			} else {
-				if(vSts != "&") {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"sts="+vSts+"&search="+vSearchValue+searchPrice;
-					}
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				} else {
-					if(vSearchValue != "&") {
-						search2Roop();
-						locGo = loc+vMenu+"search="+vSearchValue+searchPrice;
-					} else {
-						search2Roop();
-						locGo = loc+vMenu+"search="+vSearchValue+searchPrice;
-					}
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
 				}
 			}
 		}
 		location.href = locGo;
-
-		
-
 	}
 
 	// 정렬
-	function sortBtn(num) {
-		alert("눌러뜸" + num);
+	function sortBtn(sort) {
+		var locGo;
+		locGo = vMasterLoc + ("&sort="+sort);
+		location.href = locGo;
 	}
 	
 </script>
 <jsp:include page=".././template/header.jsp"></jsp:include>
 </head>
 <body>
-	
 	<div class="content">
 	<br>
 		<div class="content-inner">
@@ -1366,12 +1052,12 @@ input::-moz-focus-inner { border: 0; }
 				<!-- 정렬 메뉴 영역 시작 -->
 				<!-- ******************* -->
 				<ul class="nav nav-tabs nav-justified">
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a href="#">인기순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(2);"><a href="#">최신순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(3);"><a href="#">낮은가격순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(4);"><a href="#">높은가격순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(5);"><a href="#">판매량순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(6);"><a href="#">리뷰 많은순</a></li>
+				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a>인기순</a></li>
+				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);"><a>최신순</a></li>
+				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);"><a>낮은가격순</a></li>
+				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);"><a>높은가격순</a></li>
+				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);"><a>판매량순</a></li>
+				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);"><a>리뷰 많은순</a></li>
 				</ul>
 				<!-- ***************** -->
 				<!-- 정렬 메뉴 영역 끝 -->
