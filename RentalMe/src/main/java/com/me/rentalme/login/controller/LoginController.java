@@ -1,6 +1,7 @@
 package com.me.rentalme.login.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,16 +35,24 @@ public class LoginController {
 	/**
 	* 로그인 폼
 	* 
-	* @param  None
-	* @return String 
+	* @param  HttpServletRequest req
+	* @return ModelAndView mav 
 	* @author 황인준
 	* @exception 
 	*/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public ModelAndView login(HttpServletRequest req) {
 		log.debug("로그인 폼 컨트롤러...");
+		
+		ModelAndView mav = new ModelAndView("login/login");
+		
+		//이메일로 아이디찾기에서 넘어온 아이디 값이 있으면 userId값을 담아 로그인 페이지로 이동
+		if(req.getParameter("userId") != null) {
+			String userId = req.getParameter("userId");
+			mav.addObject("userId", userId);
+		}
 
-		return "login/login";
+		return mav;
 	}
 	
 	/**

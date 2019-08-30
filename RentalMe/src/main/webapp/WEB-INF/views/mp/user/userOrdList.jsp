@@ -9,16 +9,10 @@
 <meta charset="UTF-8">
 <style type="text/css">
       #title{
-            font-size: 18pt;
-            font-weight: bolder;
-            text-align: center;
-            font-family: "nanumB";
-            margin: 50px;
-      }
-      #path{
+            font-size: 15pt;
             font-weight: bolder;
             font-family: "nanumB";
-            float:left;
+            margin: 60px 0 50px 0;
       }
       
       #choosedel{
@@ -29,12 +23,13 @@
             color:black;
             font-weight:600;
       }
-
+		
+		
        .ordtable>thead>tr>th{
            text-align:center;
         }
         
-        .ordtable>tbody>tr>td{
+       .ordtable>tbody>tr>td{
            vertical-align: middle;
            text-align: center;
            display: table-cell;
@@ -84,8 +79,8 @@
             float:right;
             margin-top:25px;
       }
-      .pathdiv{
-            height:30px;
+      .titlediv{
+            height:40px;
       }
       .starR{
         background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
@@ -113,7 +108,18 @@
         color:#f00;
         fontweight: bold;
       }
-     
+      #info{
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
+      }
+      
+      #info p{
+      	line-height:20px;
+      	font-family:"nanumB";
+      }
+   
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
@@ -227,12 +233,22 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-   <p id="title">주문내역</p>
    <div>
-   <div class="pathdiv">
-       <p id="path">마이페이지> 주문내역</p>
+   <div class="titlediv">
+       <p id="title">주문 내역</p>
      </div>
-     <div class="hr" style="height:3px; background-color: black;"></div>
+     <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
+     <div id="info">
+     <p>
+     	<input type="hidden" value="${loginMbNo}">
+	     <c:if test="${empty userVo.userNM}">
+	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+	     </c:if>
+	     <c:if test="${!empty userVo.userNM }">
+	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+	     </c:if>
+     </p>
+     </div>
           <table class="ordtable table">
           <thead>
              <tr class="active">
@@ -272,7 +288,7 @@
                       반품확정
                    </c:if>
                 </td>
-                <td><button type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button></td>
+                <td><button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button></td>
              </tr>
           </c:forEach>
           </tbody>
@@ -326,7 +342,7 @@
      
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary submit" id="review">저장</button>
+        <button style="background:black;" id="review" type="submit" class="btn btn-default submit" >저장</button>
       </div>
    </div>
     </div>

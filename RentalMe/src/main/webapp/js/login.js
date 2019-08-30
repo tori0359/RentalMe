@@ -60,6 +60,9 @@
     $("#id_pw_find").on("hidden.bs.modal", function(){
     	//등록된 이메일 form 초기화
         $("#inputEmail").val("");
+        
+        //등록된 핸드폰으로 찾기 form 초기화
+        $('id_cellphone_find').val('');
     });
     
     //등록된 이메일로 아이디 찾기 (이메일 정규식 체크) 
@@ -75,7 +78,7 @@
     			$('#id_find_btn').prop('disabled', false);
     			
     		    $('#id_find_btn').click(function(){
-    		    	//부모창 막기
+    		    	//부모창의 스크롤을 막는다.
     		    	$("html, body").addClass("not_scroll");
     	
     		    	$.ajax({
@@ -85,19 +88,21 @@
     		            dataType: 'json',
     		            success: function(data) {
     		            	var infoList = data;
+    		            	
+    		            	//1) 등록된 이메일이 있는 경우
     		            	if(infoList.length > 0){
-    		            		//등록된 이메일이 있을 경우 계정정보 찾기 창을 닫고 결과창을 보여준다.
+    		            		//1. 계정정보 찾기 창을 닫는다.
     		            		$('#id_pw_find').modal('hide');
     		            		
-    		            		//아이디 찾기 결과 값 초기화
+    		            		//2. 아이디 찾기 결과 값 초기화
     		            		$('#find_id_body').empty();
     		            		
+    		            		//3. 아이디 찾기 결과 모달 - json으로 받아온 데이터 바인딩
     		            		$.each(infoList, function(index, info){
-    		            			// hij0359@gmail.com, htyeon91g@gmail.com
     		            			$('#find_id_body').append('<div class="row">')
     		            							  .append(	'<div class="col-md-2"></div>')
     		            							  .append(	'<div class="col-md-4">아이디</div>')
-    		            							  .append(	'<div class="col-md-4">'+info.userId+'</div>')
+    		            							  .append(	'<div class="userId col-md-4" id="userId">'+info.userId+'</div>')
     		            							  .append(	'<div class="col-md-2"></div>')
     		            							  .append('</div>')
     		            							  .append('<div class="row">')
@@ -107,16 +112,18 @@
     		            							  .append(	'<div class="col-md-2"></div>')
     		            							  .append('</div>')
     		            							  .append('<div class="row">')
-    		            							  .append(		'<div style="margin:3px 2px 3px 134px; width:200px height:50px;><button type="button" id="useId'+index+'" class="btn btn-primary">아이디 사용</button>')
-    		            							  .append(		'<button type="button" id="findPw'+index+'"class="btn btn-info">비밀번호 찾기</button></div>')
-    		            							  .append('</div>')
+    		            							  .append(		'<div style="margin:3px 2px 3px 134px; width:200px height:50px;><a type="button" href="/login?userId='+info.userId+'" class="useId btn btn-primary">아이디 사용</a>')
+    		            							  .append(		'<button type="button" id="'+info.userId+'" class="findPw btn btn-info">비밀번호 찾기</button></div>')
+    		            							  .append('</div>');
     		            		});
-    		            	
+
     		            		$('.col-md-4').css('text-align','center').css('border','1px solid black');
     		            		
+    		            		//4. 아이디 찾기 결과 모달을 보여준다.
     		            		$('#find_id_modal').modal('show');
+    		            		
     		            	}else{
-    		            		//등록된 이메일이 없을 경우 메시지를 보여준다.
+    		            		//2) 등록된 이메일이 없을 경우 메시지를 보여준다.
     		            		$('#noEmail-danger').show();
     		            		return false;
     		            	}
@@ -126,10 +133,13 @@
     		                	$("#find_id_body").html("");
     		                	$("html, body").removeClass("not_scroll");
     		                });
+    		                
+
     		            },
                 		error:function(request, status, error){
                 			alert("code="+request.status+", message="+request.responseText+", error="+error)
                 		}
+    		           
     		        });
     		    });
     		}else{
@@ -141,8 +151,36 @@
     });
     //!modal
     
+    
+    /* 아이디찾기 결과 버튼 이벤트 */
+    //1) 아이디 사용 버튼을 눌렀을 때(append로 html 작성시 이 방법으로 넘겨줘야 데이터가 동작한다.) - 1. 동작 이벤트 2. 선택자 3. function()
+    $(document).on("click", ".useId", function () {
+    	//로그인페이지로 이동
+    	window.location = $(this).attr('href');
+    });
+    
+    //2) 비밀번호찾기 버튼을 눌렀을 때
+    $(document).on("click", ".findPw", function () {
+    	//1. 아이디찾기 결과 모달을 닫는다.
+    	$('#find_id_modal').modal('hide');
+    	
+    	//2. 아이디/비밀번호찾기 모달을 연다.
+    	$('#id_pw_find').modal('show');
+    	
+    	//3. 비밀번호 찾기 탭으로 이동
+        $('#id_tab').prop('disabled', false);
+        $('#pw_tab').prop('disabled', true);
+        $('#id_find_btn').hide();
+        $('#pw_find_btn').show();
+        $('#id_find').hide();
+        $('#pw_find').show();
+        
+        //4. 사용자아이디, 입력한 이메일 바인딩
+        $('#pwUserId').val($(this).attr('id'));
+    });
+    
+    /* // 아이디찾기 결과 버튼 이벤트 */
 
-   
 });
  
 

@@ -37,9 +37,6 @@
 	font-style: italic;
 	text-align: right;
 }
-#menu-btn11 {
-
-}
 
 /* ---------- 소메뉴 영역 시작 -------- */
 
@@ -52,7 +49,7 @@
 }
 #option-price-search {
 	width: 400px;
-	text-align: right;
+	text-align: left;
 	border-left: none;
 }
 #priceSearchSt {
@@ -68,6 +65,9 @@
 }
 #option-select {
 	text-align: center;
+}
+h6 {
+	display: inline;
 }
 /* ---------- 옵션 영역 끝 ---------- */
 
@@ -184,101 +184,623 @@ input::-moz-focus-inner { border: 0; }
 		$('#menuBtn'+sMenu).attr('class','btn btn-primary');
 
 		// 옵션 브랜드 셋팅
-		var sBrandNm = "${brandNm}";
-		$('#optionBrand'+sBrandNm).attr('class', 'label label-primary');
-
+		//var sBrandNm = "${brandNm}";
+		//$('#optionBrand'+sBrandNm).attr('class', 'label label-primary');
+		
+		for(var i=0; i<vvBrandNm.length; i++) {
+			$('#optionBrand'+vvBrandNm[i]).attr('class', 'label label-primary');
+			document.getElementsByName("brandCheckBox"+vvBrandNm[i])[0].checked = true;
+		}
+		
 		// 옵션 가격 셋팅(최소)
 		var sPriceMin = "${priceMin}";
 		$('#optionPriceMin'+sPriceMin).attr('class', 'label label-primary');
+		if(!sPriceMin) {
+		} else {
+			document.getElementsByName("priceMinCheckBox"+sPriceMin)[0].checked = true;
+		}
+		
 
 		// 옵션 가격 셋팅(절반)
 		var sPriceHalf = "${priceHalf}";
 		$('#optionPriceHalf'+sPriceHalf).attr('class', 'label label-primary');
+		
 
 		// 옵션 가격 셋팅(최대)
 		var sPriceMax = "${priceMax}";
 		$('#optionPriceMax'+sPriceMax).attr('class', 'label label-primary');
-
+		if(!sPriceMax) {
+		} else {
+			document.getElementsByName("priceMaxCheckBox"+sPriceMax)[0].checked = true;
+		}
+		
 		// 상품 상태 셋팅
 		var sSts = "${sts}";
 		$('#optionSts'+sSts).attr('class', 'label label-primary');
+		if(!sSts) {
+		} else {
+			document.getElementsByName("stsCheckBox"+sSts)[0].checked = true;
+		}
+
+		// 상품 결과내검색value 셋팅
+		var sSearchValue = "${search}";
+		if(!sSearchValue) {
+		} else {
+			document.getElementById("contentSearch").value = sSearchValue;
+		}
+
+		// 상품 가격검색value(시작가) 셋팅
+		var sSearchPriceSt = "${searchPriceSt}";
+		if(!sSearchPriceSt) {
+		} else {
+			document.getElementById("priceSearchSt").value = sSearchPriceSt;
+		}
+
+		// 상품 가격검색value(종료가) 셋팅
+		var sSearchPriceEd = "${searchPriceEd}";
+		if(!sSearchPriceEd) {
+		} else {
+			document.getElementById("priceSearchEd").value = sSearchPriceEd;
+		}
 		
 		// 상품 정렬
-		var sSort = "1";
-		$('#sort-btn'+sSort).attr('class','active');
-		
-		alert("안쪽 끝");
+		var sSort = "${sort}";
+		// 소팅1번 자동셋팅
+		if(!sSort) {
+			$('#sort-btn'+1).attr('class','active');
+		} else {
+			$('#sort-btn'+sSort).attr('class','active');
+		}
+
+		alert("안쪽마지막");
 	}
 
 	alert("바깥쪽");
 
-	// JSON 방식 서버사이드 list객체 받기
-	/*
-	<c:forEach items="${path}" var="info">
-		//var json = new Object();
-		//json.gubunCd = "${info.gubunCd}";
-		//json.gdsMclassNm = "${info.gdsMclassNm}";
-		//result.push(json);
-		menu1 = ${info.gubunCd}
-		
+	/**************************/
+	/**** 전역변수 선언시작 ***/
+	/**************************/
+	var loc = "/rental/Appli/lg/";	// 기본주소 URL 셋팅
+	var vMenu = "${menu}"+"?";		// 소메뉴
+	var vvBrandNm = new Array();	// 옵션 브랜드
+	<c:forEach items="${brandNm}" var="brandNm" varStatus="status">
+		vvBrandNm[${status.index}] = "${brandNm}";
 	</c:forEach>
-	*/
+	var flg;
+	//var vPriceMin = "${priceMin}"+"&";	// 옵션 최소가격	
+	//var vPriceMax = "${priceMax}"+"&";	// 옵션 최대가격
+	var vSts = "${sts}"+"&";	// 옵션 상태
+	var vSearchValue = "${search}"+"&";	// 옵션 검색value
+	var vSearchPriceSt ="${searchPriceSt}";	// 옵션 가격검색 st
+	var vSearchPriceEd ="${searchPriceEd}";	// 옵션 가격검색 ed
+	var vSearchPrice = "&";	// 가격 st+ed 변수
+	var vSort = "${sort}";	// 정렬기준
+	if(!vSort) {
+		vSort = "1";	// sort값 자동 셋팅
+	}
 
-	var menu;
-	var brandNm;
-	var priceMin;
-	var priceHalf;
-	var priceMax;
+	var vMasterLoc;	// 마스터 URL 셋팅
+
+	// 최소가격 셋팅
+	if(vSearchPriceSt != 0) {
+		if((!vSearchPriceEd) || (vSearchPriceEd == 0)) {
+			vSearchPrice = "&searchPriceSt="+vSearchPriceSt;
+		}
+	}
+
+	// 최대가격 셋팅
+	if(vSearchPriceEd != 0) {
+		if((!vSearchPriceSt) || (vSearchPriceSt == 0)) {
+			vSearchPrice = "&searchPriceEd="+vSearchPriceEd;
+		}
+	}
+
+	// 최소&최대가격 셋팅
+	if((vSearchPriceSt != 0) && (vSearchPriceEd != 0)) {
+		vSearchPrice = "&searchPriceSt="+vSearchPriceSt+"&searchPriceEd="+vSearchPriceEd;
+	}
+
+	// 브랜드명 셋팅
+	if(vvBrandNm.length > 0) {
+		var vvBrandNmTemp = "";
+		for(var i=0; i<vvBrandNm.length; i++) {
+			vvBrandNmTemp += ("brandNm=" + (vvBrandNm[i]+"&") );
+		}	
+		vMasterLoc = loc + vMenu + vvBrandNmTemp;
+	}
+	else {
+		vMasterLoc = loc + vMenu;
+	}
+
+	// 마스터변수
+	vMasterLoc = vMasterLoc + ("&sts="+vSts) + ("&search="+vSearchValue) + vSearchPrice;
+	
+	/**************************/
+	/**** 전역변수 선언끝 *****/
+	/**************************/
+	
 	
 	// 소메뉴 선택
 	function menuBtnClick(menu) {
-		var loc = "/rental/Appli/lg/";
-		loc = loc+menu;
-		location.href = loc;
+		var locGo = loc+menu+"?";
+		location.href = locGo;
+	}
+
+	// 브랜드 checkBox 선택시
+	function brandCheckBox(brandNm) {
+		// 체크박스가 선택되었을 때
+		if(document.getElementsByName("brandCheckBox"+brandNm)[0].checked == true) {
+			flg = 1;	// brandNm 반복횟수 + 1
+			optionBrandBtnClick(brandNm);
+		} else {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionBrandBtnClick(brandNm);
+		}
 	}
 
 	// 브랜드 선택
 	function optionBrandBtnClick(brandNm) {
-		alert(brandNm);
-		alert(menu);
-		var loc = "/rental/Appli/lg/";
-		loc = loc+menu+"?";
-		loc = loc+"brandNm="+brandNm;
-		alert(loc);
-		location.href = loc
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+
+		// 브랜드명 중복검사
+		function brandRoop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					if(vvBrandNm[i] == brandNm) {
+					} else {
+						vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+					}
+				} else {
+					if(vvBrandNm[i] == brandNm) {
+					} else {
+						vvBrandNmTemp += "brandNm="+brandNm;
+					}
+				}
+			}
+		}
+
+		if(vvBrandNm.length > 0) {
+			if(vSts != "&") {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice+"&sort="+vSort;
+				}
+			} else {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		} else {
+			if(vSts != "&") {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+vSearchPrice+"&sort="+vSort;
+				}
+			} else {
+				brandRoop();
+				if(vSts.replace("&","") != vSts) {
+					locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		}
+		location.href = locGo;
 	}
 
-	// 최소가격 선택
-	function optionPriceMinBtnClick(price) {
-		alert(price);
-	}
-
-	// 최대가격 선택
-	function optionPriceHalfBtnClick(price) {
-		alert(price);
-	}
-
-	// 절반가격 선택
-	function optionPriceMaxBtnClick(price) {
-		alert(price);
-	}
-
-	// 상태 선택
-	function optionStsBtnClick(sts) {
-		alert(sts);
+	/*
+	// 최소가격 checkBox 선택시
+	function priceMinCheckBox(price) {
+		// 체크박스가 선택되었을 때
+		if(document.getElementsByName("priceMinCheckBox"+price)[0].checked == true) {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionPriceMinBtnClick(price);
+		} else {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionPriceMinBtnClick(price);
+		}
 	}
 	
+	// 최소가격 선택
+	function optionPriceMinBtnClick(price) {
+		
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+
+		// 최소가격 브랜드명 중복검사
+		function priceMinRoop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+				} else {
+					vvBrandNmTemp += "brandNm="+brandNm;
+				}
+			}
+		}
+
+		if(vvBrandNm.length > 0) {
+			if(vPriceMin != "&") {
+				if(vSts != "&") {
+					priceMinRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price+"&sts="+vSts;
+				} else {
+					priceMinRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price;
+				}
+			} else {
+				if(vSts != "&") {
+					priceMinRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price+"&sts="+vSts;
+				} else {
+					priceMinRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price;
+				}
+			}
+		} else {
+			if(vPriceMin != "&") {
+				if(vSts != "&") {
+					priceMinRoop();
+					locGo = loc+vMenu+"priceMin="+price+"&sts="+vSts;
+				} else {
+					priceMinRoop();
+					locGo = loc+vMenu+"priceMin="+price;
+				}
+			} else {
+				if(vSts != "&") {
+					priceMinRoop();
+					locGo = loc+vMenu+"priceMin="+price+"&sts="+vSts;
+				} else {
+					priceMinRoop();
+					locGo = loc+vMenu+"priceMin="+price;
+				}
+			}
+		}
+		location.href = locGo; 
+	}
+
+	// 최대가격 checkBox 선택시
+	function priceMaxCheckBox(price) {
+		// 체크박스가 선택되었을 때
+		if(document.getElementsByName("priceMaxCheckBox"+price)[0].checked == true) {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionPriceMaxBtnClick(price);
+		} else {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionPriceMaxBtnClick(price);
+		}
+	}
+	
+	// 최대가격 선택
+	function optionPriceMaxBtnClick(price) {
+
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+
+		// 최대가격 브랜드명 중복검사
+		function priceMaxRoop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+				} else {
+					vvBrandNmTemp += "brandNm="+brandNm;
+				}
+			}
+		}
+		
+		if(vvBrandNm.length > 0) {
+			if(vPriceMax != "&") {
+				if(vSts != "&") {
+					priceMaxRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price+"&sts="+vSts;
+				} else {
+					priceMaxRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price;
+				}
+			} else {
+				if(vSts != "&") {
+					priceMaxRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price+"&sts="+vSts;
+				} else {
+					priceMaxRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price;;
+				}
+			}
+		} else {
+			if(vPriceMax != "&") {
+				if(vSts != "&") {
+					priceMaxRoop();
+					locGo = loc+vMenu+"priceMax="+price+"&sts="+vSts;
+				} else {
+					priceMaxRoop();
+					locGo = loc+vMenu+"priceMax="+price;
+				}
+			} else {
+				if(vSts != "&") {
+					priceMaxRoop();
+					locGo = loc+vMenu+"priceMax="+price+"&sts="+vSts;
+				} else {
+					priceMaxRoop();
+					locGo = loc+vMenu+"priceMax="+price;
+				}
+			}
+		}
+		location.href = locGo; 
+	}
+	*/
+
+	// 상태 checkBox 선택시
+	function stsCheckBox(sts) {
+		
+		// 체크박스가 선택되었을 때
+		if(document.getElementsByName("stsCheckBox"+sts)[0].checked == true) {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionStsBtnClick(sts);
+		} else {
+			flg = 0;	// brandNm 반복횟수 + 0
+			optionStsBtnClick(sts);
+		}
+	}
+	
+	// 상태 선택
+	function optionStsBtnClick(sts) {
+
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+		
+		// 상태 브랜드명 중복검사
+		function stsRoop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+				} else {
+					vvBrandNmTemp += "brandNm="+brandNm;
+				}
+			}
+		}
+		
+		if(vvBrandNm.length > 0) {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+					} else {
+						locGo = loc+vMenu+vvBrandNmTemp+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+					}
+				} else {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice+"&sort="+vSort;
+					} else {
+						locGo = loc+vMenu+vvBrandNmTemp+vSearchPrice+"&sort="+vSort;
+					}
+				}
+			} else {
+				if(vSearchValue != "&") {
+					stsRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					stsRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+sts+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		} else {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+					} else {
+						locGo = loc+vMenu+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+					}
+				} else {
+					stsRoop();
+					if(vSts.replace("&","") != sts) {
+						locGo = loc+vMenu+"&sts="+sts+vSearchPrice+"&sort="+vSort;
+					} else {
+						locGo = loc+vMenu+vSearchPrice;
+					}
+				}
+			} else {
+				if(vSearchValue != "&") {
+					stsRoop();
+					locGo = loc+vMenu+"&sts="+sts+"&search="+vSearchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					stsRoop();
+					locGo = loc+vMenu+"&sts="+sts+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		}
+		location.href = locGo;
+	}
+
+	// 결과 내 검색 (검색버튼)
+	function search() {
+		//vSearchValue = "";
+		var searchValue = document.getElementById("contentSearch").value;
+		searchValue = searchValue.replace(/(\s*)/g,"");
+		searchValue += "&";
+
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+		flg = 0;
+
+		// 결과내검색 브랜드명 중복검사
+		function searchRoop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+				} else {
+					vvBrandNmTemp += "brandNm="+brandNm;
+				}
+			}
+		}
+		
+		if(vvBrandNm.length > 0) {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				}
+			} else {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					searchRoop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		} else {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				}
+			} else {
+				if(vSearchValue != "&") {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				} else {
+					searchRoop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+searchValue+vSearchPrice+"&sort="+vSort;
+				}
+			}
+		}
+		location.href = locGo;
+	}
+
+
+	// 가격 직접입력 (검색버튼)
+	function search2() { 
+
+		var searchPriceSt = document.getElementById("priceSearchSt").value;
+		var searchPriceEd = document.getElementById("priceSearchEd").value;
+
+		var locGo;					// URL 주소저장
+		var vvBrandNmTemp="";		// brandNm 임시저장
+		flg = 0;
+		var searchPrice;
+		
+		if(searchPriceSt != 0) {
+			if((!searchPriceEd) || (searchPriceEd == 0)) {
+				//alert("앞단 가격만있음");
+				searchPrice = "&searchPriceSt="+searchPriceSt;
+			}
+		}
+
+		if(searchPriceEd != 0) {
+			if((!searchPriceSt) || (searchPriceSt == 0)) {
+				//alert("뒷단 가격만있음");
+				searchPrice = "&searchPriceEd="+searchPriceEd;
+			}
+		}
+		
+		if((searchPriceSt != 0) && (searchPriceEd != 0)) {
+			if(searchPriceSt > searchPriceEd) {
+				//alert("최소가격이 더 큽니다.");
+				return false;
+			} else {
+				//alert("앞뒷단 가격 다있음");
+				searchPrice = "&searchPriceSt="+searchPriceSt+"&searchPriceEd="+searchPriceEd;
+			}
+		}
+
+
+		// 결과내검색 브랜드명 중복검사
+		function search2Roop() {
+			for(var i=0; i<vvBrandNm.length+flg; i++) {
+				if((i > 0) && (i <= vvBrandNm.length)) {
+					vvBrandNmTemp += "&";
+				}
+				if(i < vvBrandNm.length) {
+					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
+				} else {
+					vvBrandNmTemp += "brandNm="+brandNm;
+				}
+			}
+		}
+		
+		if(vvBrandNm.length > 0) {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				} else {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				}
+			} else {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				} else {
+					search2Roop();
+					locGo = loc+vMenu+vvBrandNmTemp+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				}
+			}
+		} else {
+			if(vSts != "&") {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				} else {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				}
+			} else {
+				if(vSearchValue != "&") {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				} else {
+					search2Roop();
+					locGo = loc+vMenu+"&sts="+vSts+"&search="+vSearchValue+searchPrice+"&sort="+vSort;
+				}
+			}
+		}
+		location.href = locGo;
+	}
 
 	// 정렬
-	function sortBtn(num) {
-		alert("눌러뜸" + num);
+	function sortBtn(sort) {
+		var locGo;
+		locGo = vMasterLoc + ("&sort="+sort);
+		location.href = locGo;
 	}
 	
 </script>
 <jsp:include page=".././template/header.jsp"></jsp:include>
 </head>
 <body>
-	
 	<div class="content">
 	<br>
 		<div class="content-inner">
@@ -365,27 +887,30 @@ input::-moz-focus-inner { border: 0; }
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
 							<c:forEach items="${list2}" var="list2" varStatus="status">
-								<span class="label label-default" id="optionBrand${list2.brandNm }" onClick="optionBrandBtnClick('${list2.brandNm }');">${list2.brandNm }</span>
+								<h6><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.5";/>${list2.brandNm }</label></span></h6>
 							</c:forEach>
 						</td>
 					</tr>
 					<tr>
 						<th class="active" id="option-price">가격</th>
+						<!-- 
 						<td>
 							<c:forEach items="${list3}" var="list3">
-								<span class="label label-default" id="optionPriceMin${list3.priceMin }" onClick="optionPriceMinBtnClick('${list3.priceMin}');">~ <fmt:setLocale value="ko_KR"></fmt:setLocale>
-									<fmt:formatNumber type="currency" value="${list3.priceMin}"></fmt:formatNumber>
+								<span class="label label-default" id="optionPriceMin${list3.priceMin }" ><label ><input class="checkBox" type="checkbox" name="priceMinCheckBox${list3.priceMin }" onClick="priceMinCheckBox('${list3.priceMin}')" style="opacity: 0.5";/>~ <fmt:setLocale value="ko_KR"></fmt:setLocale>
+									<fmt:formatNumber type="currency" value="${list3.priceMin}"></fmt:formatNumber></label>
 								</span>&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="label label-default" id="optionPriceHalf${list3.priceMin }to${list3.priceMax}" onClick="optionPriceHalfBtnClick('${list3.priceMin}to${list3.priceMax }');"><fmt:setLocale value="ko_KR"></fmt:setLocale>
+								<span class="label label-default" id="optionPriceHalf${list3.priceMin }to${list3.priceMax}" ><label ><input class="checkBox" type="checkbox" name="priceHalfCheckBox${list3.priceMin}to${list3.priceMax }" onClick="priceHalfCheckBox('${list3.priceMin}to${list3.priceMax }')" style="opacity: 0.5";/><fmt:setLocale value="ko_KR"></fmt:setLocale>
 									<fmt:formatNumber type="currency" value="${list3.priceMin}" />
-											 ~ <fmt:formatNumber type="currency" value="${list3.priceMax}"></fmt:formatNumber>
+											 ~ <fmt:formatNumber type="currency" value="${list3.priceMax}"></fmt:formatNumber></label>
 								</span>&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="label label-default" id="optionPriceMax${list3.priceMax }" onClick="optionPriceMaxBtnClick('${list3.priceMax}');"><fmt:setLocale value="ko_KR"/>
-									<fmt:formatNumber type="currency" value="${list3.priceMax}" /> ~
+								 
+								<span class="label label-default" id="optionPriceMax${list3.priceMax }" ><label ><input class="checkBox" type="checkbox" name="priceMaxCheckBox${list3.priceMax }" onClick="priceMaxCheckBox('${list3.priceMax}')" style="opacity: 0.5";/><fmt:setLocale value="ko_KR"/>
+									<fmt:formatNumber type="currency" value="${list3.priceMax}" /> ~</label>
 								</span>
 							</c:forEach>
 						</td>
-						<td id="option-price-search">
+						 -->
+						<td id="option-price-search" colspan="2">
 							<form class="form-inline">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
@@ -398,15 +923,15 @@ input::-moz-focus-inner { border: 0; }
 										<input type="text" class="form-control" id="priceSearchEd" placeholder="0">
 									</div>
 								</div>
-								<button type="submit" class="btn btn-success">검색</button>
+								<button type="button" class="btn btn-success" onClick="search2();">검색</button>
 							</form>
 						</td>
 					</tr>
 					<tr>
 						<th class="active" id="option-status">상태</th>
-							<td>
-								<span class="label label-default" id="optionStsN" onClick="optionStsBtnClick('N');">새상품</span>
-								<span class="label label-default" id="optionStsU" onClick="optionStsBtnClick('U');">중고상품</span>
+							<td colspan="2">
+								<span class="label label-default" id="optionStsN" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxN" style="opacity: 0.5" onClick="stsCheckBox('N');"/>새상품</label></span>
+								<span class="label label-default" id="optionStsU" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxU" style="opacity: 0.5" onClick="stsCheckBox('U');"/>중고상품</label></span>
 							</td>
 					</tr>
 					<tr>
@@ -416,22 +941,14 @@ input::-moz-focus-inner { border: 0; }
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
 									<div class="input-group">
-										<input type="text" class="form-control" id="contentSearch" placeholder="결과 내 검색">
+										<input type="text" class="form-control" id="contentSearch"  placeholder="결과 내 검색">
 									</div>
 								</div>
-								<button type="submit" class="btn btn-success">검색</button>
+								<button type="button" class="btn btn-success" onClick="search();">검색</button>
 							</form>							
 						</td>
 					</tr>
 					<tr>
-						<th id="option-select">전체해제</th>
-						<td colspan="2">
-							<a href="#">선택1</a>
-							<a href="#">선택2</a>
-							<a href="#">선택3</a>
-							<a href="#">선택4</a>
-							<a href="#">선택5</a>									
-						</td>
 					</tr>
 					<!-- ************ -->
 					<!-- 옵션 영역 끝 -->
@@ -535,12 +1052,12 @@ input::-moz-focus-inner { border: 0; }
 				<!-- 정렬 메뉴 영역 시작 -->
 				<!-- ******************* -->
 				<ul class="nav nav-tabs nav-justified">
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a href="#">인기순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(2);"><a href="#">최신순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(3);"><a href="#">낮은가격순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(4);"><a href="#">높은가격순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(5);"><a href="#">판매량순</a></li>
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(6);"><a href="#">리뷰 많은순</a></li>
+				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a>인기순</a></li>
+				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);"><a>최신순</a></li>
+				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);"><a>낮은가격순</a></li>
+				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);"><a>높은가격순</a></li>
+				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);"><a>판매량순</a></li>
+				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);"><a>리뷰 많은순</a></li>
 				</ul>
 				<!-- ***************** -->
 				<!-- 정렬 메뉴 영역 끝 -->

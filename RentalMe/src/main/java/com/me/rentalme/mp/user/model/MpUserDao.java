@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.model.entity.UserVo;
 
 /**
 	* 마이페이지_유저 Dao 인터페이스
@@ -15,7 +16,7 @@ import com.me.rentalme.model.entity.CallVo;
 public interface MpUserDao {
 	
 	//주문내역 리스트 출력
-	List<CallVo> selectOrd() throws SQLException;
+	List<CallVo> selectOrd(String mbNo) throws SQLException;
 	
 	//후기 등록
 	int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException;
@@ -32,8 +33,27 @@ public interface MpUserDao {
 	//예치금 리스트 출력
 	List<CallVo> selectDeposit() throws SQLException;
 
-	//에치금 충전
+	//예치금 충전
 	int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException;
+
+	//현재 예치금 업데이트
+	public void updateDeposit() throws SQLException;
+
+	//현재 예치금 출력
+	public CallVo selectUserInfo() throws SQLException;
+
+	//내 정보 출력
+	public UserVo selectMyInfo(String mbNo) throws SQLException;
+
+	//내 정보 업데이트
+	public UserVo updateMyInfo(String mbNo,String userNm, String addr, String addrDetail) throws SQLException;
 	
+	//이름 가져오기
+	public UserVo getName(String mbNo) throws SQLException;
+
+	//경매내역 리스트 출력
+	List<CallVo> selectAuct(String mbNo) throws SQLException;
+
+
 	
 }

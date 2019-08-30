@@ -103,18 +103,17 @@
 
 				<div id="pw_find">
 					<div id="insert_id">
-						<input type="text" placeholder="아이디" />
+						<input type="text" placeholder="아이디"  name="pwUserId" id="pwUserId"/>
 					</div>
 					<div id="pw_cellphone_find">
-						<input type="text" placeholder="핸드폰번호입력" />
+						<input type="text" placeholder="핸드폰번호입력" name="pwHp" id="pwHp"/>
 					</div>
 					<div id="pw_email_find">
-						<input type="text" placeholder="메일주소입력" />
+						<input type="text" placeholder="메일주소입력" name="pwInputEmail" id="pwInputEmail"/>
 					</div>
 					<div>
 						<button id="pw_find_btn" type="button"
-							class="btn btn-default btn-block" data-toggle="modal"
-							data-target="#find_pw_modal" data-ismiss="modal">찾기</button>
+							class="btn btn-default btn-block">찾기</button>
 					</div>
 				</div>
 

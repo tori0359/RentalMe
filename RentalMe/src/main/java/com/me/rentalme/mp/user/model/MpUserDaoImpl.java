@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.model.entity.UserVo;
 
 @Repository
 public class MpUserDaoImpl implements MpUserDao{
@@ -25,8 +26,8 @@ public class MpUserDaoImpl implements MpUserDao{
 	
 	
 	@Override
-	public List<CallVo> selectOrd() throws SQLException {
-		return sqlSession.selectList("mpUser.selectOrd");
+	public List<CallVo> selectOrd(String mbNo) throws SQLException {
+		return sqlSession.selectList("mpUser.selectOrd",mbNo);
 	}
 	
 	@Override
@@ -79,9 +80,48 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.inserDeposit",map);
 	}
 
+	@Override
+	public void updateDeposit() throws SQLException {
+		
+		sqlSession.selectList("mpUser.updateDeposit");
+		
+	}
 
-	
+	@Override
+	public CallVo selectUserInfo() throws SQLException {
+		return sqlSession.selectOne("mpUser.selectInfoUser");
+	}
 
-	
+	@Override
+	public UserVo selectMyInfo(String mbNo)  {
+		log.debug("mbno:"+mbNo);
+		return sqlSession.selectOne("mpUser.selectMyInfo",mbNo);
+	}
+
+	@Override
+	public UserVo updateMyInfo(String mbNo,String userNm, String addr, String addrDetail) {
+		log.debug("mbno:"+mbNo);
+		
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("mbNo",mbNo);
+		map.put("userNm",userNm);
+		map.put("addr",addr);
+		map.put("addrDetail",addrDetail);
+		
+		System.out.println("userNm="+userNm+", addr="+addr+", addrDetail="+addrDetail+" 내 정보 업데이트 DaoImpl...");
+		return sqlSession.selectOne("mpUser.updateMyinfo",map);
+	}
+
+	@Override
+	public UserVo getName(String mbNo) {
+		
+		return sqlSession.selectOne("mpUser.checkName",mbNo);
+	}
+
+	@Override
+	public List<CallVo> selectAuct(String mbNo) throws SQLException {
+		return sqlSession.selectList("mpUser.selectAuct",mbNo);
+	}
+
 
 }
