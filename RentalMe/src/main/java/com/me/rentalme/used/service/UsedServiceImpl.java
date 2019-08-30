@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.model.entity.RentalMeVo;
+import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.used.model.UsedDao;
 
@@ -22,15 +24,15 @@ public class UsedServiceImpl implements UsedService {
 	UsedDao usedDao;
 	
 	@Override
-	public List<UsedVo> list() throws SQLException {
+	public List<UsedVo> list(UsedVo bean) throws SQLException {
 		log.debug("중고거래 서비스...");
-		return usedDao.selectAll();
+		return usedDao.selectAll(bean);
 	}
 
 	@Override
-	public List<UsedVo> oneList(int GDS_MCLASS_CD) throws SQLException {
+	public List<UsedVo> oneList(UsedVo bean) throws SQLException {
 		log.debug("중고거래 탭...");
-		return usedDao.selectOne(GDS_MCLASS_CD);
+		return usedDao.selectOne(bean);
 	}
 	
 	@Override
@@ -43,6 +45,42 @@ public class UsedServiceImpl implements UsedService {
 	public int addUsed(UsedVo bean) throws SQLException {
 		log.debug("중고물품 입력...");
 		return usedDao.InsertOne(bean);
+	}
+
+	@Override
+	public UsedVo detail(String usedGdsNo) throws SQLException {
+		log.debug("중고물품 상세보기...");
+		return usedDao.DetailOne(usedGdsNo);
+	}
+
+	@Override
+	public List<UsedCmtVo> cmtList(String usedGdsNo) throws SQLException {
+		return usedDao.selectCmtAll(usedGdsNo);
+	}
+
+	@Override
+	public int addCmt(UsedCmtVo bean) throws SQLException {
+		return usedDao.cmtInsert(bean);
+	}
+
+	@Override
+	public List<UsedVo> myUsedAll(String mbNo) throws SQLException {
+		return usedDao.mySelectAll(mbNo);
+	}
+
+	@Override
+	public int addMyStoreCmt(UsedStoreVo bean) throws SQLException {
+		return usedDao.myStoreCmtInsert(bean);
+	}
+
+	@Override
+	public List<UsedStoreVo> listMyStoreCmt(String storeNo) throws SQLException {
+		return usedDao.myStoreCmtSelect(storeNo);
+	}
+
+	@Override
+	public int usedcount(UsedVo bean) throws SQLException {
+		return usedDao.usedcount(bean);
 	}
 
 

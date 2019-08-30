@@ -1,4 +1,185 @@
 @charset "UTF-8";
+/*Detail start*/
+	#usedhead{
+		height: 100px;
+	}
+	#usedDetail{
+		font-family: "nanumB";
+		width: 980px;
+		margin: auto;
+	}
+	#carouselD{
+		display: inline-block;
+		width: 490px;
+	}
+	#showInfo{
+		display: inline-block;
+		vertical-align: top;
+		border: 1px solid black;
+		min-width: 470px;
+		margin-left: 10px;
+	}
+	#mainInfo{
+		font-weight: bold;
+		font-size: xx-large;
+	}
+	.cmtContent{
+		border-top: 1px solid black;
+		height: 100px;
+	}
+	.cmtContent div:nth-child(2){
+		font-size: large;
+		display: inline-block;
+	}
+	.cmtContent div:nth-child(3){
+		float: right;
+	}
+	#bigInfo{
+	 border: 1px solid black;
+	}
+	#detailInfo{
+		display: inline-block;
+		width: 49%;
+		height: 500px;
+	}
+	#detailInfo>div{
+		border: 1px solid black;
+		margin: auto;
+		width: 95%;
+		height: 450px;
+	}
+	#sellInfo{
+		display: inline-block;
+		width: 49%;
+	}
+	#sellInfo>div{
+		border: 1px solid black;
+		margin: auto;
+		width: 95%;
+	}
+	
+	#usedFoot{
+		clear: both;
+		height: 300px;
+	}
+/*Detail end*/
+
+/*나의 상점 시작*/
+	.usedStore{
+		width: 80%;
+		margin: 100px auto;
+		margin-bottom: 300px;
+		height: 2000px;
+	}
+	.usedStore #search{
+		display: inline-block;
+		margin-left: 10px;
+	}
+	.usedStore h2{
+		text-align:center;
+		background-color: lightgray;
+		cursor: default;
+	}
+	.usedStore select{
+		display: inline-block;
+		float: right;
+		width: 120px;
+		height: 30px;
+	}
+	.tabs{
+		margin-top: 20px;
+		width: 100%;
+		border-bottom: 5px solid black;
+	}
+	.tabs>li{
+		display: inline-block;
+		width: 20.5%;
+		height: 30px;
+		line-height: 30px;
+		background-color: lightgray;
+		text-align: center;
+		cursor:pointer;
+	}
+	.tabs>li:first-child{
+		margin-left: -40px;
+	}
+	.tabs>li:not(.active):hover{
+		background-color: white;
+	}
+	.tabs> .active{
+		background-color: black;
+		color: white;
+	}
+	.pagination{
+		display: block;
+		text-align: center;
+		margin-top: 50px;
+	}
+	.pagination>li>a{
+		float: none;
+	}
+	#insertThing{
+		float: right;
+		color:white;
+		background-color: black;
+		width: 100px;
+		height: 30px;
+		line-height: 30px;
+		font-size: 15px;
+		text-align: center;
+		text-decoration: none;
+	}
+	#myUsedList ul{
+		padding: 0px;
+		clear: both;
+		
+	}
+	#myUsedList{
+		margin-bottom: 50px;
+		clear:both;
+	}
+	#myUsedList ul>li{
+		display: inline-block;
+		border-bottom: 1px solid #dedede;
+		width: 16.66%;
+		height: 100px;
+		line-height: 100px;
+		float: left;
+		text-align: center;
+	}
+	#myUsedList ul:first-child>li{
+		border-top: 1px solid #dedede;
+		font-weight: bold;
+		height: 30px;
+		line-height: 30px;
+	}
+	#myUsedList ul{
+		cursor: default;
+	}
+	.myUsedLt div{
+		width: 100px;
+		height: 100px;
+	}
+	
+	#myUsedList .used_del{
+		display: block;
+		background-color: lightgray;
+		width: 50px;
+		height: 100%;
+		margin: 0px auto;
+		text-decoration: none;
+		color: black;
+		border-radius: 5px;
+	}
+	#myUsedReview textarea{
+		margin-left: 0px;
+	}
+	#myUsedReview button{
+		float: right;
+		clear: both;
+	}
+/*나의 상점 끝*/
+
 /* usedMng start */
 			#usedMng{
 /*                border: 1px solid red;*/
@@ -56,7 +237,7 @@
             #used_exp{
                 display: inline-block;
             }
-            .form-control{
+            #usedMng .form-control{
                 margin-left: -15px;
             }
             #explain{

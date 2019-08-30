@@ -184,6 +184,7 @@ $(function() {
     
     //이메일 인증코드받기 버튼 클릭한 경우
     $('#emailSend').click(function(){
+    	alert("인증메일이 발송되었습니다.");
     	var email = $('#email').val();
     	var dataOne = {"email":email}
     	

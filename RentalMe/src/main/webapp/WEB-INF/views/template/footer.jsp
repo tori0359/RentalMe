@@ -35,6 +35,7 @@
 		    left: 0px;
 		    bottom: 0px;
 			text-align: center;
+			clear: both;
 		}
 		
 		.footer p{
