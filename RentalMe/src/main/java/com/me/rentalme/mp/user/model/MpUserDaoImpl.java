@@ -31,8 +31,8 @@ public class MpUserDaoImpl implements MpUserDao{
 	}
 	
 	@Override
-	public List<CallVo> selectCart() throws SQLException {
-		return sqlSession.selectList("mpUser.selectCart");
+	public List<CallVo> selectCart(String mbNo) throws SQLException {
+		return sqlSession.selectList("mpUser.selectCart",mbNo);
 	}
 	
 	@Override

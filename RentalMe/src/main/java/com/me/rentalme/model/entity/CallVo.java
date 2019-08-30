@@ -32,7 +32,16 @@ public class CallVo {
 	private String remnDeposit;
 	private String bidPrice;
 	private String bidTime;
+	private String img1;
 	
+
+	public String getImg1() {
+		return img1;
+	}
+
+	public void setImg1(String img1) {
+		this.img1 = img1;
+	}
 
 	public String getBidPrice() {
 		return bidPrice;

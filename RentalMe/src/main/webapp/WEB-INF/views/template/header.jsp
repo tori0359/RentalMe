@@ -37,15 +37,15 @@
         }
         
        #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	  }
-	  
-	  .navbar-default .navbar-nav > .open > a {
-			color: black;
-			background: white;
-		}
-		    
+            min-height:100%;
+            position:relative;
+     }
+     
+     .navbar-default .navbar-nav > .open > a {
+         color: black;
+         background: white;
+      }
+          
       .hr {
          height: 1px;
          width: 100%;
@@ -93,8 +93,8 @@
          z-index:2;
       }
       .login{
-      	width:100%;
-      	background-color: black;
+         width:100%;
+         background-color: black;
       }
 
       .navbar-text>a{
@@ -107,13 +107,13 @@
          font-weight: bold; 
          font-family: "nanumB";
       } 
-	   
-	 
-	   
-	   .dropdown.open .dropdown-menu {
-			max-height: 400px;
-			opacity: 1;
-		}
+      
+    
+      
+      .dropdown.open .dropdown-menu {
+         max-height: 400px;
+         opacity: 1;
+      }
 
       .nav a{
          font-family: "nanumB";
@@ -140,39 +140,39 @@
       
       .navbar .navbar-nav {
         display: inline-block;
-		float: none;
+      float: none;
       }
       
       .navbar .navbar-collapse {
            text-align: center;
       }
-	   
-	  .navbar-text a{
-		   color:white;
-	   }
-	   
-	   .navbar-text{
-		   color:white;
-	   }
-	   
+      
+     .navbar-text a{
+         color:white;
+      }
+      
+      .navbar-text{
+         color:white;
+      }
+      
     .dropdown:hover .dropdown-menu { 
          /* 상위 메뉴에 마우스 모버한 경우 그 안의 하위 메뉴 스타일 설정 */ 
          height: auto;
          
          /* 드롭다운 마우스 hover 자동기능 */
          /*
-	     display: block;
-	     margin-top: 0;
-	     */
+        display: block;
+        margin-top: 0;
+        */
       } 
     
-	.login{
-		 background:black;
-		 width: 100%;
-	   }
-	   
+   .login{
+       background:black;
+       width: 100%;
+      }
+      
     .dropdown-menu>a:hover,
-	.dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
+   .dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
          color: white;
          font-weight: bolder;
          background: #E7A602; 
@@ -185,15 +185,15 @@
          background-color: white;
          margin-top: -1px;
       } 
-	   
-	   .dropdown-menu>li a{
-		   text-align: center;
-		   height: 40px;
-		   line-height: 40px;
-	   }
-	   
+      
+      .dropdown-menu>li a{
+         text-align: center;
+         height: 40px;
+         line-height: 40px;
+      }
+      
 
-	   
+      
        #content{
          font-family: "nanumB";
          font-size: 15px;
@@ -219,14 +219,14 @@
        <div class="col-md-11">
       <p class="navbar-text navbar-right">
       <c:choose>
-      	<c:when test="${loginUserId == null }">
-	      	<a href="/login" class="navbar-link">로그인</a> ㅣ
-	      	<a href="/join/signup" class="navbar-link">회원가입</a></p>
-      	</c:when>
-      	<c:otherwise>
-      		<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
-	      	<a href="/logout" class="navbar-link">로그아웃</a></p>
-      	</c:otherwise>
+         <c:when test="${loginUserId == null }">
+            <a href="/login" class="navbar-link">로그인</a> ㅣ
+            <a href="/join/signup" class="navbar-link">회원가입</a></p>
+         </c:when>
+         <c:otherwise>
+            <a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+            <a href="/logout" class="navbar-link">로그아웃</a></p>
+         </c:otherwise>
       </c:choose>
       </div>
     </div>
@@ -259,7 +259,7 @@
         <li class="dropdown">
           <a href="#" id="bigmenu" class="dropdown-toggle" data-toggle="dropdown" >대형가전 렌탈</a>
           <ul class="dropdown-menu">
-          	  <li><a href="/rental/Appli/lg/10">전체보기</a></li>
+               <li><a href="/rental/Appli/lg/10">전체보기</a></li>
               <li><a href="/rental/Appli/lg/11">에어컨</a></li> 
               <li><a href="/rental/Appli/lg/12">냉난방기</a></li> 
               <li><a href="/rental/Appli/lg/13">냉장고</a></li>
@@ -274,7 +274,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">소형가전 렌탈</a>
           <ul class="dropdown-menu">
-          	  <li><a href="/rental/Appli/lg/20">전체보기</a></li>
+               <li><a href="/rental/Appli/lg/20">전체보기</a></li>
               <li><a href="/rental/Appli/lg/21">커피머신</a></li> 
               <li><a href="/rental/Appli/lg/22">제습기</a></li> 
               <li><a href="/rental/Appli/lg/23">청소기</a></li>
@@ -289,7 +289,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">주방가전 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/30">전체보기</a></li>
+                <li><a href="/rental/Appli/lg/30">전체보기</a></li>
                <li><a href="/rental/Appli/lg/31">음식물 처리기</a></li> 
                <li><a href="/rental/Appli/lg/32">제빙기</a></li> 
                <li><a href="/rental/Appli/lg/33">전자레인지</a></li>
@@ -300,7 +300,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">가구 렌탈</a>
           <ul class="dropdown-menu">
-			   <li><a href="/rental/Appli/lg/40">전체보기</a></li>          
+            <li><a href="/rental/Appli/lg/40">전체보기</a></li>          
                <li><a href="/rental/Appli/lg/41">침대</a></li> 
                <li><a href="/rental/Appli/lg/42">매트리스</a></li> 
                <li><a href="/rental/Appli/lg/43">쇼파</a></li> 
@@ -310,7 +310,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">기타 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/50">전체보기</a></li> 
+                <li><a href="/rental/Appli/lg/50">전체보기</a></li> 
                <li><a href="/rental/Appli/lg/51">악기</a></li> 
                <li><a href="/rental/Appli/lg/52">명품</a></li> 
                <li><a href="/rental/Appli/lg/53">귀금속</a></li> 
@@ -319,7 +319,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">패키지 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/60">전체보기</a></li>
+                <li><a href="/rental/Appli/lg/60">전체보기</a></li>
                <li><a href="/rental/Appli/lg/61">침실 패키지</a></li> 
                <li><a href="/rental/Appli/lg/62">주방 패키지</a></li> 
                <li><a href="/rental/Appli/lg/63">욕실 패키지</a></li>
@@ -334,7 +334,7 @@
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">고객센터</a>
+          <a href="${pageContext.request.contextPath}/cs/csFAQ" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" >고객센터</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

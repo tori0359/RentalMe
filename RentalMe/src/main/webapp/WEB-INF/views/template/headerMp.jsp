@@ -27,7 +27,7 @@
         
         .mpTable>thead tr{
             height:35px;
-            background-color: #4d4d4d;
+            background-color: #2E2E2E;
         }
         
         .mpTable>thead>tr>th{
@@ -41,11 +41,12 @@
         .mpTable>tbody tr{
             height:30px;
             margin: 10px;
-            background-color:#EBEBEA;
+            background-color: #F1F0EE;
         }
         
         
         .mpTable>tbody tr:hover {
+        	font-size: 11pt;
             background-color: lightgrey;
             -o-transition: all 0.2s ease-in-out;
             -webkit-transition: all 0.2s ease-in-out;
@@ -62,6 +63,7 @@
 	   
 	   .mpTable>tbody>tr a:hover{
 		   text-decoration: none;
+		   
 		   
 	   }
         

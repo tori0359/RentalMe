@@ -22,7 +22,7 @@ public interface MpUserDao {
 	int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException;
 	
 	//장바구니 리스트 출력
-	List<CallVo> selectCart() throws SQLException;
+	List<CallVo> selectCart(String mbNo) throws SQLException;
 	
 	//찜한상품 리스트 출력
 	List<CallVo> selectWish() throws SQLException;
@@ -53,6 +53,7 @@ public interface MpUserDao {
 
 	//경매내역 리스트 출력
 	List<CallVo> selectAuct(String mbNo) throws SQLException;
+
 
 
 	

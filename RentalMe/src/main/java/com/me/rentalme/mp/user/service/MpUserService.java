@@ -17,7 +17,7 @@ public interface MpUserService {
 	int addReview(CallVo callVo) throws SQLException;
 	
 	//장바구니 리스트 출력
-	List<CallVo> cartList() throws SQLException;
+	List<CallVo> cartList(String mbNo) throws SQLException;
 	
 	//찜한상품 리스트 출력
 	List<CallVo> wishList() throws SQLException;

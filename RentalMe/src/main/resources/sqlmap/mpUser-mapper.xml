@@ -8,19 +8,22 @@ encoding="UTF-8"?>
   <mapper namespace="mpUser">
   	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
   		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,
-			FN_NM('GDS_NM',GDS_CD) AS gdsNm, 
+			FN_NM('GDS_NM',tb_odr110.GDS_CD) AS gdsNm, 
 			tb_odr110.GDS_CD AS gdsCd, 
 			tb_odr110.ODR_QTY AS odrQty, 
 			tb_odr110.AGREE_TEM AS agreeTem, 
 			tb_odr110.GDS_PRICE AS gdsPrice, 
 			tb_odr100.ODR_STS_GB_CD AS odrStsGbCd, 
-			tb_user100.USER_NM AS userNM
-				FROM tb_odr110
-				INNER JOIN tb_odr100
-				ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
-				INNER JOIN tb_user100
-				ON tb_odr100.MB_NO = tb_user100.MB_NO
-				WHERE tb_user100.MB_NO=#{mbNo}
+			tb_user100.USER_NM AS userNM,
+			tb_gds200.IMG1 As img1	
+		FROM tb_odr110
+		INNER JOIN tb_odr100
+		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
+		INNER JOIN tb_user100
+		ON tb_odr100.MB_NO = tb_user100.MB_NO
+		INNER JOIN TB_GDS200
+		ON tb_odr110.GDS_CD=tb_gds200.GDS_CD			
+		WHERE tb_user100.MB_NO=#{mbNo}
 	</select>
   	<insert id="insertReview">
   		INSERT INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
@@ -36,8 +39,15 @@ encoding="UTF-8"?>
   	</insert>
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT FN_NM('GDS_NM',GDS_CD) AS gdsNm, TB_CART100.ODR_QTY AS odrQty, TB_CART100.AGREE_TERM AS agreeTem, TB_CART100.GDS_PRICE AS gdsPrice
-		FROM TB_CART100;
+  		SELECT FN_NM('GDS_NM',TB_CART100.GDS_CD) AS gdsNm, 
+			TB_CART100.ODR_QTY AS odrQty, 
+			TB_CART100.AGREE_TERM AS agreeTem, 
+			TB_CART100.GDS_PRICE AS gdsPrice,
+			tb_gds200.IMG1 AS img1
+		FROM TB_CART100
+		INNER JOIN TB_GDS200
+		ON TB_GDS200.GDS_CD = TB_CART100.GDS_CD
+		WHERE MB_NO=#{mbNo};
   	</select>
   
   	<select id="selectWish" resultType="com.me.rentalme.model.entity.CallVo">

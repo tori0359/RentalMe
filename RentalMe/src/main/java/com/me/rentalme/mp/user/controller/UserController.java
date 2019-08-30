@@ -99,7 +99,7 @@ public class UserController {
 		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
 		
-		mav.addObject("alist",mpUserService.cartList());
+		mav.addObject("alist",mpUserService.cartList(mbNo));
 		mav.setViewName("mp/user/userCartList");
 		return mav;
 	}	
@@ -114,10 +114,14 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/wish", method = RequestMethod.GET)
-	public ModelAndView getWishList(Model model) throws SQLException {
+	public ModelAndView getWishList(Model model,HttpSession session) throws SQLException {
 		//log.debug("찜한상품 컨트롤러...");
 		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("userVo",mpUserService.getName(mbNo));
+		
 		mav.addObject("alist", mpUserService.wishList());
 		mav.setViewName("mp/user/userWishList");
 		return mav;

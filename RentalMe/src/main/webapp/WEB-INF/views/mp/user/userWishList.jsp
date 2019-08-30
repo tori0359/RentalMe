@@ -8,28 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-		#title{
-	   		font-size: 18pt;
-	   		font-weight: bolder;
-	   		text-align: center;
-	   		font-family: "nanumB";
-	   		margin: 50px;
-	   }
-	   #path{
-	   		font-weight: bolder;
-	   		font-family: "nanumB";
-	   		float:left;
-	   }
-	   
-	   #choosedel{
-	   		font-family: "nanumR";
-	   		width:55px;
-	   		height:30px;
-	   		float:right;
-	   		color:black;
-	   		font-weight:600;
-	   }
-
+		 #title2{
+            font-size: 15pt;
+            font-weight: bolder;
+            font-family: "nanumB";
+            margin: 60px 0 10px 0;
+     	 }
 	    .ordtable>thead>tr>th{
         	text-align:center;
         }
@@ -72,6 +56,17 @@
 	   .pathdiv{
 	   		height:30px;
 	   }
+	   #info{
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
+      }
+      
+      #info p{
+      	line-height:20px;
+      	font-family:"nanumB";
+      }
 </style>
 <script type="text/javascript">
 
@@ -120,13 +115,22 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-	<p id="title">♥ 찜한상품</p>
 	<div>
-	<div class="pathdiv">
-       <p id="path">마이페이지> 찜한상품</p>
-       	<a href="#" id="choosedel">선택삭제</a>
+	<div class="titlediv">
+       <p id="title2">♥찜한 상품</p>
      </div>
      <div class="hr" style="height:3px; background-color: black;"></div>
+       	 <div id="info">
+       	 <p>
+	       	 <input type="hidden" value="${loginMbNo}">
+		     <c:if test="${empty userVo.userNM}">
+		     	${loginUserId} 님의 찜한 상품 목록입니다.
+		     </c:if>
+		     <c:if test="${!empty userVo.userNM }">
+		     	${userVo.userNM} 님의 찜한 상품 목록입니다.
+		     </c:if>
+		  </p>
+       	 </div>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">

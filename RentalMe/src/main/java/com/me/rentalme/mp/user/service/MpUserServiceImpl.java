@@ -43,9 +43,9 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//장바구니 리스트
 	@Override
-	public List<CallVo> cartList() throws SQLException {
+	public List<CallVo> cartList(String mbNo) throws SQLException {
 		// TODO Auto-generated method stub
-		return mpUserDao.selectCart();
+		return mpUserDao.selectCart(mbNo);
 	}
 	
 	//찜한상품 리스트
@@ -113,6 +113,7 @@ public class MpUserServiceImpl implements MpUserService{
 	public List<CallVo> AuctList(String mbNo) throws SQLException {
 		return mpUserDao.selectAuct(mbNo);
 	}
+
 
 
 	

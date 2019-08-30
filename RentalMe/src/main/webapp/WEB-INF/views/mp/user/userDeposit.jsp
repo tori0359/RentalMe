@@ -12,53 +12,33 @@
 	height:100px;
 	display:inline-block;
 }
-
 .name>div>h2{
 	font-family:"nanumEB";
 	text-align: center;
 	line-height: 80px;
 }
-
 .name div{
 	display: inline-block;
 }
-
 .name>div:nth-child(2){
 	margin-left:10px;
 }
-
 .name>div>p{
 	font-family:"nanumB";
 	font-size:13pt;
 	text-align: center;
 }
-
-
 .deposit>h2{
 	font-family:"nanumEB";
 }
-
 .deposit>p{
 	font-family:"nanumEB";
 }
-
-.select{
-	width:100px;
-	height: 100px;
-}
-
-.select>div>p{
-	font-family:"nanumEB";
-	font-size:15pt;
-	text-align:center;
-}
-
 .charge{
 	width: 150px;
 	height: 50px;
 	background-color: darkgrey;
 }
-
 .charge>p{
 	font-family: "nanumB";
 	color:white;
@@ -66,7 +46,6 @@
 .chargetable{
 	margin-top: 50px;
 }
-
 .charge_btn{
 	background-color: #D8D8D8;
 	color:black;
@@ -74,7 +53,6 @@
 	font-family: "nanumB";	
    	font-weight: border;	
 }
-
 .chargediv{
 	width:200px;
 	height:100px;
@@ -86,22 +64,20 @@
 #deposituse{
 	margin-top: 50px;
 }
-#menuuse{
-	border-color: red red red;
-}
 </style>
-
-
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
+
+<!-- 결제 api연동하기 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script>
-	$(document).ready(function(){
+	window.onload=function(){
 		$('#menuuse').attr('class','active');
 		$('#menucharge').attr('class','noactive');
 		$('#menurefund').attr('class','noactive');
 		$('#deposituse').show();
 		$('#depositcharge').hide();
 		$('#depositrefund').hide();
-
 		$('#menuuse').click(function(){
 			
 			$('#menuuse').attr('class','active');
@@ -111,7 +87,6 @@
 			$('#deposituse').show();
 			$('#depositcharge').hide();
 			$('#depositrefund').hide();
-
 			
 		});
 		
@@ -124,26 +99,50 @@
 			$('#deposituse').hide();
 			$('#depositrefund').hide();
 		});
-
 		$('#menurefund').click(function(){
 			$('#menurefund').attr('class','active');
 			$('#menucharge').attr('class','noactive');
 			$('#menuuse').attr('class','noactive');
-
 			$('#depositrefund').show();
 			$('#deposituse').hide();
 			$('#depositcharge').hide();
 		});
-		
-	});
-	window.onload=function(){
+
+	
 		$('#charge_button').click(function(){
 			alert("충전이 완료되었습니다!");
 		});
 	}
 
+	var IMP = window.IMP; // 생략가능
+	   IMP.init('imp50043848');  // 가맹점 식별 코드
+
+	   IMP.request_pay({
+	      pg : 'kakao', // 결제방식
+	       pay_method : 'card',	// 결제 수단
+	       merchant_uid : 'merchant_' + new Date().getTime(),
+	      name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+	       amount : '100',	// 결제 금액
+	       buyer_email : '',	// 구매자 email
+	      buyer_name :  '',	// 구매자 이름
+	       buyer_tel :  '',	// 구매자 전화번호
+	       buyer_addr :  '',	// 구매자 주소
+	       buyer_postcode :  '',	// 구매자 우편번호
+	       m_redirect_url : '/khx/payEnd.action'	// 결제 완료 후 보낼 컨트롤러의 메소드명
+	   }, function(rsp) {
+		if ( rsp.success ) { // 성공시
+			var msg = '결제가 완료되었습니다.';
+			msg += '고유ID : ' + rsp.imp_uid;
+			msg += '상점 거래ID : ' + rsp.merchant_uid;
+			msg += '결제 금액 : ' + rsp.paid_amount;
+			msg += '카드 승인번호 : ' + rsp.apply_num;
+		} else { // 실패시
+			var msg = '결제에 실패하였습니다.';
+			msg += '에러내용 : ' + rsp.error_msg;
+		}
+	});
+	
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 <body>
 <div style="margin-top:100px;" class="jumbotron">
@@ -154,7 +153,7 @@
 		  	
 		  	<input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty userVo.userNM}">
-		     	<h2>${userVo.userNM}</h2>
+		     	<h2>${loginUserId}</h2>
 		     </c:if>
 		     <c:if test="${!empty userVo.userNM }">
 		     	<h2>${userVo.userNM}</h2>
