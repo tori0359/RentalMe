@@ -1,6 +1,7 @@
 package com.me.rentalme.model.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 public class RentalAppliVo {
 	
@@ -14,26 +15,27 @@ public class RentalAppliVo {
 	private String gdsGbCd      ;		// 상품구분코드
 	private String gdsStsCd     ;		// 상품상태코드
 	private String delYn        ;		// 삭제여부
-	
 	private String gdsLclassNm  ; 		// 상품소분류명
 	private String gdsMclassNm  ; 		// 상품소분류명
 	private String gdsSclassNm  ; 		// 상품소분류명
-	
 	private String gubunCd		;		// 전체메뉴구분코드(10의 단위 전체메뉴)
-	
-	private int priceMin		;		// 메뉴 가격대 최소값
-	private int priceMax		;		// 메뉴 가격대 최소값
-	
 	private int cnt				;		// 카운트
 	private int totGrdSum		;		// 토탈등급합계
 	private double totGrdAvg	;		// 토탈등급평균
 	private String img1			;		// 이미지경로1
-	
 	private int gdsPrice		;		// 상품가격
-	
 	private String sortGbCd		;		// 정렬구분코드
-	
 	private Date regDt			;		// 등록일자
+	
+	
+	/* RequestParm session 사용 변수 */
+	private String sts               ;
+	private String search            ;
+	private String searchPriceSt     ;
+	private String searchPriceEd     ;
+	private String sort              ;
+	private List<String> brandNm2	 ;
+	
 	
 	public String getGdsCd() {
 		return gdsCd;
@@ -119,18 +121,6 @@ public class RentalAppliVo {
 	public void setGubunCd(String gubunCd) {
 		this.gubunCd = gubunCd;
 	}
-	public int getPriceMin() {
-		return priceMin;
-	}
-	public void setPriceMin(int priceMin) {
-		this.priceMin = priceMin;
-	}
-	public int getPriceMax() {
-		return priceMax;
-	}
-	public void setPriceMax(int priceMax) {
-		this.priceMax = priceMax;
-	}
 	public int getCnt() {
 		return cnt;
 	}
@@ -172,6 +162,42 @@ public class RentalAppliVo {
 	}
 	public void setSortGbCd(String sortGbCd) {
 		this.sortGbCd = sortGbCd;
+	}
+	public String getSts() {
+		return sts;
+	}
+	public void setSts(String sts) {
+		this.sts = sts;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public String getSearchPriceSt() {
+		return searchPriceSt;
+	}
+	public void setSearchPriceSt(String searchPriceSt) {
+		this.searchPriceSt = searchPriceSt;
+	}
+	public String getSearchPriceEd() {
+		return searchPriceEd;
+	}
+	public void setSearchPriceEd(String searchPriceEd) {
+		this.searchPriceEd = searchPriceEd;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	public List<String> getBrandNm2() {
+		return brandNm2;
+	}
+	public void setBrandNm2(List<String> brandNm2) {
+		this.brandNm2 = brandNm2;
 	}
 
 	

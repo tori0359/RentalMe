@@ -49,17 +49,11 @@ public class RentalAppliController {
 	@RequestMapping(value = "/{menu}", method = RequestMethod.GET)
 	public String getLgList(@PathVariable("menu") String gdsSclassCd, @RequestParam(value="brandNm", required = false, defaultValue="") List<String> brandNm
 			, @RequestParam(value="sts", required = false, defaultValue = "") String sts, @RequestParam(value="search", required = false, defaultValue = "") String search 
-			, @RequestParam(value="searchPriceSt", required = false, defaultValue = "" ) String searchPriceSt, @RequestParam(value="searchPriceEd", required = false, defaultValue = "" ) String searchPriceEd
-			, @RequestParam(value="sort", required = false, defaultValue = "") String sort
+			, @RequestParam(value="searchPriceSt", required = false, defaultValue = ""  ) String searchPriceSt, @RequestParam(value="searchPriceEd", required = false, defaultValue = "") String searchPriceEd
+			, @RequestParam(value="sort", required = false, defaultValue = "1") String sort
 			, RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
 		
-		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
-		
-//		System.out.println(brandNm.size());
-//		for(int i=0; i<brandNm.size(); i++) {
-//			System.out.println(brandNm.get(i));
-//		}
-		
+		// RequestParm 세션 셋팅
 		session.removeAttribute("menu");
 		session.setAttribute("menu", gdsSclassCd);
 		session.removeAttribute("brandNm");
@@ -75,13 +69,34 @@ public class RentalAppliController {
 		session.removeAttribute("sort");
 		session.setAttribute("sort", sort);
 		
+//		System.out.println("=========구분1 시작=========");
+//		System.out.println(brandNm.size());
+//		System.out.println(rentalAppliVo.getBrandNm2());
+//		System.out.println("=========구분1 끝=========");
+		
+		// Vo 셋팅
+		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
+		if(brandNm.size() > 0 ) {
+			rentalAppliVo.setBrandNm2(brandNm);
+		}
+		rentalAppliVo.setSts(sts);
+		rentalAppliVo.setSearch(search);
+		rentalAppliVo.setSearchPriceSt(searchPriceSt);
+		rentalAppliVo.setSearchPriceEd(searchPriceEd);
+		rentalAppliVo.setSort(sort);
+
+//		System.out.println("=========구분2 시작=========");
+//		System.out.println(brandNm.size());
+//		System.out.println(rentalAppliVo.getBrandNm2());
+//		System.out.println("=========구분2 끝=========");
+		
+		
 		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);	//	PATH 경로
 		List<RentalAppliVo> list1 = rentalAppliService.rentalMenu(rentalAppliVo);	//	소메뉴명 리스트
 		List<RentalAppliVo> list2 = rentalAppliService.rentalOption(rentalAppliVo, "1");	//	옵션 브랜드명 리스트
 		List<RentalAppliVo> list3 = rentalAppliService.rentalOption(rentalAppliVo, "2");	//	옵션 가격대 리스트
 		List<RentalAppliVo> list4 = rentalAppliService.rentalBest(rentalAppliVo);	//	Best 캐러셀 상품리스트
-
-		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, "1");	//상품리스트
+		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);	//상품리스트
 		
 		
 //		path test 
@@ -118,7 +133,6 @@ public class RentalAppliController {
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("list4", list4);
-		
 		model.addAttribute("list5", list5);
 
 		model.addAttribute("menu", session.getAttribute("menu"));

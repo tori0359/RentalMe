@@ -176,7 +176,7 @@ input::-moz-focus-inner { border: 0; }
 <script type="text/javascript">
 
 	window.onload = function () {
-		alert("안쪽 처음");
+		//alert("안쪽 처음");
 
 		// 소메뉴 셋팅
 		var sMenu = ${menu};
@@ -252,10 +252,10 @@ input::-moz-focus-inner { border: 0; }
 			$('#sort-btn'+sSort).attr('class','active');
 		}
 
-		alert("안쪽마지막");
+		//alert("안쪽마지막");
 	}
 
-	alert("바깥쪽");
+	//alert("바깥쪽");
 
 	/**************************/
 	/**** 전역변수 선언시작 ***/
@@ -267,8 +267,6 @@ input::-moz-focus-inner { border: 0; }
 		vvBrandNm[${status.index}] = "${brandNm}";
 	</c:forEach>
 	var flg;
-	//var vPriceMin = "${priceMin}"+"&";	// 옵션 최소가격	
-	//var vPriceMax = "${priceMax}"+"&";	// 옵션 최대가격
 	var vSts = "${sts}"+"&";	// 옵션 상태
 	var vSearchValue = "${search}"+"&";	// 옵션 검색value
 	var vSearchPriceSt ="${searchPriceSt}";	// 옵션 가격검색 st
@@ -398,152 +396,6 @@ input::-moz-focus-inner { border: 0; }
 		}
 		location.href = locGo;
 	}
-
-	/*
-	// 최소가격 checkBox 선택시
-	function priceMinCheckBox(price) {
-		// 체크박스가 선택되었을 때
-		if(document.getElementsByName("priceMinCheckBox"+price)[0].checked == true) {
-			flg = 0;	// brandNm 반복횟수 + 0
-			optionPriceMinBtnClick(price);
-		} else {
-			flg = 0;	// brandNm 반복횟수 + 0
-			optionPriceMinBtnClick(price);
-		}
-	}
-	
-	// 최소가격 선택
-	function optionPriceMinBtnClick(price) {
-		
-		var locGo;					// URL 주소저장
-		var vvBrandNmTemp="";		// brandNm 임시저장
-
-		// 최소가격 브랜드명 중복검사
-		function priceMinRoop() {
-			for(var i=0; i<vvBrandNm.length+flg; i++) {
-				if((i > 0) && (i <= vvBrandNm.length)) {
-					vvBrandNmTemp += "&";
-				}
-				if(i < vvBrandNm.length) {
-					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
-				} else {
-					vvBrandNmTemp += "brandNm="+brandNm;
-				}
-			}
-		}
-
-		if(vvBrandNm.length > 0) {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					priceMinRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price+"&sts="+vSts;
-				} else {
-					priceMinRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price;
-				}
-			} else {
-				if(vSts != "&") {
-					priceMinRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price+"&sts="+vSts;
-				} else {
-					priceMinRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMin="+price;
-				}
-			}
-		} else {
-			if(vPriceMin != "&") {
-				if(vSts != "&") {
-					priceMinRoop();
-					locGo = loc+vMenu+"priceMin="+price+"&sts="+vSts;
-				} else {
-					priceMinRoop();
-					locGo = loc+vMenu+"priceMin="+price;
-				}
-			} else {
-				if(vSts != "&") {
-					priceMinRoop();
-					locGo = loc+vMenu+"priceMin="+price+"&sts="+vSts;
-				} else {
-					priceMinRoop();
-					locGo = loc+vMenu+"priceMin="+price;
-				}
-			}
-		}
-		location.href = locGo; 
-	}
-
-	// 최대가격 checkBox 선택시
-	function priceMaxCheckBox(price) {
-		// 체크박스가 선택되었을 때
-		if(document.getElementsByName("priceMaxCheckBox"+price)[0].checked == true) {
-			flg = 0;	// brandNm 반복횟수 + 0
-			optionPriceMaxBtnClick(price);
-		} else {
-			flg = 0;	// brandNm 반복횟수 + 0
-			optionPriceMaxBtnClick(price);
-		}
-	}
-	
-	// 최대가격 선택
-	function optionPriceMaxBtnClick(price) {
-
-		var locGo;					// URL 주소저장
-		var vvBrandNmTemp="";		// brandNm 임시저장
-
-		// 최대가격 브랜드명 중복검사
-		function priceMaxRoop() {
-			for(var i=0; i<vvBrandNm.length+flg; i++) {
-				if((i > 0) && (i <= vvBrandNm.length)) {
-					vvBrandNmTemp += "&";
-				}
-				if(i < vvBrandNm.length) {
-					vvBrandNmTemp += "brandNm="+vvBrandNm[i];
-				} else {
-					vvBrandNmTemp += "brandNm="+brandNm;
-				}
-			}
-		}
-		
-		if(vvBrandNm.length > 0) {
-			if(vPriceMax != "&") {
-				if(vSts != "&") {
-					priceMaxRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price+"&sts="+vSts;
-				} else {
-					priceMaxRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price;
-				}
-			} else {
-				if(vSts != "&") {
-					priceMaxRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price+"&sts="+vSts;
-				} else {
-					priceMaxRoop();
-					locGo = loc+vMenu+vvBrandNmTemp+"&priceMax="+price;;
-				}
-			}
-		} else {
-			if(vPriceMax != "&") {
-				if(vSts != "&") {
-					priceMaxRoop();
-					locGo = loc+vMenu+"priceMax="+price+"&sts="+vSts;
-				} else {
-					priceMaxRoop();
-					locGo = loc+vMenu+"priceMax="+price;
-				}
-			} else {
-				if(vSts != "&") {
-					priceMaxRoop();
-					locGo = loc+vMenu+"priceMax="+price+"&sts="+vSts;
-				} else {
-					priceMaxRoop();
-					locGo = loc+vMenu+"priceMax="+price;
-				}
-			}
-		}
-		location.href = locGo; 
-	}
-	*/
 
 	// 상태 checkBox 선택시
 	function stsCheckBox(sts) {
@@ -710,6 +562,9 @@ input::-moz-focus-inner { border: 0; }
 		var vvBrandNmTemp="";		// brandNm 임시저장
 		flg = 0;
 		var searchPrice;
+
+		//alert(searchPriceSt);
+		//alert(searchPriceEd);
 		
 		if(searchPriceSt != 0) {
 			if((!searchPriceEd) || (searchPriceEd == 0)) {
@@ -726,8 +581,8 @@ input::-moz-focus-inner { border: 0; }
 		}
 		
 		if((searchPriceSt != 0) && (searchPriceEd != 0)) {
-			if(searchPriceSt > searchPriceEd) {
-				//alert("최소가격이 더 큽니다.");
+			if(parseInt(searchPriceSt) > parseInt(searchPriceEd)) {
+				alert("최소가격이 더 큽니다.");
 				return false;
 			} else {
 				//alert("앞뒷단 가격 다있음");
@@ -893,23 +748,6 @@ input::-moz-focus-inner { border: 0; }
 					</tr>
 					<tr>
 						<th class="active" id="option-price">가격</th>
-						<!-- 
-						<td>
-							<c:forEach items="${list3}" var="list3">
-								<span class="label label-default" id="optionPriceMin${list3.priceMin }" ><label ><input class="checkBox" type="checkbox" name="priceMinCheckBox${list3.priceMin }" onClick="priceMinCheckBox('${list3.priceMin}')" style="opacity: 0.5";/>~ <fmt:setLocale value="ko_KR"></fmt:setLocale>
-									<fmt:formatNumber type="currency" value="${list3.priceMin}"></fmt:formatNumber></label>
-								</span>&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="label label-default" id="optionPriceHalf${list3.priceMin }to${list3.priceMax}" ><label ><input class="checkBox" type="checkbox" name="priceHalfCheckBox${list3.priceMin}to${list3.priceMax }" onClick="priceHalfCheckBox('${list3.priceMin}to${list3.priceMax }')" style="opacity: 0.5";/><fmt:setLocale value="ko_KR"></fmt:setLocale>
-									<fmt:formatNumber type="currency" value="${list3.priceMin}" />
-											 ~ <fmt:formatNumber type="currency" value="${list3.priceMax}"></fmt:formatNumber></label>
-								</span>&nbsp;&nbsp;&nbsp;&nbsp;
-								 
-								<span class="label label-default" id="optionPriceMax${list3.priceMax }" ><label ><input class="checkBox" type="checkbox" name="priceMaxCheckBox${list3.priceMax }" onClick="priceMaxCheckBox('${list3.priceMax}')" style="opacity: 0.5";/><fmt:setLocale value="ko_KR"/>
-									<fmt:formatNumber type="currency" value="${list3.priceMax}" /> ~</label>
-								</span>
-							</c:forEach>
-						</td>
-						 -->
 						<td id="option-price-search" colspan="2">
 							<form class="form-inline">
 								<div class="form-group">
