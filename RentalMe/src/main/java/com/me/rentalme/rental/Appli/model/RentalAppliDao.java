@@ -14,5 +14,6 @@ public interface RentalAppliDao {
 	List<RentalAppliVo> rentalBestList(RentalAppliVo rentalAppliVo);
 	
 	List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo);
 
 }

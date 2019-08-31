@@ -47,10 +47,15 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.selectList("rentalAppli.bestListRetrive", rentalAppliVo);
 	}
 
-	/* 상품 */
+	/* 상품 2,3,4*/
 	@Override
 	public List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive", rentalAppliVo);
+	}
+
+	/* 상품 1,5,6 */
+	public List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gdsListRetrive2", rentalAppliVo);
 	}
 
 }
