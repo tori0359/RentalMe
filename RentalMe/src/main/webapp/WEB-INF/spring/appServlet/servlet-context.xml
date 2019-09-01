@@ -22,9 +22,19 @@
 		</message-converters>
 	</annotation-driven>
 	
+	<!-- interceptor : loginAfter -->
 	<beans:bean id="loginAfterInterceptor" class="com.me.rentalme.interceptor.LoginAfeterInterceptor"/>
-	<!-- interceptor : login -->
+	<beans:bean id="loginInterceptor" class="com.me.rentalme.interceptor.LoginInterceptor"/>
+	<beans:bean id="loginRememberInterceptor" class="com.me.rentalme.interceptor.LoginRememberInterceptor"/>
 	<interceptors>
+		<interceptor>
+			<mapping path="/login"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**/"/>
+			<beans:ref bean="loginRememberInterceptor"/>
+		</interceptor>
 		<interceptor>
 			<mapping path="/login"/>
 			<mapping path="/join/signup"/>

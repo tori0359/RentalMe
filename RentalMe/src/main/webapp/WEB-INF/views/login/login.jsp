@@ -44,7 +44,7 @@
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
 					<div class="checkbox">
-						<label> <input type="checkbox"> 비밀번호 기억하기
+						<label> <input type="checkbox" name="isUseLogin"> 자동 로그인
 						</label>
 					</div>
 				</div>
