@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="usedStore">
-	<h2>상점</h2>
+	<h2>나의 상점</h2>
 	<div>
 		<div class="hideenMbNo">${mbNo }</div>
 		<div class="hiddenLoginId">${loginMbNo}</div>
@@ -51,7 +51,7 @@
 			<li>${bean.usedGdsPrice }</li>
 			<li>${bean.chgDt }</li>
 			<li><form action="/used/store/del/${bean.usedGdsNo }" method="POST">
-			<button type="submit" class="used_del">삭제</button>
+			<button type="submit" class="used_del"><img src="/imgs/deleteicon.png" alt="delete"/></button>
 			</form></li>
 			<li id="hiddenNo">${bean.usedGdsNo }</il>
 		</ul>

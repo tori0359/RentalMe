@@ -203,14 +203,14 @@
 	}
 	
 	#myUsedList .used_del{
-		display: block;
-		background-color: lightgray;
+		background-color: white;
+		border: 0px;
+		outline: 0px;
+		height: 0px;
+	} 
+	#myUsedList .used_del>img{
 		width: 50px;
-		height: 100%;
-		margin: 0px auto;
-		text-decoration: none;
-		color: black;
-		border-radius: 5px;
+		height: 50px;
 	}
 	#myUsedList ul>li:last-child{
 		display: none;

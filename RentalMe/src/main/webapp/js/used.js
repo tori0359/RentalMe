@@ -4,6 +4,7 @@ $(function(){
 	/////////////////////////////////////////
 	//중고상품 등록
 	 $("#imgfile").on("change", handleImgsFilesSelect);
+	 $('#used_imgUpload').find('input[type=file]').hide();
 	 $('input[type=radio]').not($('.mclass1')).parents('label').hide();
 	 $("#category").change(function(){
      	$('input[type=radio]').parents('label').show();
