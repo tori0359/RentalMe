@@ -21,6 +21,18 @@
 			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 		</message-converters>
 	</annotation-driven>
+	
+	<beans:bean id="loginAfterInterceptor" class="com.me.rentalme.interceptor.LoginAfeterInterceptor"/>
+	<!-- interceptor : login -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/login"/>
+			<mapping path="/join/signup"/>
+			<mapping path="/join/info"/>
+			<mapping path="/join/compl"/>
+			<beans:ref bean="loginAfterInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
