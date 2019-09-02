@@ -32,6 +32,7 @@ public class CallVo {
 	private String remnDeposit;
 	private String bidPrice;
 	private String bidTime;
+	private String userNm;
 	
 
 	public String getBidPrice() {
@@ -279,6 +280,15 @@ public class CallVo {
 
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
+	}
+	
+
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
 	}
 
 	@Override
