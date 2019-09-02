@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/join.css">
 <script type="text/javascript"
@@ -65,8 +66,24 @@
 				<div id="emailCode-danger">이메일 인증 실패</div>
 				
 				<div>
+					<input type="text" class="form-control" id="addr" name="addr"
+						placeholder="" readonly="readonly">
+					<button type="button" class="form-cotrol btn btn-default" 
+						id="addrSearch" name="addrSearch" onclick="addr_execDaumPostcode()">주소검색</button>
+				</div>
+				<div>
+					<input type="hidden" id="zipcode" name="zipCode"/>
+					<input type="text" class="form-control" id="addrDetail" name="addrDetail"
+						placeholder="상세주소를 입력">
+				</div>
+				<div>
+					<input type="text" class="form-control" id="userNM" name="userNM"
+						placeholder="이름을 입력">
+				</div>
+				<div>
 					<label for="birth">생년월일</label>
-					<input type="text" class="form-control" id="birth" name="birthDay" />
+					<input type="text" class="form-control" id="birth" name="birthDay" 
+					placeholder="날짜를 입력(yy-mm-dd) " />
 				</div>
 				<div id="option_select">
 					<label id="genderGbCd">성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별</label>
