@@ -62,6 +62,9 @@ public class UsedController {
 		sessionFunc(session,bean);
 		model.addAttribute("remain", 10);
 		model.addAttribute("alist1", usedService.oneList(bean));
+		System.out.println(bean.getModelNm());
+		System.out.println(bean.getMclassName());
+		System.out.println(bean.getSclassName());
 		return "used/usedList";
 	}
 	@RequestMapping(value = "/sml", method = RequestMethod.GET)

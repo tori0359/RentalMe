@@ -69,10 +69,10 @@
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">
-			<div>${bean.mbNo }님</div>
-			<div>${bean.content }</div>
-			<div>${bean.storeReviewDt }</div>
-			<div><a href="#">신고</a></div>
+			<div class="mbNo">${bean.mbNo }님</div>
+			<div class="storeReviewDt">${bean.storeReviewDt }</div>
+			<div class="content">${bean.content }</div>
+			<div class="declaration"><a href="#">신고하기</a></div>
 		</div>
 		</c:forEach>
 	</div>

@@ -97,6 +97,12 @@ $(function(){
             			$('#insertThing').show();
             			$('.used_del').show();
             		}
+            		$('#myUsedReview').find('form').find('button').click(function(){
+            			if(chkMbNo==null){
+            				console.log('ok');
+            			}
+            			console.log('nion');
+            		});
                 //나의 상점//
         ////////////////////////////////
                 	

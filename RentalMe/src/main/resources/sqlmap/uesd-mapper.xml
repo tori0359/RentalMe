@@ -19,6 +19,7 @@
 		 <if test="gdsMclassCd !=null">
 		 AND GDS_MCLASS_CD=#{gdsMclassCd}
 		 </if> 
+		 <!--  -->
 		 <if test="modelNm !=null">
 		 AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
 		 </if>
@@ -26,7 +27,7 @@
 	</select>
 	
 	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고list 검색 USED_GDS_NO,BRAND_NM,MODEL_NM,USED_GDS_PRICE,IMG1 -->
-		 SELECT * 
+		 SELECT *,FN_NM('GDS_MCLASS_NM', GDS_MCLASS_CD) as MCLASS_NAME,FN_NM('GDS_SCLASS_NM', GDS_SCLASS_CD) as SCLASS_NAME 
 		 FROM tb_used100
 		 WHERE GDS_MCLASS_CD=#{gdsMclassCd}
 		  AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
@@ -120,7 +121,7 @@
 	</insert>
 	<insert id="storeCmt" parameterType="com.me.rentalme.model.entity.UsedStoreVo">
 		INSERT INTO tb_used200 (STORE_NO,STORE_REVIEW_NO,STORE_REVIEW_DT,MB_NO,CONTENT,GRADE) 
-		SELECT #{storeNo},IF(ISNULL(LPAD((SELECT max(STORE_REVIEW_NO)+1),3,0)),'0001',LPAD((SELECT max(STORE_REVIEW_NO)+1),3,0)),DATE_FORMAT(now(), '%Y%m%d'),#{mbNo},#{content},#{grade}
+		SELECT #{storeNo},IF(ISNULL(LPAD((SELECT max(STORE_REVIEW_NO)+1),4,0)),'0001',LPAD((SELECT max(STORE_REVIEW_NO)+1),4,0)),DATE_FORMAT(now(), '%Y%m%d'),#{mbNo},#{content},#{grade}
 		FROM tb_used200 WHERE STORE_NO=#{storeNo}
 	</insert>
 	

@@ -46,7 +46,7 @@ public class UsedDaoImpl implements UsedDao {
 	public List<UsedVo> selectAll(UsedVo bean) throws SQLException {
 		log.debug("중고거래 리스트 출력...");
 		
-		return sqlSession.selectList("used.selectAll");
+		return sqlSession.selectList("used.selectAll",bean);
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class UsedDaoImpl implements UsedDao {
 	*/
 	@Override
 	public List<UsedVo> selectOne(UsedVo bean) throws SQLException {
-		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");		
+		log.debug("중고거래 탭에 따른 출력(대형가전, 중형가전...)");
 		return sqlSession.selectList("used.selectOne",bean);
 	}
 	

@@ -115,7 +115,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">나의 중고상점</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/used/store/${loginMbNo }">나의 중고상점</a></td>
            </tr>
            <tr>
                 <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
