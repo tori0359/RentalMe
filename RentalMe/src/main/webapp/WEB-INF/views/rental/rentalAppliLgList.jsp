@@ -82,6 +82,9 @@ h6 {
 .label label-default {
 	font-size: 20pt;
 }
+#optionStyle{
+	display: inline;
+}
 
 /* --------- BEST 영역 시작 --------- */
 /* List style */
@@ -131,6 +134,15 @@ li.col-sm-3:hover {
 }
 .btn.btn-mini {
 	font-size: 0.63rem;
+}
+#brandNmStyle{
+	font-weight:bold;
+}
+.stsAlignN{
+	font-weight:bold;
+}
+.stsAlignU{
+	color:pink;
 }
 
 /* Control box */
@@ -734,7 +746,7 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-option">
 				<table class="table table-bordered">
-					<tr class="active">option111</tr>
+					<tr class="active">BEST 인기상품은 옵션이 적용되지 않습니다.</tr>
 					<!-- ************** -->
 					<!-- 옵션 영역 시작 -->
 					<!-- ************** -->
@@ -742,7 +754,7 @@ input::-moz-focus-inner { border: 0; }
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
 							<c:forEach items="${list2}" var="list2" varStatus="status">
-								<h6><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.5";/>${list2.brandNm }</label></span></h6>
+								<h4 id="optionStyle"><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.0";/>${list2.brandNm }&nbsp;&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
 							</c:forEach>
 						</td>
 					</tr>
@@ -768,8 +780,8 @@ input::-moz-focus-inner { border: 0; }
 					<tr>
 						<th class="active" id="option-status">상태</th>
 							<td colspan="2">
-								<span class="label label-default" id="optionStsN" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxN" style="opacity: 0.5" onClick="stsCheckBox('N');"/>새상품</label></span>
-								<span class="label label-default" id="optionStsU" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxU" style="opacity: 0.5" onClick="stsCheckBox('U');"/>중고상품</label></span>
+								<h4 id="optionStyle"><span class="label label-default" id="optionStsN" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxN" style="opacity: 0.0" onClick="stsCheckBox('N');"/>새상품&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
+								<h4 id="optionStyle"><span class="label label-default" id="optionStsU" ><label ><input class="checkBox" type="checkbox" name="stsCheckBoxU" style="opacity: 0.0" onClick="stsCheckBox('U');"/>중고상품&nbsp;&nbsp;&nbsp;</label></span></h4>
 							</td>
 					</tr>
 					<tr>
@@ -824,8 +836,8 @@ input::-moz-focus-inner { border: 0; }
 												</div>
 												<div class="caption-box">
 													<a href="#">
-														<p>${list4.brandNm }</p>
-														<h4>${list4.gdsNm }</h4>
+														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
+														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
 														<fmt:setLocale value="ko_KR"></fmt:setLocale>
 														<h5><fmt:formatNumber type="currency" value="${list4.gdsPrice }"></fmt:formatNumber>(월)</h5>
@@ -847,8 +859,8 @@ input::-moz-focus-inner { border: 0; }
 												</div>
 												<div class="caption-box">
 													<a href="#">
-														<p>${list4.brandNm }</p>
-														<h4>${list4.gdsNm }</h4>
+														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
+														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
 														<fmt:setLocale value="ko_KR"></fmt:setLocale>
 														<h5><fmt:formatNumber type="currency" value="${list4.gdsPrice }"></fmt:formatNumber>(월)</h5>
@@ -920,8 +932,8 @@ input::-moz-focus-inner { border: 0; }
 											</div>
 											<div class="caption-box">
 												<a href="#">
-													<p>${list5.brandNm }</p>
-													<h4>${list5.gdsNm }</h4>
+													<p>${list5.brandNm }<div class="stsAlign${list5.gdsGbCd }">${list5.gdsGbNm }</div></p>
+													<h4 id="brandNmStyle">${list5.gdsNm }</h4>
 													<h4>모델명 : ${list5.modelNm }</h4>
 													<fmt:setLocale value="ko_KR"></fmt:setLocale>
 													<h5><fmt:formatNumber type="currency" value="${list5.gdsPrice }"></fmt:formatNumber>(월)</h5>

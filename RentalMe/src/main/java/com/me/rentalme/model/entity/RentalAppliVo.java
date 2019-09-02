@@ -13,6 +13,7 @@ public class RentalAppliVo {
 	private String brandNm      ;		// 브랜드명
 	private String modelNm      ;		// 모델명
 	private String gdsGbCd      ;		// 상품구분코드
+	private String gdsGbNm		;		// 상품구분명
 	private String gdsStsCd     ;		// 상품상태코드
 	private String delYn        ;		// 삭제여부
 	private String gdsLclassNm  ; 		// 상품소분류명
@@ -198,6 +199,12 @@ public class RentalAppliVo {
 	}
 	public void setBrandNm2(List<String> brandNm2) {
 		this.brandNm2 = brandNm2;
+	}
+	public String getGdsGbNm() {
+		return gdsGbNm;
+	}
+	public void setGdsGbNm(String gdsGbNm) {
+		this.gdsGbNm = gdsGbNm;
 	}
 
 	
