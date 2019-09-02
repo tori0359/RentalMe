@@ -116,7 +116,7 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">렌탈상품 관리</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매상품 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/actList">경매상품 관리</a></td>
            </tr>
        </table>
       <table style="margin-top:30px; " class="mpTable">
