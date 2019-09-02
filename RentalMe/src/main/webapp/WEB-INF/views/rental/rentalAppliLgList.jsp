@@ -37,6 +37,10 @@
 	font-style: italic;
 	text-align: right;
 }
+.content-inner-menu-path2 {
+	font-style: italic;
+	text-align: right;
+}
 
 /* ---------- 소메뉴 영역 시작 -------- */
 
@@ -671,12 +675,24 @@ input::-moz-focus-inner { border: 0; }
 	<div class="content">
 	<br>
 		<div class="content-inner">
+			<!--  이후 메뉴경로(19.09.02) -->
+			<div class="content-inner-menu-path2">
+				<c:forEach items="${path }" var="path">
+					<h4>홈 &nbsp; > &nbsp; ${path.gdsMclassNm }
+						<c:if test="${not empty path.gdsSclassNm}">
+							 &nbsp; > &nbsp; ${ path.gdsSclassNm }
+						</c:if>
+					</h4>
+				</c:forEach>
+			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					<br>${path.gdsMclassNm }<br>
+					${path.gdsMclassNm }
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">
+			<p>&nbsp;
+				<!-- 이전 메뉴경로
 				<div class="content-inner-menu-path">
 					<c:forEach items="${path }" var="path">
 						<br>
@@ -687,6 +703,7 @@ input::-moz-focus-inner { border: 0; }
 						</h4>
 					</c:forEach>
 				</div>
+				 -->
 				<!-- **************** -->
 				<!-- 소메뉴 영역 시작 -->
 				<!-- **************** -->
