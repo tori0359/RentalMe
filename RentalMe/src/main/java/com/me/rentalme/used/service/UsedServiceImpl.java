@@ -13,6 +13,7 @@ import com.me.rentalme.model.entity.RentalMeVo;
 import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
+import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.used.model.UsedDao;
 
 @Service
@@ -22,6 +23,11 @@ public class UsedServiceImpl implements UsedService {
 	
 	@Inject
 	UsedDao usedDao;
+	
+	@Override
+	public UserVo userInfo(UserVo bean) throws SQLException {
+		return usedDao.userInfo(bean);
+	}
 	
 	@Override
 	public List<UsedVo> list(UsedVo bean) throws SQLException {
@@ -83,5 +89,14 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.usedcount(bean);
 	}
 
+	@Override
+	public int delMyStoreListOne(String usedGdsNo) throws SQLException {
+		return usedDao.delMyStoreListOne(usedGdsNo);
+	}
+
+	@Override
+	public List<UsedVo> mySelectAllAlign(UsedVo bean) throws SQLException {
+		return usedDao.mySelectAllAlign(bean);
+	}
 
 }

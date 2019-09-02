@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
+import com.me.rentalme.model.entity.UserVo;
 
 /**
 * 중고거래 Dao
@@ -28,7 +29,11 @@ public class UsedDaoImpl implements UsedDao {
 	
 	@Inject
 	SqlSession sqlSession;
-	
+    //사용자 정보	
+	@Override
+	public UserVo userInfo(UserVo bean) throws SQLException {
+		return sqlSession.selectOne("used.userInfo",bean);
+	}
 	/**
 	* 중고거래 리스트 출력
 	* 
@@ -151,7 +156,17 @@ public class UsedDaoImpl implements UsedDao {
 	public int usedcount(UsedVo bean) throws SQLException {
 		return sqlSession.selectOne("used.usedcount", bean);
 	}
-	
+
+	@Override
+	public int delMyStoreListOne(String usedGdsNo) throws SQLException {
+		return sqlSession.update("used.myselectDel", usedGdsNo);
+	}
+
+	@Override
+	public List<UsedVo> mySelectAllAlign(UsedVo bean) throws SQLException {
+		return sqlSession.selectList("used.mySelectAllAlign", bean);
+	}
+
 
 
 	

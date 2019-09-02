@@ -11,10 +11,11 @@
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">
 	.usedList{
-		width: 80%;
+		width: 1200px;
 		margin: 100px auto;
 		margin-bottom: 300px;
 		font-family: "nanumB";
+		border: 1px solid black;
 	}
 	.usedList #search{
 		display: inline-block;
@@ -72,6 +73,9 @@
 		display: inline-block;
 		cursor: pointer;
 	}
+	.line_thing:hover{
+		border: 2px solid black;
+	}
 	.used_thing_img{
 		width: 200px;
 		height: 200px;
@@ -84,6 +88,10 @@
 	.pagination>li>a{
 		float: none;
 	}
+	.tabcl>.activeTab{
+		background-color: black;
+		color: white;
+	}
 
 </style>
 <script type="text/javascript"
@@ -91,17 +99,23 @@
 </head>
 <script type="text/javascript">
 
-	$(function(){
+	$(function(){		
 		var mclass=${gdsMclassCd};
-		var gdsnm='big';
-		if(mclass==20){
+		if(mclass==10){
+			var gdsnm='big';
+			$('.tabcl').eq(0).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==20){
 			gdsnm='sml';
+			$('.tabcl').eq(1).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==30){
 			gdsnm='kit';
+			$('.tabcl').eq(2).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==40){
 			gdsnm='app';
+			$('.tabcl').eq(3).find('.tab_btn').addClass('activeTab');
 		}else if(mclass==50){
 			gdsnm='etc';
+			$('.tabcl').eq(4).find('.tab_btn').addClass('activeTab');
 		}
 		/* var link=$('.pagelink').attr('href'); */
 		var arrlink=new Array($('.pagelink').length);
@@ -129,6 +143,13 @@
 		for(var i=0; i<$('.whattab').length; i++){
 			$('.whattab').eq(i).text();
 		}
+
+	/* 	$('.line_thing').mouseover(function(){
+			$(this).children('div').css('width','150px');
+		});		
+		$('.line_thing').mouseout(function(){
+			$(this).children('div').css('width','200px');
+		});	 */	
 	});
 		function removeCls(who){ //탭활성화
 			$('.tabs').find('li').removeClass('active');
@@ -201,7 +222,7 @@
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
 			<div>${bean.brandNm }</div>
 			<div>${bean.modelNm }</div>
-			<span class="used_price">${bean.usedGdsPrice }원</span>
+			<div class="used_price">${bean.usedGdsPrice }원</div>
 			<div class="whattab">${bean.gdsMclassCd }</div>
 		</div>
 	</c:forEach>
