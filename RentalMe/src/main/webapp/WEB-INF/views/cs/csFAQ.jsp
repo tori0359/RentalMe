@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <!doctype html>
 <html>
 <head>
@@ -27,7 +27,7 @@
 			$("#noticeBar td:nth-child(3)").click(function(){
 				location.replace("/cs/csInquiry");
 			});
-			
+			$(".list0").hide();
 			//전체보기
 			$("#noticeMenuBar td:nth-child(1)").click(function(){
 				$(this).css("background","black").css("color","white");
@@ -162,14 +162,14 @@
 		#all{
 			text-align: center;
 		}
-		#all th:nth-child(1){
-			width:20%;
+		#allnext td:nth-child(1){
+			width:10%;
 		}
-		#all th:nth-child(2){
-			width:20%;
+		#allnext td:nth-child(2){
+			width:10%;
 		}
-		#all th:nth-child(3){
-			width:60%;
+		#allnext td:nth-child(3){
+			width:80%;
 		}
 		#all tr:nth-child(1){
 			text-align:center;
@@ -212,10 +212,10 @@
 </div>
 <div id="contentList" class="col-md-10 col-md-offset-1">
 	<table id="all" class="table table-hover">
-		<tr>
-			<th>번호</th>
-			<th>분류</th>
-			<th>제목</th>
+		<tr id="allnext">
+			<td>번호</td>
+			<td>분류</td>
+			<td>제목</td>
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
@@ -243,7 +243,7 @@
 					</tr>
 			</c:forEach>
 		</tr>
-		<tr>
+		<tr> 
 			<c:forEach items="${blist}" var="bean">
 			
 				<c:if test="${bean.csClassGbCd eq '1'}">

@@ -1,5 +1,7 @@
 package com.me.rentalme.login.service;
 
+import java.sql.Date;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -85,6 +87,39 @@ public class LoginServiceImpl implements LoginService {
 		log.debug("비밀번호 오류횟수 초기화 service");
 		
 		loginDao.initPwFailCnt(userId);
+	}
+
+	/**
+	* 로그인 유지
+	* 
+	* @param  String userId		- 사용자아이디
+	* @param  String sessionKey	- 세션쿠키값
+	* @param  String sessionDt	- 세션쿠키일자
+	* @return None 
+	* @author 황인준
+	* 등록일자 : 2019-09-01
+	*/
+	@Override
+	public void keepLogin(String userId, String sessionKey, Date sessionDt) {
+		log.debug("로그인 유지 service");
+		
+		loginDao.keepLogin(userId, sessionKey, sessionDt);
+	}
+
+	/**
+	* 세션쿠키값 체크
+	* 
+	* @param  String userId
+	* @return None 
+	* @author 황인준
+	* @exception none
+	* 등록일자 : 2019-09-01
+	*/
+	@Override
+	public UserVo checkLoginSessionKey(String value) {
+		log.debug("세션쿠키값 체크 service");
+		
+		return loginDao.checkLoginSessionKey(value);
 	}
 
 

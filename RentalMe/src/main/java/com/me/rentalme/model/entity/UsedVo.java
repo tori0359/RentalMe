@@ -29,6 +29,7 @@ public class UsedVo {
 	private String align;				 // list 순서
 	private int startPage;				 // 시작 페이지
 	private String userId;				 // 유저 아이디
+	private String userNM;				 // 유저 이름
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -271,6 +272,16 @@ public class UsedVo {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	
+
+	public String getUserNM() {
+		return userNM;
+	}
+
+	public void setUserNM(String userNM) {
+		this.userNM = userNM;
 	}
 
 	@Override

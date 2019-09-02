@@ -9,6 +9,7 @@
 <jsp:include page="../template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css" >
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/used.js"></script>
+
 </head>
 <body>
 <div id="usedhead">
@@ -16,6 +17,7 @@
 <div id="usedDetail">
 	<h3>중고거래>가구</h3>
 	<div id="hiddenMyId">${loginUserId}</div>
+	<div class="hiddenLoginId">${loginMbNo}</div>
 <!-- carousel -->
 <div id="carouselD">
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -62,7 +64,13 @@
 		  <div class="col-md-2">카테고리</div>
 		  <div class="col-md-10">${UsedVo.mcnm }</div>
 		</div>
-		<button>문의하기</button>
+		<button id="doQuest">장바구니</button>
+	</div>
+	<div id="subImgF">
+		<img src="${UsedVo.img1 }"style="width: 100px; height: 100px;">
+		<img src="${UsedVo.img2 }"style="width: 100px; height: 100px;">
+		<img src="${UsedVo.img3 }"style="width: 100px; height: 100px;">
+		<img src="${UsedVo.img4 }"style="width: 100px; height: 100px;">
 	</div>
 	<ul class="tabs">
 		<li class="tab">상품설명</li>
@@ -75,7 +83,8 @@
 		</div>
 		<div id="sellInfo">
 			판매자 정보
-			<div>${UsedVo.userId }</div>
+			<div id="sellManId">${UsedVo.userId }</div>
+			<div id="hiddenNM">${UsedVo.mbNo }</div>
 		</div>
 	</div>
 	<div id="storeReviewList">
@@ -84,10 +93,16 @@
 		<input type="hidden" name="mbNo" value="${loginMbNo }">
 		<input type="hidden" name="usedReGbCd" value="1">	
 		<input type="hidden" name="delYn" value="N">
-		<textarea class="form-control" name="content" rows="3" placeholder="글자수 200자 제한"></textarea>
 		<input type="radio" id="noSecret" name="secretYn" value="1" checked="checked"> 비밀안함
 		<input type="radio" id="secret" name="secretYn" value="2"> 비밀
+		<div class="row">
+		<div class="col-md-11">
+		<textarea class="form-control" name="content" rows="3" placeholder="글자수 200자 제한"></textarea>
+		</div>
+		<div class="col-md-1">
 		<button type="submit">작성</button>
+		</div>
+		</div>
 	</form>
 	<c:forEach items="${cmt }" var="cmet">
 	<div class="cmtContent">
@@ -95,40 +110,26 @@
 		<div>${cmet.userId }</div>
 		<div>${cmet.chgDt }</div>
 		<div>${cmet.content }</div>
-		<a class="insertReple" data-toggle="modal" href="#repleContent">답글달기</a>
-		<a href="#">답글</a>
+		<div>${cmet.usedGdsComtNo }</div>
+		<!-- <a class="insertReple" href="#none">답글달기</a> -->
 		<a href="#">신고하기</a>
 	</div>
+<%-- 	<div class="repleAdd">
+		<textarea class="form-control" rows="2" placeholder="비회원은 글을 못써요"></textarea>
+		<form method="post">
+			<div>글쓴이: ${loginUserId}</div>
+			<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
+			<input type="hidden" name="usedGdsComtNo" id="inputGdsComt">
+			<input type="hidden" name="mbNo" value="${loginMbNo }">
+			<textarea class="form-control" name="content" rows="2" placeholder="글자수 200자 제한"></textarea>
+		</form>
+	</div> --%>
 	<div class="cmtContent">
 		비밀글입니다.
 	</div>
 	</c:forEach>
 	</div>
 </div>
-
-<div id="repleContent" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">답글달기</h4>
-        <div class="row">
-		  <div class="col-md-2">아이디</div>
-		  <div class="col-md-10" id="repleId"></div>
-        </div>
-        <div class="row">
-		  <div class="col-md-2">내용</div>
-		  <div class="col-md-10" id="repleCnt"></div>
-        </div>
-        <form action="#" method="post">
-			<input type="hidden" name="" value="">
-			<textarea class="form-control" name="content" rows="3" placeholder="글자수 200자 제한"></textarea>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary">작성</button>
-		</form>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 
 <div id="usedFoot">
 </div>

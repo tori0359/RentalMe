@@ -26,17 +26,19 @@ public class UserVo {
 	private Date  	chgDt;			// 변경일자	
 	private String  regId;			// 등록아이디
 	private Date	regDt;			// 등록일자
+	private String  sessionKey;		// 세션키 (쿠기값 저장)
+	private Date	sessionDt;		// 세션일자
+	private boolean isUseLogin;		// 자동로그인 여부
 	
 	
 	public UserVo() {
 
 	}
 
-
 	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
 			String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
 			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, String joinDt, String userStsCd,
-			String chgId, Date chgDt, String regId, Date regDt) {
+			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean isUseLogin) {
 		super();
 		this.userId = userId;
 		this.mbNo = mbNo;
@@ -61,244 +63,218 @@ public class UserVo {
 		this.chgDt = chgDt;
 		this.regId = regId;
 		this.regDt = regDt;
+		this.sessionKey = sessionKey;
+		this.sessionDt = sessionDt;
+		this.isUseLogin = isUseLogin;
 	}
-
-
+	
 	public String getUserId() {
 		return userId;
 	}
-
 
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-
 	public String getMbNo() {
 		return mbNo;
 	}
-
 
 	public void setMbNo(String mbNo) {
 		this.mbNo = mbNo;
 	}
 
-
 	public String getUserNM() {
 		return userNM;
 	}
-
 
 	public void setUserNM(String userNM) {
 		this.userNM = userNM;
 	}
 
-
 	public String getBirthDay() {
 		return birthDay;
 	}
-
 
 	public void setBirthDay(String birthDay) {
 		this.birthDay = birthDay;
 	}
 
-
 	public String getGenderGbCd() {
 		return genderGbCd;
 	}
-
 
 	public void setGenderGbCd(String genderGbCd) {
 		this.genderGbCd = genderGbCd;
 	}
 
-
 	public String getHp() {
 		return hp;
 	}
-
 
 	public void setHp(String hp) {
 		this.hp = hp;
 	}
 
-
 	public String getHpYn() {
 		return hpYn;
 	}
-
 
 	public void setHpYn(String hpYn) {
 		this.hpYn = hpYn;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getEmailYn() {
 		return emailYn;
 	}
-
 
 	public void setEmailYn(String emailYn) {
 		this.emailYn = emailYn;
 	}
 
-
 	public String getEmailKey() {
 		return emailKey;
 	}
-
 
 	public void setEmailKey(String emailKey) {
 		this.emailKey = emailKey;
 	}
 
-
 	public String getAddr() {
 		return addr;
 	}
-
 
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
 
-
 	public String getAddrDetail() {
 		return addrDetail;
 	}
-
 
 	public void setAddrDetail(String addrDetail) {
 		this.addrDetail = addrDetail;
 	}
 
-
 	public String getZipCode() {
 		return zipCode;
 	}
-
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 
-
 	public String getUserPw() {
 		return userPw;
 	}
-
 
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
 
-
 	public String getPwFailCnt() {
 		return pwFailCnt;
 	}
-
 
 	public void setPwFailCnt(String pwFailCnt) {
 		this.pwFailCnt = pwFailCnt;
 	}
 
-
 	public Date getPwAdjDt() {
 		return pwAdjDt;
 	}
-
 
 	public void setPwAdjDt(Date pwAdjDt) {
 		this.pwAdjDt = pwAdjDt;
 	}
 
-
-	public String getlevelGbCd() {
+	public String getLevelGbCd() {
 		return levelGbCd;
 	}
 
-
-	public void setlevelGbCd(String levelGbCd) {
+	public void setLevelGbCd(String levelGbCd) {
 		this.levelGbCd = levelGbCd;
 	}
-
 
 	public String getJoinDt() {
 		return joinDt;
 	}
 
-
 	public void setJoinDt(String joinDt) {
 		this.joinDt = joinDt;
 	}
-
 
 	public String getUserStsCd() {
 		return userStsCd;
 	}
 
-
 	public void setUserStsCd(String userStsCd) {
 		this.userStsCd = userStsCd;
 	}
-
 
 	public String getChgId() {
 		return chgId;
 	}
 
-
 	public void setChgId(String chgId) {
 		this.chgId = chgId;
 	}
-
 
 	public Date getChgDt() {
 		return chgDt;
 	}
 
-
 	public void setChgDt(Date chgDt) {
 		this.chgDt = chgDt;
 	}
-
 
 	public String getRegId() {
 		return regId;
 	}
 
-
 	public void setRegId(String regId) {
 		this.regId = regId;
 	}
-
 
 	public Date getRegDt() {
 		return regDt;
 	}
 
-
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
 	}
 
+	public String getSessionKey() {
+		return sessionKey;
+	}
 
-	
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
 
+	public Date getSessionDt() {
+		return sessionDt;
+	}
 
-	
+	public void setSessionDt(Date sessionDt) {
+		this.sessionDt = sessionDt;
+	}
 
+	public boolean getIsUseLogin() {
+		return isUseLogin;
+	}
+
+	public void setIsUseLogin(boolean isUseLogin) {
+		this.isUseLogin = isUseLogin;
+	}
 
 	@Override
 	public int hashCode() {
@@ -320,6 +296,7 @@ public class UserVo {
 		result = prime * result + ((pwAdjDt == null) ? 0 : pwAdjDt.hashCode());
 		result = prime * result + ((pwFailCnt == null) ? 0 : pwFailCnt.hashCode());
 		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
+		result = prime * result + ((sessionKey == null) ? 0 : sessionKey.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((userNM == null) ? 0 : userNM.hashCode());
 		result = prime * result + ((userPw == null) ? 0 : userPw.hashCode());
@@ -327,7 +304,6 @@ public class UserVo {
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -418,6 +394,11 @@ public class UserVo {
 				return false;
 		} else if (!regId.equals(other.regId))
 			return false;
+		if (sessionKey == null) {
+			if (other.sessionKey != null)
+				return false;
+		} else if (!sessionKey.equals(other.sessionKey))
+			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
@@ -446,7 +427,6 @@ public class UserVo {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "UserVo [userId=" + userId + ", mbNo=" + mbNo + ", userNM=" + userNM + ", birthDay=" + birthDay
@@ -454,33 +434,17 @@ public class UserVo {
 				+ emailYn + ", emailKey=" + emailKey + ", addr=" + addr + ", addrDetail=" + addrDetail + ", zipCode="
 				+ zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt=" + pwAdjDt + ", levelGbCd="
 				+ levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId=" + chgId + ", chgDt="
-				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + "]";
+				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + ", sessionKey=" + sessionKey + ", sessionDt="
+				+ sessionDt + ", isUseLogin=" + isUseLogin + ", getUserId()=" + getUserId() + ", getMbNo()=" + getMbNo()
+				+ ", getUserNM()=" + getUserNM() + ", getBirthDay()=" + getBirthDay() + ", getGenderGbCd()="
+				+ getGenderGbCd() + ", getHp()=" + getHp() + ", getHpYn()=" + getHpYn() + ", getEmail()=" + getEmail()
+				+ ", getEmailYn()=" + getEmailYn() + ", getEmailKey()=" + getEmailKey() + ", getAddr()=" + getAddr()
+				+ ", getAddrDetail()=" + getAddrDetail() + ", getZipCode()=" + getZipCode() + ", getUserPw()="
+				+ getUserPw() + ", getPwFailCnt()=" + getPwFailCnt() + ", getPwAdjDt()=" + getPwAdjDt()
+				+ ", getLevelGbCd()=" + getLevelGbCd() + ", getJoinDt()=" + getJoinDt() + ", getUserStsCd()="
+				+ getUserStsCd() + ", getChgId()=" + getChgId() + ", getChgDt()=" + getChgDt() + ", getRegId()="
+				+ getRegId() + ", getRegDt()=" + getRegDt() + ", getSessionKey()=" + getSessionKey()
+				+ ", getSessionDt()=" + getSessionDt() + ", getIsUseLogin()=" + getIsUseLogin() + ", hashCode()="
+				+ hashCode() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
-	
-
-
-
-
-
-
-	
-	
-	
-
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

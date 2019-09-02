@@ -12,24 +12,59 @@
 			   USER_STS_CD  AS userStsCd,
 			   PW_FAIL_CNT	AS pwFailCnt
 		  FROM TB_USER100
-		 WHERE USER_ID=#{userId}
+		 WHERE USER_ID		= #{userId}
+	</select>
+	<select id="checkLoginSessionKey" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT USER_ID		AS userId			
+		     , MB_NO		AS mb_no
+		     , USER_NM		AS userNm
+		     , BIRTHDAY		AS birthDay
+		     , GENDER_GB_CD	AS genderGbCd
+		     , HP			AS hp
+		     , HP_YN		AS hpYn
+		     , EMAIL		AS email
+		     , EMAIL_YN		AS emailYn
+		     , ADDR			AS addr
+		     , ADDR_DETAIL	AS addrDetail
+		     , ZIP_CODE		AS zipCode
+		     , PW			AS userPw
+		     , PW_FAIL_CNT	AS pwFailCnt
+		     , PW_ADJ_DT	AS pwAdjDt
+		     , EMAIL_KEY	AS emailKey
+		     , LEVEL_GB_CD	AS levelGbCd
+		     , JOIN_DT		AS joinDt
+		     , USER_STS_CD	AS userStsCd
+		     , CHG_ID		AS chgId
+		     , CHG_DT		AS chgDt
+		     , REG_ID		AS regId
+		     , REG_DT		AS regDt
+		     , SESSION_KEY	AS sessionKey
+		     , SESSION_DT	AS sessionDt
+		  from tb_user100
+		 where session_key  = #{value}
 	</select>
 	<update id="pwFailCntAdd">
 		UPDATE TB_USER100
-		   SET PW_FAIL_CNT = #{pwFailCnt}
-		     , CHG_DT = NOW()
-		 WHERE USER_ID = #{userId}
+		   SET PW_FAIL_CNT 	= #{pwFailCnt}
+		     , CHG_DT 		= NOW()
+		 WHERE USER_ID 		= #{userId}
 	</update>
 	<update id="updUserBann">
 		UPDATE TB_USER100
-		   SET USER_STS_CD = '2'
-		     , CHG_DT = NOW()
-		 WHERE USER_ID = #{userId}
+		   SET USER_STS_CD 	= '2'
+		     , CHG_DT 		= NOW()
+		 WHERE USER_ID 		= #{userId}
 	</update>
 	<update id="initPwFailCnt">
 		UPDATE TB_USER100
-		   SET PW_FAIL_CNT = 0
-		     , CHG_DT = NOW()
-		 WHERE USER_ID = #{userId}
+		   SET PW_FAIL_CNT 	= 0
+		     , CHG_DT 		= NOW()
+		 WHERE USER_ID 		= #{userId}
+	</update>
+	<update id="keepLogin">
+		UPDATE TB_USER100
+		   SET SESSION_KEY 	= #{sessionKey}
+		     , SESSION_DT	= #{sessionDt}
+		 WHERE USER_ID		= #{userId}
 	</update>
 </mapper>

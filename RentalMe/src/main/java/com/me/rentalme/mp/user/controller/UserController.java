@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.user.service.MpUserService;
@@ -283,24 +285,66 @@ public class UserController {
 	}
 	
 	/**
+	 * @throws SQLException 
 	* 내 문의 보기
 	* 
 	* @param  
 	* @return ModelAndView 
-	* @author 신지영
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/mp/quest", method = RequestMethod.GET)
-	public ModelAndView getQuestList() {
+	public ModelAndView getQuestList(CsVo csVo,HttpSession session) throws SQLException {
 		log.debug("내 문의 보기 컨트롤러...");
 		
-		
-		
 		ModelAndView mav = new ModelAndView();
+		mpUserService.myList(csVo, session);
+		
+		mav.addObject("mylist", mpUserService.myList(csVo, session));
+		
 		mav.setViewName("mp/user/userQuestList");
 		return mav;
 	}
 	
+	/**
+	 * @throws SQLException 
+	* 내 문의 상세
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
+	@RequestMapping(value="/mp/questDetail")
+	public ModelAndView myQuestDetail(HttpSession session,CsVo csVo) throws SQLException{
+		String user=(String)session.getAttribute("loginUserId");
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bean",mpUserService.myInqDetail(csVo));
+		mav.addObject("id", user);
+		mav.setViewName("mp/user/userQuestDetail");
+		return mav;
+	}
+	
+	/**
+	 * @throws SQLException 
+	* 내 문의 삭제
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 강민수
+	* @exception 
+	*/
+	@RequestMapping(value="/mp/QuestDelete")
+	public ModelAndView myQuestDe(@RequestParam("pquestNo") String pquestNo, @RequestParam("mbNo") String mbNo,HttpSession session) throws SQLException{
+		
+		CsVo csVo=new CsVo();
+		csVo.setMbNo(mbNo);
+		csVo.setPquestNo(pquestNo);
+		ModelAndView mav=new ModelAndView();
+		mpUserService.myQuestDel(csVo);
+		mav.setViewName("redirect:/mp//mp/quest");
+		return mav;
+	}
 	/**
 	* 나의 중고 상점
 	* 
@@ -328,7 +372,7 @@ public class UserController {
 	*/
 	@RequestMapping(value = "/act", method = RequestMethod.GET)
 	public ModelAndView getActList() {
-		log.debug("내 문의 보기 컨트롤러...");
+		log.debug("내 활동 보기 컨트롤러...");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mp/user/userActList");

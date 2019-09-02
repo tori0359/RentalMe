@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.service.CsService;
+import com.me.rentalme.model.entity.UserVo;
 
 
 /**
@@ -41,12 +43,70 @@ public class CsController {
 	* @exception 
 	*/
 	
-	//1:1문의
+	//1:1문의여부 페이지
 	@RequestMapping(value="/csInquiry")
-	public String inquery(Model model) throws SQLException {
+	public ModelAndView inquery(HttpSession session) throws SQLException {
 		System.out.println("질문");
-		return "cs/csInquiry";
+		ModelAndView mav=new ModelAndView();
 		
+		String user=(String)session.getAttribute("loginUserId");
+		mav.addObject("UserId",(String)session.getAttribute("loginUserId"));
+		System.out.println(user);
+		
+	
+		mav.setViewName("cs/csInquiry");
+		return mav;
+		
+	}
+	
+	//1:1문의 등록 페이지이동
+	@RequestMapping(value="/csInquiryAddPage")
+	public ModelAndView inquiryAddPage(HttpSession session) throws SQLException{
+		
+		ModelAndView mav=new ModelAndView();
+		CsVo csVo=new CsVo();
+		String user=(String)session.getAttribute("loginUserId");
+		
+		
+		
+		System.out.println("회원id:"+user);
+		System.out.println("곧 진입 회원번호:"+csVo.getMbNo());
+		
+		mav.addObject("id", user);
+		mav.setViewName("cs/csQuestAdd");
+		return mav;
+	}
+	
+	//1:1문의등록 
+	@RequestMapping(value="/csInquiryAdd")
+	public ModelAndView inquiryAdd(CsVo csVo,HttpSession session) throws SQLException{
+		ModelAndView mav=new ModelAndView();
+		
+		if(csVo.getCsClassGbCd().equals("")) {
+			System.out.println("만약"+csVo.getCsClassGbCd());
+			mav.setViewName("redirect:/cs/csInquiryAddPage");
+			return mav;
+		}
+		if(csVo.getSub().equals("")) {
+			System.out.println("만약"+csVo.getCsClassGbCd());
+			mav.setViewName("redirect:/cs/csInquiryAddPage");
+			return mav;
+		}
+		if(csVo.getContent().equals("")) {
+			System.out.println("만약"+csVo.getCsClassGbCd());
+			mav.setViewName("redirect:/cs/csInquiryAddPage");
+			return mav;
+		}
+		String loginMbNo=(String)session.getAttribute("loginMbNo");
+		csVo.setMbNo(loginMbNo);
+		System.out.println("회원번호 여기맞나"+csVo.getMbNo());
+		System.out.println("이상..true??"+csVo.getCsGbCd().equals("30")); //true
+		if(csVo.getCsGbCd().equals("30")) {
+			csService.seqInqUp();
+		}
+		csService.addfaq(csVo);
+		mav.setViewName("redirect:/mp/mp/quest");
+		return mav;
 	}
 	
 /////////////////////////////////////////////////////////////////////////////	
@@ -73,9 +133,11 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////		
 	//notice상세게시판
 	@RequestMapping(value="/csNoticeDetail",method=RequestMethod.GET)
-	public ModelAndView csNoticeDetail(CsVo csVo) throws Exception{
+	public ModelAndView csNoticeDetail(HttpSession session,CsVo csVo) throws Exception{
 		
 		ModelAndView mav=new ModelAndView();
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		System.out.println("detail..start");
 		csService.csNoticeDetail(csVo);
 		mav.addObject("adetail", csService.csNoticeDetail(csVo));
@@ -87,10 +149,12 @@ public class CsController {
 	
 	//faq상세게시판
 	@RequestMapping(value="/csFaqDetail",method=RequestMethod.GET)
-	public ModelAndView csFaqDetail(CsVo csVo) throws Exception{
+	public ModelAndView csFaqDetail(HttpSession session,CsVo csVo) throws Exception{
 		
 		
 		ModelAndView mav=new ModelAndView();
+		String userId=(String)session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
 		mav.addObject("bdetail", csService.csFaqDetail(csVo));
 		
 		return mav;

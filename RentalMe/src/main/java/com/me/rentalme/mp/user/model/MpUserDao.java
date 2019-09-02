@@ -3,6 +3,10 @@ package com.me.rentalme.mp.user.model;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 
@@ -54,7 +58,10 @@ public interface MpUserDao {
 	//경매내역 리스트 출력
 	List<CallVo> selectAuct(String mbNo) throws SQLException;
 
-
-
+	//1:1문의내역리스트
+	List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException;
 	
+	CsVo myQuestDetail(CsVo csVo) throws SQLException;
+	
+	int myQuestDel(CsVo csVo) throws SQLException;
 }

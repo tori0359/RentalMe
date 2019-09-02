@@ -48,6 +48,7 @@
 </script>
 </head>
 <body>
+
 <div id="csContent">
 <form action="/mp/mng/csNoticeAdd" method="post">
 		<h2>공지/FAQ등록</h2>

@@ -60,6 +60,7 @@ public class UsedController {
 		log.debug("중고거래 대형가전");
 		bean.setGdsMclassCd("10");
 		sessionFunc(session,bean);
+		model.addAttribute("remain", 10);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
@@ -68,6 +69,7 @@ public class UsedController {
 		log.debug("중고거래 소형가전");
 		bean.setGdsMclassCd("20");
 		sessionFunc(session,bean);
+		model.addAttribute("remain", 20);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
@@ -76,6 +78,7 @@ public class UsedController {
 		log.debug("중고거래 주방가전");
 		bean.setGdsMclassCd("30");
 		sessionFunc(session,bean);
+		model.addAttribute("remain", 30);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
@@ -84,6 +87,7 @@ public class UsedController {
 		log.debug("중고거래 가구");
 		bean.setGdsMclassCd("40");
 		sessionFunc(session,bean);
+		model.addAttribute("remain", 40);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
@@ -92,6 +96,7 @@ public class UsedController {
 		log.debug("중고거래 기타");
 		bean.setGdsMclassCd("50");
 		sessionFunc(session,bean);
+		model.addAttribute("remain", 50);
 		model.addAttribute("alist1", usedService.oneList(bean));
 		return "used/usedList";
 	}
@@ -148,12 +153,21 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/store/{idx}", method = RequestMethod.GET)
-	public String getUsedMyStroe(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+	public String getUsedMyStore(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+		model.addAttribute("mbNo", mbNo);
 		model.addAttribute("alist", usedService.myUsedAll(mbNo));
 		model.addAttribute("cmtlist", usedService.listMyStoreCmt(mbNo));
 		return "used/usedMyStore";
 	}
-	
+	@RequestMapping(value = "/store/now", method = RequestMethod.GET)
+	public String getUsedMyStoreNow(HttpSession session,Model model,@ModelAttribute UsedVo bean) throws SQLException {
+		model.addAttribute("usedGdsResStsCd", bean.getUsedGdsResStsCd());
+		model.addAttribute("mbNo", bean.getMbNo());
+		model.addAttribute("alist", usedService.mySelectAllAlign(bean));
+		model.addAttribute("cmtlist", usedService.listMyStoreCmt(bean.getMbNo()));
+		return "used/usedMyStore";
+	}
+
 	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.POST)
 	public String getUsedMyStroeReviewInsert(HttpSession session,@ModelAttribute UsedStoreVo bean) throws SQLException {
 		
@@ -161,6 +175,15 @@ public class UsedController {
 		
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
+	
+	@RequestMapping(value = "/store/del/{idx}", method = RequestMethod.POST)
+	public String getUsedMyStroeReviewDelete(HttpSession session,@PathVariable("idx") String usedGdsNo) throws SQLException {
+		
+		usedService.delMyStoreListOne(usedGdsNo);
+		
+		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
+	}
+	
 	
 	/**
 	* 중고거래 상품등록 폼

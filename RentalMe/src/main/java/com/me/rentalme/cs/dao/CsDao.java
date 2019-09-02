@@ -15,7 +15,7 @@ public interface CsDao {
 	//공지 리스트
 	List<CsVo> noticeSelectAll() throws SQLException;
 	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
-	
+	List<CsVo> inqSelectAll() throws SQLException;
 	
 	//faq 상세
 	CsVo csFaqDetail(CsVo csVo) throws SQLException;	
@@ -23,12 +23,16 @@ public interface CsDao {
 	//공지 상세
 	CsVo csNoticeDetail(CsVo csVo) throws SQLException;
 	
+	//게시판 시퀀스
 	int seqNocInsert() throws SQLException;
 	int seqFaqInsert() throws SQLException;
+	int seqInqInsert() throws SQLException;
 	
 	int insertOne(CsVo csVo) throws SQLException;
+	
+	
 	int updateOne(CsVo csVo) throws SQLException;
 	int noticDel(String num) throws SQLException;
 	int faqDel(String num) throws SQLException;
-	
+	int inqAnswer(String num) throws SQLException;
 }

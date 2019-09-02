@@ -40,7 +40,7 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		if(sortGbCd.equals("1")) {
 			// ·»Å» Á¤·Ä ÀÎ±â¼ø : 1
 			rentalAppliVo.setSortGbCd("1");
-			return rentalAppliDao.rentalGdsList(rentalAppliVo);
+			return rentalAppliDao.rentalGdsList2(rentalAppliVo);
 		} else if(sortGbCd.equals("2")) {
 			// ·»Å» Á¤·Ä ÃÖ½Å¼ø : 2
 			rentalAppliVo.setSortGbCd("2");
@@ -56,11 +56,11 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		} else if(sortGbCd.equals("5")) {
 			// ·»Å» Á¤·Ä ÆÇ¸Å·®¼ø : 5
 			rentalAppliVo.setSortGbCd("5");
-			return rentalAppliDao.rentalGdsList(rentalAppliVo);
+			return rentalAppliDao.rentalGdsList2(rentalAppliVo);
 		} else {
 			// ·»Å» Á¤·Ä ¸®ºä¸¹Àº¼ø : 6
 			rentalAppliVo.setSortGbCd("6");
-			return rentalAppliDao.rentalGdsList(rentalAppliVo);
+			return rentalAppliDao.rentalGdsList2(rentalAppliVo);
 		}
 	}
 

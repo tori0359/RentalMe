@@ -167,7 +167,7 @@
 						<label class="radio-inline">
 						<input type="radio" name="gdsSclassCd" id="inlineRadio1" class="mclass6" value="64"> 기타패키지
 						</label>
-                    </div>
+                    </div><br/>
                   <div class="form-group">
                     <label for="BRAND_NM" class="col-sm-2 control-label">브랜드명</label>
                     <div class="col-sm-10">
