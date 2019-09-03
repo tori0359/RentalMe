@@ -44,9 +44,11 @@
 
 /* ---------- 상세정보 영역 시작 -------- */
 #gdsNmStyle { 
+	line-height: 0.7em;
 	font-weight: bolder;
 }
 #brandNmStyle {
+	line-height: 0.2em;
 	text-decoration:none;
 	font-size: 1.8rem;
 	color: #999;
@@ -103,7 +105,7 @@
 	border: 0;
 	width: 60px;
 	font-weight: bolder;
-	color: #FF00FF;
+	color: #CC0099;
 	background-color : white;
 }
 #starText {
@@ -119,7 +121,29 @@
 	color: #1E90FF;
 	background-color : white;
 }
-
+#optionSelect1 {
+	line-height:1.1em;
+	font-weight: bolder;
+}
+#optionSelect2 {
+	line-height:1.0em;
+}
+#quick {
+	font-size:16pt;
+	color: red;
+	font-weight: bolder;
+}
+#charge_button4 {
+	color: black;
+}
+#myModalLabel {
+	background-image: url('/imgs/quest2.jpg');
+	height: 160px;
+	
+}
+#agree {
+	height:100px;
+}
 /* --------- BEST 영역 시작 --------- */
 /* List style */
 
@@ -318,24 +342,24 @@ input::-moz-focus-inner { border: 0; }
 								<input type="text" id="starText" disabled value="상품평">
 							</h4>
 							<h4 id="gradeGroup">
-								<input type="text" id="starCnt" disabled value="(23)">
+								<input type="text" id="starCnt" disabled value="">
 							</h4>
 						</div><p>
 						<div style="border:1px solid gray"></div>
 						<div class="row" style="border:0px solid orange;">
 							<div id="detailNm" class="col-md-3" style="border:0px solid black;">
-								<div><h3>렌탈가격(월)</h3><h6><br></h6></div>
-								<h4>계약기간</h4><h6><br></h6>
-								<h4>배송비</h4><h6><br></h6>
-								<h4>설치비</h4><h6><br></h6>
-								<h4>AS조건</h4><h6><br></h6>
-								<h4>모델명</h4><h6><br></h6>
-								<h4>제품코드</h4><h6><br></h6>
-								<h4>수량</h4>
+								<div><h3 id="optionSelect1">렌탈가격(월)</h3><h6><br></h6></div>
+								<h4 id="optionSelect1">계약기간</h4><h6><br></h6>
+								<h4 id="optionSelect1">배송비</h4><h6><br></h6>
+								<h4 id="optionSelect1">설치비</h4><h6><br></h6>
+								<h4 id="optionSelect1">AS조건</h4><h6><br></h6>
+								<h4 id="optionSelect1">모델명</h4><h6><br></h6>
+								<h4 id="optionSelect1">제품코드</h4><h6><br></h6>
+								<h4 id="optionSelect1">수량</h4>
 							</div>
 							<div id="detailValue" class="col-md-9" style="border:0px solid pink;">
 								<fmt:setLocale value="ko_KR"></fmt:setLocale>
-								<div><h3><input type="text" id="disPrice" disabled value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원"></h3><br></div>
+								<div><h3 id="optionSelect3"><input type="text" id="disPrice" disabled value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원"></h3><br></div>
 								<div class="box box-primary">
 									<select id="agreeTermBox" onchange="chgAgreeTermBox()">
 										<option value="${list1.agreeTerm }">&nbsp;${list1.agreeTerm }개월(기본)</option>
@@ -368,58 +392,116 @@ input::-moz-focus-inner { border: 0; }
 							</div>
 							<div class="row" style="border:0px solid orange;" align="center">
 								<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-info">상담예약</button>
+						       		<button style="width:150px;" id="charge_button1" type="button" class="btn btn-info" data-backdrop="static" data-toggle="modal"data-target="#myModal">상담예약</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-success">장바구니</button>
+						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success">장바구니</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">결제하기</button>
+						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger">결제하기</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div><br>
+							<div class="row" style="border:0px solid orange;" align="center">
+								<div class="chargediv">
+						       		<button style="width:495px;" id="charge_button4" type="submit" class="btn btn-default" disabled="disabled">렌탈미 빠른상담    <span id="quick">1234-1234</span></button>
+						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
+							</div>
+							<!-- 모달 -->
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel"></h4>
+									    </div>
+										<div class="modal-body">
+									    	<div class="form-group">
+										    	<label for="name">이름</label>
+										    	<input type="text" class="form-control" id="name" name="name" value="" placeholder="이름">
+											</div>
+											<div class="form-group">
+										    	<label for="hp">휴대전화</label>
+										    	<input type="text" class="form-control" id="hp" name="hp" value="" placeholder="(-)없이 숫자만 입력">
+											</div>
+											<div class="form-group">
+										    	<label for="email">이메일</label>
+										    	<input type="text" class="form-control" id="email" name="email" value="" placeholder="rentalme@rentalme.com">
+											</div>
+											<div class="form-group">
+										    	<label for="agree">개인정보 약관동의</label>
+										    	<textarea class="form-control" id="agree" name="agree" readonly="readonly">고객님의 렌탈상품 상담과 관련하여 성실하게 답변 및 안내해 드리기 위해 필요한 최소한의 개인정보를 수집하고 있습니다. 이에개인정보의 수집 및 이용에 관하여 아래와 같이 고지하오니 충분히 읽어보신 후 동의하여 주시기 바랍니다. 
+
+1. 개인정보의 수집/이용 목적 정확한 렌탈료의 계산, 렌탈상품 및 렌탈신청 안내 및 전화를 이용한 추가적인 렌탈상품 안내 
+
+2. 수집하는 개인정보 항목 개인식별정보(성명, 전화번호) 
+
+3. 개인정보의 보유/이용기간 동의 시부터 최대 2년간 
+
+4. 개인정보의 수집/이용하는 자 렌탈미 
+
+※ 귀하는 상기 동의를 거부할 수 있습니다. 다만, 이에 대한 동의를 하시지 않을 경우에는 상담 서비스의 제공이 제한 될 수 있음을 알려드립니다.
+												</textarea>
+												<div>
+						                            <div class="checkbox">
+						                                <label>
+						                                    <input type="checkbox" name="remember"> 개인정보제공 동의
+						                                </label>
+						                            </div>
+						                        </div>
+											</div>
+										</div>
+									    <div class="modal-footer">
+									    	<button type="submit" class="btn btn-primary" data-dismiss="modal">등록</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+									    </div>
+									</div>
+							    </div>
+							</div>
+							<!-- 모달 끝 -->
 						</div>
-						</c:forEach>
-					</div>
-					<!-- ***************** -->
-					<!-- 상세 정보 영역 끝 -->
-					<!-- ***************** -->
-				</div>
-				<!-- ******************* -->
-				<!-- 상세 하단 영역 시작 -->
-				<!-- ******************* -->	
-				<div style="border:0px solid green;">
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
-					asdasd<p>
+					</c:forEach>
 				</div>
 				<!-- ***************** -->
-				<!-- 상세 하단 영역 끝 -->
-				<!-- ***************** -->		
+				<!-- 상세 정보 영역 끝 -->
+				<!-- ***************** -->
+			</div>
+			<!-- ******************* -->
+			<!-- 상세 하단 영역 시작 -->
+			<!-- ******************* -->	
+			<div style="border:0px solid green;">
+				<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+				asdasd<p>
+			</div>
+			<!-- ***************** -->
+			<!-- 상세 하단 영역 끝 -->
+			<!-- ***************** -->		
 			</div>
 		</div>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
 	</div>
+	</얖>
 </body>
 
 </html>
