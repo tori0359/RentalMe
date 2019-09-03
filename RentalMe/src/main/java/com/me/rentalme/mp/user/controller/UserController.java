@@ -172,7 +172,7 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public ModelAndView getDeposit(CallVo callVo, HttpSession session) throws SQLException {
+	public ModelAndView getDeposit( CallVo callVo, HttpSession session) throws SQLException {
 		log.debug("예치금 컨트롤러...");
 	
 		ModelAndView mav = new ModelAndView();
@@ -180,24 +180,44 @@ public class UserController {
 		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
 		
-		//현재 예치금금액으로 update
-		mpUserService.updateDeposit();
 		
-		mav.addObject("alist", mpUserService.depositList());
-		mav.addObject("callVo",mpUserService.userInfoList());
+		
+		
+		mav.addObject("callVo",mpUserService.userInfoList(mbNo));
+		mav.addObject("alist", mpUserService.depositList(mbNo));
+		
 		
 		mav.setViewName("mp/user/userDeposit");
 		return mav;
 		
 	}	
+	
+	/**
+	 * @throws SQLException 
+	* 예치금 충전
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
 	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
-	public ModelAndView insertDeposit(CallVo callVo) throws SQLException {
+	public ModelAndView insertDeposit(@RequestParam("chargeDeposit")String chargeDeposit, CallVo callVo,HttpSession session) throws SQLException {
 		log.debug("예치금 충전 컨트롤러...");
 	
-		mpUserService.insertCharge(callVo);
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userVo",mpUserService.getName(mbNo));
+		
+		mpUserService.insertCharge(callVo, mbNo);
+		//현재 예치금금액으로 update
+		mpUserService.updateDeposit(chargeDeposit, mbNo);
 		
 		
-		ModelAndView mav = new ModelAndView("redirect:/mp/deposit");
+		
+		
+		mav.setViewName("redirect:/mp/deposit");
 		return mav;
 	}	
 	

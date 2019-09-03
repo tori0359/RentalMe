@@ -28,16 +28,16 @@ public interface MpUserService {
 	public void deleteWish(CallVo callVo) throws SQLException;
 
 	//예치금 사용내역 리스트 출력
-	List<CallVo> depositList() throws SQLException;
+	List<CallVo> depositList(String mbNo) throws SQLException;
 
 	//예치금 충전
-	int insertCharge(CallVo callVo) throws SQLException;
+	int insertCharge(CallVo callVo,String mbNo) throws SQLException;
 
 	//현재 예치금 업데이트
-	public void updateDeposit() throws SQLException;
+	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException;
 
 	//현재 예치금 출력
-	public CallVo userInfoList() throws SQLException;
+	public CallVo userInfoList(String mbNo) throws SQLException;
 
 	//내 정보 출력
 	public UserVo userInfo(String mbNo) throws SQLException;
@@ -59,4 +59,5 @@ public interface MpUserService {
 	
 	//내 문의 삭제
 	int myQuestDel(CsVo csVo) throws SQLException;
+
 }

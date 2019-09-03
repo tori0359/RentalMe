@@ -67,16 +67,16 @@ public class MpUserServiceImpl implements MpUserService{
 
 	//예치금 리스트
 	@Override
-	public List<CallVo> depositList() throws SQLException {
+	public List<CallVo> depositList(String mbNo) throws SQLException {
 		log.debug("예치금 리스트 서비스...");
-		return mpUserDao.selectDeposit();
+		return mpUserDao.selectDeposit(mbNo);
 	}
 	
 	//예치금 충전
 	@Override
-	public int insertCharge(CallVo callVo) throws SQLException {
+	public int insertCharge(CallVo callVo,String mbNo) throws SQLException {
 
-		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit());
+		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit(),mbNo);
 	}
 	
 	//개인 1:1문의보기
@@ -103,16 +103,16 @@ public class MpUserServiceImpl implements MpUserService{
 
 	//현재 예치금 update
 	@Override
-	public void updateDeposit() throws SQLException {
+	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException {
 		
-		mpUserDao.updateDeposit();
+		mpUserDao.updateDeposit(chargeDeposit, mbNo);
 		
 	}
 
 	@Override
-	public CallVo userInfoList() throws SQLException {
+	public CallVo userInfoList(String mbNo) throws SQLException {
 		log.debug("현재예치금 서비스...");
-		return mpUserDao.selectUserInfo();
+		return mpUserDao.selectUserInfo(mbNo);
 	}
 
 	@Override

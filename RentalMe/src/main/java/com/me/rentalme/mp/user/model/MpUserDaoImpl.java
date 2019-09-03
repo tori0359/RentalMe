@@ -66,17 +66,18 @@ public class MpUserDaoImpl implements MpUserDao{
 	}
 
 	@Override
-	public List<CallVo> selectDeposit() throws SQLException {
+	public List<CallVo> selectDeposit(String mbNo) throws SQLException {
 		
-		return sqlSession.selectList("mpUser.selectDeposit");
+		return sqlSession.selectList("mpUser.selectDeposit",mbNo);
 	}
 
 	@Override
-	public int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException {
+	public int insertCharge(String userId, String depositGbCd, String chargeDeposit, String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("userId", userId);
 		map.put("depositGbCd", depositGbCd);
 		map.put("chargeDeposit", chargeDeposit);
+		map.put("mbNo", mbNo);
 		
 		log.debug("userId="+userId+", depositGbCd="+depositGbCd+", chargeDeposit="+chargeDeposit+" 예치금 충전 입력 DaoImpl...");
 		
@@ -85,9 +86,12 @@ public class MpUserDaoImpl implements MpUserDao{
 
 	@Override
 
-	public void updateDeposit() throws SQLException {
+	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("chargeDeposit", chargeDeposit);
+		map.put("mbNo", mbNo);
 		
-		sqlSession.selectList("mpUser.updateDeposit");
+		sqlSession.selectList("mpUser.updateDeposit",map);
 		
 	}
 
@@ -120,8 +124,8 @@ public class MpUserDaoImpl implements MpUserDao{
 
 
 	@Override
-	public CallVo selectUserInfo() throws SQLException {
-		return sqlSession.selectOne("mpUser.selectInfoUser");
+	public CallVo selectUserInfo(String mbNo) throws SQLException {
+		return sqlSession.selectOne("mpUser.selectInfoUser",mbNo);
 	}
 
 	@Override
