@@ -24,6 +24,17 @@ public class RentalAppliVo {
 	private int totGrdSum		;		// 토탈등급합계
 	private double totGrdAvg	;		// 토탈등급평균
 	private String img1			;		// 이미지경로1
+	private String img2			;		// 이미지경로2
+	private String img3			;		// 이미지경로3
+	private String img4			;		// 이미지경로4
+	private String img5			;		// 이미지경로5
+	private String img6			;		// 이미지경로6
+	private String img7			;		// 이미지경로7
+	private String img8			;		// 이미지경로8
+	private String img9			;		// 이미지경로9
+	private String img10		;		// 이미지경로10
+	private String img11		;		// 이미지경로11
+	private String img12		;		// 이미지경로12
 	private int gdsPrice		;		// 상품가격
 	private String sortGbCd		;		// 정렬구분코드
 	private Date regDt			;		// 등록일자
@@ -224,29 +235,83 @@ public class RentalAppliVo {
 	public void setAsCondition(String asCondition) {
 		this.asCondition = asCondition;
 	}
-	/**
-	 * @return the deliverCost
-	 */
 	public String getDeliverCost() {
 		return deliverCost;
 	}
-	/**
-	 * @param deliverCost the deliverCost to set
-	 */
 	public void setDeliverCost(String deliverCost) {
 		this.deliverCost = deliverCost;
 	}
-	/**
-	 * @return the instalCost
-	 */
 	public String getInstalCost() {
 		return instalCost;
 	}
-	/**
-	 * @param instalCost the instalCost to set
-	 */
 	public void setInstalCost(String instalCost) {
 		this.instalCost = instalCost;
+	}
+	public String getImg2() {
+		return img2;
+	}
+	public void setImg2(String img2) {
+		this.img2 = img2;
+	}
+	public String getImg3() {
+		return img3;
+	}
+	public void setImg3(String img3) {
+		this.img3 = img3;
+	}
+	public String getImg4() {
+		return img4;
+	}
+	public void setImg4(String img4) {
+		this.img4 = img4;
+	}
+	public String getImg5() {
+		return img5;
+	}
+	public void setImg5(String img5) {
+		this.img5 = img5;
+	}
+	public String getImg6() {
+		return img6;
+	}
+	public void setImg6(String img6) {
+		this.img6 = img6;
+	}
+	public String getImg7() {
+		return img7;
+	}
+	public void setImg7(String img7) {
+		this.img7 = img7;
+	}
+	public String getImg8() {
+		return img8;
+	}
+	public void setImg8(String img8) {
+		this.img8 = img8;
+	}
+	public String getImg9() {
+		return img9;
+	}
+	public void setImg9(String img9) {
+		this.img9 = img9;
+	}
+	public String getImg10() {
+		return img10;
+	}
+	public void setImg10(String img10) {
+		this.img10 = img10;
+	}
+	public String getImg11() {
+		return img11;
+	}
+	public void setImg11(String img11) {
+		this.img11 = img11;
+	}
+	public String getImg12() {
+		return img12;
+	}
+	public void setImg12(String img12) {
+		this.img12 = img12;
 	}
 
 	

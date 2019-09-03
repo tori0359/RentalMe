@@ -266,12 +266,14 @@ input::-moz-focus-inner { border: 0; }
 					<div style="border:0px solid red;" class="product-slider col-md-5">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
+								<c:forEach items="${list1 }" var="list1">
 								<div class="item active">
-									<img src="/imgs/sample1.jpg">
+									<img src="${list1.img1 }">
 								</div>
-								<div class="item"> <img src="/imgs/sample2.jpg"> </div>
-								<div class="item"> <img src="/imgs/sample3.jpg"> </div>
-								<div class="item"> <img src="/imgs/sample4.jpg"> </div>
+								<div class="item"> <img src="${list1.img2 }"> </div>
+								<div class="item"> <img src="${list1.img3 }"> </div>
+								<div class="item"> <img src="${list1.img4 }"> </div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="clearfix">
