@@ -32,8 +32,8 @@ public class CallVo {
 	private String remnDeposit;
 	private String bidPrice;
 	private String bidTime;
-	private String RImg1;
-	private String UImg1;
+	private String RImg1; //렌탈 이미지
+	private String UImg1; //중고사진 이미지
 	
 
 	

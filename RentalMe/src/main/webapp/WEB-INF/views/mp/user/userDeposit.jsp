@@ -67,9 +67,11 @@
 </style>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 
-<!-- 결제 api연동하기 -->
+<!-- 결제 api연동하기 (아임포트)-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+
+
 <script>
 	window.onload=function(){
 		$('#menuuse').attr('class','active');
@@ -110,7 +112,45 @@
 
 	
 		$('#charge_button').click(function(){
-			alert("충전이 완료되었습니다!");
+			
+			var amount = $('#chargeDeposit').val();
+			var userId = $('#UserId').val();
+			
+			alert(amount+"원을 충전하시겠습니까?");
+			
+			var IMP = window.IMP;
+			IMP.init('imp86711610');
+			IMP.request_pay({
+			    pg : 'kakaopay',
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '렌탈미 예치금 충전',
+			    amount : amount,
+			    buyer_name : userId
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        
+					$.ajax({
+						url: "/mp/deposit",
+						type: "post",
+						data: { "chargeDeposit" : rsp.paid_amount },
+						success : function(){
+							location.href = "/mp/deposit";
+						}
+
+					});
+			        
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+
+			    alert(msg);
+			});
+
+
+			
 		});
 	}
 	
@@ -200,7 +240,7 @@
 	</table>
 </div>
 
-<form action="/mp/deposit" method="post">
+<!-- <form action="/mp/deposit" method="post"> -->
 <div id="depositcharge" class="col-md-12">
 	<table class="chargetable table">
 			<tr>
@@ -223,16 +263,17 @@
        			<th class="active" style="text-align:center;">입금인</th>
        			<td> 
        			<c:if test="${empty userVo.userNM}">
-		     	${loginUserId}
+		     		${loginUserId}
 			     </c:if>
 			     <c:if test="${!empty userVo.userNM }">
 			     	${userVo.userNM}
 			     </c:if>
+			     <input type="hidden" id="UserId" value="${loginUserId}"/>
        			</td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금 금액(원)</th>
-       			<td><input type="text" name="chargeDeposit"></td>
+       			<td><input type="text" name="chargeDeposit" id="chargeDeposit"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">결제수단</th>
@@ -244,7 +285,7 @@
        		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충전하기</button>
        	</div>
 </div>
-</form>
+<!-- </form> -->
 
 <div id="depositrefund" class="col-md-12">
 	<table class="chargetable table">

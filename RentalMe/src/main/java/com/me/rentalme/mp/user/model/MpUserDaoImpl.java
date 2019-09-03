@@ -27,7 +27,7 @@ public class MpUserDaoImpl implements MpUserDao{
 	@Inject
 	SqlSession sqlSession;
 	
-	
+	//주문내역 리스트
 	@Override
 	public List<CallVo> selectOrd(String mbNo) throws SQLException {
 		return sqlSession.selectList("mpUser.selectOrd",mbNo);
@@ -62,7 +62,7 @@ public class MpUserDaoImpl implements MpUserDao{
 		sqlSession.update("mpUser.deleteWish",usedGdsNo);
 	}
 
-
+	//후기등록
 	@Override
 	public int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
@@ -76,12 +76,14 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.insertReview",map);
 	}
 
+	//예치금 조회
 	@Override
 	public List<CallVo> selectDeposit(String mbNo) throws SQLException {
 		
 		return sqlSession.selectList("mpUser.selectDeposit",mbNo);
 	}
-
+	
+	//예치금 충전
 	@Override
 	public int insertCharge(String userId, String depositGbCd, String chargeDeposit, String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
