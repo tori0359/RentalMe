@@ -180,6 +180,9 @@ input::-moz-focus-inner { border: 0; }
 
 		// 점수 평균
 		$('#starGrd').val("("+vTotGrdAvg+")");
+
+		// 리뷰 갯수
+		$('#starCnt').val("("+vCnt+")");
 		
 		//alert("안쪽마지막");
 	}
@@ -384,7 +387,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ******************* -->
 				<!-- 상세 하단 영역 시작 -->
 				<!-- ******************* -->	
-				<div style="border:1px solid green;">
+				<div style="border:0px solid green;">
 					asdasd<p>
 					asdasd<p>
 					asdasd<p>
