@@ -12,7 +12,13 @@ public interface RentalAppliService {
 	List<RentalAppliVo> rentalMenu(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalOption(RentalAppliVo rentalAppliVo, String option);
 	List<RentalAppliVo> rentalBest(RentalAppliVo rentalAppliVo);
-	
 	List<RentalAppliVo> rentalGds(RentalAppliVo rentalAppliVo, String sortGbCd);
+	
+	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsDetail(RentalAppliVo rentalAppliVo);
+	
+	
+	
+	
 
 }

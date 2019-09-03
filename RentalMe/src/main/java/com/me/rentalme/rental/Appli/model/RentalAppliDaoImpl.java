@@ -58,4 +58,18 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive2", rentalAppliVo);
 	}
 
+	@Override
+	public List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gradeRetrive", rentalAppliVo);
+	}
+	
+	@Override
+	public List<RentalAppliVo> rentalGdsListDetail(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gdsListDetailRetrive", rentalAppliVo);
+	}
+
+
+	
+
+
 }

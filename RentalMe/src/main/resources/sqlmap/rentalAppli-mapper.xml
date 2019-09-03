@@ -41,7 +41,19 @@
 				FROM TB_COM100		-- 공통코드
 				WHERE GRP_CD_ID = 'GDS_SCLASS_CD'
 				<if test="gdsSclassCd != null">
-					AND CD_ID = #{gdsSclassCd}
+					<choose>
+						<when test='gdsCd != null and gdsCd != ""'>
+							/* 상세페이지 PATH 경로 조회 */
+							AND CD_ID IN(SELECT 
+											GDS_SCLASS_CD
+										FROM TB_GDS100
+										WHERE GDS_CD = #{gdsCd}
+							)
+						</when>
+						<otherwise>
+							AND CD_ID = #{gdsSclassCd}
+						</otherwise>
+					</choose>
 				</if>
 			) AS GDS_SCLASS_NM						/* 상품소분류명 */
 		FROM TB_COM100
@@ -339,5 +351,75 @@
 				,AAA.REG_DT DESC
 		</if>
 	</select>
+	
+	<!-- 렌탈 상품 리스트 상세조회(점수) -->
+	<select id="gradeRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT /* */
+			   BB.GDS_CD
+			  ,BB.GDS_LCLASS_CD
+			  ,BB.GDS_MCLASS_CD
+			  ,BB.GDS_SCLASS_CD	
+			  ,BB.GDS_NM
+			  ,COALESCE(AA.CNT, 0) AS CNT
+			  ,COALESCE(AA.TOT_GRD_SUM, 0) AS TOT_GRD_SUM
+			  ,COALESCE(AA.TOT_GRD_AVG, 0) AS TOT_GRD_AVG
+		FROM (
+				SELECT 
+					   A.GDS_CD
+					  ,COUNT(A.GDS_CD) AS CNT
+					  ,SUM(A.GRADE) AS TOT_GRD_SUM
+					  ,ROUND(SUM(A.GRADE)/COUNT(A.GDS_CD),2) AS TOT_GRD_AVG
+				FROM TB_GDS210 A		/* 렌탈상품후기 */
+				GROUP BY A.GDS_CD
+		) AA RIGHT OUTER JOIN (
+				SELECT 
+					   A.GDS_CD
+				      ,A.GDS_LCLASS_CD
+					  ,A.GDS_MCLASS_CD
+					  ,A.GDS_SCLASS_CD
+					  ,A.GDS_NM
+					  ,A.BRAND_NM
+					  ,A.MODEL_NM
+					  ,B.IMG1
+					  ,A.REG_DT
+					  ,B.GDS_PRICE
+					  ,A.GDS_GB_CD
+					  ,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+						  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+						  ELSE '누락'
+					  END AS GDS_GB_NM
+				FROM TB_GDS100 A		/* 공통상품 */
+					,TB_GDS200 B		/* 렌탈상품상세 */
+				WHERE A.GDS_CD = B.GDS_CD
+				AND A.GDS_CD = #{gdsCd}
+		) BB
+		ON AA.GDS_CD = BB.GDS_CD
+	</select>
+	
+	<!-- 렌탈 상품 리스트 상세 조회 -->
+	<select id="gdsListDetailRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT 
+			A.GDS_CD
+			,A.GDS_LCLASS_CD
+			,A.GDS_MCLASS_CD
+			,A.GDS_SCLASS_CD
+			,A.GDS_NM
+			,A.BRAND_NM 
+			,B.GDS_PRICE
+			,B.AGREE_TERM
+			,B.DELIVER_COST
+			,B.INSTAL_COST
+			,B.AS_CONDITION
+			,A.MODEL_NM
+			,B.IMG1
+			,B.IMG2
+			,B.IMG3
+			,B.IMG4
+		from TB_GDS100 A		/* 공통상품 */
+			,TB_GDS200 B		/* 렌탈상품상세 */
+		WHERE A.GDS_CD = B.GDS_CD
+		AND B.GDS_CD = #{gdsCd}
+	</select>
+	
 
 </mapper>

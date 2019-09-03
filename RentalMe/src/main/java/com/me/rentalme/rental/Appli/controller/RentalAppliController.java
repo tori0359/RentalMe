@@ -90,14 +90,12 @@ public class RentalAppliController {
 //		System.out.println(rentalAppliVo.getBrandNm2());
 //		System.out.println("=========구분2 끝=========");
 		
-		
 		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);	//	PATH 경로
 		List<RentalAppliVo> list1 = rentalAppliService.rentalMenu(rentalAppliVo);	//	소메뉴명 리스트
 		List<RentalAppliVo> list2 = rentalAppliService.rentalOption(rentalAppliVo, "1");	//	옵션 브랜드명 리스트
 		List<RentalAppliVo> list3 = rentalAppliService.rentalOption(rentalAppliVo, "2");	//	옵션 가격대 리스트
 		List<RentalAppliVo> list4 = rentalAppliService.rentalBest(rentalAppliVo);	//	Best 캐러셀 상품리스트
 		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);	//상품리스트
-		
 		
 //		path test 
 //		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
@@ -127,14 +125,12 @@ public class RentalAppliController {
 //		System.out.println("regDt				== " + list5.get(0).getRegDt());
 //		System.out.println("gdsPrice			== " + list5.get(0).getGdsPrice());
 
-		
 		model.addAttribute("path", path);
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("list4", list4);
 		model.addAttribute("list5", list5);
-
 		model.addAttribute("menu", session.getAttribute("menu"));
 		model.addAttribute("brandNm", session.getAttribute("brandNm"));
 		model.addAttribute("sts", session.getAttribute("sts"));
@@ -149,179 +145,39 @@ public class RentalAppliController {
 	/**
 	 * 대형가전렌탈 상세보기
 	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	/*
-	@RequestMapping(value = "/lg/{idx}", method = RequestMethod.GET)
-	public ModelAndView getLgDeatail(@PathVariable("idx") int idx) {
-		log.debug("대형가전렌탈 상세보기 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
-	}
-	*/
-	
-	/**
-	 * 소형가전렌탈 리스트
-	 * 
 	 * @param  
-	 * @return ModelAndView 
-	 * @author 황인준
+	 * @return String 
+	 * @author 황태연
 	 * @exception 
 	 */
-	@RequestMapping(value = "/sm", method = RequestMethod.GET)
-	public ModelAndView getSmList() {
-		log.debug("대형가전렌탈 리스트 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliSmList");
-		return mav;
-	}	
 	
-	/**
-	 * 소형가전렌탈 상세보기
-	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/sm/{idx}", method = RequestMethod.GET)
-	public ModelAndView getSmDeatail(@PathVariable("idx") int idx) {
-		log.debug("소형가전렌탈 상세보기 컨트롤러...");
+	@RequestMapping(value = "/{menu}/detail/{gdsCd}", method = RequestMethod.GET)
+	public String getLgDeatail(@PathVariable("menu") String gdsSclassCd, @PathVariable("gdsCd") String gdsCd, RentalAppliVo rentalAppliVo, Model model ) {
 		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
-	}	
-	
-	/**
-	* 주방가전 리스트
-	* 
-	* @param  
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
-	@RequestMapping(value = "/kitc", method = RequestMethod.GET)
-	public ModelAndView getKitcList() {
-		log.debug("주방가전렌탈 리스트 컨트롤러...");
+		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
+		rentalAppliVo.setGdsCd(gdsCd);
 		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliKitcList");
-		return mav;
-	}	
-	
-	/**
-	 * 주방가전 상세보기
-	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/kitc/{idx}", method = RequestMethod.GET)
-	public ModelAndView getKitcDeatail(@PathVariable("idx") int idx) {
-		log.debug("주방가전렌탈 상세보기 컨트롤러...");
+		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);		//	PATH 경로
+		List<RentalAppliVo> grade = rentalAppliService.rentalGrade(rentalAppliVo);		//  상품평점
+		List<RentalAppliVo> list1 = rentalAppliService.rentalGdsDetail(rentalAppliVo);	//	상품정보
 		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
-	}
-	
-	/**
-	* 가구렌탈 리스트
-	* 
-	* @param  
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
-	@RequestMapping(value = "/furn", method = RequestMethod.GET)
-	public ModelAndView getFurnList() {
-		log.debug("가구렌탈 리스트 컨트롤러...");
+//		gds test
+		System.out.println("gdsCd				== " + list1.get(0).getGdsCd());
+		System.out.println("gdsLclassCd			== " + list1.get(0).getGdsLclassCd());
+		System.out.println("gdsMclassCd			== " + list1.get(0).getGdsMclassCd());
+		System.out.println("gdsSclassCd			== " + list1.get(0).getGdsSclassCd());
+		System.out.println("gdsNm				== " + list1.get(0).getGdsNm());
+		System.out.println("brandNm				== " + list1.get(0).getBrandNm());
+		System.out.println("modelNm				== " + list1.get(0).getModelNm());
+		System.out.println("mig1				== " + list1.get(0).getImg1());
+		System.out.println("regDt				== " + list1.get(0).getRegDt());
+		System.out.println("gdsPrice			== " + list1.get(0).getGdsPrice());
 		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliFurnList");
-		return mav;
-	}	
-	
-	/**
-	 * 가구렌탈 상세보기
-	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/furn/{idx}", method = RequestMethod.GET)
-	public ModelAndView getFurnDeatail(@PathVariable("idx") int idx) {
-		log.debug("가구렌탈 상세보기 컨트롤러...");
+		model.addAttribute("path", path);
+		model.addAttribute("list1", list1);
+		model.addAttribute("grade", grade);
 		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
-	}
-	
-	/**
-	* 기타렌탈 리스트
-	* 
-	* @param  
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
-	@RequestMapping(value = "/rest", method = RequestMethod.GET)
-	public ModelAndView getRestList() {
-		log.debug("기타렌탈 리스트 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliRestList");
-		return mav;
-	}	
-	
-	/**
-	 * 기타렌탈 상세보기
-	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/rest/{idx}", method = RequestMethod.GET)
-	public ModelAndView getRestDeatail(@PathVariable("idx") int idx) {
-		log.debug("기타렌탈 상세보기 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
-	}
-	
-	/**
-	* 패키지렌탈 리스트
-	* 
-	* @param  
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
-	@RequestMapping(value = "/pkg", method = RequestMethod.GET)
-	public ModelAndView getPkgList() {
-		log.debug("패키지렌탈 리스트 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalAppliPkgList");
-		return mav;
-	}	
-	
-	/**
-	 * 패키지렌탈 상세보기
-	 * 
-	 * @param  int idx
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/pkg/{idx}", method = RequestMethod.GET)
-	public ModelAndView getPkgDeatail(@PathVariable("idx") int idx) {
-		log.debug("패키지렌탈 상세보기 컨트롤러...");
-		
-		ModelAndView mav = new ModelAndView("rental/rentalDetail");
-		return mav;
+		return "rental/rentalDetail";
 	}
 	
 	

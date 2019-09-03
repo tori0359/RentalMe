@@ -12,8 +12,11 @@ public interface RentalAppliDao {
 	List<RentalAppliVo> rentalMenuList(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo, String option);
 	List<RentalAppliVo> rentalBestList(RentalAppliVo rentalAppliVo);
-	
 	List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo);
+	
+	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsListDetail(RentalAppliVo rentalAppliVo);
+	
 
 }

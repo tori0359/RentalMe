@@ -849,10 +849,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -870,12 +870,11 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<c:forEach items="${list4 }" var="list4" begin="4" end="7">
 											<li class="col-sm-3">
-											
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -945,10 +944,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src=${list5.img1 } alt=""></a>
+												<a href="${menu }/detail/${list5.gdsCd }" ><img src=${list5.img1 } alt=""></a>
 											</div>
 											<div class="caption-box">
-												<a href="#">
+												<a href="${menu }/detail/${list5.gdsCd }">
 													<p>${list5.brandNm }<div class="stsAlign${list5.gdsGbCd }">${list5.gdsGbNm }</div></p>
 													<h4 id="brandNmStyle">${list5.gdsNm }</h4>
 													<h4>모델명 : ${list5.modelNm }</h4>

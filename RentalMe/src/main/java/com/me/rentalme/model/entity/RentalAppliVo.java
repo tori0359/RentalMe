@@ -28,7 +28,6 @@ public class RentalAppliVo {
 	private String sortGbCd		;		// 정렬구분코드
 	private Date regDt			;		// 등록일자
 	
-	
 	/* RequestParm session 사용 변수 */
 	private String sts               ;
 	private String search            ;
@@ -36,6 +35,12 @@ public class RentalAppliVo {
 	private String searchPriceEd     ;
 	private String sort              ;
 	private List<String> brandNm2	 ;
+	
+	/* 디테일 */
+	private String agreeTerm    ;		// 계약기간
+	private String deliverCost  ;		// 배송비용
+	private String instalCost   ;		// 설치비용 
+	private String asCondition  ;		// AS조건 
 	
 	
 	public String getGdsCd() {
@@ -205,6 +210,43 @@ public class RentalAppliVo {
 	}
 	public void setGdsGbNm(String gdsGbNm) {
 		this.gdsGbNm = gdsGbNm;
+	}
+	public String getAgreeTerm() {
+		return agreeTerm;
+	}
+	public void setAgreeTerm(String agreeTerm) {
+		this.agreeTerm = agreeTerm;
+	}
+
+	public String getAsCondition() {
+		return asCondition;
+	}
+	public void setAsCondition(String asCondition) {
+		this.asCondition = asCondition;
+	}
+	/**
+	 * @return the deliverCost
+	 */
+	public String getDeliverCost() {
+		return deliverCost;
+	}
+	/**
+	 * @param deliverCost the deliverCost to set
+	 */
+	public void setDeliverCost(String deliverCost) {
+		this.deliverCost = deliverCost;
+	}
+	/**
+	 * @return the instalCost
+	 */
+	public String getInstalCost() {
+		return instalCost;
+	}
+	/**
+	 * @param instalCost the instalCost to set
+	 */
+	public void setInstalCost(String instalCost) {
+		this.instalCost = instalCost;
 	}
 
 	

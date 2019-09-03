@@ -60,8 +60,20 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		} else {
 			// ·»Å» Á¤·Ä ¸®ºä¸¹Àº¼ø : 6
 			rentalAppliVo.setSortGbCd("6");
-			return rentalAppliDao.rentalGdsList2(rentalAppliVo);
+			return rentalAppliDao.rentalGdsListDetail(rentalAppliVo);
 		}
 	}
+
+	
+	@Override
+	public List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGrade(rentalAppliVo);
+	}
+	
+	@Override
+	public List<RentalAppliVo> rentalGdsDetail(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGdsListDetail(rentalAppliVo);
+	}
+
 
 }
