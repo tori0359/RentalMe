@@ -135,7 +135,14 @@
 	  	</div>
 	  <div class="deposit col-md-3 col-md-offset-2">
 		  <h2>현재 예치금</h2>
-		  <h2><fmt:formatNumber pattern="#,###.##">${callVo.remnDeposit}</fmt:formatNumber> 원</h2>
+		  <h2><fmt:formatNumber pattern="#,###.##">
+		 	<c:if test="${empty callVo.remnDeposit}">
+				0
+			</c:if>
+			<c:if test="${!empty callVo.remnDeposit}">
+				${callVo.remnDeposit}
+			</c:if>
+		  </fmt:formatNumber> 원</h2>
 	  </div>
 	  </div>
   </div>
@@ -185,6 +192,7 @@
 			<input type="hidden" name="depositSeq" value="${bean.depositSeq}"/>
 			</td>
 		</tr>
+
 		<c:set var="remnDeposit" value="${bean.remnDeposit}"/>
 		<c:set var="userId" value="${bean.userId}"/>
 		<c:set var="mbNo" value="${bean.mbNo }"/>
@@ -197,13 +205,29 @@
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td><fmt:formatNumber pattern="#,###.##">${remnDeposit}</fmt:formatNumber> 원
-       			<input type="hidden" name="" value="${remnDeposit}"/></td>
+       			<td><fmt:formatNumber pattern="#,###.##">
+       			<c:if test="${empty remnDeposit}">
+					0
+				</c:if>
+				 <c:if test="${!empty remnDeposit}">
+					${remnDeposit}
+				</c:if>
+       			
+       			
+       			</fmt:formatNumber> 원
+       			<input type="hidden" name="" value="${remnDeposit}"/>
+       			<input type="hidden" name="" value="${mbNo}"/></td>
+       			
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금인</th>
-       			<td>${userId}
-       			<input type="hidden" name="mbno" value="${mbNo }"/>
+       			<td> 
+       			<c:if test="${empty userVo.userNM}">
+		     	${loginUserId}
+			     </c:if>
+			     <c:if test="${!empty userVo.userNM }">
+			     	${userVo.userNM}
+			     </c:if>
        			</td>
        		</tr>
        		<tr>
@@ -217,7 +241,7 @@
        		</tr>
        	</table>
        	<div class="chargediv">
-       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충천하기</button>
+       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충전하기</button>
        	</div>
 </div>
 </form>

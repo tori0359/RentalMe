@@ -1,5 +1,6 @@
 package com.me.rentalme.mp.user.controller;
 
+import java.util.List;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -108,6 +109,33 @@ public class UserController {
 	
 	/**
 	 * @throws SQLException 
+	* 장바구니 선택 삭제
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 신지영
+	* @exception 
+	*/
+	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
+	public ModelAndView deleteCart(HttpSession session,
+								@RequestParam(value = "chbox[]") List<String> chArr, CallVo callVo) throws SQLException {
+		log.debug("장바구니 삭제 컨트롤러...");
+		
+		ModelAndView mav = new ModelAndView();
+
+		
+		for(String gdsCd: chArr) {
+			callVo.setGdsCd(gdsCd);
+			mpUserService.deleteCart(gdsCd);
+		}
+		
+		
+		mav.setViewName("mp/user/userCartList");
+		return mav;
+	}
+	
+	/**
+	 * @throws SQLException 
 	* 찜한 상품
 	* 
 	* @param  
@@ -124,44 +152,38 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
-		mav.addObject("alist", mpUserService.wishList());
+		mav.addObject("alist", mpUserService.wishList(mbNo));
 		mav.setViewName("mp/user/userWishList");
 		return mav;
 	}
 	
 	/**
 	 * @throws SQLException 
-	* 찜한 상품 삭제 (너무 어려움......보류)
+	* 찜한 상품 선택 삭제
 	* 
 	* @param  
 	* @return ModelAndView 
 	* @author 신지영
 	* @exception 
 	*/
-//	@RequestMapping(value = "/wish/delete", method = RequestMethod.POST)
-//	public int deleTeWish(HttpSession session, @RequestParam(value="checkRow[]") List<String> chArr, CallVo callVo) throws Exception{
-//		
-//		log.debug("delete wish");
-//		
-//		int result=0;
-//		String usedGdsNo = "";
-//		
-//		for(String i : chArr) {
-//			callVo.setUsedGdsNo(usedGdsNo);
-//			mpUserService.deleteWish(callVo);
-//		}
-//		
-//		result=1;
-//		return result;
-//	}
+	@RequestMapping(value = "/deleteWish", method = RequestMethod.POST)
+	public ModelAndView deleteWish(HttpSession session,
+								@RequestParam(value = "chbox[]") List<String> chArr, CallVo callVo) throws SQLException {
+		log.debug("찜한상품 삭제 컨트롤러...");
+
+		ModelAndView mav = new ModelAndView();
+
+		for(String usedGdsNo: chArr) {
+			callVo.setUsedGdsNo(usedGdsNo);
+			mpUserService.deleteWish(usedGdsNo);
+		}
+		
+		
+		mav.setViewName("mp/user/userWishList");
+		return mav;
+	}
 	
-//	@RequestMapping(value = "/wish/delete", method = RequestMethod.POST)
-//	public String deleteWish(@PathVariable("used")) {
-//		
-//		return null;
-//		
-//	}
-//	
+	
 	/**
 	 * @throws SQLException 
 	* 예치금
@@ -175,16 +197,17 @@ public class UserController {
 	public ModelAndView getDeposit( CallVo callVo, HttpSession session) throws SQLException {
 		log.debug("예치금 컨트롤러...");
 	
+		
+		
+		//세션에서 mbno를 불러와서 이름 가져오기
 		ModelAndView mav = new ModelAndView();
 		String mbNo = (String) session.getAttribute("loginMbNo");
 		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
 		
 		
-		
-		
-		mav.addObject("callVo",mpUserService.userInfoList(mbNo));
 		mav.addObject("alist", mpUserService.depositList(mbNo));
+		mav.addObject("callVo",mpUserService.userInfoList(mbNo));
 		
 		
 		mav.setViewName("mp/user/userDeposit");
@@ -211,6 +234,8 @@ public class UserController {
 		mav.addObject("userVo",mpUserService.getName(mbNo));
 		
 		mpUserService.insertCharge(callVo, mbNo);
+		
+		
 		//현재 예치금금액으로 update
 		mpUserService.updateDeposit(chargeDeposit, mbNo);
 		

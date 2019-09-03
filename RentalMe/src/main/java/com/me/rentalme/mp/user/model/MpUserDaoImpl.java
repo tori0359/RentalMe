@@ -33,22 +33,33 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.selectList("mpUser.selectOrd",mbNo);
 	}
 	
+	//장바구니 리스트
 	@Override
 	public List<CallVo> selectCart(String mbNo) throws SQLException {
 		return sqlSession.selectList("mpUser.selectCart",mbNo);
 	}
 	
+	//장바구니 선택삭제
 	@Override
-	public List<CallVo> selectWish() throws SQLException {
+	public void deleteCart(String gdsCd) throws SQLException {
+		sqlSession.delete("mpUser.deleteCart",gdsCd);
+	}
+	
+	//찜한상품 리스트
+	@Override
+	public List<CallVo> selectWish(String mbNo) throws SQLException {
 		//log.debug("마이페이지(찜한상품) Dao");
 		
-		return sqlSession.selectList("mpUser.selectWish");
+		
+		return sqlSession.selectList("mpUser.selectWish",mbNo);
 	}
 
+	//찜한상품 선택삭제
 	@Override
-	public void deleteWish(CallVo callVo) throws SQLException {
+	public void deleteWish(String usedGdsNo) throws SQLException {
+		//System.out.println("usedGdsNo:"+usedGdsNo);
 		
-		sqlSession.update("mpUser.delete");
+		sqlSession.update("mpUser.deleteWish",usedGdsNo);
 	}
 
 

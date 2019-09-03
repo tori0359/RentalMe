@@ -46,23 +46,29 @@ public class MpUserServiceImpl implements MpUserService{
 	//장바구니 리스트
 	@Override
 	public List<CallVo> cartList(String mbNo) throws SQLException {
-		// TODO Auto-generated method stub
 		return mpUserDao.selectCart(mbNo);
 	}
 	
+	//장바구니 선택삭제
+	@Override
+	public void deleteCart(String gdsCd) throws SQLException {
+		mpUserDao.deleteCart(gdsCd);
+	}
+
+	
 	//찜한상품 리스트
 	@Override
-	public List<CallVo> wishList() throws SQLException {
+	public List<CallVo> wishList(String mbNo) throws SQLException {
 		//log.debug("마이페이지(찜한상품) 서비스");
 		
-		return mpUserDao.selectWish();
+		return mpUserDao.selectWish(mbNo);
 	}
 	
 	//찜한상품 삭제
 	@Override
-	public void deleteWish(CallVo callVo) throws SQLException {
+	public void deleteWish(String usedGdsNo) throws SQLException {
 		
-		mpUserDao.deleteWish(callVo);
+		mpUserDao.deleteWish(usedGdsNo);
 	}
 
 	//예치금 리스트

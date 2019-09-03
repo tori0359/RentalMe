@@ -28,11 +28,14 @@ public interface MpUserDao {
 	//장바구니 리스트 출력
 	List<CallVo> selectCart(String mbNo) throws SQLException;
 	
+	//장바구니 선택삭제
+	public void deleteCart(String gdsCd) throws SQLException;
+	
 	//찜한상품 리스트 출력
-	List<CallVo> selectWish() throws SQLException;
+	List<CallVo> selectWish(String mbNo) throws SQLException;
 	
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
-	public void deleteWish(CallVo callVo) throws SQLException;
+	public void deleteWish(String usedGdsNo) throws SQLException;
 
 	//예치금 리스트 출력
 	List<CallVo> selectDeposit(String mbNo) throws SQLException;
@@ -64,4 +67,6 @@ public interface MpUserDao {
 	CsVo myQuestDetail(CsVo csVo) throws SQLException;
 	
 	int myQuestDel(CsVo csVo) throws SQLException;
+
+	
 }

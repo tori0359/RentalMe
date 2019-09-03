@@ -113,10 +113,10 @@
 <script type="text/javascript">
 
 		function checkAll(){
-		    if( $("#th_checkAll").is(':checked') ){
-		      $("input[name=checkRow]").prop("checked", true);
+		    if( $("#allCheck").is(':checked') ){
+		      $("input[name=chBox]").prop("checked", true);
 		    }else{
-		      $("input[name=checkRow]").prop("checked", false);
+		      $("input[name=chBox]").prop("checked", false);
 		    }
 		}
 
@@ -141,10 +141,32 @@
 		  </p>
        	 </div>
        <a href="#" id="choosedel">선택삭제</a>
+       <script>
+		 $("#choosedel").click(function(){
+		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+		  
+		  if(confirm_val) {
+		   var checkArr = new Array();
+		   
+		   $("input[class='chBox']:checked").each(function(){
+		    checkArr.push($(this).attr("data-cartNum"));
+		   });
+		    
+		   $.ajax({
+		    url : "/mp/deleteCart",
+		    type : "post",
+		    data : { chbox : checkArr },
+		    success : function(){
+		     location.href = "/mp/cart";
+		    }
+		   });
+		  } 
+		 });
+		</script>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
-       			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
+       			<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></th>
        			<th>상품명/선택사항</th>
        			<th>수량</th>
        			<th>렌탈기간</th>
@@ -154,11 +176,12 @@
        	<tbody>
    		 <c:set var="sumPrice" value="0"/>
        	<c:forEach items="${alist}" var="bean">
-       		<tr data-tr_value="${bean.usedGdsNo}">  
-       			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
+       		<tr>  
+       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}">
+       			</td>
        			<td>
        				<a style="text-decoration:none; color:black;"href="#">
-       				<img class="ordimg" src="../${bean.img1}"/>${bean.gdsNm}
+       				<img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm}
        				</a>
        			</td>
        			<td><p class="tdtext">${bean.odrQty}</p></td>

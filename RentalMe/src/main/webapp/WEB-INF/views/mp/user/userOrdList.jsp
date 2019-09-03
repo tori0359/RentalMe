@@ -275,7 +275,7 @@
              <tr>  
                 <td>
 	                <a style="text-decoration:none; color:black;"href="#">
-	                <img class="ordimg" src="../${bean.img1}"/>${bean.gdsNm} 
+	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
 	                <input type=hidden value="${bean.gdsCd}"/></a>
                 </td>
                 <td><p class="tdtext">${bean.odrDt}</p></td>
@@ -325,7 +325,14 @@
 	        	<input type="hidden" name="gdsCd" value="gdsCd"/>
 	        </div>
 	        <div class="col-md-4 col-md-offset-3">
-	      		<label>글쓴이 </label><div name="userId"></div>
+	      		<label>글쓴이 </label>
+		      	 <c:if test="${empty userVo.userNM}">
+			     	<div>${loginUserId}</div>
+			     </c:if>
+			     <c:if test="${!empty userVo.userNM }">
+			     	<div>${userVo.userNM}</div>
+			     </c:if>
+		     
 	        	<input type="hidden" name="userId" value="userId"/>
 	        	<input type="hidden" name="grade" id="grade"/>
 	      	</div>
