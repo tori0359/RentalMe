@@ -223,7 +223,7 @@
 		      	<a href="/login" class="navbar-link">로그인</a>ㅣ
 		      	<a href="/join/signup" class="navbar-link">회원가입</a>
 	      	</c:when>
-	      	<c:when test="${loginUserId== 'minminad'}">	<!--관리자  -->
+	      	<c:when test="${loginUserId== 'minminad'}">	<!--관리자id  -->
 	      		<a href="/mp/mng/csNoticeList" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
 		      	<a href="/logout" class="navbar-link">로그아웃</a>
 	      	</c:when>
@@ -347,7 +347,7 @@
 </nav>
 </div>
 </div>
-<div id="wrap">
+<div class="wrap">
 
 
 </body>

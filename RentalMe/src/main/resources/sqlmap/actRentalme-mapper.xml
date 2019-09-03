@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="actRental"> 
   	<select id="actList" resultType="com.me.rentalme.model.entity.ActVo"> 
-  		SELECT A.GDS_CD,GDS_NM, A.REG_DT FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD=B.GDS_CD ORDER BY A.REG_DT
+  		SELECT A.GDS_CD,GDS_NM, A.REG_DT FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD=B.GDS_CD ORDER BY REG_DT DESC
   	</select>
+  	<insert id="actAdd"  parameterType="com.me.rentalme.model.entity.ActVo">
+  		INSERT INTO TB_GDS300(GDS_CD,GDS_ST_PRICE,UNIT_PRICE,ACT_ST_TIME,ACT_ED_TIME,CONTENT,GDS_CD_DETAIL,IMG1,IMG2,IMG3,IMG4,REG_DT) 
+  		VALUES(#{gdsCd},#{gdsStPrice},#{unitPrice},DATE_FORMAT(#{actStTime},'%Y-%m-%d %H:%i:%s'),DATE_FORMAT(#{actEdTime},'%Y-%m-%d %H:%i:%s'),#{content},#{gdsCdDetail},#{img1},#{img2},#{img3},#{img4},DATE_FORMAT(now(), '%Y%m%d'))
+  		
+  	</insert>
   </mapper>

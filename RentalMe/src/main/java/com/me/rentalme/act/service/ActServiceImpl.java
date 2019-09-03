@@ -22,4 +22,13 @@ public class ActServiceImpl implements ActService {
 		return actDao.selectActList();
 	}
 
+	@Override
+	public int addAct(ActVo actVo) throws SQLException {
+		System.out.println("insertAct dao로 ㄱㄱ");
+		System.out.println("시작시간"+actVo.getActStTime());
+		System.out.println("종료시간"+actVo.getActEdTime());
+		System.out.println("content"+actVo.getContent());
+		return actDao.insertAct(actVo);
+	}
+
 }

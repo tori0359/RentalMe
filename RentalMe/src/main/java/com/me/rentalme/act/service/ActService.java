@@ -7,4 +7,6 @@ import com.me.rentalme.model.entity.ActVo;
 
 public interface ActService {
 	List<ActVo> listAct() throws SQLException;
+	int addAct(ActVo actVo) throws SQLException;
+
 }

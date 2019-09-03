@@ -7,12 +7,12 @@ public class ActVo {
 	private String gdsCd; //상품코드
 	private int gdsStPrice; //상품 시작가격
 	private int unitPrice;	//응찰단위가격
-	private Date actStTime;	//경매시작시간
-	private Date actEdTime;	//경매종료시간
+	private String actStTime;	//경매시작시간
+	private String actEdTime;	//경매종료시간
 	private Date actReTime; //경매남은시간
 	private String content; //내용
 	private String gdsCdDetail;  //상품코드 상세
-	private String currentPresent; //현재 경매가
+	private String currentPrice; //현재 경매가
 	private String GdsLclassCd; //상품대분류코드
 	private String GdsMclassCd; //상품중분류코드
 	private String GdsSclassCd; //상품소분류코드
@@ -76,16 +76,16 @@ public class ActVo {
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public Date getActStTime() {
+	public String getActStTime() {
 		return actStTime;
 	}
-	public void setActStTime(Date actStTime) {
+	public void setActStTime(String actStTime) {
 		this.actStTime = actStTime;
 	}
-	public Date getActEdTime() {
+	public String getActEdTime() {
 		return actEdTime;
 	}
-	public void setActEdTime(Date actEdTime) {
+	public void setActEdTime(String actEdTime) {
 		this.actEdTime = actEdTime;
 	}
 	public Date getActReTime() {
@@ -106,11 +106,11 @@ public class ActVo {
 	public void setGdsCdDetail(String gdsCdDetail) {
 		this.gdsCdDetail = gdsCdDetail;
 	}
-	public String getCurrentPresent() {
-		return currentPresent;
+	public String getCurrentPrice() {
+		return currentPrice;
 	}
-	public void setCurrentPresent(String currentPresent) {
-		this.currentPresent = currentPresent;
+	public void setCurrentPrice(String currentPrice) {
+		this.currentPrice = currentPrice;
 	}
 	public String getGdsLclassCd() {
 		return GdsLclassCd;
@@ -194,7 +194,7 @@ public class ActVo {
 	public String toString() {
 		return "ActVo [gdsCd=" + gdsCd + ", gdsStPrice=" + gdsStPrice + ", unitPrice=" + unitPrice + ", actStTime="
 				+ actStTime + ", actEdTime=" + actEdTime + ", actReTime=" + actReTime + ", content=" + content
-				+ ", gdsCdDetail=" + gdsCdDetail + ", currentPresent=" + currentPresent + ", GdsLclassCd=" + GdsLclassCd
+				+ ", gdsCdDetail=" + gdsCdDetail + ", currentPresent=" + currentPrice + ", GdsLclassCd=" + GdsLclassCd
 				+ ", GdsMclassCd=" + GdsMclassCd + ", GdsSclassCd=" + GdsSclassCd + ", gdsNm=" + gdsNm + ", brandNm="
 				+ brandNm + ", modelNm=" + modelNm + ", gdsGbCd=" + gdsGbCd + ", gdsStsCd=" + gdsStsCd + ", delYn="
 				+ delYn + ", img1=" + img1 + ", img2=" + img2 + ", img3=" + img3 + ", img4=" + img4 + ", chgId=" + chgId

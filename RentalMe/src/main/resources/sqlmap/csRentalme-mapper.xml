@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="csCenter">
-  
 	<select id="faqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
 		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
   	</select>
@@ -69,7 +68,6 @@
 		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAQ_NO=#{faqNo}
 	</update>
   </mapper>
-  
   
   
   

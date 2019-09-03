@@ -22,4 +22,10 @@ public class ActDaoImpl implements ActDao {
 		return sqlSession.selectList("actRental.actList");
 	}
 
+	@Override
+	public int insertAct(ActVo actVo) throws SQLException {
+		System.out.println("insert sql");
+		return sqlSession.insert("actRental.actAdd", actVo);
+	}
+
 }
