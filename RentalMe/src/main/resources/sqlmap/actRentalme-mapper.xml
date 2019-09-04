@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="actRental"> 
+  	<select id="actList" resultType="com.me.rentalme.model.entity.ActVo"> 
+  		SELECT A.GDS_CD,GDS_NM, A.REG_DT FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD=B.GDS_CD ORDER BY A.REG_DT
+  	</select>
+  </mapper>

@@ -30,7 +30,6 @@ public class ActController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView getActList() {
 		
-		
 		ModelAndView mav = new ModelAndView("act/actList");
 		return mav;
 	}
