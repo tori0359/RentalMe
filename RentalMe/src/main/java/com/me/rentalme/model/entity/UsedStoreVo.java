@@ -1,5 +1,7 @@
 package com.me.rentalme.model.entity;
 
+import java.sql.Date;
+
 public class UsedStoreVo {
 	private String storeNo;
 	private String storeReviewNo;
@@ -10,29 +12,12 @@ public class UsedStoreVo {
 	private String usedReGbCd;
 	private String delYn;
 	private String chgId;
-	private String chgDt;
+	private Date chgDt;
 	private String regId;
-	private String regDt;
+	private Date regDt;
 	
 	public UsedStoreVo() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public UsedStoreVo(String storeNo, String storeReviewNo, String storeReviewDt, String mbNo, String content,
-			String grade, String usedReGbCd, String delYn, String chgId, String chgDt, String regId, String regDt) {
-		super();
-		this.storeNo = storeNo;
-		this.storeReviewNo = storeReviewNo;
-		this.storeReviewDt = storeReviewDt;
-		this.mbNo = mbNo;
-		this.content = content;
-		this.grade = grade;
-		this.usedReGbCd = usedReGbCd;
-		this.delYn = delYn;
-		this.chgId = chgId;
-		this.chgDt = chgDt;
-		this.regId = regId;
-		this.regDt = regDt;
 	}
 
 	public String getStoreNo() {
@@ -107,11 +92,11 @@ public class UsedStoreVo {
 		this.chgId = chgId;
 	}
 
-	public String getChgDt() {
+	public Date getChgDt() {
 		return chgDt;
 	}
 
-	public void setChgDt(String chgDt) {
+	public void setChgDt(Date chgDt) {
 		this.chgDt = chgDt;
 	}
 
@@ -123,20 +108,13 @@ public class UsedStoreVo {
 		this.regId = regId;
 	}
 
-	public String getRegDt() {
+	public Date getRegDt() {
 		return regDt;
 	}
 
-	public void setRegDt(String regDt) {
+	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
 	}
-
-	@Override
-	public String toString() {
-		return "UsedStoreVo [storeNo=" + storeNo + ", storeReviewNo=" + storeReviewNo + ", storeReviewDt="
-				+ storeReviewDt + ", mbNo=" + mbNo + ", content=" + content + ", grade=" + grade + ", usedReGbCd="
-				+ usedReGbCd + ", delYn=" + delYn + ", chgId=" + chgId + ", chgDt=" + chgDt + ", regId=" + regId
-				+ ", regDt=" + regDt + "]";
-	}
+	
 	
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mpMng">
+	<!-- 주문 -->
+	<select id="selectOrd" resultType="com.me.rentalme.model.entity.MngOrdVo">
+		SELECT *
+		FROM tb_odr100
+	</select>
+	<select id="selectOrdOne" resultType="com.me.rentalme.model.entity.MngOrdDetailVo">
+		SELECT FN_NM('GDS_NM', GDS_CD) as GDS_NM,GDS_PRICE,ODR_QTY,ODR_AMT
+		from tb_odr110
+		where ODR_NO=#{odrNo}
+	</select>
+	<select id="selectOrdOneInfo" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT B.USER_NM,B.ADDR,B.ADDR_DETAIL,B.HP
+		FROM tb_odr100 AS A,tb_user100 AS B
+		WHERE A.MB_NO=B.MB_NO AND A.ODR_NO=#{odrNo}
+	</select>
+	<update id="updateStsPC">
+		UPDATE tb_odr100
+		SET ODR_STS_GB_CD='PC'
+		WHERE ODR_NO=#{odrNo}
+	</update>
+	
+	<!-- 예치금 -->
+	<select id="selectDep" resultType="com.me.rentalme.model.entity.CallVo">
+		SELECT A.USER_NM,B.MB_NO,B.REMN_DEPOSIT,B.CHG_DT
+		FROM tb_user100 as A,tb_mb100 as B
+		WHERE A.MB_NO=B.MB_NO
+		ORDER BY B.CHG_DT DESC
+	</select>
+	<select id="selectDepOne" resultType="com.me.rentalme.model.entity.CallVo">
+		SELECT DEPOSIT_SEQ,CHARGE_DEPOSIT,USE_DEPOSIT,REFUND_DEPOSIT,CHG_DT
+		FROM tb_mb110
+		WHERE MB_NO=#{mbNo}
+		ORDER by CHG_DT DESC
+	</select>
+	
+	<!-- 중고 -->
+	<select id="selectUsed" resultType="com.me.rentalme.model.entity.UsedVo">
+		SELECT A.*,B.USER_NM
+		FROM tb_used100 AS A, tb_user100 AS B
+		WHERE A.MB_NO=B.MB_NO
+		ORDER BY A.CHG_DT DESC
+	</select>
+	<select id="selectUsedSearch" resultType="com.me.rentalme.model.entity.UsedVo">
+		SELECT A.*,B.USER_NM
+		FROM tb_used100 AS A, tb_user100 AS B
+		WHERE A.MB_NO=B.MB_NO AND USED_GDS_NO=#{usedGdsNo}
+		ORDER BY A.CHG_DT DESC
+	</select>
+	
+	<!-- 환불 -->
+	<select id="selectReturn" resultType="com.me.rentalme.model.entity.MngOrdVo">
+		SELECT *
+		FROM tb_odr100
+		WHERE ODR_STS_GB_CD='RC' OR ODR_STS_GB_CD='RW'
+	</select>
+	<update id="updateStsRtn">
+		UPDATE tb_odr100
+		SET ODR_STS_GB_CD='RC'
+		WHERE ODR_NO=#{odrNo}
+	</update>
+	
+	<!-- 신고 -->
+	<select id="selectDecl" resultType="com.me.rentalme.model.entity.DeclVo">
+		SELECT *
+		FROM tb_decl100
+		ORDER BY CHG_DT DESC
+	</select>
+	<update id="changeDeclSts">
+		UPDATE tb_decl100
+		SET DECL_RES_STS_CD='1', CHG_ID='admin'
+		WHERE DECL_NO=#{declNo}
+	</update>
+	
+</mapper>

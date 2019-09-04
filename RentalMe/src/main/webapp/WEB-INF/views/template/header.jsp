@@ -165,6 +165,17 @@
         margin-top: 0;
         */
       } 
+      .dropdown #used_link_btn{
+      	 width: 100px;
+      	 height: 40px;
+      	 margin-top: 4px;
+      	 font-family: "nanumB";
+      	 font-weight: bold;
+      	 background-color: white;
+      	 border: none;
+      	 font-size: 15px;
+      	 color: #707070;
+      }
     
    .login{
        background:black;
@@ -334,7 +345,12 @@
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
         <li class="dropdown">
-          <a href="/mp/cs" class="dropdown-toggle" role="button" aria-haspopup="true" data-toggle="dropdown">중고거래</a>
+          <form action="/used/big">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm" value="">
+			<input type="hidden" name="align" value="1">			
+			<input type="submit" id="used_link_btn" value="중고거래">
+		  </form>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
