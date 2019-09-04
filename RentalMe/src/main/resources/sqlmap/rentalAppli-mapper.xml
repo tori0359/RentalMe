@@ -421,5 +421,31 @@
 		AND B.GDS_CD = #{gdsCd}
 	</select>
 	
+	<!-- 렌탈 상품 리스트 상세 상담등록 시퀀스생성 -->
+	<insert id="questSeqProduce">
+		INSERT INTO SEQ_QUEST100 VALUES(NULL)
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 상담등록 -->
+	<insert id="gdsQuestRegister" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+			INSERT INTO
+			TB_QUEST100 (
+					QUEST_NO
+					,QUEST_DT
+					,GDS_CD
+					,QUEST_NM
+					,HP
+					,EMAIL
+					,QUEST_STS_CD
+			) VALUES (
+					(SELECT MAX(LPAD(SEQ,8,0)) FROM SEQ_QUEST100)
+					,(SELECT DATE_FORMAT(NOW(),'%Y%m%d'))
+					,#{gdsCd}
+					,#{questNm}
+					,#{hp}
+					,#{email}
+					,'1'
+			)
+	</insert>
 
 </mapper>

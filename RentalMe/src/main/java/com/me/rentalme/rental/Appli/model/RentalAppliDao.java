@@ -17,6 +17,7 @@ public interface RentalAppliDao {
 	
 	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsListDetail(RentalAppliVo rentalAppliVo);
+	int rentalGdsQuest(RentalAppliVo rentalAppliVo);
 	
 
 }

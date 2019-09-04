@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.rental.Appli.service.RentalAppliService;
+import com.mysql.fabric.Response;
 
 
 /**
@@ -45,7 +46,6 @@ public class RentalAppliController {
 	* @author 황태연
 	* @exception 
 	*/
-	
 	@RequestMapping(value = "/{menu}", method = RequestMethod.GET)
 	public String getLgList(@PathVariable("menu") String gdsSclassCd, @RequestParam(value="brandNm", required = false, defaultValue="") List<String> brandNm
 			, @RequestParam(value="sts", required = false, defaultValue = "") String sts, @RequestParam(value="search", required = false, defaultValue = "") String search 
@@ -103,15 +103,15 @@ public class RentalAppliController {
 //		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
 		
 //		session test
-		System.out.println("-----------------session start ----------------------");
-		System.out.println("sessionMenu			== " + session.getAttribute("menu"));
-		System.out.println("sessionBrandnm  	== " + session.getAttribute("brandNm"));
-		System.out.println("sessionSts  		== " + session.getAttribute("sts"));
-		System.out.println("search  			== " + session.getAttribute("search"));
-		System.out.println("searchPriceSt  		== " + session.getAttribute("searchPriceSt"));
-		System.out.println("searchPriceEd  		== " + session.getAttribute("searchPriceEd"));
-		System.out.println("sort		  		== " + session.getAttribute("sort"));
-		System.out.println("-----------------session end ----------------------");
+//		System.out.println("-----------------session start ----------------------");
+//		System.out.println("sessionMenu			== " + session.getAttribute("menu"));
+//		System.out.println("sessionBrandnm  	== " + session.getAttribute("brandNm"));
+//		System.out.println("sessionSts  		== " + session.getAttribute("sts"));
+//		System.out.println("search  			== " + session.getAttribute("search"));
+//		System.out.println("searchPriceSt  		== " + session.getAttribute("searchPriceSt"));
+//		System.out.println("searchPriceEd  		== " + session.getAttribute("searchPriceEd"));
+//		System.out.println("sort		  		== " + session.getAttribute("sort"));
+//		System.out.println("-----------------session end ----------------------");
 		
 //		gds test
 //		System.out.println("gdsCd				== " + list5.get(0).getGdsCd());
@@ -150,10 +150,9 @@ public class RentalAppliController {
 	 * @author 황태연
 	 * @exception 
 	 */
-	
 	@RequestMapping(value = "/{menu}/detail/{gdsCd}", method = RequestMethod.GET)
 	public String getLgDeatail(@PathVariable("menu") String gdsSclassCd, @PathVariable("gdsCd") String gdsCd, RentalAppliVo rentalAppliVo, Model model ) {
-		
+		System.out.println("detail~~~");
 		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
 		rentalAppliVo.setGdsCd(gdsCd);
 		
@@ -162,16 +161,16 @@ public class RentalAppliController {
 		List<RentalAppliVo> list1 = rentalAppliService.rentalGdsDetail(rentalAppliVo);	//	상품정보
 		
 //		gds test
-		System.out.println("gdsCd				== " + list1.get(0).getGdsCd());
-		System.out.println("gdsLclassCd			== " + list1.get(0).getGdsLclassCd());
-		System.out.println("gdsMclassCd			== " + list1.get(0).getGdsMclassCd());
-		System.out.println("gdsSclassCd			== " + list1.get(0).getGdsSclassCd());
-		System.out.println("gdsNm				== " + list1.get(0).getGdsNm());
-		System.out.println("brandNm				== " + list1.get(0).getBrandNm());
-		System.out.println("modelNm				== " + list1.get(0).getModelNm());
-		System.out.println("mig1				== " + list1.get(0).getImg1());
-		System.out.println("regDt				== " + list1.get(0).getRegDt());
-		System.out.println("gdsPrice			== " + list1.get(0).getGdsPrice());
+//		System.out.println("gdsCd				== " + list1.get(0).getGdsCd());
+//		System.out.println("gdsLclassCd			== " + list1.get(0).getGdsLclassCd());
+//		System.out.println("gdsMclassCd			== " + list1.get(0).getGdsMclassCd());
+//		System.out.println("gdsSclassCd			== " + list1.get(0).getGdsSclassCd());
+//		System.out.println("gdsNm				== " + list1.get(0).getGdsNm());
+//		System.out.println("brandNm				== " + list1.get(0).getBrandNm());
+//		System.out.println("modelNm				== " + list1.get(0).getModelNm());
+//		System.out.println("mig1				== " + list1.get(0).getImg1());
+//		System.out.println("regDt				== " + list1.get(0).getRegDt());
+//		System.out.println("gdsPrice			== " + list1.get(0).getGdsPrice());
 		
 		model.addAttribute("path", path);
 		model.addAttribute("list1", list1);
@@ -180,5 +179,30 @@ public class RentalAppliController {
 		return "rental/rentalDetail";
 	}
 	
+	/**
+	 * 대형가전렌탈 상담예약등록
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/detail/quest", method = RequestMethod.POST)
+	public String addLgDetailQuest(RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
+		System.out.println("타냐?");
+		
+		System.out.println(rentalAppliVo.getGdsSclassCd());
+		System.out.println(rentalAppliVo.getGdsCd());
+		System.out.println(rentalAppliVo.getQuestNm());
+		System.out.println(rentalAppliVo.getHp());
+		System.out.println(rentalAppliVo.getEmail());
+		
+		int result = rentalAppliService.rentalGdsQuest(rentalAppliVo);		//	상담등록
+		System.out.println("result = " + result);
+		
+		model.addAttribute("rtnCd", Integer.toString(result));
+		
+		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
+	}
 	
 }

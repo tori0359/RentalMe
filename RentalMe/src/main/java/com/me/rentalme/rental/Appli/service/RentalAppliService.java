@@ -16,6 +16,7 @@ public interface RentalAppliService {
 	
 	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsDetail(RentalAppliVo rentalAppliVo);
+	int rentalGdsQuest(RentalAppliVo rentalAppliVo);
 	
 	
 	

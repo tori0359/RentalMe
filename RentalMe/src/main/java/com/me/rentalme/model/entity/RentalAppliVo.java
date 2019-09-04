@@ -53,6 +53,14 @@ public class RentalAppliVo {
 	private String instalCost   ;		// 설치비용 
 	private String asCondition  ;		// AS조건 
 	
+	/* 상담 */
+	private String questNm;				// 상담자이름
+	private String hp;					// 상담자휴대전화번호
+	private String email;				// 상담자이메일
+	
+	/* 리턴코드 */
+	private String rtnCd;				// 리턴결과값코드
+	
 	
 	public String getGdsCd() {
 		return gdsCd;
@@ -312,6 +320,30 @@ public class RentalAppliVo {
 	}
 	public void setImg12(String img12) {
 		this.img12 = img12;
+	}
+	public String getQuestNm() {
+		return questNm;
+	}
+	public void setQuestNm(String questNm) {
+		this.questNm = questNm;
+	}
+	public String getHp() {
+		return hp;
+	}
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getRtnCd() {
+		return rtnCd;
+	}
+	public void setRtnCd(String rtnCd) {
+		this.rtnCd = rtnCd;
 	}
 
 	

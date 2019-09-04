@@ -144,6 +144,11 @@
 #agree {
 	height:100px;
 }
+/* --------- 제품 정보 영역 --------- */
+#infoArea {
+	text-align: center;
+}
+/* --------- 제품 정보 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
 /* List style */
 
@@ -199,6 +204,8 @@ input::-moz-focus-inner { border: 0; }
 	window.onload = function () {
 		//alert("안쪽 처음");
 		
+		//alert(vRtnCd);
+		
 		// 점수 평균 퍼센트
 		$('#starPercent').width(vTotGrdAvgPercent);
 
@@ -207,6 +214,22 @@ input::-moz-focus-inner { border: 0; }
 
 		// 리뷰 갯수
 		$('#starCnt').val("("+vCnt+")");
+
+		// 상담예약 등록
+		$('#target').submit(function(){
+			if($('#name').val().length == 0) {
+				alert("이름을 입력해주세요.");
+				return false;
+			}
+			if($('#hp').val().length < 9) {
+				alert("휴대전화를 다시 입력해주세요.");
+				return false;
+			}
+			if($('#hp').val().length < 9) {
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+		})
 		
 		//alert("안쪽마지막");
 	}
@@ -216,6 +239,7 @@ input::-moz-focus-inner { border: 0; }
 	/**************************/
 	/**** 전역변수 선언시작 ***/
 	/**************************/
+	var vRtnCd = "${rtnCd}";
 	var vGdsPrice = "";		// 렌탈가격 개월수에 따른 가걱변동 
 	var vGdsPriceTemp = "";	// 렌탈가격 개월수에 따른 가걱변동 임시변수
 	<c:forEach items="${list1}" var="list1">
@@ -266,6 +290,11 @@ input::-moz-focus-inner { border: 0; }
 			vGdsPriceTemp = gdsPriceTemp;
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		}
+	}
+
+	function gogo() {
+		alert("띠부럴")
+		return false;
 	}
 	
 </script>
@@ -406,102 +435,129 @@ input::-moz-focus-inner { border: 0; }
 						       		<button style="width:495px;" id="charge_button4" type="submit" class="btn btn-default" disabled="disabled">렌탈미 빠른상담    <span id="quick">1234-1234</span></button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
-							<!-- 모달 -->
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel"></h4>
-									    </div>
-										<div class="modal-body">
-									    	<div class="form-group">
-										    	<label for="name">이름</label>
-										    	<input type="text" class="form-control" id="name" name="name" value="" placeholder="이름">
+							<form id="target" action="/rental/Appli/lg/detail/quest" method="post">
+								<!-- 모달 -->
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel"></h4>
+										    </div>
+											<div class="modal-body">
+											    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
+											    	<input type="text" class="form-control" id="gdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
+										    	<div class="form-group">
+											    	<label for="name">이름</label>
+											    	<input type="text" class="form-control" id="name" name="questNm" value="" placeholder="이름">
+												</div>
+												<div class="form-group">
+											    	<label for="hp">휴대전화</label>
+											    	<input type="text" class="form-control" id="hp" name="hp" value="" placeholder="(-)없이 숫자만 입력, 9자 이상">
+												</div>
+												<div class="form-group">
+											    	<label for="email">이메일</label>
+											    	<input type="text" class="form-control" id="email" name="email" value="" placeholder="rentalme@rentalme.com">
+												</div>
+												<div class="form-group">
+											    	<label for="agree">개인정보 약관동의</label>
+											    	<textarea class="form-control" id="agree" name="agree" readonly="readonly">고객님의 렌탈상품 상담과 관련하여 성실하게 답변 및 안내해 드리기 위해 필요한 최소한의 개인정보를 수집하고 있습니다. 이에개인정보의 수집 및 이용에 관하여 아래와 같이 고지하오니 충분히 읽어보신 후 동의하여 주시기 바랍니다. 
+	
+	1. 개인정보의 수집/이용 목적 정확한 렌탈료의 계산, 렌탈상품 및 렌탈신청 안내 및 전화를 이용한 추가적인 렌탈상품 안내 
+	
+	2. 수집하는 개인정보 항목 개인식별정보(성명, 전화번호) 
+	
+	3. 개인정보의 보유/이용기간 동의 시부터 최대 2년간 
+	
+	4. 개인정보의 수집/이용하는 자 렌탈미 
+	
+	※ 귀하는 상기 동의를 거부할 수 있습니다. 다만, 이에 대한 동의를 하시지 않을 경우에는 상담 서비스의 제공이 제한 될 수 있음을 알려드립니다.
+													</textarea>
+													<div>
+							                            <div class="checkbox">
+							                                <label>
+							                                    <input type="checkbox" id="agreeCheck" name="remember" checked="checked" disabled="disabled"> 개인정보제공 동의
+							                                </label>
+							                            </div>
+							                        </div>
+												</div>
 											</div>
-											<div class="form-group">
-										    	<label for="hp">휴대전화</label>
-										    	<input type="text" class="form-control" id="hp" name="hp" value="" placeholder="(-)없이 숫자만 입력">
-											</div>
-											<div class="form-group">
-										    	<label for="email">이메일</label>
-										    	<input type="text" class="form-control" id="email" name="email" value="" placeholder="rentalme@rentalme.com">
-											</div>
-											<div class="form-group">
-										    	<label for="agree">개인정보 약관동의</label>
-										    	<textarea class="form-control" id="agree" name="agree" readonly="readonly">고객님의 렌탈상품 상담과 관련하여 성실하게 답변 및 안내해 드리기 위해 필요한 최소한의 개인정보를 수집하고 있습니다. 이에개인정보의 수집 및 이용에 관하여 아래와 같이 고지하오니 충분히 읽어보신 후 동의하여 주시기 바랍니다. 
-
-1. 개인정보의 수집/이용 목적 정확한 렌탈료의 계산, 렌탈상품 및 렌탈신청 안내 및 전화를 이용한 추가적인 렌탈상품 안내 
-
-2. 수집하는 개인정보 항목 개인식별정보(성명, 전화번호) 
-
-3. 개인정보의 보유/이용기간 동의 시부터 최대 2년간 
-
-4. 개인정보의 수집/이용하는 자 렌탈미 
-
-※ 귀하는 상기 동의를 거부할 수 있습니다. 다만, 이에 대한 동의를 하시지 않을 경우에는 상담 서비스의 제공이 제한 될 수 있음을 알려드립니다.
-												</textarea>
-												<div>
-						                            <div class="checkbox">
-						                                <label>
-						                                    <input type="checkbox" name="remember"> 개인정보제공 동의
-						                                </label>
-						                            </div>
-						                        </div>
-											</div>
+										    <div class="modal-footer">
+										    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										    </div>
 										</div>
-									    <div class="modal-footer">
-									    	<button type="submit" class="btn btn-primary" data-dismiss="modal">등록</button>
-											<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-									    </div>
-									</div>
-							    </div>
-							</div>
-							<!-- 모달 끝 -->
+								    </div>
+								</div>
+								<!-- 모달 끝 -->
+							</form>
 						</div>
 					</c:forEach>
+					</div>
+					<!-- ***************** -->
+					<!-- 상세 정보 영역 끝 -->
+					<!-- ***************** -->
+				</div>
+				<!-- ******************* -->
+				<!-- 상세 하단 영역 시작 -->
+				<!-- ******************* -->	
+				<div id="bottom" style="border:0px solid green;">
+					<div id="menu">
+						<br><br><br>
+						<ul class="nav nav-tabs nav-justified">
+							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+						</ul>
+					</div>
+					<div id="infoArea">
+						<div id="area1">
+							<!-- for문.. -->
+							<div id="imgs1">
+								<img src="/imgs/inner1.jpg">
+							</div>
+							<div id="imgs2">
+								<img src="/imgs/inner2.jpg">
+							</div>
+							<div id="imgs3">
+								<img src="/imgs/inner3.jpg">
+							</div>
+						</div>
+						<div id="area2">
+							<ul class="nav nav-tabs nav-justified">
+							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+						</ul>
+						</div>
+						<div id="area3">
+							<ul class="nav nav-tabs nav-justified">
+							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+						</ul>
+						</div>
+						<div id="area4">
+							<ul class="nav nav-tabs nav-justified">
+							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+						</ul>
+						</div>
+					</div>
 				</div>
 				<!-- ***************** -->
-				<!-- 상세 정보 영역 끝 -->
-				<!-- ***************** -->
+				<!-- 상세 하단 영역 끝 -->
+				<!-- ***************** -->		
+				</div>
 			</div>
-			<!-- ******************* -->
-			<!-- 상세 하단 영역 시작 -->
-			<!-- ******************* -->	
-			<div style="border:0px solid green;">
-				<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-				asdasd<p>
-			</div>
-			<!-- ***************** -->
-			<!-- 상세 하단 영역 끝 -->
-			<!-- ***************** -->		
-			</div>
-		</div>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
 	</div>
-	</얖>
+
 </body>
 
 </html>
