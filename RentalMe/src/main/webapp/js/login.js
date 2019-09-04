@@ -2,6 +2,7 @@
     $('#pw_find').hide();
     $('#id_email_find').hide();
     $('#pw_email_find').hide();
+    $('#find_pw_modal').hide();
     $('#id_find_btn').prop('disabled', true);
     
     $('#pw_tab').click(function(){
@@ -50,14 +51,18 @@
     /* 아이디/비밀번호 찾기 */    
 	var regexEmail = 
 		RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); //이메일 정규식(영문+숫자@영문+숫자가 아닐경우)
+	
+	var setEmail = '';
     
 	//모달화면에서 에러메시지 초기화
     $('#email-danger').hide();
     $('#empty-danger').hide();
     $('#noEmail-danger').hide();
     
+
+    
 	//아이디/비밀번호찾기 form 초기화 
-    $("#id_pw_find").on("hidden.bs.modal", function(){
+    $("#find_id_modal").on("hidden.bs.modal", function(){
     	//등록된 이메일 form 초기화
         $("#inputEmail").val("");
         
@@ -80,6 +85,8 @@
     		    $('#id_find_btn').click(function(){
     		    	//부모창의 스크롤을 막는다.
     		    	$("html, body").addClass("not_scroll");
+    		    	
+    		    	setEmail = $('#inputEmail').val();
     	
     		    	$.ajax({
     		            type: 'GET',
@@ -116,6 +123,8 @@
     		            							  .append(		'<button type="button" id="'+info.userId+'" class="findPw btn btn-info">비밀번호 찾기</button></div>')
     		            							  .append('</div>');
     		            		});
+    		            		
+    		            		
 
     		            		$('.col-md-4').css('text-align','center').css('border','1px solid black');
     		            		
@@ -177,11 +186,54 @@
         
         //4. 사용자아이디, 입력한 이메일 바인딩
         $('#pwUserId').val($(this).attr('id'));
+        $('#pwInputEmail').val(setEmail);
+    });
+    /* // 아이디찾기 결과 버튼 이벤트 */
+    
+    var pwMsg =  $('#pwMsg').val();
+    if(pwMsg == "notEmpty"){
+    	$('#find_pw_modal').modal('show');
+    }else if(pwMsg == "empty"){
+    	alert('입력하신 정보가 존재하지 않습니다.');
+    	$('#id_pw_find').modal('hide');
+    	return false;
+    }
+    
+  //비밀번호 변경 이벤트
+    $('#pw_change_btn').click(function(){	
+    	var pw1 		= $('#pw1').val();
+    	var pw2 		= $('#pw2').val();
+    	
+    	var pwId 		= $('#pwId').val();
+    	var pwEmail 	= $('#pwEmail').val();
+    	
+    	if(pw1 != "" && pw2 != ""){		//빈값이 아니었을 경우
+	    	if(pw1 == pw2){				//비밀번호 입력값이 같은 경우
+	    		$.ajax({
+		            type: 'POST',
+		            url: 'changePw',
+		            data: {'userPw' : pw1
+		            	  ,'userId' : pwId
+		            	  ,'email'  : pwEmail},
+		            success: function() {
+		            	alert('정상적으로 변경되었습니다.');
+		            	$('#find_pw_modal').modal('hide');
+		            },
+		            error:function(request, status, error){
+	        			alert("code="+request.status+", message="+request.responseText+", error="+error)
+	        		}
+	    		});
+	    	}else{						//비밀번호 입력값이 다른 경우
+	    		alert('비밀번호 입력값이 다릅니다.');
+	    		return false;
+	    	}
+    	}else{
+    		alert('빈값은 입력할 수 없습니다.');
+    		return false;
+    	}
     });
     
-    /* // 아이디찾기 결과 버튼 이벤트 */
-
+    
 });
  
-
  

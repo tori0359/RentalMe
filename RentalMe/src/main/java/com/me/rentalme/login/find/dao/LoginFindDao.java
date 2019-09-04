@@ -12,4 +12,10 @@ public interface LoginFindDao {
 	//입력한 이메일 유/무 체크
 	int checkEmail(String email);
 
+	//비밀번호찾기 - 이메일로 찾기 - 데이터 체크
+	int checkPwEmail(String userId, String email);
+
+	//비밀번호 변경
+	int updPw(String userPw, String userId, String email);
+
 }
