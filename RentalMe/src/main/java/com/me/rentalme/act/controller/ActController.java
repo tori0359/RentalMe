@@ -1,37 +1,56 @@
 package com.me.rentalme.act.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.act.service.ActService;
+
+
 
 /**
 * 이벤트 경매 컨트롤러
 * 
-* @author 황인준
+* @author 신지영
 * @version ver1.0
 * @see 
-* 등록일자 : 2019.08.18
+* 등록일자 : 2019.09.04
 */
 @Controller
 @RequestMapping("/act")
 public class ActController {
-
+	Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Inject
+	ActService actService;
+	
+	
 	/**
 	* 이벤트 경매 리스트
 	* 
 	* @param  None
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ModelAndView getActList() {
+	public ModelAndView getActList() throws SQLException{
 		
 		
-		ModelAndView mav = new ModelAndView("act/actList");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("alist", actService.actList());
+				
+				
+		mav.setViewName("act/actList");
 		return mav;
 	}
 	
@@ -47,7 +66,10 @@ public class ActController {
 	public ModelAndView getActDetail(@PathVariable int idx) {
 		
 		
-		ModelAndView mav = new ModelAndView("act/actDetail");
+		ModelAndView mav = new ModelAndView();
+		
+		
+		mav.setViewName("act/actDetail");
 		return mav;
 	}
 	
