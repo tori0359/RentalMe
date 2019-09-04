@@ -60,6 +60,14 @@
             	width:110px;
             	height:25px;
             }
+            #modalSelect1{
+            	height:25px;
+            	width:100px;
+            }
+            #modalSelect2{
+            	height:25px;
+            	width:100px;
+            }
             
 </style>
 <script type="text/javascript">
@@ -67,7 +75,56 @@
 		$("#cancel").click(function(){
 			window.history.back();
 		})
+		$("modalData")).click(function(){
+			$.ajax({
+				url:"//",
+				data:{},
+				method:"GET"
+
+			})	
+			
+		})
 	});
+	function doChange(srcE,targetId){
+		var val=srcE.options[srcE.selectedIndex].value;
+		var targetE=document.getElemetById(targetId);
+
+		removeAll(targetE);
+		
+		if(val=='10'){
+			addOption('냉장고',targetE);
+			addOption('침대',targetE);
+			addOption('쇼파',targetE);
+			addOption('TV',targetE);
+			addOption('세탁기',targetE);
+			}
+		else if(val=='20'){
+			addOption('빨래건조기',targetE);
+			addOption('정수기',targetE);
+			addOption('공기청정기',targetE);
+			addOption('복합기/프린터',targetE);
+			addOption('커피머신',targetE);
+			}
+		else if(val=='30'){
+			addOption('비데',targetE);
+			addOption('음식물처리기',targetE);
+			addOption('제빙기',targetE);
+			addOption('전자레인지',targetE);
+			}
+	}
+	function addOption(value, e){
+	    var o = new Option(value);
+	    try{
+	        e.add(o);
+	    }catch(ee){
+	        e.add(o, null);
+	    }
+	}
+	function removeAll(e){
+	    for(var i = 0, limit = e.options.length; i < limit - 1; ++i){
+	        e.remove(1);
+	    }
+	}
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/actImg.js"></script>
@@ -119,6 +176,47 @@
 			        		<option value="n" >새상품</option>
 			        	</select>
           		</td>
+            </tr>
+            <tr>
+            	<td><label>상품선택</label></td>
+            	<td>
+            		<button type="button" data-toggle="modal" data-target="#myModal">
+				 		 찾기
+					</button>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body" id="modalData">
+				       
+					       <div>
+					       <label>대분류</label>&nbsp&nbsp&nbsp
+					       <select name="gdsMclassCd" id="modalSelect1" onChange="doChange(this,'modalSelect2')">
+						       <option value="10">대형가전</option>
+						       <option value="20">중형가전</option>
+						       <option value="30">소형가전</option>
+					       </select>
+					       </div><br>
+					       <div>
+					       <label>제품분류</label>
+					       	<select name="gdsSclassCd" id="modalSelect2">
+					       		 <option value="default">--Select--</option>
+					       	</select>
+					       </div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default">선택</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+            	</td>
             </tr>
             <tr>
             	<td><label>상품구분</label></td>

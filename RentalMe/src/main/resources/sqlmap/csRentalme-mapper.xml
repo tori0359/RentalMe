@@ -25,8 +25,6 @@
   	<select id="myQuestDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_PQUEST100 WHERE MB_NO=#{mbNo} and PQUEST_NO=#{pquestNo}
   	</select>
-  	
-  	
   	<insert id="csInsertNocOne" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO tb_notic100 (notic_no,sub,content,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_notic100;
   	</insert>

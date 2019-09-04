@@ -7,5 +7,7 @@ import com.me.rentalme.model.entity.ActVo;
 
 public interface ActDao {
 	List<ActVo> selectActList() throws SQLException;
-	int insertAct(ActVo actVo) throws SQLException;
+	int insertAct300(ActVo actVo) throws SQLException;
+	int insertAct100(ActVo actVo) throws SQLException;
+	
 }

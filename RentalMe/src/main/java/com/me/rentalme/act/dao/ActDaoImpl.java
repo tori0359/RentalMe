@@ -23,8 +23,14 @@ public class ActDaoImpl implements ActDao {
 	}
 
 	@Override
-	public int insertAct(ActVo actVo) throws SQLException {
-		System.out.println("insert sql");
+	public int insertAct300(ActVo actVo) throws SQLException {
+		System.out.println("insert sql300");
+		return sqlSession.insert("actRental.actAdd300", actVo);
+	}
+
+	@Override
+	public int insertAct100(ActVo actVo) throws SQLException {
+		System.out.println("insert sql100");
 		return sqlSession.insert("actRental.actAdd", actVo);
 	}
 

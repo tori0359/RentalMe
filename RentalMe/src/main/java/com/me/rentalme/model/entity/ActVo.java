@@ -9,13 +9,14 @@ public class ActVo {
 	private int unitPrice;	//응찰단위가격
 	private String actStTime;	//경매시작시간
 	private String actEdTime;	//경매종료시간
-	private Date actReTime; //경매남은시간
+	private String actReTime; //경매남은시간
 	private String content; //내용
 	private String gdsCdDetail;  //상품코드 상세
 	private String currentPrice; //현재 경매가
 	private String GdsLclassCd; //상품대분류코드
 	private String GdsMclassCd; //상품중분류코드
 	private String GdsSclassCd; //상품소분류코드
+	private String actStsCd;  //경매 상태코드
 	private String gdsNm;    //상품명
 	private String brandNm;	 //브랜드명
 	private String modelNm;	 //모델명
@@ -30,34 +31,6 @@ public class ActVo {
 	private Date cghDt;
 	private String regId;  //작성아이디
 	private Date regDt;	   //등록날짜
-	
-	
-	
-	
-	public String getChgId() {
-		return chgId;
-	}
-	public void setChgId(String chgId) {
-		this.chgId = chgId;
-	}
-	public Date getCghDt() {
-		return cghDt;
-	}
-	public void setCghDt(Date cghDt) {
-		this.cghDt = cghDt;
-	}
-	public String getRegId() {
-		return regId;
-	}
-	public void setRegId(String regId) {
-		this.regId = regId;
-	}
-	public Date getRegDt() {
-		return regDt;
-	}
-	public void setRegDt(Date regDt) {
-		this.regDt = regDt;
-	}
 	public String getGdsCd() {
 		return gdsCd;
 	}
@@ -88,10 +61,10 @@ public class ActVo {
 	public void setActEdTime(String actEdTime) {
 		this.actEdTime = actEdTime;
 	}
-	public Date getActReTime() {
+	public String getActReTime() {
 		return actReTime;
 	}
-	public void setActReTime(Date actReTime) {
+	public void setActReTime(String actReTime) {
 		this.actReTime = actReTime;
 	}
 	public String getContent() {
@@ -129,6 +102,12 @@ public class ActVo {
 	}
 	public void setGdsSclassCd(String gdsSclassCd) {
 		GdsSclassCd = gdsSclassCd;
+	}
+	public String getActStsCd() {
+		return actStsCd;
+	}
+	public void setActStsCd(String actStsCd) {
+		this.actStsCd = actStsCd;
 	}
 	public String getGdsNm() {
 		return gdsNm;
@@ -190,15 +169,41 @@ public class ActVo {
 	public void setImg4(String img4) {
 		this.img4 = img4;
 	}
+	public String getChgId() {
+		return chgId;
+	}
+	public void setChgId(String chgId) {
+		this.chgId = chgId;
+	}
+	public Date getCghDt() {
+		return cghDt;
+	}
+	public void setCghDt(Date cghDt) {
+		this.cghDt = cghDt;
+	}
+	public String getRegId() {
+		return regId;
+	}
+	public void setRegId(String regId) {
+		this.regId = regId;
+	}
+	public Date getRegDt() {
+		return regDt;
+	}
+	public void setRegDt(Date regDt) {
+		this.regDt = regDt;
+	}
 	@Override
 	public String toString() {
 		return "ActVo [gdsCd=" + gdsCd + ", gdsStPrice=" + gdsStPrice + ", unitPrice=" + unitPrice + ", actStTime="
 				+ actStTime + ", actEdTime=" + actEdTime + ", actReTime=" + actReTime + ", content=" + content
-				+ ", gdsCdDetail=" + gdsCdDetail + ", currentPresent=" + currentPrice + ", GdsLclassCd=" + GdsLclassCd
-				+ ", GdsMclassCd=" + GdsMclassCd + ", GdsSclassCd=" + GdsSclassCd + ", gdsNm=" + gdsNm + ", brandNm="
-				+ brandNm + ", modelNm=" + modelNm + ", gdsGbCd=" + gdsGbCd + ", gdsStsCd=" + gdsStsCd + ", delYn="
-				+ delYn + ", img1=" + img1 + ", img2=" + img2 + ", img3=" + img3 + ", img4=" + img4 + ", chgId=" + chgId
-				+ ", cghDt=" + cghDt + ", regId=" + regId + ", regDt=" + regDt + "]";
+				+ ", gdsCdDetail=" + gdsCdDetail + ", currentPrice=" + currentPrice + ", GdsLclassCd=" + GdsLclassCd
+				+ ", GdsMclassCd=" + GdsMclassCd + ", GdsSclassCd=" + GdsSclassCd + ", actStsCd=" + actStsCd
+				+ ", gdsNm=" + gdsNm + ", brandNm=" + brandNm + ", modelNm=" + modelNm + ", gdsGbCd=" + gdsGbCd
+				+ ", gdsStsCd=" + gdsStsCd + ", delYn=" + delYn + ", img1=" + img1 + ", img2=" + img2 + ", img3=" + img3
+				+ ", img4=" + img4 + ", chgId=" + chgId + ", cghDt=" + cghDt + ", regId=" + regId + ", regDt=" + regDt
+				+ "]";
 	}
+	
 	
 }
