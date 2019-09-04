@@ -11,12 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
-@RequestMapping("/mp/mng")
-public class MngDepositController {
+@RequestMapping("/mp/mng/decl")
+public class MngDeclController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -26,33 +27,30 @@ public class MngDepositController {
 	
 	/**
 	 * @throws SQLException 
-	* 예치금내역
+	* 
 	* 
 	* @param  
 	* @return String 
 	* @author 박재환
 	* @exception 
 	*/
-	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public String getMngDepositList(Model model) throws SQLException {
-		model.addAttribute("alist", mngService.selectDep());
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getMngDeclList(Model model) throws SQLException {
+		model.addAttribute("alist", mngService.selectDecl());
 		
-		return "mp/manager/mngDeposit";
+		return "mp/manager/mngDeclList";
 	}
 	
-	/**
-	 * @throws SQLException 
-	 * 예치금 상세내역
-	 * 
-	 * @param  
-	 * @return String 
-	 * @author 박재환
-	 * @exception 
-	 */
-	@RequestMapping(value = "/deposit/{idx}", method = RequestMethod.GET)
-	public String getMngDepositDetail(Model model,@PathVariable("idx") String mbNo) throws SQLException {
-		model.addAttribute("alist", mngService.selectDepOne(mbNo));
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String getMngDeclUdt(@RequestParam(value = "declNo") String declNo) throws SQLException{
+		String[] array;
+		array=declNo.split(",");
 		
-		return "mp/manager/mngDepositDetail";
+		for(int i=0; i<array.length; i++) {
+			mngService.changeDeclSts(array[i]);
+		}
+		
+		return "redirect:/mp/mng/decl";
 	}
+	
 }

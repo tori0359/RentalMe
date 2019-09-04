@@ -8,8 +8,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.dao.MngDao;
 
@@ -35,8 +37,49 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
+	public int updateStsPC(String ordNo) throws SQLException {
+		return mngDao.updateStsPC(ordNo);						//상품상태 구매확정으로 바꾸기
+	}
+
+	@Override
 	public List<CallVo> selectDep() throws SQLException {
 		return mngDao.selectDep();								//예치금 리스트
 	}
+
+	@Override
+	public List<CallVo> selectDepOne(String mbNo) throws SQLException {
+		return mngDao.selectDepOne(mbNo);						//회원 예치금 상세
+	}
+
+	@Override
+	public List<UsedVo> selectUsed() throws SQLException {
+		return mngDao.selectUsed();								//전체 중고 리스트
+	}
+
+	@Override
+	public List<MngOrdVo> selectReturn() throws SQLException {
+		return mngDao.selectReturn();							//전체 반품 리스트
+	}
+
+	@Override
+	public int updateStsRtn(String ordNo) throws SQLException {
+		return mngDao.updateStsRtn(ordNo);						//상품상태 반품확정으로 바꾸기
+	}
+
+	@Override
+	public List<UsedVo> selectUsedSearch(String usedGdsNo) throws SQLException {
+		return mngDao.selectUsedSearch(usedGdsNo);				//중고 하나 선택
+	}
+
+	@Override
+	public List<DeclVo> selectDecl() throws SQLException {
+		return mngDao.selectDecl();								//전체 신고 리스트
+	}
+
+	@Override
+	public int changeDeclSts(String declNo) throws SQLException {
+		return mngDao.changeDeclSts(declNo);					//신고상태 처리완료로 바꾸기
+	}
+
 
 }

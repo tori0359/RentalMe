@@ -103,6 +103,14 @@ $(function(){
             			}
             			console.log('nion');
             		});
+            		$('.declaration').click(function(){
+            			$('#declmodal').find('#declRDt').val($(this).parent().find('.storeReviewDt').text());
+            			$('#declmodal').find('#declRNo').val($(this).parent().find('.hiddenStoreReNo').val());
+//            			$('#declmodal').find('#declSNo').val($(this).parent().find('.hiddenStoreNo').val());
+            			$('#declmodal').find('#declMbNo').val($(this).parent().find('.mbNo').text());
+            		});
+
+            		
                 //나의 상점//
         ////////////////////////////////
                 	
@@ -172,7 +180,15 @@ $(function(){
 				alert('로그인이 필요합니다');
 			}
 		});
-
+		
+		$('.declBtn').click(function(){
+			$('#declmodal').find('#declId').text($(this).parent().find('.cmtUserId').text());
+			$('#declmodal').find('#declNo').val($(this).parent().find('.cmtNo').val());
+			$('#declmodal').find('#declDt').val($(this).parent().find('.cmtDt').val());
+			
+			
+		});
+		
 		//중고 디테일//
 		////////////////////////////////
                 

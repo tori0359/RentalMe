@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
-@RequestMapping("/mp/mng")
-public class MngOrderController {
+@RequestMapping("/mp/mng/cart")
+public class MngReturnController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -28,41 +28,24 @@ public class MngOrderController {
 	
 	/**
 	 * @throws SQLException 
-	* 주문내역
+	* 반품내역
 	* 
 	* @param  
 	* @return String 
 	* @author 박재환
 	* @exception 
 	*/
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String getMngOrderList(Model model) throws SQLException {
-		model.addAttribute("sub", "주문");
-		model.addAttribute("alist", mngService.selectOrd());
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String getMngReturnList(Model model) throws SQLException {
+		model.addAttribute("sub", "반품");
+		model.addAttribute("alist", mngService.selectReturn());
 		
 		return "mp/manager/mngOrdList";
 	}
 	
 	/**
 	 * @throws SQLException 
-	* 주문상세내역
-	* 
-	* @param  
-	* @return String 
-	* @author 박재환
-	* @exception 
-	*/
-	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
-	public String getMngOrderDetail(Model model,@PathVariable("idx") String ordNo) throws SQLException {
-		model.addAttribute("ordNo", ordNo);
-		model.addAttribute("alist", mngService.selectOrdOne(ordNo));
-		model.addAttribute("info", mngService.selectOrdOneInfo(ordNo));
-		return "mp/manager/mngOrdDetail";
-	}
-	
-	/**
-	 * @throws SQLException 
-	 * 주문상세내역
+	 * 반품확정으로 바꾸기
 	 * 
 	 * @param  
 	 * @return String 
@@ -70,14 +53,15 @@ public class MngOrderController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String getMngOrderUpdate(@RequestParam(value = "odrNo") String odrNo) throws SQLException {
+	public String getMngReturnStsUdt(@RequestParam(value = "odrNo") String odrNo) throws SQLException {
 		String[] array;
 		array=odrNo.split(",");
 		
 		for(int i=0; i<array.length; i++) {
-			mngService.updateStsPC(array[i]);
+			mngService.updateStsRtn(array[i]);
 		}
-		return "redirect:/mp/mng/list";
+		
+		return "redirect:/mp/mng/cart";
 	}
 
 }

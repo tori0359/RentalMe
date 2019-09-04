@@ -3,16 +3,13 @@ package com.me.rentalme.used.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
@@ -144,6 +142,11 @@ public class UsedController {
 		usedService.addCmt(bean);
 		return "redirect:/used/detail/"+bean.getUsedGdsNo();
 	}
+	@RequestMapping(value = "/cmtDecl", method = RequestMethod.POST)
+	public String getUsedCmtDecl(@ModelAttribute DeclVo bean) throws  SQLException {
+		usedService.usedComtDecl(bean);
+		return "redirect:/used/detail/"+bean.getUsedGdsNo();
+	}
 	
 	
 	/**
@@ -177,6 +180,13 @@ public class UsedController {
 		usedService.addMyStoreCmt(bean);
 		
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
+	}
+	@RequestMapping(value = "/store/cmtDecl", method = RequestMethod.POST)
+	public String getUsedMyStroecmtDecl(@ModelAttribute DeclVo bean) throws SQLException {
+		System.out.println(bean.getStoreNo()+","+bean.getStoreReviewDt()+","+bean.getStoreReviewNo());
+		usedService.usedStoreDecl(bean);
+		
+		return "redirect:/used/store/"+bean.getMbNo();
 	}
 	
 	@RequestMapping(value = "/store/del/{idx}", method = RequestMethod.POST)

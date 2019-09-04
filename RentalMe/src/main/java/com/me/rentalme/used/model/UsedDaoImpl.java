@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
@@ -165,6 +166,14 @@ public class UsedDaoImpl implements UsedDao {
 	@Override
 	public List<UsedVo> mySelectAllAlign(UsedVo bean) throws SQLException {
 		return sqlSession.selectList("used.mySelectAllAlign", bean);
+	}
+	@Override
+	public int usedComtDecl(DeclVo bean) throws SQLException {
+		return sqlSession.insert("used.usedComtDecl", bean);
+	}
+	@Override
+	public int usedStoreDecl(DeclVo bean) throws SQLException {
+		return sqlSession.insert("used.usedStoreDecl", bean);
 	}
 
 

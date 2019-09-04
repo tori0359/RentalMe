@@ -130,4 +130,18 @@
 		   SET DEL_YN = 'Y'
 		 WHERE USED_GDS_NO = #{usedGdsNo}
 	</update>
+	
+	<insert id="usedComtDecl" parameterType="com.me.rentalme.model.entity.DeclVo">
+		INSERT INTO tb_decl100 (DECL_NO,USED_RE_GB_CD,USED_GDS_NO,USED_GDS_COMT_NO,USED_GDS_COMT_DT)
+		SELECT IF(ISNULL(LPAD((SELECT max(DECL_NO)+1),6,0)),'000001',LPAD((SELECT max(DECL_NO)+1),6,0)),'R1',#{usedGdsNo},#{usedGdsComtNo},#{usedGdsComtDt}
+		FROM tb_decl100
+	</insert>
+	
+	<insert id="usedStoreDecl" parameterType="com.me.rentalme.model.entity.DeclVo">
+		INSERT INTO tb_decl100 (DECL_NO,USED_RE_GB_CD,STORE_NO,STORE_REVIEW_NO,STORE_REVIEW_DT)
+		SELECT IF(ISNULL(LPAD((SELECT max(DECL_NO)+1),6,0)),'000001',LPAD((SELECT max(DECL_NO)+1),6,0)),'R3',#{storeNo},#{storeReviewNo},#{storeReviewDt}
+		FROM tb_decl100
+	</insert>
+	
+	
 </mapper>

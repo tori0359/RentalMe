@@ -121,134 +121,60 @@
       }
    
 </style>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
-    window.onload = function (){
-      //점수출력 초기화
-      $('#0').hide();
-      $('#1').hide();
-      $('#2').hide();
-      $('#3').hide();
-      $('#4').hide();
-      
-      $('.starRev span').click(function(e){
-
-         $(this).parent().children('span').removeClass('on');
-         $(this).addClass('on').prevAll('span').addClass('on');
-
-         //클릭된 요소가 몇번째인지 알아내기
-         var index=($('.starR').index($(this)));
-        
-         if(index=='0'){
-            $('#0').show();
-            $('#1').hide();
-            $('#2').hide();
-            $('#3').hide();
-            $('#4').hide();
-            
-          document.getElementById("grade").value = '1';
-
-         }else if(index=='1'){
-            $('#1').show();
-            $('#0').hide();
-            $('#2').hide();
-            $('#3').hide();
-            $('#4').hide();
-
-            document.getElementById("grade").value = '2';
-            
-         }else if(index=='2'){
-            $('#2').show();
-            $('#0').hide();
-            $('#1').hide();
-            $('#3').hide();
-            $('#4').hide();
-
-            document.getElementById("grade").value = '3';
-            
-         }else if(index=='3'){
-            $('#3').show();
-            $('#1').hide();
-            $('#2').hide();
-            $('#0').hide();
-            $('#4').hide();
-
-            document.getElementById("grade").value = '4';
-            
-         }else if(index=='4'){
-            $('#4').show();
-            $('#1').hide();
-            $('#2').hide();
-            $('#3').hide();
-            $('#0').hide();
-
-            document.getElementById("grade").value = '5';
-         }
-      });
-
-      $("textarea").keydown(function(){
-           var numChar = $(this).val().length;
-           var maxNum = 200;
-           var charRemain = numChar;
-           $("span > em").text(charRemain);
-           if(charRemain > 200){
-             alert("200자 이하로 작성해주세요.");
-             $("span > em").addClass("warning");
-             $(".submit").prop("disabled", true);
-           } else {
-             $(".submit").prop("disabled", false);
-           }
-         });
-
-       $('#myModal').on('shown.bs.modal', function (e) {
-           var gdsNm2 = $(e.relatedTarget).data('gds-nm');
-           var userId2 = $(e.relatedTarget).data('user-id');
-           var gdsCd2 = $(e.relatedTarget).data('gds-cd');
-           
-           $(e.currentTarget).find('div[name="gdsNm"]').text(gdsNm2);
-           $(e.currentTarget).find('input[name="gdsNm"]').val(gdsNm2);
-           
-           $(e.currentTarget).find('div[name="userId"]').text(userId2);
-           $(e.currentTarget).find('input[name="userId"]').val(userId2);
-           
-           $(e.currentTarget).find('div[name="gdsCd"]').text(gdsCd2);
-           $(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd2);
-       });
-
-       $('#review').click(function(){
-    	   alert("후기가 등록되었습니다!");
-       }); 
-
-   } 
-
-
-
-   
-   
-   
-</script>
-<script>
-
-</script>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
+<script type="text/javascript">
+   $(function(){
+		if($('.titlediv').text().indexOf('주문') != -1){
+			$('.changeVal').eq(1).hide();
+			for(var i=0; i<$('.stscdtxt').length; i++){
+				if($('.stscdtxt').eq(i).text().indexOf('주문확정') == -1 && $('.stscdtxt').eq(i).text().indexOf('입금') == -1){
+					$('.stscdtxt').eq(i).parent().children().first().hide();
+					$('.stscdtxt').eq(i).parent().prepend('<td></td>');
+				}
+			}
+			
+		}else if($('.titlediv').text().indexOf('반품') != -1){
+			$('.changeVal').eq(0).hide();
+			for(var i=0; i<$('.stscdtxt').length; i++){
+				if($('.stscdtxt').eq(i).text().indexOf('반품대기') == -1){
+					$('.stscdtxt').eq(i).parent().children().first().hide();
+					$('.stscdtxt').eq(i).parent().prepend('<td></td>');
+				}
+			}
+		}
+		
+   });
+   function getPost(mode){
+		var theForm=document.frmSubmit;
+		if(mode == "ord"){
+			theForm.method="post";
+			theForm.action="/mp/mng/update";
+		}else if(mode == "rtn"){
+			theForm.method="post";
+			theForm.action="/mp/mng/cart/update";
+		}
+		theForm.submit();
+	}
+
+
+
+   
+   
+   
+</script>
 </head>
 <body>
    <div>
    <div class="titlediv">
-       <p id="title">주문 관리</p>
+       <p id="title">${sub } 관리</p>
      </div>
      <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
      <div id="info">
-     <p>
-     	<input type="hidden" value="${loginMbNo}">
-	     <%-- <c:if test="${empty userVo.userNM}">
-	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
-	     </c:if>
-	     <c:if test="${!empty userVo.userNM }">
-	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
-	     </c:if> --%>
-     </p>
+
      </div>
+     <form name="frmSubmit">
+     <input type="button" class="changeVal" onclick="getPost('ord')" value="구매확정">
+     <input type="button" class="changeVal" onclick="getPost('rtn')" value="반품확정">
           <table class="ordtable table">
           <thead>
              <tr class="active">
@@ -264,19 +190,21 @@
              </tr>
           </thead>
           <tbody>
-          
            <c:forEach items="${alist}" var="bean">
              <tr>  
-             	<td><input type="checkbox" name="" value=""></td>
+             	<td><input type="checkbox" class="checkSelect" name="odrNo" value="${bean.odrNo }"></td>
                 <td>${bean.odrDt}</td>
                 <td>${bean.odrNo}</td>
                 <td>${bean.mbNo}</td>
-                <td>
+                <td class="stscdtxt">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
                       입금대기
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'OC'}">
                       주문확정
+                   </c:if>
+                   <c:if test= "${bean.odrStsGbCd eq 'PC'}">
+                      구매확정
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'RW'}">
                       반품대기
@@ -295,15 +223,13 @@
                 </c:if>
                 </td>
                 <td>
-	           	<form action="/mp/mng/detail/${bean.odrNo }" method="post">
-	           	<input type="hidden" name="ordNo" value="${bean.odrNo }">
-                <button type="submit" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;">상세보기</button>
-    	        </form>
+	           	<a style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" href="/mp/mng/detail/${bean.odrNo }">상세보기</a>
     	        </td>
              </tr>
           </c:forEach>
           </tbody>
           </table>
+          </form>
        </div>
       <div class="hr"></div>
 </body>

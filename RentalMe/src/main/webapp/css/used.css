@@ -37,6 +37,7 @@
 	}
 
 	.cmtContent{
+		position:relative;
 		border-top: 1px solid black;
 		height: 100px;
 	}
@@ -99,6 +100,15 @@
 		margin-left: -25px;
 		width: 75px;
 		height: 75px;
+	}
+	
+	.declBtn{
+		position:absolute; 
+		bottom:0px;
+		text-decoration: none;
+		color: white;
+		background-color: red;
+		right: 0px;
 	}
 	
 	#usedFoot{
@@ -233,6 +243,7 @@
 	}
 	.storeCmtList{
 		border-top: 1px solid black;
+		position: relative;
 	}
 	.storeCmtList div{
 		display: inline-block;
@@ -248,8 +259,11 @@
 		display: block;
 	}
 	.storeCmtList .declaration{
-		float: right;
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
 		background-color: red;
+		text-decoration: none;
 	}
 	.storeCmtList a{
 		color: white;

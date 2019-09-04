@@ -11,12 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
 @RequestMapping("/mp/mng")
-public class MngDepositController {
+public class MngUsedController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -26,33 +27,31 @@ public class MngDepositController {
 	
 	/**
 	 * @throws SQLException 
-	* 예치금내역
+	* 중고 리스트
 	* 
 	* @param  
 	* @return String 
 	* @author 박재환
 	* @exception 
 	*/
-	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
-	public String getMngDepositList(Model model) throws SQLException {
-		model.addAttribute("alist", mngService.selectDep());
-		
-		return "mp/manager/mngDeposit";
+	@RequestMapping(value = "/used", method = RequestMethod.GET)
+	public String getMngUsedList(Model model) throws SQLException {
+		model.addAttribute("alist", mngService.selectUsed());
+		return "mp/manager/mngUsedList";
 	}
-	
 	/**
 	 * @throws SQLException 
-	 * 예치금 상세내역
+	 * 중고 검색
 	 * 
 	 * @param  
 	 * @return String 
 	 * @author 박재환
 	 * @exception 
 	 */
-	@RequestMapping(value = "/deposit/{idx}", method = RequestMethod.GET)
-	public String getMngDepositDetail(Model model,@PathVariable("idx") String mbNo) throws SQLException {
-		model.addAttribute("alist", mngService.selectDepOne(mbNo));
-		
-		return "mp/manager/mngDepositDetail";
+	@RequestMapping(value = "/used/search", method = RequestMethod.GET)
+	public String getMngUsedOne(Model model,@RequestParam(value = "usedGdsNo") String usedGdsNo) throws SQLException {
+		model.addAttribute("alist", mngService.selectUsedSearch(usedGdsNo));
+		return "mp/manager/mngUsedList";
 	}
+	
 }
