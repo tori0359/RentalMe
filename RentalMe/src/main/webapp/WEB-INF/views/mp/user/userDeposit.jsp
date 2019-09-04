@@ -12,53 +12,33 @@
 	height:100px;
 	display:inline-block;
 }
-
 .name>div>h2{
 	font-family:"nanumEB";
 	text-align: center;
 	line-height: 80px;
 }
-
 .name div{
 	display: inline-block;
 }
-
 .name>div:nth-child(2){
 	margin-left:10px;
 }
-
 .name>div>p{
 	font-family:"nanumB";
 	font-size:13pt;
 	text-align: center;
 }
-
-
 .deposit>h2{
 	font-family:"nanumEB";
 }
-
 .deposit>p{
 	font-family:"nanumEB";
 }
-
-.select{
-	width:100px;
-	height: 100px;
-}
-
-.select>div>p{
-	font-family:"nanumEB";
-	font-size:15pt;
-	text-align:center;
-}
-
 .charge{
 	width: 150px;
 	height: 50px;
 	background-color: darkgrey;
 }
-
 .charge>p{
 	font-family: "nanumB";
 	color:white;
@@ -66,7 +46,6 @@
 .chargetable{
 	margin-top: 50px;
 }
-
 .charge_btn{
 	background-color: #D8D8D8;
 	color:black;
@@ -74,7 +53,6 @@
 	font-family: "nanumB";	
    	font-weight: border;	
 }
-
 .chargediv{
 	width:200px;
 	height:100px;
@@ -86,22 +64,22 @@
 #deposituse{
 	margin-top: 50px;
 }
-#menuuse{
-	border-color: red red red;
-}
 </style>
-
-
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
+
+<!-- 결제 api연동하기 (아임포트)-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+
+
 <script>
-	$(document).ready(function(){
+	window.onload=function(){
 		$('#menuuse').attr('class','active');
 		$('#menucharge').attr('class','noactive');
 		$('#menurefund').attr('class','noactive');
 		$('#deposituse').show();
 		$('#depositcharge').hide();
 		$('#depositrefund').hide();
-
 		$('#menuuse').click(function(){
 			
 			$('#menuuse').attr('class','active');
@@ -111,7 +89,6 @@
 			$('#deposituse').show();
 			$('#depositcharge').hide();
 			$('#depositrefund').hide();
-
 			
 		});
 		
@@ -124,26 +101,60 @@
 			$('#deposituse').hide();
 			$('#depositrefund').hide();
 		});
-
 		$('#menurefund').click(function(){
 			$('#menurefund').attr('class','active');
 			$('#menucharge').attr('class','noactive');
 			$('#menuuse').attr('class','noactive');
-
 			$('#depositrefund').show();
 			$('#deposituse').hide();
 			$('#depositcharge').hide();
 		});
-		
-	});
-	window.onload=function(){
+
+	
 		$('#charge_button').click(function(){
-			alert("충전이 완료되었습니다!");
+			
+			var amount = $('#chargeDeposit').val();
+			var userId = $('#UserId').val();
+			
+			alert(amount+"원을 충전하시겠습니까?");
+			
+			var IMP = window.IMP;
+			IMP.init('imp86711610');
+			IMP.request_pay({
+			    pg : 'kakaopay',
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '렌탈미 예치금 충전',
+			    amount : amount,
+			    buyer_name : userId
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        
+					$.ajax({
+						url: "/mp/deposit",
+						type: "post",
+						data: { "chargeDeposit" : rsp.paid_amount },
+						success : function(){
+							location.href = "/mp/deposit";
+						}
+
+					});
+			        
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+
+			    alert(msg);
+			});
+
+
+			
 		});
 	}
-
+	
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 <body>
 <div style="margin-top:100px;" class="jumbotron">
@@ -154,7 +165,7 @@
 		  	
 		  	<input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty userVo.userNM}">
-		     	<h2>${userVo.userNM}</h2>
+		     	<h2>${loginUserId}</h2>
 		     </c:if>
 		     <c:if test="${!empty userVo.userNM }">
 		     	<h2>${userVo.userNM}</h2>
@@ -164,7 +175,14 @@
 	  	</div>
 	  <div class="deposit col-md-3 col-md-offset-2">
 		  <h2>현재 예치금</h2>
-		  <h2><fmt:formatNumber pattern="#,###.##">${callVo.remnDeposit}</fmt:formatNumber> 원</h2>
+		  <h2><fmt:formatNumber pattern="#,###.##">
+		 	<c:if test="${empty callVo.remnDeposit}">
+				0
+			</c:if>
+			<c:if test="${!empty callVo.remnDeposit}">
+				${callVo.remnDeposit}
+			</c:if>
+		  </fmt:formatNumber> 원</h2>
 	  </div>
 	  </div>
   </div>
@@ -214,6 +232,7 @@
 			<input type="hidden" name="depositSeq" value="${bean.depositSeq}"/>
 			</td>
 		</tr>
+
 		<c:set var="remnDeposit" value="${bean.remnDeposit}"/>
 		<c:set var="userId" value="${bean.userId}"/>
 		<c:set var="mbNo" value="${bean.mbNo }"/>
@@ -221,23 +240,40 @@
 	</table>
 </div>
 
-<form action="/mp/deposit" method="post">
+<!-- <form action="/mp/deposit" method="post"> -->
 <div id="depositcharge" class="col-md-12">
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td><fmt:formatNumber pattern="#,###.##">${remnDeposit}</fmt:formatNumber> 원
-       			<input type="hidden" name="" value="${remnDeposit}"/></td>
+       			<td><fmt:formatNumber pattern="#,###.##">
+       			<c:if test="${empty remnDeposit}">
+					0
+				</c:if>
+				 <c:if test="${!empty remnDeposit}">
+					${remnDeposit}
+				</c:if>
+       			
+       			
+       			</fmt:formatNumber> 원
+       			<input type="hidden" name="" value="${remnDeposit}"/>
+       			<input type="hidden" name="" value="${mbNo}"/></td>
+       			
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금인</th>
-       			<td>${userId}
-       			<input type="hidden" name="mbno" value="${mbNo }"/>
+       			<td> 
+       			<c:if test="${empty userVo.userNM}">
+		     		${loginUserId}
+			     </c:if>
+			     <c:if test="${!empty userVo.userNM }">
+			     	${userVo.userNM}
+			     </c:if>
+			     <input type="hidden" id="UserId" value="${loginUserId}"/>
        			</td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">입금 금액(원)</th>
-       			<td><input type="text" name="chargeDeposit"></td>
+       			<td><input type="text" name="chargeDeposit" id="chargeDeposit"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">결제수단</th>
@@ -246,10 +282,10 @@
        		</tr>
        	</table>
        	<div class="chargediv">
-       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충천하기</button>
+       		<button style="width:150px;" id="charge_button" type="submit" class="btn btn-danger">충전하기</button>
        	</div>
 </div>
-</form>
+<!-- </form> -->
 
 <div id="depositrefund" class="col-md-12">
 	<table class="chargetable table">

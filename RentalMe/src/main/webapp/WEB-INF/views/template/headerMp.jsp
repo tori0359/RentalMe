@@ -46,6 +46,7 @@
         
         
         .mpTable>tbody tr:hover {
+
            font-size: 11pt;
             background-color: lightgrey;
             -o-transition: all 0.2s ease-in-out;
@@ -66,24 +67,13 @@
          
          
       }
-        
+     
        .mpTable>tbody>tr:last-child td{
             -moz-border-radius: 0 0 15px 15px;
             -webkit-border-radius: 0 0 10px 15px;
             border-radius: 0 0 15px 15;            
         } 
-        
-<<<<<<< HEAD
-	   .mpdiv{
-		   position: relative;
-		   z-index:1;
-		   margin:100px 0 100px 0;
-	   }
-	
-	   .row{
-		   margin: 0px;
-	   
-=======
+       
       .mpdiv{
          position: relative;
          z-index:1;
@@ -92,8 +82,6 @@
    
       .row{
          margin: 0px;
-      
->>>>>>> refs/remotes/origin/min
         }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
