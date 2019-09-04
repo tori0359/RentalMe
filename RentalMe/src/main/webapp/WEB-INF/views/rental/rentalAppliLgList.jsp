@@ -37,6 +37,10 @@
 	font-style: italic;
 	text-align: right;
 }
+.content-inner-menu-path2 {
+	font-style: italic;
+	text-align: right;
+}
 
 /* ---------- 소메뉴 영역 시작 -------- */
 
@@ -671,12 +675,24 @@ input::-moz-focus-inner { border: 0; }
 	<div class="content">
 	<br>
 		<div class="content-inner">
+			<!--  이후 메뉴경로(19.09.02) -->
+			<div class="content-inner-menu-path2">
+				<c:forEach items="${path }" var="path">
+					<h4>홈 &nbsp; > &nbsp; ${path.gdsMclassNm }
+						<c:if test="${not empty path.gdsSclassNm}">
+							 &nbsp; > &nbsp; ${ path.gdsSclassNm }
+						</c:if>
+					</h4>
+				</c:forEach>
+			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					<br>${path.gdsMclassNm }<br>
+					${path.gdsMclassNm }
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">
+			<p>&nbsp;
+				<!-- 이전 메뉴경로
 				<div class="content-inner-menu-path">
 					<c:forEach items="${path }" var="path">
 						<br>
@@ -687,6 +703,7 @@ input::-moz-focus-inner { border: 0; }
 						</h4>
 					</c:forEach>
 				</div>
+				 -->
 				<!-- **************** -->
 				<!-- 소메뉴 영역 시작 -->
 				<!-- **************** -->
@@ -832,10 +849,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -853,12 +870,11 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<c:forEach items="${list4 }" var="list4" begin="4" end="7">
 											<li class="col-sm-3">
-											
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -928,10 +944,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src=${list5.img1 } alt=""></a>
+												<a href="${menu }/detail/${list5.gdsCd }" ><img src=${list5.img1 } alt=""></a>
 											</div>
 											<div class="caption-box">
-												<a href="#">
+												<a href="${menu }/detail/${list5.gdsCd }">
 													<p>${list5.brandNm }<div class="stsAlign${list5.gdsGbCd }">${list5.gdsGbNm }</div></p>
 													<h4 id="brandNmStyle">${list5.gdsNm }</h4>
 													<h4>모델명 : ${list5.modelNm }</h4>

@@ -18,19 +18,16 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	SqlSession sqlSession;
 	
 	/* 경로 */
-	@Override
 	public List<RentalAppliVo> rentalPath(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.pathRetrive", rentalAppliVo);
 	}
 	
 	/* 소메뉴 */
-	@Override
 	public List<RentalAppliVo> rentalMenuList(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.menuListRetrive", rentalAppliVo);
 	}
 
 	/* 옵션 */
-	@Override
 	public List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo, String option) {
 		if(option.equals("1")) {
 			// 렌탈 옵션 브랜드 : 1
@@ -42,13 +39,11 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	}
 
 	/* BEST 캐러셀 */
-	@Override
 	public List<RentalAppliVo> rentalBestList(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.bestListRetrive", rentalAppliVo);
 	}
 
 	/* 상품 2,3,4*/
-	@Override
 	public List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive", rentalAppliVo);
 	}
@@ -57,5 +52,24 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	public List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo) {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive2", rentalAppliVo);
 	}
+
+	/* 점수 */
+	public List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gradeRetrive", rentalAppliVo);
+	}
+	
+	/* 상세정보 */
+	public List<RentalAppliVo> rentalGdsListDetail(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gdsListDetailRetrive", rentalAppliVo);
+	}
+
+	/* 상담등록 */
+	public int rentalGdsQuest(RentalAppliVo rentalAppliVo) {
+		// 상담시퀀스 생성
+		sqlSession.insert("rentalAppli.questSeqProduce", rentalAppliVo);
+		return sqlSession.insert("rentalAppli.gdsQuestRegister", rentalAppliVo);
+	}
+
+
 
 }
