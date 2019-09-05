@@ -61,6 +61,7 @@ public class RentalAppliVo {
 	/* 리턴코드 */
 	private String rtnCd;				// 리턴결과값코드
 	
+	private String homeCd;				// 홈 링크코드
 	
 	public String getGdsCd() {
 		return gdsCd;
@@ -344,6 +345,12 @@ public class RentalAppliVo {
 	}
 	public void setRtnCd(String rtnCd) {
 		this.rtnCd = rtnCd;
+	}
+	public String getHomeCd() {
+		return homeCd;
+	}
+	public void setHomeCd(String homeCd) {
+		this.homeCd = homeCd;
 	}
 
 	

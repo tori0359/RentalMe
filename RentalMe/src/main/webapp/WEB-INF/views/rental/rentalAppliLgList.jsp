@@ -41,7 +41,10 @@
 	font-style: italic;
 	text-align: right;
 }
-
+#pathStyle {
+	color: black;
+	text-decoration: none !important
+}
 /* ---------- 소메뉴 영역 시작 -------- */
 
 /* ---------- 소메뉴 영역 끝 -------- */
@@ -678,16 +681,16 @@ input::-moz-focus-inner { border: 0; }
 			<!--  이후 메뉴경로(19.09.02) -->
 			<div class="content-inner-menu-path2">
 				<c:forEach items="${path }" var="path">
-					<h4>홈 &nbsp; > &nbsp; ${path.gdsMclassNm }
+					<h4><a href="/main" id="pathStyle"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> &nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 						<c:if test="${not empty path.gdsSclassNm}">
-							 &nbsp; > &nbsp; ${ path.gdsSclassNm }
+							&nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.gubunCd }?" id="pathStyle">${ path.gdsSclassNm }</a>
 						</c:if>
 					</h4>
 				</c:forEach>
 			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					${path.gdsMclassNm }
+					<a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">

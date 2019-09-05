@@ -98,9 +98,9 @@ public class RentalAppliController {
 		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);	//상품리스트
 		
 //		path test 
-//		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
-//		System.out.println("getGdsMclassNm 		== " + path.get(0).getGdsMclassNm());
-//		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
+		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
+		System.out.println("getGdsMclassNm 		== " + path.get(0).getGdsMclassNm());
+		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
 		
 //		session test
 //		System.out.println("-----------------session start ----------------------");
@@ -191,11 +191,11 @@ public class RentalAppliController {
 	public String addLgDetailQuest(RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
 		System.out.println("타냐?");
 		
-		System.out.println(rentalAppliVo.getGdsSclassCd());
-		System.out.println(rentalAppliVo.getGdsCd());
-		System.out.println(rentalAppliVo.getQuestNm());
-		System.out.println(rentalAppliVo.getHp());
-		System.out.println(rentalAppliVo.getEmail());
+//		System.out.println(rentalAppliVo.getGdsSclassCd());
+//		System.out.println(rentalAppliVo.getGdsCd());
+//		System.out.println(rentalAppliVo.getQuestNm());
+//		System.out.println(rentalAppliVo.getHp());
+//		System.out.println(rentalAppliVo.getEmail());
 		
 		int result = rentalAppliService.rentalGdsQuest(rentalAppliVo);		//	상담등록
 		System.out.println("result = " + result);

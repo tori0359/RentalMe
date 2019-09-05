@@ -9,6 +9,14 @@
 	<select id="pathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT
 			DISTINCT #{gdsSclassCd} AS	GUBUN_CD	/* 전체메뉴 구분코드 */
+			,CASE WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '10' AND #{gdsSclassCd} <![CDATA[ < ]]> '20' THEN '10'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '20' AND #{gdsSclassCd} <![CDATA[ < ]]> '30' THEN '20'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '30' AND #{gdsSclassCd} <![CDATA[ < ]]> '40' THEN '30'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '40' AND #{gdsSclassCd} <![CDATA[ < ]]> '50' THEN '40'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '50' AND #{gdsSclassCd} <![CDATA[ < ]]> '60' THEN '50'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '60' AND #{gdsSclassCd} <![CDATA[ < ]]> '70' THEN '60'
+				  ELSE '99'		/* 홈 링크코드 */
+			 END AS HOME_CD
 			,(
 				SELECT	/* 대분류명 조회 */
 					CONCAT(CD_NM,'렌탈')

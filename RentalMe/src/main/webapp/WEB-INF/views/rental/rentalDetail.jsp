@@ -41,7 +41,10 @@
 	font-style: italic;
 	text-align: right;
 }
-
+#pathStyle {
+	color: black;
+	text-decoration: none !important
+}
 /* ---------- 상세정보 영역 시작 -------- */
 #gdsNmStyle { 
 	line-height: 0.7em;
@@ -145,8 +148,17 @@
 	height:100px;
 }
 /* --------- 제품 정보 영역 --------- */
-#infoArea {
+#info1 {
 	text-align: center;
+}
+#li1 {
+	list-style: none;
+	font-size: 20pt;
+	font-weight: bolder;
+}
+
+#li2 {
+	list-style: none;
 }
 /* --------- 제품 정보 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
@@ -229,7 +241,91 @@ input::-moz-focus-inner { border: 0; }
 				alert("이메일을 입력해주세요.");
 				return false;
 			}
-		})
+		});
+
+		// menu1 영역 버튼클릭
+		$("#menu1 #sort-btn1").on("click", function(event){
+			var offset = $("#menu1 #sort-btn1").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu1 #sort-btn2").on("click", function(event){
+			var offset = $("#menu2 #sort-btn2").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+		
+		$("#menu1 #sort-btn3").on("click", function(event){
+			var offset = $("#menu3 #sort-btn3").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu1 #sort-btn4").on("click", function(event){
+			var offset = $("#menu4 #sort-btn4").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		// menu2 영역 버튼클릭
+		$("#menu2 #sort-btn1").on("click", function(event){
+			var offset = $("#menu1 #sort-btn1").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu2 #sort-btn2").on("click", function(event){
+			var offset = $("#menu2 #sort-btn2").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+		
+		$("#menu2 #sort-btn3").on("click", function(event){
+			var offset = $("#menu3 #sort-btn3").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu2 #sort-btn4").on("click", function(event){
+			var offset = $("#menu4 #sort-btn4").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		// menu3 영역 버튼클릭
+		$("#menu3 #sort-btn1").on("click", function(event){
+			var offset = $("#menu1 #sort-btn1").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu3 #sort-btn2").on("click", function(event){
+			var offset = $("#menu2 #sort-btn2").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+		
+		$("#menu3 #sort-btn3").on("click", function(event){
+			var offset = $("#menu3 #sort-btn3").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu3 #sort-btn4").on("click", function(event){
+			var offset = $("#menu4 #sort-btn4").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		// menu4 영역 버튼클릭
+		$("#menu4 #sort-btn1").on("click", function(event){
+			var offset = $("#menu1 #sort-btn1").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu4 #sort-btn2").on("click", function(event){
+			var offset = $("#menu2 #sort-btn2").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+		
+		$("#menu4 #sort-btn3").on("click", function(event){
+			var offset = $("#menu3 #sort-btn3").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
+		$("#menu4 #sort-btn4").on("click", function(event){
+			var offset = $("#menu4 #sort-btn4").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
 		
 		//alert("안쪽마지막");
 	}
@@ -292,10 +388,7 @@ input::-moz-focus-inner { border: 0; }
 		}
 	}
 
-	function gogo() {
-		alert("띠부럴")
-		return false;
-	}
+	
 	
 </script>
 <jsp:include page=".././template/header.jsp"></jsp:include>
@@ -307,9 +400,9 @@ input::-moz-focus-inner { border: 0; }
 			<!--  이후 메뉴경로(19.09.02) -->
 			<div class="content-inner-menu-path2">
 				<c:forEach items="${path }" var="path">
-					<h4>홈 &nbsp; > &nbsp; ${path.gdsMclassNm }
+					<h4><a href="/main" id="pathStyle"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> &nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 						<c:if test="${not empty path.gdsSclassNm}">
-							 &nbsp; > &nbsp; ${ path.gdsSclassNm }
+							 &nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.gubunCd }?" id="pathStyle">${ path.gdsSclassNm }</a>
 						</c:if>
 					</h4>
 				</c:forEach>
@@ -502,51 +595,136 @@ input::-moz-focus-inner { border: 0; }
 				<!-- 상세 하단 영역 시작 -->
 				<!-- ******************* -->	
 				<div id="bottom" style="border:0px solid green;">
-					<div id="menu">
-						<br><br><br>
-						<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
-						</ul>
-					</div>
-					<div id="infoArea">
+					<div id="areaAll">
 						<div id="area1">
-							<!-- for문.. -->
-							<div id="imgs1">
-								<img src="/imgs/inner1.jpg">
+							<br><br><br>
+							<div id="menu1">
+								<ul class="nav nav-tabs nav-justified">
+									<li role="presentation" class="active" id="sort-btn1" ><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2" ><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+								</ul>
 							</div>
-							<div id="imgs2">
-								<img src="/imgs/inner2.jpg">
-							</div>
-							<div id="imgs3">
-								<img src="/imgs/inner3.jpg">
+							<div id="info1">
+								<!-- for문.. -->
+								<div id="imgs1">
+									<img src="/imgs/inner1.jpg">
+								</div>
+								<div id="imgs2">
+									<img src="/imgs/inner2.jpg">
+								</div>
+								<div id="imgs3">
+									<img src="/imgs/inner3.jpg">
+								</div>
 							</div>
 						</div>
 						<div id="area2">
-							<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
-						</ul>
+							<br><br><br>
+							<div id="menu2">
+								<ul class="nav nav-tabs nav-justified">
+									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+									<li role="presentation" class="active" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+								</ul>
+							</div>
+							<div id="info2">
+								<br><br><br>
+								<ul>
+									<li id="li1"><span class="glyphicon glyphicon glyphicon-gift" aria-hidden="true"></span> 상품의 배송</li>
+									<ul>
+										<h4><li>신청상품의 안전한 배송을 위해, 고객님께서 주문시 지정한 배송장소 이외, 제3자 전달이나 임의장소 배송은 제공하지 않습니다.</li></h4>
+										<h4><li>신청하신 제품의 전문설치기사가 배달, 설치해 드립니다. (도서 산간지역은 제한될 수 있습니다.) </li></h4>
+										<h4><li>배송전일 또는 당일 오전에 배송설치기사가 고객님께 연락을 드린 후 배송설치 해 드립니다. </li></h4>
+										<h4><li>신청상품은 7일~14일 이내 제품을 받아볼 수 있습니다. (단, 제조사 재고현황에 따라 배송일은 예고없이 변경될 수 있습니다.) </li></h4>
+										<h4><li>에어컨 등 계절별 특수상품은 제조사 재고현황 및 설치기사 사정에 따라 14일~30일 이후 배송 될 수 있습니다. </li></h4>
+										<h4><li>동일품목의 폐가전 무료수거가 가능합니다. (단, 에어컨은 별도 확인 필요) </li></h4>
+										<h4><li>설치상품 주문 시, 설치환경을 반드시 체크해 주시기 바랍니다. (제품의 크기와 설치공간의 크기, 출입문 사이즈 등의 체크) </li></h4>
+									</ul>
+									<br><br>
+									<li id="li1"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> A/S조건</li>
+									<ul>
+										<h4><li>신청하신 렌탈상품은 제조사의 A/S 정책을 따르며, 제조사의 무상 A/S기간동안 제조사를 통해 A/S를 받으실 수 있습니다. <br>(1년 무상 A/S, 이후 유상 A/S 등, 단 고객과실일 경우는 유상 A/S)</li></h4>
+										<h4><li>회사가 지정한 일부 상품에 한해, 3년 무상 A/S 서비스 (제조사 무상 A/S 1년 + 회사 무상 A/S 2년)가 제공됩니다. </li></h4>
+										<h4><li>“무상A/S 3년” 이미지가 표기된 상품에 한하며, 1년이내는 제조사로, 1년이후~3년까지는 당사 고객센터로 신청바랍니다.</li></h4>
+										<h4><li>“무상A/S 3년” 혜택은 아래의 경우 제공되지 않습니다.</li></h4>
+										<h4><li id="li2">가. 제품하자가 아닌 고객과실에 의한 파손 등의 경우</li></h4>
+										<h4><li id="li2">나. 상품품질 보증서에 기재된 상품품질보증의 상태, 조건, 혹은 이유에 해당하지 않는 것으로 인한 경우</li></h4>
+										<h4><li id="li2">다. 제조사의 상품품질보증기간에 의한 무상수리 또는 제조사로부터 기타 무상수리가 가능한 경우</li></h4>
+										<h4><li id="li2">라. 사용자가 임의로 상품을 개조,조립, 변경한 경우</li></h4>
+										<h4><li id="li2">마. 상품을 수리 받기위해 발생한 고객의 교통비용 등</li></h4>
+									</ul>
+									<br><br>
+								</ul>
+							</div>
 						</div>
 						<div id="area3">
-							<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
-						</ul>
+							<br><br><br>
+							<div id="menu3">
+								<ul class="nav nav-tabs nav-justified">
+									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+									<li role="presentation" class="active" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+								</ul>
+							</div>
+							<div id="info3">
+								<br><br><br>
+								<ul>
+									<li id="li1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 교환/반품 신청기간</li>
+									<ul>
+										<h4><li>교환/반품은 제품 수령일로부터 7일 이내에 가능합니다.</li></h4>
+										<h4><li>다만, 제품이 표시.광고의 내용과 다르거나 제품의 불량, 하자 등 계약내용과 다르게 이행된 경우, 제품수령일로부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날로부터 30일 이내에 교환/반품이 가능합니다.</li></h4> 
+										<h4><li>제품을 교환/반품 하시기 전, 고객센터로 미리 연락을 주셔야 합니다.</li></h4> 
+										<h4><li>제품 자체에 하자가 있는 경우, 각 제조사 서비스 센터로 접수하신 후, A/S기사의 판정을 거친 후, 소비자 분쟁해결기준에 의거하여 교환/환불/수리해 드립니다.</li></h4>
+									</ul><br><br>
+									<li id="li1"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 반품 회수(배송)비용</li>
+									<ul>
+										<h4><li>제품이 표기, 광고의 내용과 다르거나 제품의 불량, 하자 등 계약내용과 다르게 이행된 경우에는 고객님께서 반품회수(배송)비용을 부담하실 필요가 없으나, 그 외 고객님의 단순 변심 및 제품에 대한 주관적이 불만족으로 인하여 반품을 진행하시는 경우 고객님께서 반품회수(배송) 비용을 부담하셔야 합니다.</li></h4>
+									</ul><br><br>
+									<li id="li1"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 교환/반품 불가 안내</li>
+									<ul>
+										<h4><li>제품 배송완료 후 고객님이 제품포장을 개봉하여 사용한 경우 또는 제품 배송완료 후 고객님께서 제품의 하자없음을 확인한 후 설치가 완료된 경우 등 고객님의 책임 있는 사유로 상품이 멸실 또는 훼손된 경우<br>(단, 단순히 상품의 내용을 확인하기 위해 포장 등을 훼손한 경우는 제외)</li></h4>
+										<h4><li>고객님의 사용 또는 일부 소비로 제품의 가치가 현저히 감소된 경우</li></h4>
+										<h4><li>패키지 상품의 경우 구성상품 일부의 개봉/설치/사용으로 상품가치가 현저히 감소된 경우</li></h4>
+										<h4><li>시간이 경과 되어 재판매가 곤란할 정도로 상품가치가 상실된 경우</li></h4>
+										<h4><li>설치 완료 상품에 하자가 없는 경우</li></h4>
+										<h4><li>상품 등의 내용이 표시/광고 내용 및 계약내용과 같고, 별도의 하자가 없음에도 단순변심으로 인한 교환을 요구하는 경우</li></h4>
+										<h4><li>기타, '전자상거래 등에서의 소비자 보호에 관한 법률'등 관계법령이 정하는 교환/반품제한 사유에 해당되는 경우</li></h4>
+										<h4><li>그 밖에 교환/반품을 인정하는 경우, 통신판매업자에게 회복할 수 없는 중대한 피해가 예상되는 경우</li></h4>
+									</ul><br><br>
+									<li id="li1"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 해재시 위약관련 사항[2019년 10월 1일 이후 계약건부터 적용]</li>
+									<ul>
+										<h4><li>렌탈계약 해제 시, “정상적인 렌탈제품의 반납”여부에 따라, 아래의 해지위약관련 비용을 납부하셔야 합니다.</li></h4>
+										<h4><li>“정상적인 렌탈제품의 반납”이란 반납된 제품이 정상 작동되고, 반납된 제품의 본품 및 구성품이 분실,파손없이 전부 반납된 경우를 말합니다. </li></h4>
+										<h4><li id="li2">가. 정상적인 렌탈제품을 반납하고 해지할 경우 해지위약 관련 비용</li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 1) 해지시점의 연체 렌탈료, 연체이자 (발생 시) </li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 2) 중도해지 위약금 : 중도해지일 현재 잔여렌탈료 합계금액의 30% 금액</li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 3) 면제받았던 설치비용(가입비+등록비 포함) : 20만원 </li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 4) 회수비용 : 10만원~30만원 (제품별 상이함) </li></h4>
+										<h4><li id="li2">나. 정상적인 렌탈제품을 반납하지 않고 해지할 경우 해지위약 관련 비용 </li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 1) 해지시점의 연체렌탈료, 연체이자 (발생 시) </li></h4>
+										<h4><li id="li2">&nbsp;&nbsp; 2) 잔여렌탈료 합계금액의 100% 금액 </li></h4>
+										<h4><li id="li2">다. 잔여렌탈료 합계금액은 “월 렌탈료 x 잔여약정월 (단, 중도해지일이 포함된 월의 렌탈료는 일할계산)”로 계산됩니다.</li></h4>
+									</ul>
+									<br><br>
+								</ul>
+							</div>
 						</div>
 						<div id="area4">
-							<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" class="active" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-							<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-							<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-							<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
-						</ul>
+							<br><br><br>
+							<div id="menu4">
+								<ul class="nav nav-tabs nav-justified">
+									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
+									<li role="presentation" class="active" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+								</ul>
+							</div>
+							<div id="info4">
+								블라블라~4444444444444444444444444
+							</div>
 						</div>
 					</div>
 				</div>
