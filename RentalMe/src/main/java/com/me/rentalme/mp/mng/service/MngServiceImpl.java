@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
@@ -20,6 +21,7 @@ public class MngServiceImpl implements MngService {
 
 	@Inject
 	MngDao mngDao;
+	
 	
 	@Override
 	public List<MngOrdVo> selectOrd() throws SQLException {
@@ -50,10 +52,12 @@ public class MngServiceImpl implements MngService {
 	public List<CallVo> selectDepOne(String mbNo) throws SQLException {
 		return mngDao.selectDepOne(mbNo);						//회원 예치금 상세
 	}
+	
+	
 
 	@Override
-	public List<UsedVo> selectUsed() throws SQLException {
-		return mngDao.selectUsed();								//전체 중고 리스트
+	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
+		return mngDao.selectUsed(usedPage);								//전체 중고 리스트
 	}
 
 	@Override
@@ -79,6 +83,11 @@ public class MngServiceImpl implements MngService {
 	@Override
 	public int changeDeclSts(String declNo) throws SQLException {
 		return mngDao.changeDeclSts(declNo);					//신고상태 처리완료로 바꾸기
+	}
+	
+	@Override
+	public int getUsedListCnt() {
+		return mngDao.selectusedListCnt();
 	}
 
 

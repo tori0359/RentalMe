@@ -19,7 +19,6 @@
 		 <if test="gdsMclassCd !=null">
 		 AND GDS_MCLASS_CD=#{gdsMclassCd}
 		 </if> 
-		 <!--  -->
 		 <if test="modelNm !=null">
 		 AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
 		 </if>
