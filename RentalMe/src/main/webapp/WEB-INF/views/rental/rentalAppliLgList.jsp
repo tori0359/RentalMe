@@ -41,16 +41,55 @@
 	font-style: italic;
 	text-align: right;
 }
+#pathStyle {
+	color: black;
+	text-decoration: none !important
+}
+/* -스크롤 -*/
+.scrolltop {
+    display: none;
+    position: fixed;
+    right: 80px;
+    bottom: 200px;
+    z-index: 1030;
+    font-size: 2.875rem;
+    color: #868e96;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
+}
+.scrolltop:hover, .scrolltop:focus {
+	color: #dc3545;
+	transition: all 0.5s ease-in-out;
+}
+#topButton {
+	border: 0px;
+}
+
 
 /* ---------- 소메뉴 영역 시작 -------- */
+#sMenuBorder1 {
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+}
+#sMenuBorder2 {
+	border-bottom:1px solid #999;
+}
+#menuBtn11, #menuBtn21, #menuBtn31, #menuBtn41, #menuBtn51, #menuBtn61 {
+	border-left:0px solid #999;
+}
+#menuBtn16, #menuBtn26, #menuBtn36, #menuBtn46, #menuBtn56, #menuBtn66 {
+	border-left:0px solid #999;
+}
+#menuBtn15, #menuBtn25, #menuBtn35, #menuBtn45, #menuBtn55, #menuBtn65 {
+	border-right:0px solid #999;
+}
+#menuBtn20, #menuBtn30, #menuBtn40, #menuBtn50, #menuBtn60, #menuBtn70 {
+	border-right:0px solid #999;
+}
 
 /* ---------- 소메뉴 영역 끝 -------- */
 
 /* ---------- 옵션 영역 시작 ---------- */
-#option-menu {
-	width: 200px;
-	background-color: #FFFFAA;
-}
 #option-price-search {
 	width: 400px;
 	text-align: left;
@@ -72,6 +111,16 @@
 }
 h6 {
 	display: inline;
+}
+#bestNotice1 {
+	font-size: 9pt;
+}
+#option-menu, #option-price, #option-status, #option-result {
+	width: 150px;
+	text-align: center;
+	vertical-align:middle;
+	font-size: 11pt;
+	font-weight: bolder;
 }
 /* ---------- 옵션 영역 끝 ---------- */
 
@@ -149,6 +198,13 @@ li.col-sm-3:hover {
 	color:pink;
 }
 
+/* ------ 하단 정렬 시작------- */
+#sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4, #sort-btn5, #sort-btn6 {
+	cursor:pointer;
+}
+
+/* ------ 하단 정렬 끝------- */
+
 /* Control box */
 .control-box {
 	width: 100%;
@@ -199,10 +255,12 @@ input::-moz-focus-inner { border: 0; }
 		menu = sMenu;
 		$('#menuBtn'+sMenu).attr('class','btn btn-primary');
 
-		// 옵션 브랜드 셋팅
-		//var sBrandNm = "${brandNm}";
-		//$('#optionBrand'+sBrandNm).attr('class', 'label label-primary');
+		// 옵션적용 안내 셋팅
+		if(${menu}%10 != 0) {
+			$('#bestNotice1').hide();
+		} 
 		
+		// 옵션 브랜드 셋팅
 		for(var i=0; i<vvBrandNm.length; i++) {
 			$('#optionBrand'+vvBrandNm[i]).attr('class', 'label label-primary');
 			document.getElementsByName("brandCheckBox"+vvBrandNm[i])[0].checked = true;
@@ -216,12 +274,10 @@ input::-moz-focus-inner { border: 0; }
 			document.getElementsByName("priceMinCheckBox"+sPriceMin)[0].checked = true;
 		}
 		
-
 		// 옵션 가격 셋팅(절반)
 		var sPriceHalf = "${priceHalf}";
 		$('#optionPriceHalf'+sPriceHalf).attr('class', 'label label-primary');
 		
-
 		// 옵션 가격 셋팅(최대)
 		var sPriceMax = "${priceMax}";
 		$('#optionPriceMax'+sPriceMax).attr('class', 'label label-primary');
@@ -268,9 +324,22 @@ input::-moz-focus-inner { border: 0; }
 			$('#sort-btn'+sSort).attr('class','active');
 		}
 
+		// 최상단 이동
+		jQuery(document).ready(function () {
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 100) {
+					$('#backToTop').fadeIn(500);
+				} else {
+					$('#backToTop').fadeOut('slow');
+				}
+			});
+			$('#backToTop').click(function (e) {
+				e.preventDefault();
+				$('html, body').animate({scrollTop: 0}, 200);
+			});
+		});
 		//alert("안쪽마지막");
 	}
-
 	//alert("바깥쪽");
 
 	/**************************/
@@ -674,20 +743,28 @@ input::-moz-focus-inner { border: 0; }
 <body>
 	<div class="content">
 	<br>
+		<!--  페이지 상단이동 버튼 -->
+	    <a id="backToTop" class="scrolltop" href="#">
+			<i class="fas fa-chevron-circle-up">
+				<button type="button" id="topButton" style="background-color:white;" data-toggle="tooltip" data-placement="top" title="최상단 이동">		
+					<span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+				</button>		
+			</i>
+	    </a>
 		<div class="content-inner">
 			<!--  이후 메뉴경로(19.09.02) -->
 			<div class="content-inner-menu-path2">
 				<c:forEach items="${path }" var="path">
-					<h4>홈 &nbsp; > &nbsp; ${path.gdsMclassNm }
+					<h4><a href="/main" id="pathStyle"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> &nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 						<c:if test="${not empty path.gdsSclassNm}">
-							 &nbsp; > &nbsp; ${ path.gdsSclassNm }
+							&nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.gubunCd }?" id="pathStyle">${ path.gdsSclassNm }</a>
 						</c:if>
 					</h4>
 				</c:forEach>
 			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					${path.gdsMclassNm }
+					<a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">
@@ -729,26 +806,26 @@ input::-moz-focus-inner { border: 0; }
 					<c:if test="${status1Row.count <= 2 }">
 						<c:forEach items="${list1}" var="list1Co1" begin="0" end="10" varStatus="status1Col">
 							<c:if test="${status1Row.count == 1 && status1Col.count <= 5}">
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								<div class="btn-group" role="group" id="sMenuBorder1">
+									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4 style="font-weight: bolder;">${list1Co1.gdsSclassNm }</h4></button>
 								</div>
 							</c:if>
 							<c:if test="${status1Row.count == 2 && status1Col.count >=6 }">
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								<div class="btn-group" role="group" id="sMenuBorder2">
+									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4 style="font-weight: bolder;">${list1Co1.gdsSclassNm }</h4></button>
 								</div>
 							</c:if>
 							<c:if test="${list1Q < 1 && status1Col.count == list1Length }">
 								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
-									<div class="btn-group" role="group">
-										<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4><br></h4></button>
+									<div class="btn-group" role="group" id="sMenuBorder1">
+										<button type="button" style="border-right:0px solid #999;" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" ><h4><br></h4></button>
 									</div>
 								</c:forEach>
 							</c:if>
 							<c:if test="${list1Q > 1 && list1Q < 2 && status1Row.count == 2 && status1Col.count == list1Length }">
 								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
-									<div class="btn-group" role="group">
-										<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });" }><h4><br></h4></button>
+									<div class="btn-group" role="group" id="sMenuBorder2">
+										<button type="button" style="border-right:0px solid #999;" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" ><h4><br></h4></button>
 									</div>
 								</c:forEach>
 							</c:if>
@@ -763,7 +840,7 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-option">
 				<table class="table table-bordered">
-					<tr class="active">BEST 인기상품은 옵션이 적용되지 않습니다.</tr>
+					<tr class="active"><span id="bestNotice1"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다. </span><span id="bestNotice2">&nbsp;</span></tr>
 					<!-- ************** -->
 					<!-- 옵션 영역 시작 -->
 					<!-- ************** -->
@@ -771,7 +848,7 @@ input::-moz-focus-inner { border: 0; }
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
 							<c:forEach items="${list2}" var="list2" varStatus="status">
-								<h4 id="optionStyle"><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.0";/>${list2.brandNm }&nbsp;&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
+								<h4 id="optionStyle"><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.0"; />${list2.brandNm }&nbsp;&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
 							</c:forEach>
 						</td>
 					</tr>
@@ -790,7 +867,7 @@ input::-moz-focus-inner { border: 0; }
 										<input type="text" class="form-control" id="priceSearchEd" placeholder="0">
 									</div>
 								</div>
-								<button type="button" class="btn btn-success" onClick="search2();">검색</button>
+								<button type="button" class="btn btn-success" onClick="search2();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 							</form>
 						</td>
 					</tr>
@@ -811,7 +888,7 @@ input::-moz-focus-inner { border: 0; }
 										<input type="text" class="form-control" id="contentSearch"  placeholder="결과 내 검색">
 									</div>
 								</div>
-								<button type="button" class="btn btn-success" onClick="search();">검색</button>
+								<button type="button" class="btn btn-success" onClick="search();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 							</form>							
 						</td>
 					</tr>
@@ -918,12 +995,12 @@ input::-moz-focus-inner { border: 0; }
 				<!-- 정렬 메뉴 영역 시작 -->
 				<!-- ******************* -->
 				<ul class="nav nav-tabs nav-justified">
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a>인기순</a></li>
-				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);"><a>최신순</a></li>
-				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);"><a>낮은가격순</a></li>
-				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);"><a>높은가격순</a></li>
-				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);"><a>판매량순</a></li>
-				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);"><a>리뷰 많은순</a></li>
+				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);" onfocus="this.blur();" ><a>인기순</a></li>
+				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);" onfocus="this.blur();"><a>최신순</a></li>
+				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);" onfocus="this.blur();"><a>낮은가격순</a></li>
+				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);" onfocus="this.blur();"><a>높은가격순</a></li>
+				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);" onfocus="this.blur();"><a>판매량순</a></li>
+				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);" onfocus="this.blur();"><a>리뷰 많은순</a></li>
 				</ul>
 				<!-- ***************** -->
 				<!-- 정렬 메뉴 영역 끝 -->
