@@ -17,6 +17,12 @@
 	#btn00{
 		float:right;
 	}
+	#inging{
+		color:blue;
+	}
+	#endend{
+		color:red;
+	}
 </style>
 </head>
 <body>
@@ -27,14 +33,21 @@
 			<td>상품코드</td>
 			<td>상품명</td>
 			<td>등록일</td>
-			<td></td>
+			<td>경매여부</td>
 		</tr>
 			<c:forEach items="${actList}" var="bean">
 				<tr>
 					<td><input type="hidden" name="num" value="${bean.gdsCd}"/>${bean.gdsCd}</td>
 					<td><a href="#">${bean.gdsNm}</a></td>
 					<td>${bean.regDt}</td>
-					<td></td>
+					<c:choose>
+						<c:when test="${bean.actStsCd eq '2'}">
+							<td id="inging">진행중</td>
+						</c:when>
+						<c:otherwise>
+							<td id="endend">경매완료</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 	</table>
