@@ -19,6 +19,8 @@
 #join_input input{margin-bottom: 10px;  font-size: 11px;}
 #join_input #email{display: inline-block;width: 67%;}
 #join_input #emailSend{display: inline-block;}
+#join_input #hp{display: inline-block;width: 67%;}
+#join_input #hpSend{display: inline-block;}
 #join_input #addr{display: inline-block;width:75%}
 #join_input #addrSearch{display: inline-block;}
 #join_terms #option_select{text-align: left;}
