@@ -2,22 +2,29 @@ package com.me.rentalme.mp.mng.act.cotroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +67,7 @@ public class MngActController {
 		///////
 		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.listAct());
 		mav.addObject("actList", actService.listAct());
+		System.out.println(actService.listAct());		
 		System.out.println(actService.listAct());		
 		
 		mav.setViewName("/mp/manager/mngActList");
@@ -128,7 +136,6 @@ public class MngActController {
 			if(i==10) {
 				actEndTime=0;
 			}
-			
 			restTime=actStartTime-actEndTime;
 			ctime=format_time1.charAt(i);
 			System.out.print(actEndTime);
@@ -189,4 +196,122 @@ public class MngActController {
 		actService.addAct100(actVo);
 		return "redirect:/mp/mng/actList";
 	}
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	@RequestMapping(value = "searchCode", produces = "application/json; charset=utf-8")
+	   public void searchList(HttpServletRequest req, HttpServletResponse res, String param) {
+	      System.out.println("js코드");
+	      res.setCharacterEncoding("utf-8");
+	    
+	      
+	      try {
+	         String classifi = param;
+	         System.out.println("대분류"+classifi);
+	         List<String> goodsList = new ArrayList<String>();
+	         if(classifi.equals("10")) {
+	        	 goodsList.add("에어컨");
+	        	 goodsList.add("냉난방기");
+	        	 goodsList.add("냉장고");
+	        	 goodsList.add("TV");
+	        	 goodsList.add("세탁기");
+	        	 goodsList.add("빨래건조기");
+	        	 goodsList.add("공기청정기");
+	        	 goodsList.add("복합기/프린터");
+	         }
+	         else if(classifi.equals("20")) {
+	        	 goodsList.add("커피머신");
+	        	 goodsList.add("제습기");
+	        	 goodsList.add("청소기");
+	        	 goodsList.add("드라이어");
+	        	 goodsList.add("빔프로젝터");
+	        	 goodsList.add("컴퓨터/노트북");
+	        	 goodsList.add("비데");
+	        	 goodsList.add("면도기");
+	         }
+	         else if(classifi.equals("30")) {
+	        	 
+	        	 goodsList.add("음식물처리기");
+	        	 goodsList.add("제빙기");
+	        	 goodsList.add("전자레인지");
+	        	 goodsList.add("컴퓨터/에어프라이어");
+	        	 goodsList.add("오븐");
+	         }
+	         else if(classifi.equals("40")) {
+	        	 
+	        	 goodsList.add("침대");
+	        	 goodsList.add("매트리스");
+	        	 goodsList.add("쇼파");
+	        	 goodsList.add("책상");
+	         }
+	         else if(classifi.equals("50")) {
+	        	 goodsList.add("악기");
+	        	 goodsList.add("명품");
+	        	 goodsList.add("귀금속");
+	         }
+	         else if(classifi.equals("60")) {
+	        	 goodsList.add("침실패키지");
+	        	 goodsList.add("주방패키지");
+	        	 goodsList.add("욕실패키지");
+	        	 goodsList.add("기타패키지");
+	         }
+	         
+	         
+	       
+	        
+	     //    JSONArray jsonArray = new JSONArray();
+	       //  JSONArray jsonarray=new JSONArray();
+	         org.json.JSONArray jsonArray=new org.json.JSONArray();
+	         
+	         for(int i=0; i<goodsList.size(); i++) {
+	            jsonArray.put(goodsList.get(i).toString());
+//	            System.out.println(jsonArray.get(i));
+	         }
+	         
+	         
+	         PrintWriter pw = res.getWriter();
+	         pw.print(jsonArray.toString());
+	         pw.flush();
+	         pw.close();
+	         
+//	         for(int i=0; i<jsonArray.length(); i++) {
+//	            System.out.println(jsonArray.get(i));
+//	         }
+	         
+	      } catch(Exception e) {
+	         System.out.println("ajax error");
+	      }
+	   }
+
+	@RequestMapping(value="searchList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ActVo> serchList(@RequestParam("param") String goodsNum,Model model) throws SQLException{
+		List<ActVo> goodsList=actService.goodsList(goodsNum);
+		System.out.println("왜 안나오냐");
+	
+		
+		ArrayList<String> array=new ArrayList();
+		
+		
+		for(int i=0;i<goodsList.size();i++) {
+			array.add(i, goodsList.get(i).toString());
+		}
+		for(int i=0;i<goodsList.size();i++) {
+		System.out.println("전체 리스트"+goodsList.get(i).getGdsCd());
+		}
+		System.out.println("hi"+array.get(0).toString());
+		return goodsList;
+	}
+
+
+
+
+
 }

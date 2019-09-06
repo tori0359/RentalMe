@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,114 +69,167 @@
             	height:25px;
             	width:100px;
             }
+            #modalBtn{
+            	color:black;
+            	background:white;
+            	border-radius:2px;
+            }
+            #classifi{
+            	width:150px;
+            }
+            #goods{
+            	width:150px;
+            }
+            
+            #left{
+            	float:left;
+            	
+            }
+            #left2{
+            	float:left;
+            	margin-left:50px;
+            	margin-top:2px;
+            	max-height:133px;
+            	width:350px;
+            	overflow-y:auto;
+            }
+            #end{
+            	margin-top:200px;
+            }
             
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#cancel").click(function(){
-			window.history.back();
-		})
-		$("modalData")).click(function(){
-			$.ajax({
-				url:"//",
-				data:{},
-				method:"GET"
+	     
+	      function goodsSelect(classifi){
+	         $.ajax({
+	            url:'searchCode',
+	            type:'POST',
+	            dataType:'json',
+	            data : {param:classifi},
+	            success:function(result){
+//	                alert(result);
+	               //select box 초기화
+	               $('#goods').find('option').remove().end().append('<option value="">상품을 선택</option>');
+	               //option 추가
+	               $.each(result, function(i){
+		               console.log(result[i]);
+		               if(result[i]=='에어컨'){
+	                  $('#goods').append('<option name="goods" value="'+11+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉난방기'){
+	                  $('#goods').append('<option name="goods" value="'+12+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉장고'){
+	                  $('#goods').append('<option name="goods" value="'+13+'">'+result[i]+'</option>');}
+		               if(result[i]=='TV'){
+	                  $('#goods').append('<option name="goods" value="'+14+'">'+result[i]+'</option>');}
+		               if(result[i]=='세탁기'){
+	                  $('#goods').append('<option name="goods" value="'+15+'">'+result[i]+'</option>');}
+		               if(result[i]=='빨래건조기'){
+	                  $('#goods').append('<option name="goods" value="'+16+'">'+result[i]+'</option>');}
+		               if(result[i]=='정수기'){
+	                  $('#goods').append('<option name="goods" value="'+17+'">'+result[i]+'</option>');}
+		               if(result[i]=='공기청정기'){
+	                  $('#goods').append('<option name="goods" value="'+18+'">'+result[i]+'</option>');}
+		               if(result[i]=='복합기/프린터'){
+	                  $('#goods').append('<option name="goods" value="'+19+'">'+result[i]+'</option>');}
+		               if(result[i]=='커피머신'){
+	                  $('#goods').append('<option name="goods" value="'+21+'">'+result[i]+'</option>');}
+		               if(result[i]=='제습기'){
+	                  $('#goods').append('<option name="goods" value="'+22+'">'+result[i]+'</option>');}
+		               if(result[i]=='드라이어'){
+	                  $('#goods').append('<option name="goods" value="'+23+'">'+result[i]+'</option>');}
+		               if(result[i]=='빔프로젝터'){
+	                  $('#goods').append('<option name="goods" value="'+24+'">'+result[i]+'</option>');}
+		               if(result[i]=='컴퓨터/노트북'){
+	                  $('#goods').append('<option name="goods" value="'+25+'">'+result[i]+'</option>');}
+		               if(result[i]=='무선스피커'){
+	                  $('#goods').append('<option name="goods" value="'+26+'">'+result[i]+'</option>');}
+		               if(result[i]=='비데'){
+	                  $('#goods').append('<option name="goods" value="'+27+'">'+result[i]+'</option>');}
+		               if(result[i]=='면도기'){
+	                  $('#goods').append('<option name="goods" value="'+28+'">'+result[i]+'</option>');}
+		               if(result[i]=='음식물처리기'){
+	                  $('#goods').append('<option name="goods" value="'+29+'">'+result[i]+'</option>');}
+		               if(result[i]=='제빙기'){
+	                  $('#goods').append('<option name="goods" value="'+31+'">'+result[i]+'</option>');}
+		               if(result[i]=='전자레인지'){
+	                  $('#goods').append('<option name="goods" value="'+32+'">'+result[i]+'</option>');}
+		               if(result[i]=='에어프라이어'){
+	                  $('#goods').append('<option name="goods" value="'+33+'">'+result[i]+'</option>');}
+		               if(result[i]=='오븐'){
+	                  $('#goods').append('<option name="goods" value="'+34+'">'+result[i]+'</option>');}
+		               if(result[i]=='오븐'){
+	                  $('#goods').append('<option name="goods" value="'+35+'">'+result[i]+'</option>');}
+		               if(result[i]=='침대(매트리스+프레임)'){
+	                  $('#goods').append('<option name="goods" value="'+41+'">'+result[i]+'</option>');}
+		               if(result[i]=='침대'){
+	                  $('#goods').append('<option name="goods" value="'+42+'">'+result[i]+'</option>');}
+		               if(result[i]=='쇼파'){
+	                  $('#goods').append('<option name="goods" value="'+43+'">'+result[i]+'</option>');}
+		               if(result[i]=='책상'){
+	                  $('#goods').append('<option name="goods" value="'+44+'">'+result[i]+'</option>');}
+		               if(result[i]=='악기'){
+	                  $('#goods').append('<option name="goods" value="'+51+'">'+result[i]+'</option>');}
+		               if(result[i]=='명품'){
+	                  $('#goods').append('<option name="goods" value="'+52+'">'+result[i]+'</option>');}
+		               if(result[i]=='귀금속'){
+	                  $('#goods').append('<option name="goods" value="'+53+'">'+result[i]+'</option>');}
+		               if(result[i]=='침실패키지'){
+	                  $('#goods').append('<option name="goods" value="'+61+'">'+result[i]+'</option>');}
+		               if(result[i]=='주방패키지'){
+	                  $('#goods').append('<option name="goods" value="'+62+'">'+result[i]+'</option>');}
+		               if(result[i]=='욕실패키지'){
+	                  $('#goods').append('<option name="goods" value="'+63+'">'+result[i]+'</option>');}
+		               if(result[i]=='기타패키지'){
+	                  $('#goods').append('<option name="goods" value="'+64+'">'+result[i]+'</option>');}
+		                  
+	               });
+	              
+	            },
+	            erro:function(jqXHR, textStatus, errorThrown){
+	               alert('오류가 발생했습니다');
+	               
+	            }
+	            
+	         });
+	      }
 
-			})	
-			
-		})
-	});
-	function doChange(srcE,targetId){
-		var val=srcE.options[srcE.selectedIndex].value;
-		var targetE=document.getElemetById(targetId);
 
-		removeAll(targetE);
-		
-		if(val=='10'){
-			addOption('냉장고',targetE);
-			addOption('침대',targetE);
-			addOption('쇼파',targetE);
-			addOption('TV',targetE);
-			addOption('세탁기',targetE);
-			}
-		else if(val=='20'){
-			addOption('빨래건조기',targetE);
-			addOption('정수기',targetE);
-			addOption('공기청정기',targetE);
-			addOption('복합기/프린터',targetE);
-			addOption('커피머신',targetE);
-			}
-		else if(val=='30'){
-			addOption('비데',targetE);
-			addOption('음식물처리기',targetE);
-			addOption('제빙기',targetE);
-			addOption('전자레인지',targetE);
-			}
-	}
-	function addOption(value, e){
-	    var o = new Option(value);
-	    try{
-	        e.add(o);
-	    }catch(ee){
-	        e.add(o, null);
-	    }
-	}
-	function removeAll(e){
-	    for(var i = 0, limit = e.options.length; i < limit - 1; ++i){
-	        e.remove(1);
-	    }
-	}
+
+	      window.onload=function(){
+	         $('#modalBtn').click(function(){
+		         
+			       $.ajax({
+					url:'searchList',
+					type:'GET',
+					data:{'param':$("#goods option:selected").val()},
+					success:function(result){
+						var goodsList=result;
+						$.each(goodsList,function(index,goods){
+							$('#goodsTable').append('<tr><td>'+goods.gdsCd+'</td></tr>');
+						});
+					},
+					erro:function(jqXHR,testStatus,errorThrown){
+						alert('오류가 발생했습니다');
+					}
+			     }); 
+		  });   
+
+
+		  }
+
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/actImg.js"></script>
 </head>
 <body>
+
+
 <div class="col-md-8 col-md-offset-2" id="actContent">
-<form action="/mp/mng/actInsert" enctype="multipart/form-data" method="post">
 		<h2>경매상품등록</h2>
         <table class="table" id="daeContent">
             <tr>
                 <td width="100px"><label>작 성 자</label></td>
                 <td>관 리 자</td>
-            </tr>
-            <tr>
-                <td><label>분류</label></td>
-                <td>
-			        	<select style="height:26px;" name=gdsSclassCd id="se">
-			        		<option value="" selected="selected">분류선택</option>
-			        		<option value="11" >에어컨</option>
-			        		<option value="12" >냉난방기</option>
-			        		<option value="13" >냉장고</option>
-			        		<option value="14" >TV</option>
-			        		<option value="15" >세탁기</option>
-			        		<option value="16" >빨래건조기</option>
-			        		<option value="17" >정수기</option>
-			        		<option value="18" >공기청정기</option>
-			        		<option value="19" >복합기/프린터</option>
-			        		<option value="21" >커피머신</option>
-			        		<option value="22" >제습기</option>
-			        		<option value="23" >청소기</option>
-			        		<option value="24" >드라이어</option>
-			        		<option value="25" >빔프로젝터</option>
-			        		<option value="26" >컴퓨터/노트북</option>
-			        		<option value="27" >무선스피커</option>
-			        		<option value="28" >비데</option>
-			        		<option value="29" >면도기</option>
-			        		<option value="31" >음식물처리기</option>
-			        		<option value="32" >제빙기</option>
-			        		<option value="33" >전자레인지</option>
-			        		<option value="34" >에어프라이어</option>
-			        		<option value="35" >오븐</option>
-			        		<option value="41" >침대</option>
-			        		<option value="42" >매트리스</option>
-			        		<option value="43" >쇼파</option>
-			        		<option value="44" >책상</option>
-			        		<option value="51" >악기</option>
-			        		<option value="52" >명품</option>
-			        		<option value="53" >귀금속</option>
-			        		<option value="n" >새상품</option>
-			        	</select>
-          		</td>
             </tr>
             <tr>
             	<td><label>상품선택</label></td>
@@ -193,31 +247,62 @@
 				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
 				      </div>
 				      <div class="modal-body" id="modalData">
-				       
-					       <div>
-					       <label>대분류</label>&nbsp&nbsp&nbsp
-					       <select name="gdsMclassCd" id="modalSelect1" onChange="doChange(this,'modalSelect2')">
-						       <option value="10">대형가전</option>
-						       <option value="20">중형가전</option>
-						       <option value="30">소형가전</option>
-					       </select>
-					       </div><br>
-					       <div>
-					       <label>제품분류</label>
-					       	<select name="gdsSclassCd" id="modalSelect2">
-					       		 <option value="default">--Select--</option>
-					       	</select>
-					       </div>
+				      <div id="left">
+						       <label>대분류</label>
+								<select id="classifi" name="classifi"
+		                           onchange="goodsSelect(this.value);" class="form-control">
+		                           <option value="">선택하세요</option>
+		                           <option value="10">대형가전</option>
+		                           <option value="20">중형가전</option>
+		                           <option value="30">소형가전</option>
+		                           <option value="40">가구</option>
+		                           <option value="50">기타</option>
+		                           <option value="60">패키지</option>
+		                        </select>
+		                        <br>
+		                        <label>제품분류</label>
+		                        <!-- <select class="form-control" id="goods" name="goods" onchange="goods2Select(this.value);"> -->
+		                        <select class="form-control" id="goods">
+		                           <option value="">선택하세요</option>
+		                        </select><br>
+					       <div><button id="modalBtn" >검색</button></div>
 				      </div>
-				      <div class="modal-footer">
+				      <div id="left2">
+				      <label>상품코드</label>
+				      		<table id="goodsTable">
+				      			<tr>
+				      				<td>안녕</td>
+				      				<td>안녕</td>
+				      				<td>안녕</td>
+				      				<td>안녕</td>
+				      			</tr>
+				      			<tr><td>1</td></tr>
+				      			<tr><td>2</td></tr>
+				      			<tr><td>3</td></tr>
+				      			<tr><td>4</td></tr>
+				      		</table>
+				      </div>
+				      
+						       
+					      <%--  <table id="goodsTable">
+					       		<c:forEach items="${elist}" var="bean">
+					       		<tr>
+					       			<td>${bean.gdsCd}</td>
+					       		</tr>
+					       		</c:forEach>
+					       </table> --%>
+				      <div class="modal-footer" id="end">
 				        <button type="button" class="btn btn-default">선택</button>
 				        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				      </div>
 				      </div>
 				    </div>
 				  </div>
 				</div>
             	</td>
             </tr>
+<div>
+<form action="/mp/mng/actInsert" enctype="multipart/form-data" method="post">
             <tr>
             	<td><label>상품구분</label></td>
             	<td>
@@ -264,8 +349,6 @@
             	<td><textarea style="resize:none;" name="content"></textarea></td>
             </tr>
              <tr>
-             </tr>
-             <tr>
 	             <td><label for="imgfile" id="imgfile_label">이미지 업로드</label></td>
 	             <td>
 	                <p>* 상품이미지는 640x640에 최적화 되어 있습니다.<br/>
@@ -300,8 +383,10 @@
                    <input id="cancel" type="reset" value="취소">
                 </td>
             </tr>
+			</form>
+</div>
         </table>
-</form>
+        <button id="hihi">안녕</button>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
