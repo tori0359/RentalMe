@@ -1,5 +1,9 @@
 package com.me.rentalme.act.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/act")
 public class ActController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ActController.class);
 	/**
 	* 이벤트 경매 리스트
 	* 
@@ -75,6 +80,22 @@ public class ActController {
 	* @author 황인준
 	* @exception 
 	*/
+	///////////////////////// 이벤트 경매 현장 전
+	@RequestMapping(value="/ac", method=RequestMethod.GET)
+	public String getActDei(HttpSession session) {
+		logger.info("index...");
+		System.out.println(session.getId()+">>>"+session.getAttributeNames());
+		return "act/actDetail";
+	}
+	
+	///////////////////////// 이벤트 경매 현장
+	@RequestMapping(value="/bid", method=RequestMethod.GET)
+	public String getActNow(HttpSession session) {
+		logger.info("index...");
+		System.out.println(session.getId()+">>>"+session.getAttributeNames());
+		return "act/actBid";
+	}
+	
 	
 	
 }

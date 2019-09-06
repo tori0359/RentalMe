@@ -104,7 +104,6 @@ public class LoginFindServiceImpl implements LoginFindService {
 		String userPw = BCrypt.hashpw(userVo.getUserPw(), BCrypt.gensalt()); 
 		String userId = userVo.getUserId();
 		String email  = userVo.getEmail();
-		
 		loginFindDao.updPw(userPw, userId, email);
 	}
 	
