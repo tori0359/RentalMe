@@ -151,7 +151,7 @@ public class LoginController {
 						loginService.keepLogin(userId, sessionKey, sessionDt);
 					}
 					
-					mav.setViewName("redirect:/");
+					mav.setViewName("redirect:/main");
 					return mav;
 				}else {
 					/*오류횟수를 1회 증가한다.*/
@@ -218,7 +218,7 @@ public class LoginController {
 			
 		}
 
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 

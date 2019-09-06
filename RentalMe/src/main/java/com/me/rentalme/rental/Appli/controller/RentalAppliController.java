@@ -151,7 +151,7 @@ public class RentalAppliController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/{menu}/detail/{gdsCd}", method = RequestMethod.GET)
-	public String getLgDeatail(@PathVariable("menu") String gdsSclassCd, @PathVariable("gdsCd") String gdsCd, RentalAppliVo rentalAppliVo, Model model ) {
+	public String getLgDeatail(@PathVariable("menu") String gdsSclassCd, @PathVariable("gdsCd") String gdsCd, RentalAppliVo rentalAppliVo, Model model, HttpSession session ) {
 //		System.out.println("detail~~~");
 		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
 		rentalAppliVo.setGdsCd(gdsCd);
@@ -175,11 +175,18 @@ public class RentalAppliController {
 //		System.out.println("gdsPrice			== " + list1.get(0).getGdsPrice());
 //		System.out.println("rnk					== " + review.get(0).getRnk());
 		
+		String user=(String)session.getAttribute("loginUserId");
+		System.out.println("sessionId = " + user);
+		String sessionMbNo = (String)session.getAttribute("loginMbNo");
+		System.out.println("sessionMbno = " + sessionMbNo);
+		
 		model.addAttribute("path", path);
 		model.addAttribute("grade", grade);
 		model.addAttribute("list1", list1);
 		model.addAttribute("review", review);
 		model.addAttribute("reviewCnt", reviewCnt);
+		model.addAttribute("loginUserId", user);
+		model.addAttribute("sessionMbNo", sessionMbNo);
 		
 		return "rental/rentalDetail";
 	}
@@ -193,11 +200,25 @@ public class RentalAppliController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/detail/quest", method = RequestMethod.POST)
-	public String addLgDetailQuest(RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
+	public String addLgDetailQuest(RentalAppliVo rentalAppliVo, Model model) {
 		int result = rentalAppliService.rentalGdsQuest(rentalAppliVo);		//	상담등록
 		//System.out.println("result = " + result);
 		model.addAttribute("rtnCd", Integer.toString(result));
 		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
 	}
 	
+	/**
+	 * 대형가전렌탈 장바구니등록
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/detail/cart", method = RequestMethod.POST)
+	public String addLgDetailCart(RentalAppliVo rentalAppliVo, Model model ) {
+		int result = rentalAppliService.rentalGdsCart(rentalAppliVo);	// 장바구니등록
+		model.addAttribute("renCd", Integer.toString(result));
+		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
+	}
 }

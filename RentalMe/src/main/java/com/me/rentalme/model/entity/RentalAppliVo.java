@@ -71,6 +71,10 @@ public class RentalAppliVo {
 	private String userNm;				// 사용자이름
 	private String gdsReviewDt;			// 상품리뷰일자
 	
+	/* 장바구니 */
+	private String mbNo;				// 회원번호
+	private int odrQty;					// 주문수량
+	
 	public String getGdsCd() {
 		return gdsCd;
 	}
@@ -390,17 +394,23 @@ public class RentalAppliVo {
 	public void setGdsReviewDt(String gdsReviewDt) {
 		this.gdsReviewDt = gdsReviewDt;
 	}
-	/**
-	 * @return the rnk
-	 */
 	public int getRnk() {
 		return rnk;
 	}
-	/**
-	 * @param rnk the rnk to set
-	 */
 	public void setRnk(int rnk) {
 		this.rnk = rnk;
+	}
+	public String getMbNo() {
+		return mbNo;
+	}
+	public void setMbNo(String mbNo) {
+		this.mbNo = mbNo;
+	}
+	public int getOdrQty() {
+		return odrQty;
+	}
+	public void setOdrQty(int odrQty) {
+		this.odrQty = odrQty;
 	}
 
 	

@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style type="text/css">
 .content {
-	height: 30vh;
+	height: 100%;
 }
 .content-inner {
 	margin-left:200px;
@@ -170,6 +170,9 @@
 	background-image: url('/imgs/quest2.jpg');
 	height: 160px;
 	
+}.#myModalLabel2 {
+	height: 160px;
+	
 }
 #agree {
 	height:100px;
@@ -217,6 +220,10 @@
 }
 #sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4 {
 	cursor:pointer;
+}
+#cartConfirm {
+	font-size: 15pt;
+	font-weight: bolder;
 }
 /* --------- 제품 정보 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
@@ -474,34 +481,58 @@ input::-moz-focus-inner { border: 0; }
 	function chgAgreeTermBox() {
 		var gdsPriceTemp = vGdsPrice;
 		var boxSelect = document.getElementById("agreeTermBox");
+		var vBoxSelect = boxSelect.options[boxSelect.selectedIndex].value;		// 장바구니 모달 수량 변경
 		var boxValue = boxSelect.options[boxSelect.selectedIndex].value;
 		if(boxValue == 6) {
 			vGdsPriceTemp = gdsPriceTemp;
-			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#gdsPrice').val(vGdsPriceTemp);		// 장바구니 모달 가격 변경
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");		// 상세정보 가격 변경
+			$('#agreeTerm').val(vBoxSelect);		// 장바구니 모달 계약기간 변경
 		}
 		else if(boxValue == 12) {
 			vGdsPriceTemp = gdsPriceTemp;
-			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#gdsPrice').val(vGdsPriceTemp);	
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	
+			$('#agreeTerm').val(vBoxSelect);
 		}
 		else if(boxValue == 18) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));	
+			gdsPriceTemp = String((gdsPriceTemp*0.95));
 			vGdsPriceTemp = gdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		} else if(boxValue == 24) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));	
+			gdsPriceTemp = String((gdsPriceTemp*0.95));
 			vGdsPriceTemp = gdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		} else if(boxValue == 30) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		} else if(boxValue == 36) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		}
 	}
 
+	// 수량 셀렉트박스 클릭
+	function selectOerQty() {
+		var sSelect = document.getElementById("selectOerQty");
+		var sSelectOdrQty = sSelect.options[sSelect.selectedIndex].value;
+		$('#odrQty').val(sSelectOdrQty);		// 장바구니 모달 변경 수량 변경
+	}
+
+	// 장바구니 클릭
+	function btnCart() {
+		var sUserId = "${loginUserId}";
+		// 세션체크
+		if((sUserId == "") || (sUserId == null)) {
+			location.href = "/login";
+		}
+	};
 	
 	
 </script>
@@ -620,17 +651,17 @@ input::-moz-focus-inner { border: 0; }
 								<h4>${list1.modelNm }</h4><h6><br></h6>
 								<h4>${list1.gdsCd }</h4><h6><br></h6>
 								<div class="box box-primary">
-									<select>
-										<option>&nbsp;1대&nbsp;&nbsp;</option>
-										<option>2대</option>
-										<option>3대</option>
-										<option>4대</option>
-										<option>5대</option>
-										<option>6대</option>
-										<option>7대</option>
-										<option>8대</option>
-										<option>9대</option>
-										<option>10대</option>
+									<select id="selectOerQty" onchange="selectOerQty()">
+										<option value=1>&nbsp;1대&nbsp;&nbsp;</option>
+										<option value=2>2대</option>
+										<option value=3>3대</option>
+										<option value=4>4대</option>
+										<option value=5>5대</option>
+										<option value=6>6대</option>
+										<option value=7>7대</option>
+										<option value=8>8대</option>
+										<option value=9>9대</option>
+										<option value=10>10대</option>
 									</select>
 								</div><br>
 							</div>
@@ -639,7 +670,7 @@ input::-moz-focus-inner { border: 0; }
 						       		<button style="width:150px;" id="charge_button1" type="button" class="btn btn-info" data-backdrop="static" data-toggle="modal"data-target="#myModal">상담예약</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success">장바구니</button>
+						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success" onclick="btnCart();" data-backdrop="static" data-toggle="modal"data-target="#myModal2">장바구니</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
 						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger">결제하기</button>
@@ -696,6 +727,35 @@ input::-moz-focus-inner { border: 0; }
 							                            </div>
 							                        </div>
 												</div>
+											</div>
+										    <div class="modal-footer">
+										    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										    </div>
+										</div>
+								    </div>
+								</div>
+								<!-- 모달 끝 -->
+							</form>
+							<form id="target" action="/rental/Appli/lg/detail/cart" method="post">
+								<!-- 장바구니 모달 -->
+								<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel2"></h4>
+										    </div>
+											<div class="modal-body">
+										    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
+										    	<input type="text" class="form-control" id="gdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
+										    	<input type="text" class="form-control" id="mbNo" name="mbNo" value="${sessionMbNo }" style="display: none;">
+										    	<input type="text" class="form-control" id="gdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;">
+										    	<input type="text" class="form-control" id="agreeTerm" name="agreeTerm" value="${list1.agreeTerm}" style="display: none;">
+										    	<input type="text" class="form-control" id="odrQty" name="odrQty" value="1" style="display: none;">
+											</div>
+											<div class="form-group">
+										    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;장바구니에 등록 하시겠습니까?</label>
 											</div>
 										    <div class="modal-footer">
 										    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
@@ -885,6 +945,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ***************** -->		
 				</div>
 			</div>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
 	</div>
 
