@@ -455,5 +455,41 @@
 					,'1'
 			)
 	</insert>
+	
+	<!-- 렌탈 상품 리스트 후기 -->
+	<select id="reviewRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			@ROWNUM := @ROWNUM+1 AS RNK		/* 게시번호 순위 */
+			,A.*
+		FROM (
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+				ORDER BY GDS_REVIEW_NO DESC
+		) A
+		,(SELECT @ROWNUM := 0) R
+	</select>
+	
+	<!-- 렌탈 상품 리스트 후기 갯수 -->
+	<select id="reviewRetriveCnt" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			(
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+		) A
+	</select>
 
 </mapper>

@@ -98,9 +98,9 @@ public class RentalAppliController {
 		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);	//상품리스트
 		
 //		path test 
-		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
-		System.out.println("getGdsMclassNm 		== " + path.get(0).getGdsMclassNm());
-		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
+//		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
+//		System.out.println("getGdsMclassNm 		== " + path.get(0).getGdsMclassNm());
+//		System.out.println("getGdsSclassNm		== " + path.get(0).getGdsSclassNm());
 		
 //		session test
 //		System.out.println("-----------------session start ----------------------");
@@ -152,13 +152,15 @@ public class RentalAppliController {
 	 */
 	@RequestMapping(value = "/{menu}/detail/{gdsCd}", method = RequestMethod.GET)
 	public String getLgDeatail(@PathVariable("menu") String gdsSclassCd, @PathVariable("gdsCd") String gdsCd, RentalAppliVo rentalAppliVo, Model model ) {
-		System.out.println("detail~~~");
+//		System.out.println("detail~~~");
 		rentalAppliVo.setGdsSclassCd(gdsSclassCd);
 		rentalAppliVo.setGdsCd(gdsCd);
 		
 		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);		//	PATH 경로
 		List<RentalAppliVo> grade = rentalAppliService.rentalGrade(rentalAppliVo);		//  상품평점
-		List<RentalAppliVo> list1 = rentalAppliService.rentalGdsDetail(rentalAppliVo);	//	상품정보
+		List<RentalAppliVo> list1 = rentalAppliService.rentalGdsDetail(rentalAppliVo);	//	상품상세정보
+		List<RentalAppliVo> review = rentalAppliService.rentalReview(rentalAppliVo);	//	상품후기
+		List<RentalAppliVo> reviewCnt = rentalAppliService.rentalReviewCnt(rentalAppliVo);	//	상품후기갯수
 		
 //		gds test
 //		System.out.println("gdsCd				== " + list1.get(0).getGdsCd());
@@ -171,10 +173,13 @@ public class RentalAppliController {
 //		System.out.println("mig1				== " + list1.get(0).getImg1());
 //		System.out.println("regDt				== " + list1.get(0).getRegDt());
 //		System.out.println("gdsPrice			== " + list1.get(0).getGdsPrice());
+//		System.out.println("rnk					== " + review.get(0).getRnk());
 		
 		model.addAttribute("path", path);
-		model.addAttribute("list1", list1);
 		model.addAttribute("grade", grade);
+		model.addAttribute("list1", list1);
+		model.addAttribute("review", review);
+		model.addAttribute("reviewCnt", reviewCnt);
 		
 		return "rental/rentalDetail";
 	}
@@ -189,19 +194,9 @@ public class RentalAppliController {
 	 */
 	@RequestMapping(value = "/detail/quest", method = RequestMethod.POST)
 	public String addLgDetailQuest(RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
-		System.out.println("타냐?");
-		
-//		System.out.println(rentalAppliVo.getGdsSclassCd());
-//		System.out.println(rentalAppliVo.getGdsCd());
-//		System.out.println(rentalAppliVo.getQuestNm());
-//		System.out.println(rentalAppliVo.getHp());
-//		System.out.println(rentalAppliVo.getEmail());
-		
 		int result = rentalAppliService.rentalGdsQuest(rentalAppliVo);		//	상담등록
-		System.out.println("result = " + result);
-		
+		//System.out.println("result = " + result);
 		model.addAttribute("rtnCd", Integer.toString(result));
-		
 		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
 	}
 	

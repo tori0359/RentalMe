@@ -156,9 +156,37 @@
 	font-size: 20pt;
 	font-weight: bolder;
 }
-
 #li2 {
 	list-style: none;
+}
+.ordtable>thead>tr>th {
+	text-align:center;
+}
+ 
+.ordtable>tbody>tr>td {
+	vertical-align: middle;
+	text-align: center;
+	display: table-cell;
+}
+#reviewTable {
+	width: 1160px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#re1 {
+	width: 100px;
+}
+#re2 {
+	width: 760px;
+}
+#re3 {
+	width: 150px;
+}
+#re4 {
+	width: 150px;
+}
+#reviewGrade1 {
+	font-size: 11pt;
 }
 /* --------- 제품 정보 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
@@ -245,6 +273,7 @@ input::-moz-focus-inner { border: 0; }
 
 		// menu1 영역 버튼클릭
 		$("#menu1 #sort-btn1").on("click", function(event){
+			alert("asd");
 			var offset = $("#menu1 #sort-btn1").offset();
 			$('html').animate({scrollTop : offset.top}, 0);
 		});
@@ -326,11 +355,32 @@ input::-moz-focus-inner { border: 0; }
 			var offset = $("#menu4 #sort-btn4").offset();
 			$('html').animate({scrollTop : offset.top}, 0);
 		});
+
+		//alert("길이" + vReview.length);
+		//alert("값 vReview[0] = " +  vReview[0]);
 		
-		//alert("안쪽마지막");
-	}
+		// 상품후기 별점
+		if(vReview.length > 0 ) {
+			for(var i=0; i<vReview.length; i++) {
+				if(vReview[i] == 0) {
+					$('#reviewGrade'+(i+1)).html(reviewStar0);
+				} else if(vReview[i] == 1) {
+					$('#reviewGrade'+(i+1)).html(reviewStar1);
+				} else if(vReview[i] == 2) {
+					$('#reviewGrade'+(i+1)).html(reviewStar2);
+				} else if(vReview[i] == 3) {
+					$('#reviewGrade'+(i+1)).html(reviewStar3);
+				} else if(vReview[i] == 4) {
+					$('#reviewGrade'+(i+1)).html(reviewStar4);
+				} else if(vReview[i] == 5){
+					$('#reviewGrade'+(i+1)).html(reviewStar5);
+				}
+			}
+		}
 
 	//alert("바깥쪽");
+	
+	}
 	
 	/**************************/
 	/**** 전역변수 선언시작 ***/
@@ -352,6 +402,20 @@ input::-moz-focus-inner { border: 0; }
 		vTotGrdAvg = "${grade.totGrdAvg}";
 	</c:forEach>
 	var vTotGrdAvgPercent =  (vTotGrdAvg*20) + ((vTotGrdAvg*20)*0.0003)*100;		// 점수 평균 퍼센트화
+
+	var vReview = new Array();	// 리뷰 리스트
+	<c:forEach items="${review}" var="review" varStatus="status">
+		vReview[${status.index}] = "${review.grade}";
+	</c:forEach>
+
+
+	var reviewStar0 = "☆☆☆☆☆";
+	var reviewStar1 = "★☆☆☆☆";
+	var reviewStar2 = "★★☆☆☆";
+	var reviewStar3 = "★★★☆☆";
+	var reviewStar4 = "★★★★☆";
+	var reviewStar5 = "★★★★★";
+		
 	/**************************/
 	/**** 전역변수 선언끝 *****/
 	/**************************/
@@ -600,10 +664,12 @@ input::-moz-focus-inner { border: 0; }
 							<br><br><br>
 							<div id="menu1">
 								<ul class="nav nav-tabs nav-justified">
-									<li role="presentation" class="active" id="sort-btn1" ><a>제품 상세정보</a></li>
-									<li role="presentation" id="sort-btn2" ><a>배송 및 A/S정보</a></li>
-									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+									<li role="presentation" class="active" id="sort-btn1"><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2"><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn3"><a>교환/반품정보</a></li>
+									<c:forEach items="${reviewCnt }" var="reviewCnt">
+										<li role="presentation"id="sort-btn4"><a>상품후기(${reviewCnt.cnt })</a></li>
+									</c:forEach>
 								</ul>
 							</div>
 							<div id="info1">
@@ -623,10 +689,12 @@ input::-moz-focus-inner { border: 0; }
 							<br><br><br>
 							<div id="menu2">
 								<ul class="nav nav-tabs nav-justified">
-									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn1"><a>제품 상세정보</a></li>
 									<li role="presentation" class="active" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+									<li role="presentation" id="sort-btn3"><a>교환/반품정보</a></li>
+									<c:forEach items="${reviewCnt }" var="reviewCnt">
+										<li role="presentation" id="sort-btn4"><a>상품후기(${reviewCnt.cnt })</a></li>
+									</c:forEach>
 								</ul>
 							</div>
 							<div id="info2">
@@ -663,10 +731,12 @@ input::-moz-focus-inner { border: 0; }
 							<br><br><br>
 							<div id="menu3">
 								<ul class="nav nav-tabs nav-justified">
-									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-									<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn1"><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2"><a>배송 및 A/S정보</a></li>
 									<li role="presentation" class="active" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-									<li role="presentation" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+									<c:forEach items="${reviewCnt }" var="reviewCnt">
+										<li role="presentation" id="sort-btn4"><a>상품후기(${reviewCnt.cnt })</a></li>
+									</c:forEach>
 								</ul>
 							</div>
 							<div id="info3">
@@ -716,15 +786,38 @@ input::-moz-focus-inner { border: 0; }
 							<br><br><br>
 							<div id="menu4">
 								<ul class="nav nav-tabs nav-justified">
-									<li role="presentation" id="sort-btn1" onClick=""><a>제품 상세정보</a></li>
-									<li role="presentation" id="sort-btn2" onClick=""><a>배송 및 A/S정보</a></li>
-									<li role="presentation" id="sort-btn3" onClick=""><a>교환/반품정보</a></li>
-									<li role="presentation" class="active" id="sort-btn4" onClick=""><a>상품후기(31)</a></li>
+									<li role="presentation" id="sort-btn1"><a>제품 상세정보</a></li>
+									<li role="presentation" id="sort-btn2"><a>배송 및 A/S정보</a></li>
+									<li role="presentation" id="sort-btn3"><a>교환/반품정보</a></li>
+									<c:forEach items="${reviewCnt }" var="reviewCnt">
+										<li role="presentation" class="active" id="sort-btn4" onClick=""><a>상품후기(${reviewCnt.cnt })</a></li>
+									</c:forEach>
 								</ul>
 							</div>
 							<div id="info4">
-								블라블라~4444444444444444444444444
+								<br><br><br>
+								<table class="ordtable table" id="reviewTable">
+									<thead>
+									   <tr class="active">
+									      <th id="re1">글번호</th>
+									      <th id="re2">내용</th>
+									      <th id="re3">만족도</th>
+									      <th id="re4">작성자</th>
+									   </tr>
+									</thead>
+						          	<tbody>
+										<c:forEach items="${review }" var="review">
+										<tr>
+											<td>${review.rnk }</td>
+											<td>${review.content }</td>
+											<td id="reviewGrade${review.rnk }">${review.grade }</td>
+											<td>${review.userNm }</td>
+										</tr>
+							          	</c:forEach>
+						          	</tbody>
+					          	</table>
 							</div>
+							<br><br><br><br><br>
 						</div>
 					</div>
 				</div>
@@ -739,3 +832,6 @@ input::-moz-focus-inner { border: 0; }
 </body>
 
 </html>
+
+
+

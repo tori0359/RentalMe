@@ -63,6 +63,14 @@ public class RentalAppliVo {
 	
 	private String homeCd;				// 홈 링크코드
 	
+	/* 리뷰 */
+	private int rnk;					// 게시물 랭크차순 번호
+	private String gdsReviewNo;			// 상품리뷰번호
+	private String content;				// 내용
+	private int grade;					// 점수
+	private String userNm;				// 사용자이름
+	private String gdsReviewDt;			// 상품리뷰일자
+	
 	public String getGdsCd() {
 		return gdsCd;
 	}
@@ -351,6 +359,48 @@ public class RentalAppliVo {
 	}
 	public void setHomeCd(String homeCd) {
 		this.homeCd = homeCd;
+	}
+	public String getGdsReviewNo() {
+		return gdsReviewNo;
+	}
+	public void setGdsReviewNo(String gdsReviewNo) {
+		this.gdsReviewNo = gdsReviewNo;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+	public String getGdsReviewDt() {
+		return gdsReviewDt;
+	}
+	public void setGdsReviewDt(String gdsReviewDt) {
+		this.gdsReviewDt = gdsReviewDt;
+	}
+	/**
+	 * @return the rnk
+	 */
+	public int getRnk() {
+		return rnk;
+	}
+	/**
+	 * @param rnk the rnk to set
+	 */
+	public void setRnk(int rnk) {
+		this.rnk = rnk;
 	}
 
 	
