@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-		#title{
+		#title2{
 	   		font-size: 15pt;
 	   		font-weight: bolder;
 	   		font-family: "nanumB";
@@ -124,7 +124,7 @@
 <body>
 	
 	<div class="titlediv">
-       <p id="title">나의 정보</p>
+       <p id="title2">나의 정보</p>
      </div>
      <form action="/mp/updInfo" method="post">
      <div id="infodiv">
@@ -132,7 +132,7 @@
      <div id="info">
      <p>
 	     <c:if test="${empty userVo.userNM}">
-	     	${userVo.userNM} 님의 개인정보입니다.
+	     	${loginUserId} 님의 개인정보입니다.
 	     </c:if>
 	     <c:if test="${!empty userVo.userNM }">
 	     	${userVo.userNM} 님의 개인정보입니다.

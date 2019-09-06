@@ -37,15 +37,15 @@
         }
         
        #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	  }
-	  
-	  .navbar-default .navbar-nav > .open > a {
-			color: black;
-			background: white;
-		}
-		    
+            min-height:100%;
+            position:relative;
+     }
+     
+     .navbar-default .navbar-nav > .open > a {
+         color: black;
+         background: white;
+      }
+          
       .hr {
          height: 1px;
          width: 100%;
@@ -93,8 +93,8 @@
          z-index:2;
       }
       .login{
-      	width:100%;
-      	background-color: black;
+         width:100%;
+         background-color: black;
       }
 
       .navbar-text>a{
@@ -107,13 +107,13 @@
          font-weight: bold; 
          font-family: "nanumB";
       } 
-	   
-	 
-	   
-	   .dropdown.open .dropdown-menu {
-			max-height: 400px;
-			opacity: 1;
-		}
+      
+    
+      
+      .dropdown.open .dropdown-menu {
+         max-height: 400px;
+         opacity: 1;
+      }
 
       .nav a{
          font-family: "nanumB";
@@ -140,39 +140,50 @@
       
       .navbar .navbar-nav {
         display: inline-block;
-		float: none;
+      float: none;
       }
       
       .navbar .navbar-collapse {
            text-align: center;
       }
-	   
-	  .navbar-text a{
-		   color:white;
-	   }
-	   
-	   .navbar-text{
-		   color:white;
-	   }
-	   
+      
+     .navbar-text a{
+         color:white;
+      }
+      
+      .navbar-text{
+         color:white;
+      }
+      
     .dropdown:hover .dropdown-menu { 
          /* 상위 메뉴에 마우스 모버한 경우 그 안의 하위 메뉴 스타일 설정 */ 
          height: auto;
          
          /* 드롭다운 마우스 hover 자동기능 */
          /*
-	     display: block;
-	     margin-top: 0;
-	     */
+        display: block;
+        margin-top: 0;
+        */
       } 
+      .dropdown #used_link_btn{
+      	 width: 100px;
+      	 height: 40px;
+      	 margin-top: 4px;
+      	 font-family: "nanumB";
+      	 font-weight: bold;
+      	 background-color: white;
+      	 border: none;
+      	 font-size: 15px;
+      	 color: #707070;
+      }
     
-	.login{
-		 background:black;
-		 width: 100%;
-	   }
-	   
+   .login{
+       background:black;
+       width: 100%;
+      }
+      
     .dropdown-menu>a:hover,
-	.dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
+   .dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
          color: white;
          font-weight: bolder;
          background: #E7A602; 
@@ -185,15 +196,15 @@
          background-color: white;
          margin-top: -1px;
       } 
-	   
-	   .dropdown-menu>li a{
-		   text-align: center;
-		   height: 40px;
-		   line-height: 40px;
-	   }
-	   
+      
+      .dropdown-menu>li a{
+         text-align: center;
+         height: 40px;
+         line-height: 40px;
+      }
+      
 
-	   
+      
        #content{
          font-family: "nanumB";
          font-size: 15px;
@@ -334,7 +345,12 @@
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
         <li class="dropdown">
-          <a href="/mp/cs" class="dropdown-toggle" role="button" aria-haspopup="true" data-toggle="dropdown">중고거래</a>
+          <form action="/used/big">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm" value="">
+			<input type="hidden" name="align" value="1">			
+			<input type="submit" id="used_link_btn" value="중고거래">
+		  </form>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>

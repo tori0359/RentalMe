@@ -1,6 +1,8 @@
 package com.me.rentalme.login.find.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -54,6 +56,47 @@ public class LoginFindDaoImpl implements LoginFindDao {
 		log.debug("이메일로 아이디 찾기 Dao");
 		
 		return sqlSession.selectList("loginFind.getId", email);
+	}
+	
+	/**
+	* 등록된 이메일로 비밀번호 찾기 
+	* 
+	* @param  String userId : 입력한 사용자 아이디 
+	* @param  String email  : 입력한 사용자 이메일
+	* @return int 
+	* @author 황인준
+	* @exception
+	*/	
+	@Override
+	public int checkPwEmail(String userId, String email) {
+		log.debug("등록된 이메일로 비밀번호 찾기 Dao");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("email", email);
+		int result = sqlSession.selectOne("loginFind.checkPwEmail", map);
+		return result;
+	}
+
+	/**
+	* 비밀번호 변경 
+	* 
+	* @param  String userPw
+	* @return void
+	* @author 황인준
+	* @exception
+	*/
+	@Override
+	public int updPw(String userPw, String userId, String email) {
+		log.debug("비밀번호 변경 Dao");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userPw", userPw);
+		map.put("userId", userId);
+		map.put("email", email);
+		
+		return sqlSession.update("loginFind.changePw", map);
+		
 	}
 
 }

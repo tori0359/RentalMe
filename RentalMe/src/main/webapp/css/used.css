@@ -21,6 +21,9 @@
 		min-width: 470px;
 		margin-left: 10px;
 	}
+	#showInfo .row .col-md-2{
+		font-weight: bold;
+	}
 	#mainInfo{
 		font-weight: bold;
 		font-size: xx-large;
@@ -34,6 +37,7 @@
 	}
 
 	.cmtContent{
+		position:relative;
 		border-top: 1px solid black;
 		height: 100px;
 	}
@@ -98,6 +102,15 @@
 		height: 75px;
 	}
 	
+	.declBtn{
+		position:absolute; 
+		bottom:0px;
+		text-decoration: none;
+		color: white;
+		background-color: red;
+		right: 0px;
+	}
+	
 	#usedFoot{
 		clear: both;
 		height: 300px;
@@ -111,6 +124,7 @@
 		margin: 100px auto;
 		margin-bottom: 300px;
 		height: 2000px;
+		font-family: "nanumB";
 	}
 	.usedStore #search{
 		display: inline-block;
@@ -118,7 +132,7 @@
 	}
 	.usedStore h2{
 		text-align:center;
-		background-color: lightgray;
+		border: 5px solid lightgray;
 		cursor: default;
 	}
 	.usedStore select{
@@ -217,6 +231,9 @@
 		width: 0px;
 		height: 0px;
 	}
+	#myUsedReview form{
+		margin-bottom: 30px;
+	}
 	#myUsedReview textarea{
 		margin-left: 0px;
 	}
@@ -226,6 +243,35 @@
 	}
 	.storeCmtList{
 		border-top: 1px solid black;
+		position: relative;
+	}
+	.storeCmtList div{
+		display: inline-block;
+	}
+	.storeCmtList .mbNo{
+		display: inline-block;
+	}
+	.storeCmtList .storeReviewDt{
+		float: right;
+	}
+	.storeCmtList .content{
+		font-size: 2em;
+		display: block;
+	}
+	.storeCmtList .declaration{
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		background-color: red;
+		text-decoration: none;
+	}
+	.storeCmtList a{
+		color: white;
+		text-decoration: none;
+	}
+	.storeCmtList a:hover{
+		color: white;
+		text-decoration: none;
 	}
 	
 /*나의 상점 끝*/

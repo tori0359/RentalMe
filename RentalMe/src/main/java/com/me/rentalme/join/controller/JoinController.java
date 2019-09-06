@@ -25,7 +25,7 @@ import com.me.rentalme.model.entity.UserVo;
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.12
-* 수정일자 : 2019.08.13
+* 수정일자 : 2019.09.02
 */
 @Controller
 @RequestMapping(value="/join")

@@ -8,7 +8,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
-#title{
+	#title2{
             font-size: 15pt;
             font-weight: bolder;
             font-family: "nanumB";
@@ -77,14 +77,14 @@
 <body>
 	<div>
 	<div class="titlediv">
-       <p id="title">경매내역</p>
+       <p id="title2">경매내역</p>
      </div>
      <div class="hr" style="height:3px; background-color: black;"></div>
        	 <div id="info">
        	 <p>
 	       	 <input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty userVo.userNM}">
-		     	${userVo.userNM} 님의 경매내역입니다.
+		     	${loginUserId} 님의 경매내역입니다.
 		     </c:if>
 		     <c:if test="${!empty userVo.userNM }">
 		     	${userVo.userNM} 님의 경매내역입니다.
@@ -106,7 +106,10 @@
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.bidTime}</td>
        			<td><fmt:formatNumber pattern="##,###.##">${bean.bidPrice}</fmt:formatNumber> 원</td>
-       			<td><button>결제하기</button><br><button>포기하기</button></td>
+       			<td>
+       				<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >결제</button>
+ 					<button style="background:#D8D8D8; color:black;" type="button" class="btn" style="font-size: 9pt;" >포기</button>
+       			</td>
        		</tr>
        	</c:forEach>
        	</tbody>

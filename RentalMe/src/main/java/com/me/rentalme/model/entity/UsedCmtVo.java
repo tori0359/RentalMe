@@ -5,7 +5,7 @@ import java.sql.Date;
 public class UsedCmtVo {
 	private String usedGdsNo;		// 중고상품번호
 	private String usedGdsComtNo;	// 중고상품댓글번호
-	private String usedGdsContDt;	// 중고상품댓글일자
+	private String usedGdsComtDt;	// 중고상품댓글일자
 	private String mbNo;			// 회원번호
 	private String content;			// 내용
 	private String secretYn;		// 비밀여부
@@ -21,12 +21,12 @@ public class UsedCmtVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UsedCmtVo(String usedGdsNo, String usedGdsComtNo, String usedGdsContDt, String mbNo, String content,
+	public UsedCmtVo(String usedGdsNo, String usedGdsComtNo, String usedGdsComtDt, String mbNo, String content,
 			String secretYn, String usedReGbCd, String delYn, String chgId, Date chgDt, String regId, Date regDt) {
 		super();
 		this.usedGdsNo = usedGdsNo;
 		this.usedGdsComtNo = usedGdsComtNo;
-		this.usedGdsContDt = usedGdsContDt;
+		this.usedGdsComtDt = usedGdsComtDt;
 		this.mbNo = mbNo;
 		this.content = content;
 		this.secretYn = secretYn;
@@ -54,12 +54,12 @@ public class UsedCmtVo {
 		this.usedGdsComtNo = usedGdsComtNo;
 	}
 
-	public String getUsedGdsContDt() {
-		return usedGdsContDt;
+	public String getusedGdsComtDt() {
+		return usedGdsComtDt;
 	}
 
-	public void setUsedGdsContDt(String usedGdsContDt) {
-		this.usedGdsContDt = usedGdsContDt;
+	public void setusedGdsComtDt(String usedGdsComtDt) {
+		this.usedGdsComtDt = usedGdsComtDt;
 	}
 
 	public String getMbNo() {
@@ -145,8 +145,8 @@ public class UsedCmtVo {
 
 	@Override
 	public String toString() {
-		return "UsedCmtVo [usedGdsNo=" + usedGdsNo + ", usedGdsComtNo=" + usedGdsComtNo + ", usedGdsContDt="
-				+ usedGdsContDt + ", mbNo=" + mbNo + ", content=" + content + ", secretYn=" + secretYn + ", usedReGbCd="
+		return "UsedCmtVo [usedGdsNo=" + usedGdsNo + ", usedGdsComtNo=" + usedGdsComtNo + ", usedGdsComtDt="
+				+ usedGdsComtDt + ", mbNo=" + mbNo + ", content=" + content + ", secretYn=" + secretYn + ", usedReGbCd="
 				+ usedReGbCd + ", delYn=" + delYn + ", chgId=" + chgId + ", chgDt=" + chgDt + ", regId=" + regId
 				+ ", regDt=" + regDt + "]";
 	}
@@ -162,7 +162,7 @@ public class UsedCmtVo {
 		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
 		result = prime * result + ((secretYn == null) ? 0 : secretYn.hashCode());
 		result = prime * result + ((usedGdsComtNo == null) ? 0 : usedGdsComtNo.hashCode());
-		result = prime * result + ((usedGdsContDt == null) ? 0 : usedGdsContDt.hashCode());
+		result = prime * result + ((usedGdsComtDt == null) ? 0 : usedGdsComtDt.hashCode());
 		result = prime * result + ((usedGdsNo == null) ? 0 : usedGdsNo.hashCode());
 		result = prime * result + ((usedReGbCd == null) ? 0 : usedReGbCd.hashCode());
 		return result;
@@ -212,10 +212,10 @@ public class UsedCmtVo {
 				return false;
 		} else if (!usedGdsComtNo.equals(other.usedGdsComtNo))
 			return false;
-		if (usedGdsContDt == null) {
-			if (other.usedGdsContDt != null)
+		if (usedGdsComtDt == null) {
+			if (other.usedGdsComtDt != null)
 				return false;
-		} else if (!usedGdsContDt.equals(other.usedGdsContDt))
+		} else if (!usedGdsComtDt.equals(other.usedGdsComtDt))
 			return false;
 		if (usedGdsNo == null) {
 			if (other.usedGdsNo != null)

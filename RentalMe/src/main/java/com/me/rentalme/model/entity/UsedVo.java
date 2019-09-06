@@ -30,6 +30,9 @@ public class UsedVo {
 	private int startPage;				 // 시작 페이지
 	private String userId;				 // 유저 아이디
 	private String userNM;				 // 유저 이름
+	private String mclassName;			 // 중분류 이름
+	private String sclassName;			 // 소분류 이름
+	
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -273,8 +276,6 @@ public class UsedVo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
 
 	public String getUserNM() {
 		return userNM;
@@ -282,6 +283,24 @@ public class UsedVo {
 
 	public void setUserNM(String userNM) {
 		this.userNM = userNM;
+	}
+	
+
+
+	public String getMclassName() {
+		return mclassName;
+	}
+
+	public void setMclassName(String mclassName) {
+		this.mclassName = mclassName;
+	}
+
+	public String getSclassName() {
+		return sclassName;
+	}
+
+	public void setSclassName(String sclassName) {
+		this.sclassName = sclassName;
 	}
 
 	@Override

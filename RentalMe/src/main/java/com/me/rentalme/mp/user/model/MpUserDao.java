@@ -26,25 +26,28 @@ public interface MpUserDao {
 	int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException;
 	
 	//장바구니 리스트 출력
-	List<CallVo> selectCart() throws SQLException;
+	List<CallVo> selectCart(String mbNo) throws SQLException;
+	
+	//장바구니 선택삭제
+	public void deleteCart(String gdsCd) throws SQLException;
 	
 	//찜한상품 리스트 출력
-	List<CallVo> selectWish() throws SQLException;
+	List<CallVo> selectWish(String mbNo) throws SQLException;
 	
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
-	public void deleteWish(CallVo callVo) throws SQLException;
+	public void deleteWish(String usedGdsNo) throws SQLException;
 
 	//예치금 리스트 출력
-	List<CallVo> selectDeposit() throws SQLException;
+	List<CallVo> selectDeposit(String mbNo) throws SQLException;
 
 	//예치금 충전
-	int insertCharge(String userId, String depositGbCd, String chargeDeposit) throws SQLException;
+	int insertCharge(String userId, String depositGbCd, String chargeDeposit,String mbNo) throws SQLException;
 
 	//현재 예치금 업데이트
-	public void updateDeposit() throws SQLException;
+	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException;
 
 	//현재 예치금 출력
-	public CallVo selectUserInfo() throws SQLException;
+	public CallVo selectUserInfo(String mbNo) throws SQLException;
 
 	//내 정보 출력
 	public UserVo selectMyInfo(String mbNo) throws SQLException;
@@ -64,4 +67,6 @@ public interface MpUserDao {
 	CsVo myQuestDetail(CsVo csVo) throws SQLException;
 	
 	int myQuestDel(CsVo csVo) throws SQLException;
+
+	
 }

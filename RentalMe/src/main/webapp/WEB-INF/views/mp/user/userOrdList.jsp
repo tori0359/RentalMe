@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-      #title{
+      #title2{
             font-size: 15pt;
             font-weight: bolder;
             font-family: "nanumB";
@@ -33,10 +33,14 @@
            vertical-align: middle;
            text-align: center;
            display: table-cell;
+           line-height:30px;
+        }
+        .ordtable>tbody>tr>td:nth-child(1){
+        	text-align:left;
         }
         
       .ordimg{
-            width:150px;
+            width:100px;
       }
       
        .delete_btn1{
@@ -118,6 +122,9 @@
       #info p{
       	line-height:20px;
       	font-family:"nanumB";
+      }
+      .tdtext{
+      	margin:30px 0;
       }
    
 </style>
@@ -235,14 +242,14 @@
 <body>
    <div>
    <div class="titlediv">
-       <p id="title">주문 내역</p>
+       <p id="title2">주문 내역</p>
      </div>
      <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
      <div id="info">
      <p>
      	<input type="hidden" value="${loginMbNo}">
 	     <c:if test="${empty userVo.userNM}">
-	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+	     	${loginUserId} 님이 렌탈미에서 주문한 내역입니다.
 	     </c:if>
 	     <c:if test="${!empty userVo.userNM }">
 	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
@@ -252,8 +259,8 @@
           <table class="ordtable table">
           <thead>
              <tr class="active">
-                <th>주문일</th>
                 <th>상품명/선택사항</th>
+                <th>주문일</th>
                 <th>수량</th>
                 <th>렌탈기간</th>
                 <th>상품금액</th>
@@ -266,15 +273,16 @@
           
           <c:forEach items="${alist}" var="bean">
              <tr>  
-             	
-                <td>${bean.odrDt}</td>
-                <td><!--  <img class="ordimg" src="imgs/bed1.jpg"/> -->${bean.gdsNm} 
-                <input type=hidden value="${bean.gdsCd}"/>
-                </td>
-                <td>${bean.odrQty}</td>
-                <td>${bean.agreeTem}개월</td>
-                <td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</td>
                 <td>
+	                <a style="text-decoration:none; color:black;"href="#">
+	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
+	                <input type=hidden value="${bean.gdsCd}"/></a>
+                </td>
+                <td><p class="tdtext">${bean.odrDt}</p></td>
+                <td><p class="tdtext">${bean.odrQty}</p></td>
+                <td><p class="tdtext">${bean.agreeTem}개월</p></td>
+                <td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
+                <td><p class="tdtext">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
                       입금대기
                    </c:if>
@@ -287,8 +295,12 @@
                    <c:if test= "${bean.odrStsGbCd eq 'RC'}">
                       반품확정
                    </c:if>
+                   </p>
                 </td>
-                <td><button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button></td>
+                <td><p class="tdtext">
+                <button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button>
+                </p>
+                </td>
              </tr>
           </c:forEach>
           </tbody>
@@ -313,7 +325,14 @@
 	        	<input type="hidden" name="gdsCd" value="gdsCd"/>
 	        </div>
 	        <div class="col-md-4 col-md-offset-3">
-	      		<label>글쓴이 </label><div name="userId"></div>
+	      		<label>글쓴이 </label>
+		      	 <c:if test="${empty userVo.userNM}">
+			     	<div>${loginUserId}</div>
+			     </c:if>
+			     <c:if test="${!empty userVo.userNM }">
+			     	<div>${userVo.userNM}</div>
+			     </c:if>
+		     
 	        	<input type="hidden" name="userId" value="userId"/>
 	        	<input type="hidden" name="grade" id="grade"/>
 	      	</div>

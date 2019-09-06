@@ -97,13 +97,13 @@
            </tr>
            </thead>
            <tr>
-                <td class="text-center"><a href="./">주문관리</a></td>
+                <td class="text-center"><a href="${pageContext.request.contextPath }/mp/mng/list">주문관리</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="./cart">반품관리</a></td>
+                <td class="text-center"><a href="${pageContext.request.contextPath }/mp/mng/cart">반품관리</a></td>
            </tr>
            <tr>
-                <td class="text-center"><a href="#">예치금관리</a></td>
+                <td class="text-center"><a href="${pageContext.request.contextPath }/mp/mng/deposit">예치금관리</a></td>
            </tr>
        </table>
         <table style="margin-top:30px; " class="mpTable">
@@ -116,7 +116,7 @@
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">렌탈상품 관리</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">경매상품 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/actList">경매상품 관리</a></td>
            </tr>
        </table>
       <table style="margin-top:30px; " class="mpTable">
@@ -126,10 +126,10 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">중고거래 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="${pageContext.request.contextPath }/mp/mng/used">중고거래 관리</a></td>
            </tr>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고접수 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="./decl">신고접수 관리</a></td>
            </tr>
        </table>
        <table style="margin-top:30px; " class="mpTable">

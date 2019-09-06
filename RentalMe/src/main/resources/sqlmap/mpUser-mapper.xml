@@ -8,83 +8,111 @@ encoding="UTF-8"?>
   <mapper namespace="mpUser">
   	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
   		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,
-			FN_NM('GDS_NM',GDS_CD) AS gdsNm, 
+			FN_NM('GDS_NM',tb_odr110.GDS_CD) AS gdsNm, 
 			tb_odr110.GDS_CD AS gdsCd, 
 			tb_odr110.ODR_QTY AS odrQty, 
 			tb_odr110.AGREE_TEM AS agreeTem, 
 			tb_odr110.GDS_PRICE AS gdsPrice, 
 			tb_odr100.ODR_STS_GB_CD AS odrStsGbCd, 
-			tb_user100.USER_NM AS userNM
-				FROM tb_odr110
-				INNER JOIN tb_odr100
-				ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
-				INNER JOIN tb_user100
-				ON tb_odr100.MB_NO = tb_user100.MB_NO
-				WHERE tb_user100.MB_NO=#{mbNo}
+			tb_user100.USER_NM AS userNM,
+			tb_gds200.IMG1 As RImg1	
+		FROM tb_odr110
+		INNER JOIN tb_odr100
+		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
+		INNER JOIN tb_user100
+		ON tb_odr100.MB_NO = tb_user100.MB_NO
+		INNER JOIN TB_GDS200
+		ON tb_odr110.GDS_CD=tb_gds200.GDS_CD			
+		WHERE tb_user100.MB_NO=#{mbNo}
 	</select>
+	
   	<insert id="insertReview">
-  		INSERT INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
-		VALUES (#{gdsCd},
-		(SELECT LPAD((SELECT COUNT(GDS_CD)+1 FROM TB_GDS210 A WHERE GDS_CD=#{gdsCd}),8,'0')),
-		(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
-		(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId})), 
-		(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))), 
-		(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))),'%Y%m%d')),
-		(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}),
-		#{content},
-		#{grade})
+  		INSERT  INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
+		VALUES  (#{gdsCd},
+				(SELECT LPAD((SELECT COUNT(GDS_CD)+1 FROM TB_GDS210 A WHERE GDS_CD=#{gdsCd}),8,'0')),
+				(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
+				(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId})), 
+				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))), 
+				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))),'%Y%m%d')),
+				(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}),
+				#{content},
+				#{grade})
   	</insert>
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT FN_NM('GDS_NM',GDS_CD) AS gdsNm, TB_CART100.ODR_QTY AS odrQty, TB_CART100.AGREE_TERM AS agreeTem, TB_CART100.GDS_PRICE AS gdsPrice
-		FROM TB_CART100;
-  	</select>
-  
-  	<select id="selectWish" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DATE_FORMAT(TB_CALL100.CHG_DT, '%Y-%m-%d') AS chgDt, TB_USED100.MODEL_NM AS modelNm, TB_USED100.USED_GDS_PRICE as usedGdsPrice 
-		FROM TB_CALL100 
-		INNER JOIN TB_USED100 
-		ON TB_CALL100.USED_GDS_NO = TB_USED100.USED_GDS_NO 
-		WHERE CALL_STS_CD=1;
+  		SELECT  FN_NM('GDS_NM',TB_CART100.GDS_CD) AS gdsNm, 
+				TB_CART100.ODR_QTY AS odrQty, 
+				TB_CART100.AGREE_TERM AS agreeTem, 
+				TB_CART100.GDS_PRICE AS gdsPrice,
+				tb_gds200.IMG1 AS RImg1,
+				TB_CART100.GDS_CD
+		FROM 	TB_CART100
+		INNER JOIN TB_GDS200
+		ON 		TB_GDS200.GDS_CD = TB_CART100.GDS_CD
+		WHERE	MB_NO=#{mbNo};
   	</select>
   	
+  	<delete id="deleteCart">
+  		DELETE FROM TB_CART100
+		WHERE 		GDS_CD=#{gdsCd}
+  	</delete>
+  
+  	<select id="selectWish" resultType="com.me.rentalme.model.entity.CallVo">
+  		SELECT  DATE_FORMAT(TB_CALL100.CHG_DT, '%Y-%m-%d') AS chgDt, 
+  				TB_USED100.MODEL_NM AS modelNm, 
+  				TB_USED100.USED_GDS_PRICE as usedGdsPrice,
+  				TB_CALL100.USED_GDS_NO,
+  				TB_USED100.IMG1 AS UImg1
+		FROM 	TB_CALL100 
+		INNER JOIN TB_USED100 
+		ON TB_CALL100.USED_GDS_NO = TB_USED100.USED_GDS_NO 
+		WHERE CALL_STS_CD=1 AND TB_CALL100.MB_NO=#{mbNo};
+  	</select>
+  	
+  	<update id="deleteWish">
+  		UPDATE TB_CALL100 SET CALL_STS_CD='2' WHERE USED_GDS_NO=#{usedGdsNo}
+  	</update>
+  	
   	<select id="selectDeposit" resultType="com.me.rentalme.model.entity.CallVo">
-		SELECT DEPOSIT_GB_CD, 
-		CHARGE_DEPOSIT,
-		USE_DEPOSIT,
-		REFUND_DEPOSIT,
-		DEPOSIT_SEQ,
-		DATE_FORMAT(DEPOSIT_DT, '%Y-%m-%d') AS DEPOSIT_DT,
-		(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO='19000002') AS REMN_DEPOSIT, 
-		(SELECT USER_ID FROM TB_USER100 WHERE MB_NO='19000002') AS USER_ID 
-		FROM TB_MB110
-		ORDER BY DEPOSIT_SEQ DESC;
+		SELECT  DEPOSIT_GB_CD, 
+				CHARGE_DEPOSIT,
+				USE_DEPOSIT,
+				REFUND_DEPOSIT,
+				DEPOSIT_SEQ,
+				DATE_FORMAT(DEPOSIT_DT, '%Y-%m-%d') AS DEPOSIT_DT,
+				(SELECT REMN_DEPOSIT FROM TB_MB100 WHERE MB_NO=#{mbNo}) AS REMN_DEPOSIT, 
+				(SELECT USER_ID FROM TB_USER100 WHERE MB_NO=#{mbNo}) AS USER_ID 
+		FROM 	TB_MB110
+		WHERE	MB_NO=#{mbNo}
+		ORDER	BY DEPOSIT_SEQ DESC;
   	</select>
   	
   	<insert id="inserDeposit">
   			INSERT INTO TB_MB110 (MB_NO, DEPOSIT_SEQ, DEPOSIT_DT, CHARGE_DEPOSIT, DEPOSIT_GB_CD) 
-			VALUES ('19000002',
-			(SELECT LPAD((SELECT COUNT(MB_NO)+1 FROM TB_MB110 A WHERE MB_NO="19000002"),6,'0')),
+			VALUES (#{mbNo},
+			(SELECT LPAD((SELECT COUNT(MB_NO)+1 FROM TB_MB110 A WHERE MB_NO=#{mbNo}),6,'0')),
 			(SELECT DATE_FORMAT(NOW(),'%Y-%m-%d')),
 			#{chargeDeposit},
 			"1")
   	</insert>
 
 	<update id="updateDeposit">
-		UPDATE TB_MB100 SET REMN_DEPOSIT = 
-		(SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT) FROM TB_MB110 WHERE TB_MB100.MB_NO = TB_MB110.MB_NO)
+		INSERT INTO TB_MB100 ( MB_NO, REMN_DEPOSIT, LAST_DEPOSIT_DT, MB_STS_CD )
+		VALUES (#{mbNo}, #{chargeDeposit}, DATE_FORMAT(NOW(),'%Y%m%d'),1 )
+		ON DUPLICATE KEY UPDATE REMN_DEPOSIT = 
+		(SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT) FROM TB_MB110 WHERE TB_MB110.MB_NO = #{mbNo})
 	</update>
 	
 	<select id="selectInfoUser" resultType="com.me.rentalme.model.entity.CallVo">
-		SELECT REMN_DEPOSIT 
-			FROM TB_MB100 
-			WHERE MB_NO='19000002'
+		SELECT  REMN_DEPOSIT 
+		FROM 	TB_MB100 
+		WHERE 	MB_NO=#{mbNo}
 	</select>
 	
   	<update id="delete" >
-  		UPDATE TB_CALL100
-		SET CALL_STS_CD=2
-		WHERE USED_GDS_NO=#{USEDGDSNO};
+  		UPDATE  TB_CALL100
+		SET 	CALL_STS_CD=2
+		WHERE	USED_GDS_NO=#{USEDGDSNO};
   	</update>
   	
   	<select id="selectMyInfo" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo" >

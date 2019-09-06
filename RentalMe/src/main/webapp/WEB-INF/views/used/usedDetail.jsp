@@ -15,7 +15,7 @@
 <div id="usedhead">
 </div>
 <div id="usedDetail">
-	<h3>중고거래>가구</h3>
+	<h3>${UsedVo.mcnm }</h3>
 	<div id="hiddenMyId">${loginUserId}</div>
 	<div class="hiddenLoginId">${loginMbNo}</div>
 <!-- carousel -->
@@ -107,23 +107,14 @@
 	<c:forEach items="${cmt }" var="cmet">
 	<div class="cmtContent">
 		<div class="secretCmt">${cmet.secretYn }</div>
-		<div>${cmet.userId }</div>
+		<div class="cmtUserId">${cmet.userId }</div>
 		<div>${cmet.chgDt }</div>
 		<div>${cmet.content }</div>
-		<div>${cmet.usedGdsComtNo }</div>
+		<input class="cmtNo" type="hidden" value="${cmet.usedGdsComtNo }">
+		<input class="cmtDt" type="hidden" value="${cmet.usedGdsComtDt }">
 		<!-- <a class="insertReple" href="#none">답글달기</a> -->
-		<a href="#">신고하기</a>
+		<a class="declBtn" data-toggle="modal" href="#declmodal">신고하기</a>
 	</div>
-<%-- 	<div class="repleAdd">
-		<textarea class="form-control" rows="2" placeholder="비회원은 글을 못써요"></textarea>
-		<form method="post">
-			<div>글쓴이: ${loginUserId}</div>
-			<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
-			<input type="hidden" name="usedGdsComtNo" id="inputGdsComt">
-			<input type="hidden" name="mbNo" value="${loginMbNo }">
-			<textarea class="form-control" name="content" rows="2" placeholder="글자수 200자 제한"></textarea>
-		</form>
-	</div> --%>
 	<div class="cmtContent">
 		비밀글입니다.
 	</div>
@@ -132,6 +123,37 @@
 </div>
 
 <div id="usedFoot">
+</div>
+
+<div id="declmodal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">신고하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/used/cmtDecl" method="post">
+      <div class="modal-body">
+        <div>
+        	신고대상
+        	<span id="declId"></span>
+        	<input id="declNo" type="hidden" name="usedGdsComtNo">
+        	<input id="declDt" type="hidden" name="usedGdsComtDt">
+        	<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
+        </div>
+        <div> 
+			<textarea rows="5" placeholder="신고사유"></textarea>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button id="declGO" type="submit" class="btn btn-danger">신고</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>

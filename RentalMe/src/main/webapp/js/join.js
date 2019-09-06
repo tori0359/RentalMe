@@ -102,6 +102,7 @@ $(function() {
 	                        $('#id-danger').hide();
 	                        $('#idCheck-danger').hide();       
 	                        $('#joinBtn').attr('disabled', false);
+	                        cnt += 1;
             			}
             		},
             		error:function(request, status, error){
@@ -136,6 +137,7 @@ $(function() {
 	                $('#pw-danger').hide();
 	                $('#pw-danger2').hide();
 	                $('#joinBtn').attr('disabled', false);
+	                cnt += 1;
 	            } else {//비밀번호와 비밀번호확인의 값이 같지 않을 경우 "비밀번호가 다릅니다." 메시지 출력
 	                $('#pw-success').hide();
 	                $('#pw-danger').show();
@@ -160,6 +162,7 @@ $(function() {
     		if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
                 $('#hp-danger').hide();
                 $('#joinBtn').attr('disabled', false);
+                
     		}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
                 $('#hp-danger').show();
                 $('#joinBtn').attr('disabled', true);
@@ -175,6 +178,7 @@ $(function() {
     		if(regexEmail.test($('#email').val())){//이메일 정규식 체크에서 정상일경우 패스
     			$('#email-danger').hide();
     			$('#joinBtn').attr('disabled', false);
+    			
     		}else{
     			$('#email-danger').show();
     			$('#joinBtn').attr('disabled', true);
@@ -213,6 +217,7 @@ $(function() {
 			if(inputCode == emailCode){
 				$('#emailCode-success').show();
 				$('#emailCode-danger').hide();
+				cnt += 1;
 			}else{
 				$('#emailCode-success').hide();
 				$('#emailCode-danger').show();
@@ -220,7 +225,7 @@ $(function() {
 		}
 	});
     
-    //5. 생년월일
+    //6. 생년월일
     //선언한 TextBox에 DatePicker 위젯을 적용
     $('#birth').datepicker({	
         changeMonth: true,
@@ -231,8 +236,63 @@ $(function() {
         nextText: '다음 달',
         prevText: '이전 달',
         dateFormat: "yy-mm-dd",
-    }).datepicker('setDate', new Date());
+    });
+    //.datepicker('setDate', new Date()); 오늘날짜로 세팅을 하고 싶을 때 사용
 });
+
+//5. 주소
+function addr_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; 		// 주소 변수
+            var zonecode = ''; 	// 우편번호(2015년 8월 1일 이후부터 시행된 새 우편번호 사용, 구우편번호 사용x)
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+                zonecode = data.zonecode;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+                zonecode = data.zonecode;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+            
+            } else {
+                document.getElementById("extraAddress").value = '';
+            }
+
+            // 도로명 주소 정보를 해당 필드에 넣는다.
+            document.getElementById("addr").value = addr;
+            // 우편번호를 해당 필드에 넣는다.
+            document.getElementById("zipcode").value = zonecode;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("addrDetail").focus();
+            
+            
+        }
+    }).open();
+}
 
 //회원가입
 //회원가입 버튼 이벤트 (유효성 체크)
@@ -241,22 +301,32 @@ function joinCheck(){
 	
 	if(frm.userId.value==""){
 		alert("아이디를 입력 바랍니다.");
-		return frm.userId.focus();
+		frm.userId.focus();
+		return false;
 	}else if(frm.userPw.value == ""){
 		alert("비밀번호를 입력 바랍니다.");
-		return frm.userPw.focus();
+		frm.userPw.focus();
+		return false;
 	}else if(frm.pwf.value == ""){
 		alert("비밀번호를 입력 바랍니다.");
-		return frm.pwf.focus();
+		frm.pwf.focus();
+		return false;
 	}else if(frm.hp.value == ""){
 		alert("휴대전화를 입력 바랍니다.");
-		return frm.hp.focus();
+		frm.hp.focus();
+		return false;
 	}else if(frm.email.value == ""){
 		alert("이메일을 입력 바랍니다.");
-		return frm.email.focus();
+		frm.email.focus();
+		return false;
 	}else if(frm.emailCode.value == ""){
 		alert("인증코드를 입력 바랍니다.");
-		return frm.emailCode.focus();
+		frm.emailCode.focus();
+		return false;
+	}else if(frm.userNM.value == ""){
+		alert("이름을 입력 바랍니다.");
+		frm.userNM.focus();
+		return false;
 	}
 	
 	

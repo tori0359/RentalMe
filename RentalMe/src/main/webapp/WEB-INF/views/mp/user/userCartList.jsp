@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-		#title{
+		#title2{
 	   		font-size: 15pt;
 	   		font-weight: bolder;
 	   		font-family: "nanumB";
@@ -27,15 +27,22 @@
 	    .ordtable>thead>tr>th{
         	text-align:center;
         }
+        .ordtable>thead>tr>th:nth-child(1){
+        	text-align:left;
+        }
         
         .ordtable>tbody>tr>td{
         	vertical-align: middle;
         	text-align: center;
         	display: table-cell;
         }
+        .ordtable>tbody>tr>td:nth-child(1),
+        .ordtable>tbody>tr>td:nth-child(2){
+        	text-align:left;
+        }
         
 	   .ordimg{
-	   		width:150px;
+	   		width:100px;
 	   }
 	   
 	    .delete_btn1{
@@ -95,7 +102,9 @@
       	line-height:20px;
       	font-family:"nanumB";
       }
-
+	.tdtext{
+      	margin:30px 0;
+      }
    
       
 	   
@@ -104,10 +113,10 @@
 <script type="text/javascript">
 
 		function checkAll(){
-		    if( $("#th_checkAll").is(':checked') ){
-		      $("input[name=checkRow]").prop("checked", true);
+		    if( $("#allCheck").is(':checked') ){
+		      $("input[name=chBox]").prop("checked", true);
 		    }else{
-		      $("input[name=checkRow]").prop("checked", false);
+		      $("input[name=chBox]").prop("checked", false);
 		    }
 		}
 
@@ -117,25 +126,47 @@
 <body>
 	<div>
 	<div class="titlediv">
-       <p id="title">장바구니</p>
+       <p id="title2">장바구니</p>
      </div>
      <div class="hr" style="height:3px; background-color: black;"></div>
        	 <div id="info">
        	 <p>
 	       	 <input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty userVo.userNM}">
-		     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+		     	${loginUserId} 님의 장바구니 내역입니다.
 		     </c:if>
 		     <c:if test="${!empty userVo.userNM }">
-		     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+		     	${userVo.userNM} 님의 장바구니 내역입니다.
 		     </c:if>
 		  </p>
        	 </div>
        <a href="#" id="choosedel">선택삭제</a>
+       <script>
+		 $("#choosedel").click(function(){
+		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+		  
+		  if(confirm_val) {
+		   var checkArr = new Array();
+		   
+		   $("input[class='chBox']:checked").each(function(){
+		    checkArr.push($(this).attr("data-cartNum"));
+		   });
+		    
+		   $.ajax({
+		    url : "/mp/deleteCart",
+		    type : "post",
+		    data : { chbox : checkArr },
+		    success : function(){
+		     location.href = "/mp/cart";
+		    }
+		   });
+		  } 
+		 });
+		</script>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
-       			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
+       			<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></th>
        			<th>상품명/선택사항</th>
        			<th>수량</th>
        			<th>렌탈기간</th>
@@ -145,13 +176,18 @@
        	<tbody>
    		 <c:set var="sumPrice" value="0"/>
        	<c:forEach items="${alist}" var="bean">
-       		<tr data-tr_value="${bean.usedGdsNo}">  
-       			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
-       			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
-       			<td>${bean.odrQty}</td>
-       			<td>${bean.agreeTem}개월</td>
-       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       		<tr>  
+       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}">
        			</td>
+       			<td>
+       				<a style="text-decoration:none; color:black;"href="#">
+       				<img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm}
+       				</a>
+       			</td>
+       			<td><p class="tdtext">${bean.odrQty}</p></td>
+       			<td><p class="tdtext">${bean.agreeTem}개월</p></td>
+       			<td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       			</p></td>
        		</tr>
        	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
        	</c:forEach>

@@ -69,15 +69,49 @@
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">
-			<div>${bean.mbNo }님</div>
-			<div>${bean.content }</div>
-			<div>${bean.storeReviewDt }</div>
-			<div><a href="#">신고</a></div>
+			<div class="mbNo">${bean.mbNo }</div>
+			<div class="storeReviewDt">${bean.storeReviewDt }</div>
+			<div class="content">${bean.content }</div>
+			<input type="hidden" class="hiddenStoreNo" value="${bean.storeNo }">
+			<input type="hidden" class="hiddenStoreReNo" value="${bean.storeReviewNo }">
+			<a class="declaration" data-toggle="modal" href="#declmodal">신고하기</a>
 		</div>
 		</c:forEach>
 	</div>
 	
 </div>
+
+<div id="declmodal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">신고하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/used/store/cmtDecl" method="post">
+      <div class="modal-body">
+        <div>
+        	신고대상
+        	<input id="declSNo" type="hidden" name="storeNo" value="${mbNo}">
+        	<input id="declRNo" type="hidden" name="storeReviewNo" >
+        	<input id="declRDt" type="hidden" name="storeReviewDt">
+        	<input id="declMbNo" type="text" name="mbNo">
+        </div>
+        <div> 
+			<textarea rows="5" placeholder="신고사유"></textarea>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button id="declGO" type="submit" class="btn btn-danger">신고</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div id="usedFoot">
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>

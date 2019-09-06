@@ -100,22 +100,23 @@
 							class="btn btn-default btn-block" >찾기</button>
 					</div>
 				</div>
-
-				<div id="pw_find">
-					<div id="insert_id">
-						<input type="text" placeholder="아이디"  name="pwUserId" id="pwUserId"/>
+				<form action="pwFind" method="get">
+					<div id="pw_find">
+						<div id="insert_id">
+							<input type="text" placeholder="아이디"  name="userId" id="pwUserId"/>
+						</div>
+						<div id="pw_cellphone_find">
+							<input type="text" placeholder="핸드폰번호입력" name=hp id="pwHp"/>
+						</div>
+						<div id="pw_email_find">
+							<input type="text" placeholder="메일주소입력" name="email" id="pwInputEmail"/>
+						</div>
+						<div>
+							<button id="pw_find_btn" type="submit"
+								class="btn btn-default btn-block">찾기</button>
+						</div>
 					</div>
-					<div id="pw_cellphone_find">
-						<input type="text" placeholder="핸드폰번호입력" name="pwHp" id="pwHp"/>
-					</div>
-					<div id="pw_email_find">
-						<input type="text" placeholder="메일주소입력" name="pwInputEmail" id="pwInputEmail"/>
-					</div>
-					<div>
-						<button id="pw_find_btn" type="button"
-							class="btn btn-default btn-block">찾기</button>
-					</div>
-				</div>
+				</form>
 
 			</div>
 			<!-- /.modal-content -->
@@ -123,7 +124,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
 
 	<div id="find_id_modal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -148,34 +148,38 @@
 	</div>
 	<!-- /.modal -->
 
-
-	<div id="find_pw_modal" class="modal fade" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">비밀번호 변경</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<input type="text" placeholder="비밀번호" />
+		<input type="hidden" id="pwMsg" value="${pwMsg}">
+		<input type="hidden" id="pwEmail" value="${pwEmail}">
+		<input type="hidden" id="pwId" value="${pwId}">
+			
+		<div id="find_pw_modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">비밀번호 변경</h4>
 					</div>
-					<div>
-						<input type="text" placeholder="비밀번호확인" />
+					<div class="modal-body">
+						<div>
+							<input type="password" placeholder="비밀번호" name="pw1" id="pw1"/>
+						</div>
+						<div>
+							<input type="password" placeholder="비밀번호확인" name="pw2" id="pw2"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="pw_change_btn" type="button" class="btn btn-default btn-block"">비밀번호 변경</button>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
+		<!-- /.modal -->
+	
 	
 	<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>

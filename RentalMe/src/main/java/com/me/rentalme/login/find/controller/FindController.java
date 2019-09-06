@@ -1,6 +1,5 @@
 package com.me.rentalme.login.find.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,40 +57,50 @@ public class FindController {
 	}
 	
 	/**
-	* 등록된 이메일로 비밀번호 찾기 
+	* 비밀번호 찾기 데이터 체크
 	* 
 	* @param  UserVo
 	* @return String 
 	* @author 황인준
 	* @exception
-	* 등록일자 : 2019-08-14 
+	* 등록일자 : 2019-09-04 
 	*/
-	@RequestMapping(value = "/email/findPw", method = RequestMethod.POST)
-	public String findEmailPw(UserVo bean) {
+	@RequestMapping(value = "/pwFind", method = RequestMethod.GET)
+	public ModelAndView findEmailPw(@ModelAttribute UserVo userVo) {
 		log.debug("등록된 이메일로 비밀번호 찾기 컨트롤러");
 		
-		//서비스 작성(bean - id, email)
+		//받아온 데이터가 맞는지 체크
+		String str = loginFindService.checkData(userVo);
 		
-		return "login/find/changePw";
+		ModelAndView mav = new ModelAndView("login/login");
+		
+		if(str.equals("not empty")) {
+			mav.addObject("pwMsg", "notEmpty");
+			mav.addObject("pwEmail", userVo.getEmail());
+			mav.addObject("pwId", userVo.getUserId());
+		}else if(str.equals("empty")) {
+			mav.addObject("pwMsg", "empty");
+		}
+		
+		return mav;
 	}
 	
 	/**
 	* 비밀번호 변경
 	* 
-	* @param  String chgPw1	- 변경할 비밀번호
-	* @param  String chhPw2	- 변경할 비밀번호 확인
+	* @param  String userPw	- 비밀번호
 	* @return String 
 	* @author 황인준
 	* @exception
 	* 등록일자 : 2019-08-14 
 	*/
-	@RequestMapping(value = "/login/email/findPw", method = RequestMethod.PUT)
-	public String modifyChgPw(String chgPw1, String chgPw2) {
+	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
+	public String modifyChgPw(@ModelAttribute UserVo userVo) {
 		log.debug("비밀번호 변경 컨트롤러...");
 		
-		//서비스 작성(변경할 비밀번호, 변경할 비밀번호 확인, return int)
+		loginFindService.modifyPw(userVo);
 		
-		return "login/login"; //성공 : 로그인페이지로 이동
+		return "redirect:/login";
 	}
 	
 }

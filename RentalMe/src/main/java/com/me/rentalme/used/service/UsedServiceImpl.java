@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.RentalMeVo;
 import com.me.rentalme.model.entity.UsedCmtVo;
 import com.me.rentalme.model.entity.UsedStoreVo;
@@ -97,6 +98,16 @@ public class UsedServiceImpl implements UsedService {
 	@Override
 	public List<UsedVo> mySelectAllAlign(UsedVo bean) throws SQLException {
 		return usedDao.mySelectAllAlign(bean);
+	}
+
+	@Override
+	public int usedComtDecl(DeclVo bean) throws SQLException {
+		return usedDao.usedComtDecl(bean);					//중고댓글 신고
+	}
+
+	@Override
+	public int usedStoreDecl(DeclVo bean) throws SQLException {
+		return usedDao.usedStoreDecl(bean);					//상점후기 댓길 신고
 	}
 
 }

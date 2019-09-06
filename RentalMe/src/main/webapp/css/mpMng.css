@@ -1,0 +1,121 @@
+@charset "UTF-8";
+      #title, #title2{
+            font-size: 15pt;
+            font-weight: bolder;
+            font-family: "nanumB";
+            margin: 60px 0 50px 0;
+      }
+      #title > span{
+      		font-size: 5pt;
+      }
+      
+      #choosedel{
+            font-family: "nanumR";
+            width:55px;
+            height:30px;
+            float:right;
+            color:black;
+            font-weight:600;
+      }
+		
+		
+       .ordtable>thead>tr>th{
+           text-align:center;
+        }
+        
+       .ordtable>tbody>tr>td{
+           vertical-align: middle;
+           text-align: center;
+           display: table-cell;
+        }
+        
+      .ordimg{
+            width:150px;
+      }
+      
+       .delete_btn1{
+            background-color: #D8D8D8;
+            color:black;
+            height:30px;
+            font-family: "nanumB";   
+            font-weight: border;   
+      }
+      
+      .delete_btn2{
+            background-color: #4d4d4d;
+            color:white;
+            height:30px;
+            font-family: "nanumB";
+            font-weight: border;      
+      }
+      
+      .btn:hover,
+      .btn:focus{
+            background-color: #D8D8D8;
+      }
+   
+      .cartresult{
+            height:100px;
+            width: 230px;
+            float:right;
+      }
+      
+      .cartresult>p{
+            font-weight:bolder;
+            font-size: 15pt;
+            font-family: "nanumB";
+            line-height: 100px;
+      }
+      
+      .cartbtn{
+            width:180px;
+            height:50px;
+            float:right;
+            margin-top:25px;
+      }
+      .titlediv{
+            height:40px;
+      }
+      .starR{
+        background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+        background-size: auto 100%;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        text-indent: -9999px;
+        cursor: pointer;
+      }
+      .starR.on{
+         background-position:0 0;
+         color:red;
+      }
+      .satis h4{
+         font-family:"nanumEB";
+      }
+      .satis p{
+         font-family:"nanumB";
+      }
+      #red{
+         color:red;
+      }
+      span em.warning{
+        color:#f00;
+        fontweight: bold;
+      }
+      #info{
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
+      }
+      
+      #info p{
+      	line-height:20px;
+      	font-family:"nanumB";
+      }
+      
+      .usedTableTrClick:hover{
+      	background-color:#e8ffff;
+      	cursor: pointer;
+      }
+   
