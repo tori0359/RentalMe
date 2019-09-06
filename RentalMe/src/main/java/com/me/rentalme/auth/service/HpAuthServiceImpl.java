@@ -1,24 +1,12 @@
 package com.me.rentalme.auth.service;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 import javax.inject.Inject;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.text.html.HTMLDocument.Iterator;
 
-import org.json.simple.JSONObject;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.me.rentalme.join.model.JoinDao;
-
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
+//import net.nurigo.java_sdk.api.Message;
 
 
 /**
@@ -53,7 +41,7 @@ public class HpAuthServiceImpl implements HpAuthService {
 		//coolsms에서 받은 apikey 세팅
 		String apiKey = "";			//git에 올라갈시 api키 공개되면 안되므로 삭제(담당자에게 문의)
 		String apiSecret = "";		//git에 올라갈시 secret키 공개되면 안되므로 삭제(담당자에게 문의)
-		Message coolsms = new Message(apiKey, apiSecret);
+		//Message coolsms = new Message(apiKey, apiSecret);
 		
 		HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", hp);									//수신번호 입력 (콤마[,]로 구분된 수신번호 입력가능)
