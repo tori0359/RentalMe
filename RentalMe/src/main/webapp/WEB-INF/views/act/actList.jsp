@@ -40,7 +40,10 @@
 	 	float:left;
 	 	border-top-right-radius: 10px;
 	 }
-	 
+	 #actRun:hover,
+	 #actEnd:hover{
+	 	cursor: pointer;
+	 }
 	 .actMenu p{
 	 	font-family:"nanumR";
 	 	font-weight: bolder;
@@ -62,8 +65,62 @@
 	 	font-size:12pt;
 	 	font-weight: bolder;
 	 }
+	 .color{
+	 	color: #DF7401;
+	 }
+	 .wrap{
+	 	position: relative;
+	 }
+	 #end p{
+	 	text-align:center;
+	 	font-family:"nanumEB";
+	 	font-size:29pt;
+	 	border:1px solid blue;
+	 	padding:35px;
+	 	margin-top: 12%;
+	 	border:17px solid #DF0101;
+	 	border-style: double;
+	 	font-weight: bolder;
+	 	-ms-transform: rotate(-5deg); 
+		-webkit-transform: rotate(-5deg);
+		transform: rotate(-5deg);
+	 }
+	 #tag{
+	 	color: black;
+	 }
+	 #tag:hover{
+	 	text-decoration: none;
+	 	color: black;
+	 }
 	   
 </style>
+<script type="text/javascript">
+	window.onload=function(){
+		$('#actRunList').show();
+		$('#actEndList').hide();
+		
+		$('#actEnd').click(function(){
+			$('#actEnd').css("background-color","black");
+			$('#actEnd').css("color","white");
+			$('#actRun').css("background-color","#F1F0EE");
+			$('#actRun').css("color","black");
+
+			$('#actRunList').hide();
+			$('#actEndList').show();
+		});
+		
+		$('#actRun').click(function(){
+			$('#actRun').css("background-color","black");
+			$('#actRun').css("color","white");
+			$('#actEnd').css("background-color","#F1F0EE");
+			$('#actEnd').css("color","black");
+
+			$('#actRunList').show();
+			$('#actEndList').hide();
+		});
+	}
+
+</script>
 </head>
 <body>
 <div id="actList">
@@ -72,27 +129,51 @@
 		<div class="actMenu" id="actEnd"><p>경매 종료</p></div>
 		<div class="hr" style="clear:both; height:3px; background-color: black;"></div>
 	</div>
+	<div id="actRunList">
 		<c:forEach items="${alist}" var="bean">
 			<div class="row" >
 				<div class="col-md-10 col-md-offset-1">
 					<div style="height:100%;" id="actCon">
 						<div class="col-md-4" id="imgDiv" style="padding:20px 0px 20px 50px;">
-							<img class="ordimg" src="/imgs/bed1.jpg"/>
+							<a href="#"><img class="ordimg" src="/imgs/bed1.jpg"/></a>
 						</div>
-						<div class="col-md-3" id="contentDiv"">
+						<div class="col-md-3" id="contentDiv">
 							<input type="hidden" value="${bean.gdsCd}"/>
-							<div><h2 style="font-family:'nanumEB'">${bean.gdsNm }</h2></div>
+							<div><h2 style="font-family:'nanumEB' "><a id="tag" href="#">${bean.gdsNm }</a></h2></div>
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
-							<div><h4 class="text" style="color:#FE7B00;">시작가<span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
-							<div><h4 class="text" >경매 시작 시간&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
-							<div><h4 class="text" >경매 종료 시간&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
+							<div><h4 class="text"><span class="color">시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
+							<div><h4 class="text" ><span class="color">경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
+							<div><h4 class="text" ><span class="color">경매 종료 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
 						</div>
 					</div>
 				</div>
 				<div class="hr" style="clear:both; height:2px;"></div>
 			</div>
 		</c:forEach>
-	
+	</div>
+<div style="background-color:rgba(128,128,128,0.5);" id="actEndList">
+		<c:forEach items="${alist2}" var="bean">
+			<div class="row wrap" >
+				<div class="col-md-10 col-md-offset-1">
+					<div style="height:100%;" id="actCon">
+					<div id="end" style="opacity:1; position:absolute; height:40px; width:60%; padding:30px; margin-left:20%; z-index:100;"><p>경매 종료</p></div>
+						<div class="col-md-4" id="imgDiv" style="opacity:0.2; padding:20px 0px 20px 50px;">
+							<img class="ordimg" src="/imgs/bed1.jpg"/>
+						</div>
+						<div style="opacity:0.2;" class="col-md-3" id="contentDiv">
+							<input type="hidden" value="${bean.gdsCd}"/>
+							<div><h2 style="font-family:'nanumEB'">${bean.gdsNm }</h2></div>
+							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
+							<div><h4 class="text"><span>시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
+							<div><h4 class="text" ><span>경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
+							<div><h4 class="text" ><span>경매 종료 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="hr" style="clear:both; height:2px; background-color:darkgrey;" ></div>
+		</c:forEach>
+</div>
 </div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>

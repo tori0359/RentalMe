@@ -26,4 +26,10 @@ public class ActServiceImpl implements ActService{
 		return actDao.selectActRun();
 	}
 
+	//경매 종료된 리스트
+	@Override
+	public List<RentalAppliVo> actEndList() throws SQLException {
+		return actDao.selectActEnd();
+	}
+
 }

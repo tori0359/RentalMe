@@ -34,9 +34,18 @@ public class CallVo {
 	private String bidTime;
 	private String RImg1; //렌탈 이미지
 	private String UImg1; //중고사진 이미지
+	private String cnt; //회원이 해당상품에 쓴 후기 갯수
 	
 
 	
+
+	public String getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
 
 	public String getRImg1() {
 		return RImg1;

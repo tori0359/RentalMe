@@ -16,7 +16,7 @@ public interface MpUserService {
 	List<CallVo> ordList(String mbNo) throws SQLException;
 	
 	//후기 등록
-	int addReview(CallVo callVo) throws SQLException;
+	int addReview(CallVo callVo, String mbNo) throws SQLException;
 	
 	//장바구니 리스트 출력
 	List<CallVo> cartList(String mbNo) throws SQLException;
@@ -62,6 +62,7 @@ public interface MpUserService {
 	
 	//내 문의 삭제
 	int myQuestDel(CsVo csVo) throws SQLException;
+
 	
 
 }

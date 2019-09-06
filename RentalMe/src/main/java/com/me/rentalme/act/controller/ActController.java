@@ -48,7 +48,7 @@ public class ActController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("alist", actService.actList());
-				
+		mav.addObject("alist2",actService.actEndList());
 				
 		mav.setViewName("act/actList");
 		return mav;

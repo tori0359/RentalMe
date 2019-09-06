@@ -9,4 +9,5 @@ public interface ActService {
 
 	List<RentalAppliVo> actList() throws SQLException;
 
+	List<RentalAppliVo>  actEndList() throws SQLException;
 }

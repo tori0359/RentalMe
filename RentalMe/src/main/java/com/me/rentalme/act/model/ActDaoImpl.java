@@ -22,4 +22,10 @@ public class ActDaoImpl implements ActDao{
 		return sqlSession.selectList("act.selectActRun");
 	}
 
+	//경매 종료된 리스트
+	@Override
+	public List<RentalAppliVo> selectActEnd() throws SQLException {
+		return sqlSession.selectList("act.selectActEnd");
+	}
+
 }

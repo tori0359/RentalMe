@@ -70,9 +70,13 @@
       	line-height:20px;
       	font-family:"nanumB";
       }
-
 </style>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
+<script>
+	
+</script>
+
+
 </head>
 <body>
 	<div>
@@ -105,9 +109,10 @@
        		<tr>  
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.bidTime}</td>
-       			<td><fmt:formatNumber pattern="##,###.##">${bean.bidPrice}</fmt:formatNumber> 원</td>
+       			<td><fmt:formatNumber pattern="##,###.##">${bean.bidPrice}</fmt:formatNumber> 원
+       			<input id="auctPrice" type="hidden" value="${bean.bidPrice}"/></td>
        			<td>
-       				<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >결제</button>
+       				<button id="pay" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >결제</button>
  					<button style="background:#D8D8D8; color:black;" type="button" class="btn" style="font-size: 9pt;" >포기</button>
        			</td>
        		</tr>

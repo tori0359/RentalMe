@@ -18,5 +18,18 @@ encoding="UTF-8"?>
 		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD
 		WHERE 	ACT_STS_CD='2';
 	</select>
-
+	
+	<select id="selectActEnd" resultType="com.me.rentalme.model.entity.ActVo">
+		SELECT  TB_GDS300.GDS_CD,
+			    FN_NM('GDS_NM',TB_GDS100.GDS_CD) AS gdsnm,
+			    TB_GDS300.GDS_ST_PRICE,
+			    TB_GDS300.ACT_ST_TIME,
+			    TB_GDS300.ACT_ED_TIME,
+			    TB_GDS300.CONTENT
+		FROM 	TB_GDS300
+		INNER JOIN TB_GDS100
+		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD
+		WHERE 	ACT_STS_CD='1';
+	
+	</select>
 </mapper>

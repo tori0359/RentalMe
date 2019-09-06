@@ -10,4 +10,7 @@ public interface ActDao {
 	//경매 진행중 리스트
 	List<RentalAppliVo> selectActRun() throws SQLException;
 
+	//경매 종료된 리스트
+	List<RentalAppliVo> selectActEnd() throws SQLException;
+
 }
