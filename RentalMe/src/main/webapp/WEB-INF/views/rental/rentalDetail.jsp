@@ -500,21 +500,25 @@ input::-moz-focus-inner { border: 0; }
 			vGdsPriceTemp = gdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
 		} else if(boxValue == 24) {
 			gdsPriceTemp = String((gdsPriceTemp*0.95));
 			vGdsPriceTemp = gdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
 		} else if(boxValue == 30) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
 		} else if(boxValue == 36) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
 		}
 	}
 
