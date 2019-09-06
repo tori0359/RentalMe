@@ -45,13 +45,14 @@
 	color: black;
 	text-decoration: none !important
 }
+/* -스크롤 -*/
 .scrolltop {
     display: none;
     position: fixed;
-    right: 30px;
-    bottom: 50px;
+    right: 80px;
+    bottom: 200px;
     z-index: 1030;
-    font-size: 1.875rem;
+    font-size: 2.875rem;
     color: #868e96;
     transition: all 0.5s ease-in-out;
     opacity: 0.8;
@@ -59,6 +60,9 @@
 .scrolltop:hover, .scrolltop:focus {
 	color: #dc3545;
 	transition: all 0.5s ease-in-out;
+}
+#topButton {
+	border: 0px;
 }
 
 
@@ -315,22 +319,20 @@ input::-moz-focus-inner { border: 0; }
 
 		// 최상단 이동
 		jQuery(document).ready(function () {
-        $(window).scroll(function () {
-          if ($(this).scrollTop() > 100) {
-            $('#backToTop').fadeIn(500);
-          } else {
-            $('#backToTop').fadeOut('slow');
-          }
-        });
-        $('#backToTop').click(function (e) {
-          e.preventDefault();
-          $('html, body').animate({scrollTop: 0}, 200);
-        });
-      });
-		
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 100) {
+					$('#backToTop').fadeIn(500);
+				} else {
+					$('#backToTop').fadeOut('slow');
+				}
+			});
+			$('#backToTop').click(function (e) {
+				e.preventDefault();
+				$('html, body').animate({scrollTop: 0}, 200);
+			});
+		});
 		//alert("안쪽마지막");
 	}
-
 	//alert("바깥쪽");
 
 	/**************************/
@@ -734,8 +736,13 @@ input::-moz-focus-inner { border: 0; }
 <body>
 	<div class="content">
 	<br>
+		<!--  페이지 상단이동 버튼 -->
 	    <a id="backToTop" class="scrolltop" href="#">
-	      <i class="fas fa-chevron-circle-up">상단이동</i>
+			<i class="fas fa-chevron-circle-up">
+				<button type="button" id="topButton" style="background-color:white;" data-toggle="tooltip" data-placement="top" title="최상단 이동">		
+					<span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+				</button>		
+			</i>
 	    </a>
 		<div class="content-inner">
 			<!--  이후 메뉴경로(19.09.02) -->
