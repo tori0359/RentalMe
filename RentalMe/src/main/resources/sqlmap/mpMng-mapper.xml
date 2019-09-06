@@ -45,12 +45,17 @@
 		FROM tb_used100 AS A, tb_user100 AS B
 		WHERE A.MB_NO=B.MB_NO
 		ORDER BY A.CHG_DT DESC
+		LIMIT #{startListNum}, #{listSize}
 	</select>
 	<select id="selectUsedSearch" resultType="com.me.rentalme.model.entity.UsedVo">
 		SELECT A.*,B.USER_NM
 		FROM tb_used100 AS A, tb_user100 AS B
 		WHERE A.MB_NO=B.MB_NO AND USED_GDS_NO=#{usedGdsNo}
 		ORDER BY A.CHG_DT DESC
+	</select>
+	<select id="selectusedListCnt" resultType="Integer">
+		SELECT COUNT(*) as totalListCnt
+		  FROM TB_USED100
 	</select>
 	
 	<!-- 환불 -->
