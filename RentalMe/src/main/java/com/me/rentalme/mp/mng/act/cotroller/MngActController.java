@@ -46,7 +46,7 @@ public class MngActController {
 	public ModelAndView getAct() throws SQLException{
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("actList", actService.listAct() );
+		mav.addObject("actList", actService.actList() );
 		mav.setViewName("/mp/manager/mngActList");
 		
 		return mav;

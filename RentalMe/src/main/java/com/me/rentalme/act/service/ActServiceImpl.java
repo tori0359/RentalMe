@@ -5,21 +5,32 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.act.dao.ActDao;
-import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 
 @Service
-public class ActServiceImpl implements ActService {
-
+public class ActServiceImpl implements ActService{
+	
+	Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Inject
 	ActDao actDao;
 	
+	//경매 진행중 리스트
 	@Override
-	public List<ActVo> listAct() throws SQLException {
-		System.out.println("actlistdao로 ㄱㄱ");
-		return actDao.selectActList();
+	public List<RentalAppliVo> actList() throws SQLException {
+		return actDao.selectActRun();
+	}
+
+	//경매 종료된 리스트
+	@Override
+	public List<RentalAppliVo> actEndList() throws SQLException {
+		return actDao.selectActEnd();
 	}
 
 }

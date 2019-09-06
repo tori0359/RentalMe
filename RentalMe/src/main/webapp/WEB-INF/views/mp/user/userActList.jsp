@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.odrQty}</td>
        			<td>${bean.agreeTem}개월</td>
-       			<td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       			<td><fmt:formatNumber pattern="#,###.##">${bean.gdsPrice}</fmt:formatNumber> 원
        			</td>
        		</tr>
        	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>

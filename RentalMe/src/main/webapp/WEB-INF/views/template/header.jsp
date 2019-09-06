@@ -36,9 +36,18 @@
             font-style: normal;
         }
         
+    html,
+    body {
+		    margin:0;
+		    padding:0;
+		    height:100%;
+	    
+	 }
+	    
        #wrap{
             min-height:100%;
             position:relative;
+            padding-bottom: 200px;
      }
      
      .navbar-default .navbar-nav > .open > a {
@@ -353,7 +362,7 @@
 		  </form>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
+          <a href="${pageContext.request.contextPath}/act/" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">이벤트 경매</a>
         </li>
         <li class="dropdown">
           <a href="${pageContext.request.contextPath}/cs/csFAQ" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" >고객센터</a>
