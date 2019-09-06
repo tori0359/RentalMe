@@ -4,6 +4,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <meta http-equiv="Expires" content="0"/>
+   <meta http-equiv="Pragma" content="no-cache"/>
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fonts/font-awesome-4.7.0/css/font-awesome.min.css">

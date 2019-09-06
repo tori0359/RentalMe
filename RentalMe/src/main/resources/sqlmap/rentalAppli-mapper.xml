@@ -436,24 +436,24 @@
 	
 	<!-- 렌탈 상품 리스트 상세 상담등록 -->
 	<insert id="gdsQuestRegister" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
-			INSERT INTO
-			TB_QUEST100 (
-					QUEST_NO
-					,QUEST_DT
-					,GDS_CD
-					,QUEST_NM
-					,HP
-					,EMAIL
-					,QUEST_STS_CD
-			) VALUES (
-					(SELECT MAX(LPAD(SEQ,8,0)) FROM SEQ_QUEST100)
-					,(SELECT DATE_FORMAT(NOW(),'%Y%m%d'))
-					,#{gdsCd}
-					,#{questNm}
-					,#{hp}
-					,#{email}
-					,'1'
-			)
+		INSERT INTO
+		TB_QUEST100 (
+				QUEST_NO
+				,QUEST_DT
+				,GDS_CD
+				,QUEST_NM
+				,HP
+				,EMAIL
+				,QUEST_STS_CD
+		) VALUES (
+				(SELECT MAX(LPAD(SEQ,8,0)) FROM SEQ_QUEST100)
+				,(SELECT DATE_FORMAT(NOW(),'%Y%m%d'))
+				,#{gdsCd}
+				,#{questNm}
+				,#{hp}
+				,#{email}
+				,'1'
+		)
 	</insert>
 	
 	<!-- 렌탈 상품 리스트 후기 -->
@@ -468,7 +468,7 @@
 					,GRADE
 					,FN_NM('USER_NM', MB_NO) AS USER_NM
 					,GDS_REVIEW_DT
-				FROM TB_GDS210
+				FROM TB_GDS210		/* 렌탈상품후기 */
 				WHERE GDS_CD = #{gdsCd}
 				ORDER BY GDS_REVIEW_NO DESC
 		) A
@@ -487,9 +487,38 @@
 					,GRADE
 					,FN_NM('USER_NM', MB_NO) AS USER_NM
 					,GDS_REVIEW_DT
-				FROM TB_GDS210
+				FROM TB_GDS210		/* 렌탈상품후기 */
 				WHERE GDS_CD = #{gdsCd}
 		) A
 	</select>
-
+	
+	<!-- 렌탈 상품 리스트 상세 장바구니등록 -->
+	<insert id="gdsCartRegister" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+		INSERT INTO   
+				TB_CART100 (
+				     MB_NO     
+					  ,GDS_CD
+					  ,CART_SEQ
+					  ,GDS_PRICE     
+					  ,ODR_QTY     
+					  ,AGREE_TERM   
+				) VALUES (
+				    #{mbNo}
+					,#{gdsCd}
+					,(SELECT	/* 장바구니 일련번호 조회 */
+							LPAD(CONCAT(A.CNT),3,'0') AS CART_SEQ
+						FROM
+							(		
+								SELECT
+									 COUNT(*)+1 AS CNT 
+								FROM TB_CART100		/* 장바구니 */
+								WHERE MB_NO = #{mbNo}
+								AND GDS_CD = #{gdsCd} 
+						) A
+					)
+					,#{gdsPrice}
+					,#{odrQty}
+					,#{agreeTerm}
+		)
+	</insert>
 </mapper>
