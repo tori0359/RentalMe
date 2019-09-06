@@ -64,4 +64,31 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		}
 	}
 
+	
+	@Override
+	public List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGrade(rentalAppliVo);
+	}
+	
+	@Override
+	public List<RentalAppliVo> rentalGdsDetail(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGdsListDetail(rentalAppliVo);
+	}
+
+	@Override
+	public int rentalGdsQuest(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGdsQuest(rentalAppliVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> rentalReview(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalReview(rentalAppliVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> rentalReviewCnt(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalReviewCnt(rentalAppliVo);
+	}
+
+
 }

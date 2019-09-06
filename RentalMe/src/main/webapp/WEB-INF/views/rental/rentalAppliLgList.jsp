@@ -37,16 +37,55 @@
 	font-style: italic;
 	text-align: right;
 }
+.content-inner-menu-path2 {
+	font-style: italic;
+	text-align: right;
+}
+#pathStyle {
+	color: black;
+	text-decoration: none !important
+}
+.scrolltop {
+    display: none;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    z-index: 1030;
+    font-size: 1.875rem;
+    color: #868e96;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
+}
+.scrolltop:hover, .scrolltop:focus {
+	color: #dc3545;
+	transition: all 0.5s ease-in-out;
+}
+
 
 /* ---------- 소메뉴 영역 시작 -------- */
+#sMenuBorder1 {
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+}
+#sMenuBorder2 {
+	border-bottom:1px solid #999;
+}
+#menuBtn11, #menuBtn21, #menuBtn31, #menuBtn41, #menuBtn51, #menuBtn61 {
+	border-left:0px solid #999;
+}
+#menuBtn16, #menuBtn26, #menuBtn36, #menuBtn46, #menuBtn56, #menuBtn66 {
+	border-left:0px solid #999;
+}
+#menuBtn15, #menuBtn25, #menuBtn35, #menuBtn45, #menuBtn55, #menuBtn65 {
+	border-right:0px solid #999;
+}
+#menuBtn20, #menuBtn30, #menuBtn40, #menuBtn50, #menuBtn60, #menuBtn70 {
+	border-right:0px solid #999;
+}
 
 /* ---------- 소메뉴 영역 끝 -------- */
 
 /* ---------- 옵션 영역 시작 ---------- */
-#option-menu {
-	width: 200px;
-	background-color: #FFFFAA;
-}
 #option-price-search {
 	width: 400px;
 	text-align: left;
@@ -68,6 +107,16 @@
 }
 h6 {
 	display: inline;
+}
+#bestNotice1 {
+	font-size: 9pt;
+}
+#option-menu, #option-price, #option-status, #option-result {
+	width: 150px;
+	text-align: center;
+	vertical-align:middle;
+	font-size: 11pt;
+	font-weight: bolder;
 }
 /* ---------- 옵션 영역 끝 ---------- */
 
@@ -195,10 +244,12 @@ input::-moz-focus-inner { border: 0; }
 		menu = sMenu;
 		$('#menuBtn'+sMenu).attr('class','btn btn-primary');
 
-		// 옵션 브랜드 셋팅
-		//var sBrandNm = "${brandNm}";
-		//$('#optionBrand'+sBrandNm).attr('class', 'label label-primary');
+		// 옵션적용 안내 셋팅
+		if(${menu}%10 != 0) {
+			$('#bestNotice1').hide();
+		} 
 		
+		// 옵션 브랜드 셋팅
 		for(var i=0; i<vvBrandNm.length; i++) {
 			$('#optionBrand'+vvBrandNm[i]).attr('class', 'label label-primary');
 			document.getElementsByName("brandCheckBox"+vvBrandNm[i])[0].checked = true;
@@ -212,12 +263,10 @@ input::-moz-focus-inner { border: 0; }
 			document.getElementsByName("priceMinCheckBox"+sPriceMin)[0].checked = true;
 		}
 		
-
 		// 옵션 가격 셋팅(절반)
 		var sPriceHalf = "${priceHalf}";
 		$('#optionPriceHalf'+sPriceHalf).attr('class', 'label label-primary');
 		
-
 		// 옵션 가격 셋팅(최대)
 		var sPriceMax = "${priceMax}";
 		$('#optionPriceMax'+sPriceMax).attr('class', 'label label-primary');
@@ -264,6 +313,21 @@ input::-moz-focus-inner { border: 0; }
 			$('#sort-btn'+sSort).attr('class','active');
 		}
 
+		// 최상단 이동
+		jQuery(document).ready(function () {
+        $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+            $('#backToTop').fadeIn(500);
+          } else {
+            $('#backToTop').fadeOut('slow');
+          }
+        });
+        $('#backToTop').click(function (e) {
+          e.preventDefault();
+          $('html, body').animate({scrollTop: 0}, 200);
+        });
+      });
+		
 		//alert("안쪽마지막");
 	}
 
@@ -670,13 +734,28 @@ input::-moz-focus-inner { border: 0; }
 <body>
 	<div class="content">
 	<br>
+	    <a id="backToTop" class="scrolltop" href="#">
+	      <i class="fas fa-chevron-circle-up">상단이동</i>
+	    </a>
 		<div class="content-inner">
+			<!--  이후 메뉴경로(19.09.02) -->
+			<div class="content-inner-menu-path2">
+				<c:forEach items="${path }" var="path">
+					<h4><a href="/main" id="pathStyle"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> &nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
+						<c:if test="${not empty path.gdsSclassNm}">
+							&nbsp; > &nbsp; <a href="/rental/Appli/lg/${path.gubunCd }?" id="pathStyle">${ path.gdsSclassNm }</a>
+						</c:if>
+					</h4>
+				</c:forEach>
+			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					<br>${path.gdsMclassNm }<br>
+					<a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">
+			<p>&nbsp;
+				<!-- 이전 메뉴경로
 				<div class="content-inner-menu-path">
 					<c:forEach items="${path }" var="path">
 						<br>
@@ -687,6 +766,7 @@ input::-moz-focus-inner { border: 0; }
 						</h4>
 					</c:forEach>
 				</div>
+				 -->
 				<!-- **************** -->
 				<!-- 소메뉴 영역 시작 -->
 				<!-- **************** -->
@@ -712,26 +792,26 @@ input::-moz-focus-inner { border: 0; }
 					<c:if test="${status1Row.count <= 2 }">
 						<c:forEach items="${list1}" var="list1Co1" begin="0" end="10" varStatus="status1Col">
 							<c:if test="${status1Row.count == 1 && status1Col.count <= 5}">
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								<div class="btn-group" role="group" id="sMenuBorder1">
+									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4 style="font-weight: bolder;">${list1Co1.gdsSclassNm }</h4></button>
 								</div>
 							</c:if>
 							<c:if test="${status1Row.count == 2 && status1Col.count >=6 }">
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4>${list1Co1.gdsSclassNm }</h4></button>
+								<div class="btn-group" role="group" id="sMenuBorder2">
+									<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4 style="font-weight: bolder;">${list1Co1.gdsSclassNm }</h4></button>
 								</div>
 							</c:if>
 							<c:if test="${list1Q < 1 && status1Col.count == list1Length }">
 								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
-									<div class="btn-group" role="group">
-										<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });"><h4><br></h4></button>
+									<div class="btn-group" role="group" id="sMenuBorder1">
+										<button type="button" style="border-right:0px solid #999;" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" ><h4><br></h4></button>
 									</div>
 								</c:forEach>
 							</c:if>
 							<c:if test="${list1Q > 1 && list1Q < 2 && status1Row.count == 2 && status1Col.count == list1Length }">
 								<c:forEach items="${list1 }" var="list1Blank" begin="0" end="${list1QR - 1 }">
-									<div class="btn-group" role="group">
-										<button type="button" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" onclick="menuBtnClick(${list1Co1.gdsSclassCd });" }><h4><br></h4></button>
+									<div class="btn-group" role="group" id="sMenuBorder2">
+										<button type="button" style="border-right:0px solid #999;" class="btn btn-default" id="menuBtn${list1Co1.gdsSclassCd }" ><h4><br></h4></button>
 									</div>
 								</c:forEach>
 							</c:if>
@@ -746,7 +826,7 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-option">
 				<table class="table table-bordered">
-					<tr class="active">BEST 인기상품은 옵션이 적용되지 않습니다.</tr>
+					<tr class="active"><span id="bestNotice1"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다. </span><span id="bestNotice2">&nbsp;</span></tr>
 					<!-- ************** -->
 					<!-- 옵션 영역 시작 -->
 					<!-- ************** -->
@@ -773,7 +853,7 @@ input::-moz-focus-inner { border: 0; }
 										<input type="text" class="form-control" id="priceSearchEd" placeholder="0">
 									</div>
 								</div>
-								<button type="button" class="btn btn-success" onClick="search2();">검색</button>
+								<button type="button" class="btn btn-success" onClick="search2();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 							</form>
 						</td>
 					</tr>
@@ -794,7 +874,7 @@ input::-moz-focus-inner { border: 0; }
 										<input type="text" class="form-control" id="contentSearch"  placeholder="결과 내 검색">
 									</div>
 								</div>
-								<button type="button" class="btn btn-success" onClick="search();">검색</button>
+								<button type="button" class="btn btn-success" onClick="search();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 							</form>							
 						</td>
 					</tr>
@@ -832,10 +912,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -853,12 +933,11 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<c:forEach items="${list4 }" var="list4" begin="4" end="7">
 											<li class="col-sm-3">
-											
 												<div class="thumbnail">
-													<a href="#"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
 												<div class="caption-box">
-													<a href="#">
+													<a href="${menu }/detail/${list4.gdsCd }">
 														<p>${list4.brandNm }<div class="stsAlign${list4.gdsGbCd }">${list4.gdsGbNm }</div></p>
 														<h4 id="brandNmStyle">${list4.gdsNm }</h4>
 														<h4>모델명 : ${list4.modelNm }</h4>
@@ -928,10 +1007,10 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
 											<div class="thumbnail">
-												<a href="#"><img src=${list5.img1 } alt=""></a>
+												<a href="${menu }/detail/${list5.gdsCd }" ><img src=${list5.img1 } alt=""></a>
 											</div>
 											<div class="caption-box">
-												<a href="#">
+												<a href="${menu }/detail/${list5.gdsCd }">
 													<p>${list5.brandNm }<div class="stsAlign${list5.gdsGbCd }">${list5.gdsGbNm }</div></p>
 													<h4 id="brandNmStyle">${list5.gdsNm }</h4>
 													<h4>모델명 : ${list5.modelNm }</h4>
