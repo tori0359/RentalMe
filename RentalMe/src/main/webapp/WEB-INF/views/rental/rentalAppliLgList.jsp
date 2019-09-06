@@ -198,6 +198,13 @@ li.col-sm-3:hover {
 	color:pink;
 }
 
+/* ------ 하단 정렬 시작------- */
+#sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4, #sort-btn5, #sort-btn6 {
+	cursor:pointer;
+}
+
+/* ------ 하단 정렬 끝------- */
+
 /* Control box */
 .control-box {
 	width: 100%;
@@ -841,7 +848,7 @@ input::-moz-focus-inner { border: 0; }
 						<th class="active" id="option-menu">브랜드</th>
 						<td colspan="2">
 							<c:forEach items="${list2}" var="list2" varStatus="status">
-								<h4 id="optionStyle"><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.0";/>${list2.brandNm }&nbsp;&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
+								<h4 id="optionStyle"><span class="label label-default" id="optionBrand${list2.brandNm }"><label ><input class="checkBox" type="checkbox" name="brandCheckBox${list2.brandNm }" onClick="brandCheckBox('${list2.brandNm}')" style="opacity: 0.0"; />${list2.brandNm }&nbsp;&nbsp;&nbsp;&nbsp;</label></span></h4>&nbsp;&nbsp;
 							</c:forEach>
 						</td>
 					</tr>
@@ -988,12 +995,12 @@ input::-moz-focus-inner { border: 0; }
 				<!-- 정렬 메뉴 영역 시작 -->
 				<!-- ******************* -->
 				<ul class="nav nav-tabs nav-justified">
-				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);"><a>인기순</a></li>
-				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);"><a>최신순</a></li>
-				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);"><a>낮은가격순</a></li>
-				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);"><a>높은가격순</a></li>
-				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);"><a>판매량순</a></li>
-				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);"><a>리뷰 많은순</a></li>
+				  <li role="presentation" id="sort-btn1" onClick="sortBtn(1);" onfocus="this.blur();" ><a>인기순</a></li>
+				  <li role="presentation" id="sort-btn2" onClick="sortBtn(2);" onfocus="this.blur();"><a>최신순</a></li>
+				  <li role="presentation" id="sort-btn3" onClick="sortBtn(3);" onfocus="this.blur();"><a>낮은가격순</a></li>
+				  <li role="presentation" id="sort-btn4" onClick="sortBtn(4);" onfocus="this.blur();"><a>높은가격순</a></li>
+				  <li role="presentation" id="sort-btn5" onClick="sortBtn(5);" onfocus="this.blur();"><a>판매량순</a></li>
+				  <li role="presentation" id="sort-btn6" onClick="sortBtn(6);" onfocus="this.blur();"><a>리뷰 많은순</a></li>
 				</ul>
 				<!-- ***************** -->
 				<!-- 정렬 메뉴 영역 끝 -->

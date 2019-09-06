@@ -142,6 +142,7 @@
 	width: 100px;
 	color: #1E90FF;
 	background-color : white;
+	cursor:pointer;
 }
 #optionSelect1 {
 	line-height:1.1em;
@@ -154,6 +155,13 @@
 	font-size:16pt;
 	color: red;
 	font-weight: bolder;
+	vertical-align:middle;
+}
+#quick0 {
+	font-size:12pt;
+	color: black;
+	font-weight: bolder;
+	vertical-align:middle;
 }
 #charge_button4 {
 	color: black;
@@ -206,6 +214,9 @@
 }
 #reviewGrade1 {
 	font-size: 11pt;
+}
+#sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4 {
+	cursor:pointer;
 }
 /* --------- 제품 정보 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
@@ -290,9 +301,13 @@ input::-moz-focus-inner { border: 0; }
 			}
 		});
 
+		$("#gradeGroup #starCnt").on("click", function(event){
+			var offset = $("#menu4 #sort-btn4").offset();
+			$('html').animate({scrollTop : offset.top}, 0);
+		});
+
 		// menu1 영역 버튼클릭
 		$("#menu1 #sort-btn1").on("click", function(event){
-			alert("asd");
 			var offset = $("#menu1 #sort-btn1").offset();
 			$('html').animate({scrollTop : offset.top}, 0);
 		});
@@ -570,7 +585,7 @@ input::-moz-focus-inner { border: 0; }
 								<input type="text" id="starText" disabled value="상품평">
 							</h4>
 							<h4 id="gradeGroup">
-								<input type="text" id="starCnt" disabled value="">
+								<input type="text" id="starCnt" onfocus="this.blur();" readonly="readonly" value="">
 							</h4>
 						</div><p>
 						<div style="border:1px solid gray"></div>
@@ -631,7 +646,7 @@ input::-moz-focus-inner { border: 0; }
 							</div><br>
 							<div class="row" style="border:0px solid orange;" align="center">
 								<div class="chargediv">
-						       		<button style="width:495px;" id="charge_button4" type="submit" class="btn btn-default" disabled="disabled">렌탈미 빠른상담    <span id="quick">1234-1234</span></button>
+						       		<button style="width:495px;" id="charge_button4" type="submit" class="btn btn-default" disabled="disabled" ><span id="quick0">렌탈미 빠른상담&nbsp;</span><span id="quick">&nbsp;1234-1234</span></button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
 							<form id="target" action="/rental/Appli/lg/detail/quest" method="post">
@@ -715,6 +730,7 @@ input::-moz-focus-inner { border: 0; }
 								</ul>
 							</div>
 							<div id="info1">
+								<br><br><br>
 								<!-- for문.. -->
 								<div id="imgs1">
 									<img src="/imgs/inner1.jpg">
