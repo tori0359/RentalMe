@@ -301,6 +301,7 @@ input::-moz-focus-inner { border: 0; }
 			}
 		});
 
+		// 상품평 리뷰갯수 클릭
 		$("#gradeGroup #starCnt").on("click", function(event){
 			var offset = $("#menu4 #sort-btn4").offset();
 			$('html').animate({scrollTop : offset.top}, 0);
@@ -650,7 +651,7 @@ input::-moz-focus-inner { border: 0; }
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
 							<form id="target" action="/rental/Appli/lg/detail/quest" method="post">
-								<!-- 모달 -->
+								<!-- 상담예약 모달 -->
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
