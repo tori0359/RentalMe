@@ -16,7 +16,7 @@ public class LoginAfeterInterceptor extends HandlerInterceptorAdapter{
 		
 		// 로그인했을 경우
 		if(session.getAttribute("loginUserId") != null) {
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/main");
 			return false;
 		}
 		

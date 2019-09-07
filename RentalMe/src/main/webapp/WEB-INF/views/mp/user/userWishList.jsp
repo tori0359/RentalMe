@@ -110,10 +110,10 @@
        	 <p>
 	       	 <input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty userVo.userNM}">
-		     	${loginUserId} 님의 찜한 상품 목록입니다.
+		     	${loginUserId} 님이 중고거래에서 찜한 상품 목록입니다.
 		     </c:if>
 		     <c:if test="${!empty userVo.userNM }">
-		     	${userVo.userNM} 님의 찜한 상품 목록입니다.
+		     	${userVo.userNM} 님이 중고거래에서 찜한 상품 목록입니다.
 		     </c:if>
 		  </p>
        	 </div>

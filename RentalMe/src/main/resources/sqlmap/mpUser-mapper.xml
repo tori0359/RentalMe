@@ -7,34 +7,56 @@ encoding="UTF-8"?>
   
   <mapper namespace="mpUser">
   	<select id="selectOrd" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT DATE_FORMAT(tb_odr110.ODR_DT, '%Y-%m-%d') AS odrDt,
-			FN_NM('GDS_NM',tb_odr110.GDS_CD) AS gdsNm, 
-			tb_odr110.GDS_CD AS gdsCd, 
-			tb_odr110.ODR_QTY AS odrQty, 
-			tb_odr110.AGREE_TEM AS agreeTem, 
-			tb_odr110.GDS_PRICE AS gdsPrice, 
-			tb_odr100.ODR_STS_GB_CD AS odrStsGbCd, 
-			tb_user100.USER_NM AS userNM,
-			tb_gds200.IMG1 As RImg1	
-		FROM tb_odr110
-		INNER JOIN tb_odr100
-		ON tb_odr110.ODR_NO = tb_odr100.ODR_NO
-		INNER JOIN tb_user100
-		ON tb_odr100.MB_NO = tb_user100.MB_NO
-		INNER JOIN TB_GDS200
-		ON tb_odr110.GDS_CD=tb_gds200.GDS_CD			
-		WHERE tb_user100.MB_NO=#{mbNo}
+  		SELECT            
+		   AA.*
+		   ,COALESCE(BB.CNT,0) AS CNT
+		FROM
+		(            
+		      SELECT /* 주문내역 */
+		          A.ODR_NO
+		         ,B.ODR_SEQ
+		         ,DATE_FORMAT(B.ODR_DT, '%Y-%m-%d') AS ODR_DT
+		         ,FN_NM('GDS_NM', B.GDS_CD) AS GDS_NM
+		         ,B.GDS_CD 
+		         ,B.ODR_QTY
+		         ,B.AGREE_TEM 
+		         ,B.GDS_PRICE
+		         ,A.ODR_STS_GB_CD 
+		         ,A.MB_NO 
+		         ,FN_NM('USER_NM', #{mbNo}) AS USER_NM
+		         ,C.IMG1 As RImg1	
+		      FROM TB_ODR100 A
+		         , TB_ODR110 B
+		         , tb_gds200 C
+		      WHERE A.ODR_NO = B.ODR_NO
+		      AND A.MB_NO = #{mbNo}
+		      AND B.GDS_CD = C.GDS_CD
+		) AA LEFT OUTER JOIN (
+		      SELECT /* 상품후기  */
+		         A.GDS_CD
+		         ,A.GDS_REVIEW_NO
+		         ,A.ODR_NO
+		         ,A.ODR_SEQ
+		         ,COUNT(A.GDS_REVIEW_NO) AS CNT
+		      FROM TB_GDS210 A
+		      WHERE A.MB_NO = #{mbNo}
+		      GROUP BY A.GDS_REVIEW_NO
+		
+		) BB
+		ON AA.ODR_NO = BB.ODR_NO
+		AND AA.ODR_SEQ = BB.ODR_SEQ
+		AND AA.GDS_CD = BB.GDS_CD
 	</select>
 	
   	<insert id="insertReview">
   		INSERT  INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
 		VALUES  (#{gdsCd},
-				(SELECT LPAD((SELECT COUNT(GDS_CD)+1 FROM TB_GDS210 A WHERE GDS_CD=#{gdsCd}),8,'0')),
+				(SELECT LPAD((SELECT COUNT(gds_review_no)+1 FROM TB_GDS210 A),8,'0')),
 				(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
-				(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId})), 
-				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))), 
-				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT ODR_NO FROM TB_ODR100 WHERE MB_NO=(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}))),'%Y%m%d')),
-				(SELECT MB_NO FROM TB_USER100 WHERE USER_ID=#{userId}),
+				(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd}), 
+				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})), 
+				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})),'%Y%m%d')),
+				#{mbNo},
 				#{content},
 				#{grade})
   	</insert>

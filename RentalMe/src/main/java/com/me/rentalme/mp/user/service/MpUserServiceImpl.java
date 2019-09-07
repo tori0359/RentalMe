@@ -35,11 +35,11 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//후기 등록
 		@Override
-		public int addReview(CallVo callVo) throws SQLException {
+		public int addReview(CallVo callVo, String mbNo) throws SQLException {
 			log.debug("후기 등록 서비스...");
 			
 			
-			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade());
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),mbNo);
 		}
 	
 	
@@ -143,10 +143,6 @@ public class MpUserServiceImpl implements MpUserService{
 	public List<CallVo> AuctList(String mbNo) throws SQLException {
 		return mpUserDao.selectAuct(mbNo);
 	}
-
-
-
-	
 
 
 }
