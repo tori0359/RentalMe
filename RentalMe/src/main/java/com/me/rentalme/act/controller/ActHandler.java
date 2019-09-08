@@ -20,49 +20,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ActHandler extends TextWebSocketHandler{
 	//채팅서버
-//	List<WebSocketSession> list=new ArrayList<WebSocketSession>();
-	static int cnt;
-	static int totalPrice;
-	Map<String,WebSocketSession> map=new HashMap<String,WebSocketSession>();
-	List<String> enterList = new ArrayList<String>();
-//	Map<String,String> users=new HashMap<String,String>();
-	
+	Map<String,WebSocketSession> map=new HashMap<String,WebSocketSession>();			//소켓에 연결된 client
+	List<Object> bidList=new ArrayList<Object>();										//현재 낙찰가에 응찰한 사람
+	String list;
+					
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//소켓이 접속했을 때 이벤트
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("Connect...");
-		boolean same=true;
-		cnt++;
 		map.put(session.getId(), session);
 		System.out.println(session.getId()+">websocket>"+session.getAttributes().get("loginUserId"));
-		for(int i=enterList.size()-1; i>=0; i--) {
-			if(enterList.get(i).equals((String)session.getAttributes().get("loginUserId"))) {
-				System.out.println("같은사람");
-				cnt--;
-				same=false;
-				break;
-			}
-		}
-		if(same) {
-			enterList.add((String)session.getAttributes().get("loginUserId"));
-		}
-		System.out.println(enterList.toString());
-		
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//소켓이 끊어졌을 때 이벤트
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Close...");
-		for(int i=0;i<enterList.size(); i++) {
-			if(enterList.get(i).equals((String)session.getAttributes().get("loginUserId"))) {
-				System.out.println("나감");
-				enterList.remove(i);
-				cnt--;
-				break;
-			}
-		}
 		map.remove(session.getId());
 	}
-
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//소켓이 메시지를 보냈을 때 이벤트
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 클라이언트에 전달
@@ -73,34 +53,38 @@ public class ActHandler extends TextWebSocketHandler{
 		ObjectMapper mapper = new ObjectMapper();
 		String json = message.getPayload();
 		try {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map = mapper.readValue(json, new TypeReference<Map<String, String>>(){});
+			Map<String, Object> mapping = new HashMap<String, Object>();
+			mapping = mapper.readValue(json, new TypeReference<Map<String, String>>(){});
 			
-			System.out.println("json 파싱 : "+ map);
-			System.out.println("cnt = "+ map.get("cnt"));
-			
-			//이렇게 안하면 websocket 죽음 (String으로 받은 후 숫자로 변형 후 다시 String으로 변경)
-//			String cnt = (String)map.get("cnt");			
-//			int val = Integer.parseInt(cnt);
-//			val++;
-//			cnt = String.valueOf(val);
-			
-			int val=Integer.parseInt((String) map.get("price"));
-			totalPrice=totalPrice+val;
-			
-			//변경된 cnt값을 map에 넣는다.
-			map.put("price", totalPrice);
-			map.put("cnt", cnt);
-			
+			//현재 소켓에 연결된 인원 수를 cnt에 넣는다.
+			mapping.put("cnt", this.map.size());
+			System.out.println("누가 이 메시지를 보냈지?:"+mapping.get("id"));
 			//map -> json
-			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
 			//System.out.println("json값 : "+json);
-			Map<String,String> serverMsg=new HashMap<String,String>();
-			serverMsg.put("type", "smsg");
-			serverMsg.put("text", "10000원anybody");
-			serverMsg.put("id", "admin");
-			serverMsg.put("price", "");
-			serverMsg.put("cnt", "");
+			
+			System.out.println(mapping.get("type"));
+			if(String.valueOf(mapping.get("type")).equals("adminMsg")) {
+				bidList=new ArrayList<Object>();
+			}else if(String.valueOf(mapping.get("type")).equals("bid")) {
+				bidList.add(session.getAttributes().get("loginUserId"));
+			}else if(String.valueOf(mapping.get("type")).equals("enter")) {
+				
+				Map<String,Object> listAll=new HashMap<String,Object>();
+				listAll.put("type", "bidlist");
+				listAll.put("text", bidList);
+				listAll.put("id", session.getAttributes().get("loginUserId"));
+				listAll.put("cnt", "");
+				
+				list=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listAll);
+				
+				TextMessage msg=new TextMessage(list);
+				Set<String> keys=map.keySet();
+				Iterator<String> ite=keys.iterator();
+				while(ite.hasNext()) {
+					map.get(ite.next()).sendMessage(msg);
+				}
+			}
 			
 		} catch (JsonGenerationException e) { 
 			e.printStackTrace(); 
@@ -109,7 +93,6 @@ public class ActHandler extends TextWebSocketHandler{
 		} catch (IOException e) { 
 			e.printStackTrace(); 
 		}
-
 		
 		//변경된 json값을 넣어준다.
 		TextMessage msg= new TextMessage(json);
@@ -119,20 +102,26 @@ public class ActHandler extends TextWebSocketHandler{
 			map.get(ite.next()).sendMessage(msg);
 		}
 		
+		System.out.println("bidList:"+ bidList.toString());
 	}
 	
 	
 	
-//  봉인	
+ 
 //	public void timeThread(WebSocketSession session) {
 //		Timer m_timer = new Timer();
 //		TimerTask m_task = new TimerTask() {
-//
+//			ObjectMapper mapper = new ObjectMapper();
 //			@Override
 //			public void run() {
+//				Map<String,Object> serverMsg=new HashMap<String,Object>();
+//				serverMsg.put("type", "bidlist");
+//				serverMsg.put("text", bidList);
+//				serverMsg.put("id", session.getAttributes().get("loginUserId"));
+//				serverMsg.put("cnt", "");
 //			}
 //		};
-//		m_timer.schedule(m_task, 3000);
+//		m_timer.schedule(m_task, 10000, 3000);
 //	}
 	
 }

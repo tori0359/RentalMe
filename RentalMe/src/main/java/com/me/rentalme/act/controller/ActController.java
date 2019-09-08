@@ -88,12 +88,12 @@ public class ActController {
 		return "act/actDetail";
 	}
 	
-	///////////////////////// 이벤트 경매 현장
-	@RequestMapping(value="/bid", method=RequestMethod.GET)
+	///////////////////////// 이벤트 경매 관리자
+	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	public String getActNow(HttpSession session) {
 		logger.info("index...");
 		System.out.println(session.getId()+">>>"+session.getAttributeNames());
-		return "act/actBid";
+		return "act/actAdmin";
 	}
 	
 	

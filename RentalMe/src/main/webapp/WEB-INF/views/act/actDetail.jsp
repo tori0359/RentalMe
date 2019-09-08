@@ -38,56 +38,51 @@
 		enterAct();
 	};
 	sock.onmessage=function(event){			//이 서버에서 메시지를 받았을 때
-		/* $('#liveviewcnt').text(msg.data); */
+		
 		console.log(event.data);
 		var msg = JSON.parse(event.data);
 		var id= msg.id;
 		var text=msg.text;
-		var price=msg.price;
 		var type=msg.type;
-		/* if(msg.cnt==0){
-			cnt++;
-			$('#liveviewcnt').text(cnt);
-		}else if(msg.cnt==1){
-			$('#actLive').append(id+">>>"+text+"<br/>");
-		} */
+		
 		$('#liveviewcnt').text(msg.cnt);
 		if(type=='bid'){
-			$('#actLive').append(id+"님께서"+price+"응찰하셨습니다<br/>");
+			$('#actLive').append(id+"님께서 응찰하셨습니다<br/>");
+			$('#bidList').append("<li>"+id+"</li>");
 		}
 		if(type=='enter'){
-			$('#actLive').append(id+"님이 경매장에 입장하셨습니다.");
+			$('#actLive').append(id+"님이 경매장에 입장하셨습니다<br/>");
+		}
+		if(type=='adminMsg'){
+			$('#actLive').append(text+"원 응찰하실 분?<br/>");
+			$('#sendMsg').attr('disabled', false);
+			$('#nowPrice').text('');
+			$('#nowPirce').append("현재가격: "+text+"원");
+			$('#bidList').empty();
+		}
+		if(type='bidlist'){
+			console.log(text);
+			for(var i=0; i<text.length; i++){
+				$('#bidList').append("<li>"+text[i]+"</li>");
+			}
 		}
 	};
 	sock.onclose=function(event){
-		exitAct();
+		
 	};
 	$(function(){
-		$('button').click(function(){
+		$('#sendMsg').click(function(){
 			console.log('클릭함');
+			$('#sendMsg').attr('disabled', true);
 			sendBid();
 			
 		}); 
 	});
-
-	function exitAct(){
-		var msg={
-			type: "exit",
-			text: $('#actInfo').val(),
-			id: $('#idsession').text(),
-			price: 0,
-			cnt: 0
-		};
-		sock.send(JSON.stringify(msg));
-
-	}
- 	
 	function enterAct(){
 		var msg={
 			type: "enter",
 			text: $('#actInfo').val(),
 			id: $('#idsession').text(),
-			price: 0,
 			cnt: 0
 		};
 
@@ -98,7 +93,6 @@
 			type: "bid",
 			text: $('#actInfo').val(),
 			id: $('#idsession').text(),
-			price: 10000,
 			cnt: 1
 		};
 
@@ -110,13 +104,17 @@
 <body>
 <div id="headAct"></div>
 <div id="actBody">
-<div id="idsession">${loginUserId}</div>
+	<div id="idsession">${loginUserId}</div>
 	<div id="liveview">
 		<img alt="" src="/imgs/liveview.png" style="width:100%;height:100%;">
 	</div>
 	<span id="liveviewcnt"></span>
+	<div id="nowPirce"></div>
 	<div id="actLive"></div>
-	<input id="actInfo"/><button>10000원 추가</button>
+	<button id="sendMsg">응찰하기</button>
+	<ol id="bidList">
+	
+	</ol>
 </div>	
 <div id="footAct"></div>
 </body>
