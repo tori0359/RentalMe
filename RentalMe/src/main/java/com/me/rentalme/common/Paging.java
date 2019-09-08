@@ -1,9 +1,15 @@
 package com.me.rentalme.common;
 
-
+/**
+* 페이징 공통 클래스
+* 
+* @author 황인준
+* @version ver1.0
+* 등록일자 : 2019.09.06
+*/
 public class Paging {
 
-	private int 	listSize 		= 5; 		//목록   갯수
+	private int 	listSize 		= 10; 		//목록   갯수
 	private int 	rangeSize 		= 5;		//페이지 범위
 	private int 	page;						//현재   페이지
 	private int 	range;						//현재   페이지범위
@@ -15,6 +21,7 @@ public class Paging {
 	private boolean prev;						//이전   버튼 값
 	private boolean next;						//다음   버튼 값
 	
+	/*getter setter*/
 	public int getListSize() {
 		return listSize;
 	}
@@ -82,6 +89,16 @@ public class Paging {
 		this.next = next;
 	}
 	
+	/**
+	* 페이지 정보 
+	* 
+	* @param  int page  - 현재페이지 (없으면 기본값 : 1) 
+	* @param  int range - 현재범위 (없으면 기본값 : 1) 
+	* @param  int totalListCnt - 게시물 총갯수
+	* @return 
+	* @author 황인준
+	* 등록일자 : 2019.09.06
+	*/
 	public void pageInfo(int page, int range, int totalListCnt) {
 		this.page 			= page;				//현재페이지
 		this.range 			= range;			//현재페이지범위
