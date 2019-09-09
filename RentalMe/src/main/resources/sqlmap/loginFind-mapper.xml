@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="loginFind">
+	<select id="checkId" parameterType="String"  resultType="int">
+		SELECT COUNT(email) AS CNT
+		  FROM TB_USER100
+		 WHERE email=#{email}
+	</select>
+	<select id="getId" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT USER_ID AS userId
+		     , JOIN_DT AS joinDt
+		  FROM TB_USER100
+		 WHERE EMAIL=#{email}
+		 ORDER
+		    BY JOIN_DT DESC
+	</select>
+	<select id="checkPwEmail" parameterType="com.me.rentalme.model.entity.UserVo" resultType="Integer">
+		select count(email)
+		  from tb_user100
+		 where email = #{email}
+		   and user_id = #{userId}
+	</select>
+	<update id="changePw">
+		update tb_user100
+		   set pw = #{userPw}
+		     , pw_adj_dt = DATE_FORMAT(NOW(),'%Y%m%d')
+		     , chg_id = 'system'
+		     , chg_dt = DATE_FORMAT(NOW(),'%Y%m%d')
+		 where user_id = #{userId}
+		   and email = #{email}
+	</update>
+</mapper>

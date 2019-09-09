@@ -8,17 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-      #title{
-            font-size: 18pt;
-            font-weight: bolder;
-            text-align: center;
-            font-family: "nanumB";
-            margin: 50px;
-      }
-      #path{
+      #title2{
+            font-size: 15pt;
             font-weight: bolder;
             font-family: "nanumB";
-            float:left;
+            margin: 60px 0 50px 0;
       }
       
       #choosedel{
@@ -29,19 +23,24 @@
             color:black;
             font-weight:600;
       }
-
+		
+		
        .ordtable>thead>tr>th{
            text-align:center;
         }
         
-        .ordtable>tbody>tr>td{
+       .ordtable>tbody>tr>td{
            vertical-align: middle;
            text-align: center;
            display: table-cell;
+           line-height:30px;
+        }
+        .ordtable>tbody>tr>td:nth-child(1){
+        	text-align:left;
         }
         
       .ordimg{
-            width:150px;
+            width:100px;
       }
       
        .delete_btn1{
@@ -84,8 +83,8 @@
             float:right;
             margin-top:25px;
       }
-      .pathdiv{
-            height:30px;
+      .titlediv{
+            height:40px;
       }
       .starR{
         background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
@@ -113,7 +112,21 @@
         color:#f00;
         fontweight: bold;
       }
-     
+      #info{
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
+      }
+      
+      #info p{
+      	line-height:20px;
+      	font-family:"nanumB";
+      }
+      .tdtext{
+      	margin:30px 0;
+      }
+   
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
@@ -227,17 +240,27 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
-   <p id="title">주문내역</p>
    <div>
-   <div class="pathdiv">
-       <p id="path">마이페이지> 주문내역</p>
+   <div class="titlediv">
+       <p id="title2">주문 내역</p>
      </div>
-     <div class="hr" style="height:3px; background-color: black;"></div>
+     <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
+     <div id="info">
+     <p>
+     	<input type="hidden" value="${loginMbNo}">
+	     <c:if test="${empty userVo.userNM}">
+	     	${loginUserId} 님이 렌탈미에서 주문한 내역입니다.
+	     </c:if>
+	     <c:if test="${!empty userVo.userNM }">
+	     	${userVo.userNM} 님이 렌탈미에서 주문한 내역입니다.
+	     </c:if>
+     </p>
+     </div>
           <table class="ordtable table">
           <thead>
              <tr class="active">
-                <th>주문일</th>
                 <th>상품명/선택사항</th>
+                <th>주문일</th>
                 <th>수량</th>
                 <th>렌탈기간</th>
                 <th>상품금액</th>
@@ -250,15 +273,17 @@
           
           <c:forEach items="${alist}" var="bean">
              <tr>  
-             	
-                <td>${bean.odrDt}</td>
-                <td><!--  <img class="ordimg" src="imgs/bed1.jpg"/> -->${bean.gdsNm} 
-                <input type=hidden value="${bean.gdsCd}"/>
-                </td>
-                <td>${bean.odrQty}</td>
-                <td>${bean.agreeTem}개월</td>
-                <td><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</td>
                 <td>
+	                <a style="text-decoration:none; color:black;"href="#">
+	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
+	                <input type=hidden value="${bean.gdsCd}"/></a>
+	                
+                </td>
+                <td><p class="tdtext">${bean.odrDt}</p></td>
+                <td><p class="tdtext">${bean.odrQty}</p></td>
+                <td><p class="tdtext">${bean.agreeTem}개월</p></td>
+                <td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
+                <td><p class="tdtext">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
                       입금대기
                    </c:if>
@@ -271,8 +296,19 @@
                    <c:if test= "${bean.odrStsGbCd eq 'RC'}">
                       반품확정
                    </c:if>
+                   </p>
                 </td>
-                <td><button type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button></td>
+                <td><p class="tdtext">
+                 <c:choose>
+                  <c:when test="${bean.cnt == 0}">
+                	<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button>
+                </c:when>
+                <c:otherwise>
+               		<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">이미 후기를 등록하셨습니다</button>
+                </c:otherwise>
+                </c:choose>
+                </p>
+                </td>
              </tr>
           </c:forEach>
           </tbody>
@@ -297,7 +333,14 @@
 	        	<input type="hidden" name="gdsCd" value="gdsCd"/>
 	        </div>
 	        <div class="col-md-4 col-md-offset-3">
-	      		<label>글쓴이 </label><div name="userId"></div>
+	      		<label>글쓴이 </label>
+		      	 <c:if test="${empty userVo.userNM}">
+			     	<div>${loginUserId}</div>
+			     </c:if>
+			     <c:if test="${!empty userVo.userNM }">
+			     	<div>${userVo.userNM}</div>
+			     </c:if>
+		     
 	        	<input type="hidden" name="userId" value="userId"/>
 	        	<input type="hidden" name="grade" id="grade"/>
 	      	</div>
@@ -326,7 +369,7 @@
      
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary submit" id="review">저장</button>
+        <button style="background:black;" id="review" type="submit" class="btn btn-default submit" >저장</button>
       </div>
    </div>
     </div>

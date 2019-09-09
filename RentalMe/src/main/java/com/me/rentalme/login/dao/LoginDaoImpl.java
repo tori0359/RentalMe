@@ -1,5 +1,6 @@
 package com.me.rentalme.login.dao;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,6 +92,43 @@ public class LoginDaoImpl implements LoginDao {
 		log.debug("비밀번호 오류횟수 초기화 Dao");
 		
 		sqlSession.update("login.initPwFailCnt", userId);		
+	}
+
+	/**
+	* 로그인 유지
+	* 
+	* @param  String userId - 사용자 아이디
+	* @param  String sessionKey - 세션쿠키값
+	* @param  String sessionDt - 세션쿠키일자
+	* @return None
+	* @author 황인준
+	* 등록일자 : 2019-09-01
+	*/
+	@Override
+	public void keepLogin(String userId, String sessionKey, Date sessionDt) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		log.debug("로그인 유지 Dao");
+		
+		map.put("userId", userId);			//사용자아이디
+		map.put("sessionKey", sessionKey);	//세션쿠키값
+		map.put("sessionDt", sessionDt);	//세션쿠키일자
+						
+		sqlSession.update("login.keepLogin", map);
+	}
+
+	/**
+	* 세션쿠키값 체크
+	* 
+	* @param  String value
+	* @return None
+	* @author 황인준
+	* 등록일자 : 2019-09-01
+	*/
+	@Override
+	public UserVo checkLoginSessionKey(String value) {
+		log.debug("세션쿠키값 체크 Dao");
+		
+		return sqlSession.selectOne("login.checkLoginSessionKey", value);
 	}
 
 }

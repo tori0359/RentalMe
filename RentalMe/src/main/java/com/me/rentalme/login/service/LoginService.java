@@ -1,5 +1,7 @@
 package com.me.rentalme.login.service;
 
+import java.sql.Date;
+
 import com.me.rentalme.model.entity.UserVo;
 
 /**
@@ -11,6 +13,12 @@ import com.me.rentalme.model.entity.UserVo;
 * 등록일자 : 2019.08.13
 */
 public interface LoginService {
+	
+	//로그인 유지
+	void keepLogin(String userId, String sessionKey, Date sessionDt);
+	
+	//세션쿠키값 체크
+	UserVo checkLoginSessionKey(String value);
 
 	//입력한 로그인 아이디 체크
 	UserVo getId(String userId);

@@ -5,23 +5,24 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.act.dao.ActDao;
+
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 @Service
-public class ActServiceImpl implements ActService {
-
+public class ActServiceImpl implements ActService{
+	
+	Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Inject
 	ActDao actDao;
 	
-	@Override
-	public List<ActVo> listAct() throws SQLException {
-		System.out.println("actlistdao·Î ¤¡¤¡");
-		return actDao.selectActList();
-	}
 
 	@Override
 	public int addAct300(ActVo actVo) throws SQLException {
@@ -57,5 +58,12 @@ public class ActServiceImpl implements ActService {
 		
 		return actDao.selectGoodsList(goodsNum);
 	}
+
+	@Override
+	public List<ActVo> listAct() throws SQLException {
+      System.out.println("actlistdao·Î ¤¡¤¡");
+      return actDao.selectActList();		
+	}
+
 
 }

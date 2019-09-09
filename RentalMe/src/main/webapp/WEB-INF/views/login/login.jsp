@@ -44,7 +44,7 @@
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
 					<div class="checkbox">
-						<label> <input type="checkbox"> 비밀번호 기억하기
+						<label> <input type="checkbox" name="isUseLogin"> 자동 로그인
 						</label>
 					</div>
 				</div>
@@ -86,34 +86,37 @@
 							<input type="text" placeholder="번호입력" />
 						</div>
 						<div id="id_email_find">
-							<input type="text" placeholder="메일주소입력" />
+							<input type="text" placeholder="메일주소입력" name="inputEmail" id="inputEmail" />
 						</div>
+						
+						<div id="email-danger">email은 영문+숫자만 가능합니다.</div>
+						<div id="empty-danger">이메일을 입력해주시기 바랍니다.</div>
+						<div id="noEmail-danger">등록된 이메일이 아닙니다.</div>						
 					</div>
 				</div>				
 				<div id="modal-footer">
 					<div>
 						<button id="id_find_btn" type="button"
-							class="btn btn-default btn-block" data-toggle="modal"
-							data-target="#find_id_modal" data-ismiss="modal">찾기</button>
+							class="btn btn-default btn-block" >찾기</button>
 					</div>
 				</div>
-
-				<div id="pw_find">
-					<div id="insert_id">
-						<input type="text" placeholder="아이디" />
+				<form action="pwFind" method="get">
+					<div id="pw_find">
+						<div id="insert_id">
+							<input type="text" placeholder="아이디"  name="userId" id="pwUserId"/>
+						</div>
+						<div id="pw_cellphone_find">
+							<input type="text" placeholder="핸드폰번호입력" name=hp id="pwHp"/>
+						</div>
+						<div id="pw_email_find">
+							<input type="text" placeholder="메일주소입력" name="email" id="pwInputEmail"/>
+						</div>
+						<div>
+							<button id="pw_find_btn" type="submit"
+								class="btn btn-default btn-block">찾기</button>
+						</div>
 					</div>
-					<div id="pw_cellphone_find">
-						<input type="text" placeholder="핸드폰번호입력" />
-					</div>
-					<div id="pw_email_find">
-						<input type="text" placeholder="메일주소입력" />
-					</div>
-					<div>
-						<button id="pw_find_btn" type="button"
-							class="btn btn-default btn-block" data-toggle="modal"
-							data-target="#find_pw_modal" data-dismiss="modal">찾기</button>
-					</div>
-				</div>
+				</form>
 
 			</div>
 			<!-- /.modal-content -->
@@ -121,7 +124,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
 
 	<div id="find_id_modal" class="modal fade" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -133,17 +135,8 @@
 					</button>
 					<h4 class="modal-title">아이디 찾기</h4>
 				</div>
-				<div class="modal-body">
-					<table border="1">
-						<tr>
-							<td>아이디</td>
-							<td>asdzxc</td>
-						</tr>
-						<tr>
-							<td>가입일자</td>
-							<td>2019-00-00</td>
-						</tr>
-					</table>
+				<div class="modal-body" id="find_id_body" style="overflow: auto; height: 500px;">
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -155,34 +148,39 @@
 	</div>
 	<!-- /.modal -->
 
-
-	<div id="find_pw_modal" class="modal fade" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">비밀번호 변경</h4>
-				</div>
-				<div class="modal-body">
-					<div>
-						<input type="text" placeholder="비밀번호" />
+		<input type="hidden" id="pwMsg" value="${pwMsg}">
+		<input type="hidden" id="pwEmail" value="${pwEmail}">
+		<input type="hidden" id="pwId" value="${pwId}">
+			
+		<div id="find_pw_modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">비밀번호 변경</h4>
 					</div>
-					<div>
-						<input type="text" placeholder="비밀번호확인" />
+					<div class="modal-body">
+						<div>
+							<input type="password" placeholder="비밀번호" name="pw1" id="pw1"/>
+						</div>
+						<div>
+							<input type="password" placeholder="비밀번호확인" name="pw2" id="pw2"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="pw_change_btn" type="button" class="btn btn-default btn-block"">비밀번호 변경</button>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	<jsp:include page="../template/footer.jsp"></jsp:include>
+		<!-- /.modal -->
+	
+	
 </body>
+	<jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

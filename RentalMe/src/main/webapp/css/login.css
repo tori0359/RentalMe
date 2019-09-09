@@ -1,7 +1,8 @@
 #login_main{
      width: 450px;
-     height: 500px;
+     height: 100%;
      margin: 100px auto;
+     
  }
 
 #login_main h3{
@@ -47,7 +48,7 @@
  }
  
  #errCheck-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
- 
+ #email-danger,#empty-danger,#noEmail-danger{color:red;text-align:center;font-size:9pt;font-weight:bold;margin-top:10px;}
  /* modal css*/\
  .modal-body{
  	margin-top: 50px;
@@ -97,3 +98,11 @@
   border-radius: 0.3rem;
   outline: 0;
 }
+
+.tb_findId{
+	border : 1px solid black;
+}
+
+.not_scroll{position:fixed;overflow:hidden;width:100%;height:100%} 
+
+          

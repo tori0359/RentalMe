@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.auth.service.HpAuthService;
 import com.me.rentalme.auth.service.MailAuthService;
 import com.me.rentalme.join.service.JoinService;
 import com.me.rentalme.model.entity.UserVo;
@@ -25,7 +26,7 @@ import com.me.rentalme.model.entity.UserVo;
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.12
-* 수정일자 : 2019.08.13
+* 수정일자 : 2019.09.02
 */
 @Controller
 @RequestMapping(value="/join")
@@ -38,6 +39,9 @@ public class JoinController {
 	
 	@Inject
 	MailAuthService mailAuthService;
+	
+	@Inject
+	HpAuthService hpAuthService;
 	
 	/**
 	* 회원가입 페이지 
@@ -135,12 +139,26 @@ public class JoinController {
 		}		
 
 	}
+	/**
+	* 핸드폰 인증코드 발송
+	* 
+	* @param  String hp - 입력한 핸드폰 번호
+	* @return String 
+	* @author 황인준
+	* 등록일자 : 2019-09-05
+	*/	
+	@RequestMapping(value="/hpCodeSend", method = RequestMethod.POST)
+	public void sendHpCode(@RequestParam String hp) {
+		//System.out.println("view에서 넘어온 핸드폰번호 : "+hp);
+		//핸드폰으로 인증 번호 보내기
+		String key = hpAuthService.sendHp(hp);
+	}
 	
 	/**
-	* 인증코드 발송
+	* 이메일 인증코드 발송
 	* 
 	* @param  String uesrId - 사용자 아이디
-	* @return String 
+	* @return  
 	* @author 황인준
 	* @exception None
 	*/

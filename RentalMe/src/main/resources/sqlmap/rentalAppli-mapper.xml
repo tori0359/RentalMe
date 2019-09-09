@@ -6,81 +6,490 @@
 <mapper namespace="rentalAppli">
 	
 	<!-- 렌탈 Path 조회 -->
-	<select id="selectPathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT /* Path 조회 */
-			DISTINCT 
-			(
+	<select id="pathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			DISTINCT #{gdsSclassCd} AS	GUBUN_CD	/* 전체메뉴 구분코드 */
+			,CASE WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '10' AND #{gdsSclassCd} <![CDATA[ < ]]> '20' THEN '10'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '20' AND #{gdsSclassCd} <![CDATA[ < ]]> '30' THEN '20'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '30' AND #{gdsSclassCd} <![CDATA[ < ]]> '40' THEN '30'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '40' AND #{gdsSclassCd} <![CDATA[ < ]]> '50' THEN '40'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '50' AND #{gdsSclassCd} <![CDATA[ < ]]> '60' THEN '50'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '60' AND #{gdsSclassCd} <![CDATA[ < ]]> '70' THEN '60'
+				  ELSE '99'		/* 홈 링크코드 */
+			 END AS HOME_CD
+			,(
 				SELECT	/* 대분류명 조회 */
 					CONCAT(CD_NM,'렌탈')
-				FROM TB_COM100
+				FROM TB_COM100		/* 공통코드 */
 				WHERE GRP_CD_ID = 'GDS_MCLASS_CD'
 				<if test="gdsSclassCd != null">
-					<if test="gdsSclassCd gte 11 and gdsSclassCd lte 19">
+					<if test="gdsSclassCd gte 10 and gdsSclassCd lte 19">
 						AND CD_ID = '10'
 					</if>
-					<if test="gdsSclassCd gte 21 and gdsSclassCd lte 29">
+					<if test="gdsSclassCd gte 20 and gdsSclassCd lte 29">
 						AND CD_ID = '20'
 					</if>
-					<if test="gdsSclassCd gte 31 and gdsSclassCd lte 39">
+					<if test="gdsSclassCd gte 30 and gdsSclassCd lte 39">
 						AND CD_ID = '30'
 					</if>
-					<if test="gdsSclassCd gte 41 and gdsSclassCd lte 49">
+					<if test="gdsSclassCd gte 40 and gdsSclassCd lte 49">
 						AND CD_ID = '40'
 					</if>
-					<if test="gdsSclassCd gte 51 and gdsSclassCd lte 59">
+					<if test="gdsSclassCd gte 50 and gdsSclassCd lte 59">
 						AND CD_ID = '50'
 					</if>
-					<if test="gdsSclassCd gte 61 and gdsSclassCd lte 69">
+					<if test="gdsSclassCd gte 60 and gdsSclassCd lte 69">
 						AND CD_ID = '60'
 					</if>
 				</if>
-			) AS GDS_MCLASS_NM						-- 상품중분류명
+			) AS GDS_MCLASS_NM						/* 상품중분류명 */
 			,(
 				SELECT /* 소분류명 조회 */
 					CD_NM
-				FROM TB_COM100
+				FROM TB_COM100		-- 공통코드
 				WHERE GRP_CD_ID = 'GDS_SCLASS_CD'
 				<if test="gdsSclassCd != null">
-					AND CD_ID = #{gdsSclassCd}
+					<choose>
+						<when test='gdsCd != null and gdsCd != ""'>
+							/* 상세페이지 PATH 경로 조회 */
+							AND CD_ID IN(SELECT 
+											GDS_SCLASS_CD
+										FROM TB_GDS100
+										WHERE GDS_CD = #{gdsCd}
+							)
+						</when>
+						<otherwise>
+							AND CD_ID = #{gdsSclassCd}
+						</otherwise>
+					</choose>
 				</if>
-			) AS GDS_SCLASS_NM						-- 상품소분류명
+			) AS GDS_SCLASS_NM						/* 상품소분류명 */
 		FROM TB_COM100
 	</select>
 	
 	<!-- 렌탈 메뉴 리스트 조회 -->
-	<select id="selectMenuListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+	<select id="menuListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT /* 메뉴 리스트 조회 */
-			CD_ID	AS GDS_SCLASS_CD		-- 상품소분류코드
-		  , CD_NM	AS GDS_SCLASS_NM		-- 상품소분류명
-		FROM TB_COM100
+			 CD_ID	AS GDS_SCLASS_CD		/* 상품소분류코드 */
+		    ,CD_NM	AS GDS_SCLASS_NM		/* 상품소분류명 */
+		FROM TB_COM100		-- 공통코드
 		WHERE GRP_CD_ID = 'GDS_SCLASS_CD'
 		<if test="gdsSclassCd != null">
-			<if test="gdsSclassCd gte 11 and gdsSclassCd lte 19">
+			<if test="gdsSclassCd gte 10 and gdsSclassCd lte 19">
 				AND CD_ID BETWEEN '11' AND '19'
 			</if>
-			<if test="gdsSclassCd gte 21 and gdsSclassCd lte 29">
+			<if test="gdsSclassCd gte 20 and gdsSclassCd lte 29">
 				AND CD_ID BETWEEN '21' AND '29'
 			</if>
-			<if test="gdsSclassCd gte 31 and gdsSclassCd lte 39">
+			<if test="gdsSclassCd gte 30 and gdsSclassCd lte 39">
 				AND CD_ID BETWEEN '31' AND '39'
 			</if>
-			<if test="gdsSclassCd gte 41 and gdsSclassCd lte 49">
+			<if test="gdsSclassCd gte 40 and gdsSclassCd lte 49">
 				AND CD_ID BETWEEN '41' AND '49'
 			</if>
-			<if test="gdsSclassCd gte 51 and gdsSclassCd lte 59">
+			<if test="gdsSclassCd gte 50 and gdsSclassCd lte 59">
 				AND CD_ID BETWEEN '51' AND '59'
 			</if>
-			<if test="gdsSclassCd gte 61 and gdsSclassCd lte 69">
+			<if test="gdsSclassCd gte 60 and gdsSclassCd lte 69">
 				AND CD_ID BETWEEN '61' AND '69'
 			</if>
 		</if>
 	</select>
 	
 	<!-- 렌탈 옵션 브랜드명 조회 -->
-	<select id="selectOptionListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+	<select id="optionBrandListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT /* 브랜드명 조회 */
-			DISTINCT BRAND_NM				-- 브랜드명
-		FROM TB_GDS100
-		WHERE GDS_SCLASS_CD = #{gdsSclassCd} 
+			DISTINCT BRAND_NM				/* 브랜드명 */
+		FROM TB_GDS100		/* 공통상품 */
+		WHERE 1=1
+		<if test="gdsSclassCd != null">
+			<choose>
+				<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
+												   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
+					AND GDS_MCLASS_CD = #{gdsSclassCd}
+				</when> 
+				<otherwise>
+					AND GDS_SCLASS_CD = #{gdsSclassCd}
+				</otherwise>
+			</choose>
+		</if> 
 	</select>
+	
+	<!-- 렌탈 옵션 가격 조회 -->
+	<select id="optionPriceListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT  /* 가격대 조회 */
+			 TRUNCATE((AA.MIN * 1.3), 0)  AS PRICE_MIN		/* 최소가격 * 1.3배 */
+			,TRUNCATE((AA.MAX * 0.7), 0) AS PRICE_MAX		/* 최대가격 * 0.7배 */
+		FROM
+		(
+			SELECT
+				 MIN(B.GDS_PRICE) AS MIN
+				,MAX(B.GDS_PRICE) AS MAX
+			 FROM TB_GDS100 A		/* 공통상품 */
+			 	 ,TB_GDS200 B		/* 렌탈상품상세 */
+			WHERE A.GDS_CD = B.GDS_CD
+			<if test="gdsSclassCd != null">
+			<choose>
+				<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
+												   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
+					AND A.GDS_MCLASS_CD = #{gdsSclassCd}
+				</when> 
+				<otherwise>
+					AND A.GDS_SCLASS_CD = #{gdsSclassCd}
+				</otherwise>
+			</choose>
+		</if> 
+		) AA
+	</select>
+	
+	<!-- 렌탈 BEST 리스트 조회(인기순) 1 -->
+	<select id="bestListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			@ROWNUM := @ROWNUM+1 AS RNK		/* 랭크 */
+			,AAAA.*
+		FROM (
+				SELECT 
+					AAA.*
+				FROM (
+					SELECT 
+						BB.*
+						, COALESCE (AA.CNT, 0) AS CNT						/* 대상 건수 */
+						, COALESCE (AA.TOT_GRD_SUM, 0) AS TOT_GRD_SUM		/* 토탈점수합계 */
+						, COALESCE (AA.TOT_GRD_AVG, 0) AS TOT_GRD_AVG		/* 토탈점수평균 */
+					FROM (
+							SELECT	
+								 GDS_CD
+								, COUNT(A.GDS_CD) AS CNT
+								, SUM(A.GRADE) AS TOT_GRD_SUM
+								, ROUND(SUM(A.GRADE) / COUNT(A.GDS_CD),2) AS TOT_GRD_AVG
+							FROM TB_GDS210 A	/* 렌탈상품후기 */
+							GROUP BY A.GDS_CD
+					) AA RIGHT OUTER JOIN (
+							SELECT /*  */ 
+								A.GDS_CD
+								,A.GDS_LCLASS_CD
+								,A.GDS_MCLASS_CD
+								,A.GDS_SCLASS_CD
+								,A.GDS_NM
+								,A.BRAND_NM
+								,A.MODEL_NM
+								,B.IMG1
+								,A.REG_DT
+								,B.GDS_PRICE
+								,A.GDS_GB_CD
+								, CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품' 
+										WHEN A.GDS_GB_CD = 'U' THEN '중고상품' 
+										ELSE '누락' 
+								END AS GDS_GB_NM
+							FROM TB_GDS100 A	/* 공통상품 */
+								,TB_GDS200 B	/* 렌탈상품상세 */
+							WHERE A.GDS_CD = B.GDS_CD 
+							AND A.GDS_MCLASS_CD = #{gdsSclassCd}
+					) BB 
+					ON AA.GDS_CD = BB.GDS_CD
+				) AAA
+				ORDER BY AAA.TOT_GRD_AVG DESC
+						,AAA.CNT DESC
+						,AAA.REG_DT DESC
+		) AAAA
+		 ,(SELECT @ROWNUM := 0) R
+			LIMIT 8
+	</select>
+	
+	<!-- 렌탈 상품 리스트 조회(최신순,낮은가격순,높은가격순) 2,3,4 -->
+	<select id="gdsListRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			AA.*
+		FROM (	
+				SELECT 
+					 A.GDS_CD
+				    ,A.GDS_LCLASS_CD
+					,A.GDS_MCLASS_CD
+					,A.GDS_SCLASS_CD
+					,A.GDS_NM
+					,A.BRAND_NM
+					,A.MODEL_NM
+					,B.IMG1
+					,A.REG_DT
+					,B.GDS_PRICE
+					,A.GDS_GB_CD
+					,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+						  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+						  ELSE '누락'
+					END AS GDS_GB_NM
+				FROM TB_GDS100 A	/* 공통상품 */
+					,TB_GDS200 B	/* 렌탈상품상세 */
+				WHERE A.GDS_CD = B.GDS_CD
+				/* 중분류냐 소분류냐 선택에 따라 */
+				<choose> 
+					<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
+													   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
+						AND A.GDS_MCLASS_CD = #{gdsSclassCd}
+					</when> 
+					<otherwise>
+						AND A.GDS_SCLASS_CD = #{gdsSclassCd}
+					</otherwise>
+				</choose>
+				/* 브랜드명 리스트 반복문 */
+				<if test='brandNm2 != null'>
+					AND
+					<foreach collection="brandNm2" item="list" open="(" close=")" separator="OR">
+						A.BRAND_NM LIKE #{list}
+					</foreach>
+				</if>
+				/* 가격범위 */
+				<if test='searchPriceSt != null and searchPriceSt != ""'>
+					AND B.GDS_PRICE <![CDATA[ >= ]]> #{searchPriceSt}
+				</if>
+				<if test='searchPriceEd != null and searchPriceEd != ""'>
+					AND B.GDS_PRICE <![CDATA[ <= ]]> #{searchPriceEd}
+				</if>
+				/* 상품상태 */
+				<if test='sts != null and sts != ""'>
+					AND A.GDS_GB_CD = #{sts}
+				</if>
+				/* 결과내검색 */
+				<if test='search != null and search != ""'>
+					AND A.GDS_NM LIKE CONCAT('%', #{search},'%')
+				</if>
+			) AA
+		<if test='sortGbCd.equals("2")'>
+			ORDER BY AA.REG_DT DESC
+		</if>
+		<if test='sortGbCd.equals("3")'>
+			ORDER BY AA.GDS_PRICE
+					,AA.REG_DT DESC
+		</if>
+		<if test='sortGbCd.equals("4")'>
+			ORDER BY AA.GDS_PRICE DESC
+					,AA.REG_DT DESC
+		</if>
+	</select>
+	
+	<!-- 렌탈 상품 리스트 조회(인기순,판매량순,리뷰 많은순) 1, 5, 6 -->
+	<select id="gdsListRetrive2" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			AAA.*
+		FROM (
+				SELECT
+					 BB.*
+					,COALESCE (AA.CNT, 0) AS CNT						/* 대상건수 */
+					 <if test='sortGbCd.equals("1") or sortGbCd.equals("6")'>
+						,COALESCE (AA.TOT_GRD_SUM, 0) AS TOT_GRD_SUM	/* 토탈점수합계 */
+						,COALESCE (AA.TOT_GRD_AVG, 0) AS TOT_GRD_AVG	/* 토탈점수평균 */
+					 </if>
+				FROM (				
+						SELECT GDS_CD
+							  ,COUNT(A.GDS_CD) AS CNT
+							  <if test='sortGbCd.equals("1") or sortGbCd.equals("6")'>
+								  ,SUM(A.GRADE) AS TOT_GRD_SUM
+								  ,ROUND(SUM(A.GRADE) / COUNT(A.GDS_CD),2) AS TOT_GRD_AVG
+								FROM TB_GDS210 A	/* 렌탈상품후기 */
+							  </if>
+							  <if test='sortGbCd.equals("5")'>
+							  	FROM TB_ODR110 A	/* 주문상세 */
+							  </if>
+						GROUP BY A.GDS_CD
+				) AA RIGHT OUTER JOIN 
+						(SELECT /*  */
+							 A.GDS_CD
+						    ,A.GDS_LCLASS_CD
+							,A.GDS_MCLASS_CD
+							,A.GDS_SCLASS_CD
+							,A.GDS_NM
+							,A.BRAND_NM
+							,A.MODEL_NM
+							,B.IMG1
+							,A.REG_DT
+							,B.GDS_PRICE
+							,A.GDS_GB_CD
+							,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+								  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+								  ELSE '누락'
+							END AS GDS_GB_NM
+						FROM TB_GDS100 A	/* 공통상품 */
+							,TB_GDS200 B	/* 렌탈상품상세 */
+						WHERE A.GDS_CD = B.GDS_CD
+						 /* 중분류냐 소분류냐 선택에 따라 */
+						<choose> 
+							<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
+															   or gdsSclassCd.equals("50") or gdsSclassCd.equals("60")'>
+								AND A.GDS_MCLASS_CD = #{gdsSclassCd}
+							</when> 
+							<otherwise>
+								AND A.GDS_SCLASS_CD = #{gdsSclassCd}
+							</otherwise>
+						</choose>
+						/* 브랜드명 리스트 반복문 */
+						<if test='brandNm2 != null'>
+							AND
+							<foreach collection="brandNm2" item="list" open="(" close=")" separator="OR">
+								A.BRAND_NM LIKE #{list}
+							</foreach>
+						</if>
+						/* 가격범위 */
+						<if test='searchPriceSt != null and searchPriceSt != ""'>
+							AND B.GDS_PRICE <![CDATA[ >= ]]> #{searchPriceSt}
+						</if>
+						<if test='searchPriceEd != null and searchPriceEd != ""'>
+							AND B.GDS_PRICE <![CDATA[ <= ]]> #{searchPriceEd}
+						</if>
+						/* 상품상태 */
+						<if test='sts != null and sts != ""'>
+							AND A.GDS_GB_CD = #{sts}
+						</if>
+						/* 결과내검색 */
+						<if test='search != null and search != ""'>
+							AND A.GDS_NM LIKE CONCAT('%', #{search},'%')
+						</if>
+				) BB
+				ON AA.GDS_CD = BB.GDS_CD
+		) AAA
+		<if test='sortGbCd.equals("1")'>
+		ORDER BY AAA.TOT_GRD_AVG DESC
+				,AAA.CNT DESC
+				,AAA.REG_DT DESC
+		</if>
+		<if test='sortGbCd.equals("5")'>
+		ORDER BY AAA.CNT DESC	/* 판매량수 */
+		 		,AAA.REG_DT DESC
+		</if>
+		<if test='sortGbCd.equals("6")'>
+		ORDER BY AAA.CNT DESC
+				,AAA.REG_DT DESC
+		</if>
+	</select>
+	
+	<!-- 렌탈 상품 리스트 상세조회(점수) -->
+	<select id="gradeRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT /* */
+			   BB.GDS_CD
+			  ,BB.GDS_LCLASS_CD
+			  ,BB.GDS_MCLASS_CD
+			  ,BB.GDS_SCLASS_CD	
+			  ,BB.GDS_NM
+			  ,COALESCE(AA.CNT, 0) AS CNT
+			  ,COALESCE(AA.TOT_GRD_SUM, 0) AS TOT_GRD_SUM
+			  ,COALESCE(AA.TOT_GRD_AVG, 0) AS TOT_GRD_AVG
+		FROM (
+				SELECT 
+					   A.GDS_CD
+					  ,COUNT(A.GDS_CD) AS CNT
+					  ,SUM(A.GRADE) AS TOT_GRD_SUM
+					  ,ROUND(SUM(A.GRADE)/COUNT(A.GDS_CD),2) AS TOT_GRD_AVG
+				FROM TB_GDS210 A		/* 렌탈상품후기 */
+				GROUP BY A.GDS_CD
+		) AA RIGHT OUTER JOIN (
+				SELECT 
+					   A.GDS_CD
+				      ,A.GDS_LCLASS_CD
+					  ,A.GDS_MCLASS_CD
+					  ,A.GDS_SCLASS_CD
+					  ,A.GDS_NM
+					  ,A.BRAND_NM
+					  ,A.MODEL_NM
+					  ,B.IMG1
+					  ,A.REG_DT
+					  ,B.GDS_PRICE
+					  ,A.GDS_GB_CD
+					  ,CASE WHEN A.GDS_GB_CD = 'N' THEN '새상품'
+						  WHEN A.GDS_GB_CD = 'U' THEN '중고상품'
+						  ELSE '누락'
+					  END AS GDS_GB_NM
+				FROM TB_GDS100 A		/* 공통상품 */
+					,TB_GDS200 B		/* 렌탈상품상세 */
+				WHERE A.GDS_CD = B.GDS_CD
+				AND A.GDS_CD = #{gdsCd}
+		) BB
+		ON AA.GDS_CD = BB.GDS_CD
+	</select>
+	
+	<!-- 렌탈 상품 리스트 상세 조회 -->
+	<select id="gdsListDetailRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT 
+			A.GDS_CD
+			,A.GDS_LCLASS_CD
+			,A.GDS_MCLASS_CD
+			,A.GDS_SCLASS_CD
+			,A.GDS_NM
+			,A.BRAND_NM 
+			,B.GDS_PRICE
+			,B.AGREE_TERM
+			,B.DELIVER_COST
+			,B.INSTAL_COST
+			,B.AS_CONDITION
+			,A.MODEL_NM
+			,B.IMG1
+			,B.IMG2
+			,B.IMG3
+			,B.IMG4
+		from TB_GDS100 A		/* 공통상품 */
+			,TB_GDS200 B		/* 렌탈상품상세 */
+		WHERE A.GDS_CD = B.GDS_CD
+		AND B.GDS_CD = #{gdsCd}
+	</select>
+	
+	<!-- 렌탈 상품 리스트 상세 상담등록 시퀀스생성 -->
+	<insert id="questSeqProduce">
+		INSERT INTO SEQ_QUEST100 VALUES(NULL)
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 상담등록 -->
+	<insert id="gdsQuestRegister" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+			INSERT INTO
+			TB_QUEST100 (
+					QUEST_NO
+					,QUEST_DT
+					,GDS_CD
+					,QUEST_NM
+					,HP
+					,EMAIL
+					,QUEST_STS_CD
+			) VALUES (
+					(SELECT MAX(LPAD(SEQ,8,0)) FROM SEQ_QUEST100)
+					,(SELECT DATE_FORMAT(NOW(),'%Y%m%d'))
+					,#{gdsCd}
+					,#{questNm}
+					,#{hp}
+					,#{email}
+					,'1'
+			)
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 후기 -->
+	<select id="reviewRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			@ROWNUM := @ROWNUM+1 AS RNK		/* 게시번호 순위 */
+			,A.*
+		FROM (
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+				ORDER BY GDS_REVIEW_NO DESC
+		) A
+		,(SELECT @ROWNUM := 0) R
+	</select>
+	
+	<!-- 렌탈 상품 리스트 후기 갯수 -->
+	<select id="reviewRetriveCnt" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			(
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+		) A
+	</select>
+
 </mapper>

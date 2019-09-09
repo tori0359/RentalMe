@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +11,10 @@
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">
 	.usedList{
-		width: 80%;
+		width: 1200px;
 		margin: 100px auto;
-		border: 1px solid black;
 		margin-bottom: 300px;
+		font-family: "nanumB";
 	}
 	.usedList #search{
 		display: inline-block;
@@ -25,7 +26,7 @@
 	}
 	.usedList select{
 		display: inline-block;
-		float: right;
+		float: left;
 		width: 10%;
 		height: 30px;
 		min-width: 100px;
@@ -41,50 +42,53 @@
 		margin-left: 5px;
 		font-size: 15px;
 		font-weight: bold;
+		clear: both;
+		margin-bottom: 10px;
 	}
-	.usedList .tabs{
-		margin-top: 40px;
-		width: 100%;
-		border-bottom: 5px solid black;
+	.used_modelNm{
+		font-size: 2.2em;
+		font-weight: bold;
 	}
-	.usedList .tabs>li{
+	.used_price{
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+	.whattab{
+		font-size: 0.7em;
+		color: gray;
+	}
+	#form_tab{
+		clear: both;
+	}
+	.tabcl{
 		display: inline-block;
-		width: 20.5%;
-		height: 30px;
-		line-height: 30px;
-		background-color: lightgray;
-		text-align: center;
-		cursor:pointer;
-		margin-left: -2px;
+		width: 19.3%;
 	}
-	.usedList .tabs>li:first-child{
-		margin-left: -40px;
+	.tabcl>.tab_btn{
+		width: 100%;
+		background-color: white; 
+		outline: 0;
+		border: 1px solid black; 
 	}
-	.usedList .tabs>li:not(.active):hover{
-		background-color: white;
-	}
-	.usedList .tabs> .active{
-		background-color: black;
-		color: white;
-	}
-	
+
 
 	.used_thing{
 		width: 95%;
-		border: 1px solid black;
 		margin: 15px auto;
 	}
 	.line_thing{
-		border: 1px solid black;
 		width: 200px;
-		height: 300px;
+		height: 320px;
 		margin-left: 20px;
 		margin-bottom: 40px;
 		display: inline-block;
-		
+		cursor: pointer;
+	}
+	.line_thing:hover{
+		border: 2px solid black;
+		margin-top: -2px;
 	}
 	.used_thing_img{
-		border: 1px solid black;
 		width: 200px;
 		height: 200px;
 		margin: auto;
@@ -96,51 +100,68 @@
 	.pagination>li>a{
 		float: none;
 	}
+	.tabcl>.activeTab{
+		background-color: black;
+		color: white;
+	}
 
 </style>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/used.js"></script>
-</head>
 <script type="text/javascript">
-	$(function(){
+
+	$(function(){		
+		var mclass=${gdsMclassCd};
+		if(mclass==10){
+			var gdsnm='big';
+			$('.tabcl').eq(0).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==20){
+			gdsnm='sml';
+			$('.tabcl').eq(1).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==30){
+			gdsnm='kit';
+			$('.tabcl').eq(2).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==40){
+			gdsnm='app';
+			$('.tabcl').eq(3).find('.tab_btn').addClass('activeTab');
+		}else if(mclass==50){
+			gdsnm='etc';
+			$('.tabcl').eq(4).find('.tab_btn').addClass('activeTab');
+		}
+		/* var link=$('.pagelink').attr('href'); */
+		var arrlink=new Array($('.pagelink').length);
+		var link;
+		var link2;
+		var link3;
+		var mat='startPage='+${page};
+		for(var i=0; i<$('.pagelink').length; i++){
+			link=$('.pagelink').eq(i).attr('href');
+			link2=link.replace(/modelNm=&align=1/gi,'modelNm=${modelNm}&align=${align}');
+			arrlink[i]=link2.replace('big',gdsnm);
+			if(arrlink[i].match(mat) !== null){
+				$('.pagelink').eq(i).parent().addClass('active');
+			}
+			$('.pagelink').eq(i).attr('href',arrlink[i]);
+		}
+		//${pageContext.request.contextPath }/used/big?startPage=${chg }&modelNm=&align=1
 		var classnum=$('.used_price');
 		var price;
 		for(var i=0; i<classnum.length; i++){
 			price=$('.used_price').eq(i).text();
 			$('.used_price').eq(i).text(numberWithCommas(price));	
 		}
-		$('.tab:first-child').addClass('active');
-		var who;	// 클릭한 탭이 누군지
-		$('.tab').eq(0).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-			moveTab(0);
+
+		for(var i=0; i<$('.whattab').length; i++){
+			$('.whattab').eq(i).text();
+		}
+
+	 	$('.line_thing').mouseover(function(){
+			$(this).children('div').children('img').css('width','196px');
+		});		
+		$('.line_thing').mouseout(function(){
+			$(this).children('div').children('img').css('width','200px');
 		});
-		$('.tab').eq(1).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-			moveTab(1);
-		});
-		$('.tab').eq(2).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-			moveTab(2);
-		});
-		$('.tab').eq(3).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-			moveTab(3);
-		});
-		$('.tab').eq(4).click(function(e){
-			e.preventDefault();
-			who=$(this);
-			removeCls(who);
-			moveTab(4);
-		});
+
+		
+	});
 		function removeCls(who){ //탭활성화
 			$('.tabs').find('li').removeClass('active');
 			who.addClass('active');
@@ -153,105 +174,88 @@
 		function numberWithCommas(x) { //숫자 3자리 콤마
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
-	});
-
 	
 </script>
+</head>
 <body>
 <div class="usedList">
 
 	<h3>중고제품</h3>
+	<form action="/used/search">
 	<div id="search">
-	<form action="#">
-		<input type="text" id="search" placeholder="검색">
+		<input type="hidden" name="gdsMclassCd" value="${gdsMclassCd }">
+		<input type="text" name="modelNm" id="search" placeholder="검색">
+		<select name="align" id="align">
+			<option value="1">등록순</option>
+			<option value="2">낮은 가격순</option>
+			<option value="3">높은 가격순</option>
+		</select>
 		<button type="submit">검색</button>
-	</form>
 	</div>
-	
-	<a href="/used/store" id="goUsedManager">중고거래 관리</a>
-	
-	<select id="align">
-		<option>인기순</option>
-		<option>조회순</option>
-		<option>저가순</option>
-		<option>고가순</option>
-	</select>
-	
-	<ul class="tabs">
-		<li class="tab">대형가전</li>
-		<li class="tab">소형가전</li>
-		<li class="tab">주방가전</li>
-		<li class="tab">가구</li>		
-		<li class="tab">기타</li>		
-	</ul>
+	</form>
+	<div>
+	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
+	</div>
+<div id="form_tab">
+	<form class="tabcl" action="/used/big">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">대형가전</button>
+	</form>
+	<form class="tabcl" action="/used/sml">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">소형가전</button>
+	</form>
+	<form class="tabcl" action="/used/kit">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">주방가전</button>
+	</form>
+	<form class="tabcl" action="/used/app">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">가구</button>
+	</form>
+	<form class="tabcl" action="/used/etc">
+		<input type="hidden" name="startPage" value="0">
+		<input type="hidden" name="modelNm">
+		<input type="hidden" name="align" value="1">			
+		<button class="tab_btn" type="submit">기타</button>
+	</form>
+</div>
 	<div class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
-		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
+		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div class="whattab">${bean.mclassName } > ${bean.sclassName }</div>
+			<div class="used_brandNm">${bean.brandNm }</div>
+			<div class="used_modelNm">${bean.modelNm }</div>
+			<div class="used_price">${bean.usedGdsPrice }원</div>
 		</div>
 	</c:forEach>
 	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist2 }" var="bean">
-		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist3 }" var="bean">
-		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist4 }" var="bean">
-		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
-		</div>
-	</c:forEach>
-	</div>
-	<div class="used_thing">
-	<c:forEach items="${alist5 }" var="bean">
-		<div class="line_thing">
-			<div class="used_thing_img"></div>
-			<div><a href="#">${bean.BRAND_NM }</a></div>
-			<div><a href="#">${bean.MODEL_NM }</a></div>
-			<a href="#" class="used_price">${bean.USED_GDS_PRICE }</a>원
-		</div>
-	</c:forEach>
-	</div>
-	
   <ul class="pagination">
-    <li>
+ <!--    <li>
       <a href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
-    </li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
+    </li> -->
+    <c:forEach begin="1" end="${listsize }" var="x">
+    <c:set var="chg" value="10"/>
+    <c:set var="chg" value="${x*chg-chg }"/>
+    <li><a class="pagelink" href="${pageContext.request.contextPath }/used/big?startPage=${chg }&modelNm=&align=1"><c:out value="${x }"/></a></li>
+    </c:forEach> 
+<!--     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
-    </li>
-  </ul>
+    </li> -->
+  </ul>  
 	
 </div>
 <jsp:include page="../template/footer.jsp"></jsp:include>

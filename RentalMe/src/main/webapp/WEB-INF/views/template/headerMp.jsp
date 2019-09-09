@@ -46,6 +46,7 @@
         
         
         .mpTable>tbody tr:hover {
+
            font-size: 11pt;
             background-color: lightgrey;
             -o-transition: all 0.2s ease-in-out;
@@ -66,13 +67,13 @@
          
          
       }
-        
+     
        .mpTable>tbody>tr:last-child td{
             -moz-border-radius: 0 0 15px 15px;
             -webkit-border-radius: 0 0 10px 15px;
             border-radius: 0 0 15px 15;            
         } 
-        
+       
       .mpdiv{
          position: relative;
          z-index:1;
@@ -81,7 +82,6 @@
    
       .row{
          margin: 0px;
-      
         }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
@@ -117,7 +117,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">나의 중고상점</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/used/store/${loginMbNo }">나의 중고상점</a></td>
            </tr>
            <tr>
                 <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
@@ -147,6 +147,7 @@
            </tr>
        </table>
        </div>
+
       <div id="mpContent" class="col-md-8">
   
      

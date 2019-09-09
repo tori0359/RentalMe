@@ -77,7 +77,7 @@ public class JoinServiceImpl implements JoinService{
 		bean.setUserPw(hashPw);
 		
 		String levelGbCd = "1"; //일반회원
-		bean.setlevelGbCd(levelGbCd); //일반회원으로 등록
+		bean.setLevelGbCd(levelGbCd); //일반회원으로 등록
 		
 		//이메일 키 난수코드 -> Y
 		String emailKey = "Y";

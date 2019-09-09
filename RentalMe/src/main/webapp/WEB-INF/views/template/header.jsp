@@ -36,16 +36,25 @@
             font-style: normal;
         }
         
+    html,
+    body {
+		    margin:0;
+		    padding:0;
+		    height:100%;
+	    
+	 }
+	    
        #wrap{
-	      	min-height:100%;
-	      	position:relative;
-	  }
-	  
-	  .navbar-default .navbar-nav > .open > a {
-			color: black;
-			background: white;
-		}
-		    
+            min-height:100%;
+            position:relative;
+            padding-bottom: 200px;
+     }
+     
+     .navbar-default .navbar-nav > .open > a {
+         color: black;
+         background: white;
+      }
+          
       .hr {
          height: 1px;
          width: 100%;
@@ -93,8 +102,8 @@
          z-index:2;
       }
       .login{
-      	width:100%;
-      	background-color: black;
+         width:100%;
+         background-color: black;
       }
 
       .navbar-text>a{
@@ -107,13 +116,13 @@
          font-weight: bold; 
          font-family: "nanumB";
       } 
-	   
-	 
-	   
-	   .dropdown.open .dropdown-menu {
-			max-height: 400px;
-			opacity: 1;
-		}
+      
+    
+      
+      .dropdown.open .dropdown-menu {
+         max-height: 400px;
+         opacity: 1;
+      }
 
       .nav a{
          font-family: "nanumB";
@@ -140,39 +149,50 @@
       
       .navbar .navbar-nav {
         display: inline-block;
-		float: none;
+      float: none;
       }
       
       .navbar .navbar-collapse {
            text-align: center;
       }
-	   
-	  .navbar-text a{
-		   color:white;
-	   }
-	   
-	   .navbar-text{
-		   color:white;
-	   }
-	   
+      
+     .navbar-text a{
+         color:white;
+      }
+      
+      .navbar-text{
+         color:white;
+      }
+      
     .dropdown:hover .dropdown-menu { 
          /* 상위 메뉴에 마우스 모버한 경우 그 안의 하위 메뉴 스타일 설정 */ 
          height: auto;
          
          /* 드롭다운 마우스 hover 자동기능 */
          /*
-	     display: block;
-	     margin-top: 0;
-	     */
+        display: block;
+        margin-top: 0;
+        */
       } 
+      .dropdown #used_link_btn{
+      	 width: 100px;
+      	 height: 40px;
+      	 margin-top: 4px;
+      	 font-family: "nanumB";
+      	 font-weight: bold;
+      	 background-color: white;
+      	 border: none;
+      	 font-size: 15px;
+      	 color: #707070;
+      }
     
-	.login{
-		 background:black;
-		 width: 100%;
-	   }
-	   
+   .login{
+       background:black;
+       width: 100%;
+      }
+      
     .dropdown-menu>a:hover,
-	.dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
+   .dropdown-menu>a:active{ /* 중고거래 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
          color: white;
          font-weight: bolder;
          background: #E7A602; 
@@ -185,15 +205,15 @@
          background-color: white;
          margin-top: -1px;
       } 
-	   
-	   .dropdown-menu>li a{
-		   text-align: center;
-		   height: 40px;
-		   line-height: 40px;
-	   }
-	   
+      
+      .dropdown-menu>li a{
+         text-align: center;
+         height: 40px;
+         line-height: 40px;
+      }
+      
 
-	   
+      
        #content{
          font-family: "nanumB";
          font-size: 15px;
@@ -212,27 +232,28 @@
    </style>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.12.4.min.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+   <script type="text/javascript">
+		$('#rjfo').click(function(){
+			windows.location.href="/used";
+		});
+   </script>
 </head>
 <body>
 <div>
     <div class="login container-fluid">
        <div class="col-md-11">
       <p class="navbar-text navbar-right">
-   		<c:choose>
-	      	<c:when test="${loginUserId == null }">
-		      	<a href="/login" class="navbar-link">로그인</a>ㅣ
-		      	<a href="/join/signup" class="navbar-link">회원가입</a>
-	      	</c:when>
-	      	<c:when test="${loginUserId== 'minminad'}">	<!--관리자id  -->
-	      		<a href="/mp/mng/csNoticeList" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
-		      	<a href="/logout" class="navbar-link">로그아웃</a>
-	      	</c:when>
-	      	<c:otherwise>					<!-- 일반회원  -->
-	      		<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
-		      	<a href="/logout" class="navbar-link">로그아웃</a>
-	      	</c:otherwise>
-   		</c:choose>
-		      	</p>
+      <c:choose>
+      	<c:when test="${loginUserId == null }">
+	      	<a href="/login" class="navbar-link">로그인</a> ㅣ
+	      	<a href="/join/signup" class="navbar-link">회원가입</a>
+      	</c:when>
+      	<c:otherwise>
+      		<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+	      	<a href="/logout" class="navbar-link">로그아웃</a>
+      	</c:otherwise>
+      </c:choose>
+      </p>
       </div>
     </div>
      <div class="navtitle">
@@ -264,79 +285,84 @@
         <li class="dropdown">
           <a href="#" id="bigmenu" class="dropdown-toggle" data-toggle="dropdown" >대형가전 렌탈</a>
           <ul class="dropdown-menu">
-          	  <li><a href="/rental/Appli/lg/10">전체보기</a></li>
-              <li><a href="/rental/Appli/lg/11">에어컨</a></li> 
-              <li><a href="/rental/Appli/lg/12">냉난방기</a></li> 
-              <li><a href="/rental/Appli/lg/13">냉장고</a></li>
-              <li><a href="/rental/Appli/lg/14">TV</a></li>
-              <li><a href="/rental/Appli/lg/15">세탁기</a></li>
-              <li><a href="/rental/Appli/lg/16">빨래건조기</a></li>
-              <li><a href="/rental/Appli/lg/17">정수기</a></li>
-              <li><a href="/rental/Appli/lg/18">공기청정기</a></li>
-              <li><a href="/rental/Appli/lg/19">복합기/프린터</a></li>
+          	  <li><a href="/rental/Appli/lg/10?">전체보기</a></li>
+              <li><a href="/rental/Appli/lg/11?">에어컨</a></li> 
+              <li><a href="/rental/Appli/lg/12?">냉난방기</a></li> 
+              <li><a href="/rental/Appli/lg/13?">냉장고</a></li>
+              <li><a href="/rental/Appli/lg/14?">TV</a></li>
+              <li><a href="/rental/Appli/lg/15?">세탁기</a></li>
+              <li><a href="/rental/Appli/lg/16?">빨래건조기</a></li>
+              <li><a href="/rental/Appli/lg/17?">정수기</a></li>
+              <li><a href="/rental/Appli/lg/18?">공기청정기</a></li>
+              <li><a href="/rental/Appli/lg/19?">복합기/프린터</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">소형가전 렌탈</a>
           <ul class="dropdown-menu">
-          	  <li><a href="/rental/Appli/lg/20">전체보기</a></li>
-              <li><a href="/rental/Appli/lg/21">커피머신</a></li> 
-              <li><a href="/rental/Appli/lg/22">제습기</a></li> 
-              <li><a href="/rental/Appli/lg/23">청소기</a></li>
-              <li><a href="/rental/Appli/lg/24">드라이어</a></li>
-              <li><a href="/rental/Appli/lg/25">빔프로젝터</a></li>
-              <li><a href="/rental/Appli/lg/26">컴퓨터/노트북</a></li>
-              <li><a href="/rental/Appli/lg/27">무선스피커</a></li>
-              <li><a href="/rental/Appli/lg/28">비데</a></li>
-              <li><a href="/rental/Appli/lg/29">면도기</a></li>
+          	  <li><a href="/rental/Appli/lg/20?">전체보기</a></li>
+              <li><a href="/rental/Appli/lg/21?">커피머신</a></li> 
+              <li><a href="/rental/Appli/lg/22?">제습기</a></li> 
+              <li><a href="/rental/Appli/lg/23?">청소기</a></li>
+              <li><a href="/rental/Appli/lg/24?">드라이어</a></li>
+              <li><a href="/rental/Appli/lg/25?">빔프로젝터</a></li>
+              <li><a href="/rental/Appli/lg/26?">컴퓨터/노트북</a></li>
+              <li><a href="/rental/Appli/lg/27?">무선스피커</a></li>
+              <li><a href="/rental/Appli/lg/28?">비데</a></li>
+              <li><a href="/rental/Appli/lg/29?">면도기</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">주방가전 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/30">전체보기</a></li>
-               <li><a href="/rental/Appli/lg/31">음식물 처리기</a></li> 
-               <li><a href="/rental/Appli/lg/32">제빙기</a></li> 
-               <li><a href="/rental/Appli/lg/33">전자레인지</a></li>
-               <li><a href="/rental/Appli/lg/34">에어프라이어</a></li>
-               <li><a href="/rental/Appli/lg/35">오븐</a></li>
+          	   <li><a href="/rental/Appli/lg/30?">전체보기</a></li>
+               <li><a href="/rental/Appli/lg/31?">음식물 처리기</a></li> 
+               <li><a href="/rental/Appli/lg/32?">제빙기</a></li> 
+               <li><a href="/rental/Appli/lg/33?">전자레인지</a></li>
+               <li><a href="/rental/Appli/lg/34?">에어프라이어</a></li>
+               <li><a href="/rental/Appli/lg/35?">오븐</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">가구 렌탈</a>
           <ul class="dropdown-menu">
-			   <li><a href="/rental/Appli/lg/40">전체보기</a></li>          
-               <li><a href="/rental/Appli/lg/41">침대</a></li> 
-               <li><a href="/rental/Appli/lg/42">매트리스</a></li> 
-               <li><a href="/rental/Appli/lg/43">쇼파</a></li> 
-               <li><a href="/rental/Appli/lg/44">책상</a></li>
+			   <li><a href="/rental/Appli/lg/40?">전체보기</a></li>          
+               <li><a href="/rental/Appli/lg/41?">침대</a></li> 
+               <li><a href="/rental/Appli/lg/42?">매트리스</a></li> 
+               <li><a href="/rental/Appli/lg/43?">쇼파</a></li> 
+               <li><a href="/rental/Appli/lg/44?">책상</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">기타 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/50">전체보기</a></li> 
-               <li><a href="/rental/Appli/lg/51">악기</a></li> 
-               <li><a href="/rental/Appli/lg/52">명품</a></li> 
-               <li><a href="/rental/Appli/lg/53">귀금속</a></li> 
+          	   <li><a href="/rental/Appli/lg/50?">전체보기</a></li> 
+               <li><a href="/rental/Appli/lg/51?">악기</a></li> 
+               <li><a href="/rental/Appli/lg/52?">명품</a></li> 
+               <li><a href="/rental/Appli/lg/53?">귀금속</a></li> 
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">패키지 렌탈</a>
           <ul class="dropdown-menu">
-          	   <li><a href="/rental/Appli/lg/60">전체보기</a></li>
-               <li><a href="/rental/Appli/lg/61">침실 패키지</a></li> 
-               <li><a href="/rental/Appli/lg/62">주방 패키지</a></li> 
-               <li><a href="/rental/Appli/lg/63">욕실 패키지</a></li>
-               <li><a href="/rental/Appli/lg/64">기타 패키지</a></li> 
+          	   <li><a href="/rental/Appli/lg/60?">전체보기</a></li>
+               <li><a href="/rental/Appli/lg/61?">침실 패키지</a></li> 
+               <li><a href="/rental/Appli/lg/62?">주방 패키지</a></li> 
+               <li><a href="/rental/Appli/lg/63?">욕실 패키지</a></li>
+               <li><a href="/rental/Appli/lg/64?">기타 패키지</a></li> 
           </ul>
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
         <li class="dropdown">
-          <a href="/mp/cs" class="dropdown-toggle" role="button" aria-haspopup="true" data-toggle="dropdown">중고거래</a>
+          <form action="/used/big">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm" value="">
+			<input type="hidden" name="align" value="1">			
+			<input type="submit" id="used_link_btn" value="중고거래">
+		  </form>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">이벤트 경매</a>
+          <a href="${pageContext.request.contextPath}/act/" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">이벤트 경매</a>
         </li>
         <li class="dropdown">
           <a href="${pageContext.request.contextPath}/cs/csFAQ" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" >고객센터</a>
@@ -347,7 +373,7 @@
 </nav>
 </div>
 </div>
-<div class="wrap">
+<div id="wrap">
 
 
 </body>

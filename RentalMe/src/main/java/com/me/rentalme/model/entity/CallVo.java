@@ -30,10 +30,51 @@ public class CallVo {
 	private String refundDeposit;
 	private String depositGbCd;
 	private String remnDeposit;
+	private String bidPrice;
+	private String bidTime;
+	private String RImg1; //렌탈 이미지
+	private String UImg1; //중고사진 이미지
+	private String cnt; //회원이 해당상품에 쓴 후기 갯수
 	
-	
+	public String getCnt() {
+		return cnt;
+	}
 
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
 
+	public String getRImg1() {
+		return RImg1;
+	}
+
+	public void setRImg1(String rImg1) {
+		RImg1 = rImg1;
+	}
+
+	public String getUImg1() {
+		return UImg1;
+	}
+
+	public void setUImg1(String uImg1) {
+		UImg1 = uImg1;
+	}
+
+	public String getBidPrice() {
+		return bidPrice;
+	}
+
+	public void setBidPrice(String bidPrice) {
+		this.bidPrice = bidPrice;
+	}
+
+	public String getBidTime() {
+		return bidTime;
+	}
+
+	public void setBidTime(String bidTime) {
+		this.bidTime = bidTime;
+	}
 
 	public String getRemnDeposit() {
 		return remnDeposit;
@@ -106,8 +147,6 @@ public class CallVo {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-
-
 	
 	public String getContent() {
 		return content;
