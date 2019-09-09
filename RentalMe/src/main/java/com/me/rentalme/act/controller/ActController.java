@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.act.service.ActService;
+import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 
 
 
@@ -55,19 +57,20 @@ public class ActController {
 	}
 	
 	/**
+	 * @throws SQLException 
 	* 이벤트 경매 상세보기
 	* 
 	* @param  None
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 신지영
 	* @exception 
 	*/
-	@RequestMapping(value="/{idx}", method=RequestMethod.GET)
-	public ModelAndView getActDetail(@PathVariable int idx) {
-		
+	@RequestMapping(value="/{gdsCdDetail}", method=RequestMethod.GET)
+	public ModelAndView getActDetail(@PathVariable("gdsCdDetail") String gdsCdDetail, RentalAppliVo rentalAppliVo, ActVo actVo) throws SQLException {
 		
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("list1", actService.actDetail(rentalAppliVo, gdsCdDetail));
+		mav.addObject("list1", actService.actDetailAuction(gdsCdDetail));
 		
 		mav.setViewName("act/actDetail");
 		return mav;

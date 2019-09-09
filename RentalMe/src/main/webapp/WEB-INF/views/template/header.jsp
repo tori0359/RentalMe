@@ -47,7 +47,7 @@
        #wrap{
             min-height:100%;
             position:relative;
-            padding-bottom: 200px;
+            padding-botton:200px;
      }
      
      .navbar-default .navbar-nav > .open > a {

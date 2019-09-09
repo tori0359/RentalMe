@@ -51,8 +51,8 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//장바구니 선택삭제
 	@Override
-	public void deleteCart(String gdsCd) throws SQLException {
-		mpUserDao.deleteCart(gdsCd);
+	public void deleteCart(String gdsCd, String mbNo, String cartSeq) throws SQLException {
+		mpUserDao.deleteCart(gdsCd,mbNo,cartSeq);
 	}
 
 	
@@ -66,9 +66,9 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//찜한상품 삭제
 	@Override
-	public void deleteWish(String usedGdsNo) throws SQLException {
+	public void deleteWish(String usedGdsNo,String mbNo) throws SQLException {
 		
-		mpUserDao.deleteWish(usedGdsNo);
+		mpUserDao.deleteWish(usedGdsNo,mbNo);
 	}
 
 	//예치금 리스트

@@ -22,13 +22,13 @@ public interface MpUserService {
 	List<CallVo> cartList(String mbNo) throws SQLException;
 	
 	//장바구니 선택 삭제
-	public void deleteCart(String gdsCd) throws SQLException;
+	public void deleteCart(String gdsCd,String mbNo,String cartSeq) throws SQLException;
 	
 	//찜한상품 리스트 출력
 	List<CallVo> wishList(String mbNo) throws SQLException;
 	
 	//찜한상품 삭제(CALL_STS_CD=2 로 업데이트)
-	public void deleteWish(String usedGdsNo) throws SQLException;
+	public void deleteWish(String usedGdsNo,String mbNo) throws SQLException;
 
 	//예치금 사용내역 리스트 출력
 	List<CallVo> depositList(String mbNo) throws SQLException;

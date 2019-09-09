@@ -41,8 +41,15 @@ public class MpUserDaoImpl implements MpUserDao{
 	
 	//장바구니 선택삭제
 	@Override
-	public void deleteCart(String gdsCd) throws SQLException {
-		sqlSession.delete("mpUser.deleteCart",gdsCd);
+	public void deleteCart(String gdsCd, String mbNo, String cartSeq) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("gdsCd", gdsCd);
+		map.put("mbNo", mbNo);
+		map.put("cartSeq", cartSeq);
+		
+		//System.out.println("gdsCd:"+gdsCd+" mbNo:"+mbNo+" cartSeq:"+cartSeq);
+		
+		sqlSession.delete("mpUser.deleteCart",map);
 	}
 	
 	//찜한상품 리스트
@@ -50,16 +57,17 @@ public class MpUserDaoImpl implements MpUserDao{
 	public List<CallVo> selectWish(String mbNo) throws SQLException {
 		//log.debug("마이페이지(찜한상품) Dao");
 		
-		
 		return sqlSession.selectList("mpUser.selectWish",mbNo);
 	}
 
 	//찜한상품 선택삭제
 	@Override
-	public void deleteWish(String usedGdsNo) throws SQLException {
-		//System.out.println("usedGdsNo:"+usedGdsNo);
+	public void deleteWish(String usedGdsNo, String mbNo) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("usedGdsNo", usedGdsNo);
+		map.put("mbNo", mbNo);
 		
-		sqlSession.update("mpUser.deleteWish",usedGdsNo);
+		sqlSession.update("mpUser.deleteWish",map);
 	}
 
 	//후기등록

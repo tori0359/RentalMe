@@ -147,15 +147,17 @@
 		  
 		  if(confirm_val) {
 		   var checkArr = new Array();
+		   var checkSeq = new Array();
 		   
 		   $("input[class='chBox']:checked").each(function(){
 		    checkArr.push($(this).attr("data-cartNum"));
+		    checkSeq.push($(this).attr("data-cartSeq"));
 		   });
 		    
 		   $.ajax({
 		    url : "/mp/deleteCart",
 		    type : "post",
-		    data : { chbox : checkArr },
+		    data : { chbox : checkArr, chseq:checkSeq },
 		    success : function(){
 		     location.href = "/mp/cart";
 		    }
@@ -177,7 +179,7 @@
    		 <c:set var="sumPrice" value="0"/>
        	<c:forEach items="${alist}" var="bean">
        		<tr>  
-       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}">
+       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}" data-cartSeq="${bean.cartSeq }">
        			</td>
        			<td>
        				<a style="text-decoration:none; color:black;"href="#">

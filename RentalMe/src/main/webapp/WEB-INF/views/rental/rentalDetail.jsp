@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style type="text/css">
 .content {
-	height: 30vh;
+	height: 100%;
 }
 .content-inner {
 	margin-left:200px;
@@ -54,7 +54,6 @@
 	line-height: 0.2em;
 	text-decoration:none;
 	font-size: 1.8rem;
-	color: #999;
 }
 #detailNm h3{
 	font-size: 2.50rem;

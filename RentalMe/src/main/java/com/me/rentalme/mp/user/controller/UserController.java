@@ -120,15 +120,18 @@ public class UserController {
 	*/
 	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
 	public ModelAndView deleteCart(HttpSession session,
-								@RequestParam(value = "chbox[]") List<String> chArr, CallVo callVo) throws SQLException {
+								@RequestParam(value = "chbox[]") List<String> chArr, @RequestParam(value = "chseq[]") List<String> chSeq, CallVo callVo) throws SQLException {
 		log.debug("장바구니 삭제 컨트롤러...");
 		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
-
 		
 		for(String gdsCd: chArr) {
 			callVo.setGdsCd(gdsCd);
-			mpUserService.deleteCart(gdsCd);
+				for(String cartSeq: chSeq) {
+					mpUserService.deleteCart(gdsCd,mbNo,cartSeq);
+			}
 		}
 		
 		
@@ -173,11 +176,13 @@ public class UserController {
 								@RequestParam(value = "chbox[]") List<String> chArr, CallVo callVo) throws SQLException {
 		log.debug("찜한상품 삭제 컨트롤러...");
 
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
 
 		for(String usedGdsNo: chArr) {
 			callVo.setUsedGdsNo(usedGdsNo);
-			mpUserService.deleteWish(usedGdsNo);
+			mpUserService.deleteWish(usedGdsNo,mbNo);
 		}
 		
 		

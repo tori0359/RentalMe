@@ -62,21 +62,26 @@ encoding="UTF-8"?>
   	</insert>
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT  FN_NM('GDS_NM',TB_CART100.GDS_CD) AS gdsNm, 
-				TB_CART100.ODR_QTY AS odrQty, 
-				TB_CART100.AGREE_TERM AS agreeTem, 
-				TB_CART100.GDS_PRICE AS gdsPrice,
-				tb_gds200.IMG1 AS RImg1,
-				TB_CART100.GDS_CD
-		FROM 	TB_CART100
-		INNER JOIN TB_GDS200
-		ON 		TB_GDS200.GDS_CD = TB_CART100.GDS_CD
-		WHERE	MB_NO=#{mbNo};
+  		SELECT  FN_NM('GDS_NM',A.GDS_CD) AS gdsNm, 
+				A.ODR_QTY AS odrQty, 
+				A.AGREE_TERM AS agreeTem, 
+				A.GDS_PRICE AS gdsPrice,
+				B.IMG1 AS RImg1,
+				A.GDS_CD,
+				A.CART_SEQ
+		FROM 	TB_CART100 A
+		INNER JOIN TB_GDS200 B
+		ON 		B.GDS_CD = A.GDS_CD
+		WHERE	MB_NO = #{mbNo}
+		ORDER BY A.GDS_CD, A.CART_SEQ, A.REG_DT ASC
   	</select>
   	
   	<delete id="deleteCart">
-  		DELETE FROM TB_CART100
-		WHERE 		GDS_CD=#{gdsCd}
+  		DELETE 
+  		FROM 	TB_CART100
+		WHERE 	MB_NO = #{mbNo}
+		AND		GDS_CD=#{gdsCd}
+		AND		CART_SEQ=#{cartSeq}
   	</delete>
   
   	<select id="selectWish" resultType="com.me.rentalme.model.entity.CallVo">
@@ -92,7 +97,10 @@ encoding="UTF-8"?>
   	</select>
   	
   	<update id="deleteWish">
-  		UPDATE TB_CALL100 SET CALL_STS_CD='2' WHERE USED_GDS_NO=#{usedGdsNo}
+  		UPDATE 	TB_CALL100 
+  		SET		CALL_STS_CD='2' 
+  		WHERE	USED_GDS_NO=#{usedGdsNo}
+  		AND 	MB_NO = #{mbNo}	
   	</update>
   	
   	<select id="selectDeposit" resultType="com.me.rentalme.model.entity.CallVo">
@@ -121,8 +129,10 @@ encoding="UTF-8"?>
 	<update id="updateDeposit">
 		INSERT INTO TB_MB100 ( MB_NO, REMN_DEPOSIT, LAST_DEPOSIT_DT, MB_STS_CD )
 		VALUES (#{mbNo}, #{chargeDeposit}, DATE_FORMAT(NOW(),'%Y%m%d'),1 )
-		ON DUPLICATE KEY UPDATE REMN_DEPOSIT = 
-		(SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT) FROM TB_MB110 WHERE TB_MB110.MB_NO = #{mbNo})
+		ON DUPLICATE KEY UPDATE 
+		LAST_DEPOSIT_DT = (DATE_FORMAT(NOW(),'%Y%m%d')),
+		REMN_DEPOSIT = (SELECT SUM(CHARGE_DEPOSIT-REFUND_DEPOSIT-USE_DEPOSIT)
+		FROM TB_MB110 WHERE TB_MB110.MB_NO = #{mbNo})
 	</update>
 	
 	<select id="selectInfoUser" resultType="com.me.rentalme.model.entity.CallVo">
@@ -130,12 +140,7 @@ encoding="UTF-8"?>
 		FROM 	TB_MB100 
 		WHERE 	MB_NO=#{mbNo}
 	</select>
-	
-  	<update id="delete" >
-  		UPDATE  TB_CALL100
-		SET 	CALL_STS_CD=2
-		WHERE	USED_GDS_NO=#{USEDGDSNO};
-  	</update>
+
   	
   	<select id="selectMyInfo" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo" >
   		SELECT USER_NM,EMAIL,ADDR,ADDR_DETAIL FROM TB_USER100 WHERE MB_NO=#{mbNo};

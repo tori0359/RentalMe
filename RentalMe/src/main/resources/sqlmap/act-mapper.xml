@@ -8,6 +8,7 @@ encoding="UTF-8"?>
 <mapper namespace="act">
 	<select id="selectActRun" resultType="com.me.rentalme.model.entity.ActVo">
 		SELECT  TB_GDS300.GDS_CD,
+				TB_GDS300.GDS_CD_DETAIL,
 			    FN_NM('GDS_NM',TB_GDS100.GDS_CD) AS gdsnm,
 			    TB_GDS300.GDS_ST_PRICE,
 			    TB_GDS300.ACT_ST_TIME,
@@ -15,12 +16,13 @@ encoding="UTF-8"?>
 			    TB_GDS300.CONTENT
 		FROM 	TB_GDS300
 		INNER JOIN TB_GDS100
-		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD
+		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD_DETAIL
 		WHERE 	ACT_STS_CD='2';
 	</select>
 	
 	<select id="selectActEnd" resultType="com.me.rentalme.model.entity.ActVo">
 		SELECT  TB_GDS300.GDS_CD,
+				TB_GDS300.GDS_CD_DETAIL,
 			    FN_NM('GDS_NM',TB_GDS100.GDS_CD) AS gdsnm,
 			    TB_GDS300.GDS_ST_PRICE,
 			    TB_GDS300.ACT_ST_TIME,
@@ -28,8 +30,63 @@ encoding="UTF-8"?>
 			    TB_GDS300.CONTENT
 		FROM 	TB_GDS300
 		INNER JOIN TB_GDS100
-		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD
-		WHERE 	ACT_STS_CD='1';
+		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD_DETAIL
+		WHERE 	ACT_STS_CD='3';
 	
+	</select>
+	
+	<select id="selectActDetail" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT   A.GDS_CD
+				,A.GDS_NM
+				,A.BRAND_NM 
+				,B.GDS_PRICE
+				,B.AGREE_TERM
+				,B.DELIVER_COST
+				,B.INSTAL_COST
+				,B.AS_CONDITION
+				,A.MODEL_NM
+				,B.IMG1
+				,B.IMG2
+				,B.IMG3
+				,B.IMG4
+				,C.GDS_CD_DETAIL
+				,C.GDS_ST_PRICE
+				,C.UNIT_PRICE
+				,C.ACT_ST_TIME
+				,C.ACT_ED_TIME
+		FROM 	TB_GDS100 A	
+				,TB_GDS200 B		
+				,TB_GDS300 C
+		WHERE A.GDS_CD = B.GDS_CD
+		AND   A.GDS_CD = C.GDS_CD_DETAIL
+		AND   B.GDS_CD = C.GDS_CD_DETAIL
+		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
+	</select>	
+	<select id="selectActDetail2" resultType="com.me.rentalme.model.entity.ActVo">
+		SELECT   A.GDS_CD
+				,A.GDS_NM
+				,A.BRAND_NM 
+				,B.GDS_PRICE
+				,B.AGREE_TERM
+				,B.DELIVER_COST
+				,B.INSTAL_COST
+				,B.AS_CONDITION
+				,A.MODEL_NM
+				,B.IMG1
+				,B.IMG2
+				,B.IMG3
+				,B.IMG4
+				,C.GDS_CD_DETAIL
+				,C.GDS_ST_PRICE
+				,C.UNIT_PRICE
+				,C.ACT_ST_TIME
+				,C.ACT_ED_TIME
+		FROM 	TB_GDS100 A	
+				,TB_GDS200 B		
+				,TB_GDS300 C
+		WHERE A.GDS_CD = B.GDS_CD
+		AND   A.GDS_CD = C.GDS_CD_DETAIL
+		AND   B.GDS_CD = C.GDS_CD_DETAIL
+		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
 	</select>
 </mapper>

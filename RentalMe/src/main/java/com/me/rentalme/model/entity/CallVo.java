@@ -2,42 +2,51 @@ package com.me.rentalme.model.entity;
 
 
 public class CallVo {
-	private String usedGdsNo;
-	private String mbNo;
-	private String callStsCd;
-	private String chgId;
-	private String chgDt;
-	private String regId;
-	private String regDt;
-	private String modelNm;
-	private String usedGdsPrice;
-	private String odrDt;
-	private String gdsPrice;
-	private int odrQty;
-	private int odrAmt;
-	private String agreeTem;
-	private String odrStsGbCd;
-	private String gdsNm;
-	private String gdsCd;
-	private String userId;
-	private String content;
-	private String grade;
-	private String sumPrice;
-	private String depositSeq;
-	private String depositDt;
-	private String chargeDeposit;
-	private String useDeposit;
-	private String refundDeposit;
-	private String depositGbCd;
-	private String remnDeposit;
-	private String bidPrice;
-	private String bidTime;
-	private String RImg1; //렌탈 이미지
-	private String UImg1; //중고사진 이미지
-	private String cnt; //회원이 해당상품에 쓴 후기 갯수
+	private String usedGdsNo;		//중고 상품 번호
+	private String mbNo;			//회원번호
+	private String callStsCd;		//찜상태 코드
+	private String chgId;			//변경 아이디
+	private String chgDt;			//변경 날짜
+	private String regId;			//등록 아이디
+	private String regDt;			//등록 날짜
+	private String modelNm;			//모델명
+	private String usedGdsPrice;	//중고 상품 가격
+	private String odrDt;			//주문 일자
+	private String gdsPrice;		//렌탈 상품 가격
+	private int odrQty;				//주문수량
+	private int odrAmt;				//주문 금액
+	private String agreeTem;		//계약 기간
+	private String odrStsGbCd;		//주문 상태 구분 코드
+	private String gdsNm;			//상품명
+	private String gdsCd;			//상품 코드
+	private String userId;			//사용자 아이디
+	private String content;			//후기 등록 내용
+	private String grade;			//후기 별점
+	private String sumPrice;		//장바구니 총 금액?
+	private String depositSeq;		//예치금 일련 번호
+	private String depositDt;		//예치금 일자
+	private String chargeDeposit;	//충전 예치금
+	private String useDeposit;		//사용 예치금
+	private String refundDeposit;	//환불 예치금
+	private String depositGbCd;		//예치금 구분 코드 (1-충전, 2-사용, 3-환불)
+	private String remnDeposit;		//잔여 예치금
+	private String bidPrice;		//응찰 가격
+	private String bidTime;			//응찰 시간
+	private String RImg1; 			//렌탈 이미지
+	private String UImg1; 			//중고사진 이미지
+	private String cnt; 			//회원이 해당상품에 쓴 후기 갯수
+	private String cartSeq;			//장바구니 일련번호
 	
 
 	
+
+	public String getCartSeq() {
+		return cartSeq;
+	}
+
+	public void setCartSeq(String cartSeq) {
+		this.cartSeq = cartSeq;
+	}
 
 	public String getCnt() {
 		return cnt;

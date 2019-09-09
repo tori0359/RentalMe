@@ -135,11 +135,11 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div style="height:100%;" id="actCon">
 						<div class="col-md-4" id="imgDiv" style="padding:20px 0px 20px 50px;">
-							<a href="#"><img class="ordimg" src="/imgs/bed1.jpg"/></a>
+							<a href="/act/${bean.gdsCdDetail}"><img class="ordimg" src="/imgs/bed1.jpg"/></a>
 						</div>
 						<div class="col-md-3" id="contentDiv">
-							<input type="hidden" value="${bean.gdsCd}"/>
-							<div><h2 style="font-family:'nanumEB' "><a id="tag" href="#">${bean.gdsNm }</a></h2></div>
+							<input type="hidden" value="${bean.gdsCdDetail}"/>
+							<div><h2 style="font-family:'nanumEB' "><a id="tag" href="/act/${bean.gdsCdDetail}">${bean.gdsNm }</a></h2></div>
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
 							<div><h4 class="text"><span class="color">시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
 							<div><h4 class="text" ><span class="color">경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
@@ -151,7 +151,7 @@
 			</div>
 		</c:forEach>
 	</div>
-<div style="background-color:rgba(128,128,128,0.5);" id="actEndList">
+<div style="background-color:rgba(128,128,128,0.2);" id="actEndList">
 		<c:forEach items="${alist2}" var="bean">
 			<div class="row wrap" >
 				<div class="col-md-10 col-md-offset-1">
