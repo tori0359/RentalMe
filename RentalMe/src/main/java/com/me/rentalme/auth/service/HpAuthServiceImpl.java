@@ -1,12 +1,22 @@
 package com.me.rentalme.auth.service;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-//import net.nurigo.java_sdk.api.Message;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 /**
@@ -35,13 +45,11 @@ public class HpAuthServiceImpl implements HpAuthService {
 	public String sendHp(String hp) {
 		//인증코드 생성
 		String key = mailAuthService.getKey(false, 6);
-		
-		//System.out.println("생성된 인증키 : "+key);
-		
+				
 		//coolsms에서 받은 apikey 세팅
 		String apiKey = "";			//git에 올라갈시 api키 공개되면 안되므로 삭제(담당자에게 문의)
 		String apiSecret = "";		//git에 올라갈시 secret키 공개되면 안되므로 삭제(담당자에게 문의)
-		//Message coolsms = new Message(apiKey, apiSecret);
+		Message coolsms = new Message(apiKey, apiSecret);
 		
 		HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", hp);									//수신번호 입력 (콤마[,]로 구분된 수신번호 입력가능)
@@ -52,21 +60,29 @@ public class HpAuthServiceImpl implements HpAuthService {
 		
 	    try {
 	    	//수신폰으로 휴대폰 인증코드 발송
-	        //JSONObject json = (JSONObject) coolsms.send(params);
-	        //System.out.println(json.toString());
+	        JSONObject json = (JSONObject) coolsms.send(params);
+;
+	        System.out.println(json.toString());
 	    	
-	    	String jsonStr = "{ "+"group_id"+" : "+"1000"+", "+"success_count"+" : 1, "+"error_count"+" : 0 }";
+	    	//json -> map
+	    	ObjectMapper mapper = new ObjectMapper();
+	    	   	
+	    	Map<String, Object> map = new HashMap<String, Object>();
+//	    	map = mapper.readValues(json, new TypeReference<Map<String, Object>>(){});
 	    	
-	    	System.out.println(jsonStr);
+	    	System.out.println(map.toString());
 	    	
-
-	        
-	        
-	        
-	        
-	      } catch (Exception e) {
-//	        System.out.println(e.getMessage());
-//	        System.out.println(e.getCode());
+	    } 
+//	    catch (JsonGenerationException e){ 
+//	    	e.printStackTrace(); 
+//	    } catch (JsonMappingException e) { 
+//	    	e.printStackTrace(); 
+//	    } catch (IOException e) {
+//	    	e.printStackTrace(); 
+//	    } 
+	    catch (CoolsmsException e) {
+	        System.out.println(e.getMessage());
+	        System.out.println(e.getCode());
 	      }		
 		
 		return key;
