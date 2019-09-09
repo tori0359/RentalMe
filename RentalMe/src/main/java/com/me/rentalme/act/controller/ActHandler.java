@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -23,7 +25,7 @@ public class ActHandler extends TextWebSocketHandler{
 	Map<String,WebSocketSession> map=new HashMap<String,WebSocketSession>();			//소켓에 연결된 client
 	List<Object> bidList=new ArrayList<Object>();										//현재 낙찰가에 응찰한 사람
 	String list;
-					
+	boolean interup=true;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//소켓이 접속했을 때 이벤트
 	@Override
@@ -68,22 +70,27 @@ public class ActHandler extends TextWebSocketHandler{
 				bidList=new ArrayList<Object>();
 			}else if(String.valueOf(mapping.get("type")).equals("bid")) {
 				bidList.add(session.getAttributes().get("loginUserId"));
+				interup=false;
 			}else if(String.valueOf(mapping.get("type")).equals("enter")) {
 				
-				Map<String,Object> listAll=new HashMap<String,Object>();
-				listAll.put("type", "bidlist");
-				listAll.put("text", bidList);
-				listAll.put("id", session.getAttributes().get("loginUserId"));
-				listAll.put("cnt", "");
-				
-				list=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listAll);
-				
-				TextMessage msg=new TextMessage(list);
-				Set<String> keys=map.keySet();
-				Iterator<String> ite=keys.iterator();
-				while(ite.hasNext()) {
-					map.get(ite.next()).sendMessage(msg);
-				}
+//				Map<String,Object> listAll=new HashMap<String,Object>();
+//				listAll.put("type", "bidlist");
+//				listAll.put("text", bidList);
+//				listAll.put("id", session.getAttributes().get("loginUserId"));
+//				listAll.put("cnt", "");
+//				
+//				list=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listAll);
+//				
+//				TextMessage msg=new TextMessage(list);
+//				Set<String> keys=map.keySet();
+//				Iterator<String> ite=keys.iterator();
+//				while(ite.hasNext()) {
+//					map.get(ite.next()).sendMessage(msg);
+//				}
+			}else if(String.valueOf(mapping.get("type")).equals("countDown")) {
+				System.out.println("카운트 들어옴");
+				interup=true;
+				timeThread();
 			}
 			
 		} catch (JsonGenerationException e) { 
@@ -104,24 +111,31 @@ public class ActHandler extends TextWebSocketHandler{
 		
 		System.out.println("bidList:"+ bidList.toString());
 	}
-	
-	
-	
- 
-//	public void timeThread(WebSocketSession session) {
-//		Timer m_timer = new Timer();
-//		TimerTask m_task = new TimerTask() {
-//			ObjectMapper mapper = new ObjectMapper();
-//			@Override
-//			public void run() {
-//				Map<String,Object> serverMsg=new HashMap<String,Object>();
-//				serverMsg.put("type", "bidlist");
-//				serverMsg.put("text", bidList);
-//				serverMsg.put("id", session.getAttributes().get("loginUserId"));
-//				serverMsg.put("cnt", "");
-//			}
-//		};
-//		m_timer.schedule(m_task, 10000, 3000);
-//	}
-	
+		
+	public void timeThread() {
+		Timer m_timer = new Timer();
+		TimerTask m_task = new TimerTask() {
+			int count=5;
+			TextMessage msg;
+			@Override
+			public void run() {
+				msg = new TextMessage(count+"");
+				if(count>=0&&interup) {
+					count--;
+					Set<String> keys=map.keySet();
+					Iterator<String> ite=keys.iterator();
+					while(ite.hasNext()) {
+						try {
+							map.get(ite.next()).sendMessage(msg);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}else {
+					m_timer.cancel();
+				}
+			}
+		};
+		m_timer.schedule(m_task, 1000, 1000);
+	}
 }

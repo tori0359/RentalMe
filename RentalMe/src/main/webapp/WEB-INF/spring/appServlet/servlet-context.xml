@@ -26,6 +26,13 @@
 	<beans:bean id="loginAfterInterceptor" class="com.me.rentalme.interceptor.LoginAfeterInterceptor"/>
 	<beans:bean id="loginInterceptor" class="com.me.rentalme.interceptor.LoginInterceptor"/>
 	<beans:bean id="loginRememberInterceptor" class="com.me.rentalme.interceptor.LoginRememberInterceptor"/>
+	<!-- 로그아웃 후 뒤로가기 cache 방지 -->
+	<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+		<beans:property name="cacheSeconds" value="0"/>
+		<beans:property name="useExpiresHeader" value="true"/>
+		<beans:property name="useCacheControlHeader" value="true"/>
+		<beans:property name="useCacheControlNoStore" value="true"/>
+	</beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/login"/>
@@ -41,6 +48,10 @@
 			<mapping path="/join/info"/>
 			<mapping path="/join/compl"/>
 			<beans:ref bean="loginAfterInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**/"/>
+			<beans:ref bean="webContentInterceptor"/>
 		</interceptor>
 	</interceptors>
 

@@ -34,7 +34,27 @@ public class CallVo {
 	private String bidTime;
 	private String RImg1; //렌탈 이미지
 	private String UImg1; //중고사진 이미지
-	private String userNm;
+	private String cnt; //회원이 해당상품에 쓴 후기 갯수
+	private String userNm; //회원 이름
+	
+	
+	
+	
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+
+	public String getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
 
 	public String getRImg1() {
 		return RImg1;
@@ -297,13 +317,6 @@ public class CallVo {
 		this.regDt = regDt;
 	}
 	
-	public String getUserNm() {
-		return userNm;
-	}
-
-	public void setUserNm(String userNm) {
-		this.userNm = userNm;
-	}
 
 	@Override
 	public int hashCode() {

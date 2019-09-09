@@ -70,12 +70,14 @@ public class UserController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
-	public ModelAndView addReview(CallVo callVo) throws SQLException {
+	public ModelAndView addReview(CallVo callVo,HttpSession session) throws SQLException {
 		log.debug("후기등록 컨트롤러...");
 		
-		mpUserService.addReview(callVo);
 		
+		//세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
 		
+		mpUserService.addReview(callVo,mbNo);
 
 		ModelAndView mav = new ModelAndView("redirect:/mp/");
 		

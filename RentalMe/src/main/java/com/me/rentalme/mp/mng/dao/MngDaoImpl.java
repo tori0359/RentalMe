@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
@@ -53,8 +54,8 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<UsedVo> selectUsed() throws SQLException {
-		return sqlSession.selectList("mpMng.selectUsed");				//전체 중고 리스트
+	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
+		return sqlSession.selectList("mpMng.selectUsed", usedPage);				//전체 중고 리스트
 	}
 
 	@Override
@@ -73,13 +74,18 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<DeclVo> selectDecl() throws SQLException {
-		return sqlSession.selectList("mpMng.selectDecl");				//전체 신고 리스트
+	public List<DeclVo> selectDecl(Paging usedPage) throws SQLException {
+		return sqlSession.selectList("mpMng.selectDecl", usedPage);				//전체 신고 리스트
 	}
 
 	@Override
 	public int changeDeclSts(String declNo) throws SQLException {
 		return sqlSession.update("mpMng.changeDeclSts", declNo);		//신고상태 처리완료로 바꾸기
+	}
+	
+	@Override
+	public int selectusedListCnt() {
+		return sqlSession.selectOne("mpMng.selectusedListCnt");			//중고리스트 총갯수
 	}
 	
 }

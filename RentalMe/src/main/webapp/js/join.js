@@ -66,7 +66,6 @@ $(function() {
     $('#email-danger').hide();
     $('#emailCode-success').hide();
     $('#emailCode-danger').hide();
-    $('#joinBtn').attr('disabled', true);
     
     /*유효성 검사*/
     //1. 아이디 
@@ -76,7 +75,7 @@ $(function() {
         $('#id-success').hide();
         $('#id-danger').hide();
         $('#idCheck-danger').hide();
-        $('#joinBtn').attr('disabled', true);
+        
         
     }).blur(function(){//아이디가 포커스 외부에 있을 경우
     	
@@ -96,13 +95,12 @@ $(function() {
 	            			$('#id-success').hide();
 	                        $('#id-danger').hide();
 	                        $('#idCheck-danger').show();
-	                        $('#joinBtn').attr('disabled', true);
+	                        return false;
             			}else if(data=='notDupl'){
 	            			$('#id-success').show();
 	                        $('#id-danger').hide();
 	                        $('#idCheck-danger').hide();       
-	                        $('#joinBtn').attr('disabled', false);
-	                        cnt += 1;
+	                        
             			}
             		},
             		error:function(request, status, error){
@@ -113,7 +111,7 @@ $(function() {
                 $('#id-success').hide();
                 $('#idCheck-danger').hide();
                 $('#id-danger').show();
-                $('#joinBtn').attr('disabled', true);
+                return false;
     		}
     	}
     });
@@ -125,7 +123,7 @@ $(function() {
         $('#pw-success').hide();
         $('#pw-danger').hide();
         $('#pw-danger2').hide();
-        $('#joinBtn').attr('disabled', true);
+        
     }).blur(function(){//비밀번호, 비밀번호확인 포커스가 외부에 있을 경우
     	//비밀번호 또는 비밀번호 확인의 값이 공백이 아닐경우
         if($('#pw').val()!="" || $('#pwf').val()!=""){
@@ -136,19 +134,19 @@ $(function() {
 	                $('#pw-success').show();
 	                $('#pw-danger').hide();
 	                $('#pw-danger2').hide();
-	                $('#joinBtn').attr('disabled', false);
-	                cnt += 1;
+	                
 	            } else {//비밀번호와 비밀번호확인의 값이 같지 않을 경우 "비밀번호가 다릅니다." 메시지 출력
 	                $('#pw-success').hide();
 	                $('#pw-danger').show();
 	                $('#pw-danger2').hide();
-	                $('#joinBtn').attr('disabled', true);
+	                return false;
 	            }
         	}else{
         		//정규식 체크가 맞지 않는 경우 - "8~20자 영문+숫자+특수문자 조합하여 입력해주세요." 메시지 출력
                 $('#pw-success').hide();
                 $('#pw-danger').hide();
                 $('#pw-danger2').show();
+                return false;
         	}
         }
     });
@@ -161,13 +159,40 @@ $(function() {
     	if($('#hp').val()!=""){    		
     		if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
                 $('#hp-danger').hide();
-                $('#joinBtn').attr('disabled', false);
                 
     		}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
                 $('#hp-danger').show();
-                $('#joinBtn').attr('disabled', true);
+                return false;
     		}
     	}
+    });
+    
+    //3-1. 핸드폰인증
+    $('#hpSend').click(function(){
+		if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
+            $('#hp-danger').hide();
+        
+            alert('입력하신 번호로 인증번호가 발송되었습니다.');
+            var hp = $('#hp').val();	//입력한 핸드폰번호
+            
+            //서버로 전송한다.
+            $.ajax({
+            	url: 'hpCodeSend',
+        		type:'POST',
+        		data:{'hp' : hp},
+        		success:function(data){
+        			alert('성공');
+        		},
+        		error:function(request, status, error){
+        			alert("code="+request.status+", message="+request.responseText+", error="+error)
+        		}           	
+            	
+            });
+		}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
+            $('#hp-danger').show();
+            return false;
+		}
+    	
     });
     
     //4. 이메일 
@@ -176,18 +201,30 @@ $(function() {
     }).blur(function(){
     	if($('#email').val()!=""){
     		if(regexEmail.test($('#email').val())){//이메일 정규식 체크에서 정상일경우 패스
-    			$('#email-danger').hide();
-    			$('#joinBtn').attr('disabled', false);
-    			
+    			$('#email-danger').hide();    			
     		}else{
     			$('#email-danger').show();
-    			$('#joinBtn').attr('disabled', true);
+    			return false;
     		}
+    	}else{
+    		return false;
     	}
     });
     
     //이메일 인증코드받기 버튼 클릭한 경우
     $('#emailSend').click(function(){
+    	if($('#email').val()!=""){
+    		if(regexEmail.test($('#email').val())){//이메일 정규식 체크에서 정상일경우 패스
+    			$('#email-danger').hide();    			
+    		}else{
+    			$('#email-danger').show();
+    			return false;
+    		}
+    	}else{
+    		alert('이메일을 입력해주세요')
+    		return false;
+    	}
+    	
     	alert("인증메일이 발송되었습니다.");
     	var email = $('#email').val();
     	var dataOne = {"email":email}
@@ -217,10 +254,10 @@ $(function() {
 			if(inputCode == emailCode){
 				$('#emailCode-success').show();
 				$('#emailCode-danger').hide();
-				cnt += 1;
 			}else{
 				$('#emailCode-success').hide();
 				$('#emailCode-danger').show();
+				return false;
 			}
 		}
 	});

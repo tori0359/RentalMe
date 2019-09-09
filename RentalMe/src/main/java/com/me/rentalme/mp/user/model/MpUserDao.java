@@ -23,7 +23,7 @@ public interface MpUserDao {
 	List<CallVo> selectOrd(String mbNo) throws SQLException;
 	
 	//후기 등록
-	int InsertReview(String gdsCd, String userId, String content,String grade) throws SQLException;
+	int InsertReview(String gdsCd, String userId, String content,String grade, String mbNo) throws SQLException;
 	
 	//장바구니 리스트 출력
 	List<CallVo> selectCart(String mbNo) throws SQLException;

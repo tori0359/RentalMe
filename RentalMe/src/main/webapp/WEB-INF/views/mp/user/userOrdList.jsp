@@ -277,6 +277,7 @@
 	                <a style="text-decoration:none; color:black;"href="#">
 	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
 	                <input type=hidden value="${bean.gdsCd}"/></a>
+	                
                 </td>
                 <td><p class="tdtext">${bean.odrDt}</p></td>
                 <td><p class="tdtext">${bean.odrQty}</p></td>
@@ -298,7 +299,14 @@
                    </p>
                 </td>
                 <td><p class="tdtext">
-                <button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button>
+                 <c:choose>
+                  <c:when test="${bean.cnt == 0}">
+                	<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button>
+                </c:when>
+                <c:otherwise>
+               		<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">이미 후기를 등록하셨습니다</button>
+                </c:otherwise>
+                </c:choose>
                 </p>
                 </td>
              </tr>

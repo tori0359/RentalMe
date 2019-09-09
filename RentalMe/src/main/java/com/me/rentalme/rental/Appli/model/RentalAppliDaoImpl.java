@@ -70,6 +70,17 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.insert("rentalAppli.gdsQuestRegister", rentalAppliVo);
 	}
 
+	/* 후기 */
+	public List<RentalAppliVo> rentalReview(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.reviewRetrive", rentalAppliVo);
+	}
+
+	/* 후기갯수 */
+	@Override
+	public List<RentalAppliVo> rentalReviewCnt(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.reviewRetriveCnt", rentalAppliVo);
+	}
+
 
 
 }

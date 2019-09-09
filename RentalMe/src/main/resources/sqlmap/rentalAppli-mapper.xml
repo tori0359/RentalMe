@@ -9,6 +9,14 @@
 	<select id="pathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT
 			DISTINCT #{gdsSclassCd} AS	GUBUN_CD	/* 전체메뉴 구분코드 */
+			,CASE WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '10' AND #{gdsSclassCd} <![CDATA[ < ]]> '20' THEN '10'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '20' AND #{gdsSclassCd} <![CDATA[ < ]]> '30' THEN '20'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '30' AND #{gdsSclassCd} <![CDATA[ < ]]> '40' THEN '30'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '40' AND #{gdsSclassCd} <![CDATA[ < ]]> '50' THEN '40'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '50' AND #{gdsSclassCd} <![CDATA[ < ]]> '60' THEN '50'
+				  WHEN #{gdsSclassCd} <![CDATA[ >= ]]> '60' AND #{gdsSclassCd} <![CDATA[ < ]]> '70' THEN '60'
+				  ELSE '99'		/* 홈 링크코드 */
+			 END AS HOME_CD
 			,(
 				SELECT	/* 대분류명 조회 */
 					CONCAT(CD_NM,'렌탈')
@@ -447,5 +455,41 @@
 					,'1'
 			)
 	</insert>
+	
+	<!-- 렌탈 상품 리스트 후기 -->
+	<select id="reviewRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			@ROWNUM := @ROWNUM+1 AS RNK		/* 게시번호 순위 */
+			,A.*
+		FROM (
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+				ORDER BY GDS_REVIEW_NO DESC
+		) A
+		,(SELECT @ROWNUM := 0) R
+	</select>
+	
+	<!-- 렌탈 상품 리스트 후기 갯수 -->
+	<select id="reviewRetriveCnt" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT
+			COUNT(*) AS CNT
+		FROM
+			(
+				SELECT 
+					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+					,CONTENT
+					,GRADE
+					,FN_NM('USER_NM', MB_NO) AS USER_NM
+					,GDS_REVIEW_DT
+				FROM TB_GDS210
+				WHERE GDS_CD = #{gdsCd}
+		) A
+	</select>
 
 </mapper>

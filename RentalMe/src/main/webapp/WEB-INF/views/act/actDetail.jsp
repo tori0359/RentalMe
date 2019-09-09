@@ -49,6 +49,7 @@
 		if(type=='bid'){
 			$('#actLive').append(id+"님께서 응찰하셨습니다<br/>");
 			$('#bidList').append("<li>"+id+"</li>");
+			$('#countView').text('');
 		}
 		if(type=='enter'){
 			$('#actLive').append(id+"님이 경매장에 입장하셨습니다<br/>");
@@ -57,15 +58,23 @@
 			$('#actLive').append(text+"원 응찰하실 분?<br/>");
 			$('#sendMsg').attr('disabled', false);
 			$('#nowPrice').text('');
-			$('#nowPirce').append("현재가격: "+text+"원");
+			$('#nowPrice').append("현재가격: "+text+"원");
 			$('#bidList').empty();
 		}
-		if(type='bidlist'){
-			console.log(text);
+		if(typeof(msg)=='number'){
+			$('#countView').text('');
+			$('#countView').append('<img alt="count" src="/imgs/'+msg+'.png">');
+			if(msg==0){
+				$('#sendMsg').attr('disabled', true);
+				$('#countView').append('축하합니다');
+			}
+		}
+/* 		if(type=='bidlist'){
+			console.log('리스트:'+text);
 			for(var i=0; i<text.length; i++){
 				$('#bidList').append("<li>"+text[i]+"</li>");
 			}
-		}
+		} */
 	};
 	sock.onclose=function(event){
 		
@@ -109,9 +118,10 @@
 		<img alt="" src="/imgs/liveview.png" style="width:100%;height:100%;">
 	</div>
 	<span id="liveviewcnt"></span>
-	<div id="nowPirce"></div>
+	<div id="nowPrice"></div>
 	<div id="actLive"></div>
 	<button id="sendMsg">응찰하기</button>
+	<div id="countView"></div>
 	<ol id="bidList">
 	
 	</ol>
