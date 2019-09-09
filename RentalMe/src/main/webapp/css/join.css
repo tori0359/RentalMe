@@ -21,14 +21,16 @@
 #join_input #emailSend{display: inline-block;}
 #join_input #hp{display: inline-block;width: 67%;}
 #join_input #hpSend{display: inline-block;}
+#join_input .hpYnDiv{text-align: left;}
+#join_input .hpYnL{font-size: 11px;}
 #join_input #addr{display: inline-block;width:75%}
 #join_input #addrSearch{display: inline-block;}
 #join_terms #option_select{text-align: left;}
 #myInput{text-align: center;}
 #birth{display: inline-block;width: 82%;}
 #id{margin-right:20px;}
-#pw-danger,#pw-danger2,#id-danger,#hp-danger,#email-danger,#idCheck-danger,#emailCode-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
-#pw-success,#id-success,#emailCode-success{color:blue;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
+#pw-danger,#pw-danger2,#id-danger,#hp-danger,#email-danger,#idCheck-danger,#emailCode-danger,#hpCode-danger{color:red;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
+#pw-success,#id-success,#emailCode-success,#hpCode-success{color:blue;text-align:left;font-size:9pt;font-weight:bold;margin-left:10px;margin-bottom:10px;}
 /*회원가입완료*/
 #joinus>h3{text-align: center;}
 #join_btn{background-color: dimgray;color: white;font-weight: bold;}

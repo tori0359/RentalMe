@@ -66,6 +66,11 @@ $(function() {
     $('#email-danger').hide();
     $('#emailCode-success').hide();
     $('#emailCode-danger').hide();
+    $('#hpCode-success').hide();
+    $('#hpCode-danger').hide();
+    $('#hpKeyDiv').hide();
+    $('#hp').prop('disabled', true);
+    $('#hpYn').val('N');
     
     /*유효성 검사*/
     //1. 아이디 
@@ -167,33 +172,88 @@ $(function() {
     	}
     });
     
-    //3-1. 핸드폰인증
+    //3-1. 핸드폰
     $('#hpSend').click(function(){
-		if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
-            $('#hp-danger').hide();
-        
-            alert('입력하신 번호로 인증번호가 발송되었습니다.');
-            var hp = $('#hp').val();	//입력한 핸드폰번호
-            
-            //서버로 전송한다.
-            $.ajax({
-            	url: 'hpCodeSend',
-        		type:'POST',
-        		data:{'hp' : hp},
-        		success:function(data){
-        			alert('성공');
-        		},
-        		error:function(request, status, error){
-        			alert("code="+request.status+", message="+request.responseText+", error="+error)
-        		}           	
-            	
-            });
-		}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
-            $('#hp-danger').show();
-            return false;
-		}
+    	if(!($('input[name=hp]:text').prop('disabled'))){
+			if(regexHp.test($('#hp').val())){//연락처 정규식 체크에서 정상일경우 패스
+	            $('#hp-danger').hide();
+	        
+	            alert('입력하신 번호로 인증번호가 발송되었습니다.');
+	            var hp = $('#hp').val();	//입력한 핸드폰번호
+	            
+	            //서버로 전송한다.
+	            $.ajax({
+	            	url: 'hpCodeSend',
+	        		type:'POST',
+	        		data:{'hp' : hp},
+	        		success:function(data){
+	        			if(data == 'err'){
+	        				alert('핸드폰 인증에 실패하였습니다.');
+	        				return false;
+	        			}
+	        			var codeValue 	= data;
+	        			var hpCode 		= $('#hpCode').val(codeValue);	 
+	        		},
+	        		error:function(request, status, error){
+	        			alert("code="+request.status+", message="+request.responseText+", error="+error)
+	        		}           	
+	            });
+			}else{//정규식체크에서 잘못되었을 경우 "10~11자 숫자만 사용가능" 메시지 출력
+	            $('#hp-danger').show();
+	            return false;
+			}
+    	}else{
+    		return false;
+    	}
     	
     });
+    
+    //핸드폰 수신동의
+    $('#hpYn').click(function(){
+    	var check = $('#hpYn').is(':checked');
+    	
+    	var hpYn = '';
+    	
+    	if(check){
+    		//동의
+    		$('#hp').prop('disabled', false);
+    		$('#hpKeyDiv').show();
+    		hpYn = 'Y';
+    		$('#hpYn').val(hpYn);
+    	}else{
+    		//동의x
+    		$('#hp').prop('disabled', true);
+    		$('#hpKeyDiv').hide();
+    		hpYn = 'N';
+    		$('#hpYn').val(hpYn);
+    		$('#hp').val('');
+    		$('#hpKey').val('');
+    		$('#hpCode-success').hide();
+    		$('#hpCode-danger').hide();
+    		$('#hp-danger').hide();
+
+    	}
+    	
+    });
+    
+    //서버에서 받은 핸드폰 인증키와 입력한 핸드폰 번호 인증키를 비교
+    $('#hpKey').focus(function(){
+		$('#hpCode-success').hide();
+		$('#hpCode-danger').hide();
+	}).blur(function(){
+		if($('#hpKey').val()!=""){
+			var inputCode = $('#hpKey').val();
+			var hpCode = $('#hpCode').val();
+			if(inputCode == hpCode){
+				$('#hpCode-success').show();
+				$('#hpCode-danger').hide();
+			}else{
+				$('#hpCode-success').hide();
+				$('#hpCode-danger').show();
+				return false;
+			}
+		}
+	});
     
     //4. 이메일 
     $('#email').focus(function(){
@@ -336,6 +396,8 @@ function addr_execDaumPostcode() {
 function joinCheck(){
 	var frm = document.frm;
 	
+	var hpYnCheck = $('#hpYn').is(':checked');
+	
 	if(frm.userId.value==""){
 		alert("아이디를 입력 바랍니다.");
 		frm.userId.focus();
@@ -348,9 +410,12 @@ function joinCheck(){
 		alert("비밀번호를 입력 바랍니다.");
 		frm.pwf.focus();
 		return false;
-	}else if(frm.hp.value == ""){
+	}else if(frm.hp.value == "" && hpYnCheck){
 		alert("휴대전화를 입력 바랍니다.");
 		frm.hp.focus();
+		return false;
+	}else if(frm.hpKey.value == "" && hpYnCheck){
+		alert("핸드폰 인증번호를 입력하시기 바랍니다.");
 		return false;
 	}else if(frm.email.value == ""){
 		alert("이메일을 입력 바랍니다.");
@@ -366,6 +431,7 @@ function joinCheck(){
 		return false;
 	}
 	
+
 	
 	frm.submit();
 	

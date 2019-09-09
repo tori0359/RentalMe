@@ -49,10 +49,8 @@ public class LoginFindServiceImpl implements LoginFindService {
 		List<UserVo> list = new ArrayList<UserVo>();
 		
 		if(result > 0) {	//아이디가 있으면
-			//System.out.println("리스트의 크기는(유)? : "+list.size());
 			return loginFindDao.getId(email);
 		}else {				//아이디가 없으면
-			//System.out.println("리스트의 크기는?(무) : "+list.size());
 			return list;
 		}
 	}

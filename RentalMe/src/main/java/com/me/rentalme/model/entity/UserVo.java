@@ -10,6 +10,7 @@ public class UserVo {
 	private String	genderGbCd;		// 성별구분코드(1:남자, 2:여자)
 	private String	hp;				// 휴대전화
 	private String	hpYn;			// 휴대전화 수신여부
+	private String  hpKey;			// 휴대폰 사용자 키
 	private String 	email;			// 이메일
 	private String	emailYn;		// 이메일 수신여부
 	private String	emailKey;		// 이메일 사용자 키 (인증 전 : 난수 생성된 키값이 입력, 인증 후 Y 입력)
@@ -36,7 +37,7 @@ public class UserVo {
 	}
 
 	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
-			String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
+			String hpKey, String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
 			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, String joinDt, String userStsCd,
 			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean isUseLogin) {
 		super();
@@ -47,6 +48,7 @@ public class UserVo {
 		this.genderGbCd = genderGbCd;
 		this.hp = hp;
 		this.hpYn = hpYn;
+		this.hpKey = hpKey;
 		this.email = email;
 		this.emailYn = emailYn;
 		this.emailKey = emailKey;
@@ -67,7 +69,21 @@ public class UserVo {
 		this.sessionDt = sessionDt;
 		this.isUseLogin = isUseLogin;
 	}
-	
+
+
+
+	public String getHpKey() {
+		return hpKey;
+	}
+
+	public void setHpKey(String hpKey) {
+		this.hpKey = hpKey;
+	}
+
+	public void setUseLogin(boolean isUseLogin) {
+		this.isUseLogin = isUseLogin;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -430,21 +446,13 @@ public class UserVo {
 	@Override
 	public String toString() {
 		return "UserVo [userId=" + userId + ", mbNo=" + mbNo + ", userNM=" + userNM + ", birthDay=" + birthDay
-				+ ", genderGbCd=" + genderGbCd + ", hp=" + hp + ", hpYn=" + hpYn + ", email=" + email + ", emailYn="
-				+ emailYn + ", emailKey=" + emailKey + ", addr=" + addr + ", addrDetail=" + addrDetail + ", zipCode="
-				+ zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt=" + pwAdjDt + ", levelGbCd="
-				+ levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId=" + chgId + ", chgDt="
-				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + ", sessionKey=" + sessionKey + ", sessionDt="
-				+ sessionDt + ", isUseLogin=" + isUseLogin + ", getUserId()=" + getUserId() + ", getMbNo()=" + getMbNo()
-				+ ", getUserNM()=" + getUserNM() + ", getBirthDay()=" + getBirthDay() + ", getGenderGbCd()="
-				+ getGenderGbCd() + ", getHp()=" + getHp() + ", getHpYn()=" + getHpYn() + ", getEmail()=" + getEmail()
-				+ ", getEmailYn()=" + getEmailYn() + ", getEmailKey()=" + getEmailKey() + ", getAddr()=" + getAddr()
-				+ ", getAddrDetail()=" + getAddrDetail() + ", getZipCode()=" + getZipCode() + ", getUserPw()="
-				+ getUserPw() + ", getPwFailCnt()=" + getPwFailCnt() + ", getPwAdjDt()=" + getPwAdjDt()
-				+ ", getLevelGbCd()=" + getLevelGbCd() + ", getJoinDt()=" + getJoinDt() + ", getUserStsCd()="
-				+ getUserStsCd() + ", getChgId()=" + getChgId() + ", getChgDt()=" + getChgDt() + ", getRegId()="
-				+ getRegId() + ", getRegDt()=" + getRegDt() + ", getSessionKey()=" + getSessionKey()
-				+ ", getSessionDt()=" + getSessionDt() + ", getIsUseLogin()=" + getIsUseLogin() + ", hashCode()="
-				+ hashCode() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+				+ ", genderGbCd=" + genderGbCd + ", hp=" + hp + ", hpYn=" + hpYn + ", hpKey=" + hpKey + ", email="
+				+ email + ", emailYn=" + emailYn + ", emailKey=" + emailKey + ", addr=" + addr + ", addrDetail="
+				+ addrDetail + ", zipCode=" + zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt="
+				+ pwAdjDt + ", levelGbCd=" + levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId="
+				+ chgId + ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", sessionKey=" + sessionKey
+				+ ", sessionDt=" + sessionDt + ", isUseLogin=" + isUseLogin + "]";
 	}
+
+
 }
