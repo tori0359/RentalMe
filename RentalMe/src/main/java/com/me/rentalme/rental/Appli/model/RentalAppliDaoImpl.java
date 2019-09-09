@@ -91,6 +91,16 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.insert("rentalAppli.gdsCartRegister", rentalAppliVo);
 	}
 
+	/* 惑前搬力(林巩) */
+	public int rentalGdsOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrRegister", rentalAppliVo);
+	}
+
+	/* 惑前搬力(林巩惑技) */
+	public int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrDetailRegister", rentalAppliVo);
+	}
+
 
 
 }

@@ -15,6 +15,11 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<!-- 결제 api연동하기 (아임포트)-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+
 <style type="text/css">
 .content {
 	height: 100%;
@@ -292,6 +297,7 @@ input::-moz-focus-inner { border: 0; }
 
 /* --------- 상세 캐러셀 끝 ----------- */
 
+
 </style>
 <script type="text/javascript">
 
@@ -495,7 +501,9 @@ input::-moz-focus-inner { border: 0; }
 	</c:forEach>
 	var vRealOdrQty = 1;		// 결제하기 최종수량
 	var vRealTotGdsPrice;		// 결제하기 최종상품가격 * 최종수량
-		
+
+	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
+	
 	/**************************/
 	/**** 전역변수 선언끝 *****/
 	/**************************/
@@ -604,9 +612,89 @@ input::-moz-focus-inner { border: 0; }
 			if(vRealGdsPrice != 0) {
 				vRealTotPrice = vRealGdsPrice * vRealOdrQty;
 				$('#realTotPrice').val(vRealTotPrice);
+				$('#realTotPriceTxt').val((vRealTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			}
 		}
-	};
+	}
+
+	$(document).on("click", "#inlineRadio1", function(){
+		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+	});
+
+	$(document).on("click", "#inlineRadio2", function(){
+		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+	});
+
+	// 결제하기 모달 결제하기
+	$(document).on("click", "#realSubmit", function(){
+		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
+		var userId = "${loginUserId}";
+		var crudGbCd = "II";
+		var odrGbCd = "10";
+		var payGbCd = radioVal;
+		var seq	= "001";
+		var mbNo = "${sessionMbNo}";
+		var gdsCd = "";
+		var gdsPrice = $('#realGdsPrice').val();
+		var agreeTerm = $('#realAgreeTerm').val();
+		var deliverCost = "";
+		var instalCost = "";
+		var asCondition = "";
+		var odrQty = $('#realOdrQty').val();
+
+		<c:forEach items="${list1}" var="list1">
+			gdsCd = "${list1.gdsCd}";
+		 	deliverCost = "${list1.deliverCost}";
+		 	instalCost = "${list1.instalCost}";
+		 	asCondition = "${list1.asCondition}";
+		</c:forEach>
+		
+		var IMP = window.IMP;
+		IMP.init('imp86711610');
+		
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'vbank',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '렌탈미 렌탈상품 결제',
+		    amount : amount,
+		    buyer_name : userId
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        
+				$.ajax({
+					url: "/rental/Appli/lg/detail/odr",
+					type: "post",
+					data: { "totOdrAmt"  	: rsp.paid_amount,
+							"crudGbCd"		: crudGbCd,
+							"odrGbCd"		: odrGbCd,
+							"payGbCd"		: payGbCd,
+							"seq"			: seq,
+					         "mbNo"			: mbNo,
+					         "gdsCd"  		: gdsCd,
+					         "gdsPrice"		: gdsPrice,
+					         "agreeTerm"	: agreeTerm,
+					         "deliverCost"  : deliverCost,
+					         "instalCost"  	: instalCost,
+					         "asCondition" 	: asCondition,
+					         "odrQty"  		: odrQty
+						 },
+					success : function(){
+						//location.href = "/rental/Appli/lg/detail/odr";
+					}
+
+				});
+		        
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+
+		    alert(msg);
+		});
+
+	});
 	
 	
 </script>
@@ -840,7 +928,6 @@ input::-moz-focus-inner { border: 0; }
 								</div>
 								<!-- 모달 끝 -->
 							</form>
-							<form>
 								<!-- 결제하기 모달 -->
 								<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
 									<div class="modal-dialog" role="document">
@@ -877,27 +964,26 @@ input::-moz-focus-inner { border: 0; }
 												<div class="row" style="border:0px solid orange;">
 													<h3><label>&nbsp;&nbsp;결제정보</label></h3>
 													<label class="radio-inline">
-												  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1">무통장입금
+												  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="90">무통장입금
 													</label>
 													<label class="radio-inline">
-												  		<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">카카오페이
+												  		<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="10">카카오페이
 													</label>
 												</div>
 												<div class="form-group" id="realTotPriceTxtCls">
-											    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly" onfocus="this.blur(); value="${list1.gdsPrice }">
+											    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
 											    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
-											    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원"/></h2>
+											    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
 												</div>
 											    <div class="modal-footer">
-											    	<button type="submit" id="questSubmit" class="btn btn-danger">결제하기</button>
+											    	<button type="button" id="realSubmit" class="btn btn-danger">결제하기</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 											    </div>
 									    	</div>
 										</div>
 							    	</div>
 								</div>
-								<!-- 모달 끝 -->							
-							</form>
+								<!-- 모달 끝 -->					
 						</div>
 					</c:forEach>
 					</div>

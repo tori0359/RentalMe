@@ -521,4 +521,32 @@
 					,#{agreeTerm}
 		)
 	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 결제(상품주문) -->
+	<insert id="gdsOdrRegister" statementType="CALLABLE">
+		{
+			call SP_ODR100(
+							#{crudGbCd, 		mode=IN,		jdbcType=VARCHAR}
+							,#{odrGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{payGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{mbNo,			mode=IN,		jdbcType=VARCHAR}
+							,#{totOdrAmt,		mode=IN,		jdbcType=INTEGER}
+			)
+		}
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 결제(상품주문 상세) -->
+	<insert id="gdsOdrDetailRegister" statementType="CALLABLE">
+		{
+			call SP_ODR110(
+							#{crudGbCd, 		mode=IN,		jdbcType=VARCHAR}
+							,#{odrGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{seq,				mode=IN,		jdbcType=VARCHAR}
+							,#{gdsCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{gdsPrice,		mode=IN,		jdbcType=INTEGER}
+							,#{agreeTerm,		mode=IN,		jdbcType=VARCHAR}
+							,#{odrQty,			mode=IN,		jdbcType=INTEGER}
+			)
+		}
+	</insert>
 </mapper>

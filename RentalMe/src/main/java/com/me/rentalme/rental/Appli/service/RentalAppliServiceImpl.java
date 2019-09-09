@@ -95,5 +95,15 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		return rentalAppliDao.rentalGdsCart(rentalAppliVo);
 	}
 
+	@Override
+	public int rentalGdsOdr(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGdsOdr(rentalAppliVo);
+	}
+
+	@Override
+	public int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.rentalGdsDetailOdr(rentalAppliVo);
+	}
+
 
 }
