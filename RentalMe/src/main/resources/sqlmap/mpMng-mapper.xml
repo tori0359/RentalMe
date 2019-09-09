@@ -75,6 +75,7 @@
 		SELECT *
 		FROM tb_decl100
 		ORDER BY CHG_DT DESC
+		LIMIT #{startListNum}, #{listSize}
 	</select>
 	<update id="changeDeclSts">
 		UPDATE tb_decl100

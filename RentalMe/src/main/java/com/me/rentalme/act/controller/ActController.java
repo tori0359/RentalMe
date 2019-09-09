@@ -1,5 +1,6 @@
 package com.me.rentalme.act.controller;
 
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -27,11 +28,11 @@ import com.me.rentalme.act.service.ActService;
 @Controller
 @RequestMapping("/act")
 public class ActController {
+
 	Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Inject
 	ActService actService;
-	
 	
 	/**
 	* 이벤트 경매 리스트
@@ -95,6 +96,22 @@ public class ActController {
 	* @author 황인준
 	* @exception 
 	*/
+	///////////////////////// 이벤트 경매 현장 전
+	@RequestMapping(value="/ac", method=RequestMethod.GET)
+	public String getActDei(HttpSession session) {
+		log.info("index...");
+		System.out.println(session.getId()+">>>"+session.getAttributeNames());
+		return "act/actDetail";
+	}
+	
+	///////////////////////// 이벤트 경매 관리자
+	@RequestMapping(value="/admin", method=RequestMethod.GET)
+	public String getActNow(HttpSession session) {
+		log.info("index...");
+		System.out.println(session.getId()+">>>"+session.getAttributeNames());
+		return "act/actAdmin";
+	}
+	
 	
 	
 }
