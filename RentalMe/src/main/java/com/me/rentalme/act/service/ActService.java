@@ -10,7 +10,7 @@ import com.me.rentalme.model.entity.RentalAppliVo;
 
 public interface ActService {
 
-	List<ActVo> listAct() throws SQLException;
+	List<ActVo> mngListAct() throws SQLException;
 	int addAct100(ActVo actVo) throws SQLException;
 	int addAct300(ActVo actVo) throws SQLException;
 	List<ActVo> goodsList(String goodsNum) throws SQLException;

@@ -96,6 +96,9 @@
             #end{
             	margin-top:200px;
             }
+            #goodscode{
+            	margin-left:50px;
+            }
             
 </style>
 <script type="text/javascript">
@@ -202,9 +205,13 @@
 					url:'searchList',
 					type:'GET',
 					data:{'param':$("#goods option:selected").val()},
+					
 					success:function(result){
+
+						
 						var goodsList=result;
 						console.log(goodsList);
+						$('#goodsTable').find('tr').remove().end().append('<tr><td></td></tr>')
 						$.each(goodsList,function(index,goods){
 							$('#goodsTable').append('<tr><td>'+goods.gdsCd+'</td></tr>');
 						});
@@ -268,30 +275,14 @@
 		                        </select><br>
 					       <div><button id="modalBtn" >검색</button></div>
 				      </div>
+				    <label id="goodscode">상품코드</label>
 				      <div id="left2">
-				      <label>상품코드</label>
 				      		<table id="goodsTable">
 				      			<tr>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
+				      				<td>--상품--</td>
 				      			</tr>
-				      			<tr><td>1</td></tr>
-				      			<tr><td>2</td></tr>
-				      			<tr><td>3</td></tr>
-				      			<tr><td>4</td></tr>
 				      		</table>
 				      </div>
-				      
-						       
-					      <%--  <table id="goodsTable">
-					       		<c:forEach items="${elist}" var="bean">
-					       		<tr>
-					       			<td>${bean.gdsCd}</td>
-					       		</tr>
-					       		</c:forEach>
-					       </table> --%>
 				      <div class="modal-footer" id="end">
 				        <button type="button" class="btn btn-default">선택</button>
 				        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -387,7 +378,6 @@
 			</form>
 </div>
         </table>
-        <button id="hihi">안녕</button>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

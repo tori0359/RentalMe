@@ -66,11 +66,11 @@ public class MngActController {
 		
 		/////
 		///////
-		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.listAct());
+		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
 		mav.addObject("actList", actService.actList() );
-		mav.addObject("actList", actService.listAct());
-		System.out.println(actService.listAct());		
-		System.out.println(actService.listAct());		
+		mav.addObject("actList", actService.mngListAct());
+		System.out.println(actService.mngListAct());		
+		System.out.println(actService.mngListAct());		
 		
 		mav.setViewName("/mp/manager/mngActList");
 		
