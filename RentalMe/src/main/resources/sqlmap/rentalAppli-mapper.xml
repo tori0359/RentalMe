@@ -505,20 +505,44 @@
 				) VALUES (
 				    #{mbNo}
 					,#{gdsCd}
-					,(SELECT	/* 장바구니 일련번호 조회 */
-							LPAD(CONCAT(A.CNT),3,'0') AS CART_SEQ
-						FROM
-							(		
-								SELECT
-									 COUNT(*)+1 AS CNT 
-								FROM TB_CART100		/* 장바구니 */
-								WHERE MB_NO = #{mbNo}
-								AND GDS_CD = #{gdsCd} 
-						) A
+					,(	
+						SELECT	/* 장바구니 일련번호 조회 */
+							 LPAD((COALESCE(MAX(A.CART_SEQ),0)+1),3,'0') AS CART_SEQ 
+						FROM TB_CART100 A 	/* 장바구니 */
+						WHERE A.MB_NO = #{mbNo} 
+						AND A.GDS_CD = #{gdsCd}
 					)
 					,#{gdsPrice}
 					,#{odrQty}
 					,#{agreeTerm}
 		)
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 결제(상품주문) -->
+	<insert id="gdsOdrRegister" statementType="CALLABLE">
+		{
+			call SP_ODR100(
+							#{crudGbCd, 		mode=IN,		jdbcType=VARCHAR}
+							,#{odrGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{payGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{mbNo,			mode=IN,		jdbcType=VARCHAR}
+							,#{totOdrAmt,		mode=IN,		jdbcType=INTEGER}
+			)
+		}
+	</insert>
+	
+	<!-- 렌탈 상품 리스트 상세 결제(상품주문 상세) -->
+	<insert id="gdsOdrDetailRegister" statementType="CALLABLE">
+		{
+			call SP_ODR110(
+							#{crudGbCd, 		mode=IN,		jdbcType=VARCHAR}
+							,#{odrGbCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{seq,				mode=IN,		jdbcType=VARCHAR}
+							,#{gdsCd,			mode=IN,		jdbcType=VARCHAR}
+							,#{gdsPrice,		mode=IN,		jdbcType=INTEGER}
+							,#{agreeTerm,		mode=IN,		jdbcType=VARCHAR}
+							,#{odrQty,			mode=IN,		jdbcType=INTEGER}
+			)
+		}
 	</insert>
 </mapper>

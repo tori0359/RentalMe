@@ -60,6 +60,7 @@ public class RentalAppliVo {
 	
 	/* 리턴코드 */
 	private String rtnCd;				// 리턴결과값코드
+	private String rtnMsg;				// 리턴메시지
 	
 	private String homeCd;				// 홈 링크코드
 	
@@ -74,6 +75,13 @@ public class RentalAppliVo {
 	/* 장바구니 */
 	private String mbNo;				// 회원번호
 	private int odrQty;					// 주문수량
+	
+	/* 결제하기 */
+	private int totOdrAmt;				// 토탈주문금
+	private String crudGbCd;			// CRUD구분코드
+	private String odrGbCd;				// 주문구분코드
+	private String payGbCd;				// 결제구분코드
+	private String seq;					// 일련번호
 	
 	public String getGdsCd() {
 		return gdsCd;
@@ -412,6 +420,45 @@ public class RentalAppliVo {
 	public void setOdrQty(int odrQty) {
 		this.odrQty = odrQty;
 	}
+
+	public int getTotOdrAmt() {
+		return totOdrAmt;
+	}
+
+	public void setTotOdrAmt(int totOdrAmt) {
+		this.totOdrAmt = totOdrAmt;
+	}
+	public String getCrudGbCd() {
+		return crudGbCd;
+	}
+	public void setCrudGbCd(String crudGbCd) {
+		this.crudGbCd = crudGbCd;
+	}
+	public String getOdrGbCd() {
+		return odrGbCd;
+	}
+	public void setOdrGbCd(String odrGbCd) {
+		this.odrGbCd = odrGbCd;
+	}
+	public String getPayGbCd() {
+		return payGbCd;
+	}
+	public void setPayGbCd(String payGbCd) {
+		this.payGbCd = payGbCd;
+	}
+	public String getRtnMsg() {
+		return rtnMsg;
+	}
+	public void setRtnMsg(String rtnMsg) {
+		this.rtnMsg = rtnMsg;
+	}
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+
 
 	
 }
