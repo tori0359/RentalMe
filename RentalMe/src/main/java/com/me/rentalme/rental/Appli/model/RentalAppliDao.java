@@ -20,6 +20,9 @@ public interface RentalAppliDao {
 	int rentalGdsQuest(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalReview(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalReviewCnt(RentalAppliVo rentalAppliVo);
+	int rentalGdsCart(RentalAppliVo rentalAppliVo);
+	int rentalGdsOdr(RentalAppliVo rentalAppliVo);
+	int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo);
 	
 
 }

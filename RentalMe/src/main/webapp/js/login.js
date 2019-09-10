@@ -3,7 +3,19 @@
     $('#id_email_find').hide();
     $('#pw_email_find').hide();
     $('#find_pw_modal').hide();
-    $('#id_find_btn').prop('disabled', true);
+    
+	$('#email-danger').hide();
+	$('#empty-danger').hide();
+	$('#noEmail-danger').hide();
+	
+	//로그인에서 아이디/비밀번호 찾기 버튼을 눌렀을 때 값 초기화
+	$('#right_align a').click(function(){
+		$('#id_pw_find input').val('');
+		
+		$('#email-danger').hide();
+		$('#empty-danger').hide();
+		$('#noEmail-danger').hide();
+	});
     
     $('#pw_tab').click(function(){
         $('#id_tab').prop('disabled', false);
@@ -12,6 +24,8 @@
         $('#pw_find_btn').show();
         $('#id_find').hide();
         $('#pw_find').show();
+        
+        $('#id_pw_find input').val('');
     });
     $('#id_tab').click(function(){
         $('#pw_tab').prop('disabled', false);
@@ -20,6 +34,8 @@
         $('#pw_find_btn').hide();
         $('#pw_find').hide();
         $('#id_find').show();
+        
+        $('#id_pw_find input').val('');
     });
     
     $('#find_cellphone').click(function(){
@@ -27,12 +43,24 @@
         $('#id_cellphone_find').show();
         $('#pw_cellphone_find').show();
         $('#pw_email_find').hide();
+        
+        $('#email-danger').hide();
+        $('#empty-danger').hide();
+        $('#noEmail-danger').hide();
+        
+        $('#id_pw_find input').val('');
     });
     $('#find_email').click(function(){
         $('#id_email_find').show();
         $('#id_cellphone_find').hide();
         $('#pw_cellphone_find').hide();
         $('#pw_email_find').show();
+        
+        $('#email-danger').hide();
+        $('#empty-danger').hide();
+        $('#noEmail-danger').hide();
+        
+        $('#id_pw_find input').val('');
     });                
     
     /*회원가입 - 경로이동*/
@@ -70,17 +98,94 @@
         $('id_cellphone_find').val('');
     });
     
-    //등록된 이메일로 아이디 찾기 (이메일 정규식 체크) 
+    
+    //1. 등록된 핸드폰으로 아이디 찾기
+    var setHp = '';
+    $('#inputHp').focus(function(){
+    	
+    }).blur(function(){
+    	
+    	$('#id_find_btn').click(function(){
+    		//부모창의 스크롤을 막는다.
+	    	$("html, body").addClass("not_scroll");
+	    	
+	    	//모달에서 등록한 핸드폰으로 아이디 찾기에 입력한 핸드폰번호
+	    	setHp = $('#inputHp').val();
+	    	
+	    	$.ajax({
+	    		type : 'POST',
+	    		url  : 'hpFindId',
+	    		data : {'hp' : setHp},
+	    		dataType : 'json',
+	    		success: function(data) {
+	    			var infoList = data;
+	    			if($('#inputHp').val()!=""){
+		    			//1) 등록된 핸드폰이 있는 경우
+		    			if(infoList.length > 0){
+		            		//1. 계정정보 찾기 창을 닫는다.
+		            		$('#id_pw_find').modal('hide');
+		            		
+		            		//2. 아이디 찾기 결과 값 초기화
+		            		$('#find_id_body').empty();
+		            		
+		            		//3. 아이디 찾기 결과 모달 - json으로 받아온 데이터 바인딩
+		            		$.each(infoList, function(index, info){
+		            			$('#find_id_body').append('<div class="row">')
+		            							  .append(	'<div class="col-md-2"></div>')
+		            							  .append(	'<div class="col-md-4">아이디</div>')
+		            							  .append(	'<div class="userId col-md-4" id="userId">'+info.userId+'</div>')
+		            							  .append(	'<div class="col-md-2"></div>')
+		            							  .append('</div>')
+		            							  .append('<div class="row">')
+		            							  .append(	'<div class="col-md-2"></div>')
+		            							  .append(	'<div class="col-md-4">가입일자</div>')
+		            							  .append(	'<div class="col-md-4">'+info.joinDt+'</div>')
+		            							  .append(	'<div class="col-md-2"></div>')
+		            							  .append('</div>')
+		            							  .append('<div class="row">')
+		            							  .append(		'<div style="margin:3px 2px 3px 134px; width:200px height:50px;><a type="button" href="/login?userId='+info.userId+'" class="useId btn btn-primary">아이디 사용</a>')
+		            							  .append(		'<button type="button" id="'+info.userId+'" class="findPw btn btn-info">비밀번호 찾기</button></div>')
+		            							  .append('</div>');
+		            		});
+	
+		            		$('.col-md-4').css('text-align','center').css('border','1px solid black');
+		            		
+		            		//4. 아이디 찾기 결과 모달을 보여준다.
+		            		$('#find_id_modal').modal('show');
+		            		
+		            	}else{
+		            		//2) 등록된 핸드폰이 없을 경우 메시지를 보여준다.
+		            		alert('등록된 핸드폰이 없습니다.');
+		            		return false;
+		            	}
+	    			}
+	            	
+	                //아이디찾기 결과 모달이 닫히면 html 초기화
+	                $("#find_id_modal").on("hidden.bs.modal", function(){
+	                	$("#find_id_body").html("");
+	                	$("html, body").removeClass("not_scroll");
+	                	
+	                });
+	    			
+	    		},
+	    		error:function(request, status, error){
+        			alert("code="+request.status+", message="+request.responseText+", error="+error)
+        		}
+	    	});
+    	});
+    });
+    
+    
+    //2. 등록된 이메일로 아이디 찾기 (이메일 정규식 체크) 
     $('#inputEmail').focus(function(){
     	$('#email-danger').hide();
     	$('#empty-danger').hide();
     	$('#noEmail-danger').hide();
-    	$('#id_find_btn').prop('disabled', true);
+    	return false;
     }).blur(function(){
     	if($('#inputEmail').val()!=""){
     		if(regexEmail.test($('#inputEmail').val())){//이메일 정규식 체크에서 정상일경우 패스
     			$('#email-danger').hide();
-    			$('#id_find_btn').prop('disabled', false);
     			
     		    $('#id_find_btn').click(function(){
     		    	//부모창의 스크롤을 막는다.
@@ -141,7 +246,10 @@
     		                $("#find_id_modal").on("hidden.bs.modal", function(){
     		                	$("#find_id_body").html("");
     		                	$("html, body").removeClass("not_scroll");
+    		                	
     		                });
+    		                
+    		                
     		                
 
     		            },
@@ -186,7 +294,13 @@
         
         //4. 사용자아이디, 입력한 이메일 바인딩
         $('#pwUserId').val($(this).attr('id'));
-        $('#pwInputEmail').val(setEmail);
+        if($('#pwInputEmail').val() != null){
+        	$('#pwInputEmail').val(setEmail);
+        }
+        
+        if($('#pwInputHp').val() != null){
+        	$('#pwInputHp').val(setHp);        	
+        }
     });
     /* // 아이디찾기 결과 버튼 이벤트 */
     

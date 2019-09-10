@@ -15,9 +15,14 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<!-- 결제 api연동하기 (아임포트)-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+
 <style type="text/css">
 .content {
-	height: 30vh;
+	height: 100%;
 }
 .content-inner {
 	margin-left:200px;
@@ -170,6 +175,9 @@
 	background-image: url('/imgs/quest2.jpg');
 	height: 160px;
 	
+}.#myModalLabel2 {
+	height: 160px;
+	
 }
 #agree {
 	height:100px;
@@ -218,7 +226,28 @@
 #sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4 {
 	cursor:pointer;
 }
+#cartConfirm {
+	font-size: 15pt;
+	font-weight: bolder;
+	
+}
 /* --------- 제품 정보 끝 --------- */
+/* --------- 결제하기 모달 시작 --------- */
+#realTotPrice { 
+	width: 120px;
+	text-align: center;
+	vertical-align: middle;
+	color: white;
+}
+#realTotPriceTxt {
+	width: 570px;
+	text-align: center;
+}
+#realTotPriceTxt {
+	font-weight: bolder;
+    color: darkred;
+}
+/* --------- 결제하기 모달 끝 --------- */
 /* --------- BEST 영역 시작 --------- */
 /* List style */
 
@@ -267,6 +296,7 @@ input::-moz-focus-inner { border: 0; }
 .carousel-control.right, .carousel-control.left { background-color: rgba(0, 0, 0, 0); background-image: none; }
 
 /* --------- 상세 캐러셀 끝 ----------- */
+
 
 </style>
 <script type="text/javascript">
@@ -458,14 +488,22 @@ input::-moz-focus-inner { border: 0; }
 		vReview[${status.index}] = "${review.grade}";
 	</c:forEach>
 
-
 	var reviewStar0 = "☆☆☆☆☆";
 	var reviewStar1 = "★☆☆☆☆";
 	var reviewStar2 = "★★☆☆☆";
 	var reviewStar3 = "★★★☆☆";
 	var reviewStar4 = "★★★★☆";
 	var reviewStar5 = "★★★★★";
-		
+
+	var vRealGdsPrice = 0;		// 결제하기 최종상품가격
+	<c:forEach items="${list1}" var="list1">
+		vRealGdsPrice = "${list1.gdsPrice}";
+	</c:forEach>
+	var vRealOdrQty = 1;		// 결제하기 최종수량
+	var vRealTotGdsPrice;		// 결제하기 최종상품가격 * 최종수량
+
+	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
+	
 	/**************************/
 	/**** 전역변수 선언끝 *****/
 	/**************************/
@@ -474,34 +512,223 @@ input::-moz-focus-inner { border: 0; }
 	function chgAgreeTermBox() {
 		var gdsPriceTemp = vGdsPrice;
 		var boxSelect = document.getElementById("agreeTermBox");
+		var vBoxSelect = boxSelect.options[boxSelect.selectedIndex].value;		// 장바구니 모달 수량 변경
 		var boxValue = boxSelect.options[boxSelect.selectedIndex].value;
 		if(boxValue == 6) {
 			vGdsPriceTemp = gdsPriceTemp;
-			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);		// 장바구니 모달 가격 변경
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");		// 상세정보 가격 변경
+			$('#agreeTerm').val(vBoxSelect);		// 장바구니 모달 계약기간 변경
+			$('#realGdsPrice').val(vGdsPriceTemp);	// 결제 모달 가격 변경
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	// 결제 모달 가격 가짜 변경
+			$('#realAgreeTerm').val(vBoxSelect);	// 결제 모달 계약기간 변경
+			vRealGdsPrice = parseInt(realGdsPrice);
 		}
 		else if(boxValue == 12) {
 			vGdsPriceTemp = gdsPriceTemp;
-			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);	
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
 		}
 		else if(boxValue == 18) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));	
+			gdsPriceTemp = String((gdsPriceTemp*0.95));
 			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
 		} else if(boxValue == 24) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));	
+			gdsPriceTemp = String((gdsPriceTemp*0.95));
 			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
 		} else if(boxValue == 30) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
 		} else if(boxValue == 36) {
 			gdsPriceTemp = String((gdsPriceTemp*0.90));
 			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
 			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
 		}
 	}
 
+	// 수량 셀렉트박스 클릭
+	function selectOerQty() {
+		var sSelect = document.getElementById("selectOerQty");
+		var sSelectOdrQty = sSelect.options[sSelect.selectedIndex].value;
+		realOdrQty = sSelectOdrQty;
+		$('#odrQty').val(sSelectOdrQty);		// 장바구니 모달 변경 수량 변경
+		$('#realOdrQty').val(sSelectOdrQty);	// 결제 모달 변경 수량 변경
+		vRealOdrQty = sSelectOdrQty;
+	}
+
+	// 장바구니 클릭
+	function btnCart() {
+		var sUserId = "${loginUserId}";
+		// 세션체크
+		if((sUserId == "") || (sUserId == null)) {
+			location.href = "/login";
+		}
+	}
+
+	// 결제하기 클릭
+	function btnOdr() {
+		var sUserId = "${loginUserId}";
+		// 세션체크
+		if((sUserId == "") || (sUserId == null)) {
+			location.href = "/login";
+		} else {
+			if(vRealGdsPrice != 0) {
+				vRealTotPrice = vRealGdsPrice * vRealOdrQty;
+				$('#realTotPrice').val(vRealTotPrice);
+				$('#realTotPriceTxt').val((vRealTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			}
+		}
+	}
+
+	$(document).on("click", "#inlineRadio1", function(){
+		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+		$('#bank').show();
+		$('#bankInfo').show();
+	});
+
+	$(document).on("click", "#inlineRadio2", function(){
+		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+		$('#bank').hide();
+		$('#bankInfo').hide();
+	});
+
+	// 결제하기 모달 결제하기
+	$(document).on("click", "#realSubmit", function(){
+		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
+		var userId = "${loginUserId}";
+		var crudGbCd = "II";
+		var odrGbCd = "10";
+		var payGbCd = radioVal;
+		var seq	= "001";
+		var mbNo = "${sessionMbNo}";
+		var gdsCd = "";
+		var gdsPrice = $('#realGdsPrice').val();
+		var agreeTerm = $('#realAgreeTerm').val();
+		var deliverCost = "";
+		var instalCost = "";
+		var asCondition = "";
+		var odrQty = $('#realOdrQty').val();
+
+		<c:forEach items="${list1}" var="list1">
+			gdsCd = "${list1.gdsCd}";
+		 	deliverCost = "${list1.deliverCost}";
+		 	instalCost = "${list1.instalCost}";
+		 	asCondition = "${list1.asCondition}";
+		</c:forEach>
+
+		// 카드(카카오페이 결제)
+		if(payGbCd == 10) {
+			var IMP = window.IMP;
+			IMP.init('imp86711610');
+			
+			IMP.request_pay({
+			    pg : 'kakaopay',
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '렌탈미 렌탈상품 결제',
+			    amount : amount,
+			    buyer_name : userId
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        
+					$.ajax({
+						url: "/rental/Appli/lg/detail/odr",
+						type: "post",
+						data: { "totOdrAmt"  	: rsp.paid_amount,
+								"crudGbCd"		: crudGbCd,
+								"odrGbCd"		: odrGbCd,
+								"payGbCd"		: payGbCd,
+								"seq"			: seq,
+						         "mbNo"			: mbNo,
+						         "gdsCd"  		: gdsCd,
+						         "gdsPrice"		: gdsPrice,
+						         "agreeTerm"	: agreeTerm,
+						         "deliverCost"  : deliverCost,
+						         "instalCost"  	: instalCost,
+						         "asCondition" 	: asCondition,
+						         "odrQty"  		: odrQty
+							 },
+						success : function(){
+							//location.href = "/rental/Appli/lg/detail/odr";
+						}
+					});
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		
+		} else {
+			if(true) {
+				var msg = '주문이 접수되었습니다.';
+				$.ajax({
+					url: "/rental/Appli/lg/detail/odr",
+					type: "post",
+					data: { "totOdrAmt"  	: amount,
+							"crudGbCd"		: crudGbCd,
+							"odrGbCd"		: odrGbCd,
+							"payGbCd"		: payGbCd,
+							"seq"			: seq,
+					         "mbNo"			: mbNo,
+					         "gdsCd"  		: gdsCd,
+					         "gdsPrice"		: gdsPrice,
+					         "agreeTerm"	: agreeTerm,
+					         "deliverCost"  : deliverCost,
+					         "instalCost"  	: instalCost,
+					         "asCondition" 	: asCondition,
+					         "odrQty"  		: odrQty
+						 },
+					success : function(){
+						//location.href = "/rental/Appli/lg/detail/odr";
+					}
+				});
+			} else {
+				var msg = '주문에 실패하였습니다.';
+		        msg += '에러내용 : 무통장입금 주문에러 ERR 900';
+			}
+			alert(msg);
+		}
+
+	});
 	
 	
 </script>
@@ -620,17 +847,17 @@ input::-moz-focus-inner { border: 0; }
 								<h4>${list1.modelNm }</h4><h6><br></h6>
 								<h4>${list1.gdsCd }</h4><h6><br></h6>
 								<div class="box box-primary">
-									<select>
-										<option>&nbsp;1대&nbsp;&nbsp;</option>
-										<option>2대</option>
-										<option>3대</option>
-										<option>4대</option>
-										<option>5대</option>
-										<option>6대</option>
-										<option>7대</option>
-										<option>8대</option>
-										<option>9대</option>
-										<option>10대</option>
+									<select id="selectOerQty" onchange="selectOerQty()">
+										<option value=1>&nbsp;1대&nbsp;&nbsp;</option>
+										<option value=2>2대</option>
+										<option value=3>3대</option>
+										<option value=4>4대</option>
+										<option value=5>5대</option>
+										<option value=6>6대</option>
+										<option value=7>7대</option>
+										<option value=8>8대</option>
+										<option value=9>9대</option>
+										<option value=10>10대</option>
 									</select>
 								</div><br>
 							</div>
@@ -639,10 +866,10 @@ input::-moz-focus-inner { border: 0; }
 						       		<button style="width:150px;" id="charge_button1" type="button" class="btn btn-info" data-backdrop="static" data-toggle="modal"data-target="#myModal">상담예약</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success">장바구니</button>
+						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success" onclick="btnCart();" data-backdrop="static" data-toggle="modal"data-target="#myModal2">장바구니</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger">결제하기</button>
+						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger" onclick="btnOdr();" data-backdrop="static" data-toggle="modal"data-target="#myModal3">주문하기</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div><br>
 							<div class="row" style="border:0px solid orange;" align="center">
@@ -699,13 +926,100 @@ input::-moz-focus-inner { border: 0; }
 											</div>
 										    <div class="modal-footer">
 										    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
-												<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 										    </div>
 										</div>
 								    </div>
 								</div>
 								<!-- 모달 끝 -->
 							</form>
+							<form id="target" action="/rental/Appli/lg/detail/cart" method="post">
+								<!-- 장바구니 모달 -->
+								<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel2"></h4>
+										    </div>
+											<div class="modal-body">
+										    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
+										    	<input type="text" class="form-control" id="gdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
+										    	<input type="text" class="form-control" id="mbNo" name="mbNo" value="${sessionMbNo }" style="display: none;">
+										    	<input type="text" class="form-control" id="gdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;">
+										    	<input type="text" class="form-control" id="agreeTerm" name="agreeTerm" value="${list1.agreeTerm}" style="display: none;">
+										    	<input type="text" class="form-control" id="odrQty" name="odrQty" value="1" style="display: none;">
+											</div>
+											<div class="form-group">
+										    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;장바구니에 등록 하시겠습니까?</label>
+											</div>
+										    <div class="modal-footer">
+										    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+										    </div>
+										</div>
+								    </div>
+								</div>
+								<!-- 모달 끝 -->
+							</form>
+								<!-- 결제하기 모달 -->
+								<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel3"></h4>
+										    </div>
+											<div class="modal-body">
+											    <div class="row" style="border:0px solid orange;">
+				    								<h3><label for="realGdsNm">&nbsp;&nbsp;상품정보</label></h3>
+					    							<div id="detailNm" class="col-md-3" style="border:0px solid black;">
+												    	<h4><label for="realGdsNm">상품명</label></h4>
+												    	<h4><label for="realGdsPrice">렌탈가격(월)</label></h4>
+												    	<h4><label for="realAgreeTerm">계약기간</label></h4>
+												    	<h4><label for="realDeliverCost">배송</label></h4>
+												    	<h4><label for="realInstallCost">설치비</label></h4>
+												    	<h4><label for="realAsCondition">AS조건</label></h4>
+												    	<h4><label for="realOdrQty">수량</label></h4>
+													</div>
+													<div id="detailNm" class="col-md-9" style="border:0px solid black;">
+												    	<input type="text" class="form-control" id="realGdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
+														<input type="text" class="form-control" id="realGdsNm" name="gdsNm" value="${list1.gdsNm }"  >
+														<input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;" >
+														<fmt:setLocale value="ko_KR"></fmt:setLocale>
+														<input type="text" class="form-control" id="realGdsPrice2" name="gdsPrice2" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "  >
+														<input type="text" class="form-control" id="realAgreeTerm" name="agreeTerm" value="${list1.agreeTerm }"  >
+														<input type="text" class="form-control" id="realDeliverCost" name="deliverCost" value="${list1.deliverCost }"  >
+														<input type="text" class="form-control" id="realInstalCost" name="instalCost" value="${list1.instalCost }"  >
+														<input type="text" class="form-control" id="realAsCondition" name="asCondition" value="${list1.asCondition }"  >
+												    	<input type="text" class="form-control" id="realOdrQty" name="odrQty" value="1">
+													</div>
+												</div>
+												<div class="row" style="border:0px solid orange;">
+													<h3><label>&nbsp;&nbsp;결제정보</label></h3>
+													<label class="radio-inline">
+												  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="90">무통장입금
+													</label>
+													<label class="radio-inline">
+												  		<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="10">카카오페이
+													</label>
+													<h5><label id="bank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예금주명 : (주)렌탈미 &nbsp;&nbsp;&nbsp; 입금계좌번호 : 415015-92-928253(농협)</label></h5>
+													<h5><label id="bankInfo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 무통장입금은 주문하기 후 입금이 완료되어야 최종 주문확정처리 됩니다.</label></h5>
+												</div>
+												<div class="form-group" id="realTotPriceTxtCls">
+											    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
+											    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
+											    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
+												</div>
+											    <div class="modal-footer">
+											    	<button type="button" id="realSubmit" class="btn btn-danger">주문하기</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+											    </div>
+									    	</div>
+										</div>
+							    	</div>
+								</div>
+								<!-- 모달 끝 -->					
 						</div>
 					</c:forEach>
 					</div>
@@ -885,6 +1199,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ***************** -->		
 				</div>
 			</div>
+			<br><br>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
 	</div>
 

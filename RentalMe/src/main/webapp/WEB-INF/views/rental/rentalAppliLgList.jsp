@@ -1049,6 +1049,7 @@ input::-moz-focus-inner { border: 0; }
 				<!-- ************** -->
 			</div>
 		</div>
+		<br><br>
 		<jsp:include page=".././template/footer.jsp"></jsp:include>	
 	</div>
 </body>

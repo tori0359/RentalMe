@@ -35,23 +35,48 @@ public class FindController {
 	LoginFindService loginFindService; 
 	
 	/**
-	* 등록된 이메일로 아이디 찾기
+	* 등록된 핸드폰으로 아이디 찾기
 	* 
-	* @param  String email : 이메일주소
-	* @return String 
+	* @param  String hp : 핸드폰주소
+	* @return List 
 	* @author 황인준
 	* @exception
-	* 등록일자 : 2019-08-14 
+	* 등록일자 : 2019-09-09 
 	*/
 	
+	@RequestMapping(value = "/hpFindId", method = RequestMethod.POST)
+	public @ResponseBody List<UserVo> findHpId(@RequestParam("hp") String hp) {
+		log.debug("등록된 핸드폰으로 아이디 찾기 컨트롤러 ...");
+		
+		//수신동의 여부를 체크한다.
+		List<UserVo> infoList = loginFindService.checkHpYn(hp);
+		
+		for(UserVo info : infoList) {
+			System.out.println("사용자 아이디 : "+info.getUserId());
+			System.out.println("사용자 가입일자 : "+info.getJoinDt());
+		}
+
+		return infoList;
+	}
+	
+	/**
+	 * 등록된 이메일로 아이디 찾기
+	 * 
+	 * @param  String email : 이메일주소
+	 * @return List 
+	 * @author 황인준
+	 * @exception
+	 * 등록일자 : 2019-08-14 
+	 */
+	
 	@RequestMapping(value = "/emailFindId", method = RequestMethod.GET)
-	public @ResponseBody List<UserVo> findEmailId(@RequestParam("email") String email, Model model) {
+	public @ResponseBody List<UserVo> findEmailId(@RequestParam("email") String email) {
 		log.debug("등록된 이메일로 아이디 찾기 컨트롤러 ...");
 		
 		
 		//등록한 이메일로 사용자 정보를 가지고온다.
 		List<UserVo> infoList = loginFindService.getId(email);
-
+		
 		return infoList;
 		
 	}

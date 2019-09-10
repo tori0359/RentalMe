@@ -6,8 +6,8 @@
 <mapper namespace="join">
 	<insert id="insertOne" parameterType="com.me.rentalme.model.entity.UserVo">
 		 INSERT 
-		   INTO TB_USER100(USER_ID,PW,PW_ADJ_DT,HP,EMAIL,email_key,BIRTHDAY,GENDER_GB_CD,JOIN_DT,LEVEL_GB_CD,MB_NO,USER_NM,ADDR,ADDR_DETAIL,ZIP_CODE) 
-		 VALUES(#{userId},#{userPw},DATE_FORMAT(NOW(),'%Y%m%d'),#{hp},#{email},#{emailKey},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd}, #{mbNo},#{userNM},#{addr},#{addrDetail},#{zipCode})
+		   INTO TB_USER100(USER_ID,PW,PW_ADJ_DT,HP,EMAIL,email_key,BIRTHDAY,GENDER_GB_CD,JOIN_DT,LEVEL_GB_CD,MB_NO,USER_NM,ADDR,ADDR_DETAIL,ZIP_CODE,HP_YN,HP_KEY) 
+		 VALUES(#{userId},#{userPw},DATE_FORMAT(NOW(),'%Y%m%d'),#{hp},#{email},#{emailKey},#{birthDay},#{genderGbCd},DATE_FORMAT(NOW(),'%Y%m%d'),#{levelGbCd}, #{mbNo},#{userNM},#{addr},#{addrDetail},#{zipCode},#{hpYn},#{hpKey})
 	</insert>
 	<insert id="insertMemNoSeq">
 		INSERT

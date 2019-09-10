@@ -81,6 +81,26 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.selectList("rentalAppli.reviewRetriveCnt", rentalAppliVo);
 	}
 
+	/* 장바구니등록 */
+	public int rentalGdsCart(RentalAppliVo rentalAppliVo) {
+		System.out.println("getMbNo = " + rentalAppliVo.getMbNo());
+		System.out.println("getGdsCd = " + rentalAppliVo.getGdsCd());
+		System.out.println("getOdrQty = " + rentalAppliVo.getOdrQty());
+		System.out.println("getAgreeTerm = " + rentalAppliVo.getAgreeTerm());
+		
+		return sqlSession.insert("rentalAppli.gdsCartRegister", rentalAppliVo);
+	}
+
+	/* 상품결제(주문) */
+	public int rentalGdsOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrRegister", rentalAppliVo);
+	}
+
+	/* 상품결제(주문상세) */
+	public int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrDetailRegister", rentalAppliVo);
+	}
+
 
 
 }

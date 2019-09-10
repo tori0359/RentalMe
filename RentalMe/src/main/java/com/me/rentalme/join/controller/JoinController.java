@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.auth.service.HpAuthService;
@@ -106,7 +108,7 @@ public class JoinController {
 		
 		//회원번호 조회
 		joinService.getMemNo();
-		
+				
 		//회원가입
 		joinService.addInfo(userVo);
 		
@@ -148,10 +150,17 @@ public class JoinController {
 	* 등록일자 : 2019-09-05
 	*/	
 	@RequestMapping(value="/hpCodeSend", method = RequestMethod.POST)
-	public void sendHpCode(@RequestParam String hp) {
+	public void sendHpCode(@RequestParam String hp, HttpServletResponse res) {
 		//System.out.println("view에서 넘어온 핸드폰번호 : "+hp);
 		//핸드폰으로 인증 번호 보내기
+		
 		String key = hpAuthService.sendHp(hp);
+		
+		try {
+			res.getWriter().write(key);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

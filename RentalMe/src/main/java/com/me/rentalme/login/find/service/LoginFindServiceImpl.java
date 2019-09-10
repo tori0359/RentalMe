@@ -49,10 +49,8 @@ public class LoginFindServiceImpl implements LoginFindService {
 		List<UserVo> list = new ArrayList<UserVo>();
 		
 		if(result > 0) {	//아이디가 있으면
-			//System.out.println("리스트의 크기는(유)? : "+list.size());
-			return loginFindDao.getId(email);
+			return loginFindDao.getEmailFindId(email);
 		}else {				//아이디가 없으면
-			//System.out.println("리스트의 크기는?(무) : "+list.size());
 			return list;
 		}
 	}
@@ -106,6 +104,35 @@ public class LoginFindServiceImpl implements LoginFindService {
 		String email  = userVo.getEmail();
 		loginFindDao.updPw(userPw, userId, email);
 	}
+	
+	/**
+	* 등록된 핸드폰으로 아이디 찾기
+	* 
+	* @param  String hp : 입력한 핸드폰번호
+	* @return void 
+	* @author 황인준
+	* 등록일자 : 2019-09-09
+	*/
+	@Override
+	public List<UserVo> checkHpYn(String hp) {
+		log.debug("등록된 핸드폰으로 아이디 찾기 service");
+		
+		List<UserVo> userInfo = new ArrayList<UserVo>(); 
+		
+		//1. 핸드폰 동의여부를 체크한다.
+		int hpYnCnt = loginFindDao.selectHpYn(hp);
+		
+		//2. 입력한 핸드폰이 수신동의 했을 경우 아이디를 찾는다.
+		if(hpYnCnt > 0) {
+			//입력한 핸드폰이 수신동의 체크일 경우
+			userInfo = loginFindDao.getHpFindId(hp);
+			return userInfo;
+		}else {
+			//입력한 핸드폰이 수신동의가 미체크일경우 
+		}
+		return userInfo;
+	}
+	
 	
 	
 	

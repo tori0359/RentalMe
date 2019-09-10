@@ -27,7 +27,10 @@
 		</ul>
 		<div id="join_input">
 			<form name="frm" action="info" method="post">
+				<!-- 서버에서 받은 이메일 키 -->
 				<input type="hidden" id="emailCode" value=""/>
+				<!-- 서버에서 받은 핸드폰 키 -->
+				<input type="hidden" id="hpCode" value=""/>
 				<div>
 					<input type="text" class="form-control" id="id" name="userId"
 						placeholder="아이디">
@@ -53,10 +56,17 @@
 					<button type="button" class="form-cotrol btn btn-default" id="hpSend" name="hpSend">인증번호발송</button>
 				</div>
 				<div id="hp-danger">10~11자 숫자만 사용가능</div>
-				<div>
+				<div id="hpKeyDiv">
 					<input type="text" class="form-control" id="hpKey" name="hpKey"
 						placeholder="인증번호 입력">
 				</div>
+				<div id="hpCode-success">핸드폰 인증 완료</div>
+				<div id="hpCode-danger">핸드폰 인증 실패</div>
+				<div class = 'hpYnDiv'>
+					<input type="checkbox" id="hpYn" class="hpYn form-check-input" name="hpYn" value=""/>
+					<label for="hpYn" class="hpYnL form-check-label">동의</label>
+				</div>
+				
 				<div>
 					<input type="email" class="form-control" id="email" name="email"
 						placeholder="입력한 메일로 인증 메일을 발송합니다.">
