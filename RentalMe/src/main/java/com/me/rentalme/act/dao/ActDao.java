@@ -17,5 +17,6 @@ public interface ActDao {
 	int insertAct300(ActVo actVo) throws SQLException;
 	int insertAct100(ActVo actVo) throws SQLException;
 	List<ActVo> selectGoodsList(String goodsNum) throws SQLException;
+	//ActVo selectGoodsInfo(String goodsNum) throws SQLException;
 
 }

@@ -65,5 +65,11 @@ public class ActServiceImpl implements ActService{
       return actDao.selectMngActList();		
 	}
 
+	/*
+	 * @Override public ActVo goodsInfo(String goodsNum) throws SQLException {
+	 * 
+	 * return actDao.selectGoodsInfo(goodsNum); }
+	 */
+
 
 }

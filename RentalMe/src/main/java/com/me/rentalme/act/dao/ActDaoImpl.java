@@ -57,4 +57,9 @@ public class ActDaoImpl implements ActDao {
 		return sqlSession.selectList("actRental.goodsList",goodsNum);
 	}
 
+	/*
+	 * @Override public ActVo selectGoodsInfo(String goodsNum) throws SQLException {
+	 * 
+	 * return sqlSession.selectOne("actRental.goodsInfo", goodsNum); }
+	 */
 }
