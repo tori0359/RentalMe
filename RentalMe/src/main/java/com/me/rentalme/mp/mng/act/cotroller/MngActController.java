@@ -66,11 +66,11 @@ public class MngActController {
 		
 		/////
 		///////
-		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.listAct());
+		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
 		mav.addObject("actList", actService.actList() );
-		mav.addObject("actList", actService.listAct());
-		System.out.println(actService.listAct());		
-		System.out.println(actService.listAct());		
+		mav.addObject("actList", actService.mngListAct());
+		System.out.println(actService.mngListAct());		
+		System.out.println(actService.mngListAct());		
 		
 		mav.setViewName("/mp/manager/mngActList");
 		
@@ -306,11 +306,30 @@ public class MngActController {
 			array.add(i, goodsList.get(i).toString());
 		}
 		for(int i=0;i<goodsList.size();i++) {
-		System.out.println("전체 리스트"+goodsList.get(i).getGdsCd());
+			System.out.println("전체 리스트"+goodsList.get(i).getGdsCd());
+			StringBuilder act=new StringBuilder(goodsList.get(i).getGdsCd());
+			act.setCharAt(0,'3');
+			act.setCharAt(1,'0');
+			System.out.println(act.toString());
+		
+			System.out.println();
+			System.out.println("전체 리스트 수정"+goodsList.get(i).getGdsCd());
+			System.out.println("전체 리스트"+goodsList.get(i).getGdsNm());
 		}
 		System.out.println("hi"+array.get(0).toString());
 		return goodsList;
 	}
+	
+	/*
+	 * @RequestMapping(value="selectGoods", method=RequestMethod.GET)
+	 * 
+	 * @ResponseBody public ActVo selectGoods(@RequestParam("param") String
+	 * goodsNum) throws SQLException{ ActVo actVo=new ActVo();
+	 * actVo.setGdsCd(goodsNum);
+	 * 
+	 * System.out.println(actVo.getGdsCd()); ActVo
+	 * goodsInfo=actService.goodsInfo(actVo.getGdsCd()); return goodsInfo; }
+	 */
 
 
 

@@ -18,7 +18,7 @@ public class ActDaoImpl implements ActDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<ActVo> selectActList() throws SQLException {
+	public List<ActVo> selectMngActList() throws SQLException {
 		System.out.println("sql문으로 리스트뽑기");
 		return sqlSession.selectList("actRental.actList");
 	}
@@ -57,4 +57,9 @@ public class ActDaoImpl implements ActDao {
 		return sqlSession.selectList("actRental.goodsList",goodsNum);
 	}
 
+	/*
+	 * @Override public ActVo selectGoodsInfo(String goodsNum) throws SQLException {
+	 * 
+	 * return sqlSession.selectOne("actRental.goodsInfo", goodsNum); }
+	 */
 }

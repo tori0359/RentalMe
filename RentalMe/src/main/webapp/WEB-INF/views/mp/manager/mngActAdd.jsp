@@ -96,10 +96,32 @@
             #end{
             	margin-top:200px;
             }
+            #goodscode{
+            	margin-left:50px;
+            }
+            #goodsBtn{
+            	background:white;
+            	text-align:left;
+            }
+            #goodsTable{
+            	text-align:left;
+            }
+            #listname{
+            	cursor:pointer;
+            	color:black;
+            }
+            #listname:hover{
+            	text-decoration: none;
+            	font-weight: bolder;
+            }
+            
+            
             
 </style>
 <script type="text/javascript">
-	     
+
+
+
 	      function goodsSelect(classifi){
 	         $.ajax({
 	            url:'searchCode',
@@ -193,30 +215,133 @@
 	         });
 	      }
 
+	      /* function selectGoods(String num){
+				console.log("hihi"+num);
+		  }  */
 
+	 		/* function selectGoods(gooo){
+				console.log('dd'+gooo);
+		 	}   */
+
+					 	var gdsCdarr=new Array();			//경매상품번호 배열
+					  	var gdsNmarr=new Array();			//상품명 배열
+					 	var brandNmarr=new Array();			//브랜드명 배열
+					 	var modelNmarr=new Array();			//모델명 배열
+					 	//var gdsCdDetailarr=new Array(); 	//상세상품번호 배열
+					 	
+						var gdsCd; 			//상품 번호
+						var gdsNm; 			//상품명
+						var brandNm;		//브랜드명
+						var modelNm;		//모델명
+						var gdsCdDetail 	//상세코드
+
+						var test;
+						
+						String.prototype.replaceAt=function(index, character) {
+						    return this.substr(0, index) + character + this.substr(index+character.length);
+						}
 
 	      window.onload=function(){
-	         $('#modalBtn').click(function(){
+					$('#cancel').click(function(){
+							window.history.back();
+						})
+						
+		         $('#modalBtn').click(function(){
 		         
 			       $.ajax({
 					url:'searchList',
 					type:'GET',
 					data:{'param':$("#goods option:selected").val()},
+					
 					success:function(result){
+
+						
 						var goodsList=result;
-						console.log(goodsList);
+						
+						//console.log(goodsList);
+						$('#goodsTable').find('tr').remove().end().append('<tr><td></td></tr>')
 						$.each(goodsList,function(index,goods){
-							$('#goodsTable').append('<tr><td>'+goods.gdsCd+'</td></tr>');
+							/* console.log('브랜드'+goods.brandNm);
+							console.log('모델넘버'+goods.modelNm);
+							console.log('상품넘버'+goods.gdsNm);
+							console.log('상품코드'+goods.gdsCd); */
+							
+						 	/* if(gooo.equals("")){
+								$('#goodsTable').append('<tr><td>해당 상품이 없습니다</td></tr>');
+							}   */ 
+							
+							gdsCdarr.push(goods.gdsCd);//상세상품번호 push
+							gdsNmarr.push(goods.gdsNm);//상품명 push
+							modelNmarr.push(goods.modelNm);//모델명 push
+							brandNmarr.push(goods.brandNm);//브랜드명 push
+							//console.log(gdsCdarr[gdsCdarr.length-1]);
+							console.log('한 사이클');
+
+
+							gdsCdDetail=gdsCdarr[gdsCdarr.length-1];
+							gdsNm=gdsNmarr[gdsNmarr.length-1];
+							brandNm=brandNmarr[brandNmarr.length-1];
+							modelNm=modelNmarr[modelNmarr.length-1];
+
+							console.log(gdsCdDetail);
+							console.log(gdsNm);
+							
+
+							
+							/* gdsCdDetail=goods.gdsCd;
+							gdsNm=goods.gdsNm;
+							brandNm=goods.brandNm;
+							modelNm=goods.modelNm; */
+							
+							gdsCd=gdsCdDetail.replaceAt(0,"3");
+							gdsCdarr.push(gdsCd);
+							console.log('상품번호:'+gdsCdarr[gdsCdarr.length-1]);
+							gdsCd=gdsCdarr[gdsCdarr.length-1];
+							//console.log("바뀐 숫자"+gdsCd);
+							
+							//console.log(gdsCdarr);
+							//gdsCdarr.push(goods.gdsCd);
+							/* console.log('-----start-----');
+							console.log(gdsNm);
+							console.log(brandNm);
+							console.log(modelNm);
+							console.log('----end-----'); */
+							
+							$('#goodsTable').append('<tr><td style="text-align:left;"><input type="hidden" id="goodsBtn" style="border:none" name="gdsCd" value='+gdsCd+'><input type="hidden" id="goodsBtn" style="border:none" name="gdsNm" value='+gdsNm+'><input type="hidden" id="goodsBtn" style="border:none" name="brandNm" value='+brandNm+'><input type="hidden" id="goodsBtn" style="border:none" name="modelNm" value='+modelNm+'><a id="listname" onclick="selectGoods(\''+gdsCd+'\',\''+modelNm+'\',\''+gdsNm+'\',\''+brandNm+'\',\''+gdsCdDetail+'\');">'+gdsNm+'</a></td></tr>');
+							
 						});
 					},
 					erro:function(jqXHR,testStatus,errorThrown){
 						alert('오류가 발생했습니다');
 					}
 			     }); 
-		  });   
+				   
+		  });
 
+			
+			$('#selectOne').click(function(){
+				$('#myModal').modal('hide');
 
-		  }
+			})
+
+		  } 
+
+		 function selectGoods(gdsCd,modelNm,gdsNm,brandNm,gdsCdDetail){
+			
+					 
+			
+
+						/* console.log('select'+gdsNm);
+						console.log('select'+modelNm);
+						console.log('select'+brandNm); */ 
+						
+						document.getElementById('gdsCd').setAttribute('value',gdsCd);
+					 	document.getElementById('gdsNm').setAttribute('value',gdsNm);
+						document.getElementById('gdsCdDetail').setAttribute('value',gdsCdDetail)
+						document.getElementById('brandNm').setAttribute('value',brandNm); 
+						document.getElementById('modelNm').setAttribute('value',modelNm); 
+		}
+		
 
 </script>
 <script type="text/javascript"
@@ -229,7 +354,7 @@
 		<h2>경매상품등록</h2>
         <table class="table" id="daeContent">
             <tr>
-                <td width="100px"><label>작 성 자</label></td>
+                <td width="120px"><label>작 성 자</label></td>
                 <td>관 리 자</td>
             </tr>
             <tr>
@@ -268,33 +393,16 @@
 		                        </select><br>
 					       <div><button id="modalBtn" >검색</button></div>
 				      </div>
+				    <label id="goodscode">상품코드</label>
 				      <div id="left2">
-				      <label>상품코드</label>
 				      		<table id="goodsTable">
 				      			<tr>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
-				      				<td>안녕</td>
+				      				<td>--상품--</td>
 				      			</tr>
-				      			<tr><td>1</td></tr>
-				      			<tr><td>2</td></tr>
-				      			<tr><td>3</td></tr>
-				      			<tr><td>4</td></tr>
 				      		</table>
 				      </div>
-				      
-						       
-					      <%--  <table id="goodsTable">
-					       		<c:forEach items="${elist}" var="bean">
-					       		<tr>
-					       			<td>${bean.gdsCd}</td>
-					       		</tr>
-					       		</c:forEach>
-					       </table> --%>
 				      <div class="modal-footer" id="end">
-				        <button type="button" class="btn btn-default">선택</button>
-				        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-default" id="selectOne">확인</button>
 				      </div>
 				      </div>
 				    </div>
@@ -313,18 +421,20 @@
             	</select>
             	</td>
             </tr>
-            <tr>
-                <td><label>상품코드</label></td>
-                <td><input type="text" name="gdsCd" id=""/>&nbsp&nbsp모델명&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm"/></td>
-            </tr>
-            <tr>
-            	<td><label>상품명</label></td>
-                <td><input type="text" name="gdsNm" id="">&nbsp&nbsp브랜드명&nbsp&nbsp<input type="text" name="brandNm"></td>
-            </tr>
-            <tr>
-            	<td><label>시작가</label></td>
-            	<td><input type="text" name="gdsStPrice"/>&nbsp&nbsp상세코드&nbsp&nbsp<input type="text" name="gdsCdDetail"/></td>
-            </tr>
+            <div id="hihi">
+	            <tr>
+	                <td><label>상품코드</label></td>
+	                <td><input type="text" name="gdsCd" id="gdsCd"/>&nbsp&nbsp모델명&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm" id="modelNm"/></td>
+	            </tr>
+	            <tr>
+	            	<td><label>상품명</label></td>
+	                <td><input type="text" name="gdsNm" id="gdsNm">&nbsp&nbsp브랜드명&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
+	            </tr>
+	            <tr>
+	            	<td><label>시작가</label></td>
+	            	<td><input type="text" name="gdsStPrice" id="gdsStPrice"/>&nbsp&nbsp상세코드&nbsp&nbsp<input type="text" id="gdsCdDetail" name="gdsCdDetail"/></td>
+	            </tr>
+            </div>
             <tr>
             	<td><label>응찰단위</label></td>
             	<td>
@@ -387,7 +497,6 @@
 			</form>
 </div>
         </table>
-        <button id="hihi">안녕</button>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

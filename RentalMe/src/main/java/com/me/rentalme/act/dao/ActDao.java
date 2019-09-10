@@ -13,9 +13,10 @@ public interface ActDao {
 	//경매 종료된 리스트
 	List<RentalAppliVo> selectActEnd() throws SQLException;
 	
-	List<ActVo> selectActList() throws SQLException;
+	List<ActVo> selectMngActList() throws SQLException;
 	int insertAct300(ActVo actVo) throws SQLException;
 	int insertAct100(ActVo actVo) throws SQLException;
 	List<ActVo> selectGoodsList(String goodsNum) throws SQLException;
+	//ActVo selectGoodsInfo(String goodsNum) throws SQLException;
 
 }
