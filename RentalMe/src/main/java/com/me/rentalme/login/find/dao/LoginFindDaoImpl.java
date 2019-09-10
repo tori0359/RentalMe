@@ -52,9 +52,9 @@ public class LoginFindDaoImpl implements LoginFindDao {
 	* @exception
 	*/	
 	@Override
-	public List<UserVo> getId(String email) {
+	public List<UserVo> getEmailFindId (String email) {
 		log.debug("이메일로 아이디 찾기 Dao");
-		
+
 		return sqlSession.selectList("loginFind.getId", email);
 	}
 	
@@ -97,6 +97,34 @@ public class LoginFindDaoImpl implements LoginFindDao {
 		
 		return sqlSession.update("loginFind.changePw", map);
 		
+	}
+
+	/**
+	* 등록된 핸드폰의 수신여부 체크 
+	* 
+	* @param  String hp
+	* @return int - 수신동의된 아이디 갯수
+	* @author 황인준
+	* 등록일자 : 2019-09-09
+	*/
+	@Override
+	public int selectHpYn(String hp) {
+	return sqlSession.selectOne("loginFind.hpYnCheck", hp);
+	}
+	
+	/**
+	 * 등록된 핸드폰으로 아이디 찾기 
+	 * 
+	 * @param  String hp : 입력한 핸드폰번호
+	 * @return List
+	 * @author 황인준
+	 * 등록일자 : 2019-09-09
+	 */
+	@Override
+	public List<UserVo> getHpFindId(String hp) {
+		//js가 꼬여서 두개로 분리해서 개발 중 추후 하나의 메서드에 분기쳐서 변경할 예정 
+		//두개로 분리할 경우 - (코드가 꼬여서 중복으로 실행되는 버그가 있음)
+		return sqlSession.selectList("loginFind.hpFindId", hp);
 	}
 
 }

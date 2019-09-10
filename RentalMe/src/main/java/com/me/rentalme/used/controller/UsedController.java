@@ -103,6 +103,11 @@ public class UsedController {
 	}
 	
 	public void sessionFunc(HttpSession session,UsedVo bean) throws SQLException {
+		session.removeAttribute("gdsMclassCd");
+		session.removeAttribute("align");
+		session.removeAttribute("modelNm");
+		session.removeAttribute("page");
+		session.removeAttribute("listsize");
 		session.setAttribute("gdsMclassCd", bean.getGdsMclassCd());
 		session.setAttribute("align", bean.getAlign());
 		session.setAttribute("modelNm", bean.getModelNm());

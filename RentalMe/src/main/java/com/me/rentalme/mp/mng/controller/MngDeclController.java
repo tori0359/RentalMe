@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
@@ -20,7 +21,7 @@ import com.me.rentalme.mp.mng.service.MngService;
 public class MngDeclController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
-	
+	String path= "/mp/mng/decl";
 	@Inject
 	MngService mngService;
 	
@@ -35,9 +36,17 @@ public class MngDeclController {
 	* @exception 
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getMngDeclList(Model model) throws SQLException {
-		model.addAttribute("alist", mngService.selectDecl());
+	public String getMngDeclList(Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
+		int totalListCnt = mngService.getUsedListCnt(); 
 		
+		Paging usedPage = new Paging();
+		
+		usedPage.pageInfo(page, range, totalListCnt);
+		
+		model.addAttribute("path", path);
+		model.addAttribute("paging", usedPage);
+		model.addAttribute("alist", mngService.selectDecl(usedPage));
 		return "mp/manager/mngDeclList";
 	}
 	

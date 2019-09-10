@@ -83,7 +83,7 @@
 					</div>
 					<div id="id_find">
 						<div id="id_cellphone_find">
-							<input type="text" placeholder="번호입력" />
+							<input type="text" placeholder="(-)은 제외하고 입력" name="inputHp" id="inputHp" />
 						</div>
 						<div id="id_email_find">
 							<input type="text" placeholder="메일주소입력" name="inputEmail" id="inputEmail" />
@@ -106,7 +106,7 @@
 							<input type="text" placeholder="아이디"  name="userId" id="pwUserId"/>
 						</div>
 						<div id="pw_cellphone_find">
-							<input type="text" placeholder="핸드폰번호입력" name=hp id="pwHp"/>
+							<input type="text" placeholder="핸드폰번호입력" name=hp id="pwInputHp"/>
 						</div>
 						<div id="pw_email_find">
 							<input type="text" placeholder="메일주소입력" name="email" id="pwInputEmail"/>

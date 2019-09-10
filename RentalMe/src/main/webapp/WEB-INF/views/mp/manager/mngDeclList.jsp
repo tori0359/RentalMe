@@ -10,6 +10,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMng.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 </head>
 <body>
    <div class="titlediv">
@@ -71,6 +72,33 @@
 	</tbody>
 	</table>
 	</form>
+	<div id="paginationBox">
+
+		<ul class="pagination">
+
+			<c:if test="${paging.prev}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="prevEvent('${path}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+						&lt;
+					</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> ">
+					<a class="page-link" href="#" onClick="pageChange('${path}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+						${idx} 
+					</a>
+				</li>
+			</c:forEach>
+			<c:if test="${paging.next}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="nextEvent('${path}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+						&gt;
+					</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

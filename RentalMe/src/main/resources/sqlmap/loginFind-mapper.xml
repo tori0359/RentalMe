@@ -32,4 +32,19 @@
 		 where user_id = #{userId}
 		   and email = #{email}
 	</update>
+	<select id="hpYnCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(HP_YN) AS hpYnCnt
+		  FROM TB_USER100
+		 WHERE HP = #{hp}
+		   AND HP_YN = 'Y'
+	</select>
+	<select id="hpFindId" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT USER_ID AS userId
+		     , JOIN_DT AS joinDt
+		  FROM TB_USER100
+		 WHERE HP=#{hp}
+		   AND HP_YN = 'Y'
+		 ORDER
+		    BY JOIN_DT DESC		
+	</select>
 </mapper>

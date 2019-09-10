@@ -14,5 +14,8 @@ public interface LoginFindService {
 
 	//비밀번호 변경
 	void modifyPw(UserVo userVo);
+
+	//입력한 핸드폰으로 아이디 찾기.
+	List<UserVo> checkHpYn(String hp);
 	
 }

@@ -76,8 +76,8 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
-	public List<DeclVo> selectDecl() throws SQLException {
-		return mngDao.selectDecl();								//전체 신고 리스트
+	public List<DeclVo> selectDecl(Paging usedPage) throws SQLException {
+		return mngDao.selectDecl(usedPage);								//전체 신고 리스트
 	}
 
 	@Override
