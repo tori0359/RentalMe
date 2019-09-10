@@ -236,6 +236,8 @@ public class RentalAppliController {
 			@RequestParam("gdsPrice")int gdsPrice, @RequestParam("agreeTerm")String agreeTerm, @RequestParam("deliverCost")String deliverCost, @RequestParam("instalCost")String instalCost, 
 			@RequestParam("asCondition")String asCondition, @RequestParam("odrQty")int odrQty, RentalAppliVo rentalAppliVo, Model model, HttpSession session ) {
 		
+		System.out.println("∑ª≈ª∞·¡¶ ø‘¥…∞°");
+		
 		/* RequestParam text */
 //		System.out.println(userId);
 //		System.out.println(mbNo);
@@ -262,7 +264,7 @@ public class RentalAppliController {
 		System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
 		System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
 		System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
-		System.out.println("seq				= " +rentalAppliVo.getSeq());
+		System.out.println("seq		= " +rentalAppliVo.getSeq());
 		System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
 		System.out.println("gdsCd 			= " +rentalAppliVo.getGdsCd());
 		System.out.println("gdsPrice 		= " +rentalAppliVo.getGdsPrice());

@@ -505,16 +505,12 @@
 				) VALUES (
 				    #{mbNo}
 					,#{gdsCd}
-					,(SELECT	/* 장바구니 일련번호 조회 */
-							LPAD(CONCAT(A.CNT),3,'0') AS CART_SEQ
-						FROM
-							(		
-								SELECT
-									 COUNT(*)+1 AS CNT 
-								FROM TB_CART100		/* 장바구니 */
-								WHERE MB_NO = #{mbNo}
-								AND GDS_CD = #{gdsCd} 
-						) A
+					,(	
+						SELECT	/* 장바구니 일련번호 조회 */
+							 LPAD((COALESCE(MAX(A.CART_SEQ),0)+1),3,'0') AS CART_SEQ 
+						FROM TB_CART100 A 	/* 장바구니 */
+						WHERE A.MB_NO = #{mbNo} 
+						AND A.GDS_CD = #{gdsCd}
 					)
 					,#{gdsPrice}
 					,#{odrQty}

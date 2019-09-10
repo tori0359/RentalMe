@@ -619,10 +619,14 @@ input::-moz-focus-inner { border: 0; }
 
 	$(document).on("click", "#inlineRadio1", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+		$('#bank').show();
+		$('#bankInfo').show();
 	});
 
 	$(document).on("click", "#inlineRadio2", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
+		$('#bank').hide();
+		$('#bankInfo').hide();
 	});
 
 	// 결제하기 모달 결제하기
@@ -648,25 +652,58 @@ input::-moz-focus-inner { border: 0; }
 		 	instalCost = "${list1.instalCost}";
 		 	asCondition = "${list1.asCondition}";
 		</c:forEach>
+
+		// 카드(카카오페이 결제)
+		if(payGbCd == 10) {
+			var IMP = window.IMP;
+			IMP.init('imp86711610');
+			
+			IMP.request_pay({
+			    pg : 'kakaopay',
+			    pay_method : 'vbank',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '렌탈미 렌탈상품 결제',
+			    amount : amount,
+			    buyer_name : userId
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        
+					$.ajax({
+						url: "/rental/Appli/lg/detail/odr",
+						type: "post",
+						data: { "totOdrAmt"  	: rsp.paid_amount,
+								"crudGbCd"		: crudGbCd,
+								"odrGbCd"		: odrGbCd,
+								"payGbCd"		: payGbCd,
+								"seq"			: seq,
+						         "mbNo"			: mbNo,
+						         "gdsCd"  		: gdsCd,
+						         "gdsPrice"		: gdsPrice,
+						         "agreeTerm"	: agreeTerm,
+						         "deliverCost"  : deliverCost,
+						         "instalCost"  	: instalCost,
+						         "asCondition" 	: asCondition,
+						         "odrQty"  		: odrQty
+							 },
+						success : function(){
+							//location.href = "/rental/Appli/lg/detail/odr";
+						}
+					});
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
 		
-		var IMP = window.IMP;
-		IMP.init('imp86711610');
-		
-		IMP.request_pay({
-		    pg : 'kakaopay',
-		    pay_method : 'vbank',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '렌탈미 렌탈상품 결제',
-		    amount : amount,
-		    buyer_name : userId
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        
+		} else {
+			if(true) {
+				var msg = '주문이 접수되었습니다.';
 				$.ajax({
 					url: "/rental/Appli/lg/detail/odr",
 					type: "post",
-					data: { "totOdrAmt"  	: rsp.paid_amount,
+					data: { "totOdrAmt"  	: amount,
 							"crudGbCd"		: crudGbCd,
 							"odrGbCd"		: odrGbCd,
 							"payGbCd"		: payGbCd,
@@ -683,16 +720,13 @@ input::-moz-focus-inner { border: 0; }
 					success : function(){
 						//location.href = "/rental/Appli/lg/detail/odr";
 					}
-
 				});
-		        
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-
-		    alert(msg);
-		});
+			} else {
+				var msg = '주문에 실패하였습니다.';
+		        msg += '에러내용 : 무통장입금 주문에러 ERR 900';
+			}
+			alert(msg);
+		}
 
 	});
 	
@@ -835,7 +869,7 @@ input::-moz-focus-inner { border: 0; }
 						       		<button style="width:150px;" id="charge_button2" type="submit" class="btn btn-success" onclick="btnCart();" data-backdrop="static" data-toggle="modal"data-target="#myModal2">장바구니</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 						       	<div class="chargediv">
-						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger" onclick="btnOdr();" data-backdrop="static" data-toggle="modal"data-target="#myModal3">결제하기</button>
+						       		<button style="width:150px;" id="charge_button3" type="submit" class="btn btn-danger" onclick="btnOdr();" data-backdrop="static" data-toggle="modal"data-target="#myModal3">주문하기</button>
 						       	</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							</div><br>
 							<div class="row" style="border:0px solid orange;" align="center">
@@ -938,7 +972,7 @@ input::-moz-focus-inner { border: 0; }
 										    </div>
 											<div class="modal-body">
 											    <div class="row" style="border:0px solid orange;">
-				    								<h3><label for="realGdsNm">&nbsp;&nbsp;상품정보/옵션정보</label></h3>
+				    								<h3><label for="realGdsNm">&nbsp;&nbsp;상품정보</label></h3>
 					    							<div id="detailNm" class="col-md-3" style="border:0px solid black;">
 												    	<h4><label for="realGdsNm">상품명</label></h4>
 												    	<h4><label for="realGdsPrice">렌탈가격(월)</label></h4>
@@ -969,6 +1003,8 @@ input::-moz-focus-inner { border: 0; }
 													<label class="radio-inline">
 												  		<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="10">카카오페이
 													</label>
+													<h5><label id="bank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예금주명 : (주)렌탈미 &nbsp;&nbsp;&nbsp; 입금계좌번호 : 415015-92-928253(농협)</label></h5>
+													<h5><label id="bankInfo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 무통장입금은 주문하기 후 입금이 완료되어야 최종 주문확정처리 됩니다.</label></h5>
 												</div>
 												<div class="form-group" id="realTotPriceTxtCls">
 											    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
@@ -976,7 +1012,7 @@ input::-moz-focus-inner { border: 0; }
 											    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
 												</div>
 											    <div class="modal-footer">
-											    	<button type="button" id="realSubmit" class="btn btn-danger">결제하기</button>
+											    	<button type="button" id="realSubmit" class="btn btn-danger">주문하기</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 											    </div>
 									    	</div>
