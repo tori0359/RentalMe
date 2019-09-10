@@ -4,10 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="actRental"> 
   	<select id="actList" resultType="com.me.rentalme.model.entity.ActVo"> 
-  		SELECT A.GDS_CD,GDS_NM, A.REG_DT, A.ACT_ED_TIME,A.ACT_STS_CD FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD=B.GDS_CD ORDER BY REG_DT DESC
+  		SELECT A.GDS_CD,GDS_NM, A.REG_DT, A.ACT_ED_TIME,A.ACT_STS_CD FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD_DETAIL=B.GDS_CD ORDER BY REG_DT DESC
   	</select>
   	<select id="goodsList" resultType="com.me.rentalme.model.entity.ActVo">
-  		SELECT  GDS_CD FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}
+  		SELECT  GDS_NM,GDS_CD,MODEL_NM,BRAND_NM FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}
+  	</select>
+  	<select id="goodsInfo" resultType="com.me.rentalme.model.entity.ActVo">
+  		SELECT GDS_CD,GDS_NM,MODEL_NM,BRAND_NM FROM TB_GDS100 WHERE GDS_CD=#{goodsNum}
   	</select>
   	<insert id="actAdd300"  parameterType="com.me.rentalme.model.entity.ActVo">
   		INSERT INTO TB_GDS300(GDS_CD,GDS_ST_PRICE,UNIT_PRICE,ACT_ST_TIME,ACT_ED_TIME,CONTENT,GDS_CD_DETAIL,IMG1,IMG2,IMG3,IMG4,REG_DT) 

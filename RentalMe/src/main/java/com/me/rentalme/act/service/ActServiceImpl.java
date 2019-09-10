@@ -60,10 +60,16 @@ public class ActServiceImpl implements ActService{
 	}
 
 	@Override
-	public List<ActVo> listAct() throws SQLException {
+	public List<ActVo> mngListAct() throws SQLException {
       System.out.println("actlistdao·Î ¤¡¤¡");
-      return actDao.selectActList();		
+      return actDao.selectMngActList();		
 	}
+
+	/*
+	 * @Override public ActVo goodsInfo(String goodsNum) throws SQLException {
+	 * 
+	 * return actDao.selectGoodsInfo(goodsNum); }
+	 */
 
 
 }
