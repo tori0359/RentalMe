@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.rental.Appli.model.RentalAppliDao;
 
@@ -103,6 +104,35 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 	@Override
 	public int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo) {
 		return rentalAppliDao.rentalGdsDetailOdr(rentalAppliVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> rentalGdsTotCnt(RentalAppliVo rentalAppliVo, String sortGbCd) {
+		if(sortGbCd.equals("1")) {
+			// ·»Å» Á¤·Ä ÀÎ±â¼ø : 1
+			rentalAppliVo.setSortGbCd("1");
+			return rentalAppliDao.rentalGdsTotCntList2(rentalAppliVo);
+		} else if(sortGbCd.equals("2")) {
+			// ·»Å» Á¤·Ä ÃÖ½Å¼ø : 2
+			rentalAppliVo.setSortGbCd("2");
+			return rentalAppliDao.rentalGdsTotCntList(rentalAppliVo);
+		} else if(sortGbCd.equals("3")) {
+			// ·»Å» Á¤·Ä ³·Àº°¡°Ý¼ø : 3
+			rentalAppliVo.setSortGbCd("3");
+			return rentalAppliDao.rentalGdsTotCntList(rentalAppliVo);
+		} else if(sortGbCd.equals("4")) {
+			// ·»Å» Á¤·Ä ³ôÀº°¡°Ý¼ø : 4
+			rentalAppliVo.setSortGbCd("4");
+			return rentalAppliDao.rentalGdsTotCntList(rentalAppliVo);
+		} else if(sortGbCd.equals("5")) {
+			// ·»Å» Á¤·Ä ÆÇ¸Å·®¼ø : 5
+			rentalAppliVo.setSortGbCd("5");
+			return rentalAppliDao.rentalGdsTotCntList2(rentalAppliVo);
+		} else {
+			// ·»Å» Á¤·Ä ¸®ºä¸¹Àº¼ø : 6
+			rentalAppliVo.setSortGbCd("6");
+			return rentalAppliDao.rentalGdsTotCntList2(rentalAppliVo);
+		}
 	}
 
 

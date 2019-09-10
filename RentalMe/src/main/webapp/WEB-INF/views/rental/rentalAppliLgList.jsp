@@ -15,6 +15,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 <style type="text/css">
 .content {
 	height: 100%;
@@ -204,6 +205,11 @@ li.col-sm-3:hover {
 }
 
 /* ------ 하단 정렬 끝------- */
+#paginationBox {
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+}
 
 /* Control box */
 .control-box {
@@ -1043,6 +1049,37 @@ input::-moz-focus-inner { border: 0; }
 						<!-- /.col-sm-12 -->
 					</div>
 					<!-- /.row -->
+					<!-- **************** -->
+					<!-- 페에징 처리 시작 -->
+					<!-- **************** -->
+					<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
+					<!-- **************** -->
+					<!-- 페에징 처리 끝   -->
+					<!-- **************** -->
 				</div>
 				<!-- ************** -->
 				<!-- 리스트 영역 끝 -->

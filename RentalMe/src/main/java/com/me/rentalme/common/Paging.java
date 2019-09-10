@@ -9,7 +9,7 @@ package com.me.rentalme.common;
 */
 public class Paging {
 
-	private int 	listSize 		= 10; 		//목록   갯수
+	private int 	listSize 		= 20; 		//목록   갯수
 	private int 	rangeSize 		= 5;		//페이지 범위
 	private int 	page;						//현재   페이지
 	private int 	range;						//현재   페이지범위
