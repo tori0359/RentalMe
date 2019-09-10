@@ -2,6 +2,7 @@ package com.me.rentalme.rental.Appli.service;
 
 import java.util.List;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 
@@ -12,7 +13,7 @@ public interface RentalAppliService {
 	List<RentalAppliVo> rentalMenu(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalOption(RentalAppliVo rentalAppliVo, String option);
 	List<RentalAppliVo> rentalBest(RentalAppliVo rentalAppliVo);
-	List<RentalAppliVo> rentalGds(RentalAppliVo rentalAppliVo, String sortGbCd);
+	List<RentalAppliVo> rentalGds(RentalAppliVo rentalAppliVo, String sortGbCd );
 	
 	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsDetail(RentalAppliVo rentalAppliVo);
@@ -22,6 +23,7 @@ public interface RentalAppliService {
 	int rentalGdsCart(RentalAppliVo rentalAppliVo);
 	int rentalGdsOdr(RentalAppliVo rentalAppliVo);
 	int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsTotCnt(RentalAppliVo rentalAppliVo, String sort);
 	
 	
 	

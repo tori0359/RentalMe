@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 
@@ -44,12 +45,12 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	}
 
 	/* »óÇ° 2,3,4*/
-	public List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo) {
+	public List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo ) {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive", rentalAppliVo);
 	}
 
 	/* »óÇ° 1,5,6 */
-	public List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo) {
+	public List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo ) {
 		return sqlSession.selectList("rentalAppli.gdsListRetrive2", rentalAppliVo);
 	}
 
@@ -100,6 +101,17 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 	public int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo) {
 		return sqlSession.insert("rentalAppli.gdsOdrDetailRegister", rentalAppliVo);
 	}
+
+	/* »óÇ° ÃÑ°¹¼ö 2,3,4*/
+	public List<RentalAppliVo> rentalGdsTotCntList(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gdsListTotCntRetrive", rentalAppliVo);
+	}
+	
+	/* »óÇ° ÃÑ°¹¼ö 2,3,4*/
+	public List<RentalAppliVo> rentalGdsTotCntList2(RentalAppliVo rentalAppliVo) {
+		return sqlSession.selectList("rentalAppli.gdsListTotCntRetrive2", rentalAppliVo);
+	}
+
 
 
 

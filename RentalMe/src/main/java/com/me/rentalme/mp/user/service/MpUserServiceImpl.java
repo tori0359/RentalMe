@@ -6,11 +6,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.login.service.LoginService;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -24,6 +26,8 @@ public class MpUserServiceImpl implements MpUserService{
 	@Inject
 	MpUserDao mpUserDao;
 	
+	@Inject
+	LoginService loginService;
 	
 	//주문내역 리스트
 	@Override
@@ -51,8 +55,8 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//장바구니 선택삭제
 	@Override
-	public void deleteCart(String gdsCd) throws SQLException {
-		mpUserDao.deleteCart(gdsCd);
+	public void deleteCart(String gdsCd, String mbNo, String cartSeq) throws SQLException {
+		mpUserDao.deleteCart(gdsCd,mbNo,cartSeq);
 	}
 
 	
@@ -66,9 +70,9 @@ public class MpUserServiceImpl implements MpUserService{
 	
 	//찜한상품 삭제
 	@Override
-	public void deleteWish(String usedGdsNo) throws SQLException {
+	public void deleteWish(String usedGdsNo,String mbNo) throws SQLException {
 		
-		mpUserDao.deleteWish(usedGdsNo);
+		mpUserDao.deleteWish(usedGdsNo,mbNo);
 	}
 
 	//예치금 리스트
@@ -142,6 +146,45 @@ public class MpUserServiceImpl implements MpUserService{
 	@Override
 	public List<CallVo> AuctList(String mbNo) throws SQLException {
 		return mpUserDao.selectAuct(mbNo);
+	}
+
+	@Override
+	public UserVo getInfo(String userId) throws SQLException {
+		log.debug("로그인된 아이디의 비밀번호찾기...");
+		return mpUserDao.selectPw(userId);
+	}
+
+	//
+	@Override
+	public String checkPw(String userId, String userPw) throws SQLException {
+		log.debug("비밀번호 DB랑 확인");
+		
+		//DB저장된 정보
+		UserVo userVo = loginService.getId(userId); 
+		String targetPw = userVo.getUserPw();
+		String msg = "";
+		
+		//입력한 비밀번호와 타겟비밀번호가 같은지 체크
+		if(BCrypt.checkpw(userPw, targetPw)) {
+			msg = "equals";
+		}else {
+			msg = "not equals";
+		}
+		
+		return msg;
+	}
+	
+	@Override
+	public int changePw(String userId, String userPw) {
+		
+		//비밀번호 암호화
+		String hashPw = BCrypt.hashpw(userPw, BCrypt.gensalt());
+		
+		int result = mpUserDao.updPw(userId, hashPw);
+		
+		System.out.println("service로 넘어온 값 : "+result);
+		
+		return result;
 	}
 
 

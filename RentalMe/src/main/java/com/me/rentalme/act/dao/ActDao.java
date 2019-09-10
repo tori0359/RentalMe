@@ -19,4 +19,10 @@ public interface ActDao {
 	List<ActVo> selectGoodsList(String goodsNum) throws SQLException;
 	//ActVo selectGoodsInfo(String goodsNum) throws SQLException;
 
+	//경매 상품 상세페이지
+	List<RentalAppliVo> selectActDetail(RentalAppliVo rentalAppliVo,String gdsCdDetail) throws SQLException;
+
+	//경매 상품 상세페이지2
+	List<ActVo> selectActDetail2(String gdsCdDetail);
+
 }

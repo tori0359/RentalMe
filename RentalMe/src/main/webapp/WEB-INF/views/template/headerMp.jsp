@@ -6,11 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-
-      #wrap{
+    html,
+    body {
+		    margin:0;
+		    padding:0;
+		    height:100%;
+	    
+	 }
+  /*     #wrap{
             min-height:100%;
             position:relative;
-         }
+            border:1px solid red;
+         } */
          
       .contentDiv{
          padding-bottom: 200px;
@@ -88,7 +95,6 @@
 </head>
 <body>
 <div id="wrap">
-<div class="contentDiv">
    <div id="mp" class="row">
       <div style="margin-right:0" class="mpdiv col-md-2 col-md-offset-1">
        <table class="mpTable">
@@ -119,9 +125,7 @@
            <tr>
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="/used/store/${loginMbNo }">나의 중고상점</a></td>
            </tr>
-           <tr>
-                <td class="text-center"><a href="/mp/wish">찜한상품</a></td>
-           </tr>
+
        </table>
       <table style="margin-top:30px; " class="mpTable">
            <thead>
@@ -139,9 +143,7 @@
                 <th style="color:white;"class="text-center">나의활동</th>
            </tr>
            </thead>
-           <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">신고</a></td>
-           </tr>
+
            <tr>
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mp/quest">1:1문의</a></td>
            </tr>

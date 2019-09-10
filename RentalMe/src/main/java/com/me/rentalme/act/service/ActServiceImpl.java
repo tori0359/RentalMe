@@ -72,4 +72,16 @@ public class ActServiceImpl implements ActService{
 	 */
 
 
+	//경매 상품 상세페이지 (RentalAppliVo에서 가져옴)
+	@Override
+	public List<RentalAppliVo> actDetail(RentalAppliVo rentalAppliVo, String gdsCdDetail) throws SQLException {
+		return actDao.selectActDetail(rentalAppliVo, gdsCdDetail);
+	}
+
+	//경매 상품 상세페이지2 (ActVo에서 가져옴)
+	@Override
+	public Object actDetailAuction(String gdsCdDetail) {
+		return actDao.selectActDetail2(gdsCdDetail);
+	}
+
 }
