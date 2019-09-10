@@ -2,34 +2,37 @@ package com.me.rentalme.model.entity;
 
 import java.sql.Date;
 
-public class ActVo {   
-   private String gdsCd; //상품코드
-   private int gdsStPrice; //상품 시작가격
-   private int unitPrice;   //응찰단위가격
-   private String actStTime;   //경매시작시간
-   private String actEdTime;   //경매종료시간
-   private String actReTime; //경매남은시간
-   private String content; //내용
-   private String gdsCdDetail;  //상품코드 상세
-   private String currentPrice; //현재 경매가
-   private String GdsLclassCd; //상품대분류코드
-   private String GdsMclassCd; //상품중분류코드
-   private String GdsSclassCd; //상품소분류코드
-   private String actStsCd;  //경매 상태코드
-   private String gdsNm;    //상품명
-   private String brandNm;    //브랜드명
-   private String modelNm;    //모델명
-   private String gdsGbCd;    //상품구분코드
-   private String gdsStsCd; //상품상태코드
-   private String delYn;    //삭제여부
-   private String img1;     // 이미지1
-   private String img2;     // 이미지2
-   private String img3;     // 이미지3
-   private String img4;     // 이미지4
+
+public class ActVo {
+   
+   private String gdsCd; 		 //상품코드
+   private int gdsStPrice;		 //상품 시작가격
+   private int unitPrice;  		 //응찰단위가격
+   private String actStTime;   	 //경매시작시간
+   private String actEdTime;   	 //경매종료시간
+   private String actReTime; 	 //경매남은시간
+   private String content; 	 	 //내용
+   private String gdsCdDetail;   //상품코드 상세
+   private String currentPrice;  //현재 경매가
+   private String GdsLclassCd; 	 //상품대분류코드
+   private String GdsMclassCd;   //상품중분류코드
+   private String GdsSclassCd;   //상품소분류코드
+   private String actStsCd;      //경매 상태코드
+   private String gdsNm;   	 	 //상품명
+   private String brandNm;  	 //브랜드명
+   private String modelNm;   	 //모델명
+   private String gdsGbCd;   	 //상품구분코드
+   private String gdsStsCd;		 //상품상태코드
+   private String delYn;   	 	 //삭제여부
+   private String img1;     	 // 이미지1
+   private String img2;     	 // 이미지2
+   private String img3;     	 // 이미지3
+   private String img4;     	 // 이미지4
    private String chgId;  
    private Date cghDt;
-   private String regId;  //작성아이디
-   private Date regDt;      //등록날짜
+   private String regId;  	 	 //작성아이디
+   private Date regDt;      	 //등록날짜
+   
    public String getGdsCd() {
       return gdsCd;
    }

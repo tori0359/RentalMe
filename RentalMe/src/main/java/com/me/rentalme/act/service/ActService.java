@@ -20,5 +20,12 @@ public interface ActService {
 	
 	List<RentalAppliVo> actList() throws SQLException;
 
+
 	List<RentalAppliVo>  actEndList() throws SQLException;
+
+	List<RentalAppliVo> actDetail(RentalAppliVo rentalAppliVo, String gdsCdDetail) throws SQLException;
+
+	Object actDetailAuction(String gdsCdDetail);
+
+
 }

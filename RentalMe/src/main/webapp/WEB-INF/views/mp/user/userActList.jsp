@@ -44,7 +44,7 @@
        			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.odrQty}</td>
-       			<td>${bean.agreeTem}개월</td>
+       			<td>${bean.agreeTerm}개월</td>
        			<td><fmt:formatNumber pattern="#,###.##">${bean.gdsPrice}</fmt:formatNumber> 원
        			</td>
        		</tr>

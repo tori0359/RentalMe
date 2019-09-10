@@ -122,5 +122,4 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.checkLoginSessionKey(value);
 	}
 
-
 }

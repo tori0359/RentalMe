@@ -26,6 +26,7 @@
 
 	    .ordtable>thead>tr>th{
         	text-align:center;
+        	font-family: "nanumB";
         }
         .ordtable>thead>tr>th:nth-child(1){
         	text-align:left;
@@ -35,6 +36,7 @@
         	vertical-align: middle;
         	text-align: center;
         	display: table-cell;
+        	font-family: "nanumB";
         }
         .ordtable>tbody>tr>td:nth-child(1),
         .ordtable>tbody>tr>td:nth-child(2){
@@ -124,6 +126,7 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
+<div style="height:100%;">
 	<div>
 	<div class="titlediv">
        <p id="title2">장바구니</p>
@@ -147,15 +150,17 @@
 		  
 		  if(confirm_val) {
 		   var checkArr = new Array();
+		   var checkSeq = new Array();
 		   
 		   $("input[class='chBox']:checked").each(function(){
 		    checkArr.push($(this).attr("data-cartNum"));
+		    checkSeq.push($(this).attr("data-cartSeq"));
 		   });
 		    
 		   $.ajax({
 		    url : "/mp/deleteCart",
 		    type : "post",
-		    data : { chbox : checkArr },
+		    data : { chbox : checkArr, chseq:checkSeq },
 		    success : function(){
 		     location.href = "/mp/cart";
 		    }
@@ -177,7 +182,7 @@
    		 <c:set var="sumPrice" value="0"/>
        	<c:forEach items="${alist}" var="bean">
        		<tr>  
-       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}">
+       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}" data-cartSeq="${bean.cartSeq }">
        			</td>
        			<td>
        				<a style="text-decoration:none; color:black;"href="#">
@@ -185,7 +190,7 @@
        				</a>
        			</td>
        			<td><p class="tdtext">${bean.odrQty}</p></td>
-       			<td><p class="tdtext">${bean.agreeTem}개월</p></td>
+       			<td><p class="tdtext">${bean.agreeTerm}개월</p></td>
        			<td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
        			</p></td>
        		</tr>
@@ -203,6 +208,7 @@
 			<button type="button" class="delete_btn1 btn">계속 쇼핑하기</button>
 			<button type="button" class="delete_btn2 btn">주문하기</button>
 		</div>
+</div>
       
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

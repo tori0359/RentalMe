@@ -12,7 +12,7 @@ import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 @Repository
-public class ActDaoImpl implements ActDao {
+public class ActDaoImpl implements ActDao{
 
 	@Inject
 	SqlSession sqlSession;
@@ -35,20 +35,31 @@ public class ActDaoImpl implements ActDao {
 		return sqlSession.insert("actRental.actAdd", actVo);
 	}
 	
-	//지영
-	
 	//경매 진행중 리스트
-	   @Override
-	   public List<RentalAppliVo> selectActRun() throws SQLException {
-	      return sqlSession.selectList("act.selectActRun");
-	   }
+	@Override
+	public List<RentalAppliVo> selectActRun() throws SQLException {
+		return sqlSession.selectList("act.selectActRun");
+	}
 
-	   //경매 종료된 리스트
-	   @Override
-	   public List<RentalAppliVo> selectActEnd() throws SQLException {
-	      return sqlSession.selectList("act.selectActEnd");
-	   }
+	//경매 종료된 리스트
+	@Override
+	public List<RentalAppliVo> selectActEnd() throws SQLException {
+		return sqlSession.selectList("act.selectActEnd");
+	}
+	
+	//경매 상세 페이지
+	@Override
+	public List<RentalAppliVo> selectActDetail(RentalAppliVo rentalAppliVo,String gdsCdDetail) throws SQLException {
+		
+		return sqlSession.selectList("act.selectActDetail",gdsCdDetail);
+	}
 
+	//경매 상세 페이지2
+	@Override
+	public List<ActVo> selectActDetail2(String gdsCdDetail) {
+		return sqlSession.selectList("act.selectActDetail2",gdsCdDetail);
+	}
+	
 	@Override
 	public List<ActVo> selectGoodsList(String goodsNum) throws SQLException {
 		System.out.println("상품코드번호ㄱㄱ");
@@ -57,9 +68,4 @@ public class ActDaoImpl implements ActDao {
 		return sqlSession.selectList("actRental.goodsList",goodsNum);
 	}
 
-	/*
-	 * @Override public ActVo selectGoodsInfo(String goodsNum) throws SQLException {
-	 * 
-	 * return sqlSession.selectOne("actRental.goodsInfo", goodsNum); }
-	 */
 }
