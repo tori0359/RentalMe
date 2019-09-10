@@ -2,6 +2,7 @@ package com.me.rentalme.rental.Appli.model;
 
 import java.util.List;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 
@@ -12,8 +13,8 @@ public interface RentalAppliDao {
 	List<RentalAppliVo> rentalMenuList(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalOptionList(RentalAppliVo rentalAppliVo, String option);
 	List<RentalAppliVo> rentalBestList(RentalAppliVo rentalAppliVo);
-	List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo);
-	List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsList(RentalAppliVo rentalAppliVo );
+	List<RentalAppliVo> rentalGdsList2(RentalAppliVo rentalAppliVo );
 	
 	List<RentalAppliVo> rentalGrade(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsListDetail(RentalAppliVo rentalAppliVo);
@@ -23,6 +24,8 @@ public interface RentalAppliDao {
 	int rentalGdsCart(RentalAppliVo rentalAppliVo);
 	int rentalGdsOdr(RentalAppliVo rentalAppliVo);
 	int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsTotCntList2(RentalAppliVo rentalAppliVo);
+	List<RentalAppliVo> rentalGdsTotCntList(RentalAppliVo rentalAppliVo);
 	
 
 }

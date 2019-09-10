@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.rental.Appli.service.RentalAppliService;
 import com.mysql.fabric.Response;
@@ -34,6 +35,7 @@ import com.mysql.fabric.Response;
 public class RentalAppliController {
 
 	Logger log = LoggerFactory.getLogger(getClass());
+	//String pathPaging= "/rental/Appli/lg";
 	
 	@Inject
 	RentalAppliService rentalAppliService; 
@@ -50,8 +52,11 @@ public class RentalAppliController {
 	public String getLgList(@PathVariable("menu") String gdsSclassCd, @RequestParam(value="brandNm", required = false, defaultValue="") List<String> brandNm
 			, @RequestParam(value="sts", required = false, defaultValue = "") String sts, @RequestParam(value="search", required = false, defaultValue = "") String search 
 			, @RequestParam(value="searchPriceSt", required = false, defaultValue = ""  ) String searchPriceSt, @RequestParam(value="searchPriceEd", required = false, defaultValue = "") String searchPriceEd
-			, @RequestParam(value="sort", required = false, defaultValue = "1") String sort
-			, RentalAppliVo rentalAppliVo, Model model, HttpSession session) {
+			, @RequestParam(value="sort", required = false, defaultValue = "1") String sort, RentalAppliVo rentalAppliVo, Model model, HttpSession session
+			, @RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) {
+		
+		String pathPaging = "/rental/Appli/lg/";
+		pathPaging += gdsSclassCd;
 		
 		// RequestParm 세션 셋팅
 		session.removeAttribute("menu");
@@ -84,18 +89,27 @@ public class RentalAppliController {
 		rentalAppliVo.setSearchPriceSt(searchPriceSt);
 		rentalAppliVo.setSearchPriceEd(searchPriceEd);
 		rentalAppliVo.setSort(sort);
+		
 
 //		System.out.println("=========구분2 시작=========");
 //		System.out.println(brandNm.size());
 //		System.out.println(rentalAppliVo.getBrandNm2());
 //		System.out.println("=========구분2 끝=========");
 		
-		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);	//	PATH 경로
-		List<RentalAppliVo> list1 = rentalAppliService.rentalMenu(rentalAppliVo);	//	소메뉴명 리스트
-		List<RentalAppliVo> list2 = rentalAppliService.rentalOption(rentalAppliVo, "1");	//	옵션 브랜드명 리스트
-		List<RentalAppliVo> list3 = rentalAppliService.rentalOption(rentalAppliVo, "2");	//	옵션 가격대 리스트
-		List<RentalAppliVo> list4 = rentalAppliService.rentalBest(rentalAppliVo);	//	Best 캐러셀 상품리스트
-		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);	//상품리스트
+		List<RentalAppliVo> path = rentalAppliService.rentalPath(rentalAppliVo);				//	PATH 경로
+		List<RentalAppliVo> list1 = rentalAppliService.rentalMenu(rentalAppliVo);				//	소메뉴명 리스트
+		List<RentalAppliVo> list2 = rentalAppliService.rentalOption(rentalAppliVo, "1");		//	옵션 브랜드명 리스트
+		List<RentalAppliVo> list3 = rentalAppliService.rentalOption(rentalAppliVo, "2");		//	옵션 가격대 리스트
+		List<RentalAppliVo> list4 = rentalAppliService.rentalBest(rentalAppliVo);				//	Best 캐러셀 상품리스트
+		List<RentalAppliVo> list6 = rentalAppliService.rentalGdsTotCnt(rentalAppliVo, sort);	// 상품리스트 총갯수
+		
+		// Paging 셋팅
+		Paging usedPage = new Paging();
+		usedPage.pageInfo(page, range, list6.get(0).getCnt());
+		rentalAppliVo.setStartListNum(usedPage.getstartListNum());
+		rentalAppliVo.setListSize(usedPage.getListSize());
+		
+		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);			// 상품리스트
 		
 //		path test 
 //		System.out.println("getGubunCd 			== " + path.get(0).getGubunCd());
@@ -114,6 +128,7 @@ public class RentalAppliController {
 //		System.out.println("-----------------session end ----------------------");
 		
 //		gds test
+//		System.out.println("-----------------list5 start ----------------------");
 //		System.out.println("gdsCd				== " + list5.get(0).getGdsCd());
 //		System.out.println("gdsLclassCd			== " + list5.get(0).getGdsLclassCd());
 //		System.out.println("gdsMclassCd			== " + list5.get(0).getGdsMclassCd());
@@ -124,6 +139,7 @@ public class RentalAppliController {
 //		System.out.println("mig1				== " + list5.get(0).getImg1());
 //		System.out.println("regDt				== " + list5.get(0).getRegDt());
 //		System.out.println("gdsPrice			== " + list5.get(0).getGdsPrice());
+		
 
 		model.addAttribute("path", path);
 		model.addAttribute("list1", list1);
@@ -138,6 +154,9 @@ public class RentalAppliController {
 		model.addAttribute("searchPriceSt", session.getAttribute("searchPriceSt"));
 		model.addAttribute("searchPriceEd", session.getAttribute("searchPriceEd"));
 		model.addAttribute("sort", session.getAttribute("sort"));
+		
+		model.addAttribute("pathPaging", pathPaging);
+		model.addAttribute("paging", usedPage);
 		
 		return "rental/rentalAppliLgList";
 	}
