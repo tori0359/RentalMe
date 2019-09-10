@@ -204,6 +204,7 @@
 					data:{'param':$("#goods option:selected").val()},
 					success:function(result){
 						var goodsList=result;
+						console.log(goodsList);
 						$.each(goodsList,function(index,goods){
 							$('#goodsTable').append('<tr><td>'+goods.gdsCd+'</td></tr>');
 						});
