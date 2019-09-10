@@ -15,7 +15,7 @@ public class CallVo {
 	private String gdsPrice;		//렌탈 상품 가격
 	private int odrQty;				//주문수량
 	private int odrAmt;				//주문 금액
-	private String agreeTem;		//계약 기간
+	private String agreeTerm;		//계약 기간
 	private String odrStsGbCd;		//주문 상태 구분 코드
 	private String gdsNm;			//상품명
 	private String gdsCd;			//상품 코드
@@ -235,12 +235,12 @@ public class CallVo {
 		this.odrAmt = odrAmt;
 	}
 
-	public String getAgreeTem() {
-		return agreeTem;
+	public String getAgreeTerm() {
+		return agreeTerm;
 	}
 
-	public void setAgreeTem(String agreeTem) {
-		this.agreeTem = agreeTem;
+	public void setAgreeTerm(String agreeTerm) {
+		this.agreeTerm = agreeTerm;
 	}
 
 	public String getModelNm() {
@@ -373,7 +373,7 @@ public class CallVo {
 		return "CallVo [usedGdsNo=" + usedGdsNo + ", mbNo=" + mbNo + ", callStsCd=" + callStsCd + ", chgId=" + chgId
 				+ ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", modelNm=" + modelNm
 				+ ", usedGdsPrice=" + usedGdsPrice + ", odrDt=" + odrDt + ", gdsPrice=" + gdsPrice + ", odrQty="
-				+ odrQty + ", odrAmt=" + odrAmt + ", agreeTem=" + agreeTem + ", odrStsGbCd=" + odrStsGbCd + "]";
+				+ odrQty + ", odrAmt=" + odrAmt + ", agreeTerm=" + agreeTerm + ", odrStsGbCd=" + odrStsGbCd + "]";
 	}
 	
 }

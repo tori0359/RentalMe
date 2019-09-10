@@ -1,6 +1,8 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,8 +105,13 @@
 		font-size:12pt;
 		padding: 8px 0px 8px 0px;
 	}
+	.detailText{
+		color: #DF7401;
+		font-weight: bolder;
+	}
 
 </style>
+
 </head>
 <body>
 <div id="actContent">
@@ -113,7 +120,7 @@
 					<!-- ********************* -->
 					<!-- 상세 캐러셀 영역 시작 -->
 					<!-- ********************* -->
-					<div style="border:0px solid red; width:50%; margin-top:100px; margin-bottom:100px;"  class="product-slider col-md-4">
+					<div style="border:0px solid red; width:40%; margin-top:100px; margin-bottom:100px;"  class="product-slider col-md-4">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<c:forEach items="${list1}" var="list1">
@@ -157,28 +164,28 @@
 							<h2 id="gdsNmStyle">${list1.gdsNm }</h2>
 							<div class="hr"></div>
 							<div class="row">
-								<div class="col-md-3">
+								<div class="col-md-3" style="display:inline-block">
 									<h4 id="optionSelect1">브랜드</h4>
 									<h4 id="optionSelect1">제품코드</h4>
-									<h4 id="optionSelect1">시작가</h4>
-									<h4 id="optionSelect1">응찰단위</h4>
-									<h4 id="optionSelect1">경매 시작 시간</h4>
-									<h4 id="optionSelect1">경매 종료 시간</h4>
-									<h4 id="optionSelect1">남은 시간</h4>
+									<h4 class="detailText" id="optionSelect1">시작가</h4>
+									<h4 class="detailText" id="optionSelect1">응찰단위</h4>
+									<h4 class="detailText" id="optionSelect1">경매 시작 시간</h4>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6" style="display:inline-block">
 									<h4 id="optionSelect1">${list1.brandNm }</h4>
 									<h4 id="optionSelect1">${list1.gdsCd }</h4>
-									<h4 id="optionSelect1">${list1.gdsStPrice }</h4>
-									<h4 id="optionSelect1">${list1.unitPrice }</h4>
+									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###"> ${list1.gdsStPrice }</fmt:formatNumber> 원</h4>
+									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###">${list1.unitPrice }</fmt:formatNumber> 원</h4>
 									<h4 id="optionSelect1">${list1.actStTime }</h4>
-									<h4 id="optionSelect1">${list1.actEdTime }</h4>
-									<h4 id="optionSelect1">남은시간 계산중...</h4>
+
 								</div>
 							</div>
 						</c:forEach>
 					</div>
 				</div>
+			<div style="border:1px solid grey; margin-bottom:100px; height: 500px;">
+					경매 상태창
+			</div>
 			</div>
 		</div>
 </body>

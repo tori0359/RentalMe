@@ -26,6 +26,7 @@
 
 	    .ordtable>thead>tr>th{
         	text-align:center;
+        	font-family: "nanumB";
         }
         .ordtable>thead>tr>th:nth-child(1){
         	text-align:left;
@@ -35,6 +36,7 @@
         	vertical-align: middle;
         	text-align: center;
         	display: table-cell;
+        	font-family: "nanumB";
         }
         .ordtable>tbody>tr>td:nth-child(1),
         .ordtable>tbody>tr>td:nth-child(2){
@@ -124,6 +126,7 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
 <body>
+<div style="height:100%;">
 	<div>
 	<div class="titlediv">
        <p id="title2">장바구니</p>
@@ -187,7 +190,7 @@
        				</a>
        			</td>
        			<td><p class="tdtext">${bean.odrQty}</p></td>
-       			<td><p class="tdtext">${bean.agreeTem}개월</p></td>
+       			<td><p class="tdtext">${bean.agreeTerm}개월</p></td>
        			<td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
        			</p></td>
        		</tr>
@@ -205,6 +208,7 @@
 			<button type="button" class="delete_btn1 btn">계속 쇼핑하기</button>
 			<button type="button" class="delete_btn2 btn">주문하기</button>
 		</div>
+</div>
       
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

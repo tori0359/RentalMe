@@ -13,7 +13,6 @@
 		margin: 100px auto;
 		height:100%;
 		width:65%;
-		margin-bottom: 200px;
 	}
 	.ordimg{
 	   	width:280px;
@@ -68,7 +67,7 @@
 	 .color{
 	 	color: #DF7401;
 	 }
-	 .wrap{
+	 .wrapper{
 	 	position: relative;
 	 }
 	 #end p{
@@ -92,6 +91,14 @@
 	 	text-decoration: none;
 	 	color: black;
 	 }
+	 #brandNmStyle{
+		line-height: 0.2em;
+		text-decoration:none;
+		font-size: 1.8rem;
+		color: #999;
+		font-family:"nanumB";
+		font-weight: 600;
+	}
 	   
 </style>
 <script type="text/javascript">
@@ -139,6 +146,7 @@
 						</div>
 						<div class="col-md-3" id="contentDiv">
 							<input type="hidden" value="${bean.gdsCdDetail}"/>
+							<div><h4 id="brandNmStyle">${bean.brandNm}</h4></div>
 							<div><h2 style="font-family:'nanumEB' "><a id="tag" href="/act/${bean.gdsCdDetail}">${bean.gdsNm }</a></h2></div>
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
 							<div><h4 class="text"><span class="color">시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
@@ -153,7 +161,7 @@
 	</div>
 <div style="background-color:rgba(128,128,128,0.2);" id="actEndList">
 		<c:forEach items="${alist2}" var="bean">
-			<div class="row wrap" >
+			<div class="row wrapper" >
 				<div class="col-md-10 col-md-offset-1">
 					<div style="height:100%;" id="actCon">
 					<div id="end" style="opacity:1; position:absolute; height:40px; width:60%; padding:30px; margin-left:20%; z-index:100;"><p>경매 종료</p></div>
@@ -166,7 +174,6 @@
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
 							<div><h4 class="text"><span>시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
 							<div><h4 class="text" ><span>경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
-							<div><h4 class="text" ><span>경매 종료 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
 						</div>
 					</div>
 				</div>

@@ -68,5 +68,11 @@ public interface MpUserDao {
 	
 	int myQuestDel(CsVo csVo) throws SQLException;
 
+	//유저아이디의 비밀번호를 DB에서 가져오기 
+	UserVo selectPw(String userId);
+
+	//사용자 비밀번호 변경
+	int updPw(String userId, String hashPw);
+
 	
 }

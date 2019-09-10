@@ -102,7 +102,7 @@ public class LoginController {
 			String emailKey 	= loginUser.getEmailKey();						//이메일 키값(Y : 인증, 난수key : 비인증)
 			int userStsCd		= Integer.parseInt(loginUser.getUserStsCd());	//유저 상태 코드(1: 정상, 2: 정지-사용중지, 3: 삭제-강제탈퇴)
 			int pwFailCnt		= Integer.parseInt(loginUser.getPwFailCnt());	//비밀번호 오류 횟수(5회이상 정지사용자로 변경)
-			
+				
 			/*오류횟수 5회이상일 경우 계정 정지*/
 			if(pwFailCnt >= 5) {
 				//사용자 상태코드를 정지 상태로 변경.

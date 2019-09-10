@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.me.rentalme.act.model.ActDao;
+import com.me.rentalme.act.dao.ActDao;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 

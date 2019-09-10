@@ -7,30 +7,33 @@ encoding="UTF-8"?>
   
 <mapper namespace="act">
 	<select id="selectActRun" resultType="com.me.rentalme.model.entity.ActVo">
-		SELECT  TB_GDS300.GDS_CD,
-				TB_GDS300.GDS_CD_DETAIL,
-			    FN_NM('GDS_NM',TB_GDS100.GDS_CD) AS gdsnm,
-			    TB_GDS300.GDS_ST_PRICE,
-			    TB_GDS300.ACT_ST_TIME,
-			    TB_GDS300.ACT_ED_TIME,
-			    TB_GDS300.CONTENT
-		FROM 	TB_GDS300
-		INNER JOIN TB_GDS100
-		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD_DETAIL
-		WHERE 	ACT_STS_CD='2';
+		SELECT  A.GDS_CD,
+				A.GDS_CD_DETAIL,
+			    FN_NM('GDS_NM',B.GDS_CD) AS gdsnm,
+			    A.GDS_ST_PRICE,
+			    A.ACT_ST_TIME,
+			    A.ACT_ED_TIME,
+			    A.CONTENT,
+			    B.BRAND_NM,
+			    A.IMG1
+		FROM 	TB_GDS300 A, TB_GDS100 B
+		WHERE	B.GDS_CD = A.GDS_CD_DETAIL
+		AND 	ACT_STS_CD='2';
 	</select>
 	
 	<select id="selectActEnd" resultType="com.me.rentalme.model.entity.ActVo">
-		SELECT  TB_GDS300.GDS_CD,
-				TB_GDS300.GDS_CD_DETAIL,
+		SELECT  A.GDS_CD,
+				A.GDS_CD_DETAIL,
 			    FN_NM('GDS_NM',TB_GDS100.GDS_CD) AS gdsnm,
-			    TB_GDS300.GDS_ST_PRICE,
-			    TB_GDS300.ACT_ST_TIME,
-			    TB_GDS300.ACT_ED_TIME,
-			    TB_GDS300.CONTENT
-		FROM 	TB_GDS300
+			    A.GDS_ST_PRICE,
+			    A.ACT_ST_TIME,
+			    A.ACT_ED_TIME,
+			    A.CONTENT,
+			    TB_GDS100.BRAND_NM,
+			    A.IMG1
+		FROM 	TB_GDS300 A
 		INNER JOIN TB_GDS100
-		ON 		TB_GDS100.GDS_CD = TB_GDS300.GDS_CD_DETAIL
+		ON 		TB_GDS100.GDS_CD = A.GDS_CD_DETAIL
 		WHERE 	ACT_STS_CD='3';
 	
 	</select>

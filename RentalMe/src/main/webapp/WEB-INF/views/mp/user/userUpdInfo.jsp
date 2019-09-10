@@ -23,10 +23,11 @@
 	   		width:90px;	
 	   }
 	   
-	   .btn:hover,
-	   .btn:focus{
-	   		background-color: #D8D8D8;
+	   #update:hover{
+	   		color:white;
 	   }
+	   
+	
 	   
 	   #infobtn{
 	  		width:360px;
@@ -41,7 +42,6 @@
 	   
 	    .delete_btn1{
 	   		background-color: #D8D8D8;
-	   		color:black;
 	   		height:30px;
 	   		font-family: "nanumB";	
 	   		font-weight: border;	
@@ -60,6 +60,18 @@
       .titlediv{
             height:40px;
       }
+      .pw-chk{
+      		color:red;
+      		font-family:"nanumB";
+      		font-weight: bolder;
+      		font-size:10pt;
+      		margin-left:110px;
+      		padding:5px;
+      }
+      .table tr{
+      		font-family:"nanumB";
+      }
+ 
 </style>
 <script type="text/javascript">
 
@@ -113,11 +125,120 @@
     }
 
     window.onload=function(){
+    	var regexPw = 
+    		RegExp(/^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/); //비밀번호 정규식(8~20자 영문소문자,대문자,숫자,특수문자 사용가능)
+    	$('#pw-success').hide();
+		$('#pw-danger').hide();
+		$('#pw-danger2').hide();
+		$('#pw-notsuccess').hide();
+
+    	
+		//1. 현재 비밀번호 중복체크
+		//1-1. 같은지 - 입력하신 비밀번호가 현재 비밀밀번호와 같습니다.
+		//1-2. 다른지 - 다음단계
+		//2. 변경비밀번호 비밀번호확인 체크
+		//2-1. 비밀번호 정규화 체크
+		//2-2. 같으면 : 비밀번호가 일치합니다. 띄우고 비밀번호 변경 버튼 활성화 
+		//2-3. 다르면 : 비밀번호가 일치하지않습니다. 띄우고 비밀번호 변경 버튼 비활성화
+		
+		//현재비밀번호 입력란
+		$('#inputPw').focus(function(){
+			$('#pw-success').hide();
+			$('#pw-danger').hide();
+			$('#pw-notsuccess').hide();
+		}).blur(function(){
+			//현재 비밀번호
+			var inputPw = $('#inputPw').val();
+
+			//공백이 아니면
+			if($('#inputPw').val() != ""){
+				
+				$.ajax({
+					url:"checkPw",
+					type: "post",
+					data: { "userPw" : inputPw},
+					success : function(data){
+						var msg = data;
+						
+						if(msg == 'equals'){
+							$('#pw-success').show();
+						}else{
+							$('#pw-notsuccess').show();
+						}
+					}				
+				});
+			}else{
+				//공백이면 메시지 추가
+				return false;
+			}
+		});
+
+		//비밀번호 변경 버튼 비활성화로 초기화
+		$('#pwchange').attr('disabled', true);
+
+		//신규비밀번호
+	  	$('#newpw, #newpwre').focus(function(){
+	    	//비밀번호 메시지를 가려준다.
+	        $('#pw-success').hide();
+	        $('#pw-danger').hide();
+	        $('#pw-danger2').hide();
+	        
+	    }).blur(function(){//비밀번호, 비밀번호확인 포커스가 외부에 있을 경우
+	    	//비밀번호 또는 비밀번호 확인의 값이 공백이 아닐경우
+	        if($('#newpw').val()!="" || $('#newpwre').val()!=""){
+		        
+	        	//비밀번호, 비밀번호확인 정규식 체크
+	        	if(regexPw.test($('#newpw').val()) || regexPw.test($('#newpwre').val())){
+		        	
+		        	//비밀번호와 비밀번호확인의 값이 같을 경우 "비밀번호가 일치합니다." 메시지 출력
+		            if($('#newpw').val()==$('#newpwre').val()){
+		                $('#pw-success').show();
+		                $('#pw-danger').hide();
+		                $('#pw-danger2').hide();
+		                $('#pwchange').attr('disabled', false);
+		                
+		            } else {//비밀번호와 비밀번호확인의 값이 같지 않을 경우 "비밀번호가 다릅니다." 메시지 출력
+		                $('#pw-success').hide();
+		                $('#pw-danger').show();
+		                $('#pw-danger2').hide();
+		                $('#pwchange').attr('disabled', true);
+		            }
+	        	}else{
+	        		//정규식 체크가 맞지 않는 경우 - "8~20자 영문+숫자+특수문자 조합하여 입력해주세요." 메시지 출력
+	                $('#pw-success').hide();
+	                $('#pw-danger').hide();
+	                $('#pw-danger2').show();
+	        	}
+	        }
+		});
+		 
     	$('#update').click(function(){
 			alert("수정되었습니다!");
-       	});
+       	}); 
+    	
 
-     }
+
+
+
+    	
+    	
+		$('#pwchange').click(function(){
+       		var newpw = $('#newpw').val();
+           	
+			$.ajax({
+				url:"changePw",
+				type: "post",
+				data: { "userPw" : newpw},
+				success : function(){
+					alert("비밀번호가 변경되었습니다!");
+				}
+			});
+        });
+
+     } 
+
+
+    
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
@@ -157,6 +278,10 @@
      		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value="${userVo.email}"></td>
      	</tr>
      	<tr>
+     		<th class="active" style="text-align: center">연락처</th>
+     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value=""></td>
+     	</tr>
+     	<tr>
      		<th class="active" style="text-align: center">비밀번호 변경</th>
      		<td>
      			<div>
@@ -166,16 +291,30 @@
      			</div>
 	     		<div>
 	     			<label for="pw">현재 비밀번호</label>
-	     			<input style="margin-left:32px;" type="text" name="pw" id="pw">
+	     			
+	     			<input style="margin-left:32px;" type="text" name="inputPw" id="inputPw">
+	     			<div style="color: #04B404;" class="pw-chk" id="pw-success">비밀번호가 일치합니다</div>
+	     			<div class="pw-chk" id="pw-notsuccess">현재 비밀번호와 일치하지 않습니다.</div>
 	     		</div>
 	     		<div>
 	     			<label for="newpw">신규 비밀번호</label>
-	     			<input style="margin-left:32px;" type="text" name="newpw" id="newpw">
+	     			<input style="margin-left:32px;" type="text" name="newpw" id="newpw"> 
+	     			<div class="pw-chk" id="pw-danger">비밀번호가 다릅니다</div>
+	     			<div class="pw-chk" id="pw-danger2">8~20자 영문+숫자+특수문자 조합하여 입력해주세요.</div>
+	     		
 	     		</div>
 	     		<div>
 	     			<label for="newpwre">신규 비밀번호 확인</label>
-	     			<input type="text" name="newpwre" id="newpwre">
+	     			<input style="margin-left:4px;" type="text" name="newpwre" id="newpwre">
+	     			<button type="button" class="delete_btn1 btn" id="pwchange">비밀번호 변경</button><br>
 	     		</div>
+				
+     			<script>
+     			
+     			
+
+     			</script>
+     		
      		</td>
      	</tr>
      	<tr>

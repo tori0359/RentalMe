@@ -63,6 +63,15 @@ public interface MpUserService {
 	//내 문의 삭제
 	int myQuestDel(CsVo csVo) throws SQLException;
 
+	//유저아이디의 비밀번호를 DB에서 가져오기 
+	UserVo getInfo(String userId) throws SQLException;
+
+	//입력한 비밀번호 체크
+	String checkPw(String userId, String userPw) throws SQLException;
+
+	//비밀번호 변경
+	int changePw(String userId, String userPw);
+	
 	
 
 }

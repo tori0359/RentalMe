@@ -181,5 +181,24 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.selectList("mpUser.selectAuct",mbNo);
 	}
 
+	@Override
+	public UserVo selectPw(String userId) {
+		return sqlSession.selectOne("mpUser.selectPw",userId);
+	}
+	
+	@Override
+	public int updPw(String userId, String hashPw) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("userPw", hashPw);
+		
+		int result = sqlSession.update("mpUser.updPw", map);
+		
+		System.out.println("DB °á°ú : "+result);
+		
+		return result;
+	}
+
 
 }

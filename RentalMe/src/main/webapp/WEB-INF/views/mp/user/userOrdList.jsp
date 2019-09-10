@@ -27,6 +27,7 @@
 		
        .ordtable>thead>tr>th{
            text-align:center;
+           font-family: "nunumB";
         }
         
        .ordtable>tbody>tr>td{
@@ -34,6 +35,7 @@
            text-align: center;
            display: table-cell;
            line-height:30px;
+           font-family: "nunumB";
         }
         .ordtable>tbody>tr>td:nth-child(1){
         	text-align:left;
@@ -281,7 +283,7 @@
                 </td>
                 <td><p class="tdtext">${bean.odrDt}</p></td>
                 <td><p class="tdtext">${bean.odrQty}</p></td>
-                <td><p class="tdtext">${bean.agreeTem}개월</p></td>
+                <td><p class="tdtext">${bean.agreeTerm}개월</p></td>
                 <td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
                 <td><p class="tdtext">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
