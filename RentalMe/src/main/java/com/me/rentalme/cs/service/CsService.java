@@ -4,13 +4,17 @@ package com.me.rentalme.cs.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.UserVo;
 
 public interface CsService {
+
 	
-	List<CsVo> csFaqList() throws SQLException;    //faq리스트페이지
+	List<CsVo> csFaqList(Paging paging) throws SQLException;    //faq리스트페이지
 	List<CsVo> csNoticeList() throws SQLException;	//공지 리스트페이지
 	List<CsVo> csInqList() throws SQLException;	//문의 리스트페이지
 	
@@ -29,4 +33,5 @@ public interface CsService {
 	
 	int inquiryAdd() throws SQLException;
 	int inqAnswer(String num) throws SQLException;
+	int faqListCnt1() throws SQLException;
 }

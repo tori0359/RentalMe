@@ -4,18 +4,21 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 
 public interface CsDao {
 
 	//faq 리스트
-	List<CsVo> faqSelectAll() throws SQLException;
+	List<CsVo> faqSelectAll(Paging paging) throws SQLException;
 	List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//공지 리스트
 	List<CsVo> noticeSelectAll() throws SQLException;
 	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
 	List<CsVo> inqSelectAll() throws SQLException;
+	int faqListCnt() throws SQLException;
+	
 	
 	//faq 상세
 	CsVo csFaqDetail(CsVo csVo) throws SQLException;	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.UserVo;
@@ -29,6 +30,9 @@ import com.me.rentalme.model.entity.UserVo;
 @Controller
 @RequestMapping("/cs")
 public class CsController {
+	
+	
+	String pagingPath="/cs";
 	
 	@Inject
 	CsService csService; 
@@ -123,10 +127,29 @@ public class CsController {
 	
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
-	public ModelAndView csfaq(Model model) throws SQLException {
+	public ModelAndView csfaq(Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		System.out.println("자주묻는질문");
+		pagingPath+="/csFAQ";  //페이징경로 설정
+		
+		CsVo csVo=new CsVo();
+		
+		//페이징 셋팅
+		Paging csPaging = new Paging();
+		
+		int listCnt=csService.faqListCnt1();
+		csPaging.pageInfo(page, range,listCnt); //현재페이지,현재페이지범위, 게시물 총 갯수
+		csVo.setStartListNum(csPaging.getstartListNum());
+		System.out.println("시작넘버:"+csPaging.getstartListNum());
+		csVo.setListSize(csPaging.getListSize());
+		System.out.println("게시물 갯수:"+csPaging.getListSize());
+		////////////////////////////////////
+		
+		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("blist", csService.csFaqList());
+		mav.addObject("blist", csService.csFaqList(csPaging));
+		model.addAttribute("pathPaging", pagingPath);
+		model.addAttribute("paging", csPaging);
 		mav.setViewName("cs/csFAQ");
 		return mav;
 	}

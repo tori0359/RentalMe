@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 
 
@@ -20,9 +21,9 @@ public class CsDaoImpl implements CsDao {
 	SqlSession sqlSession; 
 	
 	@Override
-	public List<CsVo> faqSelectAll() throws SQLException {
+	public List<CsVo> faqSelectAll(Paging paging) throws SQLException {
 		
-		return sqlSession.selectList("csCenter.faqSelectAll");
+		return sqlSession.selectList("csCenter.faqSelectAll",paging);
 	}
 
 	
@@ -153,6 +154,16 @@ public class CsDaoImpl implements CsDao {
 		
 		String pquestNo=num;
 		return sqlSession.update("csCenter.inqAnswer", pquestNo);
+	}
+
+
+	@Override
+	public int faqListCnt() throws SQLException {
+		System.out.println("∆‰¿Ã¬° dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csListCnt");
+		System.out.println("gg"+cnt);
+		return cnt;
 	}
 
 

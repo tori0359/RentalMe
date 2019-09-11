@@ -6,6 +6,7 @@
 <head>
 <jsp:include page="../template/header.jsp"></jsp:include>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 
@@ -174,6 +175,11 @@
 		#all tr:nth-child(1){
 			text-align:center;
 		}
+		#paginationBox {
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+}
 	</style>
 </head>
 <body>
@@ -317,25 +323,31 @@
 		</tr>
 	</table>
 	<div align="center" width="100%">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-					</li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					 <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
+				<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 	</div>
 </div>
 </div>

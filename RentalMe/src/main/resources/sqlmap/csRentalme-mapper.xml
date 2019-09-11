@@ -5,9 +5,11 @@
   <mapper namespace="csCenter">
 	<select id="faqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
 		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
+  		LIMIT #{startListNum}, #{listSize}
   	</select>
   	<select id="csFaqDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_FAQ100 WHERE CS_GB_CD=#{csGbCd} AND FAQ_NO=#{faqNo}
+  		
   	</select>
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
@@ -15,7 +17,9 @@
   	<select id="inqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_PQUEST100 ORDER BY PQUEST_NO DESC
   	</select>
-  	
+  	<select id="csListCnt" resultType="int">
+  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100;
+  	</select>
   	<select id="csNoticeDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo}
   	</select>

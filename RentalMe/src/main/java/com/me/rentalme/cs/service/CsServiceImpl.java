@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -23,9 +24,9 @@ public class CsServiceImpl implements CsService {
 	
 	//faq게시글 리스트
 	@Override
-	public List<CsVo> csFaqList() throws SQLException {
+	public List<CsVo> csFaqList(Paging paging) throws SQLException {
 		
-		return csDao.faqSelectAll();
+		return csDao.faqSelectAll(paging);
 	}
 	
 	//공지게시글 리스트
@@ -117,6 +118,12 @@ public class CsServiceImpl implements CsService {
 	public int inqAnswer(String num) throws SQLException {
 		// TODO Auto-generated method stub
 		return csDao.inqAnswer(num);
+	}
+
+	@Override
+	public int faqListCnt1() throws SQLException {
+		System.out.println("페이징 service");
+		return csDao.faqListCnt();
 	}
 
 
