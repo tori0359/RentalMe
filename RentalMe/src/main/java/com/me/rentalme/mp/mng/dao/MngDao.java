@@ -29,5 +29,8 @@ public interface MngDao {
 	List<DeclVo> selectDecl(Paging usedPage) throws SQLException;							//전체 신고 리스트
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
-	int selectusedListCnt();												//전체 중고 리스트 총갯수		
+	int selectusedListCnt();												//전체 중고 리스트 총갯수
+	
+	//2019.09.11 추가
+	List<UserVo> selectUserList();											//사용자관리 - 사용자정보 리스트
 }

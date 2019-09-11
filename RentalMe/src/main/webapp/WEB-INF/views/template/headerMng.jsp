@@ -152,7 +152,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">사용자관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/userList">사용자관리</a></td>
            </tr>
        </table>
        </div>

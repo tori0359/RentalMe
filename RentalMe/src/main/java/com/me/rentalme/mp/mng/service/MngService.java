@@ -30,4 +30,8 @@ public interface MngService {
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
 	int getUsedListCnt();													//전체 중고리스트 게시물 총갯수
+	
+	
+	//추가(2019.09.11)
+	List<UserVo> getUserInfo();												//사용자관리 - 사용자 리스트 
 }

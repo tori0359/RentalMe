@@ -83,4 +83,26 @@
 		WHERE DECL_NO=#{declNo}
 	</update>
 	
+	<!-- 사용자관리 -->
+	<select id="selectUserList" resultType="com.me.rentalme.model.entity.UserVo">
+		select mb_no
+		     , user_id
+		     , user_nm
+		     , birthday
+		     , gender_gb_cd
+		     , hp
+		     , hp_yn
+		     , email
+		     , email_yn
+		     , addr
+		     , addr_detail
+		     , zip_code
+		     , user_sts_cd
+		     , join_dt
+		  from tb_user100
+		 where level_gb_cd = '1'
+		 order
+		    by mb_no asc
+	</select>
+	
 </mapper>

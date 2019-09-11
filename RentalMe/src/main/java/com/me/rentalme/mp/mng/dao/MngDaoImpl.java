@@ -88,4 +88,18 @@ public class MngDaoImpl implements MngDao{
 		return sqlSession.selectOne("mpMng.selectusedListCnt");			//중고리스트 총갯수
 	}
 	
+	/**
+	* 사용자 리스트 Dao
+	* 
+	* @param  None
+	* @return List - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.11
+	*/	
+	@Override
+	public List<UserVo> selectUserList() {
+		
+		return sqlSession.selectList("mpMng.selectUserList");
+	}
+	
 }

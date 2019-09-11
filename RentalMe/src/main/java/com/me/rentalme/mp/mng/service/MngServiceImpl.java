@@ -1,7 +1,10 @@
 package com.me.rentalme.mp.mng.service;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -15,6 +18,7 @@ import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.dao.MngDao;
+import com.thoughtworks.qdox.parser.ParseException;
 
 @Service
 public class MngServiceImpl implements MngService {
@@ -88,6 +92,46 @@ public class MngServiceImpl implements MngService {
 	@Override
 	public int getUsedListCnt() {
 		return mngDao.selectusedListCnt();
+	}
+	
+	/**
+	* 사용자 리스트 service
+	* 
+	* @param  None
+	* @return List - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.11
+	*/	
+	@Override
+	public List<UserVo> getUserInfo() {
+		List<UserVo> userInfo = mngDao.selectUserList();
+		
+		for(UserVo userVo : userInfo) {
+			//성별(1:남 2:여)
+			if(userVo.getGenderGbCd().equals("1")) {
+				userVo.setGenderGbCd("남");
+			}else if(userVo.getGenderGbCd().equals("2")) {
+				userVo.setGenderGbCd("여");
+			}else {
+				userVo.setGenderGbCd("x");
+			}
+			
+			//사용자상태코드(1:정상, 2:정지[비밀번호오류횟수 5회 초과], 3:삭제(탈퇴))
+			if(userVo.getUserStsCd().equals("1")) {
+				userVo.setUserStsCd("정상");
+			}else if(userVo.getUserStsCd().equals("2")){
+				userVo.setUserStsCd("정지");
+			}else if(userVo.getUserStsCd().equals("3")){
+				userVo.setUserStsCd("삭제");
+			}else {
+				userVo.setUserStsCd("x");
+			}
+			
+		}
+
+		
+		
+		return userInfo;
 	}
 
 

@@ -18,9 +18,8 @@
             font-weight:600;
       }
 		
-		
        .ordtable>thead>tr>th{
-           text-align:center;
+            text-align:center;
         }
         
        .ordtable>tbody>tr>td{
