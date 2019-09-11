@@ -104,10 +104,10 @@ public class RentalAppliController {
 		List<RentalAppliVo> list6 = rentalAppliService.rentalGdsTotCnt(rentalAppliVo, sort);	// 상품리스트 총갯수
 		
 		// Paging 셋팅
-		Paging usedPage = new Paging();
-		usedPage.pageInfo(page, range, list6.get(0).getCnt());
-		rentalAppliVo.setStartListNum(usedPage.getstartListNum());
-		rentalAppliVo.setListSize(usedPage.getListSize());
+		Paging rentalPage = new Paging();
+		rentalPage.pageInfo(page, range, list6.get(0).getCnt());
+		rentalAppliVo.setStartListNum(rentalPage.getstartListNum());
+		rentalAppliVo.setListSize(rentalPage.getListSize());
 		
 		List<RentalAppliVo> list5 = rentalAppliService.rentalGds(rentalAppliVo, sort);			// 상품리스트
 		
@@ -155,8 +155,8 @@ public class RentalAppliController {
 		model.addAttribute("searchPriceEd", session.getAttribute("searchPriceEd"));
 		model.addAttribute("sort", session.getAttribute("sort"));
 		
-		model.addAttribute("pathPaging", pathPaging);
-		model.addAttribute("paging", usedPage);
+		//model.addAttribute("pathPaging", pathPaging);
+		model.addAttribute("paging", rentalPage);
 		
 		return "rental/rentalAppliLgList";
 	}
