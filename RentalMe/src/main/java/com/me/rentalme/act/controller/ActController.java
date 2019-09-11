@@ -64,11 +64,11 @@ public class ActController {
 	* @exception 
 	*/
 	@RequestMapping(value="/{gdsCdDetail}", method=RequestMethod.GET)
-	public ModelAndView getActDetail(@PathVariable("gdsCdDetail") String gdsCdDetail, RentalAppliVo rentalAppliVo, ActVo actVo, HttpSession session) throws SQLException {
+	public ModelAndView getActDetail(@PathVariable("gdsCdDetail") String gdsCdDetail, ActVo actVo, HttpSession session) throws SQLException {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list1", actService.actDetail(rentalAppliVo, gdsCdDetail));
-		mav.addObject("list1", actService.actDetailAuction(gdsCdDetail));
+		mav.addObject("list1", actService.actDetail(gdsCdDetail));
+		mav.addObject("list2", actService.actDetailAuction(gdsCdDetail));
 		
 		mav.setViewName("act/actDetail");
 		return mav;

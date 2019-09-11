@@ -112,12 +112,6 @@
 		font-weight: bolder;
 	}
 
-
-
-	#headAct{
-		clear: both;
-		height: 300px;
-	}
 	#actBody{
 		clear: both;
 	}
@@ -129,10 +123,6 @@
 	#chattingRoom{
 		border: 1px solid black;
 		height: 500px;
-	}
-	#footAct{
-		clear: both;
-		height: 300px;
 	}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
@@ -221,28 +211,24 @@
 					<div style="border:0px solid red; width:40%; margin-top:100px; margin-bottom:100px;"  class="product-slider col-md-4">
 						<div id="carousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
-								<c:forEach items="${list1}" var="list1">
 								<div class="item active">
-									<img src="${list1.img1 }">
+									<img src="${list2.img1 }">
 								</div>
-								<div class="item"> <img src="${list1.img2 }"> </div>
-								<div class="item"> <img src="${list1.img3 }"> </div>
-								<div class="item"> <img src="${list1.img4 }"> </div>
+								<div class="item"> <img src="${list2.img2 }"> </div>
+								<div class="item"> <img src="${list2.img3 }"> </div>
+								<div class="item"> <img src="${list2.img4 }"> </div>
 
-								</c:forEach>
 							</div>
 						</div>
 						<div class="clearfix">
 							<div id="thumbcarousel" class="carousel slide" data-interval="false">
 								<div class="carousel-inner">
-								<c:forEach items="${list1}" var="list1">
 									<div class="item active">
-										<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="${list1.img1 }"></div>
-										<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="${list1.img2 }"></div>
-										<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="${list1.img3 }"></div>
-										<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="${list1.img4 }"></div>
+										<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="${list2.img1 }"></div>
+										<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="${list2.img2 }"></div>
+										<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="${list2.img3 }"></div>
+										<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="${list2.img4 }"></div>
 									</div>
-									</c:forEach>
 								</div>
 						    	<!-- /carousel-inner --> 
 							</div>
@@ -257,7 +243,7 @@
 					<!-- 상세 정보 영역 시작 -->
 					<!-- ******************* -->
 					<div style="border:0px solid blue; height:100%; margin-top:100px; margin-bottom:100px; padding-left:3%" class="col-md-6">
-						<c:forEach items="${list1}" var="list1">
+					
 							<h4 id="brandNmStyle">${list1.brandNm }</h4>
 							<h2 id="gdsNmStyle">${list1.gdsNm }</h2>
 							<div class="hr"></div>
@@ -272,17 +258,15 @@
 								<div class="col-md-6" style="display:inline-block">
 									<h4 id="optionSelect1">${list1.brandNm }</h4>
 									<h4 id="optionSelect1">${list1.gdsCd }</h4>
-									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###"> ${list1.gdsStPrice }</fmt:formatNumber> 원</h4>
-									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###">${list1.unitPrice }</fmt:formatNumber> 원</h4>
-									<h4 id="optionSelect1">${list1.actStTime }</h4>
+									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###"> ${list2.gdsStPrice }</fmt:formatNumber> 원</h4>
+									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###">${list2.unitPrice }</fmt:formatNumber> 원</h4>
+									<h4 id="optionSelect1">${list2.actStTime }</h4>
 
 								</div>
 							</div>
-						</c:forEach>
 					</div>
 				</div>
 			<div style="border:1px solid grey; margin-bottom:100px; height: 500px;">
-					<div id="headAct"></div>
 					<div id="actBody">
 						<div id="idsession">${loginUserId}</div>
 						<div id="liveview">
@@ -297,7 +281,6 @@
 						
 						</ol>
 					</div>	
-					<div id="footAct"></div>
 			</div>
 			</div>
 		</div>

@@ -47,6 +47,14 @@
 		}else if(type=='endMsg'){
 			$('#sendMsg').attr('disabled', true);
 			$('#countView').append(text+'님 입찰되었습니다.');
+		}else if(type=='listMsg'){
+			$('#listMsg').text('');
+			text=text.slice(1,-1);				//앞뒤 중괄호없애기
+			var textSplit=text.split(', ');
+			for (var i in textSplit){
+				$('#listMsg').append('<li>'+textSplit[i]+'</li>');	
+			}
+			
 		}
 	};
 	function sendServer(who){
@@ -89,5 +97,7 @@
 	<input type="button" class="sendMsg" value="100000">
 	<div id="countView"></div>
 	<button id="countDown">끝내기 카운트</button>
+	<ol id="listMsg">
+	</ol>
 </body>
 </html>

@@ -49,15 +49,15 @@ public class ActDaoImpl implements ActDao{
 	
 	//경매 상세 페이지
 	@Override
-	public List<RentalAppliVo> selectActDetail(RentalAppliVo rentalAppliVo,String gdsCdDetail) throws SQLException {
+	public RentalAppliVo selectActDetail(String gdsCdDetail) throws SQLException {
 		
-		return sqlSession.selectList("act.selectActDetail",gdsCdDetail);
+		return sqlSession.selectOne("act.selectActDetail",gdsCdDetail);
 	}
 
 	//경매 상세 페이지2
 	@Override
-	public List<ActVo> selectActDetail2(String gdsCdDetail) {
-		return sqlSession.selectList("act.selectActDetail2",gdsCdDetail);
+	public ActVo selectActDetail2(String gdsCdDetail) {
+		return sqlSession.selectOne("act.selectActDetail2",gdsCdDetail);
 	}
 	
 	@Override

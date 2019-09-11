@@ -54,8 +54,8 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
-		return sqlSession.selectList("mpMng.selectUsed", usedPage);				//전체 중고 리스트
+	public List<UsedVo> selectUsed(UsedVo bean) throws SQLException {
+		return sqlSession.selectList("mpMng.selectUsed", bean);				//전체 중고 리스트
 	}
 
 	@Override
@@ -84,8 +84,13 @@ public class MngDaoImpl implements MngDao{
 	}
 	
 	@Override
-	public int selectusedListCnt() {
-		return sqlSession.selectOne("mpMng.selectusedListCnt");			//중고리스트 총갯수
+	public int selectusedListCnt(UsedVo bean) {
+		return sqlSession.selectOne("mpMng.selectusedListCnt",bean);			//중고리스트 총갯수
+	}
+
+	@Override
+	public int selectDeclListCnt(DeclVo bean) {
+		return sqlSession.selectOne("mpMng.selectDeclListCnt",bean);			//신고리스트 총개수
 	}
 	
 }

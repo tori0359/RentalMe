@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.me.rentalme.common.Paging;
+import com.me.rentalme.model.entity.DeclVo;
+import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
@@ -37,9 +39,14 @@ public class MngDeclController {
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getMngDeclList(Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		int totalListCnt = mngService.getUsedListCnt(); 
-		
+			@RequestParam(required = false, defaultValue = "1")int page, 
+			@RequestParam(required = false, defaultValue = "1")int range,
+			@RequestParam(required = false, defaultValue = "") String usedGdsNo) throws SQLException {
+		DeclVo bean=new DeclVo();
+		System.out.println(usedGdsNo+"usedgdsno");
+		bean.setUsedGdsNo(usedGdsNo);
+		int totalListCnt = mngService.selectDeclListCnt(bean); 
+		System.out.println(totalListCnt+"okok");
 		Paging usedPage = new Paging();
 		
 		usedPage.pageInfo(page, range, totalListCnt);

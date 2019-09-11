@@ -127,7 +127,7 @@
 		if($('.titlediv').text().indexOf('주문') != -1){
 			$('.changeVal').eq(1).hide();
 			for(var i=0; i<$('.stscdtxt').length; i++){
-				if($('.stscdtxt').eq(i).text().indexOf('주문확정') == -1 && $('.stscdtxt').eq(i).text().indexOf('입금') == -1){
+				if($('.stscdtxt').eq(i).text().indexOf('입금') == -1){
 					$('.stscdtxt').eq(i).parent().children().first().hide();
 					$('.stscdtxt').eq(i).parent().prepend('<td></td>');
 				}
@@ -173,7 +173,7 @@
 
      </div>
      <form name="frmSubmit">
-     <input type="button" class="changeVal" onclick="getPost('ord')" value="구매확정">
+     <input type="button" class="changeVal" onclick="getPost('ord')" value="주문확정">
      <input type="button" class="changeVal" onclick="getPost('rtn')" value="반품확정">
           <table class="ordtable table">
           <thead>

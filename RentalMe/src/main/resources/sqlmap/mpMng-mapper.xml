@@ -21,7 +21,7 @@
 	</select>
 	<update id="updateStsPC">
 		UPDATE tb_odr100
-		SET ODR_STS_GB_CD='PC'
+		SET ODR_STS_GB_CD='OC'
 		WHERE ODR_NO=#{odrNo}
 	</update>
 	
@@ -44,6 +44,9 @@
 		SELECT A.*,B.USER_NM
 		FROM tb_used100 AS A, tb_user100 AS B
 		WHERE A.MB_NO=B.MB_NO
+		<if test="usedGdsNo != ''">
+		AND USED_GDS_NO=#{usedGdsNo}
+		</if>
 		ORDER BY A.CHG_DT DESC
 		LIMIT #{startListNum}, #{listSize}
 	</select>
@@ -56,6 +59,9 @@
 	<select id="selectusedListCnt" resultType="Integer">
 		SELECT COUNT(*) as totalListCnt
 		  FROM TB_USED100
+		<if test="usedGdsNo != ''">
+		WHERE USED_GDS_NO=#{usedGdsNo}
+		</if>
 	</select>
 	
 	<!-- 환불 -->
@@ -82,5 +88,8 @@
 		SET DECL_RES_STS_CD='1', CHG_ID='admin'
 		WHERE DECL_NO=#{declNo}
 	</update>
-	
+	<select id="selectDeclListCnt" resultType="Integer">
+		SELECT COUNT(*)
+		FROM tb_decl100
+	</select>
 </mapper>

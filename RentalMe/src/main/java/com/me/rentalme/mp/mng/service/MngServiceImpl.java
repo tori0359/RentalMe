@@ -56,8 +56,8 @@ public class MngServiceImpl implements MngService {
 	
 
 	@Override
-	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
-		return mngDao.selectUsed(usedPage);								//전체 중고 리스트
+	public List<UsedVo> selectUsed(UsedVo bean) throws SQLException {
+		return mngDao.selectUsed(bean);								//전체 중고 리스트
 	}
 
 	@Override
@@ -86,8 +86,13 @@ public class MngServiceImpl implements MngService {
 	}
 	
 	@Override
-	public int getUsedListCnt() {
-		return mngDao.selectusedListCnt();
+	public int getUsedListCnt(UsedVo bean) {
+		return mngDao.selectusedListCnt(bean);
+	}
+
+	@Override
+	public int selectDeclListCnt(DeclVo bean) {
+		return mngDao.selectDeclListCnt(bean);
 	}
 
 

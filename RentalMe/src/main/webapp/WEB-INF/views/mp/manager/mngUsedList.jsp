@@ -18,7 +18,7 @@
        <p id="title">중고거래 내역</p>
      </div>
      <div>
-     	<form action="/mp/mng/used/search">
+     	<form action="/mp/mng/used">
 	     	<input type="text" name="usedGdsNo" placeholder="상품번호 입력">
 	     	<input type="submit" value="검색">
      	</form>

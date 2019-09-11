@@ -32,7 +32,8 @@ public class UsedVo {
 	private String userNM;				 // 유저 이름
 	private String mclassName;			 // 중분류 이름
 	private String sclassName;			 // 소분류 이름
-	
+	private int startListNum;			 // 시작 페이지
+	private int listSize;				 // 리스트사이즈
 	
 	public UsedVo() {
 		// TODO Auto-generated constructor stub
@@ -65,6 +66,24 @@ public class UsedVo {
 		this.chgDt = chgDt;
 		this.regId = regId;
 		this.regDt = regDt;
+	}
+	
+	
+
+	public int getStartListNum() {
+		return startListNum;
+	}
+
+	public void setStartListNum(int startListNum) {
+		this.startListNum = startListNum;
+	}
+
+	public int getListSize() {
+		return listSize;
+	}
+
+	public void setListSize(int listSize) {
+		this.listSize = listSize;
 	}
 
 	public String getUsedGdsNo() {
