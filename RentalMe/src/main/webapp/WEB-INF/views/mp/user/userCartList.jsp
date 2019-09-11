@@ -2,11 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+	type="text/css" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style type="text/css">
 		#title2{
 	   		font-size: 15pt;
@@ -70,15 +77,28 @@
 	
 	   .cartresult{
 	   		height:100px;
-	   		width: 230px;
+	   		width: 280px;
 	   		float:right;
+	   		display: inline;
+	   		
 	   }
 	   
 	   .cartresult>p{
 	   		font-weight:bolder;
 	   		font-size: 15pt;
 	   		font-family: "nanumB";
-	   		line-height: 100px;
+	   		display: inline;
+	   		
+	   }
+	   
+	   #sumTotPrice{
+	   		width: 120px;
+	   		font-weight:bolder;
+	   		font-size: 15pt;
+	   		font-family: "nanumB";
+	   		display: inline;
+	   		text-align:right;
+	   		border: 0px;
 	   }
 	   
 	   .cartbtn{
@@ -114,13 +134,62 @@
 </style>
 <script type="text/javascript">
 
+		/**************************/
+		/**** 전역변수 선언시작 ***/
+		/**************************/
+		var vSumTotPrice = 0;				// 장바구니 토탈금액 셋팅
+		var vGdsPriceArr = new Array();		// 장바구니 상품가격 배열
+		var vOdrQtyArr = new Array();		// 장바구니 상품수량 배열
+		
+		<c:set var="alistLength" value="${fn:length(alist)}"></c:set>
+		var vCnt = "${alistLength}";	// 장바구니 총 리스트수
+		
+		<c:forEach items="${alist}" var="bean" varStatus="status">
+			vGdsPriceArr[${status.index}] = "${bean.gdsPrice}";
+			vOdrQtyArr[${status.index}] = "${bean.odrQty}";
+			vSumTotPrice = vSumTotPrice + ${(bean.gdsPrice * bean.odrQty)};
+		</c:forEach>
+		vSumTotPrice += "";	// 타입변환
+		/**************************/
+		/**** 전역변수 선언끝 *****/
+		/**************************/
+
+		// All 체크박스 선택
 		function checkAll(){
 		    if( $("#allCheck").is(':checked') ){
 		      $("input[name=chBox]").prop("checked", true);
+		      $('#sumTotPrice').val(vSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 		    }else{
 		      $("input[name=chBox]").prop("checked", false);
+		      $('#sumTotPrice').val(0);
 		    }
 		}
+
+		// 상품 체크박스 선택
+		function chBox(num) {
+			if($('#chBox'+num).is(':checked')) {
+				var fSumTotPrice = 0;	// 함수 내 토탈금액 셋팅
+				for(var i=0; i<vCnt; i++) {
+					if($('#chBox'+i).is(':checked')) {
+						//alert("i = " + i + " vGdsPriceArr["+i+"] = " + vGdsPriceArr[i]);
+						fSumTotPrice =  Number(fSumTotPrice) + Number(vGdsPriceArr[i]);
+					}
+				}
+				fSumTotPrice += "";
+				$('#sumTotPrice').val(fSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+			} else {
+				var fSumTotPrice = 0;	// 함수 내 토탈금액 셋팅
+				for(var i=0; i<vCnt; i++) {
+					if($('#chBox'+i).is(':checked')) {
+						fSumTotPrice = Number(fSumTotPrice) + Number(vGdsPriceArr[i]);
+					}	
+				}
+				fSumTotPrice += "";
+				$('#sumTotPrice').val(fSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+				//$('#sumTotPrice').val(0);
+			}
+		}
+
 
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
@@ -171,18 +240,19 @@
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
-       			<th><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></th>
+       			<th><input type="checkbox" checked="checked" name="allCheck" id="allCheck" onclick="checkAll();"/></th>
        			<th>상품명/선택사항</th>
        			<th>수량</th>
        			<th>렌탈기간</th>
        			<th>상품금액</th>
+       			<th>상품총금액</th>
        		</tr>
        	</thead>
        	<tbody>
    		 <c:set var="sumPrice" value="0"/>
-       	<c:forEach items="${alist}" var="bean">
+       	<c:forEach items="${alist}" var="bean" varStatus="status">
        		<tr>  
-       			<td><input type="checkbox" class="chBox" name="chBox" data-cartNum="${bean.gdsCd}" data-cartSeq="${bean.cartSeq }">
+       			<td><input type="checkbox" class="chBox" id="chBox${status.index }" onclick="chBox(${status.index});" checked="checked" name="chBox" data-cartNum="${bean.gdsCd}" data-cartSeq="${bean.cartSeq }">
        			</td>
        			<td>
        				<a style="text-decoration:none; color:black;"href="#">
@@ -192,6 +262,7 @@
        			<td><p class="tdtext">${bean.odrQty}</p></td>
        			<td><p class="tdtext">${bean.agreeTerm}개월</p></td>
        			<td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원
+       			<td><p class="tdtext"><fmt:formatNumber value="${bean.odrQty * bean.gdsPrice}" pattern="#,###.##"/>원
        			</p></td>
        		</tr>
        	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
@@ -201,7 +272,8 @@
        </div>
        <div class="hr" style="height:2px;"></div>
        <div class="cartresult">
-       	<p>총 주문 금액: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> 원</p>
+       <br><br>
+       	<p>총 주문 금액 :</p><input type="text" id="sumTotPrice" readonly="readonly" value="<fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/>"> <p>원</p>
        </div>
        <div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">
