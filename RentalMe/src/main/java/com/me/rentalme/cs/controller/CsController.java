@@ -130,18 +130,22 @@ public class CsController {
 	public ModelAndView csfaq(Model model,
 			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		System.out.println("자주묻는질문");
+		pagingPath="/cs";
 		pagingPath+="/csFAQ";  //페이징경로 설정
-		
+		System.out.println("페이징경로"+pagingPath);
 		CsVo csVo=new CsVo();
+		
+		//전체 게시물 갯수
+		int listCnt=csService.faqListCnt1();
+		System.out.println("전체 게시물 갯수"+listCnt);
 		
 		//페이징 셋팅
 		Paging csPaging = new Paging();
 		
-		int listCnt=csService.faqListCnt1();
 		csPaging.pageInfo(page, range,listCnt); //현재페이지,현재페이지범위, 게시물 총 갯수
-		csVo.setStartListNum(csPaging.getstartListNum());
+		//csVo.setStartListNum(csPaging.getstartListNum());
 		System.out.println("시작넘버:"+csPaging.getstartListNum());
-		csVo.setListSize(csPaging.getListSize());
+		//csVo.setListSize(csPaging.getListSize());
 		System.out.println("게시물 갯수:"+csPaging.getListSize());
 		////////////////////////////////////
 		
