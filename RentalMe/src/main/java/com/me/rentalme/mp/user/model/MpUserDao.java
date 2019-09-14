@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -62,8 +63,9 @@ public interface MpUserDao {
 	List<CallVo> selectAuct(String mbNo) throws SQLException;
 
 	//1:1문의내역리스트
-	List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException;
+	List<CsVo> myQuestList(CsVo csVo,HttpSession session,int startListNum,int listSize) throws SQLException;
 	
+	int myInquiryListCnt(HttpSession session) throws SQLException;
 	CsVo myQuestDetail(CsVo csVo) throws SQLException;
 	
 	int myQuestDel(CsVo csVo) throws SQLException;

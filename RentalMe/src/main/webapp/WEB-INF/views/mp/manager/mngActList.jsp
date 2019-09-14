@@ -23,6 +23,14 @@
 	#endend{
 		color:red;
 	}
+	#goodstext{
+		color:black;
+	}
+	#goodstext:hover{
+		text-decoration:none;
+		font-weight:bolder;
+		color:red;
+	}
 </style>
 </head>
 <body>
@@ -38,7 +46,7 @@
 			<c:forEach items="${actList}" var="bean">
 				<tr>
 					<td><input type="hidden" name="num" value="${bean.gdsCd}"/>${bean.gdsCd}</td>
-					<td><a href="#">${bean.gdsNm}</a></td>
+					<td><a id="goodstext" href="/act/${bean.gdsCdDetail}">${bean.gdsNm}</a></td>
 					<td>${bean.regDt}</td>
 					<c:choose>
 						<c:when test="${bean.actStsCd eq '2'}">

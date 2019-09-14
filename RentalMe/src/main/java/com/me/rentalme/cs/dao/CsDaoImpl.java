@@ -87,15 +87,15 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public List<CsVo> noticeSelectAll() throws SQLException {
-		return sqlSession.selectList("csCenter.noticeSelectAll");
+	public List<CsVo> noticeSelectAll(Paging paging) throws SQLException {
+		return sqlSession.selectList("csCenter.noticeSelectAll",paging);
 	}
 
 
 	@Override
-	public List<CsVo> inqSelectAll() throws SQLException {
+	public List<CsVo> inqSelectAll(Paging paging) throws SQLException {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("csCenter.inqSelectAll");
+		return sqlSession.selectList("csCenter.inqSelectAll",paging);
 	}
 
 	@Override
@@ -157,14 +157,37 @@ public class CsDaoImpl implements CsDao {
 	}
 
 
+	//°Ô½Ã±Û °¹¼ö
 	@Override
 	public int faqListCnt() throws SQLException {
-		System.out.println("ÆäÀÌÂ¡ dao");
+		System.out.println("faqÆäÀÌÂ¡ dao");
 		int cnt=0;
-		cnt=sqlSession.selectOne("csCenter.csListCnt");
-		System.out.println("gg"+cnt);
+		cnt=sqlSession.selectOne("csCenter.csFaqListCnt");
+		System.out.println("faq°¹¼ö:"+cnt);
 		return cnt;
 	}
+	
+	@Override
+	public int noticListCnt() throws SQLException {
+		System.out.println("noticÆäÀÌÂ¡ dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csNoticListCnt");
+		System.out.println("notic°¹¼ö:"+cnt);
+		return cnt;
+	}
+
+
+	@Override
+	public int inquiryListCnt() throws SQLException {
+		
+		System.out.println("inqÆäÀÌÂ¡ dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csInquiryListCnt");
+		System.out.println("inq°¹¼ö:"+cnt);
+		return cnt;
+	}
+	
+	
 
 
 

@@ -15,8 +15,8 @@ public interface CsService {
 
 	
 	List<CsVo> csFaqList(Paging paging) throws SQLException;    //faq리스트페이지
-	List<CsVo> csNoticeList() throws SQLException;	//공지 리스트페이지
-	List<CsVo> csInqList() throws SQLException;	//문의 리스트페이지
+	List<CsVo> csNoticeList(Paging paging) throws SQLException;	//공지 리스트페이지
+	List<CsVo> csInqList(Paging paging) throws SQLException;	//문의 리스트페이지
 	
 	CsVo csFaqDetail(CsVo csVo) throws SQLException;  //faq 상세페이지
 	CsVo csNoticeDetail(CsVo csVo) throws SQLException;	//공지 상세페이지
@@ -25,13 +25,18 @@ public interface CsService {
 	int noticDel(String num) throws SQLException;
 	int faqDel(String num) throws SQLException;
 	
+	//공지,Faq,문의게시판 시퀀스
 	int seqNocUp() throws SQLException;
 	int seqFaqUp() throws SQLException;
 	int seqInqUp() throws SQLException;
 	
+	//1대1문의
 	int addfaq(CsVo csVo) throws SQLException;
 	
-	int inquiryAdd() throws SQLException;
 	int inqAnswer(String num) throws SQLException;
+	
+	//게시글 총 갯수
 	int faqListCnt1() throws SQLException;
+	int noticListCnt() throws SQLException;
+	int inquiryListCnt() throws SQLException;
 }

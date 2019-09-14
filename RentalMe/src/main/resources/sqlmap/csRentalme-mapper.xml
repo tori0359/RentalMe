@@ -3,28 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="csCenter">
+  
+  <!-- 게시글 리스트  -->
 	<select id="faqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
 		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
   		LIMIT #{startListNum}, #{listSize}
   	</select>
+  	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
+  		LIMIT #{startListNum},#{listSize}
+  	</select>
+  	
+  	<select id="inqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT * FROM TB_PQUEST100 ORDER BY PQUEST_NO DESC
+  		LIMIT #{startListNum},#{listSize}
+  	</select>
+  	
+  	<!--  게시글 갯수-->
+  	<select id="csFaqListCnt" resultType="int">
+  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100;
+  	</select>
+  	<select id="csNoticListCnt" resultType="int">
+  		SELECT COUNT(NOTIC_NO) AS CNT FROM TB_NOTIC100;
+  	</select>
+  	<select id="csInquiryListCnt" resultType="int">
+  		SELECT COUNT(PQUEST_NO) AS CNT FROM TB_PQUEST100;
+  	</select>
+  	<select id="myInquiryListCnt" resultType="int">
+  		SELECT COUNT(TB_PQUEST100.PQUEST_NO) FROM TB_PQUEST100 INNER JOIN TB_USER100 ON TB_PQUEST100.MB_NO=TB_USER100.MB_NO WHERE TB_USER100.MB_NO=#{mbNo} ORDER BY PQUEST_NO DESC	
+  	</select>
+  	
+  	
   	<select id="csFaqDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_FAQ100 WHERE CS_GB_CD=#{csGbCd} AND FAQ_NO=#{faqNo}
   		
-  	</select>
-  	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
-  	</select>
-  	<select id="inqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_PQUEST100 ORDER BY PQUEST_NO DESC
-  	</select>
-  	<select id="csListCnt" resultType="int">
-  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100;
   	</select>
   	<select id="csNoticeDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 WHERE NOTIC_NO=#{noticNo}
   	</select>
   	<select id="myQuestList" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_PQUEST100 INNER JOIN TB_USER100 ON TB_PQUEST100.MB_NO=TB_USER100.MB_NO WHERE TB_USER100.MB_NO=#{mbNo} ORDER BY PQUEST_NO DESC
+  		LIMIT #{startListNum},#{listSize}
   	</select>
   	<select id="myQuestDetail" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_PQUEST100 WHERE MB_NO=#{mbNo} and PQUEST_NO=#{pquestNo}

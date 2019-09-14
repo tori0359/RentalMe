@@ -27,6 +27,7 @@
 			});
 		})
 	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<style type="text/css">
 		#noticeBar{
 			height:250px;
@@ -106,6 +107,33 @@
 				</tr>
 			</c:forEach>
 	</table>
+	<div align="center" width="100%">
+				<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
+	</div>
 </div>
 
 </div>

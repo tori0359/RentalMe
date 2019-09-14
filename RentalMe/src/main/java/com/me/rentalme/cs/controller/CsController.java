@@ -116,10 +116,28 @@ public class CsController {
 /////////////////////////////////////////////////////////////////////////////	
 	//공지게시판
 	@RequestMapping(value = "/csNotice", method = RequestMethod.GET)
-	public ModelAndView home() throws SQLException {
-		System.out.println("mapping..");
+	public ModelAndView csNotic(Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
+		
+		pagingPath="/cs";
+		pagingPath+="/csNotice";
+		
+		int listCnt=csService.noticListCnt();
+		
+		Paging csPaging=new Paging();
+		
+		csPaging.pageInfo(page,range,listCnt);
+		//csVo.setStartListNum(csPaging.getstartListNum());
+		System.out.println("시작넘버:"+csPaging.getstartListNum());
+		//csVo.setListSize(csPaging.getListSize());
+		System.out.println("게시물 갯수:"+csPaging.getListSize());
+		////////////////////////////////////
+		
+		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("alist", csService.csNoticeList());
+		mav.addObject("alist", csService.csNoticeList(csPaging));
+		model.addAttribute("pathPaging", pagingPath);
+		model.addAttribute("paging", csPaging);
 		mav.setViewName("cs/csNotice");
 		return mav;
 	}
@@ -127,13 +145,13 @@ public class CsController {
 	
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
-	public ModelAndView csfaq(Model model,
+	public ModelAndView csFaq(Model model,
 			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		System.out.println("자주묻는질문");
 		pagingPath="/cs";
 		pagingPath+="/csFAQ";  //페이징경로 설정
 		System.out.println("페이징경로"+pagingPath);
-		CsVo csVo=new CsVo();
+		//CsVo csVo=new CsVo();
 		
 		//전체 게시물 갯수
 		int listCnt=csService.faqListCnt1();
