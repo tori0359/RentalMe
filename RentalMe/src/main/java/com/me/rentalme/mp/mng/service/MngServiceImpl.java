@@ -103,8 +103,8 @@ public class MngServiceImpl implements MngService {
 	* 등록일자 : 2019.09.11
 	*/	
 	@Override
-	public List<UserVo> getUserInfo() {
-		List<UserVo> userInfo = mngDao.selectUserList();
+	public List<UserVo> getUserInfo(Paging mngUserPage) {
+		List<UserVo> userInfo = mngDao.selectUserList(mngUserPage);
 		
 		for(UserVo userVo : userInfo) {
 			//성별(1:남 2:여)
@@ -129,9 +129,57 @@ public class MngServiceImpl implements MngService {
 			
 		}
 
-		
-		
 		return userInfo;
+	}
+	
+	/**
+	* 사용자 탈퇴하기 service
+	* 
+	* @param  String mbNo - 회원번호
+	* @return void 
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/	
+	@Override
+	public String delUserInfo(String mbNo) {
+		
+		int result = mngDao.updUserinfo(mbNo);
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "success";
+		}else {
+			msg = "fail";
+		}
+		
+		return msg;
+	}
+
+	/**
+	* 사용자 상세정보 service
+	* 
+	* @param  String mbNo - 회원번호
+	* @return UserVo - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public UserVo getUserDetail(String mbNo) {
+		
+		return mngDao.selectUserDetail(mbNo);
+	}
+
+	/**
+	* 사용자 총인원 조회 service
+	* 
+	* @param  
+	* @return int - 총인원 수 
+	* @author 황인준
+	* 등록일자 : 2019.09.16
+	*/
+	@Override
+	public int getMngUserListCnt() {
+		return mngDao.selectMngUserListCnt();
 	}
 
 

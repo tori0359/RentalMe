@@ -85,24 +85,77 @@
 	
 	<!-- 사용자관리 -->
 	<select id="selectUserList" resultType="com.me.rentalme.model.entity.UserVo">
-		select mb_no
-		     , user_id
-		     , user_nm
-		     , birthday
-		     , gender_gb_cd
-		     , hp
-		     , hp_yn
-		     , email
-		     , email_yn
-		     , addr
-		     , addr_detail
-		     , zip_code
-		     , user_sts_cd
-		     , join_dt
-		  from tb_user100
-		 where level_gb_cd = '1'
-		 order
-		    by mb_no asc
+		SELECT MB_NO
+		     , USER_ID
+		     , USER_NM
+		     , DATE_FORMAT(BIRTHDAY, '%Y-%m-%d') AS BIRTHDAY
+		     , GENDER_GB_CD
+		     , LEVEL_GB_CD
+		     , HP
+		     , HP_YN
+		     , EMAIL
+		     , EMAIL_YN
+		     , ADDR
+		     , ADDR_DETAIL
+		     , ZIP_CODE
+		     , USER_STS_CD
+		     , DATE_FORMAT(JOIN_DT, '%Y-%m-%d') AS JOIN_DT
+		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS CHG_DT
+		  FROM TB_USER100
+		 WHERE USER_STS_CD IN ('1', '2')
+		 ORDER
+		    BY MB_NO ASC
+		 LIMIT #{startListNum}, #{listSize}
 	</select>
+	<select id="selectUserDetail" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT MB_NO
+		     , USER_ID
+		     , USER_NM
+		     , DATE_FORMAT(BIRTHDAY, '%Y-%m-%d') AS BIRTHDAY
+		     , GENDER_GB_CD
+		     , LEVEL_GB_CD
+		     , HP
+		     , HP_YN
+		     , EMAIL
+		     , EMAIL_YN
+		     , ADDR
+		     , ADDR_DETAIL
+		     , ZIP_CODE
+		     , USER_STS_CD
+		  FROM TB_USER100
+		 WHERE MB_NO = #{mbNo}
+	</select>
+	<select id="selectMngUserListCnt" resultType="Integer">
+		SELECT COUNT(*) AS totalUserCnt
+		  FROM TB_USER100
+	</select>
+	<update id="updUserInfo" parameterType="String">
+		UPDATE TB_USER100
+		   SET USER_NM 		= ''
+		     , BIRTHDAY 	= ''
+		     , GENDER_GB_CD	= ''
+		     , HP			= ''
+		     , HP_YN		= ''
+		     , EMAIL		= ''
+		     , EMAIL_YN		= ''
+		     , ADDR			= ''
+		     , ADDR_DETAIL	= ''
+		     , ZIP_CODE		= ''
+		     , PW			= ''
+		     , PW_FAIL_CNT	= 0
+		     , PW_ADJ_DT	= ''
+		     , EMAIL_KEY	= ''
+		     , HP_KEY		= ''
+		     , LEVEL_GB_CD	= ''
+		     , JOIN_DT		= ''
+		     , USER_STS_CD	= '3'
+		     , SESSION_KEY	= ''
+		     , SESSION_DT	= '0000-00-00 00:00:00'
+		     , CHG_ID		= 'system'
+		     , CHG_DT		= DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		     , REG_ID		= 'system'
+		     , REG_DT		= '0000-00-00 00:00:00'
+		 WHERE MB_NO = #{mbNo}
+	</update>
 	
 </mapper>

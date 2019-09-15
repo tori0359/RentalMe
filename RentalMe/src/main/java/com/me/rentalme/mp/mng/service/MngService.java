@@ -26,12 +26,19 @@ public interface MngService {
 	List<MngOrdVo> selectReturn() throws SQLException;						//전체 반품 리스트
 	int updateStsRtn(String ordNo) throws SQLException;						//상품상태 반품확정으로 바꾸기
 	
-	List<DeclVo> selectDecl(Paging usedPage) throws SQLException;							//전체 신고 리스트
+	List<DeclVo> selectDecl(Paging usedPage) throws SQLException;			//전체 신고 리스트
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
 	int getUsedListCnt();													//전체 중고리스트 게시물 총갯수
 	
 	
 	//추가(2019.09.11)
-	List<UserVo> getUserInfo();												//사용자관리 - 사용자 리스트 
+	List<UserVo> getUserInfo(Paging mngUserPage);							//사용자관리 - 사용자 리스트 
+	
+	//추가(2019.09.15)
+	String delUserInfo(String mbNo);										//사용자관리 - 사용자 탈퇴하기
+	UserVo getUserDetail(String mbNo);										//사용자관리 - 사용자 상세정보
+	
+	//추가(2019.09.16)
+	int getMngUserListCnt();												//사용자관리 - 사용자관리 총인원 조회			
 }

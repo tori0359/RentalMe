@@ -97,9 +97,48 @@ public class MngDaoImpl implements MngDao{
 	* 등록일자 : 2019.09.11
 	*/	
 	@Override
-	public List<UserVo> selectUserList() {
+	public List<UserVo> selectUserList(Paging mngUserPage) {
 		
-		return sqlSession.selectList("mpMng.selectUserList");
+		return sqlSession.selectList("mpMng.selectUserList", mngUserPage);
+	}
+	
+	/**
+	* 사용자 탈퇴하기 Dao
+	* 
+	* @param  String mbNo - 회원번호
+	* @return int - 결과값
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public int updUserinfo(String mbNo) {
+		return sqlSession.update("mpMng.updUserInfo", mbNo);
+	}
+
+	/**
+	* 사용자 상세정보 Dao
+	* 
+	* @param  String mbNo - 회원번호
+	* @return UserVo - 사용자정보
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public UserVo selectUserDetail(String mbNo) {
+		return sqlSession.selectOne("mpMng.selectUserDetail", mbNo);
+	}
+	
+	/**
+	* 사용자관리 - 총회원수 Dao
+	* 
+	* @param  
+	* @return int - 총인원수
+	* @author 황인준
+	* 등록일자 : 2019.09.16
+	*/	
+	@Override
+	public int selectMngUserListCnt() {
+		return sqlSession.selectOne("mpMng.selectMngUserListCnt");
 	}
 	
 }

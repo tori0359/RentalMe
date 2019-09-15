@@ -32,5 +32,12 @@ public interface MngDao {
 	int selectusedListCnt();												//전체 중고 리스트 총갯수
 	
 	//2019.09.11 추가
-	List<UserVo> selectUserList();											//사용자관리 - 사용자정보 리스트
+	List<UserVo> selectUserList(Paging mngUserPage);						//사용자관리 - 사용자정보 리스트
+	
+	//2019.09.15 추가
+	int updUserinfo(String mbNo);											//사용자관리 - 회원탈퇴
+	UserVo selectUserDetail(String mbNo);									//사용자관리 - 사용자 상세정보
+	
+	//2019.09.16 추가
+	int selectMngUserListCnt();												//사용자관리 - 회원 총 인원 수
 }
