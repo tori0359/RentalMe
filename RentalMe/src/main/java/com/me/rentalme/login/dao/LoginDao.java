@@ -18,4 +18,8 @@ public interface LoginDao {
 
 	void initPwFailCnt(String userId);									//비밀번호 오류횟수 초기화
 
+	void updLoginStsCd(String userId, String browserStsCd);				//로그인 상태 업데이트
+
+	void updLogoutStsCd(String userId);									//로그아웃 상태 업데이트
+
 }

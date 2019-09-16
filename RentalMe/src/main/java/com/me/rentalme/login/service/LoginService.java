@@ -31,6 +31,12 @@ public interface LoginService {
 
 	//비밀번호 오류횟수 초기화
 	void initPwFailCnt(String userId);
+
+	//로그인 상태 업데이트 - 로그인
+	void chgLoginStsCd(String userId, String browserStsCd);
+
+	//로그아웃 상태 업데이트 - 로그아웃
+	void chgLogoutStsCd(String userId);
 	
 	
 }

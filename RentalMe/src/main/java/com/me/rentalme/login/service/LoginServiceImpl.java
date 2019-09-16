@@ -121,5 +121,32 @@ public class LoginServiceImpl implements LoginService {
 		
 		return loginDao.checkLoginSessionKey(value);
 	}
+	
+	/**
+	* 로그인 상태 업데이트
+	* 
+	* @param  String userId : 사용자아이디
+	* @param  String browserStsCd : 브라우저 코드
+	* @return void
+	* @author 황인준
+	* 등록일자 : 2019-09-16
+	*/
+	@Override
+	public void chgLoginStsCd(String userId, String browserStsCd) {
+		loginDao.updLoginStsCd(userId, browserStsCd);
+	}
+	
+	/**
+	* 로그아웃 상태 업데이트
+	* 
+	* @param  String userId : 사용자아이디
+	* @return void
+	* @author 황인준
+	* 등록일자 : 2019-09-16
+	*/
+	@Override
+	public void chgLogoutStsCd(String userId) {
+		loginDao.updLogoutStsCd(userId);
+	}
 
 }
