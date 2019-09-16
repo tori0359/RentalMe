@@ -10,13 +10,13 @@ import javax.servlet.http.HttpSessionBindingListener;
 
 public class SessionListener implements HttpSessionBindingListener {
 	
-	//ì‹±ê¸€í†¤ ê°ì²´ë¥¼ ë‹´ì„ ë³€ìˆ˜
+	//½Ì±ÛÅæ °´Ã¼¸¦ ´ãÀ» º¯¼ö
 	private static SessionListener sessionListener = null;
 
-	//ë¡œê·¸ì¸í•œ ì ‘ì†ìë¥¼ ì €ì¥í•œ hashTable
+	//·Î±×ÀÎÇÑ Á¢¼ÓÀÚ¸¦ ÀúÀåÇÑ hashTable
 	private static Hashtable<HttpSession, String> loginUsers = new Hashtable<HttpSession, String>();
 	
-    // ì‹±ê¸€í†¤ ì²˜ë¦¬
+    // ½Ì±ÛÅæ Ã³¸®
     public static synchronized SessionListener getInstance() {
         if(sessionListener == null) {
             sessionListener = new SessionListener();
@@ -25,25 +25,25 @@ public class SessionListener implements HttpSessionBindingListener {
     }
 
 
-    // ì„¸ì…˜ì´ ì—°ê²°ì‹œ í˜¸ì¶œ (í•´ì‹œí…Œì´ë¸”ì— ì ‘ì†ì ì €ì¥)
+    // ¼¼¼ÇÀÌ ¿¬°á½Ã È£Ãâ (ÇØ½ÃÅ×ÀÌºí¿¡ Á¢¼ÓÀÚ ÀúÀå)
     @Override
     public void valueBound(HttpSessionBindingEvent event) {
         // TODO Auto-generated method stub
         loginUsers.put(event.getSession(), event.getName());
-        System.out.println(event.getName() + " ë¡œê·¸ì¸ ì™„ë£Œ");
-        System.out.println("í˜„ì¬ ì ‘ì†ì ìˆ˜ : " +  getUserCount());
+        System.out.println(event.getName() + " ·Î±×ÀÎ ¿Ï·á");
+        System.out.println("ÇöÀç Á¢¼ÓÀÚ ¼ö : " +  getUserCount());
     }
 
-    // ì„¸ì…˜ì´ ëŠê²¼ì„ì‹œ í˜¸ì¶œ
+    // ¼¼¼ÇÀÌ ²÷°åÀ»½Ã È£Ãâ
     @Override
     public void valueUnbound(HttpSessionBindingEvent event) {
         // TODO Auto-generated method stub
         loginUsers.remove(event.getSession());
-        System.out.println(event.getName() + " ë¡œê·¸ì•„ì›ƒ ì™„ë£Œ");
-        System.out.println("í˜„ì¬ ì ‘ì†ì ìˆ˜ : " +  getUserCount());
+        System.out.println(event.getName() + " ·Î±×¾Æ¿ô ¿Ï·á");
+        System.out.println("ÇöÀç Á¢¼ÓÀÚ ¼ö : " +  getUserCount());
     }
     
-    // ì…ë ¥ë°›ì€ ì•„ì´ë””ë¥¼ í•´ì‹œí…Œì´ë¸”ì—ì„œ ì‚­ì œ
+    // ÀÔ·Â¹ŞÀº ¾ÆÀÌµğ¸¦ ÇØ½ÃÅ×ÀÌºí¿¡¼­ »èÁ¦
     public void removeSession(String userId) {
         Enumeration<HttpSession> e = loginUsers.keys();
         HttpSession session = null;
@@ -57,35 +57,35 @@ public class SessionListener implements HttpSessionBindingListener {
     }
 
    /*
-    * í•´ë‹¹ ì•„ì´ë””ì˜ ë™ì‹œ ì‚¬ìš©ì„ ë§‰ê¸°ìœ„í•´ì„œ 
-    * ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë””ì¸ì§€ë¥¼ í™•ì¸í•œë‹¤.
+    * ÇØ´ç ¾ÆÀÌµğÀÇ µ¿½Ã »ç¿ëÀ» ¸·±âÀ§ÇØ¼­ 
+    * ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğÀÎÁö¸¦ È®ÀÎÇÑ´Ù.
     */
    public boolean isUsing(String userId){
        boolean flag = loginUsers.containsValue(userId);
        
        if(flag) {
-    	   System.out.println("ì‚¬ìš©ì¤‘");    	   
+    	   System.out.println("»ç¿ëÁß");    	   
        }else {
-    	   System.out.println("ë¯¸ì‚¬ìš©ì¤‘");
+    	   System.out.println("¹Ì»ç¿ëÁß");
        }
        return flag;
    }
     
    
    /*
-    * ë¡œê·¸ì¸ì„ ì™„ë£Œí•œ ì‚¬ìš©ìì˜ ì•„ì´ë””ë¥¼ ì„¸ì…˜ì— ì €ì¥í•˜ëŠ” ë©”ì†Œë“œ
+    * ·Î±×ÀÎÀ» ¿Ï·áÇÑ »ç¿ëÀÚÀÇ ¾ÆÀÌµğ¸¦ ¼¼¼Ç¿¡ ÀúÀåÇÏ´Â ¸Ş¼Òµå
     */
    public void setSession(HttpSession session, String userId){
-       //ì´ìˆœê°„ì— Session Bindingì´ë²¤íŠ¸ê°€ ì¼ì–´ë‚˜ëŠ” ì‹œì 
-       //nameê°’ìœ¼ë¡œ userId, valueê°’ìœ¼ë¡œ ìê¸°ìì‹ (HttpSessionBindingListenerë¥¼ êµ¬í˜„í•˜ëŠ” Object)
-       session.setAttribute(userId, this);//loginì— ìê¸°ìì‹ ì„ ì§‘ì–´ë„£ëŠ”ë‹¤.
+       //ÀÌ¼ø°£¿¡ Session BindingÀÌº¥Æ®°¡ ÀÏ¾î³ª´Â ½ÃÁ¡
+       //name°ªÀ¸·Î userId, value°ªÀ¸·Î ÀÚ±âÀÚ½Å(HttpSessionBindingListener¸¦ ±¸ÇöÇÏ´Â Object)
+       session.setAttribute(userId, this);//login¿¡ ÀÚ±âÀÚ½ÅÀ» Áı¾î³Ö´Â´Ù.
    }
     
     
    /*
-     * ì…ë ¥ë°›ì€ ì„¸ì…˜Objectë¡œ ì•„ì´ë””ë¥¼ ë¦¬í„´í•œë‹¤.
-     * @param session : ì ‘ì†í•œ ì‚¬ìš©ìì˜ session Object
-     * @return String : ì ‘ì†ì ì•„ì´ë””
+     * ÀÔ·Â¹ŞÀº ¼¼¼ÇObject·Î ¾ÆÀÌµğ¸¦ ¸®ÅÏÇÑ´Ù.
+     * @param session : Á¢¼ÓÇÑ »ç¿ëÀÚÀÇ session Object
+     * @return String : Á¢¼ÓÀÚ ¾ÆÀÌµğ
     */
    public String getUserID(HttpSession session){
        return (String)loginUsers.get(session);
@@ -93,20 +93,20 @@ public class SessionListener implements HttpSessionBindingListener {
     
     
    /*
-    * í˜„ì¬ ì ‘ì†í•œ ì´ ì‚¬ìš©ì ìˆ˜
-    * @return int  í˜„ì¬ ì ‘ì†ì ìˆ˜
+    * ÇöÀç Á¢¼ÓÇÑ ÃÑ »ç¿ëÀÚ ¼ö
+    * @return int  ÇöÀç Á¢¼ÓÀÚ ¼ö
     */
    public int getUserCount(){
        int size = loginUsers.size();
        
-       System.out.println("ì´ ì‚¬ìš©ì ìˆ˜ : "+ size);
+       System.out.println("ÃÑ »ç¿ëÀÚ ¼ö : "+ size);
        
        return size;
    }
     
     
    /*
-    * í˜„ì¬ ì ‘ì†ì¤‘ì¸ ëª¨ë“  ì‚¬ìš©ì ì•„ì´ë””ë¥¼ ì¶œë ¥
+    * ÇöÀç Á¢¼ÓÁßÀÎ ¸ğµç »ç¿ëÀÚ ¾ÆÀÌµğ¸¦ Ãâ·Â
     * @return void
     */
    public void printloginUsers(){
@@ -116,13 +116,13 @@ public class SessionListener implements HttpSessionBindingListener {
        int i = 0;
        while(e.hasMoreElements()){
            session = e.nextElement();
-           System.out.println((++i) + ". ì ‘ì†ì : " +  loginUsers.get(session));
+           System.out.println((++i) + ". Á¢¼ÓÀÚ : " +  loginUsers.get(session));
        }
        System.out.println("===========================================");
     }
     
    /*
-    * í˜„ì¬ ì ‘ì†ì¤‘ì¸ ëª¨ë“  ì‚¬ìš©ìë¦¬ìŠ¤íŠ¸ë¥¼ ë¦¬í„´
+    * ÇöÀç Á¢¼ÓÁßÀÎ ¸ğµç »ç¿ëÀÚ¸®½ºÆ®¸¦ ¸®ÅÏ
     * @return list
     */
    public Collection getUsers(){
