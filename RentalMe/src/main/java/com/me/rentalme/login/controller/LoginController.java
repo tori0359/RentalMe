@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.me.rentalme.common.SessionListener;
 import com.me.rentalme.login.service.LoginService;
 import com.me.rentalme.model.entity.UserVo;
 
@@ -132,17 +131,6 @@ public class LoginController {
 			if(emailKey.equals("Y") && userStsCd == 1) {
 				//입력한 아이디가 DB에 있는 경우 입력한 비밀번호와 DB에 저장된 비밀번호 암호화 값과 비교
 				if(BCrypt.checkpw(userPw, loginPw)) {
-									
-//		            if(SessionListener.getInstance().isUsing(userId)) {
-//		                System.out.println("이미 아이디가 접속중 입니다.");
-//		                msg = "usingId";
-//						mav.addObject("msg", msg);
-//						mav.setViewName("login/login");
-//						return mav;
-//		            }
-					
-//					String sessionId = (String)session.getAttribute("loginUserId");
-//					System.out.println("세션에 담긴 아이디  : "+sessionId+", 입력한 아이디 : "+ userId);
 															
 					if(pwFailCnt > 0) {
 						//비밀번호 오류횟수 초기화
