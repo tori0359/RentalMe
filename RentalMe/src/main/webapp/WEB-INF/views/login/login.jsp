@@ -40,6 +40,10 @@
 			<c:if test="${msg == 'pwFailCntOver'}">
 				<div id="errCheck-danger">비밀번호 5회 입력오류로 계정이 정지되었습니다.</div>
 			</c:if>
+			<c:if test="${msg == 'usingId'}">
+				<div id="errCheck-danger">이미 아이디가 접속중 입니다.</div>			
+			</c:if>
+			
 			
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
