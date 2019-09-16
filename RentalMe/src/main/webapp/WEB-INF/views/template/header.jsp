@@ -356,12 +356,7 @@
         </li>
        <li style="font-family: nanumB; padding: 12px; font-size: 13pt;" class="etc">ㅣ</li>
         <li class="dropdown">
-          <form action="/used/big">
-			<input type="hidden" name="startPage" value="0">
-			<input type="hidden" name="modelNm" value="">
-			<input type="hidden" name="align" value="1">			
-			<input type="submit" id="used_link_btn" value="중고거래">
-		  </form>
+		  <a href="${pageContext.request.contextPath}/used/big" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">중고거래</a>
         </li>
         <li class="dropdown">
           <a href="${pageContext.request.contextPath}/act/" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">이벤트 경매</a>

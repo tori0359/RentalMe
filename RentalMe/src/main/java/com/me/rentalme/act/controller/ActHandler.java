@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,7 +74,6 @@ public class ActHandler extends TextWebSocketHandler{
 			System.out.println("누가 이 메시지를 보냈지?:"+mapping.get("id"));
 			//map -> json
 			//System.out.println("json값 : "+json);
-			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
 			if(String.valueOf(mapping.get("type")).equals("adminMsg")) {
 				bidList=new ArrayList<Object>();
 				totalprice=totalprice+Integer.parseInt(String.valueOf(mapping.get("text")));
@@ -82,22 +83,7 @@ public class ActHandler extends TextWebSocketHandler{
 				Map<String, Integer> inmap=new HashMap<String, Integer>();				//맵에 들어갈 맵
 				inmap.put(dayTime.format(new Date(System.currentTimeMillis())), totalprice);		//현재 시간과 가격을 넣는다
 				premap.put(String.valueOf(session.getAttributes().get("loginUserId")), inmap);
-				System.out.println("아이디시간:"+idtimeMap(premap).toString());
-				System.out.println("아이디시간 오름차순:"+funcAsc(idtimeMap(premap)).toString());
-				System.out.println("최종맵:"+changeMap(funcAsc(idtimeMap(premap)),premap).toString());
-				System.out.println("최종맵에서 아이디 가격:"+idpriceMap(changeMap(funcAsc(idtimeMap(premap)),premap)).toString());
-				
-				String listMsg="{\"type\":\"listMsg\",\"text\":\""+idpriceMap(changeMap(funcAsc(idtimeMap(premap)),premap))+"\",\"id\":\"admin\",\"cnt\":0}";
-				mapping = mapper.readValue(listMsg, new TypeReference<Map<String, String>>(){});
-				listMsg = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
-				TextMessage msg= new TextMessage(listMsg);
-				Set<String> keys=map.keySet();
-				Iterator<String> ite=keys.iterator();
-				while(ite.hasNext()) {
-					map.get(ite.next()).sendMessage(msg);
-				}
-				
-				
+
 				interup=false;
 			}else if(String.valueOf(mapping.get("type")).equals("enter")) {
 
@@ -107,6 +93,7 @@ public class ActHandler extends TextWebSocketHandler{
 				timeThread();
 			}
 			
+			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
 			
 		} catch (JsonGenerationException e) { 
 			e.printStackTrace(); 
@@ -126,10 +113,19 @@ public class ActHandler extends TextWebSocketHandler{
 		
 		System.out.println("bidList:"+ bidList.toString());
 		System.out.println("premap:"+ premap.toString());
-		System.out.println("lm:"+idtimeMap(premap));
 		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//이중 맵을 받아서 가격별로 분류시켜 리스트에 넣기
+//	public List<Map<String,Map<String, Integer>>> priceSet(Map<String,Map<String, Integer>> premap){
+//		List<Map<String,Map<String, Integer>>> priceSetList = new ArrayList<Map<String,Map<String,Integer>>>();
+//		Map<String,Integer> idpriMap=idpriceMap(premap);
+//		idpriMap= funcAsc2(idpriMap);
+//		
+//		return priceSetList;
+//	}
+	
+	
 	public Map<String,String> idtimeMap(Map<String,Map<String, Integer>> premap) {					//맵안에 맵뽑아 아이디,시간 맵만들기
 		Iterator<String> preMapIter = premap.keySet().iterator();
         Map<String,String> othermap=new HashMap<String,String>();
@@ -174,6 +170,26 @@ public class ActHandler extends TextWebSocketHandler{
 			 ascMap.put(key, map.get(key));
 	     }
 		 return ascMap;
+	}
+	
+	public Map<String,Integer> funcAsc2(Map<String,Integer> map) {			//아이디 가격 내림차순
+		List<Map.Entry<String, Integer>> list = new LinkedList<>(map.entrySet());
+        
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                int comparision = (o1.getValue() - o2.getValue()) * -1;
+                return comparision == 0 ? o1.getKey().compareTo(o2.getKey()) : comparision;
+            }
+        });
+        
+        // 순서유지를 위해 LinkedHashMap을 사용
+        Map<String, Integer> sortedMap = new LinkedHashMap<>(); 
+        for(Iterator<Map.Entry<String, Integer>> iter = list.iterator(); iter.hasNext();){
+            Map.Entry<String, Integer> entry = iter.next();
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+		 return sortedMap;
 	}
 	
 	public Map<String,Map<String, Integer>> changeMap(Map<String,String> map, Map<String,Map<String, Integer>> premap){

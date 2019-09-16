@@ -54,7 +54,7 @@
 		font-weight: bold;
 	}
 	.whattab{
-		font-size: 0.7em;
+		font-size: 1em;
 		color: gray;
 	}
 	#form_tab{
