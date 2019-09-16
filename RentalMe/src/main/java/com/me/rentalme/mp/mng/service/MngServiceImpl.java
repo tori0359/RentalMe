@@ -12,6 +12,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.dao.MngDao;
@@ -90,5 +91,14 @@ public class MngServiceImpl implements MngService {
 		return mngDao.selectusedListCnt();
 	}
 
+	@Override
+	public List<RentalAppliVo> selectGoodsList() throws SQLException{
+		
+		return mngDao.selectGoodsList();
+	}
+
+	//¹Î¼ö
+	//·»Å»»óÇ° ¸®½ºÆ®
+	
 
 }

@@ -8,6 +8,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 
@@ -30,4 +31,9 @@ public interface MngDao {
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
 	int selectusedListCnt();												//전체 중고 리스트 총갯수		
+	
+	//민수
+	//렌탈 전체 상품 리스트
+	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	
 }

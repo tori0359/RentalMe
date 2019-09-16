@@ -83,4 +83,9 @@
 		WHERE DECL_NO=#{declNo}
 	</update>
 	
+	
+	<!--민수 렌탈상품리스트 -->
+	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 ORDER BY REG_DT
+	</select>
 </mapper>

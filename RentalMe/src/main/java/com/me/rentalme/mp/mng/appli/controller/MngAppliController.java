@@ -1,5 +1,9 @@
 package com.me.rentalme.mp.mng.appli.controller;
 
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,11 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/mp")
 public class MngAppliController {
+	@Inject
+	com.me.rentalme.mp.mng.service.MngService MngService;
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 
 	
 	/**
+	 * @throws SQLException 
 	* 마이페이지(관리자) - 메인 리스트
 	* 
 	* @param  
@@ -29,11 +36,13 @@ public class MngAppliController {
 	* @author 황인준
 	* @exception 
 	*/
-	@RequestMapping(value = "/mng/", method = RequestMethod.POST)
-	public ModelAndView getMainList() {
+	@RequestMapping(value = "/mng/goodsList",method = RequestMethod.GET)
+	public ModelAndView getMainList() throws SQLException {
 		log.debug("마이페이지(관리자) 메인 컨트롤러");
+	
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("rlist", MngService.selectGoodsList());
 		mav.setViewName("mp/manager/mngMainList");
 		return mav;
 	}
