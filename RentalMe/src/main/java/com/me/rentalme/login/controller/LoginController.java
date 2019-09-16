@@ -132,17 +132,14 @@ public class LoginController {
 			if(emailKey.equals("Y") && userStsCd == 1) {
 				//입력한 아이디가 DB에 있는 경우 입력한 비밀번호와 DB에 저장된 비밀번호 암호화 값과 비교
 				if(BCrypt.checkpw(userPw, loginPw)) {
-					
-					
-					SessionListener.getInstance().printloginUsers();
-					
-		            if(SessionListener.getInstance().isUsing(userId)) {
-		                System.out.println("이미 아이디가 접속중 입니다.");
-		                msg = "usingId";
-						mav.addObject("msg", msg);
-						mav.setViewName("login/login");
-						return mav;
-		            }
+									
+//		            if(SessionListener.getInstance().isUsing(userId)) {
+//		                System.out.println("이미 아이디가 접속중 입니다.");
+//		                msg = "usingId";
+//						mav.addObject("msg", msg);
+//						mav.setViewName("login/login");
+//						return mav;
+//		            }
 					
 //					String sessionId = (String)session.getAttribute("loginUserId");
 //					System.out.println("세션에 담긴 아이디  : "+sessionId+", 입력한 아이디 : "+ userId);

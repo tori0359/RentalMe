@@ -30,6 +30,7 @@ public class SessionListener implements HttpSessionBindingListener {
     public void valueBound(HttpSessionBindingEvent event) {
         // TODO Auto-generated method stub
         loginUsers.put(event.getSession(), event.getName());
+        
         System.out.println(event.getName() + " 로그인 완료");
         System.out.println("현재 접속자 수 : " +  getUserCount());
     }

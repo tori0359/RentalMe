@@ -1,5 +1,7 @@
 package com.me.rentalme.interceptor;
 
+import java.util.Hashtable;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.me.rentalme.common.SessionListener;
 import com.me.rentalme.model.entity.UserVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
@@ -21,12 +24,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		ModelMap modelMap = modelAndView.getModelMap();
 		UserVo userVo = (UserVo)modelMap.get("loginUser");
 		
+		Hashtable<String, String> loginUsers = new Hashtable<String, String>();
+		
 		if(userVo!=null) {
 			/*세션값 세팅*/
 			//암호화된 비밀번호와 같은 경우 세션에 저장한다.(sessionId : loginUserId)
 			session.setAttribute("loginUserId", userVo.getUserId());
 			//회원번호를 세션에 저장한다.(sessionMbNo : loginMbNo)
 			session.setAttribute("loginMbNo", userVo.getMbNo());
+			
+			loginUsers.put("loginUserId", (String) session.getAttribute("loginUserId"));
+			
+			
+			System.out.println((String) session.getAttribute("loginUserId") + "님 로그인 환영합니다.");
+			System.out.println("총 접속자 수 : "+ loginUsers.size());
 			
 			//자동로그인 체크가 되어있을 경우
 			if(request.getParameter("isUseLogin") != null) {
