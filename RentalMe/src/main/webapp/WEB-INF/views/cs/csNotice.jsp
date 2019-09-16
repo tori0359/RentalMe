@@ -75,6 +75,9 @@
 		#csContent{
 			height:800px;
 		}
+		#mainTable{
+			height:1000px;
+		}
 	</style>
 </head>
 <body>
@@ -93,21 +96,23 @@
 	</table>
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
-	<table class="table table-hover">
+	<div>
+	<table class="table table-hover" >
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성일</th>
+			<td align="center">번호</td>
+			<td align="center">제목</td>
+			<td align="center">작성일</td>
 		</tr>
 			<c:forEach items="${alist}" var="bean">
 				<tr>
-					<td>${bean.noticNo }</td>
-					<td><a href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
-					<td>${bean.regDt }</td>
+					<td align="center">${bean.noticNo }</td>
+					<td align="center"><a href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td align="center">${bean.regDt }</td>
 				</tr>
 			</c:forEach>
 	</table>
-	<div align="center" width="100%">
+	</div>
+	<div align="center" style="width:100%">
 				<div id="paginationBox">
 						<ul class="pagination">
 							<c:if test="${paging.prev}">
@@ -119,7 +124,7 @@
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" style="cursor:pointer" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>

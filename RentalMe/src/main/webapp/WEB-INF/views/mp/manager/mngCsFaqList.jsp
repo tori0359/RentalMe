@@ -42,8 +42,25 @@
 				<tr>
 				<form action="${pageContext.request.contextPath}/mp/mng/faqDelete" method="post">
 					<td><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
-					<td>FAQ</td>
-					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+					<c:if test="${bean.csClassGbCd eq '1'}">
+						<td>주문</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '2'}">
+						<td>배송</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '3'}">
+						<td>결제</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '4'}">
+						<td>교환취소</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '5'}">
+						<td>회원정보</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '6'}">
+						<td>기타</td>
+					</c:if>
+					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
 					<td>${bean.regDt}</td>
 					<td><input type="submit" value="삭제"/></td>
 				</form>
@@ -62,7 +79,7 @@
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" style="cursor: pointer;"onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>

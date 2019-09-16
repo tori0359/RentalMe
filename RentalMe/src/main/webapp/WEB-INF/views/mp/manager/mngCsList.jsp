@@ -45,7 +45,7 @@
 					<form action="${pageContext.request.contextPath}/mp/mng/noticeDelete" method="post">
 						<td><input type="hidden" name="num" value="${bean.noticNo}"/>${bean.noticNo}</td>
 						<td>공지</td>
-						<td><a href="${pageContext.request.contextPath}/cs/csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub}</a></td>
+						<td><a style="text-decoration:none" href="${pageContext.request.contextPath}/cs/csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub}</a></td>
 						<td>${bean.regDt}</td>
 						<td><input type="submit" value="삭제"/></td>
 					</form>
@@ -64,7 +64,7 @@
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" style="cursor: pointer;" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>

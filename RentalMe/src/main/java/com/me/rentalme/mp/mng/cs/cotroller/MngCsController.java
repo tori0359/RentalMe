@@ -87,7 +87,7 @@ public class MngCsController {
 		pagingPath="/mp/mng";
 		pagingPath+="/csFaqList";
 		
-		int listCnt=csService.noticListCnt();
+		int listCnt=csService.faqListCnt1();
 		
 		Paging csPaging=new Paging();
 		
