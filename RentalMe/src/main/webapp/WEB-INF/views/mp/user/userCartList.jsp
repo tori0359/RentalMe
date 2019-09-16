@@ -94,18 +94,18 @@
             height:40px;
       }
         #info{
-      	width:93%;
-      	margin: 20px auto;
-      	border:7px solid #E6E6E6;
-      	padding: 15px;
+	      	width:93%;
+	      	margin: 20px auto;
+	      	border:7px solid #E6E6E6;
+	      	padding: 15px;
       }
       
       #info p{
-      	line-height:20px;
-      	font-family:"nanumB";
+	      	line-height:20px;
+	      	font-family:"nanumB";
       }
 	.tdtext{
-      	margin:30px 0;
+      		margin:30px 0;
       }
    
       

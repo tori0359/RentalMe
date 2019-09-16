@@ -60,6 +60,7 @@ encoding="UTF-8"?>
 				#{content},
 				#{grade})
   	</insert>
+  
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
   		SELECT  FN_NM('GDS_NM',A.GDS_CD) AS gdsNm, 
@@ -124,6 +125,15 @@ encoding="UTF-8"?>
 			(SELECT DATE_FORMAT(NOW(),'%Y-%m-%d')),
 			#{chargeDeposit},
 			"1")
+  	</insert>
+  	<insert id="refundDeposit">
+  		INSERT INTO TB_MB120 (MB_NO, DEPOSIT_REFUND_SEQ, DEPOSIT_REFUND_DT, REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD)
+		VALUES	(#{mbNo}, 
+				(SELECT LPAD((SELECT COUNT(DEPOSIT_REFUND_SEQ)+1 FROM TB_MB120 A WHERE A.MB_NO=#{mbNo}),6,'0')),
+				DATE_FORMAT(NOW(), '%Y%m%d'),
+				#{refund},
+				'1')
+  	
   	</insert>
 
 	<update id="updateDeposit">

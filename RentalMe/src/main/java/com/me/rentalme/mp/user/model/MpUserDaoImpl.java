@@ -106,8 +106,18 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.inserDeposit",map);
 	}
 
+	//예치금 환불 요청
 	@Override
-
+	public int refundCharge(String refund, String mbNo) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("refund", refund);
+		map.put("mbNo", mbNo);
+		
+		return sqlSession.insert("mpUser.refundDeposit",map);
+	}
+	
+	
+	@Override
 	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("chargeDeposit", chargeDeposit);
@@ -199,6 +209,8 @@ public class MpUserDaoImpl implements MpUserDao{
 		
 		return result;
 	}
+
+	
 
 
 }

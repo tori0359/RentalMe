@@ -35,6 +35,9 @@ public interface MpUserService {
 
 	//예치금 충전
 	int insertCharge(CallVo callVo,String mbNo) throws SQLException;
+	
+	//예치금 환불요청
+	int refundCharge(String refund,String mbNo) throws SQLException;
 
 	//현재 예치금 업데이트
 	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException;
@@ -71,6 +74,8 @@ public interface MpUserService {
 
 	//비밀번호 변경
 	int changePw(String userId, String userPw);
+
+	
 	
 	
 

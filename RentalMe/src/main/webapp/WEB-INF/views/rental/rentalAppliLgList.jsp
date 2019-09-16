@@ -17,7 +17,7 @@
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style type="text/css">
 .content {
-	height: 30vh;
+	height: 100%;
 }
 .content-inner {
 	margin-left:200px;

@@ -288,6 +288,7 @@
 <!-- </form> -->
 
 <div id="depositrefund" class="col-md-12">
+<form action="/mp/deposit/refund" method="post">
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
@@ -295,27 +296,20 @@
        		</tr>
 			<tr>
        			<th class="active" style="text-align:center;">환불요청 금액(원)</th>
-       			<td><input type="text"></td>
+       			<td><input type="text" name="refund"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">환불수단</th>
        			<td>
        				<input type="radio" name="refund" value="계좌이체">무통장입금 &nbsp;
        				<input type="radio" name="refund" value="신용카드">카드취소<br>
-       				<div style="margin-top:10px;">
-       					<input type="text" placeholder="예금주명"/>
-       					<input type="text" placeholder="은행명"/>
-       				</div>
-       			
-	       			<div>
-	       				<input style="width:352px; margin-top:3px;" type="text" placeholder="계좌번호"/>
-	       			</div>
        			</td>
        		</tr>
 	</table>
 	<div class="chargediv">
-       		<button style="width:150px; margin-left:50px;" type="button" class="btn btn-danger">환불 신청하기</button>
+       		<button style="width:150px; margin-left:50px;" type="submit" class="btn btn-danger" id="refund_button">환불 신청하기</button>
     </div>
+</form>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

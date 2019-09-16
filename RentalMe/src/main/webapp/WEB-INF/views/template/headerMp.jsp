@@ -13,11 +13,11 @@
 		    height:100%;
 	    
 	 }
-  /*     #wrap{
+       /* #headerwrap{
             min-height:100%;
             position:relative;
             border:1px solid red;
-         } */
+         } */ 
          
       .contentDiv{
          padding-bottom: 200px;
@@ -41,8 +41,8 @@
             -moz-border-radius: 15px 15px 0 0;
             -webkit-border-radius: 15px 15px 0 0;
             border-radius: 15px 15px 0 0;
-         font-family: "nanumR";
-         text-align: center;
+         	font-family: "nanumR";
+       	  	text-align: center;
         }
         
         .mpTable>tbody tr{
@@ -82,19 +82,22 @@
         } 
        
       .mpdiv{
-         position: relative;
-         z-index:1;
-         margin:100px 0 100px 0;
+         	position: relative;
+        	z-index:1;
+         	margin:100px 0 100px 0;
       }
    
       .row{
-         margin: 0px;
+         	margin: 0px;
+        }
+        #mpContent{
+        	height:100%;
         }
 </style>
 <jsp:include page="./header.jsp"></jsp:include>
 </head>
 <body>
-<div id="wrap">
+<div id="headerwrap">
    <div id="mp" class="row">
       <div style="margin-right:0" class="mpdiv col-md-2 col-md-offset-1">
        <table class="mpTable">
