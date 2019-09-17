@@ -237,7 +237,7 @@ public class RentalAppliController {
 	@RequestMapping(value = "/detail/cart", method = RequestMethod.POST)
 	public String addLgDetailCart(RentalAppliVo rentalAppliVo, Model model ) {
 		int result = rentalAppliService.rentalGdsCart(rentalAppliVo);	// 장바구니등록
-		model.addAttribute("renCd", Integer.toString(result));
+		model.addAttribute("rtnCd", Integer.toString(result));
 		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
 	}
 	
@@ -255,19 +255,18 @@ public class RentalAppliController {
 			@RequestParam("gdsPrice")int gdsPrice, @RequestParam("agreeTerm")String agreeTerm, @RequestParam("deliverCost")String deliverCost, @RequestParam("instalCost")String instalCost, 
 			@RequestParam("asCondition")String asCondition, @RequestParam("odrQty")int odrQty, RentalAppliVo rentalAppliVo, Model model, HttpSession session ) {
 		
-		System.out.println("렌탈결제 왔능가");
+//		System.out.println("렌탈결제 왔능가");
 		
 		/* RequestParam text */
-//		System.out.println(userId);
 //		System.out.println(mbNo);
 //		System.out.println(gdsCd);
+//		System.out.println(rentalAppliVo.getGdsSclassCd());
 //		System.out.println(gdsPrice);
 //		System.out.println(agreeTerm);
 //		System.out.println(deliverCost);
 //		System.out.println(instalCost);
 //		System.out.println(asCondition);
 //		System.out.println(odrQty);
-//		System.out.println(realTotPrice);
 		
 		rentalAppliVo.setCrudGbCd(crudGbCd);
 		rentalAppliVo.setOdrGbCd(odrGbCd);
@@ -275,26 +274,26 @@ public class RentalAppliController {
 		rentalAppliVo.setSeq(seq);
 		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
 		rentalAppliVo.setGdsCd(gdsCd);
+		rentalAppliVo.setGdsSclassCd(rentalAppliVo.getGdsSclassCd());
 		rentalAppliVo.setGdsPrice(gdsPrice);
 		rentalAppliVo.setAgreeTerm(agreeTerm);
 		rentalAppliVo.setOdrQty(odrQty);
 		rentalAppliVo.setTotOdrAmt(totOdrAmt);
 		
-		System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
-		System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
-		System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
-		System.out.println("seq		= " +rentalAppliVo.getSeq());
-		System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
-		System.out.println("gdsCd 			= " +rentalAppliVo.getGdsCd());
-		System.out.println("gdsPrice 		= " +rentalAppliVo.getGdsPrice());
-		System.out.println("agreeTerm 		= " +rentalAppliVo.getAgreeTerm());
-		System.out.println("odrQty 			= " +rentalAppliVo.getOdrQty());
-		System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
+//		System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
+//		System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
+//		System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
+//		System.out.println("seq		= " +rentalAppliVo.getSeq());
+//		System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
+//		System.out.println("gdsCd 			= " +rentalAppliVo.getGdsCd());
+//		System.out.println("gdsPrice 		= " +rentalAppliVo.getGdsPrice());
+//		System.out.println("agreeTerm 		= " +rentalAppliVo.getAgreeTerm());
+//		System.out.println("odrQty 			= " +rentalAppliVo.getOdrQty());
+//		System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
 		
 		int result1 = rentalAppliService.rentalGdsOdr(rentalAppliVo);			// 주문자료 생성
 		int result2 = rentalAppliService.rentalGdsDetailOdr(rentalAppliVo);		// 주문상세자료 생성
-		model.addAttribute("renCd", Integer.toString(result1));
-
-		return null;
+		model.addAttribute("rtnCd", Integer.toString(result1));
+		return "redirect:/rental/Appli/lg/"+rentalAppliVo.getGdsSclassCd()+"/detail/"+rentalAppliVo.getGdsCd();
 	}
 }

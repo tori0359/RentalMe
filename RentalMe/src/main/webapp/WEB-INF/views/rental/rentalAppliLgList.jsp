@@ -113,7 +113,7 @@
 h6 {
 	display: inline;
 }
-#bestNotice1 {
+#bestNotice1, #bestNotice3 {
 	font-size: 9pt;
 }
 #option-menu, #option-price, #option-status, #option-result {
@@ -264,6 +264,7 @@ input::-moz-focus-inner { border: 0; }
 		// 옵션적용 안내 셋팅
 		if(${menu}%10 != 0) {
 			$('#bestNotice1').hide();
+			$('#bestNotice3').hide();
 		} 
 		
 		// 옵션 브랜드 셋팅
@@ -848,7 +849,10 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-option">
 				<table class="table table-bordered">
-					<tr class="active"><span id="bestNotice1"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다. </span><span id="bestNotice2">&nbsp;</span></tr>
+					<tr class="active">
+						<span id="bestNotice1"> * 전체보기 선택 또는 서브메뉴를 선택하지 않을 경우에만 [BEST 인기상품]이 표시됩니다.</span><span id="bestNotice2">&nbsp;</span><br>
+						<span id="bestNotice3"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다.</span><span id="bestNotice4">&nbsp;</span>
+					</tr>
 					<!-- ************** -->
 					<!-- 옵션 영역 시작 -->
 					<!-- ************** -->

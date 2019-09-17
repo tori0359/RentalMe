@@ -20,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.user.service.MpUserService;
+import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 /**
  * 마이페이지 컨트롤러
@@ -38,6 +40,9 @@ public class UserController {
 
 	@Inject
 	MpUserService mpUserService;
+	
+	@Inject
+	RentalAppliService rentalAppliService; 
 
 	/**
 	 * @throws SQLException 주문내역
@@ -89,6 +94,7 @@ public class UserController {
 		// 세션에서 mbno를 불러와서 이름 가져오기
 		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("sessionMbNo", mbNo);
 		mav.addObject("userVo", mpUserService.getName(mbNo));
 
 		mav.addObject("alist", mpUserService.cartList(mbNo));
@@ -119,6 +125,43 @@ public class UserController {
 
 		mav.setViewName("mp/user/userCartList");
 		return mav;
+	}
+	
+	/**
+	 * 장바구니 결제하기
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/cart/odr", method = RequestMethod.POST) 
+	public String addCartOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("payGbCd")String payGbCd, 
+			@RequestParam("mbNo")String mbNo, @RequestParam("totOdrAmt")int totOdrAmt,  @RequestParam("gdsCdArr[]")List<String> gdsCdArr,
+			@RequestParam("cartSeqArr[]")List<String> cartSeqArr, @RequestParam("gdsPriceArr[]")List<Integer> gdsPriceArr, @RequestParam("odrQtyArr[]")List<Integer> odrQtyArr, 
+			@RequestParam("agreeTermArr[]")List<String> agreeTermArr, RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
+		
+//			rentalAppliVo.setCrudGbCd(crudGbCd);
+//			rentalAppliVo.setOdrGbCd(odrGbCd);
+//			rentalAppliVo.setPayGbCd(payGbCd);
+//			rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
+//			rentalAppliVo.setTotOdrAmt(totOdrAmt);
+			
+//			System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
+//			System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
+//			System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
+//			System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
+//			System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
+//			System.out.println("gdsPriceArr		= " +gdsPriceArr);
+//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(0));
+//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(1));
+//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(2));
+//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(3));
+			
+			int result1 = rentalAppliService.cartOdr(rentalAppliVo);			// 주문자료 생성
+			int result2 = rentalAppliService.cartDetailOdr(rentalAppliVo, gdsCdArr, cartSeqArr, gdsPriceArr, odrQtyArr, agreeTermArr );		// 주문상세자료 생성
+			model.addAttribute("rtnCd", Integer.toString(result1));
+			return "redirect:/mp/";
 	}
 
 	/**
