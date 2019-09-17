@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,6 +153,21 @@
 
 			
 		});
+			$('#refund_button').click(function(){
+				alert('하이');
+				});
+
+			$('#myModal').on('shown.bs.modal', function (e) {
+				var refund = $(e.relatedTarget).data('refund');
+				console.log(refund);
+				
+				$(e.currentTarget).find('input[name="refund"]').val(refund);
+				
+				
+			})
+
+
+		
 	}
 	
 </script>
@@ -286,9 +302,9 @@
        	</div>
 </div>
 <!-- </form> -->
-
 <div id="depositrefund" class="col-md-12">
-<form action="/mp/deposit/refund" method="post">
+
+
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
@@ -296,20 +312,39 @@
        		</tr>
 			<tr>
        			<th class="active" style="text-align:center;">환불요청 금액(원)</th>
-       			<td><input type="text" name="refund"></td>
+       			<td><input type="text" name="refund" id="refund"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">환불수단</th>
        			<td>
-       				<input type="radio" name="refund" value="계좌이체">무통장입금 &nbsp;
-       				<input type="radio" name="refund" value="신용카드">카드취소<br>
+       				<input type="radio" name="refund2" value="계좌이체">무통장입금 &nbsp;
+       				<input type="radio" name="refund3" value="신용카드">카드취소<br>
        			</td>
        		</tr>
 	</table>
 	<div class="chargediv">
-       		<button style="width:150px; margin-left:50px;" type="submit" class="btn btn-danger" id="refund_button">환불 신청하기</button>
+       		<button style="width:150px; margin-left:50px;" type="submit" class="btn btn-danger" id="refund_button" data-target="#myModal" data-toggle="modal" >환불 신청하기</button>
     </div>
-</form>
+
+	<form action="/mp/deposit/refund" method="post">
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	       <input type="text" name="refund4"/><p>환불을 요청하시겠습니까?</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</form>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

@@ -43,7 +43,7 @@ public class MpUserServiceImpl implements MpUserService{
 			log.debug("후기 등록 서비스...");
 			
 			
-			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),mbNo);
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),callVo.getOdrNo(),mbNo);
 		}
 	
 	

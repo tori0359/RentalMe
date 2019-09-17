@@ -9,12 +9,19 @@
 
 <style type="text/css">
 	.maincar{
-		height: 850px;	
+		height: 500px;	
 	}
 	
 	.carousel-inner{
 		height:500px;
 	}
+	#event{
+		background-color:black;
+	}
+	#event p {
+		color:white;
+	}
+	
 
 </style>
 <script type="text/javascript">
@@ -55,6 +62,11 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+</div>
+<div class="container">
+	<div id="event" style="border:1px solid red;">
+		<p> 땡 잡았다! 이벤트경매 바로가기</p>
+	</div>
 </div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>

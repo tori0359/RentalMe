@@ -51,7 +51,7 @@
 		}
 		#title{
          	font-family: "altair";
-       	 	color: black;
+       	 	color: #1C1C1C;
         	font-size: 28pt;
         	text-decoration:none;
    	   }
