@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.me.rentalme.act.dao.ActDao;
-
+import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
@@ -82,6 +81,36 @@ public class ActServiceImpl implements ActService{
 	@Override
 	public ActVo actDetailAuction(String gdsCdDetail) {
 		return actDao.selectActDetail2(gdsCdDetail);
+	}
+
+	@Override
+	public int insertActResult(ActResultVo bean) throws SQLException {
+		return actDao.insertActResult(bean);
+	}
+
+	@Override
+	public int updateBidWin(String gdsCd) throws SQLException {
+		return actDao.updateBidWin(gdsCd);
+	}
+
+	@Override
+	public List<ActResultVo> SelectMngActSpec() throws SQLException {
+		return actDao.SelectMngActSpec();
+	}
+
+	@Override
+	public int updateMngBidCancel(String gdsCd) throws SQLException {
+		return actDao.updateMngBidCancel(gdsCd);
+	}
+
+	@Override
+	public int updateActEnd(String gdsCd) throws SQLException {
+		return actDao.updateActEnd(gdsCd);
+	}
+
+	@Override
+	public int selectMyMb(String mbno) throws SQLException {
+		return actDao.selectMyMb(mbno);
 	}
 
 }

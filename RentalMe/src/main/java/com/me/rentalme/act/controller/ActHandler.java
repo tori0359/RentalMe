@@ -30,13 +30,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ActHandler extends TextWebSocketHandler{
 	//채팅서버
 	Map<String,WebSocketSession> map=new HashMap<String,WebSocketSession>();			//소켓에 연결된 client
-	Map<String,Map<String, Integer>> premap=new LinkedHashMap<String, Map<String, Integer>>();//응찰한 사람 전부 아이디, 시간,가격 넣음
+	Map<String,Map<String, Integer>> premap=new HashMap<String, Map<String, Integer>>();//응찰한 사람 전부 아이디, 시간,가격 넣음
 	Map<String,Integer> pricemap=new LinkedHashMap<String, Integer>();			//아이디 가격 넣음
+	List<Object> prebidList=new ArrayList<Object>();									//이전 낙찰가에 응찰한 사람
 	List<Object> bidList=new ArrayList<Object>();										//현재 낙찰가에 응찰한 사람
-	SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss.SSS");
+	SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //	String list;
 	int totalprice;							//낙찰가
 	boolean interup=true;					//중간에 응찰시 스레드를 끊음
+	int currentCnt;							//현재 응찰중인 사람들
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//소켓이 접속했을 때 이벤트
 	@Override
@@ -75,10 +77,14 @@ public class ActHandler extends TextWebSocketHandler{
 			//map -> json
 			//System.out.println("json값 : "+json);
 			if(String.valueOf(mapping.get("type")).equals("adminMsg")) {
+				currentCnt=0;
+				prebidList=bidList;
+				System.out.println("이전리스트:"+prebidList);
 				bidList=new ArrayList<Object>();
 				totalprice=totalprice+Integer.parseInt(String.valueOf(mapping.get("text")));
 				mapping.put("text", totalprice);
 			}else if(String.valueOf(mapping.get("type")).equals("bid")) {
+				currentCnt++;
 				bidList.add(session.getAttributes().get("loginUserId"));
 				Map<String, Integer> inmap=new HashMap<String, Integer>();				//맵에 들어갈 맵
 				inmap.put(dayTime.format(new Date(System.currentTimeMillis())), totalprice);		//현재 시간과 가격을 넣는다
@@ -86,9 +92,9 @@ public class ActHandler extends TextWebSocketHandler{
 
 				interup=false;
 			}else if(String.valueOf(mapping.get("type")).equals("enter")) {
-
+				mapping.put("text",bidList);
+				mapping.put("price",totalprice);
 			}else if(String.valueOf(mapping.get("type")).equals("countDown")) {
-				System.out.println("카운트 들어옴");
 				interup=true;
 				timeThread();
 			}
@@ -211,39 +217,77 @@ public class ActHandler extends TextWebSocketHandler{
 			TextMessage msg;
 			@Override
 			public void run() {
-				if(count>0&&interup) {
-					msg = new TextMessage(count+"");
-					count--;
-				}else if(count==0&&interup){
-					System.out.println("첫번째리스트:"+bidList.get(0));
-					String endMsg="{\"type\":\"endMsg\",\"text\":\""+bidList.get(0)+"\",\"id\":\"admin\",\"cnt\":0}";
-					ObjectMapper mapper = new ObjectMapper();
-					Map<String, Object> mapping = new HashMap<String, Object>();
-					try {
-						mapping = mapper.readValue(endMsg, new TypeReference<Map<String, String>>(){});
-						endMsg = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					msg= new TextMessage(endMsg);
-					count--;
-				}else {
-					System.out.println("끝...");
-					m_timer.cancel();
-					count--;
-				}
-				
-				if(count>=-1) {
-					Set<String> keys=map.keySet();
-					Iterator<String> ite=keys.iterator();
-					while(ite.hasNext()) {
+				if(interup) {
+					if(count>0) {
+						msg = new TextMessage(count+"");
+						System.out.println("현재카운트:"+currentCnt);
+						Set<String> keys=map.keySet();
+						Iterator<String> ite=keys.iterator();
+						while(ite.hasNext()) {
+							try {
+								map.get(ite.next()).sendMessage(msg);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}else if(count==0){
+						String endMsg=null;
+						
+						if(currentCnt==0) {
+							endMsg="{\"type\":\"endMsg\",\"text\":\""+prebidList.get(0)+"\",\"id\":\"admin\",\"cnt\":0}";
+						}else {
+							endMsg="{\"type\":\"endMsg\",\"text\":\""+bidList.get(0)+"\",\"id\":\"admin\",\"cnt\":0}";
+						}
+						ObjectMapper mapper = new ObjectMapper();
+						Map<String, Object> mapping = new HashMap<String, Object>();
 						try {
-							map.get(ite.next()).sendMessage(msg);
+							mapping = mapper.readValue(endMsg, new TypeReference<Map<String, String>>(){});
+							endMsg = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						msg= new TextMessage(endMsg);
+						Set<String> keys=map.keySet();
+						Iterator<String> ite=keys.iterator();
+						while(ite.hasNext()) {
+							try {
+								map.get(ite.next()).sendMessage(msg);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}else if(count==-1){
+						String bidResult=null;
+						
+						ObjectMapper mapper = new ObjectMapper();
+						Map<String, Object> mapping = new HashMap<String, Object>();
+						try {
+							String chbidR=mapper.writeValueAsString(premap).replaceAll("\"", "바꿈");
+							bidResult="{\"type\":\"bidResult\",\"text\":\""+chbidR+"\",\"id\":\"admin\",\"cnt\":0}";
+							mapping = mapper.readValue(bidResult, new TypeReference<Map<String, String>>(){});
+							bidResult = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						msg= new TextMessage(bidResult);
+						Set<String> keys=map.keySet();
+						Iterator<String> ite=keys.iterator();
+						while(ite.hasNext()) {
+							try {
+								map.get(ite.next()).sendMessage(msg);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}else {
+						System.out.println("끝...");
+						m_timer.cancel();
 					}
+				}else {
+					System.out.println("끝...");
+					m_timer.cancel();
 				}
+				count--;
 			}
 		};
 		m_timer.schedule(m_task, 1000, 1000);

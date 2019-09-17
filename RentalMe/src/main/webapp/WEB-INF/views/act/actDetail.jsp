@@ -140,6 +140,7 @@
 		var id= msg.id;
 		var text=msg.text;
 		var type=msg.type;
+		var price=msg.price;
 		
 		$('#liveviewcnt').text(msg.cnt);
 		if(type=='bid'){
@@ -147,7 +148,16 @@
 			$('#bidList').append("<li>"+id+"</li>");
 			$('#countView').text('');
 		}else if(type=='enter'){
+			text=text+'';
 			$('#actLive').append(id+"님이 경매장에 입장하셨습니다<br/>");
+			$('#nowPrice').text("");
+			$('#nowPrice').append("현재가격: "+price+"원");
+			$('#bidList').text("");
+			var textArr=text.split(',');
+			for(var i in textArr){
+				$('#bidList').append("<li>"+textArr[i]+"</li>");
+			}
+			
 		}else if(type=='adminMsg'){
 			$('#actLive').append(text+"원 응찰하실 분?<br/>");
 			$('#sendMsg').attr('disabled', false);
@@ -163,6 +173,7 @@
 			}
 		}else if(type=='endMsg'){
 			$('#sendMsg').attr('disabled', true);
+			$('#countView').text('');
 			$('#countView').append(text+'님 입찰되었습니다.');
 		}
 
@@ -183,7 +194,8 @@
 			type: "enter",
 			text: $('#actInfo').val(),
 			id: $('#idsession').text(),
-			cnt: 0
+			cnt: 0,
+			price: 0
 		};
 
 		sock.send(JSON.stringify(msg));
@@ -193,7 +205,8 @@
 			type: "bid",
 			text: $('#actInfo').val(),
 			id: $('#idsession').text(),
-			cnt: 1
+			cnt: 1,
+			price: 0
 		};
 
 		sock.send(JSON.stringify(msg));

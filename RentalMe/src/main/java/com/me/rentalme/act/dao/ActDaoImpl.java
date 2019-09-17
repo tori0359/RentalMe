@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
@@ -66,6 +67,36 @@ public class ActDaoImpl implements ActDao{
 		
 		System.out.println(goodsNum);
 		return sqlSession.selectList("actRental.goodsList",goodsNum);
+	}
+
+	@Override
+	public int insertActResult(ActResultVo bean) throws SQLException {
+		return sqlSession.insert("act.insertActResult",bean);
+	}
+
+	@Override
+	public int updateBidWin(String gdsCd) throws SQLException {
+		return sqlSession.update("act.updateBidWin", gdsCd);
+	}
+
+	@Override
+	public List<ActResultVo> SelectMngActSpec() throws SQLException {
+		return sqlSession.selectList("act.SelectMngActSpec");
+	}
+
+	@Override
+	public int updateMngBidCancel(String gdsCd) throws SQLException {
+		return sqlSession.update("act.updateMngBidCancel", gdsCd);
+	}
+
+	@Override
+	public int updateActEnd(String gdsCd) throws SQLException {
+		return sqlSession.update("act.updateActEnd", gdsCd);
+	}
+
+	@Override
+	public int selectMyMb(String mbno) throws SQLException {
+		return sqlSession.selectOne("act.selectMyMb", mbno);
 	}
 
 }
