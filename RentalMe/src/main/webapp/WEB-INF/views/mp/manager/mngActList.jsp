@@ -92,7 +92,7 @@
 					<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
        				</td>
 					<td style="text-align:center"><input type="hidden" name="num" value="${bean.gdsCd}" />${bean.gdsCd}</td>
-					<td><a id="goodstext" href="/act/${bean.gdsCdDetail}">${bean.gdsNm}</a></td>
+					<td><a>${bean.gdsNm}</a></td>
 					<td style="text-align:center">${bean.regDt}</td>
 					<c:choose>
 						<c:when test="${bean.actStsCd eq '2'}">

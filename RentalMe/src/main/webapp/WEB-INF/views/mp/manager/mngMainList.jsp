@@ -119,7 +119,7 @@
 						</ul>
 					</div>
 	</div>
-				<div id="btn00"><a href="/mp/mng/csAdd"><input type="button" id="btn00" value="등록"></a></div>
+				<div id="btn00"><a href="${pageContext.request.contextPath}/mp/mng/rentalAddPage"><input type="button" id="btn00" value="등록"></a></div>
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
