@@ -303,7 +303,7 @@
 
 		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
 		var userId = "${loginUserId}";
-		var crudGbCd = "IICART";
+		var crudGbCCART"IICART";
 		var odrGbCd = "10";
 		var payGbCd = radioVal;
 		var mbNo = "${sessionMbNo}";
@@ -365,7 +365,7 @@
 						type: "post",
 						data: allData,
 						success : function(){
-							location.href = "/mp/";
+							location.hrmp/= "/mp/";
 						}
 					});
 			    } else {
@@ -382,7 +382,7 @@
 					url: "/mp/cart/odr",
 					type: "post",
 					data: allData,
-					success : function(){
+					success : function() {
 						location.href = "/mp/";
 					}
 				});
@@ -505,10 +505,10 @@
 								<c:forEach items="${alist }" var="alist" varStatus="status">
 									<c:if test="${status.index eq '0' }">
 								    	<!-- <input type="text" class="form-control" id="realGdsCd" disabled="disabled" style="background-color:white;" name="gdsCd" value="${alist.gdsCd }" style="display: none;">  -->
-										<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
+										<input type="text" btn btn-defaultdefault" id="realGdsNm" disabled="disabled" style="background-color border:solid 0px; text-align:left;n:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
 										<!-- <input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${alist.gdsPrice }" > -->
 										<fmt:setLocale value="ko_KR"></fmt:setLocale>
-										<input type="text" class="btn btn-default" id="realGdsPrice2" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
+										<input type="text" btn btn-defaultdefault" id="realGdsPrice2" disabled="disabled" style="background-colo; border:solid 0px; text-align:left;n:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
 							    	</c:if>
 						    	</c:forEach>
 							</div>
