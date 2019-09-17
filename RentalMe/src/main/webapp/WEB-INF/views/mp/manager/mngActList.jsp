@@ -54,7 +54,7 @@
 </script>
 </head>
 <body>
-<div id="head"><h2>이벤트 경매</h2></div>
+<div id="head"><h2>경매상품 리스트</h2></div>
 <script>
 		 $("#choosedel").click(function(){
 		  var confirm_val = confirm("정말 삭제하시겠습니까?");
@@ -81,11 +81,11 @@
 <a id="choosedel">선택삭제</a>
 	<table class="table table-hover">
 		<tr>
-			<td style="text-align:center"><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></td>
-			<td style="text-align:center">상품코드</td>
-			<td style="text-align:center">상품명</td>
-			<td style="text-align:center">등록일</td>
-			<td style="text-align:center">경매여부</td>
+			<th style="text-align:center"><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></th>
+			<th style="text-align:center">상품코드</th>
+			<th style="text-align:center">상품명</th>
+			<th style="text-align:center">등록일</th>
+			<th style="text-align:center">경매여부</th>
 		</tr>
 			<c:forEach items="${actList}" var="bean">
 				<tr>

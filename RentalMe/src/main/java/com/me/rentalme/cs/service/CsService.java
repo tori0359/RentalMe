@@ -9,12 +9,13 @@ import javax.inject.Inject;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.model.entity.UserVo;
 
 public interface CsService {
 
 	
-	List<CsVo> csFaqList(Paging paging) throws SQLException;    //faq리스트페이지
+	List<CsVo> csFaqList(Search search) throws SQLException;    //faq리스트페이지
 	List<CsVo> csNoticeList(Paging paging) throws SQLException;	//공지 리스트페이지
 	List<CsVo> csInqList(Paging paging) throws SQLException;	//문의 리스트페이지
 	
@@ -36,7 +37,7 @@ public interface CsService {
 	int inqAnswer(String num) throws SQLException;
 	
 	//게시글 총 갯수
-	int faqListCnt1() throws SQLException;
+	int faqListCnt1(Search search) throws SQLException;
 	int noticListCnt() throws SQLException;
 	int inquiryListCnt() throws SQLException;
 }

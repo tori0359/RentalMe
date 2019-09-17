@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 
 
 @Repository
@@ -21,9 +22,9 @@ public class CsDaoImpl implements CsDao {
 	SqlSession sqlSession; 
 	
 	@Override
-	public List<CsVo> faqSelectAll(Paging paging) throws SQLException {
+	public List<CsVo> faqSelectAll(Search search) throws SQLException {
 		
-		return sqlSession.selectList("csCenter.faqSelectAll",paging);
+		return sqlSession.selectList("csCenter.faqSelectAll",search);
 	}
 
 	
@@ -159,10 +160,10 @@ public class CsDaoImpl implements CsDao {
 
 	//°Ô½Ã±Û °¹¼ö
 	@Override
-	public int faqListCnt() throws SQLException {
+	public int faqListCnt(Search search) throws SQLException {
 		System.out.println("faqÆäÀÌÂ¡ dao");
 		int cnt=0;
-		cnt=sqlSession.selectOne("csCenter.csFaqListCnt");
+		cnt=sqlSession.selectOne("csCenter.csFaqListCnt",search);
 		System.out.println("faq°¹¼ö:"+cnt);
 		return cnt;
 	}

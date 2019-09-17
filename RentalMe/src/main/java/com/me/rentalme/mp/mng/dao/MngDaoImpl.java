@@ -89,10 +89,91 @@ public class MngDaoImpl implements MngDao{
 		return sqlSession.selectOne("mpMng.selectusedListCnt");			//Áß°í¸®½ºÆ® ÃÑ°¹¼ö
 	}
 
+	
+	
+	
+	//¹Î¼ö
 	@Override
-	public List<RentalAppliVo> selectGoodsList() throws SQLException {
+	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException {
 		
-		return sqlSession.selectList("mpMng.selectRentalList");
+		return sqlSession.selectList("mpMng.selectRentalList",apliPaging);
+	}
+
+	@Override
+	public int goodsListCnt() {
+		return sqlSession.selectOne("mpMng.goodsListCnt");
+	}
+
+	
+	@Override
+	public int lGoodsListCnt() {
+		return sqlSession.selectOne("mpMng.lGoodsListCnt");
+	}
+
+	@Override
+	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.selectLgoodsList",apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.sGoodsList",apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.kGoodsList",apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.fGoodsList",apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.otherGoodsList",apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.pacGoodsList",apliPaging);
+	}
+
+	@Override
+	public int sGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mpMng.sGoodsListCnt");
+	}
+
+	@Override
+	public int kGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mpMng.kGoodsListCnt");
+	}
+
+	@Override
+	public int fGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mpMng.fGoodsListCnt");
+	}
+
+	@Override
+	public int otherGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mpMng.otherGoodsListCnt");
+	}
+
+	@Override
+	public int pacGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mpMng.pacGoodsListCnt");
 	}
 	
 }

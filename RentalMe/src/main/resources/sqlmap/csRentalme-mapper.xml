@@ -6,7 +6,15 @@
   
   <!-- 게시글 리스트  -->
 	<select id="faqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-		SELECT * FROM TB_FAQ100 ORDER BY FAQ_NO DESC
+		SELECT * FROM TB_FAQ100 
+		
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+				AND SUB like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		
+		ORDER BY FAQ_NO DESC
   		LIMIT #{startListNum}, #{listSize}
   	</select>
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
@@ -21,7 +29,15 @@
   	
   	<!--  게시글 갯수-->
   	<select id="csFaqListCnt" resultType="int">
-  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100;
+  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100
+  		<trim prefix="WHERE" prefixOverrides="AND|OR">
+      <if test="keyword != null and keyword != '' ">
+			<if test="searchType=='title'">
+				AND SUB like CONCAT('%', #{keyword}, '%')
+			</if>
+      </if>
+	</trim>
+	
   	</select>
   	<select id="csNoticListCnt" resultType="int">
   		SELECT COUNT(NOTIC_NO) AS CNT FROM TB_NOTIC100;

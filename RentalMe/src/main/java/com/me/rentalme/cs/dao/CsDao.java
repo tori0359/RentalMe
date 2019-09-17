@@ -6,11 +6,12 @@ import java.util.Map;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 
 public interface CsDao {
 
 	//faq 리스트
-	List<CsVo> faqSelectAll(Paging paging) throws SQLException;
+	List<CsVo> faqSelectAll(Search search) throws SQLException;
 	List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//공지 리스트
@@ -21,7 +22,7 @@ public interface CsDao {
 	List<CsVo> inqSelectAll(Paging paging) throws SQLException;
 	
 	//게시글 총 갯수
-	int faqListCnt() throws SQLException;
+	int faqListCnt(Search search) throws SQLException;
 	int noticListCnt() throws SQLException;
 	int inquiryListCnt() throws SQLException;
 	

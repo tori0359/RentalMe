@@ -34,6 +34,22 @@ public interface MngDao {
 	
 	//¹Î¼ö
 	//·»Å» ÀüÃ¼ »óÇ° ¸®½ºÆ®
-	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	
+	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException;
+	int goodsListCnt();
+	int lGoodsListCnt();
+	int sGoodsListCnt();
+	int kGoodsListCnt();
+	int fGoodsListCnt();
+	int otherGoodsListCnt();
+	int pacGoodsListCnt();
+	
+	
 	
 }

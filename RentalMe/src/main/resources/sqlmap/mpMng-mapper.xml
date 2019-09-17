@@ -83,9 +83,71 @@
 		WHERE DECL_NO=#{declNo}
 	</update>
 	
+	<!--민수 -->
 	
-	<!--민수 렌탈상품리스트 -->
+	<!--렌탈상품리스트 -->
 	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT * FROM TB_GDS100 ORDER BY REG_DT
+		LIMIT #{startListNum},#{listSize}
 	</select>
+	<!--대형 상품리스트 -->
+	<select id="selectLgoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='10' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	<!--소형 상품리스트 -->
+	<select id="sGoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='20' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	<!--주방 상품리스트 -->
+	<select id="kGoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='30' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	<!--가구 상품리스트 -->
+	<select id="fGoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='40' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	<!--기타 상품리스트 -->
+	<select id="otherGoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='50' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	<!--패키지 상품리스트 -->
+	<select id="pacGoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * FROM TB_GDS100 WHERE GDS_MCLASS_CD='60' ORDER BY REG_DT 
+		LIMIT #{startListNum},#{listSize}
+	</select>
+	
+	<!--전체 상품리스트 갯수  -->
+	<select id="goodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100;
+  	</select>
+	<!-- 대형가전 상품리스트 갯수 -->
+	<select id="lGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='10';
+  	</select>
+	<!-- 소형가전 상품리스트 갯수 -->
+	<select id="sGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='20';
+  	</select>
+	<!-- 주방가전 상품리스트 갯수 -->
+	<select id="kGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='30';
+  	</select>
+	<!-- 가구가전 상품리스트 갯수 -->
+	<select id="fGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='40';
+  	</select>
+	<!-- 기타가전 상품리스트 갯수 -->
+	<select id="otherGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='50';
+  	</select>
+	<!-- 패키지가전 상품리스트 갯수 -->
+	<select id="pacGoodsListCnt" resultType="int">
+  		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='60';
+  	</select>
+	
 </mapper>

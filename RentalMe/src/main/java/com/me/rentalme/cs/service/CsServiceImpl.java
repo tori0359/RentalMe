@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.dao.CsDao;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.model.entity.UserVo;
 
 
@@ -24,9 +25,9 @@ public class CsServiceImpl implements CsService {
 	
 	//faq게시글 리스트
 	@Override
-	public List<CsVo> csFaqList(Paging paging) throws SQLException {
+	public List<CsVo> csFaqList(Search search) throws SQLException {
 		
-		return csDao.faqSelectAll(paging);
+		return csDao.faqSelectAll(search);
 	}
 	
 	//공지게시글 리스트
@@ -118,9 +119,9 @@ public class CsServiceImpl implements CsService {
 
 	//게시글 총 갯수
 	@Override
-	public int faqListCnt1() throws SQLException {
+	public int faqListCnt1(Search search) throws SQLException {
 		System.out.println("페이징 service");
-		return csDao.faqListCnt();
+		return csDao.faqListCnt(search);
 	}
 
 	@Override

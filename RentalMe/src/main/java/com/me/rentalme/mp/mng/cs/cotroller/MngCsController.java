@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.ProductVo;
 
@@ -87,7 +88,8 @@ public class MngCsController {
 		pagingPath="/mp/mng";
 		pagingPath+="/csFaqList";
 		
-		int listCnt=csService.faqListCnt1();
+		Search search=new Search();
+		int listCnt=csService.faqListCnt1(search);
 		
 		Paging csPaging=new Paging();
 		
@@ -99,7 +101,7 @@ public class MngCsController {
 		
 		
 		System.out.println("mapping..");
-		mav.addObject("blist", csService.csFaqList(csPaging));
+		mav.addObject("blist", csService.csFaqList(search));
 		model.addAttribute("pathPaging",pagingPath);
 		model.addAttribute("paging", csPaging);
 		

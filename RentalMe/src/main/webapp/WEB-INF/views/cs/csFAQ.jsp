@@ -80,7 +80,23 @@
 				$(".list6").show();
 				$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
 			});
-			
+
+			$('#btnSearch').click(function(e){
+
+				e.preventDefault();
+
+				var url = "${pageContext.request.contextPath}/cs/csFAQ";
+
+				url = url + "?searchType=" + $('#searchType').val();
+
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+
+				console.log(url);
+
+			});
+	
 		})
 	</script>
 	<style type="text/css">
@@ -205,13 +221,11 @@
 					<td>회원정보</td>
 					<td>기타</td>
 					<td>
-						<select style="height:25px;">
-							<option>전체보기</option>
-							<option>제목</option>
-							<option>분류</option>
+						<select style="height:25px;" name="searchType" id="searchType">
+							<option value="title">제목</option>
 						</select>
-						<input type="text"/>
-						<button>검색</button>
+						<input type="text" name="keyword" id="keyword">
+						<button name="btnSearch" id="btnSearch">검색</button>
 					</td>
 				</tr>
 			</table>
