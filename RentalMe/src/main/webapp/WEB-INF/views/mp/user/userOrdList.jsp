@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html>
 <html>
@@ -126,13 +127,19 @@
       	font-family:"nanumB";
       }
       .tdtext{
-      	margin:30px 0;
+      	margin:40px 0;
+      }
+      .tdtext1{
+      	margin-top:40px ;
+      }
+      .tdtext2{
+      	margin-top:0px ;
       }
    
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
-    window.onload = function (){
+    window.onload = function () {
       //점수출력 초기화
       $('#0').hide();
       $('#1').hide();
@@ -231,13 +238,67 @@
     	   alert("후기가 등록되었습니다!");
        }); 
 
-   } 
+       $(".gubun1").each(function(){
+    	   var rows1 = $(".gubun1:contains('"+$(this).text()+"')");
+			if(rows1.length > 1) {
+					rows1.eq(0).attr("rowspan", rows1.length);
+					rows1.not(":eq(0)").remove();
+			}
+       })
 
+      $(".gubun2").each(function(){
+    	   var rows2 = $(".gubun2:contains('"+$(this).text()+"')");
+			if(rows2.length > 1) {
+					//vCnt -= 1;
+					rows2.eq(0).attr("rowspan", rows2.length);
+					rows2.not(":eq(0)").remove();
+			}
+       })
 
+       // 주문상태 value값에 따른 동적처리변환
+       for(var i=0; i<vCnt; i++) {
+           //alert($("#odrNo"+i).text()); 현재 선택한 버튼의 주문번호
+           var odrStsGbCd = $("#odrBtn"+i).val();
+           if(odrStsGbCd == "DW") {
+        	   $("#odrBtn"+i).val("입금대기");
+        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).attr('disabled', true);
+        	   $("#odrBtn2"+i).hide();
+           } else if(odrStsGbCd == "OC") {
+        	   $("#odrBtn"+i).val("구매");
+        	   $("#odrBtn2"+i).val("반품");
+		   } else if(odrStsGbCd == "PC") {
+        	   $("#odrBtn"+i).val("구매확정");
+        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).attr('disabled', true);
+        	   $("#odrBtn2"+i).hide();
+		   } else if(odrStsGbCd == "RW") {
+        	   $("#odrBtn"+i).val("반품대기");
+        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).attr('disabled', true);
+        	   $("#odrBtn2"+i).hide();
+		   } else if(odrStsGbCd == "RC"){
+        	   $("#odrBtn"+i).val("반품확정");
+        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).attr('disabled', true);
+        	   $("#odrBtn2"+i).hide();
+		   }
+		   //alert($(".gubun2").eq(i).text());
+			//$("#odrBtn"+i).val(i);
+       }
+       //alert($("#odrBtn9").val("zzz"));
+       //alert($(".gubun2").eq(10).text("씨빵"));
+       
+    } 
+	/**************************/
+	/**** 전역변수 선언시작 ***/
+	/**************************/
+	<c:set var="alistLength" value="${fn:length(alist)}"></c:set>
+	var vCnt = "${alistLength}";	// 주문내역 총 리스트수
 
-   
-   
-   
+	/**************************/
+	/**** 전역변수 선언끝 *****/
+	/**************************/
 </script>
 <script>
 
@@ -275,22 +336,30 @@
              </tr>
           </thead>
           <tbody>
-          <c:set var="ordNoChk" value=""/>
-          <c:forEach items="${alist}" var="bean" >
+          <c:forEach items="${alist}" var="bean" varStatus="status">
              <tr>
-             	<c:set var="ordNoChk" value="${bean.odrNo }"/>
-                <td ><p class="tdtext" style="text-align:center;">${ordNoChk}</p></td>
+                <td class="gubun1" style="vertical-align:middle;"><p class="tdtext" style="text-align:center; ">${bean.odrNo}</p></td>
                 <td style="text-align:left;">
 	                <a style="text-decoration:none; color:black;"href="#">
-	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
+	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm}
 	                <input type=hidden value="${bean.gdsCd}"/></a>
 	                
                 </td>
-                <td style="text-align:center;"><p class="tdtext">${bean.odrDt}</p></td>
-                <td style="text-align:center;"><p class="tdtext">${bean.odrQty}</p></td>
-                <td style="text-align:center;"><p class="tdtext">${bean.agreeTerm}개월</p></td>
-                <td style="text-align:center;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
-                <td style="text-align:center;"><p class="tdtext">
+                <td style="vertical-align:middle;"><p class="tdtext">${bean.odrDt}</p></td>
+                <td style="vertical-align:middle;"><p class="tdtext">${bean.odrQty}</p></td>
+                <td style="vertical-align:middle;"><p class="tdtext">${bean.agreeTerm}개월</p></td>
+                <td style="vertical-align:middle;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
+                <td class="gubun2" style="vertical-align:middle;">
+                	<p class="tdtext1" style="text-align:center; color:red;">
+                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
+               		</p>
+               		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:blue;">
+               			${bean.odrNo}
+               		</p>
+                </td>
+                <!-- 이전 주문상태 사용 안함, display:none 처리 -->
+                <td style="vertical-align:middle; display:none;"><p class="tdtext">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
                       입금대기
                    </c:if>
@@ -308,7 +377,7 @@
                    </c:if>
                    </p>
                 </td>
-                <td style="text-align:center;"><p class="tdtext">
+                <td style="vertical-align:middle;"><p class="tdtext">
                  <c:choose>
                   	<c:when test="${bean.cnt == 0}">
                 		<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
