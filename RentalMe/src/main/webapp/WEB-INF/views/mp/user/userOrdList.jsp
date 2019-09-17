@@ -213,6 +213,7 @@
            var gdsNm2 = $(e.relatedTarget).data('gds-nm');
            var userId2 = $(e.relatedTarget).data('user-id');
            var gdsCd2 = $(e.relatedTarget).data('gds-cd');
+           var odrNo = $(e.relatedTarget).data('odr-no');
            
            $(e.currentTarget).find('div[name="gdsNm"]').text(gdsNm2);
            $(e.currentTarget).find('input[name="gdsNm"]').val(gdsNm2);
@@ -222,6 +223,8 @@
            
            $(e.currentTarget).find('div[name="gdsCd"]').text(gdsCd2);
            $(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd2);
+
+           $(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
        });
 
        $('#review').click(function(){
@@ -281,6 +284,7 @@
 	                <input type=hidden value="${bean.gdsCd}"/></a>
 	                
                 </td>
+                <td><input type="hidden" value="${bean.odrNo}"/></td>
                 <td><p class="tdtext">${bean.odrDt}</p></td>
                 <td><p class="tdtext">${bean.odrQty}</p></td>
                 <td><p class="tdtext">${bean.agreeTerm}개월</p></td>
@@ -303,7 +307,7 @@
                 <td><p class="tdtext">
                  <c:choose>
                   <c:when test="${bean.cnt == 0}">
-                	<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-user-id="jiyoung" data-gds-cd="${bean.gdsCd}">후기쓰기</button>
+                	<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
                 </c:when>
                 <c:otherwise>
                		<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">이미 후기를 등록하셨습니다</button>
@@ -318,65 +322,65 @@
        </div>
       <div class="hr"></div>
      <!-- Modal -->
-<form action="/mp/review" class="form-horizontal" method="post">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">후기 쓰기</h4>
-      </div>
-      
-      <div class="modal-body">
-      	<div class="row">
-      		<div class="col-md-5">
-	        	<label>상품명</label> <div name="gdsNm"></div>
-	        	<input type="hidden" name="gdsNm" value="gdsNm"/>
-	        	<input type="hidden" name="gdsCd" value="gdsCd"/>
-	        </div>
-	        <div class="col-md-4 col-md-offset-3">
-	      		<label>글쓴이 </label>
-		      	 <c:if test="${empty userVo.userNM}">
-			     	<div>${loginUserId}</div>
-			     </c:if>
-			     <c:if test="${!empty userVo.userNM }">
-			     	<div>${userVo.userNM}</div>
-			     </c:if>
-		     
-	        	<input type="hidden" name="userId" value="userId"/>
-	        	<input type="hidden" name="grade" id="grade"/>
+	<form action="/mp/review" class="form-horizontal" method="post">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">후기 쓰기</h4>
+	      </div>
+	      
+	      <div class="modal-body">
+	      	<div class="row">
+	      		<div class="col-md-5">
+		        	<label>상품명</label> <div name="gdsNm"></div>
+		        	<input type="hidden" name="gdsNm" value="gdsNm"/>
+		        	<input type="hidden" name="gdsCd" value="gdsCd"/>
+		        </div>
+		        <div class="col-md-4 col-md-offset-3">
+		      		<label>글쓴이 </label>
+			      	 <c:if test="${empty userVo.userNM}">
+				     	<div>${loginUserId}</div>
+				     </c:if>
+				     <c:if test="${!empty userVo.userNM }">
+				     	<div>${userVo.userNM}</div>
+				     </c:if>
+			     
+		        	<input type="hidden" name="grade" id="grade"/>
+		        	<input type="hidden" name="odrNo" id="odrNo"/>
+		      	</div>
 	      	</div>
-      	</div>
-          <br>
-          <div class="hr"></div>
-          <br>
-          <label>후기</label><br>
-      <div class="starRev">
-        <span class="starR on"></span>
-        <span class="starR"></span>
-        <span class="starR"></span>
-        <span class="starR"></span>
-        <span class="starR"></span>
-      </div>
-      <br>
-      <div class="satis" id="0"><h4>만족도 1점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
-      <div class="satis" id="1"><h4>만족도 2점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
-      <div class="satis" id="2"><h4>만족도 3점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
-      <div class="satis" id="3"><h4>만족도 4점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
-      <div class="satis" id="4"><h4>만족도 5점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
-      <textarea name="content" style="width:100%; height:200px;"  placeholder="후기를 입력해주세요."></textarea>
-      <span style="float:right;"><em>0</em>/ 200</span>
-          
-      </div>
-     
-      <div class="modal-footer">
-        <button type="reset" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button style="background:black;" id="review" type="submit" class="btn btn-default submit" >저장</button>
-      </div>
-   </div>
-    </div>
-    </div>
-</form>
+	          <br>
+	          <div class="hr"></div>
+	          <br>
+	          <label>후기</label><br>
+	      <div class="starRev">
+	        <span class="starR on"></span>
+	        <span class="starR"></span>
+	        <span class="starR"></span>
+	        <span class="starR"></span>
+	        <span class="starR"></span>
+	      </div>
+	      <br>
+	      <div class="satis" id="0"><h4>만족도 1점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
+	      <div class="satis" id="1"><h4>만족도 2점을 주셨네요.</h4><p>어떤 점이 아쉬웠나요?</p></div>
+	      <div class="satis" id="2"><h4>만족도 3점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+	      <div class="satis" id="3"><h4>만족도 4점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+	      <div class="satis" id="4"><h4>만족도 5점을 주셨네요.</h4><p>어떤 점이 좋았나요?</p></div>
+	      <textarea name="content" style="width:100%; height:200px;"  placeholder="후기를 입력해주세요."></textarea>
+	      <span style="float:right;"><em>0</em>/ 200</span>
+	          
+	      </div>
+	     
+	      <div class="modal-footer">
+	        <button type="reset" class="btn btn-default" data-dismiss="modal">취소</button>
+	        <button style="background:black;" id="review" type="submit" class="btn btn-default submit" >저장</button>
+	      </div>
+	   </div>
+	    </div>
+	    </div>
+	</form>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

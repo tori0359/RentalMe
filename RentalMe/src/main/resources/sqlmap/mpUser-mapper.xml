@@ -50,16 +50,19 @@ encoding="UTF-8"?>
 	
   	<insert id="insertReview">
   		INSERT  INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
-		VALUES  (#{gdsCd},
+		VALUES  (
+				#{gdsCd},
 				(SELECT LPAD((SELECT COUNT(gds_review_no)+1 FROM TB_GDS210 A),8,'0')),
 				(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
-				(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd}), 
-				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})), 
-				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})),'%Y%m%d')),
+				#{odrNo}, 
+				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=#{odrNo}), 
+				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=#{odrNo}),'%Y%m%d')),
 				#{mbNo},
 				#{content},
-				#{grade})
+				#{grade}
+				)
   	</insert>
+  
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
   		SELECT  FN_NM('GDS_NM',A.GDS_CD) AS gdsNm, 
@@ -124,6 +127,15 @@ encoding="UTF-8"?>
 			(SELECT DATE_FORMAT(NOW(),'%Y-%m-%d')),
 			#{chargeDeposit},
 			"1")
+  	</insert>
+  	<insert id="refundDeposit">
+  		INSERT INTO TB_MB120 (MB_NO, DEPOSIT_REFUND_SEQ, DEPOSIT_REFUND_DT, REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD)
+		VALUES	(#{mbNo}, 
+				(SELECT LPAD((SELECT COUNT(DEPOSIT_REFUND_SEQ)+1 FROM TB_MB120 A WHERE A.MB_NO=#{mbNo}),6,'0')),
+				DATE_FORMAT(NOW(), '%Y%m%d'),
+				#{refund},
+				'1')
+  	
   	</insert>
 
 	<update id="updateDeposit">

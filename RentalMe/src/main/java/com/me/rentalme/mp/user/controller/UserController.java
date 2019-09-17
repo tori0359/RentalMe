@@ -251,6 +251,31 @@ public class UserController {
 		mav.setViewName("redirect:/mp/deposit");
 		return mav;
 	}
+	
+	/**
+	 * @throws SQLException 예치금 충전
+	 * 
+	 * @param @return ModelAndView @author 신지영 @exception
+	 */
+	@RequestMapping(value = "/deposit/refund", method = RequestMethod.POST)
+	public ModelAndView refundtDeposit(String refund,
+			HttpSession session) throws SQLException {
+		log.debug("예치금 환불 컨트롤러...");
+
+		// 세션에서 mbno를 불러와서 이름 가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userVo", mpUserService.getName(mbNo));
+		
+		//예치금 환불 요청하기
+		mpUserService.refundCharge(refund,mbNo);
+
+		// 현재 예치금금액으로 update
+		//mpUserService.updateDeposit(chargeDeposit, mbNo);
+
+		mav.setViewName("redirect:/mp/deposit");
+		return mav;
+	}
 
 	/**
 	 * @throws SQLException 내 정보 수정 폼

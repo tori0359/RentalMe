@@ -11,6 +11,7 @@ public class CallVo {
 	private String regDt;			//등록 날짜
 	private String modelNm;			//모델명
 	private String usedGdsPrice;	//중고 상품 가격
+	private String odrNo;			//주문 번호
 	private String odrDt;			//주문 일자
 	private String gdsPrice;		//렌탈 상품 가격
 	private int odrQty;				//주문수량
@@ -45,7 +46,15 @@ public class CallVo {
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
 	}
+	
+	public String getOdrNo() {
+		return odrNo;
+	}
 
+	public void setOdrNo(String odrNo) {
+		this.odrNo = odrNo;
+	}
+	
 	public String getCartSeq() {
 		return cartSeq;
 	}

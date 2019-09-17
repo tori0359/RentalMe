@@ -43,7 +43,7 @@ public class MpUserServiceImpl implements MpUserService{
 			log.debug("후기 등록 서비스...");
 			
 			
-			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),mbNo);
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),callVo.getOdrNo(),mbNo);
 		}
 	
 	
@@ -87,6 +87,13 @@ public class MpUserServiceImpl implements MpUserService{
 	public int insertCharge(CallVo callVo,String mbNo) throws SQLException {
 
 		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit(),mbNo);
+	}
+	
+	//예치금 환불 요청
+	@Override
+	public int refundCharge(String refund, String mbNo) throws SQLException {
+		return mpUserDao.refundCharge(refund,mbNo);
+		
 	}
 	
 	//개인 1:1문의보기
@@ -186,6 +193,8 @@ public class MpUserServiceImpl implements MpUserService{
 		
 		return result;
 	}
+
+	
 
 
 }

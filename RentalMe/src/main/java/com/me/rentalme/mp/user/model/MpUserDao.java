@@ -23,7 +23,7 @@ public interface MpUserDao {
 	List<CallVo> selectOrd(String mbNo) throws SQLException;
 	
 	//후기 등록
-	int InsertReview(String gdsCd, String userId, String content,String grade, String mbNo) throws SQLException;
+	int InsertReview(String gdsCd, String userId, String content,String grade, String odrNo, String mbNo) throws SQLException;
 	
 	//장바구니 리스트 출력
 	List<CallVo> selectCart(String mbNo) throws SQLException;
@@ -43,6 +43,9 @@ public interface MpUserDao {
 	//예치금 충전
 	int insertCharge(String userId, String depositGbCd, String chargeDeposit,String mbNo) throws SQLException;
 
+	//예치금 환불 요청
+	int refundCharge(String refund, String mbNo) throws SQLException;
+	
 	//현재 예치금 업데이트
 	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException;
 
@@ -73,6 +76,9 @@ public interface MpUserDao {
 
 	//사용자 비밀번호 변경
 	int updPw(String userId, String hashPw);
+
+
+	
 
 	
 }
