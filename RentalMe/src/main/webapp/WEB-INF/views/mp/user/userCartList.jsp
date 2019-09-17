@@ -34,7 +34,6 @@
 	   		color:black;
 	   		font-weight:600;
 	   }
-
 	    .ordtable>thead>tr>th{
         	text-align:center;
         	font-family: "nanumB";
@@ -118,18 +117,18 @@
             height:40px;
       }
         #info{
-	      	width:93%;
-	      	margin: 20px auto;
-	      	border:7px solid #E6E6E6;
-	      	padding: 15px;
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
       }
       
       #info p{
-	      	line-height:20px;
-	      	font-family:"nanumB";
+      	line-height:20px;
+      	font-family:"nanumB";
       }
 	.tdtext{
-      		margin:30px 0;
+      	margin:30px 0;
       }
 /* --------- 결제하기 모달 시작 --------- */
 #realTotPrice { 
@@ -151,15 +150,12 @@
 	   
 </style>
 <script type="text/javascript">
-
 	window.onload = function () {
 		$('#realGdsPrice').val(vSumTotPrice);
 		$('#realGdsPrice2').val(vSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
-
 		$('#realTotPrice').val(vSumTotPrice);
 		$('#realTotPriceTxt').val((vSumTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 	}
-
 	/**************************/
 	/**** 전역변수 선언시작 ***/
 	/**************************/
@@ -185,13 +181,11 @@
 		vSumTotPrice = vSumTotPrice + ${(bean.gdsPrice * bean.odrQty)};
 	</c:forEach>
 	vSumTotPrice += "";	// 타입변환
-
 	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
 	
 	/**************************/
 	/**** 전역변수 선언끝 *****/
 	/**************************/
-
 	// All 체크박스 선택
 	function checkAll(){
 	    if( $("#allCheck").is(':checked') ){
@@ -217,7 +211,6 @@
 			vCheckCnt = 0;
 	    }
 	}
-
 	// 상품 체크박스 선택
 	function chBox(num) {
 		if($('#chBox'+num).is(':checked')) {
@@ -272,7 +265,6 @@
 			$('#realTotPriceTxt').val((fSumTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		}
 	}
-
 	// 결제하기 클릭
 	function btnOdr() {
 		var sUserId = "${loginUserId}";
@@ -280,30 +272,25 @@
 		if((sUserId == "") || (sUserId == null)) {
 			location.href = "/login";
 		} else {
-
 		}
 	}
-
 	// 결제하기 라디오버튼(무통장입금)
 	$(document).on("click", "#inlineRadio1", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').show();
 		$('#bankInfo').show();
 	});
-
 	// 결제하기 라디오버튼(카카오페이)
 	$(document).on("click", "#inlineRadio2", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').hide();
 		$('#bankInfo').hide();
 	});
-
 	// 결제하기 모달 결제하기
 	$(document).on("click", "#realSubmit2", function(){
-
 		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
 		var userId = "${loginUserId}";
-		var crudGbCCART"IICART";
+		var crudGbCd = "IICART";
 		var odrGbCd = "10";
 		var payGbCd = radioVal;
 		var mbNo = "${sessionMbNo}";
@@ -331,11 +318,9 @@
 				j = j+1;
 			}
 		}
-
 		// 전송대상 data 
 		var allData = {'crudGbCd':crudGbCd, 'odrGbCd':odrGbCd, 'payGbCd':payGbCd, 'mbNo':mbNo, 'totOdrAmt':amount,'gdsCdArr':gdsCdArr, 'cartSeqArr':cartSeqArr,
 					   'gdsPriceArr':gdsPriceArr, 'odrQtyArr':odrQtyArr, 'agreeTermArr':agreeTermArr  };
-
 		// 배열값 테스트...
 		/*
 		for(var i=0; i<vCnt; i++) {
@@ -365,7 +350,7 @@
 						type: "post",
 						data: allData,
 						success : function(){
-							location.hrmp/= "/mp/";
+							location.href = "/mp/";
 						}
 					});
 			    } else {
@@ -382,7 +367,7 @@
 					url: "/mp/cart/odr",
 					type: "post",
 					data: allData,
-					success : function() {
+					success : function(){
 						location.href = "/mp/";
 					}
 				});
@@ -392,9 +377,7 @@
 			}
 			alert(msg);
 		}
-
 	});
-
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
@@ -505,10 +488,10 @@
 								<c:forEach items="${alist }" var="alist" varStatus="status">
 									<c:if test="${status.index eq '0' }">
 								    	<!-- <input type="text" class="form-control" id="realGdsCd" disabled="disabled" style="background-color:white;" name="gdsCd" value="${alist.gdsCd }" style="display: none;">  -->
-										<input type="text" btn btn-defaultdefault" id="realGdsNm" disabled="disabled" style="background-color border:solid 0px; text-align:left;n:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
+										<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
 										<!-- <input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${alist.gdsPrice }" > -->
 										<fmt:setLocale value="ko_KR"></fmt:setLocale>
-										<input type="text" btn btn-defaultdefault" id="realGdsPrice2" disabled="disabled" style="background-colo; border:solid 0px; text-align:left;n:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
+										<input type="text" class="btn btn-default" id="realGdsPrice2" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
 							    	</c:if>
 						    	</c:forEach>
 							</div>

@@ -339,11 +339,10 @@
           <c:forEach items="${alist}" var="bean" varStatus="status">
              <tr>
                 <td class="gubun1" style="vertical-align:middle;"><p class="tdtext" style="text-align:center; ">${bean.odrNo}</p></td>
-                <td style="text-align:left;">
-	                <a style="text-decoration:none; color:black;"href="#">
-	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm}
+                <td style="text-align:left; vertical-align:middle;">
+	                <a style="text-decoration:none; color:black;"href="/rental/Appli/lg/${fn:substring(bean.gdsCd,4,6) }/detail/${bean.gdsCd}">
+	                <img class="ordimg" src="../${bean.RImg1}"/><textarea rows="2" cols="30" style="vertical-align:middle; border:0; cursor:pointer; resize: none;" readonly="readonly" >${bean.gdsNm }</textarea>
 	                <input type=hidden value="${bean.gdsCd}"/></a>
-	                
                 </td>
                 <td style="vertical-align:middle;"><p class="tdtext">${bean.odrDt}</p></td>
                 <td style="vertical-align:middle;"><p class="tdtext">${bean.odrQty}</p></td>
