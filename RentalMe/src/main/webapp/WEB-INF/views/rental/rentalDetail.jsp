@@ -55,7 +55,7 @@
     display: none;
     position: fixed;
     right: 80px;
-    bottom: 200px;
+    bottom: 340px;
     z-index: 1030;
     font-size: 2.875rem;
     color: #868e96;

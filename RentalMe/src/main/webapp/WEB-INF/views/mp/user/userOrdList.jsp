@@ -264,6 +264,7 @@
           <table class="ordtable table">
           <thead>
              <tr class="active">
+             	<th>주문번호</th>
                 <th>상품명/선택사항</th>
                 <th>주문일</th>
                 <th>수량</th>
@@ -271,30 +272,33 @@
                 <th>상품금액</th>
                 <th>주문상태</th>
                 <th>상품후기</th>
-         
              </tr>
           </thead>
           <tbody>
-          
-          <c:forEach items="${alist}" var="bean">
-             <tr>  
-                <td>
+          <c:set var="ordNoChk" value=""/>
+          <c:forEach items="${alist}" var="bean" >
+             <tr>
+             	<c:set var="ordNoChk" value="${bean.odrNo }"/>
+                <td ><p class="tdtext" style="text-align:center;">${ordNoChk}</p></td>
+                <td style="text-align:left;">
 	                <a style="text-decoration:none; color:black;"href="#">
 	                <img class="ordimg" src="../${bean.RImg1}"/>${bean.gdsNm} 
 	                <input type=hidden value="${bean.gdsCd}"/></a>
 	                
                 </td>
-                <td><input type="hidden" value="${bean.odrNo}"/></td>
-                <td><p class="tdtext">${bean.odrDt}</p></td>
-                <td><p class="tdtext">${bean.odrQty}</p></td>
-                <td><p class="tdtext">${bean.agreeTerm}개월</p></td>
-                <td><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
-                <td><p class="tdtext">
+                <td style="text-align:center;"><p class="tdtext">${bean.odrDt}</p></td>
+                <td style="text-align:center;"><p class="tdtext">${bean.odrQty}</p></td>
+                <td style="text-align:center;"><p class="tdtext">${bean.agreeTerm}개월</p></td>
+                <td style="text-align:center;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
+                <td style="text-align:center;"><p class="tdtext">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
                       입금대기
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'OC'}">
                       주문확정
+                   </c:if>
+                   <c:if test= "${bean.odrStsGbCd eq 'PC'}">
+                   	  구매확정
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'RW'}">
                       반품대기
@@ -304,14 +308,14 @@
                    </c:if>
                    </p>
                 </td>
-                <td><p class="tdtext">
+                <td style="text-align:center;"><p class="tdtext">
                  <c:choose>
-                  <c:when test="${bean.cnt == 0}">
-                	<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
-                </c:when>
-                <c:otherwise>
-               		<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">이미 후기를 등록하셨습니다</button>
-                </c:otherwise>
+                  	<c:when test="${bean.cnt == 0}">
+                		<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
+              		</c:when>
+                	<c:otherwise>
+               			<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">등록완료</button>
+                	</c:otherwise>
                 </c:choose>
                 </p>
                 </td>
