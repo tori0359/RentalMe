@@ -7,8 +7,6 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.service.MngService;
-import com.me.rentalme.mp.user.service.MpUserService;
 
 /**
 * 마이페이지(관리자) - 사용자관리

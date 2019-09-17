@@ -1,12 +1,5 @@
-
-
-$(function(){
-
-});
-
 //상세정보
 function userDatail(mbNo){
-	
 	$.ajax({
 		type : 'POST',
 		url  : 'UserDetail',
@@ -18,42 +11,49 @@ function userDatail(mbNo){
 			//1. 정보 세팅
 			$('#mbNo').text(userInfo.mbNo);														//회원번호
 			if(userInfo.levelGbCd == '1'){														//구분
-				$('input:radio[name=levelGbCd][value=1]').prop('checked', true);
+				$('input:radio[name=levelGbCd][value=1]').prop('checked', 'checked');
 				$('input:radio[name=levelGbCd][value=2]').prop('checked', false);
 			}else{
 				$('input:radio[name=levelGbCd][value=1]').prop('checked', false);
-				$('input:radio[name=levelGbCd][value=2]').prop('checked', true);
+				$('input:radio[name=levelGbCd][value=2]').prop('checked', 'checked');
 			}
 			$('#userId').text(userInfo.userId);													//아이디
 			$('#userNm').text(userInfo.userNM);													//이름
 			$('#birthDay').text(userInfo.birthDay);												//생년월일
 			if(userInfo.genderGbCd == '1'){														//성별
-				$('input:radio[name=genderGbCd][value=1]').prop('checked', true);
+				$('input:radio[name=genderGbCd][value=1]').prop('checked', 'checked');
 				$('input:radio[name=genderGbCd][value=2]').prop('checked', false);
 			}else{
 				$('input:radio[name=genderGbCd][value=1]').prop('checked', false);
-				$('input:radio[name=genderGbCd][value=2]').prop('checked', true);
+				$('input:radio[name=genderGbCd][value=2]').prop('checked', 'checked');
 			}
 			$('#hp').text(userInfo.hp);															//핸드폰
 			if(userInfo.hpYn == 'Y'){															//핸드폰 수신여부
-				$('input:checkbox[name=hpYn]').prop('checked', true);
+				$('input:checkbox[name=hpYn]').prop('checked', 'checked');
 			}else{
 				$('input:checkbox[name=hpYn]').prop('checked', false);
 			}
 			$('#email').text(userInfo.email);													//이메일
 			if(userInfo.emailYn == 'Y'){														//이메일 수신여부
-				$('input:checkbox[name=emailYn]').prop('checked', true);
+				$('input:checkbox[name=emailYn]').prop('checked', 'checked');
 			}else{
 				$('input:checkbox[name=emailYn]').prop('checked', false);
 			}
 			$('#addrDetail').text(userInfo.addrDetail);											//상세주소
 			if(userInfo.userStsCd == '1'){														//회원상태 선택
-				$("#userStsCd").val("1").prop("selected", true);
+				$('input:radio[name=userStsCd][value=1]').prop('checked', 'checked');
+				$('input:radio[name=userStsCd][value=2]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=3]').prop('checked', false);
+			}else if(userInfo.userStsCd == '2'){
+				$('input:radio[name=userStsCd][value=1]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=2]').prop('checked', 'checked');
+				$('input:radio[name=userStsCd][value=3]').prop('checked', false);				
 			}else{
-				$("#userStsCd").val("2").prop("selected", true);
+				$('input:radio[name=userStsCd][value=1]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=2]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=3]').prop('checked', 'checked');
 
 			}
-		
 			
 			//2. 모달을 연다
 			$('#mngUserDatail').modal('show');
@@ -87,7 +87,26 @@ function userDatail(mbNo){
 	
 	
 }
-
+//탈퇴하기 버튼을 눌렀을 때
+function userLeave(mbNo){
+	 $.ajax({
+ 		type : 'POST',
+ 		url  : 'userLeave',
+ 		data : {'mbNo' : mbNo},
+ 		dataType : 'json',
+ 		success: function(data) {
+ 			var msg = data;
+ 			if(msg == 'success'){
+ 				alert('정상적으로 탈퇴되었습니다.')
+ 				location.reload();
+ 			}
+ 		},
+ 		error:function(){
+ 			alert('예상치 못한 오류로 인해 회원탈퇴가 취소되었습니다.');
+ 		}
+   	 });
+}
+/*
 //탈퇴하기 버튼을 눌렀을 때
 function userLeave(mbNo){
     ezBSAlert({
@@ -247,3 +266,4 @@ function ezBSAlert (options) {
   _show();  
   return deferredObject.promise();    
 }
+*/
