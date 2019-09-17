@@ -283,11 +283,17 @@
         	   $("#odrBtn"+i).attr('disabled', true);
         	   $("#odrBtn2"+i).hide();
 		   }
-		   //alert($(".gubun2").eq(i).text());
-			//$("#odrBtn"+i).val(i);
        }
-       //alert($("#odrBtn9").val("zzz"));
-       //alert($(".gubun2").eq(10).text("씨빵"));
+		
+		// 장바구니 조회
+		function btnCart() {
+			alert("샤잠");
+			var sUserId = "${loginUserId}";
+			// 세션체크
+			if((sUserId == "") || (sUserId == null)) {
+				location.href = "/login";
+			}
+		}
        
     } 
 	/**************************/
@@ -350,8 +356,8 @@
                 <td style="vertical-align:middle;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
                 <td class="gubun2" style="vertical-align:middle;">
                 	<p class="tdtext1" style="text-align:center; color:red;">
-                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
-                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" onclick="btnCart();" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" onclick="btnCart();" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal3" value="${bean.odrStsGbCd }">
                		</p>
                		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:red;">
                			${bean.odrNo}
@@ -453,6 +459,58 @@
 	    </div>
 	    </div>
 	</form>
+	<!-- modal 끝 -->
+	<form id="target" action="/rental/Appli/lg/detail/cart" method="post">
+	<!-- 구매 모달 -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel2">구매확정</h4>
+			    </div>
+				<div class="modal-body">
+			    	<input type="text" class="form-control" id="odrNo" name="odrNo" value=""  >
+				</div>
+				<div class="form-group">
+			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;구매확정 하시겠습니까?</label>
+				</div>
+			    <div class="modal-footer">
+			    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			    </div>
+			</div>
+	    </div>
+	</div>
+	<!-- 모달 끝 -->
+	<!-- 반품 모달 -->
+	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel2">반품요청</h4>
+			    </div>
+				<div class="modal-body">
+			    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
+			    	<input type="text" class="form-control" id="gdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
+			    	<input type="text" class="form-control" id="mbNo" name="mbNo" value="${sessionMbNo }" style="display: none;">
+			    	<input type="text" class="form-control" id="gdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;">
+			    	<input type="text" class="form-control" id="agreeTerm" name="agreeTerm" value="${list1.agreeTerm}" style="display: none;">
+			    	<input type="text" class="form-control" id="odrQty" name="odrQty" value="1" style="display: none;">
+				</div>
+				<div class="form-group">
+			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품요청 하시겠습니까?</label>
+				</div>
+			    <div class="modal-footer">
+			    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			    </div>
+			</div>
+	    </div>
+	</div>
+	<!-- 모달 끝 -->
+</form>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>
