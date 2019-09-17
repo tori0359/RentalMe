@@ -33,7 +33,7 @@ public interface MngService {
 	
 	
 	//추가(2019.09.11)
-	List<UserVo> getUserInfo(Paging mngUserPage);							//사용자관리 - 사용자 리스트 
+	List<UserVo> getUserInfo();												//사용자관리 - 사용자 리스트 
 	
 	//추가(2019.09.15)
 	String delUserInfo(String mbNo);										//사용자관리 - 사용자 탈퇴하기

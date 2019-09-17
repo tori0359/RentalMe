@@ -102,10 +102,9 @@
 		     , DATE_FORMAT(JOIN_DT, '%Y-%m-%d') AS JOIN_DT
 		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS CHG_DT
 		  FROM TB_USER100
-		 WHERE USER_STS_CD IN ('1', '2')
+		 WHERE USER_STS_CD IN ('1', '2', '3')
 		 ORDER
 		    BY MB_NO ASC
-		 LIMIT #{startListNum}, #{listSize}
 	</select>
 	<select id="selectUserDetail" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
 		SELECT MB_NO
@@ -124,10 +123,6 @@
 		     , USER_STS_CD
 		  FROM TB_USER100
 		 WHERE MB_NO = #{mbNo}
-	</select>
-	<select id="selectMngUserListCnt" resultType="Integer">
-		SELECT COUNT(*) AS totalUserCnt
-		  FROM TB_USER100
 	</select>
 	<update id="updUserInfo" parameterType="String">
 		UPDATE TB_USER100

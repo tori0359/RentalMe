@@ -103,8 +103,8 @@ public class MngServiceImpl implements MngService {
 	* 등록일자 : 2019.09.11
 	*/	
 	@Override
-	public List<UserVo> getUserInfo(Paging mngUserPage) {
-		List<UserVo> userInfo = mngDao.selectUserList(mngUserPage);
+	public List<UserVo> getUserInfo() {
+		List<UserVo> userInfo = mngDao.selectUserList();
 		
 		for(UserVo userVo : userInfo) {
 			//성별(1:남 2:여)

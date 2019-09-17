@@ -46,23 +46,14 @@ public class MngUserController {
 	* 등록일자 : 2019.09.11
 	*/
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
-	public ModelAndView getUserList(@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) {
+	public ModelAndView getUserList() {
 		log.debug("사용자 리스트 컨트롤러");
 		
 		
-		int totalUserCnt = mngService.getMngUserListCnt(); 
-				
-		Paging mngUserPage = new Paging();
-		
-		mngUserPage.pageInfo(page, range, totalUserCnt);
-		
-		
 		//사용자 리스트 서비스
-		List<UserVo> userInfo =  mngService.getUserInfo(mngUserPage);
+		List<UserVo> userInfo =  mngService.getUserInfo();
 		
 		ModelAndView mav = new ModelAndView("mp/manager/mngUserList");
-		mav.addObject("path", path+"/userList");
-		mav.addObject("paging", mngUserPage);
 		mav.addObject("userInfo", userInfo);
 		return mav;
 	}

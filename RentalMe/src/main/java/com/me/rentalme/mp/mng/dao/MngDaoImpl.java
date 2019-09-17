@@ -97,9 +97,9 @@ public class MngDaoImpl implements MngDao{
 	* 등록일자 : 2019.09.11
 	*/	
 	@Override
-	public List<UserVo> selectUserList(Paging mngUserPage) {
+	public List<UserVo> selectUserList() {
 		
-		return sqlSession.selectList("mpMng.selectUserList", mngUserPage);
+		return sqlSession.selectList("mpMng.selectUserList");
 	}
 	
 	/**
