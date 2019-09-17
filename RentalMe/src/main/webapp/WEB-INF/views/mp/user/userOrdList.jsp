@@ -257,7 +257,7 @@
 
        // 주문상태 value값에 따른 동적처리변환
        for(var i=0; i<vCnt; i++) {
-           //alert($("#odrNo"+i).text()); 현재 선택한 버튼의 주문번호
+           //alert($("#odrNo"+i).text()); //현재 선택한 버튼의 주문번호
            var odrStsGbCd = $("#odrBtn"+i).val();
            if(odrStsGbCd == "DW") {
         	   $("#odrBtn"+i).val("입금대기");
@@ -354,7 +354,7 @@
                 		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
                 		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" value="${bean.odrStsGbCd }">
                		</p>
-               		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:blue;">
+               		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:red;">
                			${bean.odrNo}
                		</p>
                 </td>
