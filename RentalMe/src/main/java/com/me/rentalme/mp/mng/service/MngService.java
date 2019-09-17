@@ -20,7 +20,7 @@ public interface MngService {
 	List<CallVo> selectDep() throws SQLException;							//예치금 리스트
 	List<CallVo> selectDepOne(String mbNo) throws SQLException;				//회원 예치금 상세
 	
-	List<UsedVo> selectUsed(Paging usedPage) throws SQLException;							//전체 중고 리스트
+	List<UsedVo> selectUsed() throws SQLException;							//전체 중고 리스트
 	List<UsedVo> selectUsedSearch(String usedGdsNo) throws SQLException;	//중고 하나 선택
 	
 	List<MngOrdVo> selectReturn() throws SQLException;						//전체 반품 리스트

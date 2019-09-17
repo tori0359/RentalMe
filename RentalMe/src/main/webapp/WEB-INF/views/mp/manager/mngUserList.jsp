@@ -28,6 +28,7 @@
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngUser.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
 </head>
 <body>
 		<!-- ============================================================== -->
@@ -66,7 +67,7 @@
                             <h5 class="card-header">사용자 목록</h5>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered first">
+                                    <table id="dt" class="table table-striped table-bordered first">
                                         <thead>
                                             <tr>
                                                 <th>회원번호		</th>

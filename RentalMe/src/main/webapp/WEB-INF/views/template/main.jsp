@@ -42,11 +42,6 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Search..">
-                            </div>
-                        </li>
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
@@ -86,13 +81,13 @@
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">주문관리</a>
+                                            <a class="nav-link" href="/mp/mng/list">주문관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">반품관리</a>
+                                            <a class="nav-link" href="/mp/mng/cart">반품관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">예치금관리</a>
+                                            <a class="nav-link" href="/mp/mng/deposit">예치금관리</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -105,7 +100,7 @@
                                             <a class="nav-link" href="#">렌탈상품 관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">경매상품 관리</a>
+                                            <a class="nav-link" href="/mp/mng/actList">경매상품 관리</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -115,10 +110,10 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">중고거래 관리</a>
+                                            <a class="nav-link" href="/mp/mng/used">중고거래 관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">신고접수 관리</a>
+                                            <a class="nav-link" href="/mp/mng/decl">신고접수 관리</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -128,10 +123,10 @@
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">공지사항/FAQ관리</a>
+                                            <a class="nav-link" href="/mp/mng/csNoticeList">공지사항/FAQ관리</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">1:1문의관리</a>
+                                            <a class="nav-link" href="/mp/mng/InqList">1:1문의관리</a>
                                         </li>
                                     </ul>
                                 </div>

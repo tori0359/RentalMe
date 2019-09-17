@@ -20,7 +20,6 @@ import com.me.rentalme.mp.mng.service.MngService;
 public class MngUsedController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
-	String path= "/mp/mng/used";
 	@Inject
 	MngService mngService;
 	
@@ -35,20 +34,10 @@ public class MngUsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getMngUsedList(Model model, 
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		System.out.println("중고리스트 : page ="+page+", range = "+range);
+	public String getMngUsedList(Model model) throws SQLException {
 		
-		//게시물의 총갯수를 구한다.
-		int totalListCnt = mngService.getUsedListCnt(); 
+		model.addAttribute("alist", mngService.selectUsed());
 		
-		Paging usedPage = new Paging();
-		
-		usedPage.pageInfo(page, range, totalListCnt);
-		
-		model.addAttribute("path", path);
-		model.addAttribute("paging", usedPage);
-		model.addAttribute("alist", mngService.selectUsed(usedPage));
 		return "mp/manager/mngUsedList";
 	}
 	/**

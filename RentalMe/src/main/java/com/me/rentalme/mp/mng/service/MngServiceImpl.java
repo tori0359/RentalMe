@@ -60,8 +60,8 @@ public class MngServiceImpl implements MngService {
 	
 
 	@Override
-	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
-		return mngDao.selectUsed(usedPage);								//전체 중고 리스트
+	public List<UsedVo> selectUsed() throws SQLException {
+		return mngDao.selectUsed();								//전체 중고 리스트
 	}
 
 	@Override

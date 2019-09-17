@@ -54,8 +54,8 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
-		return sqlSession.selectList("mpMng.selectUsed", usedPage);				//전체 중고 리스트
+	public List<UsedVo> selectUsed() throws SQLException {
+		return sqlSession.selectList("mpMng.selectUsed");				//전체 중고 리스트
 	}
 
 	@Override
