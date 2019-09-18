@@ -81,7 +81,28 @@ public class UserController {
 
 		return mav;
 	}
-
+	
+	/**
+	 * 주문내역> 구매 or 반품
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/decision", method = RequestMethod.POST) 
+	public String modifyOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("payGbCd")String payGbCd, 
+			@RequestParam("mbNo")String mbNo, @RequestParam("totOdrAmt")int totOdrAmt,  @RequestParam("gdsCdArr[]")List<String> gdsCdArr,
+			@RequestParam("cartSeqArr[]")List<String> cartSeqArr, @RequestParam("gdsPriceArr[]")List<Integer> gdsPriceArr, @RequestParam("odrQtyArr[]")List<Integer> odrQtyArr, 
+			@RequestParam("agreeTermArr[]")List<String> agreeTermArr, RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
+		
+			System.out.println("주문내역 구매or반품");
+		
+//			int result1 = rentalAppliService.cartOdr(rentalAppliVo);			// 주문자료 생성
+//			int result2 = rentalAppliService.cartDetailOdr(rentalAppliVo, gdsCdArr, cartSeqArr, gdsPriceArr, odrQtyArr, agreeTermArr );		// 주문상세자료 생성
+//			model.addAttribute("rtnCd", Integer.toString(result1));
+			return "redirect:/mp/";
+	}
 	/**
 	 * @throws SQLException 장바구니
 	 * 
