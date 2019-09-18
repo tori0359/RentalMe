@@ -946,7 +946,7 @@ input::-moz-focus-inner { border: 0; }
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel2"></h4>
+												<h4 class="modal-title" id="myModalLabel2">장바구니</h4>
 										    </div>
 											<div class="modal-body">
 										    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
@@ -974,7 +974,7 @@ input::-moz-focus-inner { border: 0; }
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel3"></h4>
+												<h4 class="modal-title" id="myModalLabel3">주문하기</h4>
 										    </div>
 											<div class="modal-body">
 											    <div class="row" style="border:0px solid orange;">

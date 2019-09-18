@@ -105,7 +105,7 @@
 	   }
 	   
 	   .cartbtn{
-	   		width:180px;
+	   		width:200px;
 	   		height:50px;
 	   		float:right;
 	   		margin-top:25px;
@@ -155,6 +155,11 @@
 		$('#realGdsPrice2').val(vSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		$('#realTotPrice').val(vSumTotPrice);
 		$('#realTotPriceTxt').val((vSumTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+
+		if(vCheckCnt == 0 ) {
+			$('#realSubmit').prop("disabled","disabled");
+			$("#allCheck").prop("disabled", "disabled");
+		}
 	}
 	/**************************/
 	/**** 전역변수 선언시작 ***/
@@ -378,6 +383,10 @@
 			alert(msg);
 		}
 	});
+
+	function going() {
+		location.href = "/main";
+	}
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
@@ -464,8 +473,12 @@
 		</div>
 		<div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">
-			<button type="button" class="delete_btn1 btn">계속 쇼핑하기</button>
+		<!-- 
+			<button type="button" class="btn delete_btn1" onclick="going();"></a>계속 쇼핑하기</button>
 			<button type="button" id="realSubmit" class="delete_btn2 btn" onclick="btnOdr();" data-backdrop="static"  data-toggle="modal" data-placement="top" title="" data-target="#myModal1">주문하기</button>
+		 -->
+			<button type="button" class="btn btn-default" onclick="going();">계속 쇼핑하기</button>
+			<button type="button" id="realSubmit" class="btn btn-danger" onclick="btnOdr();" data-backdrop="static"  data-toggle="modal" data-placement="top" title="" data-target="#myModal1">주문하기</button>
 		</div>
 		<!-- 주문하기 모달 -->
 		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
@@ -473,7 +486,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel1"></h4>
+						<h4 class="modal-title" id="myModalLabel1">주문하기</h4>
 				    </div>
 					<div class="modal-body">
 					    <div class="row" style="border:0px solid orange;">

@@ -46,6 +46,7 @@ encoding="UTF-8"?>
 		ON AA.ODR_NO = BB.ODR_NO
 		AND AA.ODR_SEQ = BB.ODR_SEQ
 		AND AA.GDS_CD = BB.GDS_CD
+		ORDER BY AA.ODR_NO DESC
 	</select>
 	
   	<insert id="insertReview">

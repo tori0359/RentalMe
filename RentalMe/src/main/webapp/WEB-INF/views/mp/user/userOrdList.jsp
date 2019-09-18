@@ -130,7 +130,7 @@ span em.warning{
 	margin:40px 0;
 }
 .tdtext1{
-	margin-top:40px ;
+	margin-top:10px ;
 }
 .tdtext2{
 	margin-top:0px ;
@@ -283,25 +283,31 @@ span em.warning{
            var odrStsGbCd = $("#odrBtn"+i).val();
            if(odrStsGbCd == "DW") {
         	   $("#odrBtn"+i).val("입금대기");
-        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).css({opacity:0.5});
+        	   $('#odrBtn'+i).attr('class','btn btn-success');
         	   $("#odrBtn"+i).attr('disabled', true);
         	   $("#odrBtn2"+i).hide();
            } else if(odrStsGbCd == "OC") {
         	   $("#odrBtn"+i).val("구매");
+        	   $("#odrBtn"+i).css({opacity:1.0});
         	   $("#odrBtn2"+i).val("반품");
+        	   $("#odrBtn"+i).css({opacity:1.0});
 		   } else if(odrStsGbCd == "PC") {
         	   $("#odrBtn"+i).val("구매확정");
-        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).css({opacity:0.5});
+        	   $('#odrBtn'+i).attr('class','btn btn-primary');
         	   $("#odrBtn"+i).attr('disabled', true);
         	   $("#odrBtn2"+i).hide();
 		   } else if(odrStsGbCd == "RW") {
         	   $("#odrBtn"+i).val("반품대기");
-        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).css({opacity:0.5});
+        	   $('#odrBtn'+i).attr('class','btn btn-warning');
         	   $("#odrBtn"+i).attr('disabled', true);
         	   $("#odrBtn2"+i).hide();
 		   } else if(odrStsGbCd == "RC"){
         	   $("#odrBtn"+i).val("반품확정");
-        	   $("#odrBtn"+i).css({opacity:0.3});
+        	   $("#odrBtn"+i).css({opacity:0.5});
+        	   $('#odrBtn'+i).attr('class','btn btn-danger');
         	   $("#odrBtn"+i).attr('disabled', true);
         	   $("#odrBtn2"+i).hide();
 		   }
@@ -377,11 +383,11 @@ span em.warning{
                 <td style="vertical-align:middle;"><p class="tdtext">${bean.agreeTerm}개월</p></td>
                 <td style="vertical-align:middle;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
                 <td class="gubun2" style="vertical-align:middle;">
-                	<p class="tdtext1" style="text-align:center; color:red;">
-                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
-                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal3" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
+                	<p class="tdtext1" style="text-align:center;">
+                		<input type="button" id="odrBtn${status.index }" type="button" class="btn btn-primary" type="button" class="btn" style="font-size: 10pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn btn-danger" type="button" class="btn" style="font-size: 10pt;" data-toggle="modal" data-target="#myModal3" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
                		</p>
-               		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:red;">
+               		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:white; display: none;">
                			${bean.odrNo}
                		</p>
                 </td>
@@ -492,15 +498,15 @@ span em.warning{
 					<h4 class="modal-title" id="myModalLabel2">구매확정</h4>
 			    </div>
 				<div class="modal-body">
-			    	<input type="text" name="crudGbCd" value="crudGbCd"/>
-			    	<input type="text" name="odrGbCd" value="odrGbCd"/>
-			    	<input type="text" name="odrNo" value="odrNo"/>
+			    	<input type="hidden" name="crudGbCd" value="crudGbCd"/>
+			    	<input type="hidden" name="odrGbCd" value="odrGbCd"/>
+			    	<input type="hidden" name="odrNo" value="odrNo"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;구매확정 하시겠습니까?</label>
 				</div>
 			    <div class="modal-footer">
-			    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+			    	<button type="submit" id="questSubmit" class="btn btn-primary">확정</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			    </div>
 			</div>
@@ -518,15 +524,15 @@ span em.warning{
 					<h4 class="modal-title" id="myModalLabel2">반품요청</h4>
 			    </div>
 				<div class="modal-body">
-			    	<input type="text" name="crudGbCd" value="crudGbCd"/>
-			    	<input type="text" name="odrGbCd" value="odrGbCd"/>
-			    	<input type="text" name="odrNo" value="odrNo"/>
+			    	<input type="hidden" name="crudGbCd" value="crudGbCd"/>
+			    	<input type="hidden" name="odrGbCd" value="odrGbCd"/>
+			    	<input type="hidden" name="odrNo" value="odrNo"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품요청 하시겠습니까?</label>
 				</div>
 			    <div class="modal-footer">
-			    	<button type="submit" id="questSubmit" class="btn btn-primary">등록</button>
+			    	<button type="submit" id="questSubmit" class="btn btn-primary">요청</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			    </div>
 			</div>

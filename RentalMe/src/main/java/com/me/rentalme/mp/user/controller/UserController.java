@@ -96,21 +96,16 @@ public class UserController {
 	public String modifyDecisionOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("odrNo")String odrNo,
 			RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
 		
-		System.out.println(crudGbCd);
-		System.out.println(odrGbCd);
-		System.out.println(odrNo);
-		System.out.println((String) session.getAttribute("loginMbNo"));
-		System.out.println("주문내역 구매or반품");
-		
 		rentalAppliVo.setCrudGbCd(crudGbCd);
 		rentalAppliVo.setOdrGbCd(odrGbCd);
 		rentalAppliVo.setOdrNo(odrNo);
 		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
 		
-			int result1 = rentalAppliService.decisionOdr(rentalAppliVo);			// 주문자료 생성
-			model.addAttribute("rtnCd", Integer.toString(result1));
-			return "redirect:/mp/";
+		int result1 = rentalAppliService.decisionOdr(rentalAppliVo);			// 주문자료 생성
+		model.addAttribute("rtnCd", Integer.toString(result1));
+		return "redirect:/mp/";
 	}
+	
 	/**
 	 * @throws SQLException 장바구니
 	 * 

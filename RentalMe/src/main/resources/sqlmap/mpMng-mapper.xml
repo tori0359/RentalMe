@@ -6,8 +6,12 @@
 <mapper namespace="mpMng">
 	<!-- 주문 -->
 	<select id="selectOrd" resultType="com.me.rentalme.model.entity.MngOrdVo">
-		SELECT *
-		FROM tb_odr100
+		SELECT 
+			A.*
+			,FN_NM('USER_NM', A.MB_NO) AS USER_NM
+		FROM TB_ODR100 A
+		WHERE ODR_STS_GB_CD NOT IN('RW', 'RC')
+		ORDER BY A.ODR_NO DESC
 	</select>
 	<select id="selectOrdOne" resultType="com.me.rentalme.model.entity.MngOrdDetailVo">
 		SELECT FN_NM('GDS_NM', GDS_CD) as GDS_NM,GDS_PRICE,ODR_QTY,ODR_AMT
@@ -66,9 +70,12 @@
 	
 	<!-- 환불 -->
 	<select id="selectReturn" resultType="com.me.rentalme.model.entity.MngOrdVo">
-		SELECT *
-		FROM tb_odr100
-		WHERE ODR_STS_GB_CD='RC' OR ODR_STS_GB_CD='RW'
+		SELECT 
+			A.*
+			,FN_NM('USER_NM', A.MB_NO) AS USER_NM
+		FROM TB_ODR100 A
+		WHERE ODR_STS_GB_CD IN('RW', 'RC')
+		ORDER BY A.ODR_NO DESC
 	</select>
 	<update id="updateStsRtn">
 		UPDATE tb_odr100
