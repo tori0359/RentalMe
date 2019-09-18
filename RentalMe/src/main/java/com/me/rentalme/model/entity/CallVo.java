@@ -38,7 +38,18 @@ public class CallVo {
 	private String cnt; 			//회원이 해당상품에 쓴 후기 갯수
 	private String cartSeq;			//장바구니 일련번호
 	private String userNm; 			//회원 이름
+	private String actBidStsCd;		//회원 경매 상태
 	
+	
+	
+	public String getActBidStsCd() {
+		return actBidStsCd;
+	}
+
+	public void setActBidStsCd(String actBidStsCd) {
+		this.actBidStsCd = actBidStsCd;
+	}
+
 	public String getUserNm() {
 		return userNm;
 	}

@@ -105,8 +105,8 @@
 	<ol id="listMsg">
 	</ol>
 	<form action="/act/result" method="post">
-	<input type="hidden" name="gdsCd" value="${list1.gdsCd }">
-	<input type="hidden" id="bidresult" name="bidresult">
+	<input type="text" name="gdsCd" value="${list1.gdsCd }">
+	<input type="text" id="bidresult" name="bidresult">
 	<button>Á¾·á</button>
 	</form>
 </body>

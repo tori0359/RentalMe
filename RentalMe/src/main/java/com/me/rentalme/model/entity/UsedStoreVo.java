@@ -15,9 +15,18 @@ public class UsedStoreVo {
 	private Date chgDt;
 	private String regId;
 	private Date regDt;
+	private String userNm;
 	
 	public UsedStoreVo() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
 	}
 
 	public String getStoreNo() {

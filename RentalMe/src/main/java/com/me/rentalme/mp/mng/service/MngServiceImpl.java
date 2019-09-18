@@ -12,6 +12,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.ProductVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -184,6 +185,16 @@ public class MngServiceImpl implements MngService {
 	public int getUsedListCnt() {
 		// TODO Auto-generated method stub
 		return mngDao.selectusedListCnt();
+	}
+	public int rentalGoodsAdd100(RentalAppliVo rentalAppliVo) {
+		
+		return mngDao.rentalGoodsAdd100(rentalAppliVo);
+	}
+
+	@Override
+	public int rentalGoodsAdd200(ProductVo productVo) {
+		// TODO Auto-generated method stub
+		return mngDao.rentalGoodsAdd300(productVo);
 	}
 	
 

@@ -101,6 +101,7 @@
        			<th>경매낙찰 상품</th>
        			<th>낙찰날짜</th>
        			<th>낙찰가격</th>
+       			<th>상태</th>
        			<th>결제여부</th>
        		</tr>
        	</thead>
@@ -111,10 +112,20 @@
        			<td>${bean.bidTime}</td>
        			<td><fmt:formatNumber pattern="##,###.##">${bean.bidPrice}</fmt:formatNumber> 원
        			<input id="auctPrice" type="hidden" value="${bean.bidPrice}"/></td>
-       			<td>
-       				<button id="pay" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >결제</button>
- 					<button style="background:#D8D8D8; color:black;" type="button" class="btn" style="font-size: 9pt;" >포기</button>
-       			</td>
+       			<c:if test="${bean.actBidStsCd eq 1}">
+       				<td>낙찰</td>
+       				<td>
+	       				<button id="pay" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >결제</button>
+	 					<button style="background:#D8D8D8; color:black;" type="button" class="btn" style="font-size: 9pt;" >포기</button>
+       				</td>
+       			</c:if>
+       			<c:if test="${bean.actBidStsCd eq 2}">
+       				<td>예비</td><td></td>
+       			</c:if>
+       			<c:if test="${bean.actBidStsCd eq 3}">
+       				<td>종료</td><td></td>
+       			</c:if>
+       			
        		</tr>
        	</c:forEach>
        	</tbody>

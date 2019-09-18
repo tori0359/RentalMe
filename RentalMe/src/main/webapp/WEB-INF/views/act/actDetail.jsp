@@ -124,6 +124,17 @@
 		border: 1px solid black;
 		height: 500px;
 	}
+	
+	#actLive{
+		display: inline-block;
+		border: 1px solid black;
+	}
+	#bidListBody{
+		display: inline-block;
+		border: 1px solid black;
+	}
+
+
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 <script type="text/javascript">
@@ -212,6 +223,8 @@
 		sock.send(JSON.stringify(msg));
 	}
 
+
+	
 </script>
 </head>
 <body>
@@ -288,11 +301,13 @@
 						<span id="liveviewcnt"></span>
 						<div id="nowPrice"></div>
 						<div id="actLive"></div>
-						<button id="sendMsg">응찰하기</button>
-						<div id="countView"></div>
+						<div id="bidListBody">
 						<ol id="bidList">
 						
 						</ol>
+						</div>
+						<button id="sendMsg" class="btn btn-primary">응찰하기</button>
+						<div id="countView"></div>
 					</div>	
 			</div>
 			</div>

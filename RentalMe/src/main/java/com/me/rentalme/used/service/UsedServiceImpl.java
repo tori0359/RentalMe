@@ -110,4 +110,9 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.usedStoreDecl(bean);					//상점후기 댓길 신고
 	}
 
+	@Override
+	public String userId(String mbNo) throws SQLException {
+		return usedDao.userId(mbNo);
+	}
+
 }

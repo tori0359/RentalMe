@@ -171,6 +171,7 @@ public class UsedController {
 	*/
 	@RequestMapping(value = "/store/{idx}", method = RequestMethod.GET)
 	public String getUsedMyStore(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+		model.addAttribute("userNm", usedService.userId(mbNo));
 		model.addAttribute("mbNo", mbNo);
 		model.addAttribute("alist", usedService.myUsedAll(mbNo));
 		model.addAttribute("cmtlist", usedService.listMyStoreCmt(mbNo));
@@ -178,6 +179,7 @@ public class UsedController {
 	}
 	@RequestMapping(value = "/store/now", method = RequestMethod.GET)
 	public String getUsedMyStoreNow(HttpSession session,Model model,@ModelAttribute UsedVo bean) throws SQLException {
+		model.addAttribute("userNm", usedService.userId(bean.getMbNo()));
 		model.addAttribute("usedGdsResStsCd", bean.getUsedGdsResStsCd());
 		model.addAttribute("mbNo", bean.getMbNo());
 		model.addAttribute("alist", usedService.mySelectAllAlign(bean));
@@ -187,10 +189,10 @@ public class UsedController {
 
 	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.POST)
 	public String getUsedMyStroeReviewInsert(HttpSession session,@ModelAttribute UsedStoreVo bean) throws SQLException {
-		
+		System.out.println(bean.getStoreNo()+"fff"+bean.getMbNo());
 		usedService.addMyStoreCmt(bean);
 		
-		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
+		return "redirect:/used/store/"+bean.getStoreNo();
 	}
 	@RequestMapping(value = "/store/cmtDecl", method = RequestMethod.POST)
 	public String getUsedMyStroecmtDecl(@ModelAttribute DeclVo bean) throws SQLException {
@@ -208,15 +210,6 @@ public class UsedController {
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 	
-	
-	/**
-	* 중고거래 상품등록 폼
-	* 
-	* @param  None
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
 	@RequestMapping(value = "/mng", method = RequestMethod.GET)
 	public ModelAndView getUsedPrd() {
 		
@@ -288,21 +281,5 @@ public class UsedController {
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 
-	
-	/**
-	 * 중고거래 상품수정
-	 * 
-	 * @param  None
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/mng", method = RequestMethod.PUT)
-	public ModelAndView modifyUsedPrd() {
-		
-		
-		ModelAndView mav = new ModelAndView("used/usedMyStore");
-		return mav;
-	}
 
 }

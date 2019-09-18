@@ -86,13 +86,9 @@
 				e.preventDefault();
 
 				var url = "${pageContext.request.contextPath}/cs/csFAQ";
-
 				url = url + "?searchType=" + $('#searchType').val();
-
 				url = url + "&keyword=" + $('#keyword').val();
-
 				location.href = url;
-
 				console.log(url);
 
 			});
@@ -336,6 +332,13 @@
 			</c:forEach>
 		</tr>
 	</table>
+	<%
+		String searchType=request.getParameter("searchType"); 
+		String keyword=request.getParameter("keyword"); 
+		
+		System.out.println(searchType);
+		System.out.println(keyword);
+	%>
 	<div align="center" width="100%">
 				<div id="paginationBox">
 						<ul class="pagination">
@@ -348,7 +351,7 @@
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" style="cursor:pointer" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" style="cursor:pointer" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}','${paging.rangeSize}','${searchType}','${keyword}')"> 
 										${idx} 
 									</a>
 								</li>

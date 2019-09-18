@@ -13,12 +13,12 @@
 </head>
 <body>
 <div class="usedStore">
-	<h2>나의 상점</h2>
+	<h2 id="topStore">${userNm }님의 상점</h2>
 	<div>
 		<div class="hideenMbNo">${mbNo }</div>
 		<div class="hiddenLoginId">${loginMbNo}</div>
 		<div id="hiddenStsCd">${usedGdsResStsCd}</div>
-		<form action="/used/store/now">
+		<form action="/used/store/now#topStore">
 		<input type="hidden" name="mbNo" value="${mbNo }">
 		<select id="usedGdsResStsCd" name="usedGdsResStsCd" onchange="this.form.submit()">
 			<option value="0">전체</option>
@@ -59,7 +59,7 @@
 	</div>
 	<div id="myUsedReview">
 		<form action="/used/store/reviewinsert" method="post">
-			<input type="hidden" name="storeNo" value="111">
+			<input type="hidden" name="storeNo" value="${mbNo }">
 			<input type="hidden" name="mbNo" value="${loginMbNo }">
 			<input type="hidden" name="grade" value="1">
 			<div id="textAreaInput" >
@@ -69,12 +69,12 @@
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">
-			<div class="mbNo">${bean.mbNo }</div>
+			<div class="mbNo">${bean.userNm }</div>
 			<div class="storeReviewDt">${bean.storeReviewDt }</div>
 			<div class="content">${bean.content }</div>
 			<input type="hidden" class="hiddenStoreNo" value="${bean.storeNo }">
 			<input type="hidden" class="hiddenStoreReNo" value="${bean.storeReviewNo }">
-			<a class="declaration" data-toggle="modal" href="#declmodal">신고하기</a>
+			<button class="btn btn-danger declaration" data-toggle="modal" href="#declmodal">신고하기</button>
 		</div>
 		</c:forEach>
 	</div>
@@ -100,7 +100,7 @@
         	<input id="declMbNo" type="text" name="mbNo">
         </div>
         <div> 
-			<textarea rows="5" placeholder="신고사유"></textarea>
+			<input type="text" class="form-control" placeholder="신고사유">
 		</div>
       </div>
       <div class="modal-footer">

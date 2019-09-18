@@ -33,7 +33,7 @@
 <body>
 
 <!-- 관리자 공지게시판 리스트 -->
-<h1>기타가전 리스트</h1>
+<h1>패키지 리스트</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
 <div align="right">
 <a href="${pageContext.request.contextPath}/mp/mng/goodsList">[전체상품]</a>&nbsp

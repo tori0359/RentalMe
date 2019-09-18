@@ -12,6 +12,11 @@
 		FROM tb_user100,tb_used100
 		WHERE tb_user100.MB_NO=#{mbNo}
 	</select>
+	<select id="userId" resultType="String">
+		SELECT FN_NM('USER_NM', #{mbNo})
+		FROM tb_user100
+		where MB_NO=#{mbNo}
+	</select>
 	<select id="selectAll" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고거래 테스트용 -->
 		 SELECT *
 		 FROM tb_used100
@@ -76,9 +81,9 @@
 	</select>
 	
 	<select id="myStoreCmtSelectAll" resultType="com.me.rentalme.model.entity.UsedStoreVo">
-		SELECT *
-		FROM tb_used200
-		WHERE MB_NO=#{mbNo} AND DEL_YN='N'
+		SELECT B.USER_NM,A.*
+		FROM tb_used200 AS A, tb_user100 as B
+		WHERE A.STORE_NO=#{mbNo} AND DEL_YN='N' and A.MB_NO=B.MB_NO
 		ORDER BY CHG_DT DESC
 	</select>
 	

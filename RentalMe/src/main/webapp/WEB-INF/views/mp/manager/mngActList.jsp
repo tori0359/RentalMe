@@ -18,6 +18,9 @@
 	#btn00{
 		float:right;
 	}
+	#yetyet{
+		color:green;
+	}
 	#inging{
 		color:blue;
 	}
@@ -45,6 +48,14 @@
 </style>
 <script type="text/javascript">
 
+	$(function(){
+ 		$('.gdsLink').click(function(){
+			var link=$(this).parent().find('.hiddenCd').val().substring(2,12);
+			window.location.href='/act/admin/10'+link;
+		});	 
+		
+	});
+
 	function checkAll(){
 	    if( $("#allCheck").is(':checked') ){
 	      $("input[name=chBox]").prop("checked", true);
@@ -57,6 +68,7 @@
 <body>
 <div id="head"><h2>경매상품 리스트</h2></div>
 <script>
+$(function(){
 		 $("#choosedel").click(function(){
 		  var confirm_val = confirm("정말 삭제하시겠습니까?");
 		  
@@ -77,6 +89,7 @@
 		   });
 		  } 
 		 });
+});
 </script>
 <div id="contentTable" class="col-md-10 col-md-offset-1">
 <a id="choosedel">선택삭제</a>
@@ -92,10 +105,13 @@
 				<tr>
 					<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
        				</td>
-					<td style="text-align:center"><input type="hidden" class="hiddenCd" name="num" value="${bean.gdsCd}" />${bean.gdsCd}</td>
-					<td><a>${bean.gdsNm}</a></td>
+					<td style="text-align:center">${bean.gdsCd}</td>
+					<td><input type="hidden" class="hiddenCd" name="num" value="${bean.gdsCd}" /><a class="gdsLink">${bean.gdsNm}</a></td>
 					<td style="text-align:center">${bean.regDt}</td>
 					<c:choose>
+						<c:when test="${bean.actStsCd eq '1'}">
+							<td id="yetyet" style="text-align:center">대기</td>
+						</c:when>
 						<c:when test="${bean.actStsCd eq '2'}">
 							<td id="inging" style="text-align:center">진행중</td>
 						</c:when>

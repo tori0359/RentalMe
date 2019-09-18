@@ -183,6 +183,11 @@ public class CsController {
 		mav.addObject("blist", csService.csFaqList(search));
 		model.addAttribute("pathPaging", pagingPath);
 		model.addAttribute("paging", search);
+		System.out.println("1"+search.getKeyword());
+		System.out.println("2"+search.getSearchType());
+		
+		model.addAttribute("keyword",search.getKeyword());
+		model.addAttribute("searchType",search.getSearchType());
 		mav.setViewName("cs/csFAQ");
 		return mav;
 	}

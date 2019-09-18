@@ -13,6 +13,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.ProductVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -185,6 +186,16 @@ public class MngDaoImpl implements MngDao{
 	public int selectusedListCnt() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("mpMng.selectusedListCnt");
+	}
+	public int rentalGoodsAdd100(RentalAppliVo rentalAppliVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mpMng.rentalGoodsAdd100", rentalAppliVo);
+	}
+
+	@Override
+	public int rentalGoodsAdd300(ProductVo productVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mpMng.rentalGoodsAdd200",productVo);
 	}
 	
 }

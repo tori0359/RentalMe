@@ -39,7 +39,7 @@ encoding="UTF-8"?>
 	</select>
 	
 	<select id="selectActDetail" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT   A.GDS_CD
+		SELECT   C.GDS_CD
 				,A.GDS_NM
 				,A.BRAND_NM 
 				,B.GDS_PRICE
@@ -66,7 +66,7 @@ encoding="UTF-8"?>
 		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
 	</select>	
 	<select id="selectActDetail2" resultType="com.me.rentalme.model.entity.ActVo">
-		SELECT   A.GDS_CD
+		SELECT   C.GDS_CD
 				,A.GDS_NM
 				,A.BRAND_NM 
 				,B.GDS_PRICE
@@ -138,6 +138,7 @@ encoding="UTF-8"?>
 	<select id="SelectMngActSpec" resultType="com.me.rentalme.model.entity.ActResultVo">
 		SELECT GDS_CD,ACT_SEQ,MB_NO,BID_PRICE,BID_TIME,ACT_BID_STS_CD
 		FROM tb_act100
+		WHERE ACT_BID_STS_CD=1
 	</select>
 	
 	<update id="updateMngBidCancel">

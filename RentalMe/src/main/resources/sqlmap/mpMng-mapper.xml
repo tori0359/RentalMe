@@ -104,7 +104,7 @@
 	
 	<!--렌탈상품리스트 -->
 	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT * FROM TB_GDS100 ORDER BY REG_DT
+		SELECT * FROM TB_GDS100 ORDER BY REG_DT DESC
 		LIMIT #{startListNum},#{listSize}
 	</select>
 	<!--대형 상품리스트 -->
@@ -166,4 +166,13 @@
 	<select id="pacGoodsListCnt" resultType="int">
   		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='60';
   	</select>
+  	
+  	<insert id="rentalGoodsAdd100" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+  		INSERT INTO TB_GDS100(GDS_CD,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_NM,BRAND_NM,MODEL_NM,GDS_GB_CD) 
+  		VALUES(#{gdsCd},#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})
+  	</insert>
+  	<insert id="rentalGoodsAdd200" parameterType="com.me.rentalme.model.entity.ProductVo">
+  		insert into tb_gds200(GDS_CD,GDS_PRICE,AGREE_TERM,DELIVER_COST,INSTAL_COST,AS_CONDITION,IMG1,IMG2,IMG3,IMG4,IMG5,IMG6,IMG7,IMG8,IMG9,IMG10,IMG11,IMG12) 
+  		values(#{prdCode},#{prdPrice},#{prdContDate},#{prdDeliveryCost},#{prdInstCost},#{prdAsContent},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10},#{img11},#{img12})
+  	</insert>
 </mapper>

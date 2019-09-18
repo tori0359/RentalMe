@@ -135,7 +135,11 @@ public class ActController {
 	@RequestMapping(value="/result", method=RequestMethod.POST)
 	public String getActResult(@RequestParam("bidresult") String bidresult,
 								@RequestParam("gdsCd") String gdsCd) throws SQLException {
-		System.out.println(bidresult);
+		StringBuilder sb=new StringBuilder(gdsCd);
+		sb.setCharAt(0, '3');
+		sb.setCharAt(1, '0');
+		gdsCd=sb.toString();
+		System.out.println("gdsCd:"+gdsCd);
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Map<String,Integer>> map=new HashMap<String, Map<String,Integer>>();
 		Map<String, Integer> map2 = new HashMap<String, Integer>();
@@ -164,45 +168,42 @@ public class ActController {
 			
 		}
 		actService.updateBidWin(gdsCd);
-		StringBuilder sb=new StringBuilder(gdsCd);
-		sb.setCharAt(0, '3');
-		sb.setCharAt(1, '0');
-		actService.updateActEnd(sb.toString());
+		actService.updateActEnd(gdsCd);
 		
-		/*//
-
-		Set<String> keys=map.keySet();
-		Iterator<String> ite=keys.iterator();
-		while(ite.hasNext()) {
-			ActResultVo bean=new ActResultVo();
-			bean.setGdsCd(gdsCd);
-			bean.setUserId(ite.next());
-			System.out.println("zzz"+map.get(ite.next()));
-			Set<String> key=map.get(ite.next()).keySet();
-			System.out.println(18);
-			Iterator<String> iter=key.iterator();
-			System.out.println(19);
-			while(ite.hasNext()) {
-				System.out.println(20);
-				bean.setBidTime(iter.next());	
-				System.out.println(21);
-				bean.setBidPrice(map.get(ite.next()).get(iter.next()));
-				System.out.println(22);
-			}
-			System.out.println(23);
-			actService.insertActResult(bean);
-			System.out.println(24);
-		}
-		*/
+//		ObjectMapper mapper = new ObjectMapper();
+//		Map<String,Map<String,Integer>> map=new HashMap<String, Map<String,Integer>>();
+//		Map<String, Integer> map2 = new HashMap<String, Integer>();
+//		try {
+//			map=mapper.readValue(bidresult, new TypeReference<Map<String,Map<String,Integer>>>(){});
+//			System.out.println("dddadda"+map.toString());
+//		} catch (JsonParseException e) {
+//			e.printStackTrace();
+//		} catch (JsonMappingException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		for(Map.Entry<String, Map<String,Integer>> entry : map.entrySet()) {
+//			ActResultVo bean=new ActResultVo();
+//			System.out.println("key : "+entry.getKey()+", value : "+entry.getValue());
+//			bean.setGdsCd(gdsCd);
+//			bean.setUserId(entry.getKey());
+//			for(Map.Entry<String, Integer> entry2 : entry.getValue().entrySet()) {
+//				System.out.println("key : "+entry2.getKey()+", value : "+entry2.getValue());
+//				bean.setBidTime(entry2.getKey());
+//				bean.setBidPrice(entry2.getValue());
+//			}
+//			actService.insertActResult(bean);
+//			
+//		}
+//		actService.updateBidWin(gdsCd);
+//		StringBuilder sb=new StringBuilder(gdsCd);
+//		sb.setCharAt(0, '3');
+//		sb.setCharAt(1, '0');
+//		actService.updateActEnd(sb.toString());
+		
 		return "redirect:/act/";
-	}
-	
-	///////////////////////// 이벤트 경매 관리자
-	@RequestMapping(value="/admin", method=RequestMethod.GET)
-	public String getActNow(HttpSession session) {
-		log.info("index...");
-		System.out.println(session.getId()+">>>"+session.getAttributeNames());
-		return "act/actAdmin";
 	}
 	
 	
