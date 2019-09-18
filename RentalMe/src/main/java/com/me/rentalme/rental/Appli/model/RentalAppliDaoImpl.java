@@ -123,6 +123,11 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 		return sqlSession.insert("rentalAppli.gdsOdrDetailRegister", rentalAppliVo);
 	}
 
+	/* 林巩郴开 备概 or 馆前 */
+	public int decisionOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrRegister", rentalAppliVo);
+	}
+
 
 
 

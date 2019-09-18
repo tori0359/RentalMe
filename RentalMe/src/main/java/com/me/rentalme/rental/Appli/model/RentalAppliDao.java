@@ -29,6 +29,7 @@ public interface RentalAppliDao {
 	
 	int cartOdr(RentalAppliVo rentalAppliVo);
 	int cartDetailOdr(RentalAppliVo rentalAppliVo);
+	int decisionOdr(RentalAppliVo rentalAppliVo);
 	
 
 }

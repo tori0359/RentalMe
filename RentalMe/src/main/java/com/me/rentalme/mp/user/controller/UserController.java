@@ -93,16 +93,22 @@ public class UserController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/decision", method = RequestMethod.POST) 
-	public String modifyOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("payGbCd")String payGbCd, 
-			@RequestParam("mbNo")String mbNo, @RequestParam("totOdrAmt")int totOdrAmt,  @RequestParam("gdsCdArr[]")List<String> gdsCdArr,
-			@RequestParam("cartSeqArr[]")List<String> cartSeqArr, @RequestParam("gdsPriceArr[]")List<Integer> gdsPriceArr, @RequestParam("odrQtyArr[]")List<Integer> odrQtyArr, 
-			@RequestParam("agreeTermArr[]")List<String> agreeTermArr, RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
+	public String modifyDecisionOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("odrNo")String odrNo,
+			RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
 		
-			System.out.println("林巩郴开 备概or馆前");
+		System.out.println(crudGbCd);
+		System.out.println(odrGbCd);
+		System.out.println(odrNo);
+		System.out.println((String) session.getAttribute("loginMbNo"));
+		System.out.println("林巩郴开 备概or馆前");
 		
-//			int result1 = rentalAppliService.cartOdr(rentalAppliVo);			// 林巩磊丰 积己
-//			int result2 = rentalAppliService.cartDetailOdr(rentalAppliVo, gdsCdArr, cartSeqArr, gdsPriceArr, odrQtyArr, agreeTermArr );		// 林巩惑技磊丰 积己
-//			model.addAttribute("rtnCd", Integer.toString(result1));
+		rentalAppliVo.setCrudGbCd(crudGbCd);
+		rentalAppliVo.setOdrGbCd(odrGbCd);
+		rentalAppliVo.setOdrNo(odrNo);
+		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
+		
+			int result1 = rentalAppliService.decisionOdr(rentalAppliVo);			// 林巩磊丰 积己
+			model.addAttribute("rtnCd", Integer.toString(result1));
 			return "redirect:/mp/";
 	}
 	/**
@@ -164,23 +170,6 @@ public class UserController {
 			@RequestParam("cartSeqArr[]")List<String> cartSeqArr, @RequestParam("gdsPriceArr[]")List<Integer> gdsPriceArr, @RequestParam("odrQtyArr[]")List<Integer> odrQtyArr, 
 			@RequestParam("agreeTermArr[]")List<String> agreeTermArr, RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
 		
-//			rentalAppliVo.setCrudGbCd(crudGbCd);
-//			rentalAppliVo.setOdrGbCd(odrGbCd);
-//			rentalAppliVo.setPayGbCd(payGbCd);
-//			rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
-//			rentalAppliVo.setTotOdrAmt(totOdrAmt);
-			
-//			System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
-//			System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
-//			System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
-//			System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
-//			System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr);
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(0));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(1));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(2));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(3));
-			
 			int result1 = rentalAppliService.cartOdr(rentalAppliVo);			// 林巩磊丰 积己
 			int result2 = rentalAppliService.cartDetailOdr(rentalAppliVo, gdsCdArr, cartSeqArr, gdsPriceArr, odrQtyArr, agreeTermArr );		// 林巩惑技磊丰 积己
 			model.addAttribute("rtnCd", Integer.toString(result1));

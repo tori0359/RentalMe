@@ -83,6 +83,9 @@ public class RentalAppliVo {
 	private String payGbCd;				// 결제구분코드
 	private String seq;					// 일련번호
 	
+	/* 구매확정 or 반품 */
+	private String odrNo;				// 주문번호
+	
 	private int startListNum;
 	private int listSize;
 	
@@ -472,6 +475,12 @@ public class RentalAppliVo {
 	}
 	public void setListSize(int listSize) {
 		this.listSize = listSize;
+	}
+	public String getOdrNo() {
+		return odrNo;
+	}
+	public void setOdrNo(String odrNo) {
+		this.odrNo = odrNo;
 	}
 
 }

@@ -241,15 +241,19 @@ span em.warning{
        // 구매 모달
        $('#myModal2').on('shown.bs.modal', function (e) {
 			var odrNo = $(e.relatedTarget).data('odr-no');
+			$(e.currentTarget).find('input[name="crudGbCd"]').val("UUPC");
+			$(e.currentTarget).find('input[name="odrGbCd"]').val("10");
 			$(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
-			$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
+			//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
        });
 
        // 반품 모달
        $('#myModal3').on('shown.bs.modal', function (e) {
-    	   var odrNo = $(e.relatedTarget).data('odr-no');
-    	   $(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
-    	   $(e.currentTarget).find('input[name="odrStsGbCd"]').val("RW");
+    	    var odrNo = $(e.relatedTarget).data('odr-no');
+			$(e.currentTarget).find('input[name="crudGbCd"]').val("UURW");
+			$(e.currentTarget).find('input[name="odrGbCd"]').val("10");
+			$(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
+    	   //$(e.currentTarget).find('input[name="odrStsGbCd"]').val("RW");
       });
 
        $('#review').click(function(){
@@ -478,8 +482,8 @@ span em.warning{
 	    </div>
 	</form>
 	<!-- modal 끝 -->
-	<form id="target" action="/mp/" method="post">
 	<!-- 구매 모달 -->
+	<form id="target" action="/mp/decision" method="post">
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -488,8 +492,9 @@ span em.warning{
 					<h4 class="modal-title" id="myModalLabel2">구매확정</h4>
 			    </div>
 				<div class="modal-body">
+			    	<input type="text" name="crudGbCd" value="crudGbCd"/>
+			    	<input type="text" name="odrGbCd" value="odrGbCd"/>
 			    	<input type="text" name="odrNo" value="odrNo"/>
-			    	<input type="text" name="odrStsGbCd" value="odrStsGbCd"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;구매확정 하시겠습니까?</label>
@@ -501,8 +506,10 @@ span em.warning{
 			</div>
 	    </div>
 	</div>
+	</form>
 	<!-- 모달 끝 -->
 	<!-- 반품 모달 -->
+	<form id="target" action="/mp/decision" method="post">
 	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -511,8 +518,9 @@ span em.warning{
 					<h4 class="modal-title" id="myModalLabel2">반품요청</h4>
 			    </div>
 				<div class="modal-body">
+			    	<input type="text" name="crudGbCd" value="crudGbCd"/>
+			    	<input type="text" name="odrGbCd" value="odrGbCd"/>
 			    	<input type="text" name="odrNo" value="odrNo"/>
-			    	<input type="text" name="odrStsGbCd" value="odrStsGbCd"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품요청 하시겠습니까?</label>
@@ -524,8 +532,8 @@ span em.warning{
 			</div>
 	    </div>
 	</div>
+	</form>
 	<!-- 모달 끝 -->
-</form>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

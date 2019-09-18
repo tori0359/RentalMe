@@ -702,6 +702,7 @@
 							,#{payGbCd,			mode=IN,		jdbcType=VARCHAR}
 							,#{mbNo,			mode=IN,		jdbcType=VARCHAR}
 							,#{totOdrAmt,		mode=IN,		jdbcType=INTEGER}
+							,#{odrNo,			mode=IN,		jdbcType=VARCHAR}
 			)
 		}
 	</insert>
