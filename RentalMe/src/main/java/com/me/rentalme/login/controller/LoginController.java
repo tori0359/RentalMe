@@ -129,74 +129,7 @@ public class LoginController {
 			//이메일 인증을 한 사용자 이고 사용자 상태가 정상인 사용자
 			if(emailKey.equals("Y") && userStsCd == 1) {
 				//입력한 아이디가 DB에 있는 경우 입력한 비밀번호와 DB에 저장된 비밀번호 암호화 값과 비교
-				if(BCrypt.checkpw(userPw, loginPw)) {
-					
-					//사용하고 있는 브라우저 확인 체크
-					String userAgent = req.getHeader("User-Agent");
-					String browser = "";										//사용자가 로그인 한 브라우저
-					String browserStsCd = "";									//DB에 입력할 브라우저 코드
-					
-					System.out.println("로그인 유저정보 : "+loginUser.toString());
-					
-					String loginStsCd   		= loginUser.getLoginStsCd();	//로그인상태 체크
-					String loginBrowserStsCD 	= loginUser.getBrowserStsCd();	//로그인 브라우저 코드
-					String loginBrowserNm = "";									//로그인한 브라우저 코드명
-					
-					//Db에 저장된 로그인 한 유저의 브라우저
-					if(loginBrowserStsCD.equals("1")) {
-						loginBrowserNm = "IE";
-					}else if(loginBrowserStsCD.equals("2")) {
-						loginBrowserNm = "Opera";
-					}else if(loginBrowserStsCD.equals("3")) {
-						loginBrowserNm = "Firefox";
-					}else if(loginBrowserStsCD.equals("4")) {
-						loginBrowserNm = "Chrome";
-					}else if(loginBrowserStsCD.equals("5")) {
-						loginBrowserNm = "Safari";
-					}
-
-					//로그인하려는 사람의 브라우저
-					if (userAgent.indexOf("Trident") > 0 || userAgent.indexOf("MSIE") > 0) {
-						browser = "IE";
-						browserStsCd = "1";
-					} else if (userAgent.indexOf("Opera") > 0) {
-						browser = "Opera";
-						browserStsCd = "2";
-					} else if (userAgent.indexOf("Firefox") > 0) {
-						browser = "Firefox";
-						browserStsCd = "3";
-					} else if (userAgent.indexOf("Safari") > 0) {
-						if (userAgent.indexOf("Chrome") > 0) {
-							browser = "Chrome";
-							browserStsCd = "4";
-						} else {
-							browser = "Safari";
-							browserStsCd = "5";
-						}
-					}
-					
-					System.out.println("입력한 유저 브라우저 :  "+browser);
-					System.out.println("로그인 유저 상태값 :  "+loginStsCd+", 로그인 유저 브라우저 : "+ loginBrowserNm);
-					
-					//로그인이 되어있고 같은 브라우저일 경우 이미 사용중인 아이디 이다.
-					if(loginStsCd.equals("1") && loginBrowserNm.equals(browser)) {	
-						msg = "usingId";
-						mav.addObject("msg", msg);
-						System.out.println("사용중인아이디 : "+msg);
-						mav.setViewName("login/login");
-						return mav;								
-					}else {					//사용중인 아이디가 아닐 경우
-						if(loginStsCd.equals("1")) {
-							if(!loginBrowserNm.equals(browser)) {
-								//서로 다른 브라우저이므로 로그인이 가능
-								System.out.println("입력한 유저 브라우저 : "+ browser 
-										+ ", 로그인 상태 유저 브라우저 : "+ loginBrowserNm);
-							}
-						}else {
-							loginService.chgLoginStsCd(userId, browserStsCd);
-							session.setAttribute("flag", "Y");
-						}
-					}									
+				if(BCrypt.checkpw(userPw, loginPw)) {								
 					
 					if(pwFailCnt > 0) {
 						//비밀번호 오류횟수 초기화
@@ -267,16 +200,6 @@ public class LoginController {
 		if(sessionUserId != null && sessionMbNo != null) {
 			String userId = sessionUserId;
 			
-			
-			System.out.println("flag값은 : "+session.getAttribute("flag"));
-			//현재로그인한 사람일 때 
-			//로그인상태, 브라우저코드 초기화
-			if(session.getAttribute("flag") != null) {
-				loginService.chgLogoutStsCd(userId);
-				session.removeAttribute("flag");
-			}
-			
-			session.removeAttribute("flag");
 			session.removeAttribute("loginUserId");
 			session.removeAttribute("loginMbNo");
 			

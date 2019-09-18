@@ -74,16 +74,4 @@
 		     , SESSION_DT	= #{sessionDt}
 		 WHERE USER_ID		= #{userId}
 	</update>
-	<update id="updLoginStsCd">
-		update tb_user100
-		   set login_sts_cd = '1'
-		     , browser_sts_cd = #{browserStsCd}
-		 where user_id		= #{userId}
-	</update>
-	<update id="updLogoutStsCd">
-		update tb_user100
-		   set login_sts_cd = '2'
-		     , browser_sts_cd = ''
-		 where user_id		= #{userId}
-	</update>
 </mapper>

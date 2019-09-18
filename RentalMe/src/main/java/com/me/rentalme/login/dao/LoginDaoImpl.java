@@ -131,33 +131,4 @@ public class LoginDaoImpl implements LoginDao {
 		return sqlSession.selectOne("login.checkLoginSessionKey", value);
 	}
 	
-	/**
-	* 로그인 상태 업데이트
-	* 
-	* @param  String userId 		- 입력한 사용자 아이디
-	* @param  String browserStsCd 	- 로그인을 하려는 브라우저
-	* @return void
-	* @author 황인준
-	* 등록일자 : 2019-09-16
-	*/		
-	@Override
-	public void updLoginStsCd(String userId, String browserStsCd) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userId", userId);
-		map.put("browserStsCd", browserStsCd);
-		sqlSession.update("login.updLoginStsCd", map);
-	}
-	
-	/**
-	* 로그인 상태 업데이트
-	* 
-	* @param  String userId 		- 사용자 아이디
-	* @return void
-	* @author 황인준
-	* 등록일자 : 2019-09-16
-	*/
-	@Override
-	public void updLogoutStsCd(String userId) {
-		sqlSession.update("login.updLogoutStsCd", userId);
-	}
 }
