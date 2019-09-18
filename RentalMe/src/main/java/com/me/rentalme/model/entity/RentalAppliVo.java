@@ -461,31 +461,17 @@ public class RentalAppliVo {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-	/**
-	 * @return the startListNum
-	 */
 	public int getStartListNum() {
 		return startListNum;
 	}
-	/**
-	 * @param startListNum the startListNum to set
-	 */
 	public void setStartListNum(int startListNum) {
 		this.startListNum = startListNum;
 	}
-	/**
-	 * @return the listSize
-	 */
 	public int getListSize() {
 		return listSize;
 	}
-	/**
-	 * @param listSize the listSize to set
-	 */
 	public void setListSize(int listSize) {
 		this.listSize = listSize;
 	}
 
-
-	
 }

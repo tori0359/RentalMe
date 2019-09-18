@@ -135,5 +135,25 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		}
 	}
 
+	@Override
+	public int cartOdr(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.cartOdr(rentalAppliVo);
+	}
+
+	@Override
+	public int cartDetailOdr(RentalAppliVo rentalAppliVo, List<String> gdsCdArr, List<String> cartSeqArr,
+			List<Integer> gdsPriceArr, List<Integer> odrQtyArr, List<String> agreeTermArr) {
+		int result = 0;
+		for(int i=0; i<gdsCdArr.size(); i++) {
+			rentalAppliVo.setGdsCd(gdsCdArr.get(i));
+			rentalAppliVo.setSeq(cartSeqArr.get(i));
+			rentalAppliVo.setGdsPrice(gdsPriceArr.get(i));
+			rentalAppliVo.setOdrQty(odrQtyArr.get(i));
+			rentalAppliVo.setAgreeTerm(agreeTermArr.get(i));
+			result = rentalAppliDao.cartDetailOdr(rentalAppliVo);
+		}
+		return result;
+	}
+
 
 }

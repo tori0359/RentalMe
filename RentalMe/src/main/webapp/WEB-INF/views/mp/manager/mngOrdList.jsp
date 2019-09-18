@@ -132,15 +132,33 @@
 					$('.stscdtxt').eq(i).parent().prepend('<td></td>');
 				}
 			}
-			
+
+			$('.depositConfirm').click(function(){
+				$(this).parent().append('입금확인');
+				$(this).hide();
+				return false;
+			});
 		}else if($('.titlediv').text().indexOf('반품') != -1){
 			$('.changeVal').eq(0).hide();
 			for(var i=0; i<$('.stscdtxt').length; i++){
 				if($('.stscdtxt').eq(i).text().indexOf('반품대기') == -1){
 					$('.stscdtxt').eq(i).parent().children().first().hide();
 					$('.stscdtxt').eq(i).parent().prepend('<td></td>');
+				} else if($('.stscdtxt').eq(i).text().indexOf('반품대기') != -1){
+					$('.stscdtxt').eq(i).html('<button class="returnConfirm">확정</button> <button class="returnCancel">반려</button>');						
 				}
 			}
+
+			$('.returnConfirm').click(function(){
+				$(this).parent().append('반품확정');
+				$(this).parent().find('button').hide();
+				return false;			
+			});
+			$('.returnCancel').click(function(){
+				$(this).parent().append('반품반려');
+				$(this).parent().find('button').hide();
+				return false;			
+			});
 		}
 		
    });
@@ -155,8 +173,6 @@
 		}
 		theForm.submit();
 	}
-
-
 
    
    
@@ -198,7 +214,8 @@
                 <td>${bean.mbNo}</td>
                 <td class="stscdtxt">
                    <c:if test= "${bean.odrStsGbCd eq 'DW'}">
-                      입금대기
+                      <!-- 입금대기 -->
+                      <button style="background:#151515; color:white;" class="btn btn-default depositConfirm">입금대기</button>
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'OC'}">
                       주문확정

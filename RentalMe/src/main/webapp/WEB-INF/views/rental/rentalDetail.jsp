@@ -55,7 +55,7 @@
     display: none;
     position: fixed;
     right: 80px;
-    bottom: 200px;
+    bottom: 340px;
     z-index: 1030;
     font-size: 2.875rem;
     color: #868e96;
@@ -616,19 +616,21 @@ input::-moz-focus-inner { border: 0; }
 		}
 	}
 
+	// 결제하기 라디오버튼(무통장입금)
 	$(document).on("click", "#inlineRadio1", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').show();
 		$('#bankInfo').show();
 	});
 
+	// 결제하기 라디오버튼(카카오페이)
 	$(document).on("click", "#inlineRadio2", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').hide();
 		$('#bankInfo').hide();
 	});
 
-	// 결제하기 모달 결제하기
+	// 결제하기 모달 
 	$(document).on("click", "#realSubmit", function(){
 		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
 		var userId = "${loginUserId}";
@@ -637,6 +639,7 @@ input::-moz-focus-inner { border: 0; }
 		var payGbCd = radioVal;
 		var seq	= "001";
 		var mbNo = "${sessionMbNo}";
+		var gdsSclassCd = $('#realGdsSclassCd').val();
 		var gdsCd = "";
 		var gdsPrice = $('#realGdsPrice').val();
 		var agreeTerm = $('#realAgreeTerm').val();
@@ -677,6 +680,7 @@ input::-moz-focus-inner { border: 0; }
 								"payGbCd"		: payGbCd,
 								"seq"			: seq,
 						         "mbNo"			: mbNo,
+						         "gdsSclassCd"	: gdsSclassCd,
 						         "gdsCd"  		: gdsCd,
 						         "gdsPrice"		: gdsPrice,
 						         "agreeTerm"	: agreeTerm,
@@ -686,7 +690,8 @@ input::-moz-focus-inner { border: 0; }
 						         "odrQty"  		: odrQty
 							 },
 						success : function(){
-							//location.href = "/rental/Appli/lg/detail/odr";
+							//location.href = "/rental/Appli/lg/"+gdsSclassCd+"/detail/"+gdsCd;
+							location.href="/mp/";
 						}
 					});
 			    } else {
@@ -709,6 +714,7 @@ input::-moz-focus-inner { border: 0; }
 							"seq"			: seq,
 					         "mbNo"			: mbNo,
 					         "gdsCd"  		: gdsCd,
+					         "gdsSclassCd"	: gdsSclassCd,
 					         "gdsPrice"		: gdsPrice,
 					         "agreeTerm"	: agreeTerm,
 					         "deliverCost"  : deliverCost,
@@ -717,7 +723,8 @@ input::-moz-focus-inner { border: 0; }
 					         "odrQty"  		: odrQty
 						 },
 					success : function(){
-						//location.href = "/rental/Appli/lg/detail/odr";
+						//location.href = "/rental/Appli/lg/"+gdsSclassCd+"/detail/"+gdsCd;
+						location.href="/mp/";
 					}
 				});
 			} else {
@@ -972,7 +979,7 @@ input::-moz-focus-inner { border: 0; }
 											<div class="modal-body">
 											    <div class="row" style="border:0px solid orange;">
 				    								<h3><label for="realGdsNm">&nbsp;&nbsp;상품정보</label></h3>
-					    							<div id="detailNm" class="col-md-3" style="border:0px solid black;">
+					    							<div id="detailNm" class="col-md-4" style="border:0px solid black;">
 												    	<h4><label for="realGdsNm">상품명</label></h4>
 												    	<h4><label for="realGdsPrice">렌탈가격(월)</label></h4>
 												    	<h4><label for="realAgreeTerm">계약기간</label></h4>
@@ -981,17 +988,18 @@ input::-moz-focus-inner { border: 0; }
 												    	<h4><label for="realAsCondition">AS조건</label></h4>
 												    	<h4><label for="realOdrQty">수량</label></h4>
 													</div>
-													<div id="detailNm" class="col-md-9" style="border:0px solid black;">
+													<div id="detailNm2" class="col-md-8">
 												    	<input type="text" class="form-control" id="realGdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
-														<input type="text" class="form-control" id="realGdsNm" name="gdsNm" value="${list1.gdsNm }"  >
+												    	<input type="text" class="form-control" id="realGdsSclassCd" name="realGdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;">
+														<input type="text" class="btn btn-defalut" id="realGdsNm" disabled="disabled" style="background-color:white; text-align:left;" name="gdsNm" value="${list1.gdsNm }"  >
 														<input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;" >
 														<fmt:setLocale value="ko_KR"></fmt:setLocale>
-														<input type="text" class="form-control" id="realGdsPrice2" name="gdsPrice2" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "  >
-														<input type="text" class="form-control" id="realAgreeTerm" name="agreeTerm" value="${list1.agreeTerm }"  >
-														<input type="text" class="form-control" id="realDeliverCost" name="deliverCost" value="${list1.deliverCost }"  >
-														<input type="text" class="form-control" id="realInstalCost" name="instalCost" value="${list1.instalCost }"  >
-														<input type="text" class="form-control" id="realAsCondition" name="asCondition" value="${list1.asCondition }"  >
-												    	<input type="text" class="form-control" id="realOdrQty" name="odrQty" value="1">
+														<input type="text" class="btn btn-defalut" id="realGdsPrice2" disabled="disabled" style="background-color:white; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "  >
+														<input type="text" class="btn btn-defalut" id="realAgreeTerm" disabled="disabled" style="background-color:white; text-align:left;" name="agreeTerm" value="${list1.agreeTerm }"  >
+														<input type="text" class="btn btn-defalut" id="realDeliverCost" disabled="disabled" style="background-color:white; text-align:left;" name="deliverCost" value="${list1.deliverCost }"  >
+														<input type="text" class="btn btn-defalut" id="realInstalCost" disabled="disabled" style="background-color:white; text-align:left;" name="instalCost" value="${list1.instalCost }"  >
+														<input type="text" class="btn btn-defalut" id="realAsCondition" disabled="disabled" style="background-color:white; text-align:left;" name="asCondition" value="${list1.asCondition }"  >
+												    	<input type="text" class="btn btn-defalut" id="realOdrQty" disabled="disabled" style="background-color:white; text-align:left;" name="odrQty" value="1">
 													</div>
 												</div>
 												<div class="row" style="border:0px solid orange;">

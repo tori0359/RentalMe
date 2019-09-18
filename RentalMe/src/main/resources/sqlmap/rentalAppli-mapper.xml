@@ -717,6 +717,7 @@
 							,#{gdsPrice,		mode=IN,		jdbcType=INTEGER}
 							,#{agreeTerm,		mode=IN,		jdbcType=VARCHAR}
 							,#{odrQty,			mode=IN,		jdbcType=INTEGER}
+							,#{mbNo,			mode=IN,		jdbcType=VARCHAR}
 			)
 		}
 	</insert>
