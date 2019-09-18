@@ -69,9 +69,7 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 
 <!-- 결제 api연동하기 (아임포트)-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
-
 
 <script>
 	window.onload=function(){
@@ -153,21 +151,49 @@
 
 			
 		});
-			$('#refund_button').click(function(){
-				alert('하이');
+
+
+		//예치금 환불 신청 버튼 눌렀을 때
+		$('#refund_button').click(function(){
+
+			//입력한 환불 요청 금액 저장
+			var refundinput = $('#refundinput').val();
+
+			var refund;
+			
+			//환불 요청 금액이 공백이 아닐 때
+			if(refundinput != ""){
+				$('#refund').val(refundinput);
+				refund = $('#refund').val();
+			
+				$.ajax({
+					url:"deposit/refund",
+					type: "post",
+					data: { "refund" : refund },
+					success : function(data){
+						var msg = data;
+						
+						if(msg == "duplication"){
+							$('#refundtext').text("이미 요청된 환불이 있습니다.");
+						}else{
+							$('#refundtext').text("관리자에게 환불이 요청되었습니다.");
+						}
+					}				
 				});
 
-			$('#myModal').on('shown.bs.modal', function (e) {
-				var refund = $(e.relatedTarget).data('refund');
-				console.log(refund);
-				
-				$(e.currentTarget).find('input[name="refund"]').val(refund);
-				
-				
-			})
+			}else{
+				$('#refundtext').text("환불요청 금액을 입력하세요.");
+			}
+			
+			$('#myModal').modal('show');
+			
+			//모달 확인버튼을 눌렀을 때
+			$('#modalconfirm').click(function(){
+				$('#myModal').modal('hide');
+			});
 
-
-		
+			
+		});		
 	}
 	
 </script>
@@ -308,11 +334,21 @@
 	<table class="chargetable table">
 			<tr>
        			<th class="active" style="text-align:center;">현재 예치금</th>
-       			<td><fmt:formatNumber pattern="#,###.##">${remnDeposit}</fmt:formatNumber> 원</td>
+       			<td>
+       			<fmt:formatNumber pattern="#,###.##">
+	       			<c:if test="${empty remnDeposit}">
+						0
+					</c:if>
+					 <c:if test="${!empty remnDeposit}">
+						${remnDeposit}
+					</c:if>
+       			</fmt:formatNumber> 원
+				</td>
+       			
        		</tr>
 			<tr>
        			<th class="active" style="text-align:center;">환불요청 금액(원)</th>
-       			<td><input type="text" name="refund" id="refund"></td>
+       			<td><input type="text" name="refundinput" id="refundinput"></td>
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">환불수단</th>
@@ -323,28 +359,31 @@
        		</tr>
 	</table>
 	<div class="chargediv">
-       		<button style="width:150px; margin-left:50px;" type="submit" class="btn btn-danger" id="refund_button" data-target="#myModal" data-toggle="modal" >환불 신청하기</button>
+       		<button style="width:150px; margin-left:50px;" class="btn btn-danger" id="refund_button">환불 신청하기</button>
     </div>
 
-	<form action="/mp/deposit/refund" method="post">
+	<!-- <form action="/mp/deposit/refund" method="post"> -->
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="height:10px;" aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"></h4>
 	      </div>
 	      <div class="modal-body">
-	       <input type="text" name="refund4"/><p>환불을 요청하시겠습니까?</p>
+	       <input type="hidden" id="refund" name="refund"/>
+	       <div style="text-align:center;">
+	       <span id="refundtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
+	       </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-primary">Save changes</button>
+	        <button style="background:black;" type="submit" id="modalconfirm" class="btn btn-primary">확인</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-	</form>
+	<!-- </form> -->
 </div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>

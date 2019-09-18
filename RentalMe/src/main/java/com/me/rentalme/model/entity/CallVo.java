@@ -10,6 +10,7 @@ public class CallVo {
 	private String regId;			//등록 아이디
 	private String regDt;			//등록 날짜
 	private String modelNm;			//모델명
+	private String brandNm;			//브랜드명
 	private String usedGdsPrice;	//중고 상품 가격
 	private String odrNo;			//주문 번호
 	private String odrDt;			//주문 일자
@@ -38,6 +39,52 @@ public class CallVo {
 	private String cnt; 			//회원이 해당상품에 쓴 후기 갯수
 	private String cartSeq;			//장바구니 일련번호
 	private String userNm; 			//회원 이름
+	private String refund;			//환불 요청 예치금 금액
+	private String gdsSclassCd;		//상품 소분류 코드
+	private String gdsMclassCd;		//상품 중분류 코드
+	
+		
+	public String getGdsMclassCd() {
+		return gdsMclassCd;
+	}
+
+
+	public void setGdsMclassCd(String gdsMclassCd) {
+		this.gdsMclassCd = gdsMclassCd;
+	}
+
+
+	public CallVo() {
+			
+	}
+		
+	
+	public String getGdsSclassCd() {
+		return gdsSclassCd;
+	}
+
+
+	public void setGdsSclassCd(String gdsSclassCd) {
+		this.gdsSclassCd = gdsSclassCd;
+	}
+
+
+	public String getBrandNm() {
+		return brandNm;
+	}
+
+	public void setBrandNm(String brandNm) {
+		this.brandNm = brandNm;
+	}
+	
+	public String getRefund() {
+		return refund;
+	}
+
+	public void setRefund(String refund) {
+		this.refund = refund;
+	}
+
 	
 	public String getUserNm() {
 		return userNm;
@@ -272,9 +319,7 @@ public class CallVo {
 		this.usedGdsPrice = usedGdsPrice;
 	}
 
-	public CallVo() {
-		
-	}
+	
 
 	public String getUsedGdsNo() {
 		return usedGdsNo;

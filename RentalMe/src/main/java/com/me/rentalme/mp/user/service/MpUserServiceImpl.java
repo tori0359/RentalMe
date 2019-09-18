@@ -89,12 +89,30 @@ public class MpUserServiceImpl implements MpUserService{
 		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit(),mbNo);
 	}
 	
+	//예치금 환불 요청 중복 조회
+	@Override
+	public String selectRefund(String mbNo) throws SQLException {
+		
+		int refundDupl = mpUserDao.selectRefund(mbNo);
+		String duplmsg="";
+		
+		
+		if(refundDupl>0) {
+			duplmsg="duplication";
+		}else {
+			duplmsg="not duplication";
+		}
+		
+		return duplmsg;
+	}
+	
 	//예치금 환불 요청
 	@Override
 	public int refundCharge(String refund, String mbNo) throws SQLException {
 		return mpUserDao.refundCharge(refund,mbNo);
 		
 	}
+	
 	
 	//개인 1:1문의보기
 	@Override
@@ -194,6 +212,7 @@ public class MpUserServiceImpl implements MpUserService{
 		return result;
 	}
 
+	
 	
 
 

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <jsp:include page="../template/header.jsp"></jsp:include>
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
 <style type="text/css">
 	.maincar{
 		height: 500px;	
@@ -16,20 +18,189 @@
 		height:500px;
 	}
 	#event{
-		background-color:black;
+		background-color: #F1C528;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
 	}
-	#event p {
-		color:white;
+	#event a {
+		line-height: 50px; 
+		font-size: 15pt; 
+		font-family:"nanumEB";
+		color: black;
+	}
+	#event a:hover{
+		text-decoration: none;
+		
+	}
+	#best{
+		/* border-top:4px solid grey; */
+		text-align:center;
+		margin-top:70px;
+	}
+	#best h3{
+		font-family:"nanumEB";
+		font-size:19pt;
+	}
+	.bestitem{
+		margin-top: 40px;
+	}
+	.bestitem img{
+		width: 250px;
+		padding-right:10px;
+	}
+	#ordlist{
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		height:30px;
+		background-color: #F1C528;
+	}
+	#ordlist p{
+		line-height: 30px;
+		font-family: "nanumB";
+		font-weight:bolder;
+		margin-left:10px;
+		font-size:10pt;
+	}
+	.eventlist{
+		margin-top: 40px;
+		padding-top:10px;
+		height:165px;
+		background:#fff; 
+	}
+	.eventlist img{
+		height:140px;
+	}
+	/* 실시간 접수현황 carousel*/
+	.none{ 
+		display:none
 	}
 	
+	#ticker{ 
+		float:left;width:100px;
+	}
+	
+	.block { 
+		padding:0 5px; 
+		height:105px; 
+		overflow:hidden; 
+		width:100%; 
+		font-family:"nanumB"; 
+		font-size:12px;
+		float:left; 
+		border: 1px solid #E6E6E6;
+	}
+	
+	.block ul,
+	.block li { margin:0; padding:0; list-style:none;}
+	.block li p { display:block; height:15px; line-height:15px; color:#555;}
+	.block li img{ width:30px;}
+	/* 실시간 접수현황 끝*/
 
+	.new{
+		background-color: #151515;
+		color:white;
+		width:35px;
+		font-family:"nanumEB";
+		text-align: center;
+		margin-right:8px;
+	}
+	#banner p {
+		font-family: "nanumEB";
+		font-size:14pt;
+	}
+	#auctionimg {
+		width:170px;
+	}
+	#brandNm {
+		padding:20px 10px 0 10px;
+		font-family:"nanumB";
+		font-size: 10pt;
+		color: #A4A4A4;
+		font-weight:bolder;
+	}
+	#goodsNm{
+		padding:0 10px 0 10px;
+		font-family:"nanumB";
+		font-weight:bolder;
+	}
+	#goodsNm a{
+		color:black;
+		text-decoration:none;
+	}
+	#price{
+		padding:0 10px 0 10px;
+		font-family:"nanumEB";
+		font-weight:bolder;
+		font-size:13pt;
+	}
+	.bestitem:hover{
+		transform:scale(1.1);             /*  default */
+		-webkit-transform:scale(1.1);  /*  크롬 */
+		-moz-transform:scale(1.1);     /* FireFox */
+		-o-transform:scale(1.1);  
+	}
 </style>
+<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 <script type="text/javascript">
 			$(document).ready(function(){
 				$('.carousel').carousel({
 					  interval: 2000
 					})
 				});
+
+			//실시간 접수 현황 세로 carousel
+			jQuery(function($)
+					{
+					    var ticker = function()
+					    {
+					        timer = setTimeout(function(){
+					            $('#ticker li:first').animate( {marginTop: '-25px'}, 300, function()
+					            {
+					                $(this).detach().appendTo('ul#ticker').removeAttr('style');
+					            });
+					            ticker();
+					        }, 1500);         
+					      };
+
+					  //마우스를 올렸을 때 기능 정지
+					  var tickerover = function()
+					  {
+					    $('#ticker').mouseover(function(){
+					      clearTimeout(timer);
+					    });
+					    $('#ticker').mouseout(function(){
+					      ticker();
+					    });  
+					  };
+					  tickerover();
+					  //끝
+					    ticker();
+					    
+					});
+			
+		//best상품 carousel
+		window.onload=function(){
+			$('.owl-carousel').owlCarousel({
+				loop:true,
+				margin:10,
+				nav:true,
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:3
+					},
+					1000:{
+						items:5
+					}
+				}
+			})
+		}
 				
 </script>
 </head>
@@ -63,11 +234,79 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 <div class="container">
-	<div id="event" style="border:1px solid red;">
-		<p> �� ��Ҵ�! �̺�Ʈ��� �ٷΰ���</p>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5" id="best">
+				<h3>BEST ITEM</h3>
+		</div>
+	</div>
+	<div style="width:100%;">
+			<div class="owl-carousel owl-theme owl-img-responsive">
+			<c:forEach items="${bestitem}" var="best">
+				<div class="item" id="bestlist">
+					<a href="/rental/Appli/lg/${best.gdsSclassCd}/detail/${best.gdsCd }"><img class="bestitem" style="height:200px;" src="${best.RImg1}"/></a>
+					<div id="brandNm">${best.brandNm}</div>
+					<p id="goodsNm"><a href="#">${best.gdsNm}</a></p>
+					<p id="price">￦ 월<fmt:formatNumber pattern="#,###.##">${best.gdsPrice}</fmt:formatNumber></p>
+					<input type="hidden" name="gdsCd" value="${best.gdsCd}">
+					<input type="hidden" name="gdsSclassCd" value="${best.gdsSclassCd}">
+					<input type="hidden" name="gdsMclassCd" value="${best.gdsMclassCd}">
+				</div>
+			</c:forEach>
+			</div>
+				
 	</div>
 </div>
+
+<!-- <div style="width:100%; background-color:#F2F2F2; height:50px;">
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5" id="best">
+				<h3>오늘의 이벤트 경매</h3>
+		</div>
+	</div>
+</div> -->
+
+<div style="width:100%; background-color:#F2F2F2; height:240px;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 eventlist" >
+			<div id="ordlist"><p>&nbsp;렌탈미 실시간 접수 현황</p></div>
+			<div style="height:100px; margin-top:10px;">
+				<div class="block">
+				    <ul id="ticker">
+				    <c:forEach items="${ordlist}" var="bean">
+				        <li><div class="new" style="display:inline-block;">NEW </div><div style="display:inline-block;"><p>${bean.userId }</p></div></li>
+
+				   </c:forEach>
+
+				    </ul>
+				</div>
+			
+			</div>
+		</div>
+		<div class="col-md-3" style="margin-top:40px;">
+			<img style="height:160px;" src="imgs/card.PNG"/>
+			
+			
+				
+		</div>
+		<div class="col-md-5 eventlist" style="border:1px solid #E6E6E6; display:inline-block; height:165px; margin-left:70px;">
+			<div style="border:0px solid red; display:inline-block;" >
+				<img id="auctionimg" src="imgs/auction.png"/>
+			</div>
+			<div id="banner" style="border:0px solid blue; display:inline-block;"> 
+				<!-- <img id="auctionimg" src="imgs/event2.jpg"/> -->
+					<p><span style="font-size:10pt; color:grey; font-family:'nanumB';">렌탈미에서만 진행하는</span> <br>땡 잡았다! <br><a href="${pageContext.request.contextPath}/act/">이벤트 경매 바로가기</a></p> 
+			</div>
+		
+		</div>
+			
+	</div>
+</div>
+</div>
+
 </body>
+
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

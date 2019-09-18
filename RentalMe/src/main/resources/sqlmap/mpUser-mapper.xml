@@ -55,8 +55,8 @@ encoding="UTF-8"?>
 				(SELECT LPAD((SELECT COUNT(gds_review_no)+1 FROM TB_GDS210 A),8,'0')),
 				(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
 				#{odrNo}, 
-				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=#{odrNo}), 
-				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=#{odrNo}),'%Y%m%d')),
+				(SELECT MAX(ODR_SEQ) FROM TB_ODR110 WHERE ODR_NO=#{odrNo} AND GDS_CD=#{gdsCd}), 
+				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR100 WHERE ODR_NO=#{odrNo}),'%Y%m%d')),
 				#{mbNo},
 				#{content},
 				#{grade}
@@ -128,6 +128,11 @@ encoding="UTF-8"?>
 			#{chargeDeposit},
 			"1")
   	</insert>
+  	
+  	<select id="selectRefund" resultType="java.lang.Integer">
+  		SELECT COUNT(*) FROM TB_MB120 WHERE MB_NO=#{mbNo} AND DEPOSIT_REFUND_GB_CD='1'
+  	</select>
+  	
   	<insert id="refundDeposit">
   		INSERT INTO TB_MB120 (MB_NO, DEPOSIT_REFUND_SEQ, DEPOSIT_REFUND_DT, REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD)
 		VALUES	(#{mbNo}, 
