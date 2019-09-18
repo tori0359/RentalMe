@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.act.service.ActService;
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.CallVo;
 
 
 /**
@@ -44,6 +47,8 @@ import com.me.rentalme.model.entity.ActVo;
 @Controller
 @RequestMapping("/mp/mng")
 public class MngActController {
+	
+	String pagingPath="";
 	
 	@Inject
 	ActService actService;
@@ -60,17 +65,31 @@ public class MngActController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/actList", method = RequestMethod.GET)
-	public ModelAndView getAct() throws SQLException{
+	public ModelAndView getAct(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException{
 		
-		ModelAndView mav=new ModelAndView();
+		pagingPath="/mp/mng";
+		pagingPath+="/actList";
+		System.out.println("actlist 컨트롤러");
+		int listCnt=actService.actListCnt();
+		
+		Paging actPaging=new Paging();
+		actPaging.pageInfo(page, range, listCnt);
+		//csVo.setStartListNum(csPaging.getstartListNum());
+		System.out.println("시작넘버:"+actPaging.getstartListNum());
+		//csVo.setListSize(csPaging.getListSize());
+		System.out.println("게시물 갯수:"+actPaging.getListSize());
+		////////////////////////////////////
 		
 		/////
 		///////
-		ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
-		mav.addObject("actList", actService.actList() );
-		mav.addObject("actList", actService.mngListAct());
-		System.out.println(actService.mngListAct());		
-		System.out.println(actService.mngListAct());		
+		//ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
+		ModelAndView mav=new ModelAndView();
+		
+		//mav.addObject("actList", actService.actList() );
+		mav.addObject("actList", actService.mngListAct(actPaging));
+		model.addAttribute("pathPaging", pagingPath);
+		model.addAttribute("paging", actPaging);
+		//System.out.println(actService.mngListAct());	
 		
 		mav.setViewName("/mp/manager/mngActList");
 		
@@ -112,6 +131,8 @@ public class MngActController {
 		ModelAndView mav=new ModelAndView();
 		return mav;
 	}
+	
+	//경매상품등록 
 	@RequestMapping(value = "/actInsert", method = RequestMethod.POST)
 	public String addAct(@RequestParam("actStTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) String actStTime,@RequestParam("actEdTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) 
 	String actEdTime,MultipartHttpServletRequest mtfRequest,@ModelAttribute ActVo actVo) throws SQLException, ParseException {
@@ -291,7 +312,7 @@ public class MngActController {
 	         System.out.println("ajax error");
 	      }
 	   }
-
+	//modal창 
 	@RequestMapping(value="searchList", method=RequestMethod.GET)
 	@ResponseBody
 	public List<ActVo> serchList(@RequestParam("param") String goodsNum,Model model) throws SQLException{
@@ -320,18 +341,24 @@ public class MngActController {
 		return goodsList;
 	}
 	
-	/*
-	 * @RequestMapping(value="selectGoods", method=RequestMethod.GET)
-	 * 
-	 * @ResponseBody public ActVo selectGoods(@RequestParam("param") String
-	 * goodsNum) throws SQLException{ ActVo actVo=new ActVo();
-	 * actVo.setGdsCd(goodsNum);
-	 * 
-	 * System.out.println(actVo.getGdsCd()); ActVo
-	 * goodsInfo=actService.goodsInfo(actVo.getGdsCd()); return goodsInfo; }
-	 */
+	//경매상품 선택삭제
+	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
+	public ModelAndView deleteCart(@RequestParam(value = "chbox[]") List<String> chArr
+			,ActVo actVo) throws SQLException {
+	
+		System.out.println("경매상품 삭제 컨트롤러");
+		
+		ModelAndView mav=new ModelAndView();
 
+		for (String gdsCd : chArr) {
+			actVo.setGdsCd(gdsCd);
+			
+			actService.deleteAct(gdsCd);
+		}
 
+		mav.setViewName("/mp/manager/mngActList");
+		return mav;
+	}
 
 
 

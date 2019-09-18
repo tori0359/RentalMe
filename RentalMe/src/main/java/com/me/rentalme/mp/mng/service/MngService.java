@@ -8,6 +8,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 
@@ -30,5 +31,23 @@ public interface MngService {
 	List<DeclVo> selectDecl(Paging usedPage) throws SQLException;							//전체 신고 리스트
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	int selectDeclListCnt(DeclVo bean);										//전체 신고 수
-	
+
+	int getUsedListCnt();													//전체 중고리스트 게시물 총갯수
+
+	//민수
+	//렌탈 상품 리스트
+	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException;
+	int goodsListCnt();
+	int lGoodsListCnt();
+	int sGoodsListCnt();
+	int kGoodsListCnt();
+	int fGoodsListCnt();
+	int otherGoodsListCnt();
+	int pacGoodsListCnt();
 }

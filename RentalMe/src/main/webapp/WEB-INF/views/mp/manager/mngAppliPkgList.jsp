@@ -55,7 +55,7 @@
 		</tr>
 			<c:forEach items="${rlist}" var="bean">
 				<tr id="maincontent">
-						<c:if test="${bean.gdsMclassCd eq '50'}">
+						<c:if test="${bean.gdsMclassCd eq '60'}">
 							<td>${bean.gdsCd}</td>
 							<c:if test="${bean.gdsLclassCd eq '10'}">
 								<td>새상품</td>
@@ -63,7 +63,7 @@
 							<c:if test="${bean.gdsLclassCd eq '20'}">
 								<td style="color:gray;">*중고</td>
 							</c:if>
-							<td>기타가전</td>
+							<td>패키지가전</td>
 							<td>${bean.gdsNm}</td>
 							<td>${bean.brandNm}</td>
 							<td>${bean.modelNm}</td>

@@ -59,8 +59,12 @@ public class ActController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("alist", actService.actList());
 		mav.addObject("alist2",actService.actEndList());
-		mav.addObject("myMb", actService.selectMyMb(String.valueOf(session.getAttribute("loginMbNo"))));
-		mav.setViewName("act/actList");
+		if(String.valueOf(session.getAttribute("loginMbNo")).equals("null")) {
+			mav.setViewName("redirect:/login");
+		}else {
+			mav.addObject("myMb", actService.selectMyMb(String.valueOf(session.getAttribute("loginMbNo"))));
+			mav.setViewName("act/actList");
+		}
 		return mav;
 	}
 	

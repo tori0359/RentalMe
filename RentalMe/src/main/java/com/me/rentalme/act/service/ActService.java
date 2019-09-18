@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.me.rentalme.model.entity.ActResultVo;
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 public interface ActService {
 
-	List<ActVo> mngListAct() throws SQLException;
+	//관리자 경매관리 리스트
+	List<ActVo> mngListAct(Paging actPaging) throws SQLException;
+	
 	int addAct100(ActVo actVo) throws SQLException;
 	int addAct300(ActVo actVo) throws SQLException;
 	List<ActVo> goodsList(String goodsNum) throws SQLException;
@@ -41,4 +44,10 @@ public interface ActService {
 	
 	//경매종료
 	int updateActEnd(String gdsCd) throws SQLException;
+	
+	//경매상품 리스트 삭제
+	void deleteAct(String gdsCd) throws SQLException;
+	
+	//경매상품리스트 갯수
+	int actListCnt() throws SQLException;
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.me.rentalme.act.dao.ActDao;
 import com.me.rentalme.model.entity.ActResultVo;
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
@@ -26,9 +27,7 @@ public class ActServiceImpl implements ActService{
 	@Override
 	public int addAct300(ActVo actVo) throws SQLException {
 		System.out.println("insertAct dao로 ㄱㄱ");
-		System.out.println("시작시간"+actVo.getActStTime());
-		System.out.println("종료시간"+actVo.getActEdTime());
-		System.out.println("content"+actVo.getContent());
+	
 		return actDao.insertAct300(actVo);
 	}
 
@@ -59,9 +58,9 @@ public class ActServiceImpl implements ActService{
 	}
 
 	@Override
-	public List<ActVo> mngListAct() throws SQLException {
+	public List<ActVo> mngListAct(Paging actPaging) throws SQLException {
       System.out.println("actlistdao로 ㄱㄱ");
-      return actDao.selectMngActList();		
+      return actDao.selectMngActList(actPaging);		
 	}
 
 	/*
@@ -111,6 +110,18 @@ public class ActServiceImpl implements ActService{
 	@Override
 	public int selectMyMb(String mbno) throws SQLException {
 		return actDao.selectMyMb(mbno);
+	}
+	//경매 상품 삭제
+	@Override
+	public void deleteAct(String gdsCd) throws SQLException {
+		System.out.println("경매상품 삭제 service");
+		actDao.deleteActList(gdsCd);
+	}
+
+	@Override
+	public int actListCnt() throws SQLException {
+		
+		return actDao.actListCnt();
 	}
 
 }
