@@ -116,7 +116,10 @@
        				<td>³«Âû</td>
        				<td>
 	       				<button id="pay" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" >°áÁ¦</button>
-	 					<button style="background:#D8D8D8; color:black;" type="button" class="btn" style="font-size: 9pt;" >Æ÷±â</button>
+	       				<form action="/act/cancel" method="post">
+	       					<input type="hidden" name="gdsCd" value="${bean.gdsCd }">
+	 						<button style="background:#D8D8D8; color:black;" type="submit" class="btn" style="font-size: 9pt;" >Æ÷±â</button>
+	 					</form>
        				</td>
        			</c:if>
        			<c:if test="${bean.actBidStsCd eq 2}">
