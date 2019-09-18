@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>RentalMe - 중고거래관리 리스트</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -114,29 +114,7 @@
 				<!-- ============================================================== -->
 			</div>
 		</div>
-		<!-- ============================================================== -->
-		<!-- start footer -->
-		<!-- ============================================================== -->
-		<div class="footer">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-						Copyright © 2019 RentalMe. All rights reserved. Dashboard by <a
-							href="#">RentalMe</a>.
-					</div>
-					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-						<div class="text-md-right footer-links d-none d-sm-block">
-							<a href="javascript: void(0);">About</a> <a
-								href="javascript: void(0);">Support</a> <a
-								href="javascript: void(0);">Contact Us</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- ============================================================== -->
-		<!-- end footer -->
-		<!-- ============================================================== -->
+		<jsp:include page="../../template/footerAdmin.jsp"></jsp:include>
 	</div>
 	<!-- ============================================================== -->
 	<!-- end wrapper  -->

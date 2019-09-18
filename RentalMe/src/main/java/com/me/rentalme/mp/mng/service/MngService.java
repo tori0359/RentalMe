@@ -26,7 +26,7 @@ public interface MngService {
 	List<MngOrdVo> selectReturn() throws SQLException;						//전체 반품 리스트
 	int updateStsRtn(String ordNo) throws SQLException;						//상품상태 반품확정으로 바꾸기
 	
-	List<DeclVo> selectDecl(Paging usedPage) throws SQLException;			//전체 신고 리스트
+	List<DeclVo> selectDecl() throws SQLException;							//전체 신고 리스트
 	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
 	int getUsedListCnt();													//전체 중고리스트 게시물 총갯수

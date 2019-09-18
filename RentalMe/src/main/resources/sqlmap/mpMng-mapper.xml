@@ -72,9 +72,8 @@
 	<!-- 신고 -->
 	<select id="selectDecl" resultType="com.me.rentalme.model.entity.DeclVo">
 		SELECT *
-		FROM tb_decl100
+		FROM TB_DECL100
 		ORDER BY CHG_DT DESC
-		LIMIT #{startListNum}, #{listSize}
 	</select>
 	<update id="changeDeclSts">
 		UPDATE tb_decl100
