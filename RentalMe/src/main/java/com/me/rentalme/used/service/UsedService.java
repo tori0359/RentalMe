@@ -11,6 +11,7 @@ import com.me.rentalme.model.entity.UserVo;
 
 public interface UsedService {
 	UserVo userInfo(UserVo bean) throws SQLException;
+	String userId(String mbNo) throws SQLException;
 	List<UsedVo> list(UsedVo bean) throws SQLException; 
 	List<UsedVo> oneList(UsedVo bean) throws SQLException;
 	

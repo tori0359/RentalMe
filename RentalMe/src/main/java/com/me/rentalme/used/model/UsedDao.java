@@ -11,6 +11,7 @@ import com.me.rentalme.model.entity.UserVo;
 
 public interface UsedDao {
 	UserVo userInfo(UserVo bean) throws SQLException; //사용자 정보
+	String userId(String mbNo) throws SQLException;
 	List<UsedVo> selectAll(UsedVo bean) throws SQLException;
 	List<UsedVo> selectOne(UsedVo bean) throws SQLException; //중고거래 선택
 	

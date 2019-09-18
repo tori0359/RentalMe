@@ -9,8 +9,8 @@ function prevEvent(path ,page, range, rangeSize){
 
 //페이지 번호 클릭
 function pageChange(path ,page, range, rangeSize, searchType, keyword) {
-	var url = path+"?page="+page+"&range="+range;
-	location.href = url;	
+	var url = path+"?page="+page+"&range="+range+"&searchType="+searchType+"&keyword="+keyword;
+	location.href = url;
 }
 
 //다음 버튼 이벤트

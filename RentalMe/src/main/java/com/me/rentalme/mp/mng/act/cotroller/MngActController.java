@@ -39,7 +39,7 @@ import com.me.rentalme.model.entity.CallVo;
 /**
 * 마이페이지(관리자) - 이벤트 경매 컨트롤러
 * 
-* @author 황인준
+* @author 강민수
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.14
@@ -61,7 +61,7 @@ public class MngActController {
 	* 
 	* @param  String code - c : 이벤트 경매 등록 폼, R : 이벤트 경매 리스트
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/actList", method = RequestMethod.GET)
@@ -121,7 +121,7 @@ public class MngActController {
 	* 
 	* @param  ProductVo - 상품
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	

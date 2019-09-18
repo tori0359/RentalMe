@@ -175,6 +175,10 @@ public class UsedDaoImpl implements UsedDao {
 	public int usedStoreDecl(DeclVo bean) throws SQLException {
 		return sqlSession.insert("used.usedStoreDecl", bean);
 	}
+	@Override
+	public String userId(String mbNo) throws SQLException {
+		return sqlSession.selectOne("used.userId", mbNo);
+	}
 
 
 

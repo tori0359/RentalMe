@@ -62,7 +62,8 @@
 	}
 	.tabcl{
 		display: inline-block;
-		width: 19.3%;
+		width: 20.1%;
+		margin-right: -4px;
 	}
 	.tabcl>.tab_btn{
 		width: 100%;
