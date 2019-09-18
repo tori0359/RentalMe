@@ -9,132 +9,136 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-      #title2{
-            font-size: 15pt;
-            font-weight: bolder;
-            font-family: "nanumB";
-            margin: 60px 0 50px 0;
-      }
+#title2{
+      font-size: 15pt;
+      font-weight: bolder;
+      font-family: "nanumB";
+      margin: 60px 0 50px 0;
+}
+    
+#choosedel{
+      font-family: "nanumR";
+      width:55px;
+      height:30px;
+      float:right;
+      color:black;
+      font-weight:600;
+}
+
+
+.ordtable>thead>tr>th{
+    text-align:center;
+    font-family: "nunumB";
+ }
       
-      #choosedel{
-            font-family: "nanumR";
-            width:55px;
-            height:30px;
-            float:right;
-            color:black;
-            font-weight:600;
-      }
-		
-		
-       .ordtable>thead>tr>th{
-           text-align:center;
-           font-family: "nunumB";
-        }
-        
-       .ordtable>tbody>tr>td{
-           vertical-align: middle;
-           text-align: center;
-           display: table-cell;
-           line-height:30px;
-           font-family: "nunumB";
-        }
-        .ordtable>tbody>tr>td:nth-child(1){
-        	text-align:left;
-        }
-        
-      .ordimg{
-            width:100px;
-      }
+.ordtable>tbody>tr>td{
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    line-height:30px;
+    font-family: "nunumB";
+ }
+ .ordtable>tbody>tr>td:nth-child(1){
+ 	text-align:left;
+ }
       
-       .delete_btn1{
-            background-color: #D8D8D8;
-            color:black;
-            height:30px;
-            font-family: "nanumB";   
-            font-weight: border;   
-      }
-      
-      .delete_btn2{
-            background-color: #4d4d4d;
-            color:white;
-            height:30px;
-            font-family: "nanumB";
-            font-weight: border;      
-      }
-      
-      .btn:hover,
-      .btn:focus{
-            background-color: #D8D8D8;
-      }
-   
-      .cartresult{
-            height:100px;
-            width: 230px;
-            float:right;
-      }
-      
-      .cartresult>p{
-            font-weight:bolder;
-            font-size: 15pt;
-            font-family: "nanumB";
-            line-height: 100px;
-      }
-      
-      .cartbtn{
-            width:180px;
-            height:50px;
-            float:right;
-            margin-top:25px;
-      }
-      .titlediv{
-            height:40px;
-      }
-      .starR{
-        background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-        background-size: auto 100%;
-        width: 30px;
-        height: 30px;
-        display: inline-block;
-        text-indent: -9999px;
-        cursor: pointer;
-      }
-      .starR.on{
-         background-position:0 0;
-         color:red;
-      }
-      .satis h4{
-         font-family:"nanumEB";
-      }
-      .satis p{
-         font-family:"nanumB";
-      }
-      #red{
-         color:red;
-      }
-      span em.warning{
-        color:#f00;
-        fontweight: bold;
-      }
-      #info{
-      	width:93%;
-      	margin: 20px auto;
-      	border:7px solid #E6E6E6;
-      	padding: 15px;
-      }
-      
-      #info p{
-      	line-height:20px;
-      	font-family:"nanumB";
-      }
-      .tdtext{
-      	margin:40px 0;
-      }
-      .tdtext1{
-      	margin-top:40px ;
-      }
-      .tdtext2{
-      	margin-top:0px ;
-      }
+.ordimg{
+      width:100px;
+}
+
+ .delete_btn1{
+      background-color: #D8D8D8;
+      color:black;
+      height:30px;
+      font-family: "nanumB";   
+      font-weight: border;   
+}
+
+.delete_btn2{
+      background-color: #4d4d4d;
+      color:white;
+      height:30px;
+      font-family: "nanumB";
+      font-weight: border;      
+}
+
+.btn:hover,
+.btn:focus{
+      background-color: #D8D8D8;
+}
+
+.cartresult{
+      height:100px;
+      width: 230px;
+      float:right;
+}
+
+.cartresult>p{
+      font-weight:bolder;
+      font-size: 15pt;
+      font-family: "nanumB";
+      line-height: 100px;
+}
+    
+.cartbtn{
+      width:180px;
+      height:50px;
+      float:right;
+      margin-top:25px;
+}
+.titlediv{
+      height:40px;
+}
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{
+   background-position:0 0;
+   color:red;
+}
+.satis h4{
+   font-family:"nanumEB";
+}
+.satis p{
+   font-family:"nanumB";
+}
+#red{
+   color:red;
+}
+span em.warning{
+  color:#f00;
+  fontweight: bold;
+}
+#info{
+	width:93%;
+	margin: 20px auto;
+	border:7px solid #E6E6E6;
+	padding: 15px;
+}
+
+#info p{
+	line-height:20px;
+	font-family:"nanumB";
+}
+.tdtext{
+	margin:40px 0;
+}
+.tdtext1{
+	margin-top:40px ;
+}
+.tdtext2{
+	margin-top:0px ;
+}
+#cartConfirm {
+	font-size: 15pt;
+	font-weight: bolder;
+}
    
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -234,6 +238,16 @@
            $(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
        });
 
+       $('#myModal2').on('shown.bs.modal', function (e) {
+			var odrNo = $(e.relatedTarget).data('odr-no');
+            $(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
+       });
+
+       $('#myModal3').on('shown.bs.modal', function (e) {
+    	   var odrNo = $(e.relatedTarget).data('odr-no');
+           $(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
+      });
+
        $('#review').click(function(){
     	   alert("후기가 등록되었습니다!");
        }); 
@@ -287,7 +301,7 @@
 		
 		// 장바구니 조회
 		function btnCart() {
-			alert("샤잠");
+			//$("#odrNoModal").val("zzzzz");
 			var sUserId = "${loginUserId}";
 			// 세션체크
 			if((sUserId == "") || (sUserId == null)) {
@@ -356,8 +370,8 @@
                 <td style="vertical-align:middle;"><p class="tdtext"><fmt:formatNumber value="${bean.gdsPrice}" pattern="#,###.##"/>원</p></td>
                 <td class="gubun2" style="vertical-align:middle;">
                 	<p class="tdtext1" style="text-align:center; color:red;">
-                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" onclick="btnCart();" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" value="${bean.odrStsGbCd }">
-                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" onclick="btnCart();" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal3" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal3" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
                		</p>
                		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:red;">
                			${bean.odrNo}
@@ -470,7 +484,7 @@
 					<h4 class="modal-title" id="myModalLabel2">구매확정</h4>
 			    </div>
 				<div class="modal-body">
-			    	<input type="text" class="form-control" id="odrNo" name="odrNo" value=""  >
+			    	<input type="text" name="odrNo" value="odrNo"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;구매확정 하시겠습니까?</label>
@@ -492,12 +506,7 @@
 					<h4 class="modal-title" id="myModalLabel2">반품요청</h4>
 			    </div>
 				<div class="modal-body">
-			    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
-			    	<input type="text" class="form-control" id="gdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
-			    	<input type="text" class="form-control" id="mbNo" name="mbNo" value="${sessionMbNo }" style="display: none;">
-			    	<input type="text" class="form-control" id="gdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;">
-			    	<input type="text" class="form-control" id="agreeTerm" name="agreeTerm" value="${list1.agreeTerm}" style="display: none;">
-			    	<input type="text" class="form-control" id="odrQty" name="odrQty" value="1" style="display: none;">
+			    	<input type="text" name="odrNo" value="odrNo"/>
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품요청 하시겠습니까?</label>
