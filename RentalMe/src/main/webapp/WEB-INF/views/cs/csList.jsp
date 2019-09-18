@@ -42,12 +42,15 @@
 		#content>table>tr>th:nth-child(1){
 			width:20%;
 			background:blue;
+			text-align:center;
 		}
 		#content>table>tr>th:nth-child(2){
 			width:60%;
+			text-align:center;
 		}
 		#content>table>tr>th:nth-child(3){
 			width:20%;
+			text-align:center;
 		}
 
 </style>
@@ -71,10 +74,10 @@
 			<th>작성일</th>
 		</tr>
 			<c:forEach items='${alist}' var="bean">
-				<tr>
-					<td>${bean.num }</td>
-					<td>${bean.sub }</td>
-					<td>${bean.nalja }</td>
+				<tr style="text-align:center">
+					<td align="center">${bean.num }</td>
+					<td align="center">${bean.sub }</td>
+					<td align="center">${bean.nalja }</td>
 				</tr>
 			</c:forEach>
 	</table>

@@ -743,7 +743,7 @@ input::-moz-focus-inner { border: 0; }
 		var locGo;
 		locGo = vMasterLoc+"&sort="+sort
 		vMasterLoc = locGo;
-		location.href = locGo;
+		location.href = locGo+"#sort-btn1";
 	}
 	
 </script>

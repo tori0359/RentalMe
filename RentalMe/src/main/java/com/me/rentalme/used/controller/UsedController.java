@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,15 +55,20 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/big", method = RequestMethod.GET)
-	public String getUsedListB(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+	public String getUsedListB(Model model,
+			@RequestParam(required = false, defaultValue = "0")int startPage,
+			@RequestParam(required = false, defaultValue = "")String modelNm,
+			@RequestParam(required = false, defaultValue = "1")String align,
+			HttpSession session) throws SQLException {
+		UsedVo bean=new UsedVo();
 		log.debug("중고거래 대형가전");
+		bean.setStartPage(startPage);
+		bean.setModelNm(modelNm);
+		bean.setAlign(align);
 		bean.setGdsMclassCd("10");
 		sessionFunc(session,bean);
 		model.addAttribute("remain", 10);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		System.out.println(bean.getModelNm());
-		System.out.println(bean.getMclassName());
-		System.out.println(bean.getSclassName());
 		return "used/usedList";
 	}
 	@RequestMapping(value = "/sml", method = RequestMethod.GET)

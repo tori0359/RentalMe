@@ -48,12 +48,11 @@
 	.cmtContent div:nth-child(3){
 		float: right;
 	}
-	#bigInfo{
-	}
 	#detailInfo{
 		display: inline-block;
 		width: 49%;
 		height: 500px;
+		border-right: 2px solid black;
 	}
 	#detailInfo>div{
 		border: 1px solid black;
@@ -66,7 +65,6 @@
 		width: 49%;
 	}
 	#sellInfo>div{
-		border: 1px solid black;
 		margin: auto;
 		width: 95%;
 		cursor: pointer;
@@ -91,23 +89,19 @@
 	#storeReviewList .inpList{
 		float: right;
 	}
-	
+	#repleContentInput{
+		margin-left: 15px;
+		width: 97%;
+		margin-bottom: 15px;
+	}
 	#bigInfo>div{
 		font-size: 3em;
 		font-weight: bold;
 	}
-	#storeReviewList button{
-		margin-left: -25px;
-		width: 75px;
-		height: 75px;
-	}
 	
 	.declBtn{
 		position:absolute; 
-		bottom:0px;
-		text-decoration: none;
-		color: white;
-		background-color: red;
+		bottom: 2px;
 		right: 0px;
 	}
 	
@@ -294,7 +288,6 @@
            }
            #radiog{
            		display:inline-block;
-           	border: 1px solid black;
            }
            #usedMng_frame{
 /*                border: 1px solid blue;*/

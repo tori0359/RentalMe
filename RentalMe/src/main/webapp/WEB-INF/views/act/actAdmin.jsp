@@ -23,7 +23,7 @@
 	sock.onmessage=function(event){			//이 서버에서 메시지를 받았을 때
 		
 		console.log("들어온 데이터"+event.data);
-		console.log("타입:"+typeof(event.data))
+		console.log("타입:"+typeof(event.data));
 		var msg = JSON.parse(event.data);
 		var id= msg.id;
 		var text=msg.text;
@@ -46,7 +46,19 @@
 			$('#countView').append('<img alt="count" src="/imgs/'+msg+'.png">');
 		}else if(type=='endMsg'){
 			$('#sendMsg').attr('disabled', true);
+			$('#countView').text('');
 			$('#countView').append(text+'님 입찰되었습니다.');
+		}else if(type=='listMsg'){
+			$('#listMsg').text('');
+			text=text.slice(1,-1);				//앞뒤 중괄호없애기
+			var textSplit=text.split(', ');
+			for (var i in textSplit){
+				$('#listMsg').append('<li>'+textSplit[i]+'</li>');	
+			}
+		}else if(type=='bidResult'){
+			text=text.split('바꿈').join('"');
+			
+			$('#bidresult').val(text);
 		}
 	};
 	function sendServer(who){
@@ -89,5 +101,13 @@
 	<input type="button" class="sendMsg" value="100000">
 	<div id="countView"></div>
 	<button id="countDown">끝내기 카운트</button>
+	<ol id="bidList"></ol>
+	<ol id="listMsg">
+	</ol>
+	<form action="/act/result" method="post">
+	<input type="hidden" name="gdsCd" value="${list1.gdsCd }">
+	<input type="hidden" id="bidresult" name="bidresult">
+	<button>종료</button>
+	</form>
 </body>
 </html>

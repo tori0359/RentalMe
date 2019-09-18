@@ -12,6 +12,7 @@ import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.dao.MngDao;
@@ -56,8 +57,8 @@ public class MngServiceImpl implements MngService {
 	
 
 	@Override
-	public List<UsedVo> selectUsed(Paging usedPage) throws SQLException {
-		return mngDao.selectUsed(usedPage);								//전체 중고 리스트
+	public List<UsedVo> selectUsed(UsedVo bean) throws SQLException {
+		return mngDao.selectUsed(bean);								//전체 중고 리스트
 	}
 
 	@Override
@@ -86,9 +87,104 @@ public class MngServiceImpl implements MngService {
 	}
 	
 	@Override
-	public int getUsedListCnt() {
-		return mngDao.selectusedListCnt();
+	public int getUsedListCnt(UsedVo bean) {
+		return mngDao.selectusedListCnt(bean);
 	}
 
+	@Override
+	public int selectDeclListCnt(DeclVo bean) {
+		return mngDao.selectDeclListCnt(bean);
+	}
+
+	@Override
+	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException{
+		
+		return mngDao.selectGoodsList(apliPaging);
+	}
+
+	@Override
+	public int goodsListCnt() {
+		
+		return mngDao.goodsListCnt();
+	}
+
+	@Override
+	public int lGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.lGoodsListCnt();
+	}
+
+	@Override
+	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.lGoodsList(apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.sGoodsList(apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.kGoodsList(apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.fGoodsList(apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.otherGoodsList(apliPaging);
+	}
+
+	@Override
+	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
+		// TODO Auto-generated method stub
+		return mngDao.pacGoodsList(apliPaging);
+	}
+
+	@Override
+	public int sGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.sGoodsListCnt();
+	}
+
+	@Override
+	public int kGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.kGoodsListCnt();
+	}
+
+	@Override
+	public int fGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.fGoodsListCnt();
+	}
+
+	@Override
+	public int otherGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.otherGoodsListCnt();
+	}
+
+	@Override
+	public int pacGoodsListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.pacGoodsListCnt();
+	}
+
+	@Override
+	public int getUsedListCnt() {
+		// TODO Auto-generated method stub
+		return mngDao.selectusedListCnt();
+	}
+	
 
 }

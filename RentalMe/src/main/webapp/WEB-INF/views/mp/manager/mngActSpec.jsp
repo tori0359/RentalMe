@@ -15,18 +15,12 @@
 </head>
 <body>
    <div class="titlediv">
-       <p id="title">중고거래 내역</p>
-     </div>
-     <div>
-     	<form action="/mp/mng/used">
-	     	<input type="text" name="usedGdsNo" placeholder="상품번호 입력">
-	     	<input type="submit" value="검색">
-     	</form>
+       <p id="title">경매 내역</p>
      </div>
      <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
      <div id="info">
      <p style="text-align: center;">
-     	삭제된 제품은 클릭할 수 없습니다.
+     	
      </p>
      </div>
 	<table class="ordtable table">
@@ -34,35 +28,36 @@
 		<tr class="active">
 			<th>상품번호</th>
 			<th>회원번호</th>
-			<th>회원이름</th>
-			<th>중분류</th>
-			<th>소분류</th>
-			<th>브랜드명</th>
-			<th>모델명</th>
-			<th>제목</th>
-			<th>가격</th>
-			<th>삭제여부</th>
-			<th>등록일자</th>
+			<th>응찰가격</th>
+			<th>응찰시간</th>
+			<th>응찰상태</th>
+			<th>비고</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${alist }" var="bean">
-		<tr class="usedTableTrClick" onclick="location.href='/used/detail/${bean.usedGdsNo}'">
-			<td>${bean.usedGdsNo }</td>
+		<tr>
+			<td>${bean.gdsCd }</td>
 			<td>${bean.mbNo }</td>
-			<td>${bean.userNM }</td>
-			<td>${bean.gdsMclassCd }</td>
-			<td>${bean.gdsSclassCd }</td>
-			<td>${bean.brandNm }</td>
-			<td>${bean.modelNm }</td>
-			<td>${bean.sub }</td>
-			<td><fmt:formatNumber value="${bean.usedGdsPrice }" pattern="#,###.##"/>원</td>
-			<td class="delYn">${bean.delYn }</td>
-			<td>${bean.chgDt }</td>
-			<%-- <td><a href="/mp/mng/deposit/${bean.mbNo }">${bean.userNm }</a></td>
-			<td><fmt:formatNumber value="${bean.remnDeposit}" pattern="#,###.##"/>원</td>
-			<fmt:parseDate value="${bean.chgDt }" var="time" pattern="yyyy-MM-dd HH:mm:ss.S"/>
-			<td><fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/></td> --%>
+			<td>${bean.bidPrice }</td>
+			<td>${bean.bidTime }</td>
+			<c:if test= "${bean.actBidStsCd == 1}">
+				<td>낙찰</td>
+				<td>
+				<form action="/mp/mng/act/spec/cancel" method="post">
+					<input type="hidden" name="gdsCd" value="${bean.gdsCd }">
+					<button class="btn btn-default btn-sm">낙찰취소</button>
+				</form>
+				</td>
+			</c:if>			
+			<c:if test= "${bean.actBidStsCd == 2}">
+				<td>예비</td>
+				<td></td>
+			</c:if>
+			<c:if test= "${bean.actBidStsCd == 3}">
+				<td>종료</td>
+				<td></td>
+			</c:if>
 		</tr>
 		</c:forEach>
 	</tbody>
