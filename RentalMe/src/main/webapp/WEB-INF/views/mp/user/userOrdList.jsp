@@ -532,7 +532,7 @@ span em.warning{
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품요청 하시겠습니까?</label>
 				</div>
 			    <div class="modal-footer">
-			    	<button type="submit" id="questSubmit" class="btn btn-primary">요청</button>
+			    	<button type="submit" id="questSubmit" class="btn btn-danger">요청</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			    </div>
 			</div>

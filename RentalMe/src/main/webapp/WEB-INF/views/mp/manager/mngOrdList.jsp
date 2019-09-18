@@ -273,7 +273,7 @@
                       <button id="disabled" style="opacity:0.5;" type="button" class="btn btn-primary" style="font-size: 9pt;" disabled="disabled">구매확정</button>
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'RW'}">
-                      <button id="odrBtn${status.index }" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}">반품확인</button>
+                      <button id="odrBtn${status.index }" style="opacity:1.0;" type="button" class="btn btn-warning" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}">반품확인</button>
                    </c:if>
                    <c:if test= "${bean.odrStsGbCd eq 'RC'}">
                       <button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">반품완료</button>
@@ -307,7 +307,7 @@
 				    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;입금완료 하시겠습니까?</label>
 					</div>
 				    <div class="modal-footer">
-				    	<button type="submit" id="questSubmit" class="btn btn-primary">완료</button>
+				    	<button type="submit" id="questSubmit" class="btn btn-success">완료</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 				    </div>
 				</div>
@@ -333,7 +333,7 @@
 				    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;반품완료 하시겠습니까?</label>
 					</div>
 				    <div class="modal-footer">
-				    	<button type="submit" id="questSubmit" class="btn btn-primary">완료</button>
+				    	<button type="submit" id="questSubmit" class="btn btn-warning">완료</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 				    </div>
 				</div>
