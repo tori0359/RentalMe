@@ -48,7 +48,10 @@ public interface MngDao {
 		
 	//민수(메서드 추가 주석 할것)
 	//렌탈 전체 상품 리스트
-	
+
+	//추가--------------
+	//렌탈 전체 상품 리스트(카운트)
+	List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException;
 	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
@@ -66,5 +69,12 @@ public interface MngDao {
 	
 	//렌탈 상품 등록
 	int rentalGoodsAdd100(RentalAppliVo rentalAppliVo);
+
 	int rentalGoodsAdd300(ProductVo productVo);
+	
+	long selectNum(String mGoodsNum,String sGoodsNum);
+	
+	//시퀀스 증가
+	void rentalSeq();
+	
 }

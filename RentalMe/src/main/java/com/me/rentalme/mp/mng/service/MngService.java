@@ -41,8 +41,13 @@ public interface MngService {
 	UserVo getUserDetail(String mbNo);										//사용자관리 - 사용자 상세정보	
 	int getMngUserListCnt();												//사용자관리 - 사용자관리 총인원 조회			
 
-	//민수 - 메서드 주석 추가 할 것!(serviceImpl도 마찬가지)
-	//렌탈 상품 리스트
+	////추가--------------
+	//상품 리스트
+	List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException;
+	
+	long selectNum(String mGoodsNum,String sGoodsNum);
+	
+	//렌탈 상품 리스트 페이징
 	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
@@ -58,8 +63,10 @@ public interface MngService {
 	int otherGoodsListCnt();
 	int pacGoodsListCnt();
 	
-	
 	//렌탈상품등록
 	int rentalGoodsAdd100(RentalAppliVo rentalAppliVo);
 	int rentalGoodsAdd200(ProductVo productVo);	
+	
+	//시퀀스 증가
+	void rentalseq();	
 }

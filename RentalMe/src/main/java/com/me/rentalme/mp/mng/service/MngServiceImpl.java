@@ -203,73 +203,61 @@ public class MngServiceImpl implements MngService {
 
 	@Override
 	public int lGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.lGoodsListCnt();
 	}
 
 	@Override
 	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.lGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.sGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.kGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.fGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.otherGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.pacGoodsList(apliPaging);
 	}
 
 	@Override
 	public int sGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.sGoodsListCnt();
 	}
 
 	@Override
 	public int kGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.kGoodsListCnt();
 	}
 
 	@Override
 	public int fGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.fGoodsListCnt();
 	}
 
 	@Override
 	public int otherGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.otherGoodsListCnt();
 	}
 
 	@Override
 	public int pacGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.pacGoodsListCnt();
 	}
 
@@ -285,8 +273,23 @@ public class MngServiceImpl implements MngService {
 
 	@Override
 	public int rentalGoodsAdd200(ProductVo productVo) {
-		// TODO Auto-generated method stub
 		return mngDao.rentalGoodsAdd300(productVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException {
+		return mngDao.searchScGoods(goodsNum);
+	}
+
+	@Override
+	public long selectNum(String mGoodsNum, String sGoodsNum) {
+		return mngDao.selectNum(mGoodsNum,sGoodsNum);
+	}
+
+	@Override
+	public void rentalseq() {
+		mngDao.rentalSeq();
+		
 	}
 	
 

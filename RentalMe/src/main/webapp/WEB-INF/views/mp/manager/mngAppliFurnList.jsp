@@ -26,6 +26,13 @@
 	#maincontent td:nth-child(n){
 		text-align:center;
 	}
+	#headMenu>a{
+		text-decoration:none;
+		color:gray;
+	}
+	#headMenu>a:hover{
+		color:blue;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
@@ -35,7 +42,7 @@
 <!-- 관리자 공지게시판 리스트 -->
 <h1>가구 리스트</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
-<div align="right">
+<div align="right" id="headMenu">
 <a href="${pageContext.request.contextPath}/mp/mng/goodsList">[전체상품]</a>&nbsp
 <a href="${pageContext.request.contextPath}/mp/mng/Appli/lg">[대형가전]</a>&nbsp
 <a href="${pageContext.request.contextPath}/mp/mng/Appli/sm">[소형가전]</a>&nbsp

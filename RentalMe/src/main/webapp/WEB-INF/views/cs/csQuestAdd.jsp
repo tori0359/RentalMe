@@ -1,11 +1,13 @@
 <%@page import="javax.mail.Session"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html>
 <head>
-<jsp:include page="../template/header.jsp"></jsp:include>
-    <meta charset="UTF-8">
+<jsp:include page="../template/headerMp.jsp"></jsp:include>
+<meta charset="UTF-8">
+<script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
 	<script type="text/javascript">
 	 	$(document).ready(function(){
 			$("#cancel").click(function(){
@@ -14,7 +16,7 @@
 
 		
 		})
-	</script>
+		</script>
 	<%
 		String userId=(String)session.getAttribute("userId");
 	
@@ -41,17 +43,24 @@
         
         }
        
-        textarea{
-            width:100%;
-            height:250px;
-        }
+      	#select{
+      		width:125px;
+      	}
         #text{
         	width:100%;
         }
         #csContent{
         	height:900px;
         }
-        
+        #editor{
+        	height:250px;
+        }
+        tr>td:nth-child(1){
+        	text-align:center;
+        }
+        .ck-editor__editable {
+  			  min-height: 250px;
+		}
 	</style>
 </head>
 <body>
@@ -75,7 +84,7 @@
                 <td><label for="category">분류</label></td>
                 <td>
         <div>
-        	<select style="height:26px;"  name="csClassGbCd">
+        	<select id="select" style="height:35px;"  name="csClassGbCd" class="form-control">
         		<option value="" selected="selected">분류선택</option>
         		<option value="1">주문</option>
         		<option value="2">배송</option>
@@ -93,8 +102,19 @@
             </tr>
             <tr>
                 <td><label>내용</label></td>
-                <td><textarea name="content" style="resize:none;"></textarea></td>
+                <td><textarea id="editor" name="content" style="resize:none;"></textarea>
+                 <script>
+				   		 ClassicEditor
+				        .create( document.querySelector( '#editor' ),{removePlugins: [ 'ImageUpload' ]
+				      } 
+						        )
+				        .catch( error => {
+				            console.error( error );
+				        } );
+				 </script>
+    </td>
             </tr>
+    
             <tr>
                 <td></td>
                 <td id="daeButton" >

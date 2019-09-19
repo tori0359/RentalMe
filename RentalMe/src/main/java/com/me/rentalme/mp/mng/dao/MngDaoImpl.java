@@ -1,7 +1,9 @@
 package com.me.rentalme.mp.mng.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -104,7 +106,7 @@ public class MngDaoImpl implements MngDao{
 	
 	
 	
-	//¹Î¼ö
+	////Ãß°¡--------------
 	@Override
 	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException {
 		
@@ -124,43 +126,36 @@ public class MngDaoImpl implements MngDao{
 
 	@Override
 	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.selectLgoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.sGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.kGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.fGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.otherGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.pacGoodsList",apliPaging);
 	}
 
 	@Override
 	public int sGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("mpMng.sGoodsListCnt");
 	}
 
@@ -255,6 +250,27 @@ public class MngDaoImpl implements MngDao{
 	@Override
 	public int selectMngUserListCnt() {
 		return sqlSession.selectOne("mpMng.selectMngUserListCnt");
+	}
+
+	@Override
+	public List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.searchScGoods", goodsNum);
+	}
+
+	@Override
+	public long selectNum(String mGoodsNum, String sGoodsNum) {
+		Map<String,String> map=new HashMap<String,String>();
+		
+		map.put("mGoodsNum", mGoodsNum);
+		map.put("sGoodsNum", sGoodsNum);
+		
+		return sqlSession.selectOne("mpMng.selectNum",map);
+	}
+
+	@Override
+	public void rentalSeq() {
+		sqlSession.insert("mpMng.insertSeq");
 	}
 	
 }

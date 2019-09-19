@@ -42,7 +42,7 @@
                 float:left;
             }
             #used_sub_img_group{
-                width: 300px;
+                width: 500px;
             }
             .used_sub_img{
                 display: inline-block;
@@ -119,13 +119,127 @@
             
 </style>
 <script type="text/javascript">
+
+		window.onload=function(){
+			$('.cancel').click(function(){
+				window.history.back();
+		    })
+		    
+		}
+		//selectbox
+		function selectMcGoods(gdsMclassCd){
+			console.log("getget함수 호출");
+			console.log(gdsMclassCd);
+			 	$.ajax({
+					url:'searchSelect',
+					type:'GET',
+					dataType:'json',
+					data:{param:gdsMclassCd},
+				//	console.log(param);
+				success:function(result){
+	               //select box 초기화
+	               $('#secSelect').find('option').remove().end().append('<option value="">상품을 선택</option>');
+	               //option 추가
+	               $.each(result, function(i){
+		               console.log(result[i]);
+		               if(result[i]=='에어컨'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+11+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉난방기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+12+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉장고'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+13+'">'+result[i]+'</option>');}
+		               if(result[i]=='TV'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+14+'">'+result[i]+'</option>');}
+		               if(result[i]=='세탁기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+15+'">'+result[i]+'</option>');}
+		               if(result[i]=='빨래건조기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+16+'">'+result[i]+'</option>');}
+		               if(result[i]=='정수기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+17+'">'+result[i]+'</option>');}
+		               if(result[i]=='공기청정기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+18+'">'+result[i]+'</option>');}
+		               if(result[i]=='복합기/프린터'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+19+'">'+result[i]+'</option>');}
+		               if(result[i]=='커피머신'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+21+'">'+result[i]+'</option>');}
+		               if(result[i]=='제습기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+22+'">'+result[i]+'</option>');}
+		               if(result[i]=='드라이어'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+23+'">'+result[i]+'</option>');}
+		               if(result[i]=='빔프로젝터'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+24+'">'+result[i]+'</option>');}
+		               if(result[i]=='컴퓨터/노트북'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+25+'">'+result[i]+'</option>');}
+		               if(result[i]=='무선스피커'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+26+'">'+result[i]+'</option>');}
+		               if(result[i]=='비데'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+27+'">'+result[i]+'</option>');}
+		               if(result[i]=='면도기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+28+'">'+result[i]+'</option>');}
+		               if(result[i]=='음식물처리기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+29+'">'+result[i]+'</option>');}
+		               if(result[i]=='제빙기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+31+'">'+result[i]+'</option>');}
+		               if(result[i]=='전자레인지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+32+'">'+result[i]+'</option>');}
+		               if(result[i]=='에어프라이어'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+33+'">'+result[i]+'</option>');}
+		               if(result[i]=='오븐'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+34+'">'+result[i]+'</option>');}
+		               if(result[i]=='오븐'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+35+'">'+result[i]+'</option>');}
+		               if(result[i]=='침대(매트리스+프레임)'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+41+'">'+result[i]+'</option>');}
+		               if(result[i]=='침대'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+42+'">'+result[i]+'</option>');}
+		               if(result[i]=='쇼파'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+43+'">'+result[i]+'</option>');}
+		               if(result[i]=='책상'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+44+'">'+result[i]+'</option>');}
+		               if(result[i]=='악기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+51+'">'+result[i]+'</option>');}
+		               if(result[i]=='명품'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+52+'">'+result[i]+'</option>');}
+		               if(result[i]=='귀금속'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+53+'">'+result[i]+'</option>');}
+		               if(result[i]=='침실패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+61+'">'+result[i]+'</option>');}
+		               if(result[i]=='주방패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+62+'">'+result[i]+'</option>');}
+		               if(result[i]=='욕실패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+63+'">'+result[i]+'</option>');}
+		               if(result[i]=='기타패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+64+'">'+result[i]+'</option>');}
+		                  
+	               });
+	              
+	            },
+	            erro:function(jqXHR, textStatus, errorThrown){
+	               alert('오류가 발생했습니다');
+	            }
+				})
+		}
+
+		function selectScGoods(gdsSclassCd){
+			console.log("들어옴"+$("#secSelect option:selected").val());
+			$.ajax({
+				url:'searchScSelect',
+				type:'GET',
+				data:{'param':$("#secSelect option:selected").val(),'param2':$("#firSelect option:selected").val()},
+				success:function(result){
+					$('#ajax').find('td').remove();
+					//$('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly=readonly value="'+"10"+$("#secSelect option:selected").val()+result+'""/></td>');
+					$('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly="readonly" value="'+result+'"/></td>');
+					//document.getElementById('gdsCd').setAttribute('value',result);
+					//console.log('ff');
+
+					
+				}
+
+			})
+		}
 	     
-	      window.onload=function(){
-					$('#cancel').click(function(){
-							window.history.back();
-					})
-				   
-		  });
+	      
 
 		  //이미지 등록
 	        var cnt=0;
@@ -147,7 +261,9 @@
                     }
                 });
             });
- 
+            
+
+	        
         function handleImgsFilesSelect(e) {
         	var imgCnt = document.getElementById("imgfile");
         	if(imgCnt.files.length>12){
@@ -206,9 +322,8 @@
                 }
                 reader.readAsDataURL(f);
             });
-        }	
-		  
-		 
+        } 	
+       
 		
 </script>
 </head>
@@ -231,49 +346,18 @@
 	        <tr>
 	            <td><label>상품-중분류</label></td>
 	            <td>
-	            <select name="gdsMclassCd">
+	            <select id="firSelect" name="gdsMclassCd" onchange="selectMcGoods(this.value);">
+	            	<option selected="selected" value="">대분류상품</option>
 	            	<option value="10">대형가전</option>	
 	            	<option value="20">소형가전</option>	
 	            	<option value="30">주방가전</option>	
 	            	<option value="40">가구</option>	
 	            	<option value="50">기타</option>	
 	            	<option value="60">패키지</option>	
-	            </select>&nbsp&nbsp&nbsp&nbsp&nbsp<label>상품-소분류</label>&nbsp&nbsp&nbsp&nbsp&nbsp
-	            <select name="gdsSclassCd">
-	            	<option value="11">에어컨</option>
-	            	<option value="12">냉난방기</option>
-	            	<option value="13">냉장고</option>
-	            	<option value="14">TV</option>
-	            	<option value="15">세탁기</option>
-	            	<option value="16">빨래건조기</option>
-	            	<option value="17">정수기</option>
-	            	<option value="18">공기청정기</option>
-	            	<option value="19">복합기/프린터</option>
-	            	<option value="21">커피머신</option>
-	            	<option value="22">제습기</option>
-	            	<option value="23">청소기</option>
-	            	<option value="24">드라이어</option>
-	            	<option value="25">빔프로젝터</option>
-	            	<option value="26">컴퓨터/노트북</option>
-	            	<option value="27">무선스피커</option>
-	            	<option value="28">비데</option>
-	            	<option value="29">면도기</option>
-	            	<option value="31">음식물처리기</option>
-	            	<option value="32">제빙기</option>
-	            	<option value="33">전자레인지</option>
-	            	<option value="34">에어프라이어</option>
-	            	<option value="35">오븐</option>
-	            	<option value="41">침대(매트리스+프레임)</option>
-	            	<option value="42">침대</option>
-	            	<option value="43">쇼파</option>
-	            	<option value="44">책상</option>
-	            	<option value="51">악기</option>
-	            	<option value="52">명품</option>
-	            	<option value="53">귀금속</option>
-	            	<option value="61">침실패키지</option>
-	            	<option value="62">주방패키지</option>
-	            	<option value="63">욕실패키지</option>
-	            	<option value="64">기타패키지</option>
+	            </select>
+	            &nbsp&nbsp&nbsp&nbsp&nbsp<label>상품-소분류</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+	            <select id="secSelect" name="gdsSclassCd" onchange="selectScGoods(this.value);">
+	            	<option selected="selected" value="">소분류상품</option>
 	            </select></td>
 	        </tr>
 	        <tr>
@@ -282,10 +366,14 @@
 	        </tr>
 	        <tr>
 	        	<td><label>모델명</label></td>
-	            <td><input type="text" name="modelNm" id="gdsNm">&nbsp&nbsp<label>상품코드</label>&nbsp&nbsp<input type="text" name="gdsCd"/>
+	            <td><input type="text" name="modelNm" id="gdsNm"></td>
+	        </tr>
+	        <tr id="ajax">
+	        	<td><label>상품코드</label></td>
+	        	<td><input type="text" id="gdsCd" name="gdsCd"/></td>
 	        </tr>
 	        <tr>
-	        	<td><label>상품 가격</label></td><td><input type="text" name="prdPrice">&nbsp&nbsp<label>렌탈 기간</label>&nbsp
+	        	<td><label>상품 가격</label></td><td><input type="text" name="prdPrice">&nbsp&nbsp&nbsp<label>&nbsp렌탈 기간</label>&nbsp
 	        	<select name="prdContDate">
 	        			<option value="3">3개월</option>
 	        			<option value="6">6개월</option>
@@ -297,13 +385,13 @@
 	        </tr>
 	        <tr>
 	        	<td><label>배송비용</label></td><td><input type="text" name="prdDeliveryCost"/>
-	        	&nbsp&nbsp<label>설치비용</label>&nbsp&nbsp<input type="text" name="prdInstCost"/>
+	        	&nbsp&nbsp<label>&nbsp설치비용</label>&nbsp&nbsp<input type="text" name="prdInstCost"/>
 	        	</td>
 	        </tr>
 	        <tr>
 	        	<td><label>AS조건</label></td>
 	        	<td><input type="text" name="prdAsContent" value="렌탈기간 내 무상 AS"/>&nbsp&nbsp&nbsp&nbsp<label>상품상태</label>&nbsp&nbsp
-	            <label>새상품</label>&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="N"><label>&nbsp&nbsp&nbsp&nbsp중고상품</label>&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="Y"></td>
+	            새상품&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="N">&nbsp&nbsp&nbsp&nbsp중고상품&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="Y"></td>
 	        </td>
 	        </tr>
 	        <tr>
@@ -364,7 +452,7 @@
             	<td></td>
                 <td id="daeButton" >
                    <input type="submit" value="등록"/>
-                   <input id="cancel" type="reset" value="취소">
+                   <input class="cancel" type="reset" value="취소">
                 </td>
             </tr>
 	</form>

@@ -69,27 +69,28 @@
 <div id="head"><h2>경매상품 리스트</h2></div>
 <script>
 $(function(){
-		 $("#choosedel").click(function(){
-		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+	$('#choosedel').click(function(){
+		 var confirm_val = confirm("정말 삭제하시겠습니까?");
 		  
 		  if(confirm_val) {
-		   var checkArr = new Array();
-		   
-		   $("input[class='chBox']:checked").each(function(){
-		    checkArr.push($(this).attr("data-actNum"));
-		   });
-		    
-		   $.ajax({
-		    url : "/mp/mng/deleteList",
-		    type : "post",
-		    data : { chbox : checkArr},
-		    success : function(){
-		     location.href = "/mp/mng/actList";
-		    }
-		   });
+			   var checkArr = new Array();
+			   
+			   $("input[class='chBox']:checked").each(function(){
+			    checkArr.push($(this).attr("data-actNum"));
+			   });
+			    
+			   $.ajax({
+				    url : "/mp/mng/deleteList",
+				    type : "post",
+				    data : { chbox : checkArr},
+				    success : function(){
+				    	location.href = "/mp/mng/actList";
+			    	}
+			   });
 		  } 
-		 });
+	 });
 });
+
 </script>
 <div id="contentTable" class="col-md-10 col-md-offset-1">
 <a id="choosedel">선택삭제</a>
@@ -105,8 +106,8 @@ $(function(){
 				<tr>
 					<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
        				</td>
-					<td style="text-align:center">${bean.gdsCd}</td>
-					<td><input type="hidden" class="hiddenCd" name="num" value="${bean.gdsCd}" /><a class="gdsLink">${bean.gdsNm}</a></td>
+					<td style="text-align:center"><input type="hidden" name="num" value="${bean.gdsCd}"/>${bean.gdsCd}</td>
+					<td><a>${bean.gdsNm}</a></td>
 					<td style="text-align:center">${bean.regDt}</td>
 					<c:choose>
 						<c:when test="${bean.actStsCd eq '1'}">

@@ -175,29 +175,45 @@
 		#all{
 			text-align: center;
 		}
-		#allnext td:nth-child(1){
+		#allnext th:nth-child(1){
 			width:10%;
+			text-align:center;
 		}
-		#allnext td:nth-child(2){
+		#allnext th:nth-child(2){
 			width:10%;
+			text-align:center;
 		}
-		#allnext td:nth-child(3){
+		#allnext th:nth-child(3){
 			width:80%;
+			text-align:center;
 		}
 		#all tr:nth-child(1){
 			text-align:center;
 		}
 		#paginationBox {
-	width: 100%;
-	text-align: center;
-	margin: 0px auto;
-}
+			width: 100%;
+			text-align: center;
+			margin: 0px auto;
+		}
+		#aSub{
+			text-decoration:none;
+			
+		}
+		#aSub:hover{
+			color:red;
+		}
+		#noticeMenuBar tr>td{
+			cursor:pointer;
+		}
+		#firTable tr>td{
+			cursor:pointer;
+		}
 	</style>
 </head>
 <body>
 <div id="csContent">
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
-	<table>
+	<table id="firTable">
 		<tr>
 			<td>공지사항</td>
 			<td>FAQ</td>
@@ -218,6 +234,7 @@
 					<td>기타</td>
 					<td>
 						<select style="height:25px;" name="searchType" id="searchType">
+							<option>선택하기</option>
 							<option value="title">제목</option>
 						</select>
 						<input type="text" name="keyword" id="keyword">
@@ -229,9 +246,9 @@
 <div id="contentList" class="col-md-10 col-md-offset-1">
 	<table id="all" class="table table-hover">
 		<tr id="allnext">
-			<td>번호</td>
-			<td>분류</td>
-			<td>제목</td>
+			<th>번호</th>
+			<th>분류</th>
+			<th>제목</th>
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
@@ -255,7 +272,7 @@
 						<c:if test="${bean.csClassGbCd eq '6' }">
 						<td>기타</td>
 						</c:if>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			</c:forEach>
 		</tr>
@@ -266,7 +283,7 @@
 					<tr class="list1">
 						<td>${bean.faqNo}</td>
 						<td>주문</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -279,7 +296,7 @@
 					<tr class="list2">
 						<td>${bean.faqNo}</td>
 						<td>배송</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -291,7 +308,7 @@
 					<tr class="list3">
 						<td>${bean.faqNo}</td>
 						<td>결제</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -302,7 +319,7 @@
 					<tr class="list4">
 						<td>${bean.faqNo}</td>
 						<td>교환취소</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			  </c:if>
 			</c:forEach>
@@ -313,19 +330,18 @@
 					<tr class="list5">
 						<td>${bean.faqNo}</td>
 						<td>회원정보</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
-			
 				<c:if test="${bean.csClassGbCd eq '6'}">
 					<tr class="list6">
 						<td>${bean.faqNo}</td>
 						<td>기타</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 

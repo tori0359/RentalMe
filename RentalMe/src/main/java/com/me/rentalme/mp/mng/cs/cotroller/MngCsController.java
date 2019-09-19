@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
@@ -291,6 +292,19 @@ public class MngCsController {
 			mav.setViewName("redirect:/mp/mng/InqList");
 			return mav;
 		}
+		
+		@RequestMapping(value="/csList")
+		@ResponseBody
+		public String csList(@RequestParam("param") String selected) {
+			if(selected.equals("20")) {
+				System.out.println("맞음");
+			}else {
+				System.out.println("틀림");
+			}
+			
+			return selected;
+		}
+		
 	/**
 	* 1:1 문의
 	* 
