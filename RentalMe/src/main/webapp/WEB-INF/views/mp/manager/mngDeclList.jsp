@@ -121,7 +121,7 @@
 								</div>
 							</div>
 						</div>
-						<input id="chkResult" class="btn btn-success btn-sm" value="처리완료" >
+						<input type="button" id="chkResult" class="btn btn-success btn-sm" value="처리완료" >
 				</div>
 				<!-- ============================================================== -->
 				<!-- end table  -->
