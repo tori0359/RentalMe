@@ -7,6 +7,7 @@ encoding="UTF-8"?>
   
 <mapper namespace="act">
 	<select id="selectActRun" resultType="com.me.rentalme.model.entity.ActVo">
+	<![CDATA[
 		SELECT  A.GDS_CD,
 				A.GDS_CD_DETAIL,
 			    FN_NM('GDS_NM',B.GDS_CD) AS gdsnm,
@@ -15,10 +16,12 @@ encoding="UTF-8"?>
 			    A.ACT_ED_TIME,
 			    A.CONTENT,
 			    B.BRAND_NM,
-			    A.IMG1
+			    A.IMG1,
+			    A.ACT_STS_CD
 		FROM 	TB_GDS300 A, TB_GDS100 B
 		WHERE	B.GDS_CD = A.GDS_CD_DETAIL
-		AND 	ACT_STS_CD='2';
+		AND 	A.ACT_STS_CD<'3'
+		]]>
 	</select>
 	
 	<select id="selectActEnd" resultType="com.me.rentalme.model.entity.ActVo">
@@ -84,6 +87,7 @@ encoding="UTF-8"?>
 				,C.UNIT_PRICE
 				,C.ACT_ST_TIME
 				,C.ACT_ED_TIME
+				,C.ACT_STS_CD
 		FROM 	TB_GDS100 A	
 				,TB_GDS200 B		
 				,TB_GDS300 C
@@ -145,5 +149,11 @@ encoding="UTF-8"?>
 		UPDATE tb_act100
 		SET ACT_BID_STS_CD='3'
 		WHERE GDS_CD=#{gdsCd} AND ACT_BID_STS_CD='1'
+	</update>
+	
+	<update id="updateMngActStsCd">
+		UPDATE tb_gds300
+		SET ACT_STS_CD='2'
+		WHERE GDS_CD_DETAIL=#{gdsCdDetail} AND ACT_STS_CD='1' 
 	</update>
 </mapper>
