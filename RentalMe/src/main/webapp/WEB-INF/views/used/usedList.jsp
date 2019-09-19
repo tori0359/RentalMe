@@ -68,6 +68,7 @@
 		font-size: 1em;
 		color: gray;
 		margin-bottom: 10px;
+		margin-left: 10px;
 	}
 	#form_tab{
 		margin-top: 50px;
@@ -133,7 +134,14 @@
 		color: #FF976E;
 		background-color: white;
 	}
-	
+	.pagination > .active > a{
+		background-color: #FF654F;
+		border-color: #FF654F;
+	}
+	.pagination > .active > a:hover{
+		background-color: #FF654F;
+		border-color: #FF654F;
+	}
 	
 	
 	.tab_btn{
@@ -228,6 +236,10 @@
 			$(this).children('div').children('img').css('margin-left','0px');
 		});
 
+		var checkMbno=$('#checkMbno').val();
+		if(checkMbno==''){
+			$('#hideBtnMbno').hide();
+		}
 		
 	});
 		function removeCls(who){ //탭활성화
@@ -247,7 +259,7 @@
 </head>
 <body>
 <div class="usedList">
-
+	<input id="checkMbno" type="hidden" value="${loginMbNo }">
 	<h3>중고제품</h3>
 	<form action="/used/search">
 	<div id="search">
@@ -261,7 +273,7 @@
 		<button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
 	</div>
 	</form>
-	<div>
+	<div id="hideBtnMbno">
 	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
 	</div>
 <div id="form_tab">
