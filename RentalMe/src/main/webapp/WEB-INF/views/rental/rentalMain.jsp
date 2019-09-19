@@ -37,7 +37,8 @@
 	#best{
 		/* border-top:4px solid grey; */
 		text-align:center;
-		margin-top:70px;
+		margin-top:20px;
+		border: 0px solid green;
 	}
 	#best h3{
 		font-family:"nanumEB";
@@ -45,6 +46,7 @@
 	}
 	.bestitem{
 		margin-top: 40px;
+		border: 0px solid green;
 	}
 	.bestitem img{
 		width: 250px;
@@ -70,6 +72,7 @@
 		padding-top:10px;
 		height:165px;
 		background:#fff; 
+		margin-right:0;
 	}
 	.eventlist img{
 		height:140px;
@@ -143,6 +146,9 @@
 		-moz-transform:scale(1.1);     /* FireFox */
 		-o-transform:scale(1.1);  
 	}
+	#selfimg{
+	
+	}
 </style>
 <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 <script type="text/javascript">
@@ -208,7 +214,7 @@
 <div id="carousel-example-generic" class="maincar carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner" role="">
     <div class="item active">
       <img class="mainimg" src="imgs/main1.png" alt="...">
       <div class="carousel-caption">
@@ -240,6 +246,7 @@
 		<div class="col-md-2 col-md-offset-5" id="best">
 				<h3>BEST ITEM</h3>
 		</div>
+		
 	</div>
 	<div style="width:100%;">
 			<div class="owl-carousel owl-theme owl-img-responsive">
@@ -255,19 +262,12 @@
 				</div>
 			</c:forEach>
 			</div>
+			
+			
 				
 	</div>
 </div>
-
-<!-- <div style="width:100%; background-color:#F2F2F2; height:50px;">
-	<div class="row">
-		<div class="col-md-2 col-md-offset-5" id="best">
-				<h3>오늘의 이벤트 경매</h3>
-		</div>
-	</div>
-</div> -->
-
-<div style="width:100%; background-color:#F2F2F2; height:240px;">
+<div style="background-color:#FAF1E2; height:240px; margin-top:30px;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-3 eventlist" >
@@ -285,12 +285,11 @@
 			
 			</div>
 		</div>
-		<div class="col-md-3" style="margin-top:40px;">
+		
+		<div class="col-md-3" style="margin-top:40px; padding:0; margin-left:4px;">
 			<img style="height:160px;" src="imgs/card.PNG"/>
-			
-			
-				
 		</div>
+		
 		<div class="col-md-5 eventlist" style="border:1px solid #E6E6E6; display:inline-block; height:165px; margin-left:70px;">
 			<div style="border:0px solid red; display:inline-block;" >
 				<img id="auctionimg" src="imgs/auction.png"/>
@@ -305,7 +304,9 @@
 	</div>
 </div>
 </div>
-
+<div style="border:1px solid red;">
+	<h3>오늘의 이벤트 경매</h3>
+</div>
 </body>
 
 <jsp:include page="../template/footer.jsp"></jsp:include>
