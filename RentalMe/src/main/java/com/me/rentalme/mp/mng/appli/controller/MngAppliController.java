@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,26 +45,12 @@ public class MngAppliController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/mng/goodsList",method = RequestMethod.GET)
-	public ModelAndView getMainList(Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		
+	public ModelAndView getMainList(Model model) throws SQLException {
 		log.debug("마이페이지(관리자) 메인 컨트롤러");
-	 
-		pagingPath="/mp";
-		pagingPath+="/mng/goodsList";
-		
-		int listCnt=MngService.goodsListCnt();
-		System.out.println("컬럼수"+listCnt);
-		
-		Paging apliPaging=new Paging();
-		
-		apliPaging.pageInfo(page, range, listCnt);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("rlist", MngService.selectGoodsList(apliPaging));
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", apliPaging);
+		mav.addObject("rlist", MngService.selectGoodsList());
 		mav.setViewName("mp/manager/mngMainList");
 		return mav;
 	}

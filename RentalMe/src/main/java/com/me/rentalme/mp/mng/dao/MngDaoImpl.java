@@ -116,9 +116,9 @@ public class MngDaoImpl implements MngDao{
 	
 	////Ãß°¡--------------
 	@Override
-	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException {
+	public List<RentalAppliVo> selectGoodsList() throws SQLException {
 		
-		return sqlSession.selectList("mpMng.selectRentalList",apliPaging);
+		return sqlSession.selectList("mpMng.selectRentalList");
 	}
 
 	@Override

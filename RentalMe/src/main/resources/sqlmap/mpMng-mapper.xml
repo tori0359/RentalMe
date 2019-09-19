@@ -122,7 +122,7 @@
 		     , DATE_FORMAT(JOIN_DT, '%Y-%m-%d') AS JOIN_DT
 		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS CHG_DT
 		  FROM TB_USER100
-		 WHERE USER_STS_CD IN ('1', '2', '3')
+		 WHERE USER_STS_CD IN ('1', '2')
 		 ORDER
 		    BY MB_NO ASC
 	</select>
@@ -176,7 +176,6 @@
 	<!--렌탈상품리스트 -->
 	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT * FROM TB_GDS100 ORDER BY REG_DT DESC
-		LIMIT #{startListNum},#{listSize}
 	</select>
 	<!--대형 상품리스트 -->
 	<select id="selectLgoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">

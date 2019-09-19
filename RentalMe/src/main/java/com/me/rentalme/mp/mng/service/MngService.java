@@ -50,7 +50,7 @@ public interface MngService {
 	long selectNum(String mGoodsNum,String sGoodsNum);
 	
 	//∑ª≈ª ªÛ«∞ ∏ÆΩ∫∆Æ ∆‰¿Ã¬°
-	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> selectGoodsList() throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;

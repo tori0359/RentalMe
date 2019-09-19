@@ -205,9 +205,9 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
-	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException{
+	public List<RentalAppliVo> selectGoodsList() throws SQLException{
 		
-		return mngDao.selectGoodsList(apliPaging);
+		return mngDao.selectGoodsList();
 	}
 
 	@Override
