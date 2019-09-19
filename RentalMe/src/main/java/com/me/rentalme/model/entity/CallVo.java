@@ -39,6 +39,8 @@ public class CallVo {
 	private String cartSeq;			//장바구니 일련번호
 	private String userNm; 			//회원 이름
 	private String actBidStsCd;		//회원 경매 상태
+	private String gdsCdDetail;		//경매상품 디테일코드
+	private String img1;			//경매상품 대표이미지
 	
 	
 	
@@ -401,6 +403,19 @@ public class CallVo {
 				+ ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", modelNm=" + modelNm
 				+ ", usedGdsPrice=" + usedGdsPrice + ", odrDt=" + odrDt + ", gdsPrice=" + gdsPrice + ", odrQty="
 				+ odrQty + ", odrAmt=" + odrAmt + ", agreeTerm=" + agreeTerm + ", odrStsGbCd=" + odrStsGbCd + "]";
+	}
+
+	public String getGdsCdDetail() {
+		return gdsCdDetail;
+	}
+	public void setGdsCdDetail(String gdsCdDetail) {
+		this.gdsCdDetail = gdsCdDetail;
+	}
+	public String getImg1() {
+		return img1;
+	}
+	public void setImg1(String img1) {
+		this.img1 = img1;
 	}
 	
 }

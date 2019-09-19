@@ -186,7 +186,7 @@
 		vSumTotPrice = vSumTotPrice + ${(bean.gdsPrice * bean.odrQty)};
 	</c:forEach>
 	vSumTotPrice += "";	// 타입변환
-	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
+	
 	
 	/**************************/
 	/**** 전역변수 선언끝 *****/
@@ -521,7 +521,7 @@
 							<h5><label id="bankInfo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 무통장입금은 주문하기 후 입금이 완료되어야 최종 주문확정처리 됩니다.</label></h5>
 						</div>
 						<div class="form-group" id="realTotPriceTxtCls">
-					    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
+					    	<input type="hidden"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
 					    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
 					    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
 						</div>
