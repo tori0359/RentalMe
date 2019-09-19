@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>RentalMe - 경매상품관리 리스트</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
@@ -27,6 +27,7 @@
     <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngAct.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
 </head>

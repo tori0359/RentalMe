@@ -134,15 +134,14 @@ public class MngActController {
 	
 	//경매상품등록 
 	@RequestMapping(value = "/actInsert", method = RequestMethod.POST)
-	public String addAct(@RequestParam("actStTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) String actStTime,@RequestParam("actEdTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) 
-	String actEdTime,MultipartHttpServletRequest mtfRequest,@ModelAttribute ActVo actVo) throws SQLException, ParseException {
+	public String addAct(@RequestParam("actStTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) String actStTime, 
+	MultipartHttpServletRequest mtfRequest,@ModelAttribute ActVo actVo) throws SQLException, ParseException {
 		log.debug("이벤트 경매 등록 컨트롤러");
 		
 		int cnt=1;
 		String currentTime=System.currentTimeMillis()+"";
 		System.out.println("커런트타임"+currentTime);
 		System.out.println("시작시간"+actStTime.charAt(4));
-		System.out.println("종료시간"+actEdTime.charAt(5));
 		int restTime=0;
 		
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm");
@@ -154,7 +153,6 @@ public class MngActController {
 		   int actEndTime=0;
 		for(int i=0;i<actStTime.length();i++) {
 			actStartTime=actStTime.charAt(i);
-			actEndTime=actEdTime.charAt(i);
 			
 			if(i==10) {
 				actEndTime=0;
