@@ -122,18 +122,29 @@
 	}
 	#chattingRoom{
 		border: 1px solid black;
-		height: 500px;
 	}
-	
 	#actLive{
-		display: inline-block;
 		border: 1px solid black;
+		height: 400px;
+		overflow: hidden;
 	}
 	#bidListBody{
-		display: inline-block;
-		border: 1px solid black;
+	border: 1px solid black;
+		height: 400px;
 	}
-
+	.idIn{
+		color: #FF851C;
+	}
+	.moneyIn{
+		font-weight: bold;
+		color: #9431E8;
+	}
+	.enterIn{
+		color: #366CFF;
+	}
+	.whoIn{
+		font-weight: bold;
+	}
 
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
@@ -153,14 +164,14 @@
 		var type=msg.type;
 		var price=msg.price;
 		
-		$('#liveviewcnt').text(msg.cnt);
+		$('#liveviewcnt').text(msg.cnt+'명 참여중');
 		if(type=='bid'){
-			$('#actLive').append(id+"님께서 응찰하셨습니다<br/>");
+			$('#actLive').prepend('<div class="bidIn"><span class="idIn">'+id+'</span>님께서 응찰하셨습니다</div>');
 			$('#bidList').append("<li>"+id+"</li>");
 			$('#countView').text('');
 		}else if(type=='enter'){
 			text=text+'';
-			$('#actLive').append(id+"님이 경매장에 입장하셨습니다<br/>");
+			$('#actLive').prepend('<div class="enterIn"><span class="idIn">'+id+"</span>님이 경매장에 입장하셨습니다</div>");
 			$('#nowPrice').text("");
 			$('#nowPrice').append("현재가격: "+price+"원");
 			$('#bidList').text("");
@@ -170,10 +181,10 @@
 			}
 			
 		}else if(type=='adminMsg'){
-			$('#actLive').append(text+"원 응찰하실 분?<br/>");
+			$('#actLive').prepend('<div class="whoIn"><span class="moneyIn">'+text+"</span>원 응찰하실 분?</div>");
 			$('#sendMsg').attr('disabled', false);
 			$('#nowPrice').text('');
-			$('#nowPrice').append("현재가격: "+text+"원");
+			$('#nowPrice').append("현재가격: <span class='moneyIn'>"+text+"</span>원");
 			$('#bidList').empty();
 		}else if(typeof(msg)=='number'){
 			$('#countView').text('');
@@ -186,13 +197,23 @@
 			$('#sendMsg').attr('disabled', true);
 			$('#countView').text('');
 			$('#countView').append(text+'님 입찰되었습니다.');
+		}else if(type=='endBid'){
+			console.log('연결끊김');
+			sock.close();
 		}
 
 	};
 	sock.onclose=function(event){
-		
+		alert('경매가 끝났습니다.<br/> 이용해주셔서 감사합니다.');
+		window.location.href='/act/';
 	};
 	$(function(){
+		$('#sendMsg').attr('disabled', true);
+		if($('#hiddenStsCd').val()=='1'){
+			alert('아직 경매가 열리지않았습니다');
+			window.location.href="/act/";
+		}
+		
 		$('#sendMsg').click(function(){
 			console.log('클릭함');
 			$('#sendMsg').attr('disabled', true);
@@ -228,6 +249,7 @@
 </script>
 </head>
 <body>
+<input type="hidden" id="hiddenStsCd" value="${list2.actStsCd }">
 <div id="actContent">
 	<div class="container">
 		<div class="row">
@@ -300,11 +322,14 @@
 						</div>
 						<span id="liveviewcnt"></span>
 						<div id="nowPrice"></div>
-						<div id="actLive"></div>
-						<div id="bidListBody">
-						<ol id="bidList">
-						
-						</ol>
+						<div class="row">
+							<div id="actLive" class="col-md-10"></div>
+							<div id="bidListBody" class="col-md-2">
+								<div>현재 응찰한 인원</div>
+								<ol id="bidList">
+								
+								</ol>
+							</div>
 						</div>
 						<button id="sendMsg" class="btn btn-primary">응찰하기</button>
 						<div id="countView"></div>

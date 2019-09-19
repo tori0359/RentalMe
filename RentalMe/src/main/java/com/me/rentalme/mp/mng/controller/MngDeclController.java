@@ -1,17 +1,21 @@
 package com.me.rentalme.mp.mng.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.DeclVo;
@@ -23,14 +27,12 @@ import com.me.rentalme.mp.mng.service.MngService;
 public class MngDeclController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
-	String path= "/mp/mng/decl";
 	@Inject
 	MngService mngService;
 	
-	
+		
 	/**
-	 * @throws SQLException 
-	* 
+	* 신고접수관리 - 리스트
 	* 
 	* @param  
 	* @return String 
@@ -38,33 +40,35 @@ public class MngDeclController {
 	* @exception 
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
+
 	public String getMngDeclList(Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, 
-			@RequestParam(required = false, defaultValue = "1")int range,
-			@RequestParam(required = false, defaultValue = "") String usedGdsNo) throws SQLException {
-		DeclVo bean=new DeclVo();
-		System.out.println(usedGdsNo+"usedgdsno");
-		bean.setUsedGdsNo(usedGdsNo);
-		int totalListCnt = mngService.selectDeclListCnt(bean); 
-		System.out.println(totalListCnt+"okok");
-		Paging usedPage = new Paging();
-		
-		usedPage.pageInfo(page, range, totalListCnt);
-		
-		model.addAttribute("path", path);
-		model.addAttribute("paging", usedPage);
-		model.addAttribute("alist", mngService.selectDecl(usedPage));
+			@RequestParam(required = false, defaultValue = "") String usedGdsNo) throws SQLException {		
+		model.addAttribute("alist", mngService.selectDecl());
 		return "mp/manager/mngDeclList";
 	}
 	
+	/**
+	 * @throws IOException 
+	* 신고접수관리 - 처리완료 업데이트
+	* 
+	* @param  
+	* @return String 
+	* @author 박재환
+	* @exception 
+	*/
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String getMngDeclUdt(@RequestParam(value = "declNo") String declNo) throws SQLException{
+	public String getMngDeclUdt(@RequestParam String declNo, HttpServletResponse res, HttpServletRequest req) throws SQLException, IOException{
 		String[] array;
 		array=declNo.split(",");
 		
 		for(int i=0; i<array.length; i++) {
 			mngService.changeDeclSts(array[i]);
 		}
+		
+//		res.setContentType("text/html; charset=utf-8");
+//		PrintWriter out = res.getWriter();		
+//		out.println("<script>alert(\"정상적으로 처리되었습니다.\"); location.href=\""+req.getContextPath()+"/mp/mng/decl\";</script>");
+//		out.flush();
 		
 		return "redirect:/mp/mng/decl";
 	}

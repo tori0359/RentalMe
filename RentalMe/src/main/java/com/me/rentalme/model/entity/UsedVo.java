@@ -321,7 +321,7 @@ public class UsedVo {
 	public void setSclassName(String sclassName) {
 		this.sclassName = sclassName;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "UsedVo [usedGdsNo=" + usedGdsNo + ", mbNo=" + mbNo + ", usedGdsDt=" + usedGdsDt + ", gdsLclassCd="
@@ -329,7 +329,22 @@ public class UsedVo {
 				+ ", brandNm=" + brandNm + ", modelNm=" + modelNm + ", usedGdsPrice=" + usedGdsPrice + ", sub=" + sub
 				+ ", content=" + content + ", usedGdsResStsCd=" + usedGdsResStsCd + ", delYn=" + delYn + ", img1="
 				+ img1 + ", img2=" + img2 + ", img3=" + img3 + ", img4=" + img4 + ", chgId=" + chgId + ", chgDt="
-				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + "]";
+				+ chgDt + ", regId=" + regId + ", regDt=" + regDt + ", mcnm=" + mcnm + ", align=" + align
+				+ ", startPage=" + startPage + ", userId=" + userId + ", userNM=" + userNM + ", mclassName="
+				+ mclassName + ", sclassName=" + sclassName + ", startListNum=" + startListNum + ", listSize="
+				+ listSize + ", getStartListNum()=" + getStartListNum() + ", getListSize()=" + getListSize()
+				+ ", getUsedGdsNo()=" + getUsedGdsNo() + ", getMbNo()=" + getMbNo() + ", getUsedGdsDt()="
+				+ getUsedGdsDt() + ", getGdsLclassCd()=" + getGdsLclassCd() + ", getGdsMclassCd()=" + getGdsMclassCd()
+				+ ", getGdsSclassCd()=" + getGdsSclassCd() + ", getGdsGbCd()=" + getGdsGbCd() + ", getBrandNm()="
+				+ getBrandNm() + ", getModelNm()=" + getModelNm() + ", getUsedGdsPrice()=" + getUsedGdsPrice()
+				+ ", getSub()=" + getSub() + ", getContent()=" + getContent() + ", getUsedGdsResStsCd()="
+				+ getUsedGdsResStsCd() + ", getDelYn()=" + getDelYn() + ", getImg1()=" + getImg1() + ", getImg2()="
+				+ getImg2() + ", getImg3()=" + getImg3() + ", getImg4()=" + getImg4() + ", getChgId()=" + getChgId()
+				+ ", getChgDt()=" + getChgDt() + ", getRegId()=" + getRegId() + ", getRegDt()=" + getRegDt()
+				+ ", getMcnm()=" + getMcnm() + ", getAlign()=" + getAlign() + ", getStartPage()=" + getStartPage()
+				+ ", getUserId()=" + getUserId() + ", getUserNM()=" + getUserNM() + ", getMclassName()="
+				+ getMclassName() + ", getSclassName()=" + getSclassName() + ", hashCode()=" + hashCode()
+				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
 
 	@Override

@@ -1,7 +1,10 @@
 package com.me.rentalme.mp.mng.service;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -17,6 +20,7 @@ import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.dao.MngDao;
+import com.thoughtworks.qdox.parser.ParseException;
 
 @Service
 public class MngServiceImpl implements MngService {
@@ -58,8 +62,8 @@ public class MngServiceImpl implements MngService {
 	
 
 	@Override
-	public List<UsedVo> selectUsed(UsedVo bean) throws SQLException {
-		return mngDao.selectUsed(bean);								//전체 중고 리스트
+	public List<UsedVo> selectUsed() throws SQLException {
+		return mngDao.selectUsed();								//전체 중고 리스트
 	}
 
 	@Override
@@ -78,8 +82,8 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
-	public List<DeclVo> selectDecl(Paging usedPage) throws SQLException {
-		return mngDao.selectDecl(usedPage);								//전체 신고 리스트
+	public List<DeclVo> selectDecl() throws SQLException {
+		return mngDao.selectDecl();								//전체 신고 리스트
 	}
 
 	@Override
@@ -90,6 +94,94 @@ public class MngServiceImpl implements MngService {
 	@Override
 	public int getUsedListCnt(UsedVo bean) {
 		return mngDao.selectusedListCnt(bean);
+	}
+	
+	/**
+	* 사용자 리스트 service
+	* 
+	* @param  None
+	* @return List - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.11
+	*/	
+	@Override
+	public List<UserVo> getUserInfo() {
+		List<UserVo> userInfo = mngDao.selectUserList();
+		
+		for(UserVo userVo : userInfo) {
+			//성별(1:남 2:여)
+			if(userVo.getGenderGbCd().equals("1")) {
+				userVo.setGenderGbCd("남");
+			}else if(userVo.getGenderGbCd().equals("2")) {
+				userVo.setGenderGbCd("여");
+			}else {
+				userVo.setGenderGbCd("x");
+			}
+			
+			//사용자상태코드(1:정상, 2:정지[비밀번호오류횟수 5회 초과], 3:삭제(탈퇴))
+			if(userVo.getUserStsCd().equals("1")) {
+				userVo.setUserStsCd("정상");
+			}else if(userVo.getUserStsCd().equals("2")){
+				userVo.setUserStsCd("정지");
+			}else if(userVo.getUserStsCd().equals("3")){
+				userVo.setUserStsCd("삭제");
+			}else {
+				userVo.setUserStsCd("x");
+			}
+			
+		}
+
+		return userInfo;
+	}
+	
+	/**
+	* 사용자 탈퇴하기 service
+	* 
+	* @param  String mbNo - 회원번호
+	* @return void 
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/	
+	@Override
+	public String delUserInfo(String mbNo) {
+		
+		int result = mngDao.updUserinfo(mbNo);
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "success";
+		}else {
+			msg = "fail";
+		}
+		
+		return msg;
+	}
+
+	/**
+	* 사용자 상세정보 service
+	* 
+	* @param  String mbNo - 회원번호
+	* @return UserVo - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public UserVo getUserDetail(String mbNo) {
+		
+		return mngDao.selectUserDetail(mbNo);
+	}
+
+	/**
+	* 사용자 총인원 조회 service
+	* 
+	* @param  
+	* @return int - 총인원 수 
+	* @author 황인준
+	* 등록일자 : 2019.09.16
+	*/
+	@Override
+	public int getMngUserListCnt() {
+		return mngDao.selectMngUserListCnt();
 	}
 
 	@Override
@@ -111,73 +203,61 @@ public class MngServiceImpl implements MngService {
 
 	@Override
 	public int lGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.lGoodsListCnt();
 	}
 
 	@Override
 	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.lGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.sGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.kGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.fGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.otherGoodsList(apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return mngDao.pacGoodsList(apliPaging);
 	}
 
 	@Override
 	public int sGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.sGoodsListCnt();
 	}
 
 	@Override
 	public int kGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.kGoodsListCnt();
 	}
 
 	@Override
 	public int fGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.fGoodsListCnt();
 	}
 
 	@Override
 	public int otherGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.otherGoodsListCnt();
 	}
 
 	@Override
 	public int pacGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return mngDao.pacGoodsListCnt();
 	}
 
@@ -193,8 +273,23 @@ public class MngServiceImpl implements MngService {
 
 	@Override
 	public int rentalGoodsAdd200(ProductVo productVo) {
-		// TODO Auto-generated method stub
 		return mngDao.rentalGoodsAdd300(productVo);
+	}
+
+	@Override
+	public List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException {
+		return mngDao.searchScGoods(goodsNum);
+	}
+
+	@Override
+	public long selectNum(String mGoodsNum, String sGoodsNum) {
+		return mngDao.selectNum(mGoodsNum,sGoodsNum);
+	}
+
+	@Override
+	public void rentalseq() {
+		mngDao.rentalSeq();
+		
 	}
 	
 

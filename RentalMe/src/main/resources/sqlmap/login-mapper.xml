@@ -5,12 +5,14 @@
   
 <mapper namespace="login">
 	<select id="checkId" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
-		SELECT USER_ID  	AS userId,		
-			   PW			AS userPw,
-			   MB_NO    	AS mbNo,
-			   EMAIL_KEY	AS emailKey,
-			   USER_STS_CD  AS userStsCd,
-			   PW_FAIL_CNT	AS pwFailCnt
+		SELECT USER_ID  	  AS userId,		
+			   PW			  AS userPw,
+			   MB_NO    	  AS mbNo,
+			   EMAIL_KEY	  AS emailKey,
+			   USER_STS_CD    AS userStsCd,
+			   PW_FAIL_CNT	  AS pwFailCnt,
+			   LOGIN_STS_CD   AS loginStsCd,
+			   BROWSER_STS_CD AS browserStsCd  
 		  FROM TB_USER100
 		 WHERE USER_ID		= #{userId}
 	</select>
@@ -42,6 +44,11 @@
 		     , SESSION_DT	AS sessionDt
 		  from tb_user100
 		 where session_key  = #{value}
+	</select>
+	<select id="selectLoginSts" parameterType="String" resultType="String">
+		select login_sts_cd
+		  from tb_user100
+		 where user_id = #{userId}
 	</select>
 	<update id="pwFailCntAdd">
 		UPDATE TB_USER100

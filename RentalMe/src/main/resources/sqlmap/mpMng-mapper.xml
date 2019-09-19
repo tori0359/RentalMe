@@ -48,11 +48,7 @@
 		SELECT A.*,B.USER_NM
 		FROM tb_used100 AS A, tb_user100 AS B
 		WHERE A.MB_NO=B.MB_NO
-		<if test="usedGdsNo != ''">
-		AND USED_GDS_NO=#{usedGdsNo}
-		</if>
 		ORDER BY A.CHG_DT DESC
-		LIMIT #{startListNum}, #{listSize}
 	</select>
 	<select id="selectUsedSearch" resultType="com.me.rentalme.model.entity.UsedVo">
 		SELECT A.*,B.USER_NM
@@ -86,9 +82,8 @@
 	<!-- 신고 -->
 	<select id="selectDecl" resultType="com.me.rentalme.model.entity.DeclVo">
 		SELECT *
-		FROM tb_decl100
+		FROM TB_DECL100
 		ORDER BY CHG_DT DESC
-		LIMIT #{startListNum}, #{listSize}
 	</select>
 	<update id="changeDeclSts">
 		UPDATE tb_decl100
@@ -99,9 +94,77 @@
 		SELECT COUNT(*)
 		FROM tb_decl100
 	</select>
-	
+
+	<!-- 사용자관리 -->
+	<select id="selectUserList" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT MB_NO
+		     , USER_ID
+		     , USER_NM
+		     , DATE_FORMAT(BIRTHDAY, '%Y-%m-%d') AS BIRTHDAY
+		     , GENDER_GB_CD
+		     , LEVEL_GB_CD
+		     , HP
+		     , HP_YN
+		     , EMAIL
+		     , EMAIL_YN
+		     , ADDR
+		     , ADDR_DETAIL
+		     , ZIP_CODE
+		     , USER_STS_CD
+		     , DATE_FORMAT(JOIN_DT, '%Y-%m-%d') AS JOIN_DT
+		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS CHG_DT
+		  FROM TB_USER100
+		 WHERE USER_STS_CD IN ('1', '2', '3')
+		 ORDER
+		    BY MB_NO ASC
+	</select>
+	<select id="selectUserDetail" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT MB_NO
+		     , USER_ID
+		     , USER_NM
+		     , DATE_FORMAT(BIRTHDAY, '%Y-%m-%d') AS BIRTHDAY
+		     , GENDER_GB_CD
+		     , LEVEL_GB_CD
+		     , HP
+		     , HP_YN
+		     , EMAIL
+		     , EMAIL_YN
+		     , ADDR
+		     , ADDR_DETAIL
+		     , ZIP_CODE
+		     , USER_STS_CD
+		  FROM TB_USER100
+		 WHERE MB_NO = #{mbNo}
+	</select>
+	<update id="updUserInfo" parameterType="String">
+		UPDATE TB_USER100
+		   SET USER_NM 		= ''
+		     , BIRTHDAY 	= ''
+		     , GENDER_GB_CD	= ''
+		     , HP			= ''
+		     , HP_YN		= ''
+		     , EMAIL		= ''
+		     , EMAIL_YN		= ''
+		     , ADDR			= ''
+		     , ADDR_DETAIL	= ''
+		     , ZIP_CODE		= ''
+		     , PW			= ''
+		     , PW_FAIL_CNT	= 0
+		     , PW_ADJ_DT	= ''
+		     , EMAIL_KEY	= ''
+		     , HP_KEY		= ''
+		     , LEVEL_GB_CD	= ''
+		     , JOIN_DT		= ''
+		     , USER_STS_CD	= '3'
+		     , SESSION_KEY	= ''
+		     , SESSION_DT	= '0000-00-00 00:00:00'
+		     , CHG_ID		= 'system'
+		     , CHG_DT		= DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		     , REG_ID		= 'system'
+		     , REG_DT		= '0000-00-00 00:00:00'
+		 WHERE MB_NO = #{mbNo}
+	</update>
 	<!--민수 -->
-	
 	<!--렌탈상품리스트 -->
 	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT * FROM TB_GDS100 ORDER BY REG_DT DESC
@@ -167,12 +230,28 @@
   		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='60';
   	</select>
   	
+  	<!--렌탈 상품등록  -->
   	<insert id="rentalGoodsAdd100" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
   		INSERT INTO TB_GDS100(GDS_CD,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_NM,BRAND_NM,MODEL_NM,GDS_GB_CD) 
-  		VALUES(#{gdsCd},#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})
+  		VALUES(
+		  (SELECT CONCAT('10','${gdsMclassCd}','${gdsSclassCd}',(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100 a),'10',#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})
   	</insert>
   	<insert id="rentalGoodsAdd200" parameterType="com.me.rentalme.model.entity.ProductVo">
-  		insert into tb_gds200(GDS_CD,GDS_PRICE,AGREE_TERM,DELIVER_COST,INSTAL_COST,AS_CONDITION,IMG1,IMG2,IMG3,IMG4,IMG5,IMG6,IMG7,IMG8,IMG9,IMG10,IMG11,IMG12) 
-  		values(#{prdCode},#{prdPrice},#{prdContDate},#{prdDeliveryCost},#{prdInstCost},#{prdAsContent},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10},#{img11},#{img12})
+  		INSERT INTO TB_GDS200(GDS_CD,GDS_PRICE,AGREE_TERM,DELIVER_COST,INSTAL_COST,AS_CONDITION,IMG1,IMG2,IMG3,IMG4,IMG5,IMG6,IMG7,IMG8,IMG9,IMG10,IMG11,IMG12) 
+  		VALUES(
+  		(SELECT CONCAT(#{prdCode},(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100 a),#{prdPrice},#{prdContDate},#{prdDeliveryCost},#{prdInstCost},#{prdAsContent},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10},#{img11},#{img12})
   	</insert>
+  	
+  	<!-- 렌탈상품등록 리스트 -->
+  	<select id="searchScGoods">
+  		SELECT * FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}
+  	</select>
+  	<select id="selectNum" resultType="long">
+  		SELECT CONCAT('10',${mGoodsNum},${sGoodsNum},(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100;
+  	</select>
+  	
+	<!-- 시퀀스 증가 -->
+	<insert id="insertSeq">
+		INSERT INTO SEQ_GDS100 VALUES(NULL);
+	</insert>
 </mapper>

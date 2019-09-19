@@ -1,7 +1,9 @@
 package com.me.rentalme.mp.mng.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,8 +58,14 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<UsedVo> selectUsed(UsedVo bean) throws SQLException {
-		return sqlSession.selectList("mpMng.selectUsed", bean);				//전체 중고 리스트
+	public List<UsedVo> selectUsed() throws SQLException {
+		List<UsedVo> list = sqlSession.selectList("mpMng.selectUsed");				//전체 중고 리스트
+
+		for(UsedVo usedVo : list) {
+			System.out.println("dao - usedVo list : "+usedVo.toString());
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -76,8 +84,8 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public List<DeclVo> selectDecl(Paging usedPage) throws SQLException {
-		return sqlSession.selectList("mpMng.selectDecl", usedPage);				//전체 신고 리스트
+	public List<DeclVo> selectDecl() throws SQLException {
+		return sqlSession.selectList("mpMng.selectDecl");				//전체 신고 리스트
 	}
 
 	@Override
@@ -98,7 +106,7 @@ public class MngDaoImpl implements MngDao{
 	
 	
 	
-	//민수
+	////추가--------------
 	@Override
 	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException {
 		
@@ -118,43 +126,36 @@ public class MngDaoImpl implements MngDao{
 
 	@Override
 	public List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.selectLgoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.sGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.kGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> fGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.fGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> otherGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.otherGoodsList",apliPaging);
 	}
 
 	@Override
 	public List<RentalAppliVo> pacGoodsList(Paging apliPaging) throws SQLException {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mpMng.pacGoodsList",apliPaging);
 	}
 
 	@Override
 	public int sGoodsListCnt() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("mpMng.sGoodsListCnt");
 	}
 
@@ -196,6 +197,80 @@ public class MngDaoImpl implements MngDao{
 	public int rentalGoodsAdd300(ProductVo productVo) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("mpMng.rentalGoodsAdd200",productVo);
+	}
+	
+	/**
+	* 사용자 리스트 Dao
+	* 
+	* @param  None
+	* @return List - 사용자정보 
+	* @author 황인준
+	* 등록일자 : 2019.09.11
+	*/	
+	@Override
+	public List<UserVo> selectUserList() {
+		
+		return sqlSession.selectList("mpMng.selectUserList");
+	}
+	
+	/**
+	* 사용자 탈퇴하기 Dao
+	* 
+	* @param  String mbNo - 회원번호
+	* @return int - 결과값
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public int updUserinfo(String mbNo) {
+		return sqlSession.update("mpMng.updUserInfo", mbNo);
+	}
+
+	/**
+	* 사용자 상세정보 Dao
+	* 
+	* @param  String mbNo - 회원번호
+	* @return UserVo - 사용자정보
+	* @author 황인준
+	* 등록일자 : 2019.09.15
+	*/
+	@Override
+	public UserVo selectUserDetail(String mbNo) {
+		return sqlSession.selectOne("mpMng.selectUserDetail", mbNo);
+	}
+	
+	/**
+	* 사용자관리 - 총회원수 Dao
+	* 
+	* @param  
+	* @return int - 총인원수
+	* @author 황인준
+	* 등록일자 : 2019.09.16
+	*/	
+	@Override
+	public int selectMngUserListCnt() {
+		return sqlSession.selectOne("mpMng.selectMngUserListCnt");
+	}
+
+	@Override
+	public List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mpMng.searchScGoods", goodsNum);
+	}
+
+	@Override
+	public long selectNum(String mGoodsNum, String sGoodsNum) {
+		Map<String,String> map=new HashMap<String,String>();
+		
+		map.put("mGoodsNum", mGoodsNum);
+		map.put("sGoodsNum", sGoodsNum);
+		
+		return sqlSession.selectOne("mpMng.selectNum",map);
+	}
+
+	@Override
+	public void rentalSeq() {
+		sqlSession.insert("mpMng.insertSeq");
 	}
 	
 }

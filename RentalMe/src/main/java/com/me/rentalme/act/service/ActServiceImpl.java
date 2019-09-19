@@ -124,4 +124,9 @@ public class ActServiceImpl implements ActService{
 		return actDao.actListCnt();
 	}
 
+	@Override
+	public int updateMngActStsCd(String gdsCd) throws SQLException {
+		return actDao.updateMngActStsCd(gdsCd);
+	}
+
 }

@@ -74,7 +74,7 @@
   		INSERT INTO tb_pquest100 (PQUEST_NO,MB_NO,CS_CLASS_GB_CD,SUB,CONTENT,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{mbNo},#{csClassGbCd},#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_pquest100;
   	</insert>
   	
-  	
+  	<!--시퀀스 증가  -->
   	<insert id="seqNocInsert" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO SEQ_NOTIC100 VALUES(NULL)
 	</insert>

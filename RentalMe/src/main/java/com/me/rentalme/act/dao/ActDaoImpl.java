@@ -118,4 +118,9 @@ public class ActDaoImpl implements ActDao{
 		System.out.println("inq°¹¼ö:"+cnt);
 		return cnt;
 	}
+
+	@Override
+	public int updateMngActStsCd(String gdsCd) throws SQLException {
+		return sqlSession.update("act.updateMngActStsCd", gdsCd);
+	}
 }
