@@ -128,7 +128,7 @@
 </style>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 <script type="text/javascript">
-   $(function(){
+	window.onload = function () {
 	   	/*
 		if($('.titlediv').text().indexOf('주문') != -1){
 			$('.changeVal').eq(1).hide();
@@ -139,7 +139,6 @@
 				}
 			}
 		*/
-
 			/*
 			$('.depositConfirm').click(function(){
 				$(this).parent().append('입금확인');
@@ -147,7 +146,7 @@
 				return false;
 			});
 			*/
-		}
+		
 		/*
 		else if($('.titlediv').text().indexOf('반품') != -1){
 			$('.changeVal').eq(0).hide();
@@ -172,7 +171,6 @@
 			});
 		}
 		*/
-
 		// 입금확인 모달
        $('#myModal').on('shown.bs.modal', function (e) {
 			var odrNo = $(e.relatedTarget).data('odr-no');
@@ -181,7 +179,6 @@
 			$(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
 			//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
        });
-
 		// 반품확인 모달
        $('#myModal2').on('shown.bs.modal', function (e) {
 			var odrNo = $(e.relatedTarget).data('odr-no');
@@ -190,10 +187,9 @@
 			$(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
 			//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
        });
-
 		//alert("화면로딩 끝!");
 		
-   });
+	};
     /**************************/
 	/**** 전역변수 선언시작 ***/
 	/**************************/
@@ -316,7 +312,7 @@
 		</form>
 		<!-- 모달 끝 -->
 		<!-- 반품확인 모달 -->
-        <form id="target" action="/mp/mng/decision" method="post">
+        <form id="target" action="/mp/mng/cart/decision" method="post">
 		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">

@@ -391,6 +391,57 @@ public class UserController {
 		mav.setViewName("mp/user/userAuctList");
 		return mav;
 	}
+	
+	/**
+	 * 경매내역 결제하기
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/auctList/odr", method = RequestMethod.POST)
+	public String addLgDetailOdr(@RequestParam("totOdrAmt")int totOdrAmt, @RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("payGbCd")String payGbCd, 
+			@RequestParam("seq")String seq, @RequestParam("mbNo")String mbNo, @RequestParam("gdsCd")String gdsCd, RentalAppliVo rentalAppliVo, Model model, HttpSession session ) {
+		
+		System.out.println("렌탈결제 왔능가");
+		
+		/* RequestParam text */
+//		System.out.println(mbNo);
+//		System.out.println(gdsCd);
+//		System.out.println(rentalAppliVo.getGdsSclassCd());
+//		System.out.println(gdsPrice);
+//		System.out.println(agreeTerm);
+//		System.out.println(deliverCost);
+//		System.out.println(instalCost);
+//		System.out.println(asCondition);
+//		System.out.println(odrQty);
+		
+		rentalAppliVo.setCrudGbCd(crudGbCd);
+		rentalAppliVo.setOdrGbCd(odrGbCd);
+		rentalAppliVo.setPayGbCd(payGbCd);
+		rentalAppliVo.setSeq(seq);
+		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
+		rentalAppliVo.setGdsCd(gdsCd);
+		rentalAppliVo.setTotOdrAmt(totOdrAmt);
+		
+		System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
+		System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
+		System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
+		System.out.println("seq				= " +rentalAppliVo.getSeq());
+		System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
+		System.out.println("gdsCd 			= " +rentalAppliVo.getGdsCd());
+//		System.out.println("gdsPrice 		= " +rentalAppliVo.getGdsPrice());
+//		System.out.println("agreeTerm 		= " +rentalAppliVo.getAgreeTerm());
+//		System.out.println("odrQty 			= " +rentalAppliVo.getOdrQty());
+		System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
+		
+//		int result1 = rentalAppliService.rentalGdsOdr(rentalAppliVo);			// 주문자료 생성
+//		int result2 = rentalAppliService.rentalGdsDetailOdr(rentalAppliVo);		// 주문상세자료 생성
+//		model.addAttribute("rtnCd", Integer.toString(result1));
+		return "redirect:/mp/auctList";
+	}
+	
 
 	/**
 	 * @throws SQLException 내 문의 보기

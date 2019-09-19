@@ -80,11 +80,13 @@
 </style>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 	window.onload = function () {
 
 		 // 구매 모달
 	       $('#myModal').on('shown.bs.modal', function (e) {
+		       $("#inlineRadio1").prop("checked", true);
 	    	   var gdsCd = $(e.relatedTarget).data('gds-cd');
 	    	   var gdsNm = $(e.relatedTarget).data('gds-nm'); 
 	    	   var bidPrice = $(e.relatedTarget).data('bid-price');
@@ -136,6 +138,8 @@
 		$('#bankInfo').hide();
 	});
 
+	$("#inlineRadio1").attr('checked', 'checked');
+	
 	// 결제하기 모달 
 	$(document).on("click", "#realSubmit", function(){
 		var amount = $('#realBidPrice').val();	// 결제할 실제 금액
@@ -145,23 +149,7 @@
 		var payGbCd = radioVal;
 		var seq	= "001";
 		var mbNo = "${sessionMbNo}";
-		alert(mbNo);
-		return false;
-		var gdsSclassCd = $('#realGdsSclassCd').val();
-		var gdsCd = "";
-		var gdsPrice = $('#realGdsPrice').val();
-		var agreeTerm = $('#realAgreeTerm').val();
-		var deliverCost = "";
-		var instalCost = "";
-		var asCondition = "";
-		var odrQty = $('#realOdrQty').val();
-
-		<c:forEach items="${list1}" var="list1">
-			gdsCd = "${list1.gdsCd}";
-		 	deliverCost = "${list1.deliverCost}";
-		 	instalCost = "${list1.instalCost}";
-		 	asCondition = "${list1.asCondition}";
-		</c:forEach>
+		var gdsCd = $('#realGdsCd').val();
 
 		// 카드(카카오페이 결제)
 		if(payGbCd == 10) {
@@ -172,34 +160,26 @@
 			    pg : 'kakaopay',
 			    pay_method : 'vbank',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '렌탈미 렌탈상품 결제',
+			    name : '렌탈미 경매상품 결제',
 			    amount : amount,
 			    buyer_name : userId
 			}, function(rsp) {
 			    if ( rsp.success ) {
 			        var msg = '결제가 완료되었습니다.';
-			        
 					$.ajax({
-						url: "/rental/Appli/lg/detail/odr",
+						url: "/mp/auctList/odr",
 						type: "post",
-						data: { "totOdrAmt"  	: rsp.paid_amount,
+						data: { "totOdrAmt"  	: amount,
 								"crudGbCd"		: crudGbCd,
 								"odrGbCd"		: odrGbCd,
 								"payGbCd"		: payGbCd,
 								"seq"			: seq,
 						         "mbNo"			: mbNo,
-						         "gdsSclassCd"	: gdsSclassCd,
 						         "gdsCd"  		: gdsCd,
-						         "gdsPrice"		: gdsPrice,
-						         "agreeTerm"	: agreeTerm,
-						         "deliverCost"  : deliverCost,
-						         "instalCost"  	: instalCost,
-						         "asCondition" 	: asCondition,
-						         "odrQty"  		: odrQty
 							 },
 						success : function(){
 							//location.href = "/rental/Appli/lg/"+gdsSclassCd+"/detail/"+gdsCd;
-							location.href="/mp/";
+							location.href="/mp/auctList";
 						}
 					});
 			    } else {
@@ -213,7 +193,7 @@
 			if(true) {
 				var msg = '주문이 접수되었습니다.';
 				$.ajax({
-					url: "/rental/Appli/lg/detail/odr",
+					url: "/mp/auctList/odr",
 					type: "post",
 					data: { "totOdrAmt"  	: amount,
 							"crudGbCd"		: crudGbCd,
@@ -222,17 +202,10 @@
 							"seq"			: seq,
 					         "mbNo"			: mbNo,
 					         "gdsCd"  		: gdsCd,
-					         "gdsSclassCd"	: gdsSclassCd,
-					         "gdsPrice"		: gdsPrice,
-					         "agreeTerm"	: agreeTerm,
-					         "deliverCost"  : deliverCost,
-					         "instalCost"  	: instalCost,
-					         "asCondition" 	: asCondition,
-					         "odrQty"  		: odrQty
 						 },
 					success : function(){
 						//location.href = "/rental/Appli/lg/"+gdsSclassCd+"/detail/"+gdsCd;
-						location.href="/mp/";
+						location.href="/mp/auctList";
 					}
 				});
 			} else {
@@ -331,10 +304,9 @@
 					    	<h4><label for="realGdsPrice">낙찰가격</label></h4>
 						</div>
 						<div id="detailNm2" class="col-md-8">
-					    	<input type="text" class="form-control" id="realGdsCd" name="gdsCd" value="${bean.gdsCd }" style="display: none;">
-							<input type="text" class="btn btn-defalut" style="background-color:white; text-align:left;" name="gdsNm" value="gdsNm"  >
+							<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; margin-top:5px;  text-align:left;" name="gdsNm" value="gdsNm"  >
 							<fmt:setLocale value="ko_KR"></fmt:setLocale>
-							<input type="text" class="btn btn-defalut" id="realGdsPrice2" disabled="disabled" style="background-color:white; text-align:left;" name="bidPrice" value="bidPrice"/>
+							<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; margin-top:4px; text-align:left;" name="bidPrice" value="bidPrice"/>
 						</div>
 					</div>
 					<div class="row" style="border:0px solid orange;">
@@ -375,12 +347,6 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel2">포기요청</h4>
 			    </div>
-			    		<label class="radio-inline">
-					  		<input type="radio" name="inlineRadioOptions5" id="inlineRadio1" checked="checked" value="90">무통장입금
-						</label>
-						<label class="radio-inline">
-					  		<input type="radio" name="inlineRadioOptions5" id="inlineRadio2" value="10">카카오페이
-						</label>
 				<div class="modal-body">
 					<input type="hidden" name="gdsCd" value="gdsCd"/>
 				</div>

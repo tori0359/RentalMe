@@ -87,7 +87,7 @@ public class MngOrderController {
 	}
 	
 	/**
-	 * 주문관리> 입급확인 or 반품확인
+	 * 주문관리> 입급확인
 	 * 
 	 * @param  
 	 * @return String 
