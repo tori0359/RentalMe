@@ -11,6 +11,7 @@
 			,FN_NM('USER_NM', A.MB_NO) AS USER_NM
 		FROM TB_ODR100 A
 		WHERE ODR_STS_GB_CD NOT IN('RW', 'RC')
+		AND ODR_GB_CD IN('10')
 		ORDER BY A.ODR_NO DESC
 	</select>
 	<select id="selectOrdOne" resultType="com.me.rentalme.model.entity.MngOrdDetailVo">
@@ -71,6 +72,7 @@
 			,FN_NM('USER_NM', A.MB_NO) AS USER_NM
 		FROM TB_ODR100 A
 		WHERE ODR_STS_GB_CD IN('RW', 'RC')
+		AND ODR_GB_CD IN('10')
 		ORDER BY A.ODR_NO DESC
 	</select>
 	<update id="updateStsRtn">

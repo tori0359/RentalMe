@@ -230,7 +230,6 @@
              	<!-- <th></th>  -->
                 <th>주문번호</th>
                 <th>주문일</th>
-                <th>주문구분</th>
                 <th>회원번호</th>
                 <th>회원명</th>
                 <th>주문금액</th>
@@ -245,14 +244,6 @@
              	<!-- <td style="vertical-align:middle;"><input type="checkbox" class="checkSelect" name="odrNo" value="${bean.odrNo }"></td>  -->
                 <td style="vertical-align:middle;">${bean.odrNo}</td>
                 <td style="vertical-align:middle;">${bean.odrDt}</td>
-                <td style="vertical-align:middle;">
-                <c:if test= "${bean.odrGbCd eq '10'}">
-                	렌탈
-                </c:if>
-                <c:if test= "${bean.odrGbCd eq '20'}">
-                	경매
-                </c:if>
-                </td>
                 <td style="vertical-align:middle;">${bean.mbNo}</td>
                 <td style="vertical-align:middle;">${bean.userNm }</td>
                 <td style="vertical-align:middle;"><fmt:formatNumber value="${bean.totOdrAmt}" pattern="#,###.##"/>원</td>

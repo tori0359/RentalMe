@@ -174,8 +174,17 @@ encoding="UTF-8"?>
   	</select>
   	
   	<select id="selectAuct" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT
-			AA.*
+		SELECT
+			AA.GDS_CD
+			,AA.GDS_NM
+			,AA.BID_TIME
+			,AA.BID_PRICE
+			,AA.ACT_BID_STS_CD
+			,AA.GDS_CD_DETAIL
+			,AA.IMG1
+			,BB.ODR_NO
+			,BB.PAY_GB_CD
+			,BB.ODR_STS_GB_CD
 		FROM (
 				SELECT 	
 					A.GDS_CD,
@@ -191,8 +200,19 @@ encoding="UTF-8"?>
 				WHERE A.MB_NO = #{mbNo}
 				AND A.GDS_CD = B.GDS_CD
 				ORDER BY A.GDS_CD DESC
-		) AA
-		 ORDER BY AA.GDS_CD2 DESC
+		) AA LEFT OUTER JOIN (
+				SELECT
+					B.GDS_CD
+					,A.ODR_NO
+					,A.PAY_GB_CD
+					,A.ODR_STS_GB_CD
+				from TB_ODR100 A,
+					TB_ODR110 B
+				WHERE A.ODR_NO = B.ODR_NO
+				AND A.MB_NO = #{mbNo}
+		) BB
+		ON AA.GDS_CD = BB.GDS_CD
+		ORDER BY AA.GDS_CD2 DESC
   	</select>
   	
   	<select id="selectPw" resultType="com.me.rentalme.model.entity.UserVo">
