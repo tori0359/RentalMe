@@ -31,6 +31,7 @@ public interface LoginService {
 
 	//비밀번호 오류횟수 초기화
 	void initPwFailCnt(String userId);
+
 	
 	
 }

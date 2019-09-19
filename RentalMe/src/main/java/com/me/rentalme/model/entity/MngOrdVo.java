@@ -16,6 +16,8 @@ public class MngOrdVo {
 	private String regId;				//등록아이디
 	private Date regDt;					//등록일자
 	
+	private String userNm;				// 사용자명
+	
 	public String getOdrNo() {
 		return odrNo;
 	}
@@ -81,6 +83,12 @@ public class MngOrdVo {
 	}
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
 	}
 	
 	

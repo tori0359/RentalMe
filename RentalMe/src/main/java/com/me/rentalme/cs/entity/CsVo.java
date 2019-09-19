@@ -15,13 +15,35 @@ public class CsVo {
 	private String regId;  //작성아이디
 	private Date regDt;	   //등록날짜
 	
-	
 	private String pquestNo; //1대1 게시글 번호
 	private String pquestDt; //1대1 상담일자
 	private String mbNo;	 //1대1 회원번호
 	private String questStsCd; //1대1 상담처리코드
 	
+	private int startListNum;   //게시판 시작번호
+	private int listSize;		//목록갯수
+	private int cnt;			//글 전체 카운트
 	
+	
+	
+	public int getStartListNum() {
+		return startListNum;
+	}
+	public void setStartListNum(int startListNum) {
+		this.startListNum = startListNum;
+	}
+	public int getListSize() {
+		return listSize;
+	}
+	public void setListSize(int listSize) {
+		this.listSize = listSize;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getFaqNo() {
 		return faqNo;
 	}

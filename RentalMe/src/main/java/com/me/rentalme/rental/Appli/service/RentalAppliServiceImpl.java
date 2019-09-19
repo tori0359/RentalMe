@@ -155,5 +155,10 @@ public class RentalAppliServiceImpl implements RentalAppliService {
 		return result;
 	}
 
+	@Override
+	public int decisionOdr(RentalAppliVo rentalAppliVo) {
+		return rentalAppliDao.decisionOdr(rentalAppliVo);
+	}
+
 
 }

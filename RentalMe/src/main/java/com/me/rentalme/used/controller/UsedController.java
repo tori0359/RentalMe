@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,15 +55,20 @@ public class UsedController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/big", method = RequestMethod.GET)
-	public String getUsedListB(Model model,HttpSession session,@ModelAttribute UsedVo bean) throws SQLException {
+	public String getUsedListB(Model model,
+			@RequestParam(required = false, defaultValue = "0")int startPage,
+			@RequestParam(required = false, defaultValue = "")String modelNm,
+			@RequestParam(required = false, defaultValue = "1")String align,
+			HttpSession session) throws SQLException {
+		UsedVo bean=new UsedVo();
 		log.debug("중고거래 대형가전");
+		bean.setStartPage(startPage);
+		bean.setModelNm(modelNm);
+		bean.setAlign(align);
 		bean.setGdsMclassCd("10");
 		sessionFunc(session,bean);
 		model.addAttribute("remain", 10);
 		model.addAttribute("alist1", usedService.oneList(bean));
-		System.out.println(bean.getModelNm());
-		System.out.println(bean.getMclassName());
-		System.out.println(bean.getSclassName());
 		return "used/usedList";
 	}
 	@RequestMapping(value = "/sml", method = RequestMethod.GET)
@@ -165,6 +171,7 @@ public class UsedController {
 	*/
 	@RequestMapping(value = "/store/{idx}", method = RequestMethod.GET)
 	public String getUsedMyStore(HttpSession session,Model model,@PathVariable("idx") String mbNo) throws SQLException {
+		model.addAttribute("userNm", usedService.userId(mbNo));
 		model.addAttribute("mbNo", mbNo);
 		model.addAttribute("alist", usedService.myUsedAll(mbNo));
 		model.addAttribute("cmtlist", usedService.listMyStoreCmt(mbNo));
@@ -172,6 +179,7 @@ public class UsedController {
 	}
 	@RequestMapping(value = "/store/now", method = RequestMethod.GET)
 	public String getUsedMyStoreNow(HttpSession session,Model model,@ModelAttribute UsedVo bean) throws SQLException {
+		model.addAttribute("userNm", usedService.userId(bean.getMbNo()));
 		model.addAttribute("usedGdsResStsCd", bean.getUsedGdsResStsCd());
 		model.addAttribute("mbNo", bean.getMbNo());
 		model.addAttribute("alist", usedService.mySelectAllAlign(bean));
@@ -181,10 +189,10 @@ public class UsedController {
 
 	@RequestMapping(value = "/store/reviewinsert", method = RequestMethod.POST)
 	public String getUsedMyStroeReviewInsert(HttpSession session,@ModelAttribute UsedStoreVo bean) throws SQLException {
-		
+		System.out.println(bean.getStoreNo()+"fff"+bean.getMbNo());
 		usedService.addMyStoreCmt(bean);
 		
-		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
+		return "redirect:/used/store/"+bean.getStoreNo();
 	}
 	@RequestMapping(value = "/store/cmtDecl", method = RequestMethod.POST)
 	public String getUsedMyStroecmtDecl(@ModelAttribute DeclVo bean) throws SQLException {
@@ -202,15 +210,6 @@ public class UsedController {
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 	
-	
-	/**
-	* 중고거래 상품등록 폼
-	* 
-	* @param  None
-	* @return ModelAndView 
-	* @author 황인준
-	* @exception 
-	*/
 	@RequestMapping(value = "/mng", method = RequestMethod.GET)
 	public ModelAndView getUsedPrd() {
 		
@@ -282,21 +281,5 @@ public class UsedController {
 		return "redirect:/used/store/"+session.getAttribute("loginMbNo");
 	}
 
-	
-	/**
-	 * 중고거래 상품수정
-	 * 
-	 * @param  None
-	 * @return ModelAndView 
-	 * @author 황인준
-	 * @exception 
-	 */
-	@RequestMapping(value = "/mng", method = RequestMethod.PUT)
-	public ModelAndView modifyUsedPrd() {
-		
-		
-		ModelAndView mav = new ModelAndView("used/usedMyStore");
-		return mav;
-	}
 
 }

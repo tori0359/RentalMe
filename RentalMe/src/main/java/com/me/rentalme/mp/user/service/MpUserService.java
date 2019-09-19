@@ -3,14 +3,17 @@ package com.me.rentalme.mp.user.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
 
 
 public interface MpUserService {
+
 	
 	//주문내역 리스트 출력
 	List<CallVo> ordList(String mbNo) throws SQLException;
@@ -62,7 +65,10 @@ public interface MpUserService {
 
 	
 	//개인 1:1문의 리스트 출력
-	List<CsVo> myList(CsVo csVo,HttpSession session) throws SQLException;
+	List<CsVo> myList(CsVo csVo,HttpSession session,int startListNum, int listSize) throws SQLException;
+	
+	//내 문의 리스트 갯수
+	int inquiryListCnt(HttpSession session) throws SQLException;
 	
 	//내 문의 상세 페이지
 	CsVo myInqDetail(CsVo csVo) throws SQLException;

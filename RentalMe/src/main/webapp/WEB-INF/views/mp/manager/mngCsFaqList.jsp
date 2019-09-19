@@ -6,18 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function(){
 	
-
-	});
 </script>
 <style type="text/css">
 	#btn00{
 		text-align:right;
 	}
-	
+	#notcH{
+		text-decoration:none;
+		color:red;
+	}
+	#faqH{
+		text-decoration:none;
+		color:blue;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
@@ -28,7 +33,7 @@
 <!-- 관리자 공지게시판 리스트 -->
 <h1>공지/FAQ</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
-<div align="right"><a href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
+<div align="right" id="text"><a id="notcH" href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a id="faqH" href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
 	<table class="table table-hover">
 		<tr>
 			<th>번호</th>
@@ -41,8 +46,25 @@
 				<tr>
 				<form action="${pageContext.request.contextPath}/mp/mng/faqDelete" method="post">
 					<td><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
-					<td>FAQ</td>
-					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+					<c:if test="${bean.csClassGbCd eq '1'}">
+						<td>주문</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '2'}">
+						<td>배송</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '3'}">
+						<td>결제</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '4'}">
+						<td>교환취소</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '5'}">
+						<td>회원정보</td>
+					</c:if>
+					<c:if test="${bean.csClassGbCd eq '6'}">
+						<td>기타</td>
+					</c:if>
+					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
 					<td>${bean.regDt}</td>
 					<td><input type="submit" value="삭제"/></td>
 				</form>
@@ -50,25 +72,31 @@
 			</c:forEach>
 	</table>
 	<div align="center" width="100%">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-					</li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					 <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
+				<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" style="cursor: pointer;"onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 	</div>
 				<div id="btn00"><a href="/mp/mng/csAdd"><input type="button" id="btn00" value="등록"></a></div>
 </div>

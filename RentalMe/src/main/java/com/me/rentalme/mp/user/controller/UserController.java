@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
@@ -36,6 +37,7 @@ import com.me.rentalme.rental.Appli.service.RentalAppliService;
 @RequestMapping("/mp")
 public class UserController {
 
+	String pagingPath="/mp";
 	Logger log = LoggerFactory.getLogger(getClass());
 
 	@Inject
@@ -81,7 +83,29 @@ public class UserController {
 
 		return mav;
 	}
-
+	
+	/**
+	 * 주문내역> 구매 or 반품
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/decision", method = RequestMethod.POST) 
+	public String modifyDecisionOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("odrNo")String odrNo,
+			RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
+		
+		rentalAppliVo.setCrudGbCd(crudGbCd);
+		rentalAppliVo.setOdrGbCd(odrGbCd);
+		rentalAppliVo.setOdrNo(odrNo);
+		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
+		
+		int result1 = rentalAppliService.decisionOdr(rentalAppliVo);			// 주문자료 생성
+		model.addAttribute("rtnCd", Integer.toString(result1));
+		return "redirect:/mp/";
+	}
+	
 	/**
 	 * @throws SQLException 장바구니
 	 * 
@@ -141,23 +165,6 @@ public class UserController {
 			@RequestParam("cartSeqArr[]")List<String> cartSeqArr, @RequestParam("gdsPriceArr[]")List<Integer> gdsPriceArr, @RequestParam("odrQtyArr[]")List<Integer> odrQtyArr, 
 			@RequestParam("agreeTermArr[]")List<String> agreeTermArr, RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
 		
-//			rentalAppliVo.setCrudGbCd(crudGbCd);
-//			rentalAppliVo.setOdrGbCd(odrGbCd);
-//			rentalAppliVo.setPayGbCd(payGbCd);
-//			rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
-//			rentalAppliVo.setTotOdrAmt(totOdrAmt);
-			
-//			System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
-//			System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
-//			System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
-//			System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
-//			System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr);
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(0));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(1));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(2));
-//			System.out.println("gdsPriceArr		= " +gdsPriceArr.get(3));
-			
 			int result1 = rentalAppliService.cartOdr(rentalAppliVo);			// 주문자료 생성
 			int result2 = rentalAppliService.cartDetailOdr(rentalAppliVo, gdsCdArr, cartSeqArr, gdsPriceArr, odrQtyArr, agreeTermArr );		// 주문상세자료 생성
 			model.addAttribute("rtnCd", Integer.toString(result1));
@@ -391,14 +398,28 @@ public class UserController {
 	 * @param @return ModelAndView @author 강민수 @exception
 	 */
 	@RequestMapping(value = "/mp/quest", method = RequestMethod.GET)
-	public ModelAndView getQuestList(CsVo csVo, HttpSession session) throws SQLException {
+	public ModelAndView getQuestList(CsVo csVo, HttpSession session,Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		log.debug("내 문의 보기 컨트롤러...");
 
+		pagingPath="/mp";
+		pagingPath+="/mp/quest";
+		
+        int listCnt=mpUserService.inquiryListCnt(session);
+		
+		Paging csPaging=new Paging();
+		
+		csPaging.pageInfo(page,range,listCnt);
+		System.out.println("inq시작번호:"+csPaging.getstartListNum());
+		System.out.println("inq 사이즈:"+csPaging.getListSize());
+		
 		ModelAndView mav = new ModelAndView();
-		mpUserService.myList(csVo, session);
+		
+		mpUserService.myList(csVo, session,csPaging.getstartListNum(),csPaging.getListSize());
 
-		mav.addObject("mylist", mpUserService.myList(csVo, session));
-
+		mav.addObject("mylist", mpUserService.myList(csVo, session,csPaging.getstartListNum(),csPaging.getListSize()));
+		model.addAttribute("pathPaging", pagingPath);
+		model.addAttribute("paging", csPaging);
 		mav.setViewName("mp/user/userQuestList");
 		return mav;
 	}

@@ -119,9 +119,6 @@
             
 </style>
 <script type="text/javascript">
-
-
-
 	      function goodsSelect(classifi){
 	         $.ajax({
 	            url:'searchCode',
@@ -214,15 +211,12 @@
 	            
 	         });
 	      }
-
 	      /* function selectGoods(String num){
 				console.log("hihi"+num);
 		  }  */
-
 	 		/* function selectGoods(gooo){
 				console.log('dd'+gooo);
 		 	}   */
-
 					 	var gdsCdarr=new Array();			//경매상품번호 배열
 					  	var gdsNmarr=new Array();			//상품명 배열
 					 	var brandNmarr=new Array();			//브랜드명 배열
@@ -234,17 +228,15 @@
 						var brandNm;		//브랜드명
 						var modelNm;		//모델명
 						var gdsCdDetail 	//상세코드
-
 						var test;
 						
 						String.prototype.replaceAt=function(index, character) {
 						    return this.substr(0, index) + character + this.substr(index+character.length);
 						}
-
 	      window.onload=function(){
 					$('#cancel').click(function(){
 							window.history.back();
-						})
+					})
 						
 		         $('#modalBtn').click(function(){
 		         
@@ -254,7 +246,6 @@
 					data:{'param':$("#goods option:selected").val()},
 					
 					success:function(result){
-
 						
 						var goodsList=result;
 						
@@ -276,17 +267,13 @@
 							brandNmarr.push(goods.brandNm);//브랜드명 push
 							//console.log(gdsCdarr[gdsCdarr.length-1]);
 							console.log('한 사이클');
-
-
 							gdsCdDetail=gdsCdarr[gdsCdarr.length-1];
 							gdsNm=gdsNmarr[gdsNmarr.length-1];
 							brandNm=brandNmarr[brandNmarr.length-1];
 							modelNm=modelNmarr[modelNmarr.length-1];
-
 							console.log(gdsCdDetail);
 							console.log(gdsNm);
 							
-
 							
 							/* gdsCdDetail=goods.gdsCd;
 							gdsNm=goods.gdsNm;
@@ -317,20 +304,15 @@
 			     }); 
 				   
 		  });
-
 			
 			$('#selectOne').click(function(){
 				$('#myModal').modal('hide');
-
 			})
-
 		  } 
-
 		 function selectGoods(gdsCd,modelNm,gdsNm,brandNm,gdsCdDetail){
 			
 					 
 			
-
 						/* console.log('select'+gdsNm);
 						console.log('select'+modelNm);
 						console.log('select'+brandNm); */ 
@@ -342,7 +324,6 @@
 						document.getElementById('modelNm').setAttribute('value',modelNm); 
 		}
 		
-
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/actImg.js"></script>
@@ -459,34 +440,6 @@
             	<td><label>제품설명</label></td>
             	<td><textarea style="resize:none;" name="content"></textarea></td>
             </tr>
-             <tr>
-	             <td><label for="imgfile" id="imgfile_label">이미지 업로드</label></td>
-	             <td>
-	                <p>* 상품이미지는 640x640에 최적화 되어 있습니다.<br/>
-			           - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br/>
-			           - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
-			           최대 지원 사이즈인 640x640으로 리사이즈 해서 올려주세요<br/>
-			           (개당 이미지 최대 10M)
-		            </p>
-	             		<div id="used_imgUpload">
-	                        <input type="file" id="imgfile" name="imgfile" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp">
-	                    </div>
-	                    <div id="used_main_img">
-	                    
-                   		</div>
-                    <div id="used_sub_img_group">
-	                        <div class="used_sub_img" id="sub_img1">
-									
-	                        </div>
-	                        <div class="used_sub_img" id="sub_img2">
-	
-	                        </div>
-	                        <div class="used_sub_img" id="sub_img3">
-	
-	                        </div>
-	                </div>
-	             </td>
-             </tr>
             <tr>
             	<td></td>
                 <td id="daeButton" >

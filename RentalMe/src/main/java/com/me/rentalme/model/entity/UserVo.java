@@ -30,16 +30,20 @@ public class UserVo {
 	private String  sessionKey;		// 세션키 (쿠기값 저장)
 	private Date	sessionDt;		// 세션일자
 	private boolean isUseLogin;		// 자동로그인 여부
+	private String  loginStsCd;		// 로그인 상태 값 (1 : 로그인, 2 : 로그오프)
+	private String  browserStsCd;	// 브라우저 상태 값 (1:IE, 2:Opera, 3:FireFox, 4: Chrome, 5:Safari)
 	
 	
 	public UserVo() {
 
 	}
 
+
 	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
 			String hpKey, String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
 			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, String joinDt, String userStsCd,
-			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean isUseLogin) {
+			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean isUseLogin,
+			String loginStsCd, String browserStsCd) {
 		super();
 		this.userId = userId;
 		this.mbNo = mbNo;
@@ -68,229 +72,300 @@ public class UserVo {
 		this.sessionKey = sessionKey;
 		this.sessionDt = sessionDt;
 		this.isUseLogin = isUseLogin;
+		this.loginStsCd = loginStsCd;
+		this.browserStsCd = browserStsCd;
 	}
 
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+	public String getMbNo() {
+		return mbNo;
+	}
+
+
+	public void setMbNo(String mbNo) {
+		this.mbNo = mbNo;
+	}
+
+
+	public String getUserNM() {
+		return userNM;
+	}
+
+
+	public void setUserNM(String userNM) {
+		this.userNM = userNM;
+	}
+
+
+	public String getBirthDay() {
+		return birthDay;
+	}
+
+
+	public void setBirthDay(String birthDay) {
+		this.birthDay = birthDay;
+	}
+
+
+	public String getGenderGbCd() {
+		return genderGbCd;
+	}
+
+
+	public void setGenderGbCd(String genderGbCd) {
+		this.genderGbCd = genderGbCd;
+	}
+
+
+	public String getHp() {
+		return hp;
+	}
+
+
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
+
+
+	public String getHpYn() {
+		return hpYn;
+	}
+
+
+	public void setHpYn(String hpYn) {
+		this.hpYn = hpYn;
+	}
 
 
 	public String getHpKey() {
 		return hpKey;
 	}
 
+
 	public void setHpKey(String hpKey) {
 		this.hpKey = hpKey;
 	}
 
-	public void setUseLogin(boolean isUseLogin) {
-		this.isUseLogin = isUseLogin;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getMbNo() {
-		return mbNo;
-	}
-
-	public void setMbNo(String mbNo) {
-		this.mbNo = mbNo;
-	}
-
-	public String getUserNM() {
-		return userNM;
-	}
-
-	public void setUserNM(String userNM) {
-		this.userNM = userNM;
-	}
-
-	public String getBirthDay() {
-		return birthDay;
-	}
-
-	public void setBirthDay(String birthDay) {
-		this.birthDay = birthDay;
-	}
-
-	public String getGenderGbCd() {
-		return genderGbCd;
-	}
-
-	public void setGenderGbCd(String genderGbCd) {
-		this.genderGbCd = genderGbCd;
-	}
-
-	public String getHp() {
-		return hp;
-	}
-
-	public void setHp(String hp) {
-		this.hp = hp;
-	}
-
-	public String getHpYn() {
-		return hpYn;
-	}
-
-	public void setHpYn(String hpYn) {
-		this.hpYn = hpYn;
-	}
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getEmailYn() {
 		return emailYn;
 	}
 
+
 	public void setEmailYn(String emailYn) {
 		this.emailYn = emailYn;
 	}
+
 
 	public String getEmailKey() {
 		return emailKey;
 	}
 
+
 	public void setEmailKey(String emailKey) {
 		this.emailKey = emailKey;
 	}
+
 
 	public String getAddr() {
 		return addr;
 	}
 
+
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+
 
 	public String getAddrDetail() {
 		return addrDetail;
 	}
 
+
 	public void setAddrDetail(String addrDetail) {
 		this.addrDetail = addrDetail;
 	}
+
 
 	public String getZipCode() {
 		return zipCode;
 	}
 
+
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+
 
 	public String getUserPw() {
 		return userPw;
 	}
 
+
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
+
 
 	public String getPwFailCnt() {
 		return pwFailCnt;
 	}
 
+
 	public void setPwFailCnt(String pwFailCnt) {
 		this.pwFailCnt = pwFailCnt;
 	}
+
 
 	public Date getPwAdjDt() {
 		return pwAdjDt;
 	}
 
+
 	public void setPwAdjDt(Date pwAdjDt) {
 		this.pwAdjDt = pwAdjDt;
 	}
+
 
 	public String getLevelGbCd() {
 		return levelGbCd;
 	}
 
+
 	public void setLevelGbCd(String levelGbCd) {
 		this.levelGbCd = levelGbCd;
 	}
+
 
 	public String getJoinDt() {
 		return joinDt;
 	}
 
+
 	public void setJoinDt(String joinDt) {
 		this.joinDt = joinDt;
 	}
+
 
 	public String getUserStsCd() {
 		return userStsCd;
 	}
 
+
 	public void setUserStsCd(String userStsCd) {
 		this.userStsCd = userStsCd;
 	}
+
 
 	public String getChgId() {
 		return chgId;
 	}
 
+
 	public void setChgId(String chgId) {
 		this.chgId = chgId;
 	}
+
 
 	public Date getChgDt() {
 		return chgDt;
 	}
 
+
 	public void setChgDt(Date chgDt) {
 		this.chgDt = chgDt;
 	}
+
 
 	public String getRegId() {
 		return regId;
 	}
 
+
 	public void setRegId(String regId) {
 		this.regId = regId;
 	}
+
 
 	public Date getRegDt() {
 		return regDt;
 	}
 
+
 	public void setRegDt(Date regDt) {
 		this.regDt = regDt;
 	}
+
 
 	public String getSessionKey() {
 		return sessionKey;
 	}
 
+
 	public void setSessionKey(String sessionKey) {
 		this.sessionKey = sessionKey;
 	}
+
 
 	public Date getSessionDt() {
 		return sessionDt;
 	}
 
+
 	public void setSessionDt(Date sessionDt) {
 		this.sessionDt = sessionDt;
 	}
 
-	public boolean getIsUseLogin() {
+
+	public boolean isUseLogin() {
 		return isUseLogin;
 	}
 
-	public void setIsUseLogin(boolean isUseLogin) {
+
+	public void setUseLogin(boolean isUseLogin) {
 		this.isUseLogin = isUseLogin;
 	}
+
+
+	public String getLoginStsCd() {
+		return loginStsCd;
+	}
+
+
+	public void setLoginStsCd(String loginStsCd) {
+		this.loginStsCd = loginStsCd;
+	}
+
+
+	public String getBrowserStsCd() {
+		return browserStsCd;
+	}
+
+
+	public void setBrowserStsCd(String browserStsCd) {
+		this.browserStsCd = browserStsCd;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -299,19 +374,26 @@ public class UserVo {
 		result = prime * result + ((addr == null) ? 0 : addr.hashCode());
 		result = prime * result + ((addrDetail == null) ? 0 : addrDetail.hashCode());
 		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
+		result = prime * result + ((browserStsCd == null) ? 0 : browserStsCd.hashCode());
+		result = prime * result + ((chgDt == null) ? 0 : chgDt.hashCode());
 		result = prime * result + ((chgId == null) ? 0 : chgId.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((emailKey == null) ? 0 : emailKey.hashCode());
 		result = prime * result + ((emailYn == null) ? 0 : emailYn.hashCode());
 		result = prime * result + ((genderGbCd == null) ? 0 : genderGbCd.hashCode());
 		result = prime * result + ((hp == null) ? 0 : hp.hashCode());
+		result = prime * result + ((hpKey == null) ? 0 : hpKey.hashCode());
 		result = prime * result + ((hpYn == null) ? 0 : hpYn.hashCode());
+		result = prime * result + (isUseLogin ? 1231 : 1237);
 		result = prime * result + ((joinDt == null) ? 0 : joinDt.hashCode());
 		result = prime * result + ((levelGbCd == null) ? 0 : levelGbCd.hashCode());
+		result = prime * result + ((loginStsCd == null) ? 0 : loginStsCd.hashCode());
 		result = prime * result + ((mbNo == null) ? 0 : mbNo.hashCode());
 		result = prime * result + ((pwAdjDt == null) ? 0 : pwAdjDt.hashCode());
 		result = prime * result + ((pwFailCnt == null) ? 0 : pwFailCnt.hashCode());
+		result = prime * result + ((regDt == null) ? 0 : regDt.hashCode());
 		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
+		result = prime * result + ((sessionDt == null) ? 0 : sessionDt.hashCode());
 		result = prime * result + ((sessionKey == null) ? 0 : sessionKey.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((userNM == null) ? 0 : userNM.hashCode());
@@ -320,6 +402,7 @@ public class UserVo {
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -344,6 +427,16 @@ public class UserVo {
 			if (other.birthDay != null)
 				return false;
 		} else if (!birthDay.equals(other.birthDay))
+			return false;
+		if (browserStsCd == null) {
+			if (other.browserStsCd != null)
+				return false;
+		} else if (!browserStsCd.equals(other.browserStsCd))
+			return false;
+		if (chgDt == null) {
+			if (other.chgDt != null)
+				return false;
+		} else if (!chgDt.equals(other.chgDt))
 			return false;
 		if (chgId == null) {
 			if (other.chgId != null)
@@ -375,10 +468,17 @@ public class UserVo {
 				return false;
 		} else if (!hp.equals(other.hp))
 			return false;
+		if (hpKey == null) {
+			if (other.hpKey != null)
+				return false;
+		} else if (!hpKey.equals(other.hpKey))
+			return false;
 		if (hpYn == null) {
 			if (other.hpYn != null)
 				return false;
 		} else if (!hpYn.equals(other.hpYn))
+			return false;
+		if (isUseLogin != other.isUseLogin)
 			return false;
 		if (joinDt == null) {
 			if (other.joinDt != null)
@@ -389,6 +489,11 @@ public class UserVo {
 			if (other.levelGbCd != null)
 				return false;
 		} else if (!levelGbCd.equals(other.levelGbCd))
+			return false;
+		if (loginStsCd == null) {
+			if (other.loginStsCd != null)
+				return false;
+		} else if (!loginStsCd.equals(other.loginStsCd))
 			return false;
 		if (mbNo == null) {
 			if (other.mbNo != null)
@@ -405,10 +510,20 @@ public class UserVo {
 				return false;
 		} else if (!pwFailCnt.equals(other.pwFailCnt))
 			return false;
+		if (regDt == null) {
+			if (other.regDt != null)
+				return false;
+		} else if (!regDt.equals(other.regDt))
+			return false;
 		if (regId == null) {
 			if (other.regId != null)
 				return false;
 		} else if (!regId.equals(other.regId))
+			return false;
+		if (sessionDt == null) {
+			if (other.sessionDt != null)
+				return false;
+		} else if (!sessionDt.equals(other.sessionDt))
 			return false;
 		if (sessionKey == null) {
 			if (other.sessionKey != null)
@@ -443,6 +558,7 @@ public class UserVo {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "UserVo [userId=" + userId + ", mbNo=" + mbNo + ", userNM=" + userNM + ", birthDay=" + birthDay
@@ -451,8 +567,19 @@ public class UserVo {
 				+ addrDetail + ", zipCode=" + zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt="
 				+ pwAdjDt + ", levelGbCd=" + levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId="
 				+ chgId + ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", sessionKey=" + sessionKey
-				+ ", sessionDt=" + sessionDt + ", isUseLogin=" + isUseLogin + "]";
+				+ ", sessionDt=" + sessionDt + ", isUseLogin=" + isUseLogin + ", loginStsCd=" + loginStsCd
+				+ ", browserStsCd=" + browserStsCd + ", getUserId()=" + getUserId() + ", getMbNo()=" + getMbNo()
+				+ ", getUserNM()=" + getUserNM() + ", getBirthDay()=" + getBirthDay() + ", getGenderGbCd()="
+				+ getGenderGbCd() + ", getHp()=" + getHp() + ", getHpYn()=" + getHpYn() + ", getHpKey()=" + getHpKey()
+				+ ", getEmail()=" + getEmail() + ", getEmailYn()=" + getEmailYn() + ", getEmailKey()=" + getEmailKey()
+				+ ", getAddr()=" + getAddr() + ", getAddrDetail()=" + getAddrDetail() + ", getZipCode()=" + getZipCode()
+				+ ", getUserPw()=" + getUserPw() + ", getPwFailCnt()=" + getPwFailCnt() + ", getPwAdjDt()="
+				+ getPwAdjDt() + ", getLevelGbCd()=" + getLevelGbCd() + ", getJoinDt()=" + getJoinDt()
+				+ ", getUserStsCd()=" + getUserStsCd() + ", getChgId()=" + getChgId() + ", getChgDt()=" + getChgDt()
+				+ ", getRegId()=" + getRegId() + ", getRegDt()=" + getRegDt() + ", getSessionKey()=" + getSessionKey()
+				+ ", getSessionDt()=" + getSessionDt() + ", isUseLogin()=" + isUseLogin() + ", getLoginStsCd()="
+				+ getLoginStsCd() + ", getBrowserStsCd()=" + getBrowserStsCd() + ", hashCode()=" + hashCode()
+				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
-
 
 }

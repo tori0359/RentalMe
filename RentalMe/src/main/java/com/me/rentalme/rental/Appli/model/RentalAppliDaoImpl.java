@@ -114,13 +114,12 @@ public class RentalAppliDaoImpl implements RentalAppliDao {
 
 	/* 장바구니 결제(주문상세) */
 	public int cartDetailOdr(RentalAppliVo rentalAppliVo) {
-//		System.out.println(rentalAppliVo.getMbNo());
-//		System.out.println(rentalAppliVo.getGdsCd());
-//		System.out.println(rentalAppliVo.getSeq());
-//		System.out.println(rentalAppliVo.getGdsPrice());
-//		System.out.println(rentalAppliVo.getOdrQty());
-//		System.out.println(rentalAppliVo.getAgreeTerm());
 		return sqlSession.insert("rentalAppli.gdsOdrDetailRegister", rentalAppliVo);
+	}
+
+	/* 주문내역 (구매/반품/입금확인/확정/반려) 주문상태코드에 따른 처리 */
+	public int decisionOdr(RentalAppliVo rentalAppliVo) {
+		return sqlSession.insert("rentalAppli.gdsOdrRegister", rentalAppliVo);
 	}
 
 

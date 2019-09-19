@@ -634,20 +634,38 @@
 	<!-- 렌탈 상품 리스트 후기 -->
 	<select id="reviewRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT
-			@ROWNUM := @ROWNUM+1 AS RNK		/* 게시번호 순위 */
-			,A.*
-		FROM (
-				SELECT 
-					REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
-					,CONTENT
-					,GRADE
-					,FN_NM('USER_NM', MB_NO) AS USER_NM
-					,GDS_REVIEW_DT
-				FROM TB_GDS210		/* 렌탈상품후기 */
-				WHERE GDS_CD = #{gdsCd}
-				ORDER BY GDS_REVIEW_NO DESC
-		) A
-		,(SELECT @ROWNUM := 0) R
+			AAA.*
+		FROM
+			(
+				SELECT
+						@ROWNUM := @ROWNUM+1 AS RNK		/* 게시번호 순위 */
+						,LPAD(CAST(AA.GDS_REVIEW_NO AS CHAR(8)),8, '0') AS GDS_REVIEW_NO
+						,AA.CONTENT
+						,AA.GRADE
+						,AA.USER_NM
+						,AA.GDS_REVIEW_DT
+				FROM (
+							SELECT
+								CAST(A.GDS_REVIEW_NO AS UNSIGNED) AS GDS_REVIEW_NO
+								,A.CONTENT
+								,A.GRADE
+								,A.USER_NM
+								,A.GDS_REVIEW_DT
+							FROM (
+									SELECT 
+										REPLACE(GDS_REVIEW_NO,'0','') AS GDS_REVIEW_NO
+										,CONTENT
+										,GRADE
+										,FN_NM('USER_NM', MB_NO) AS USER_NM
+										,GDS_REVIEW_DT
+									FROM TB_GDS210		/* 렌탈상품후기 */
+									WHERE GDS_CD = #{gdsCd}
+							) A
+							ORDER BY GDS_REVIEW_NO ASC
+				) AA
+				,(SELECT @ROWNUM := 0) R
+		) AAA
+		ORDER BY AAA.RNK DESC
 	</select>
 	
 	<!-- 렌탈 상품 리스트 후기 갯수 -->
@@ -702,6 +720,7 @@
 							,#{payGbCd,			mode=IN,		jdbcType=VARCHAR}
 							,#{mbNo,			mode=IN,		jdbcType=VARCHAR}
 							,#{totOdrAmt,		mode=IN,		jdbcType=INTEGER}
+							,#{odrNo,			mode=IN,		jdbcType=VARCHAR}
 			)
 		}
 	</insert>

@@ -946,7 +946,7 @@ input::-moz-focus-inner { border: 0; }
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel2"></h4>
+												<h4 class="modal-title" id="myModalLabel2">장바구니</h4>
 										    </div>
 											<div class="modal-body">
 										    	<input type="text" class="form-control" id="gdsSclassCd" name="gdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;" >
@@ -974,7 +974,7 @@ input::-moz-focus-inner { border: 0; }
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel3"></h4>
+												<h4 class="modal-title" id="myModalLabel3">주문하기</h4>
 										    </div>
 											<div class="modal-body">
 											    <div class="row" style="border:0px solid orange;">
@@ -1014,7 +1014,7 @@ input::-moz-focus-inner { border: 0; }
 													<h5><label id="bankInfo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 무통장입금은 주문하기 후 입금이 완료되어야 최종 주문확정처리 됩니다.</label></h5>
 												</div>
 												<div class="form-group" id="realTotPriceTxtCls">
-											    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
+											    	<input type="hidden"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
 											    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
 											    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
 												</div>

@@ -18,9 +18,8 @@
             font-weight:600;
       }
 		
-		
        .ordtable>thead>tr>th{
-           text-align:center;
+            text-align:center;
         }
         
        .ordtable>tbody>tr>td{
@@ -118,4 +117,14 @@
       	background-color:#e8ffff;
       	cursor: pointer;
       }
+      
+/* ---------- 옵션 영역 시작 ---------- */
+.table th .rows {
+  color: #401500;
+  background-color: #FFDDCC;
+  border-color: #792700;
+ 
+}
+
+/* ---------- 옵션 영역 끝 ---------- */
    

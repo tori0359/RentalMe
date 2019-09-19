@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -141,15 +142,32 @@ public class MpUserDaoImpl implements MpUserDao{
 		
 	}
 
-	public List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException {
-		Map<String, String> map=new HashMap<String, String>();
+	public List<CsVo> myQuestList(CsVo csVo,HttpSession session,int startListNum,int listSize) throws SQLException {
+		Map<String, Object> map=new HashMap<String, Object>();
+		//Map<String,Integer> map2=new HashMap<String,Integer>();
 		String mbNo=(String)session.getAttribute("loginMbNo");
 		System.out.println(mbNo+"dd");
+		
+		System.out.println("startListNum"+startListNum);
+		System.out.println("listSize"+listSize);
+		
+		
+		
+		//map2.put("startListNum", startListNumber);
+		//map2.put("listSize", listSized);
+		
 		map.put("mbNo",mbNo);
+		map.put("startListNum", startListNum); 
+		map.put("listSize", listSize);
+		
+
 		csVo.setMbNo(mbNo);
 		System.out.println(csVo.getMbNo());
 		System.out.println("sql·Î..");
+		
+		//sqlSession.selectList("csCenter.myQuestList", map);
 		return sqlSession.selectList("csCenter.myQuestList",map);
+		
 	}
 
 	@Override
@@ -224,8 +242,15 @@ public class MpUserDaoImpl implements MpUserDao{
 		return result;
 	}
 
-	
-	
-
+	@Override
+	public int myInquiryListCnt(HttpSession session) throws SQLException {
+		System.out.println("inqÆäÀÌÂ¡ dao");
+		String mbNo=(String)session.getAttribute("loginMbNo");
+		session.getAttribute(mbNo);
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.myInquiryListCnt",mbNo);
+		System.out.println("inq°¹¼ö:"+cnt);
+		return cnt;
+	}
 
 }

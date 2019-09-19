@@ -8,13 +8,17 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.ProductVo;
 
@@ -31,6 +35,8 @@ import com.me.rentalme.model.entity.ProductVo;
 @RequestMapping("/mp/mng")
 public class MngCsController {
 
+	String pagingPath="/mp/mng";
+	
 	@Inject
 	CsService csService;
 	
@@ -46,8 +52,19 @@ public class MngCsController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/csNoticeList", method = RequestMethod.GET)
-	public ModelAndView getCsNotice(HttpSession session) throws SQLException {
+	public ModelAndView getCsNotice(HttpSession session,Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		log.debug("공지/FAQ 컨트롤러");
+		
+		pagingPath="/mp/mng";
+		pagingPath+="/csNoticeList";
+		
+		int listCnt=csService.noticListCnt();
+		
+		Paging csPaging=new Paging();
+		
+		csPaging.pageInfo(page, range, listCnt);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("mapping..");
@@ -55,22 +72,39 @@ public class MngCsController {
 		// 세션받아오기
 		String userId=(String)session.getAttribute("loginUserId");
 		mav.addObject("id", userId);
-		//
-		mav.addObject("alist", csService.csNoticeList());
+		
+		mav.addObject("alist", csService.csNoticeList(csPaging));
+		model.addAttribute("pathPaging",pagingPath);
+		model.addAttribute("paging", csPaging);
 		
 		mav.setViewName("/mp/manager/mngCsList");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/csFaqList", method = RequestMethod.GET)
-	public ModelAndView getCsFaq(HttpSession session) throws SQLException {
+	public ModelAndView getCsFaq(HttpSession session,Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		log.debug("공지/FAQ 컨트롤러");
+		
+		pagingPath="/mp/mng";
+		pagingPath+="/csFaqList";
+		
+		Search search=new Search();
+		int listCnt=csService.faqListCnt1(search);
+		
+		Paging csPaging=new Paging();
+		
+		csPaging.pageInfo(page, range, listCnt);
 		
 		ModelAndView mav = new ModelAndView();
 		String userId=(String)session.getAttribute("loginUserId");
 		mav.addObject("id", userId);
+		
+		
 		System.out.println("mapping..");
-		mav.addObject("blist", csService.csFaqList());
+		mav.addObject("blist", csService.csFaqList(search));
+		model.addAttribute("pathPaging",pagingPath);
+		model.addAttribute("paging", csPaging);
 		
 		mav.setViewName("/mp/manager/mngCsFaqList");
 		return mav;
@@ -86,14 +120,29 @@ public class MngCsController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/InqList", method = RequestMethod.GET)
-	public ModelAndView getQuestList(HttpSession session,CsVo csVo) throws SQLException {
-		log.debug("내 문의 보기 컨트롤러...");
+	public ModelAndView getQuestList(HttpSession session,CsVo csVo,Model model,
+			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
+		log.debug("문의 보기 컨트롤러...");
+		
+		pagingPath="/mp/mng";
+		pagingPath+="/InqList";
+		
+		int listCnt=csService.inquiryListCnt();
+		System.out.println("inq리스트 갯수:"+listCnt);
+		
+		Paging csPaging=new Paging();
+		
+		csPaging.pageInfo(page, range, listCnt);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("inqlist", csService.csInqList());
+		mav.addObject("inqlist", csService.csInqList(csPaging));
+		
 		System.out.println("list뽑고 넘기기");
 		String userId=(String)session.getAttribute("loginUserId");
 		mav.addObject("id", userId);
+		
+		model.addAttribute("pathPaging",pagingPath);
+		model.addAttribute("paging", csPaging);
 		mav.setViewName("mp/manager/mngCsQuestList");
 		return mav;
 	}
@@ -243,6 +292,19 @@ public class MngCsController {
 			mav.setViewName("redirect:/mp/mng/InqList");
 			return mav;
 		}
+		
+		@RequestMapping(value="/csList")
+		@ResponseBody
+		public String csList(@RequestParam("param") String selected) {
+			if(selected.equals("20")) {
+				System.out.println("맞음");
+			}else {
+				System.out.println("틀림");
+			}
+			
+			return selected;
+		}
+		
 	/**
 	* 1:1 문의
 	* 

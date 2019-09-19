@@ -34,7 +34,6 @@
 	   		color:black;
 	   		font-weight:600;
 	   }
-
 	    .ordtable>thead>tr>th{
         	text-align:center;
         	font-family: "nanumB";
@@ -106,7 +105,7 @@
 	   }
 	   
 	   .cartbtn{
-	   		width:180px;
+	   		width:200px;
 	   		height:50px;
 	   		float:right;
 	   		margin-top:25px;
@@ -118,18 +117,18 @@
             height:40px;
       }
         #info{
-	      	width:93%;
-	      	margin: 20px auto;
-	      	border:7px solid #E6E6E6;
-	      	padding: 15px;
+      	width:93%;
+      	margin: 20px auto;
+      	border:7px solid #E6E6E6;
+      	padding: 15px;
       }
       
       #info p{
-	      	line-height:20px;
-	      	font-family:"nanumB";
+      	line-height:20px;
+      	font-family:"nanumB";
       }
 	.tdtext{
-      		margin:30px 0;
+      	margin:30px 0;
       }
 /* --------- 결제하기 모달 시작 --------- */
 #realTotPrice { 
@@ -151,15 +150,17 @@
 	   
 </style>
 <script type="text/javascript">
-
 	window.onload = function () {
 		$('#realGdsPrice').val(vSumTotPrice);
 		$('#realGdsPrice2').val(vSumTotPrice.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
-
 		$('#realTotPrice').val(vSumTotPrice);
 		$('#realTotPriceTxt').val((vSumTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
-	}
 
+		if(vCheckCnt == 0 ) {
+			$('#realSubmit').prop("disabled","disabled");
+			$("#allCheck").prop("disabled", "disabled");
+		}
+	}
 	/**************************/
 	/**** 전역변수 선언시작 ***/
 	/**************************/
@@ -185,13 +186,11 @@
 		vSumTotPrice = vSumTotPrice + ${(bean.gdsPrice * bean.odrQty)};
 	</c:forEach>
 	vSumTotPrice += "";	// 타입변환
-
-	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
+	
 	
 	/**************************/
 	/**** 전역변수 선언끝 *****/
 	/**************************/
-
 	// All 체크박스 선택
 	function checkAll(){
 	    if( $("#allCheck").is(':checked') ){
@@ -217,7 +216,6 @@
 			vCheckCnt = 0;
 	    }
 	}
-
 	// 상품 체크박스 선택
 	function chBox(num) {
 		if($('#chBox'+num).is(':checked')) {
@@ -272,7 +270,6 @@
 			$('#realTotPriceTxt').val((fSumTotPrice.toString()).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 		}
 	}
-
 	// 결제하기 클릭
 	function btnOdr() {
 		var sUserId = "${loginUserId}";
@@ -280,30 +277,25 @@
 		if((sUserId == "") || (sUserId == null)) {
 			location.href = "/login";
 		} else {
-
 		}
 	}
-
 	// 결제하기 라디오버튼(무통장입금)
 	$(document).on("click", "#inlineRadio1", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').show();
 		$('#bankInfo').show();
 	});
-
 	// 결제하기 라디오버튼(카카오페이)
 	$(document).on("click", "#inlineRadio2", function(){
 		radioVal = $('input[name="inlineRadioOptions"]:checked').val();
 		$('#bank').hide();
 		$('#bankInfo').hide();
 	});
-
 	// 결제하기 모달 결제하기
 	$(document).on("click", "#realSubmit2", function(){
-
 		var amount = $('#realTotPrice').val();	// 결제할 실제 금액
 		var userId = "${loginUserId}";
-		var crudGbCCART"IICART";
+		var crudGbCd = "IICART";
 		var odrGbCd = "10";
 		var payGbCd = radioVal;
 		var mbNo = "${sessionMbNo}";
@@ -331,11 +323,9 @@
 				j = j+1;
 			}
 		}
-
 		// 전송대상 data 
 		var allData = {'crudGbCd':crudGbCd, 'odrGbCd':odrGbCd, 'payGbCd':payGbCd, 'mbNo':mbNo, 'totOdrAmt':amount,'gdsCdArr':gdsCdArr, 'cartSeqArr':cartSeqArr,
 					   'gdsPriceArr':gdsPriceArr, 'odrQtyArr':odrQtyArr, 'agreeTermArr':agreeTermArr  };
-
 		// 배열값 테스트...
 		/*
 		for(var i=0; i<vCnt; i++) {
@@ -365,7 +355,7 @@
 						type: "post",
 						data: allData,
 						success : function(){
-							location.hrmp/= "/mp/";
+							location.href = "/mp/";
 						}
 					});
 			    } else {
@@ -382,7 +372,7 @@
 					url: "/mp/cart/odr",
 					type: "post",
 					data: allData,
-					success : function() {
+					success : function(){
 						location.href = "/mp/";
 					}
 				});
@@ -392,9 +382,11 @@
 			}
 			alert(msg);
 		}
-
 	});
 
+	function going() {
+		location.href = "/main";
+	}
 </script>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 </head>
@@ -481,8 +473,12 @@
 		</div>
 		<div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">
-			<button type="button" class="delete_btn1 btn">계속 쇼핑하기</button>
+		<!-- 
+			<button type="button" class="btn delete_btn1" onclick="going();"></a>계속 쇼핑하기</button>
 			<button type="button" id="realSubmit" class="delete_btn2 btn" onclick="btnOdr();" data-backdrop="static"  data-toggle="modal" data-placement="top" title="" data-target="#myModal1">주문하기</button>
+		 -->
+			<button type="button" class="btn btn-default" onclick="going();">계속 쇼핑하기</button>
+			<button type="button" id="realSubmit" class="btn btn-danger" onclick="btnOdr();" data-backdrop="static"  data-toggle="modal" data-placement="top" title="" data-target="#myModal1">주문하기</button>
 		</div>
 		<!-- 주문하기 모달 -->
 		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
@@ -490,7 +486,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel1"></h4>
+						<h4 class="modal-title" id="myModalLabel1">주문하기</h4>
 				    </div>
 					<div class="modal-body">
 					    <div class="row" style="border:0px solid orange;">
@@ -505,10 +501,10 @@
 								<c:forEach items="${alist }" var="alist" varStatus="status">
 									<c:if test="${status.index eq '0' }">
 								    	<!-- <input type="text" class="form-control" id="realGdsCd" disabled="disabled" style="background-color:white;" name="gdsCd" value="${alist.gdsCd }" style="display: none;">  -->
-										<input type="text" btn btn-defaultdefault" id="realGdsNm" disabled="disabled" style="background-color border:solid 0px; text-align:left;n:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
+										<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
 										<!-- <input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${alist.gdsPrice }" > -->
 										<fmt:setLocale value="ko_KR"></fmt:setLocale>
-										<input type="text" btn btn-defaultdefault" id="realGdsPrice2" disabled="disabled" style="background-colo; border:solid 0px; text-align:left;n:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
+										<input type="text" class="btn btn-default" id="realGdsPrice2" disabled="disabled" style="background-color:white; border:solid 0px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
 							    	</c:if>
 						    	</c:forEach>
 							</div>
@@ -525,7 +521,7 @@
 							<h5><label id="bankInfo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 무통장입금은 주문하기 후 입금이 완료되어야 최종 주문확정처리 됩니다.</label></h5>
 						</div>
 						<div class="form-group" id="realTotPriceTxtCls">
-					    	<input type="text"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
+					    	<input type="hidden"  id="realTotPrice" style="border:0px;" name="realTotPrice" readonly="readonly"  value="${list1.gdsPrice }">
 					    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
 					    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="realTotPriceTxt" readonly="readonly" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "></h2>
 						</div>

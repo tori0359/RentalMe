@@ -6,6 +6,7 @@
 <head>
 <jsp:include page="../template/header.jsp"></jsp:include>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 
@@ -79,7 +80,19 @@
 				$(".list6").show();
 				$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
 			});
-			
+
+			$('#btnSearch').click(function(e){
+
+				e.preventDefault();
+
+				var url = "${pageContext.request.contextPath}/cs/csFAQ";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+				location.href = url;
+				console.log(url);
+
+			});
+	
 		})
 	</script>
 	<style type="text/css">
@@ -162,24 +175,45 @@
 		#all{
 			text-align: center;
 		}
-		#allnext td:nth-child(1){
+		#allnext th:nth-child(1){
 			width:10%;
+			text-align:center;
 		}
-		#allnext td:nth-child(2){
+		#allnext th:nth-child(2){
 			width:10%;
+			text-align:center;
 		}
-		#allnext td:nth-child(3){
+		#allnext th:nth-child(3){
 			width:80%;
+			text-align:center;
 		}
 		#all tr:nth-child(1){
 			text-align:center;
+		}
+		#paginationBox {
+			width: 100%;
+			text-align: center;
+			margin: 0px auto;
+		}
+		#aSub{
+			text-decoration:none;
+			
+		}
+		#aSub:hover{
+			color:red;
+		}
+		#noticeMenuBar tr>td{
+			cursor:pointer;
+		}
+		#firTable tr>td{
+			cursor:pointer;
 		}
 	</style>
 </head>
 <body>
 <div id="csContent">
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
-	<table>
+	<table id="firTable">
 		<tr>
 			<td>공지사항</td>
 			<td>FAQ</td>
@@ -199,13 +233,12 @@
 					<td>회원정보</td>
 					<td>기타</td>
 					<td>
-						<select style="height:25px;">
-							<option>전체보기</option>
-							<option>제목</option>
-							<option>분류</option>
+						<select style="height:25px;" name="searchType" id="searchType">
+							<option>선택하기</option>
+							<option value="title">제목</option>
 						</select>
-						<input type="text"/>
-						<button>검색</button>
+						<input type="text" name="keyword" id="keyword">
+						<button name="btnSearch" id="btnSearch">검색</button>
 					</td>
 				</tr>
 			</table>
@@ -213,9 +246,9 @@
 <div id="contentList" class="col-md-10 col-md-offset-1">
 	<table id="all" class="table table-hover">
 		<tr id="allnext">
-			<td>번호</td>
-			<td>분류</td>
-			<td>제목</td>
+			<th>번호</th>
+			<th>분류</th>
+			<th>제목</th>
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
@@ -239,7 +272,7 @@
 						<c:if test="${bean.csClassGbCd eq '6' }">
 						<td>기타</td>
 						</c:if>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			</c:forEach>
 		</tr>
@@ -250,7 +283,7 @@
 					<tr class="list1">
 						<td>${bean.faqNo}</td>
 						<td>주문</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -263,7 +296,7 @@
 					<tr class="list2">
 						<td>${bean.faqNo}</td>
 						<td>배송</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -275,7 +308,7 @@
 					<tr class="list3">
 						<td>${bean.faqNo}</td>
 						<td>결제</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -286,7 +319,7 @@
 					<tr class="list4">
 						<td>${bean.faqNo}</td>
 						<td>교환취소</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			  </c:if>
 			</c:forEach>
@@ -297,45 +330,57 @@
 					<tr class="list5">
 						<td>${bean.faqNo}</td>
 						<td>회원정보</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
-			
 				<c:if test="${bean.csClassGbCd eq '6'}">
 					<tr class="list6">
 						<td>${bean.faqNo}</td>
 						<td>기타</td>
-						<td><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
 			</c:forEach>
 		</tr>
 	</table>
+	<%
+		String searchType=request.getParameter("searchType"); 
+		String keyword=request.getParameter("keyword"); 
+		
+		System.out.println(searchType);
+		System.out.println(keyword);
+	%>
 	<div align="center" width="100%">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-					</li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					 <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
+				<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" style="cursor:pointer" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}','${paging.rangeSize}','${searchType}','${keyword}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 	</div>
 </div>
 </div>

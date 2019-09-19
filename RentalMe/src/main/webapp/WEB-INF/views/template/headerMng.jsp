@@ -113,7 +113,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">렌탈상품 관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="${pageContext.request.contextPath }/mp/mng/goodsList">렌탈상품 관리</a></td>
            </tr>
            <tr>
                 <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/actList">경매상품 관리</a></td>
@@ -152,7 +152,7 @@
            </tr>
            </thead>
            <tr>
-                <td style="padding: 8px 0 8px 0" class="text-center"><a href="#">사용자관리</a></td>
+                <td style="padding: 8px 0 8px 0" class="text-center"><a href="/mp/mng/userList">사용자관리</a></td>
            </tr>
        </table>
        </div>

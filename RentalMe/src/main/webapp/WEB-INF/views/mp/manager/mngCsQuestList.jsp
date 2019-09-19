@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -11,14 +12,20 @@
 	#uptext{
 		height:130px;
 	}
-	#upmenu{
-		text-align:center;
-	}
 	#ansNo{
 		color:red;
 	}
 	#ansYe{
 		color:blue;
+	}
+	#aSub{
+		text-decoration:none;
+	}
+	#aSub:hover{
+		color:red;
+	}
+	#upMenu>th{
+		text-align:center;
 	}
 </style>
 </head>
@@ -32,19 +39,19 @@
 	</div>
 	
 	<table class="table table-hover">
-		<tr align="center">
-			<td>회원번호</td>
-			<td>번호</td>
-			<td>제목</td>
-			<td>등록일</td>
-			<td>답변유무</td>
+		<tr id="upMenu">
+			<th>회원번호</th>
+			<th>번호</th>
+			<th>제목</th>
+			<th>등록일</th>
+			<th>답변유무</th>
 		</tr>
 			<!-- <form action="" method="get"> -->
 			<c:forEach items="${inqlist}" var="bean">
 				<tr align="center">
 						<td>${bean.mbNo}</td>
 						<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
-						<td><a href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
+						<td style="text-align:left"><a id="aSub" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
 						<td>${bean.regDt}</td>
 						<c:if test="${bean.questStsCd eq '1'}">
 							<td id="ansNo">N</td>
@@ -57,25 +64,31 @@
 			<!-- </form> -->
 	</table>
 	<div align="center" width="100%">
-				<nav aria-label="Page navigation">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-					</li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					 <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
+				<div id="paginationBox">
+						<ul class="pagination">
+							<c:if test="${paging.prev}">
+								<li class="page-item">
+									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+										&lt;
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
+									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+										${idx} 
+									</a>
+								</li>
+							</c:forEach>
+							<c:if test="${paging.next}">
+								<li class="page-item">
+									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+										&gt;
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</div>
 	</div>
 			
 </div>

@@ -54,7 +54,7 @@
 		font-weight: bold;
 	}
 	.whattab{
-		font-size: 0.7em;
+		font-size: 1em;
 		color: gray;
 	}
 	#form_tab{
@@ -62,7 +62,8 @@
 	}
 	.tabcl{
 		display: inline-block;
-		width: 19.3%;
+		width: 20.1%;
+		margin-right: -4px;
 	}
 	.tabcl>.tab_btn{
 		width: 100%;

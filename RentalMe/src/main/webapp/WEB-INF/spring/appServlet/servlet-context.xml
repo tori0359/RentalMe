@@ -61,6 +61,7 @@
 	<resources location="/js/" mapping="/js/**"></resources>
 	<resources location="/imgs/" mapping="/imgs/**"></resources>
 	<resources location="/fonts/" mapping="/fonts/**"></resources>
+	<resources location="/assets/" mapping="/assets/**"></resources>
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

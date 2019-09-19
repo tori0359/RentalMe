@@ -73,7 +73,7 @@ public class LoginController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(UserVo userVo, HttpSession session, Model model) {
+	public ModelAndView login(UserVo userVo, HttpSession session, Model model, HttpServletRequest req) {
 		log.debug("로그인 컨트롤러...(서비스에서 작성했어야 하나... 만들다보니 컨트롤러에 추후 이동[보류])");
 		
 		String msg = "";
@@ -129,8 +129,8 @@ public class LoginController {
 			//이메일 인증을 한 사용자 이고 사용자 상태가 정상인 사용자
 			if(emailKey.equals("Y") && userStsCd == 1) {
 				//입력한 아이디가 DB에 있는 경우 입력한 비밀번호와 DB에 저장된 비밀번호 암호화 값과 비교
-				if(BCrypt.checkpw(userPw, loginPw)) {
-										
+				if(BCrypt.checkpw(userPw, loginPw)) {								
+					
 					if(pwFailCnt > 0) {
 						//비밀번호 오류횟수 초기화
 						loginService.initPwFailCnt(loginId);
@@ -140,7 +140,7 @@ public class LoginController {
 					model.addAttribute("loginUser", loginUser);
 					
 					//자동로그인에 체크가 되어있을 경우
-					if(userVo.getIsUseLogin()) {
+					if(userVo.isUseLogin()) {
 						//세션쿠키값을 가지고 온다.
 						String sessionKey = session.getId();
 						//쿠키세션 시간 설정
@@ -190,9 +190,11 @@ public class LoginController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		log.debug("로그아웃 컨트롤러");
+		
 		//세션에 담긴 사용자 아이디
 		String sessionUserId = (String)session.getAttribute("loginUserId");
 		String sessionMbNo = (String)session.getAttribute("loginMbNo");
+		
 		
 		//세션의 값이 있을 경우
 		if(sessionUserId != null && sessionMbNo != null) {
@@ -200,6 +202,7 @@ public class LoginController {
 			
 			session.removeAttribute("loginUserId");
 			session.removeAttribute("loginMbNo");
+			
 			//설정된 모든 세션의 값을 삭제
 			session.invalidate();
 			
@@ -215,7 +218,6 @@ public class LoginController {
 				Date sessionDt = new Date(System.currentTimeMillis() + (1000 * 0));
 				loginService.keepLogin(userId, "none", sessionDt);
 			}
-			
 		}
 
 		return "redirect:/main";

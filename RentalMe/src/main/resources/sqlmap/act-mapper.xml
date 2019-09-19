@@ -7,6 +7,7 @@ encoding="UTF-8"?>
   
 <mapper namespace="act">
 	<select id="selectActRun" resultType="com.me.rentalme.model.entity.ActVo">
+	<![CDATA[
 		SELECT  A.GDS_CD,
 				A.GDS_CD_DETAIL,
 			    FN_NM('GDS_NM',B.GDS_CD) AS gdsnm,
@@ -15,10 +16,12 @@ encoding="UTF-8"?>
 			    A.ACT_ED_TIME,
 			    A.CONTENT,
 			    B.BRAND_NM,
-			    A.IMG1
+			    A.IMG1,
+			    A.ACT_STS_CD
 		FROM 	TB_GDS300 A, TB_GDS100 B
 		WHERE	B.GDS_CD = A.GDS_CD_DETAIL
-		AND 	ACT_STS_CD='2';
+		AND 	A.ACT_STS_CD<'3'
+		]]>
 	</select>
 	
 	<select id="selectActEnd" resultType="com.me.rentalme.model.entity.ActVo">
@@ -39,7 +42,7 @@ encoding="UTF-8"?>
 	</select>
 	
 	<select id="selectActDetail" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT   A.GDS_CD
+		SELECT   C.GDS_CD
 				,A.GDS_NM
 				,A.BRAND_NM 
 				,B.GDS_PRICE
@@ -66,7 +69,7 @@ encoding="UTF-8"?>
 		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
 	</select>	
 	<select id="selectActDetail2" resultType="com.me.rentalme.model.entity.ActVo">
-		SELECT   A.GDS_CD
+		SELECT   C.GDS_CD
 				,A.GDS_NM
 				,A.BRAND_NM 
 				,B.GDS_PRICE
@@ -84,6 +87,7 @@ encoding="UTF-8"?>
 				,C.UNIT_PRICE
 				,C.ACT_ST_TIME
 				,C.ACT_ED_TIME
+				,C.ACT_STS_CD
 		FROM 	TB_GDS100 A	
 				,TB_GDS200 B		
 				,TB_GDS300 C
@@ -92,4 +96,64 @@ encoding="UTF-8"?>
 		AND   B.GDS_CD = C.GDS_CD_DETAIL
 		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
 	</select>
+	
+	<insert id="insertActResult" parameterType="com.me.rentalme.model.entity.ActResultVo">	
+		INSERT INTO tb_act100 (GDS_CD,ACT_SEQ,MB_NO,BID_PRICE,BID_TIME,ACT_BID_STS_CD)
+		SELECT #{gdsCd} 
+			,(SELECT
+				  LPAD(COALESCE(A.CNT,'0'),5,'0') AS ACT_SEQ
+				FROM
+				(
+					SELECT 
+						COUNT(*)+1 AS CNT
+					FROM TB_ACT100 A
+					WHERE A.GDS_CD = #{gdsCd}
+				) A
+			) AS ACT_SEQ
+			,MB_NO
+			,#{bidPrice}
+			,#{bidTime}
+			,'2'
+		FROM tb_user100
+		where USER_ID=#{userId};
+	</insert>
+	
+	<update id="updateActEnd">
+		update tb_gds300
+		set ACT_STS_CD='3'
+		where GDS_CD=#{gdsCd}
+	</update>
+	
+	<!-- 보증금 검사 -->
+	<select id="selectMyMb" resultType="Integer">
+		SELECT REMN_DEPOSIT
+		FROM tb_mb100
+		WHERE MB_NO=#{mbNo}
+	</select>
+	
+	<update id="updateBidWin">
+		UPDATE tb_act100 
+		SET ACT_BID_STS_CD='1' 
+		WHERE GDS_CD=#{gdsCd} AND ACT_BID_STS_CD='2' 
+		ORDER BY BID_PRICE DESC, BID_TIME ASC 
+		limit 1
+	</update>
+	
+	<select id="SelectMngActSpec" resultType="com.me.rentalme.model.entity.ActResultVo">
+		SELECT GDS_CD,ACT_SEQ,MB_NO,BID_PRICE,BID_TIME,ACT_BID_STS_CD
+		FROM tb_act100
+		WHERE ACT_BID_STS_CD=1
+	</select>
+	
+	<update id="updateMngBidCancel">
+		UPDATE tb_act100
+		SET ACT_BID_STS_CD='3'
+		WHERE GDS_CD=#{gdsCd} AND ACT_BID_STS_CD='1'
+	</update>
+	
+	<update id="updateMngActStsCd">
+		UPDATE tb_gds300
+		SET ACT_STS_CD='2'
+		WHERE GDS_CD_DETAIL=#{gdsCdDetail} AND ACT_STS_CD='1' 
+	</update>
 </mapper>

@@ -64,7 +64,6 @@
 		  <div class="col-md-2">카테고리</div>
 		  <div class="col-md-10">${UsedVo.mcnm }</div>
 		</div>
-		<button id="doQuest">장바구니</button>
 	</div>
 	<div id="subImgF">
 		<img src="${UsedVo.img1 }"style="width: 100px; height: 100px;">
@@ -96,12 +95,9 @@
 		<input type="radio" id="noSecret" name="secretYn" value="1" checked="checked"> 비밀안함
 		<input type="radio" id="secret" name="secretYn" value="2"> 비밀
 		<div class="row">
-		<div class="col-md-11">
-		<textarea class="form-control" name="content" rows="3" placeholder="글자수 200자 제한"></textarea>
-		</div>
-		<div class="col-md-1">
-		<button type="submit">작성</button>
-		</div>
+		<!-- <textarea name="content" rows="3" placeholder="글자수 200자 제한"></textarea> -->
+		<input type="text" class="form-control" id="repleContentInput" name="content" placeholder="엔터로 입력">
+		<!-- <button class="btn btn-default" type="submit">작성</button> -->
 		</div>
 	</form>
 	<c:forEach items="${cmt }" var="cmet">
@@ -113,7 +109,8 @@
 		<input class="cmtNo" type="hidden" value="${cmet.usedGdsComtNo }">
 		<input class="cmtDt" type="hidden" value="${cmet.usedGdsComtDt }">
 		<!-- <a class="insertReple" href="#none">답글달기</a> -->
-		<a class="declBtn" data-toggle="modal" href="#declmodal">신고하기</a>
+		<!-- <a class="declBtn" data-toggle="modal" href="#declmodal">신고하기</a> -->
+		<button type="button" class="btn btn-danger declBtn" data-toggle="modal" href="#declmodal">신고</button>
 	</div>
 	<div class="cmtContent">
 		비밀글입니다.

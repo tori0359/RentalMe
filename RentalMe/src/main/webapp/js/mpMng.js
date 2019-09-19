@@ -12,6 +12,7 @@ $(function(){
 //         $(".submit").prop("disabled", false);
 //       }
 //	});
+	
 	for(var i=0; i<$('.delYn').length; i++){
 		if($('.delYn').eq(i).text()=='Y'){
 			$('.delYn').eq(i).css('color','blue');
@@ -20,9 +21,12 @@ $(function(){
 			$('.delYn').eq(i).css('color','red');
 		}
 	}
-	$('#usedTableTrClick').click(function(){
+	
+	$('.usedTableTrClick').click(function(){
 		if($(this).find('.delYn').text()=='Y'){
 			alert('삭제된 제품입니다.');
 		}
 	});
+	
+	
 });
