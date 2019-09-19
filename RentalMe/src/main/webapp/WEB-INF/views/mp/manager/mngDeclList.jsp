@@ -27,9 +27,11 @@
     <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMng.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	
+	
 	<script>
 
 	</script>
@@ -68,7 +70,6 @@
 				<!-- start table  -->
 				<!-- ============================================================== -->
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<form action="/mp/mng/decl/update" method="post">
 						<div class="card">
 							<h5 class="card-header">신고접수 목록</h5>
 							<div class="card-body">
@@ -91,7 +92,7 @@
 											<c:forEach items="${alist }" var="bean">
 												<tr class="usedTableTrClick">
 													<td><input type="checkbox" name="declNo" value="${bean.declNo }"></td>
-													<td>${bean.declNo }</td>
+													<td id="${bean.declNo }">${bean.declNo }</td>
 													<td>
 														<c:if test="${bean.usedReGbCd eq 'R1'}">
 															댓글
@@ -120,8 +121,7 @@
 								</div>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-success btn-sm" value="처리완료" >
-					</form>
+						<input id="chkResult" class="btn btn-success btn-sm" value="처리완료" >
 				</div>
 				<!-- ============================================================== -->
 				<!-- end table  -->

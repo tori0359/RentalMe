@@ -85,10 +85,10 @@
 		FROM TB_DECL100
 		ORDER BY CHG_DT DESC
 	</select>
-	<update id="changeDeclSts">
+	<update id="changeDeclSts" parameterType="String">
 		UPDATE tb_decl100
 		SET DECL_RES_STS_CD='1', CHG_ID='admin'
-		WHERE DECL_NO=#{declNo}
+		WHERE DECL_NO IN (#{declNo})
 	</update>
 	<select id="selectDeclListCnt" resultType="Integer">
 		SELECT COUNT(*)
