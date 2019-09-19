@@ -119,9 +119,6 @@
             
 </style>
 <script type="text/javascript">
-
-
-
 	      function goodsSelect(classifi){
 	         $.ajax({
 	            url:'searchCode',
@@ -214,15 +211,12 @@
 	            
 	         });
 	      }
-
 	      /* function selectGoods(String num){
 				console.log("hihi"+num);
 		  }  */
-
 	 		/* function selectGoods(gooo){
 				console.log('dd'+gooo);
 		 	}   */
-
 					 	var gdsCdarr=new Array();			//경매상품번호 배열
 					  	var gdsNmarr=new Array();			//상품명 배열
 					 	var brandNmarr=new Array();			//브랜드명 배열
@@ -234,13 +228,11 @@
 						var brandNm;		//브랜드명
 						var modelNm;		//모델명
 						var gdsCdDetail 	//상세코드
-
 						var test;
 						
 						String.prototype.replaceAt=function(index, character) {
 						    return this.substr(0, index) + character + this.substr(index+character.length);
 						}
-
 	      window.onload=function(){
 					$('#cancel').click(function(){
 							window.history.back();
@@ -254,7 +246,6 @@
 					data:{'param':$("#goods option:selected").val()},
 					
 					success:function(result){
-
 						
 						var goodsList=result;
 						
@@ -276,17 +267,13 @@
 							brandNmarr.push(goods.brandNm);//브랜드명 push
 							//console.log(gdsCdarr[gdsCdarr.length-1]);
 							console.log('한 사이클');
-
-
 							gdsCdDetail=gdsCdarr[gdsCdarr.length-1];
 							gdsNm=gdsNmarr[gdsNmarr.length-1];
 							brandNm=brandNmarr[brandNmarr.length-1];
 							modelNm=modelNmarr[modelNmarr.length-1];
-
 							console.log(gdsCdDetail);
 							console.log(gdsNm);
 							
-
 							
 							/* gdsCdDetail=goods.gdsCd;
 							gdsNm=goods.gdsNm;
@@ -317,20 +304,15 @@
 			     }); 
 				   
 		  });
-
 			
 			$('#selectOne').click(function(){
 				$('#myModal').modal('hide');
-
 			})
-
 		  } 
-
 		 function selectGoods(gdsCd,modelNm,gdsNm,brandNm,gdsCdDetail){
 			
 					 
 			
-
 						/* console.log('select'+gdsNm);
 						console.log('select'+modelNm);
 						console.log('select'+brandNm); */ 
@@ -342,7 +324,6 @@
 						document.getElementById('modelNm').setAttribute('value',modelNm); 
 		}
 		
-
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/actImg.js"></script>

@@ -51,7 +51,7 @@
     display: none;
     position: fixed;
     right: 80px;
-    bottom: 200px;
+    bottom: 340px;
     z-index: 1030;
     font-size: 2.875rem;
     color: #868e96;
@@ -113,7 +113,7 @@
 h6 {
 	display: inline;
 }
-#bestNotice1 {
+#bestNotice1, #bestNotice3 {
 	font-size: 9pt;
 }
 #option-menu, #option-price, #option-status, #option-result {
@@ -264,6 +264,7 @@ input::-moz-focus-inner { border: 0; }
 		// 옵션적용 안내 셋팅
 		if(${menu}%10 != 0) {
 			$('#bestNotice1').hide();
+			$('#bestNotice3').hide();
 		} 
 		
 		// 옵션 브랜드 셋팅
@@ -344,6 +345,7 @@ input::-moz-focus-inner { border: 0; }
 				$('html, body').animate({scrollTop: 0}, 200);
 			});
 		});
+		
 		//alert("안쪽마지막");
 	}
 	//alert("바깥쪽");
@@ -739,8 +741,9 @@ input::-moz-focus-inner { border: 0; }
 	// 정렬
 	function sortBtn(sort) {
 		var locGo;
-		locGo = vMasterLoc + ("&sort="+sort);
-		location.href = locGo;
+		locGo = vMasterLoc+"&sort="+sort
+		vMasterLoc = locGo;
+		location.href = locGo+"#sort-btn1";
 	}
 	
 </script>
@@ -846,7 +849,10 @@ input::-moz-focus-inner { border: 0; }
 			<br>
 			<div class="content-inner-option">
 				<table class="table table-bordered">
-					<tr class="active"><span id="bestNotice1"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다. </span><span id="bestNotice2">&nbsp;</span></tr>
+					<tr class="active">
+						<span id="bestNotice1"> * 전체보기 선택 또는 서브메뉴를 선택하지 않을 경우에만 [BEST 인기상품]이 표시됩니다.</span><span id="bestNotice2">&nbsp;</span><br>
+						<span id="bestNotice3"> * 아래의 옵션은 [BEST 인기상품]에 적용되지 않습니다.</span><span id="bestNotice4">&nbsp;</span>
+					</tr>
 					<!-- ************** -->
 					<!-- 옵션 영역 시작 -->
 					<!-- ************** -->
@@ -1056,21 +1062,21 @@ input::-moz-focus-inner { border: 0; }
 						<ul class="pagination">
 							<c:if test="${paging.prev}">
 								<li class="page-item">
-									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
+									<a class="page-link" onClick="prevEvent2('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
 										&lt;
 									</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" onClick="pageChange2('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>
 							</c:forEach>
 							<c:if test="${paging.next}">
 								<li class="page-item">
-									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
+									<a class="page-link" onClick="nextEvent2('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
 										&gt;
 									</a>
 								</li>

@@ -46,20 +46,24 @@ encoding="UTF-8"?>
 		ON AA.ODR_NO = BB.ODR_NO
 		AND AA.ODR_SEQ = BB.ODR_SEQ
 		AND AA.GDS_CD = BB.GDS_CD
+		ORDER BY AA.ODR_NO DESC
 	</select>
 	
   	<insert id="insertReview">
   		INSERT  INTO TB_GDS210 (GDS_CD, GDS_REVIEW_NO, GDS_REVIEW_DT, ODR_NO, ODR_SEQ, ODR_DT, MB_NO, CONTENT, GRADE)
-		VALUES  (#{gdsCd},
+		VALUES  (
+				#{gdsCd},
 				(SELECT LPAD((SELECT COUNT(gds_review_no)+1 FROM TB_GDS210 A),8,'0')),
 				(SELECT DATE_FORMAT(NOW(),'%Y%m%d')), 
-				(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd}), 
-				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})), 
-				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=(SELECT TB_ODR100.ODR_NO FROM TB_ODR100 inner join TB_ODR110 on TB_ODR110.odr_NO = TB_ODR100.odr_NO WHERE MB_NO=#{mbNo} AND gds_CD=#{gdsCd})),'%Y%m%d')),
+				#{odrNo}, 
+				(SELECT ODR_SEQ FROM TB_ODR110 WHERE ODR_NO=#{odrNo}), 
+				(SELECT DATE_FORMAT((SELECT ODR_DT FROM TB_ODR110 WHERE ODR_NO=#{odrNo}),'%Y%m%d')),
 				#{mbNo},
 				#{content},
-				#{grade})
+				#{grade}
+				)
   	</insert>
+  
   	
   	<select id="selectCart" resultType="com.me.rentalme.model.entity.CallVo">
   		SELECT  FN_NM('GDS_NM',A.GDS_CD) AS gdsNm, 
@@ -73,7 +77,7 @@ encoding="UTF-8"?>
 		INNER JOIN TB_GDS200 B
 		ON 		B.GDS_CD = A.GDS_CD
 		WHERE	MB_NO = #{mbNo}
-		ORDER BY A.GDS_CD, A.CART_SEQ, A.REG_DT ASC
+		ORDER BY A.GDS_CD, A.CART_SEQ, A.REG_DT
   	</select>
   	
   	<delete id="deleteCart">
@@ -125,6 +129,15 @@ encoding="UTF-8"?>
 			#{chargeDeposit},
 			"1")
   	</insert>
+  	<insert id="refundDeposit">
+  		INSERT INTO TB_MB120 (MB_NO, DEPOSIT_REFUND_SEQ, DEPOSIT_REFUND_DT, REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD)
+		VALUES	(#{mbNo}, 
+				(SELECT LPAD((SELECT COUNT(DEPOSIT_REFUND_SEQ)+1 FROM TB_MB120 A WHERE A.MB_NO=#{mbNo}),6,'0')),
+				DATE_FORMAT(NOW(), '%Y%m%d'),
+				#{refund},
+				'1')
+  	
+  	</insert>
 
 	<update id="updateDeposit">
 		INSERT INTO TB_MB100 ( MB_NO, REMN_DEPOSIT, LAST_DEPOSIT_DT, MB_STS_CD )
@@ -156,9 +169,25 @@ encoding="UTF-8"?>
   	</select>
   	
   	<select id="selectAuct" resultType="com.me.rentalme.model.entity.CallVo">
-  		SELECT FN_NM('GDS_NM',GDS_CD) AS gdsNm, 
-		BID_TIME,BID_PRICE
-		FROM TB_ACT100 WHERE MB_NO=#{mbNo};
+  		SELECT
+			AA.*
+		FROM (
+				SELECT 	
+					A.GDS_CD,
+					CAST(REPLACE(SUBSTRING(A.GDS_CD,7,6),'0','') AS UNSIGNED) AS GDS_CD2,
+					FN_NM('GDS_NM',B.GDS_CD_DETAIL) AS GDS_NM, 
+					A.BID_TIME,
+					A.BID_PRICE,
+					A.ACT_BID_STS_CD,
+					B.GDS_CD_DETAIL,
+					B.IMG1
+				FROM TB_ACT100 A, 
+					 TB_GDS300 B
+				WHERE A.MB_NO = #{mbNo}
+				AND A.GDS_CD = B.GDS_CD
+				ORDER BY A.GDS_CD DESC
+		) AA
+		 ORDER BY AA.GDS_CD2 DESC
   	</select>
   	
   	<select id="selectPw" resultType="com.me.rentalme.model.entity.UserVo">

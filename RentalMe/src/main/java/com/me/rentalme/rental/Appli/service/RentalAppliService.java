@@ -24,9 +24,11 @@ public interface RentalAppliService {
 	int rentalGdsOdr(RentalAppliVo rentalAppliVo);
 	int rentalGdsDetailOdr(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsTotCnt(RentalAppliVo rentalAppliVo, String sort);
-	
-	
-	
-	
+
+	int cartOdr(RentalAppliVo rentalAppliVo);
+	int cartDetailOdr(RentalAppliVo rentalAppliVo, List<String> gdsCdArr, List<String> cartSeqArr,
+			List<Integer> gdsPriceArr, List<Integer> odrQtyArr, List<String> agreeTermArr);
+	int decisionOdr(RentalAppliVo rentalAppliVo);
+
 
 }

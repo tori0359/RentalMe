@@ -33,7 +33,7 @@
 <body>
 
 <!-- 관리자 공지게시판 리스트 -->
-<h1>기타가전 리스트</h1>
+<h1>패키지 리스트</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
 <div align="right">
 <a href="${pageContext.request.contextPath}/mp/mng/goodsList">[전체상품]</a>&nbsp
@@ -55,7 +55,7 @@
 		</tr>
 			<c:forEach items="${rlist}" var="bean">
 				<tr id="maincontent">
-						<c:if test="${bean.gdsMclassCd eq '50'}">
+						<c:if test="${bean.gdsMclassCd eq '60'}">
 							<td>${bean.gdsCd}</td>
 							<c:if test="${bean.gdsLclassCd eq '10'}">
 								<td>새상품</td>
@@ -63,7 +63,7 @@
 							<c:if test="${bean.gdsLclassCd eq '20'}">
 								<td style="color:gray;">*중고</td>
 							</c:if>
-							<td>기타가전</td>
+							<td>패키지가전</td>
 							<td>${bean.gdsNm}</td>
 							<td>${bean.brandNm}</td>
 							<td>${bean.modelNm}</td>

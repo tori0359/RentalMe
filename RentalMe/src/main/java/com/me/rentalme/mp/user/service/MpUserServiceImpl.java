@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.login.service.LoginService;
 import com.me.rentalme.model.entity.CallVo;
@@ -43,7 +44,7 @@ public class MpUserServiceImpl implements MpUserService{
 			log.debug("후기 등록 서비스...");
 			
 			
-			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),mbNo);
+			return mpUserDao.InsertReview(callVo.getGdsCd(), callVo.getUserId(), callVo.getContent(), callVo.getGrade(),callVo.getOdrNo(),mbNo);
 		}
 	
 	
@@ -89,11 +90,18 @@ public class MpUserServiceImpl implements MpUserService{
 		return mpUserDao.insertCharge(callVo.getUserId(), callVo.getDepositGbCd(), callVo.getChargeDeposit(),mbNo);
 	}
 	
+	//예치금 환불 요청
+	@Override
+	public int refundCharge(String refund, String mbNo) throws SQLException {
+		return mpUserDao.refundCharge(refund,mbNo);
+		
+	}
+	
 	//개인 1:1문의보기
 	@Override
-	public List<CsVo> myList(CsVo csVo,HttpSession session) throws SQLException {
+	public List<CsVo> myList(CsVo csVo,HttpSession session,int startListNum, int listSize) throws SQLException {
 		System.out.println("dao로...");
-		return  mpUserDao.myQuestList(csVo,session);
+		return  mpUserDao.myQuestList(csVo,session,startListNum,listSize);
 	}
  
 	//개인 1:1문의 상세
@@ -187,5 +195,11 @@ public class MpUserServiceImpl implements MpUserService{
 		return result;
 	}
 
+	//내 문의 리스트 갯수
+	@Override
+	public int inquiryListCnt(HttpSession session) throws SQLException {
+		
+		return mpUserDao.myInquiryListCnt(session);
+	}
 
 }

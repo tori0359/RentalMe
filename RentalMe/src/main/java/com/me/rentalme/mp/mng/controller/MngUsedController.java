@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.me.rentalme.common.Paging;
+import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
@@ -22,6 +23,7 @@ public class MngUsedController {
 	Logger log = LoggerFactory.getLogger(getClass());
 	@Inject
 	MngService mngService;
+	String path = "/mp/mng/used";
 	
 	
 	/**
@@ -36,8 +38,13 @@ public class MngUsedController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getMngUsedList(Model model) throws SQLException {
 		
-		model.addAttribute("alist", mngService.selectUsed());
+		List<UsedVo> list =  mngService.selectUsed();
+
+		for(UsedVo usedVo : list) {
+			System.out.println("usedVo list : "+usedVo.toString());
+		}
 		
+		model.addAttribute("alist", list);
 		return "mp/manager/mngUsedList";
 	}
 	/**
@@ -51,6 +58,7 @@ public class MngUsedController {
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String getMngUsedOne(Model model,@RequestParam(value = "usedGdsNo") String usedGdsNo) throws SQLException {
+		model.addAttribute("path", path+"/search");
 		model.addAttribute("alist", mngService.selectUsedSearch(usedGdsNo));
 		return "mp/manager/mngUsedList";
 	}

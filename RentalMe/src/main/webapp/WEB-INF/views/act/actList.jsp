@@ -56,8 +56,9 @@
 	 	margin-top:30px;
 
 	 }
-	 #actCon{
+	 .actCon{
 	 	float: left;
+	 	cursor: pointer;
 	 }
 	 .text{
 	 	font-family:'nanumB'; 
@@ -125,11 +126,26 @@
 			$('#actRunList').show();
 			$('#actEndList').hide();
 		});
+		var sessionMbno=$('#ssId').val();
+		$('.actCon').click(function(){
+			var startPrice=$(this).find('.hiddenPrice').val();
+			if(sessionMbno==''){
+				alert('로그인 해주세요');
+				window.location.href='/login';
+			}else {
+				if(startPrice>${myMb}){
+					alert('보증금이 부족해요');
+				}else{
+					window.location.href='/act/'+$(this).find('#hiddenCd').val();
+				}
+			}
+		}); 
 	}
 
 </script>
 </head>
 <body>
+<input type="hidden" id="ssId" value="${loginMbNo }">
 <div id="actList">
 	<div id="actMenuDiv">
 		<div class="actMenu" id="actRun"><p>경매 진행중</p></div>
@@ -140,16 +156,17 @@
 		<c:forEach items="${alist}" var="bean">
 			<div class="row" >
 				<div class="col-md-10 col-md-offset-1">
-					<div style="height:100%;" id="actCon">
+					<div style="height:100%;" class="actCon">
 						<div class="col-md-4" id="imgDiv" style="padding:20px 0px 20px 50px;">
-							<a href="/act/${bean.gdsCdDetail}"><img class="ordimg" src="/imgs/bed1.jpg"/></a>
+							<img class="ordimg" src="/imgs/bed1.jpg"/>
 						</div>
 						<div class="col-md-3" id="contentDiv">
-							<input type="hidden" value="${bean.gdsCdDetail}"/>
+							<input id="hiddenCd" type="hidden" value="${bean.gdsCdDetail}"/>
+							<input class="hiddenPrice" type="hidden" value="${bean.gdsStPrice}"/>							
 							<div><h4 id="brandNmStyle">${bean.brandNm}</h4></div>
-							<div><h2 style="font-family:'nanumEB' "><a id="tag" href="/act/${bean.gdsCdDetail}">${bean.gdsNm }</a></h2></div>
+							<div><h2 style="font-family:'nanumEB' ">${bean.gdsNm }</h2></div>
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
-							<div><h4 class="text"><span class="color">시작가</span><span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
+							<div><h4 class="text"><span class="color">시작가</span><span class="startPrice">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
 							<div><h4 class="text" ><span class="color">경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
 							<div><h4 class="text" ><span class="color">경매 종료 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
 						</div>

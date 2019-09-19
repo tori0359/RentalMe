@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.me.rentalme.common.Paging;
+import com.me.rentalme.model.entity.DeclVo;
+import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
@@ -36,9 +40,9 @@ public class MngDeclController {
 	* @exception 
 	*/
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getMngDeclList(Model model) throws SQLException {
-		mngService.getUsedListCnt(); 
-		
+
+	public String getMngDeclList(Model model,
+			@RequestParam(required = false, defaultValue = "") String usedGdsNo) throws SQLException {		
 		model.addAttribute("alist", mngService.selectDecl());
 		return "mp/manager/mngDeclList";
 	}

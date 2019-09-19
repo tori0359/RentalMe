@@ -11,6 +11,7 @@ public class CallVo {
 	private String regDt;			//등록 날짜
 	private String modelNm;			//모델명
 	private String usedGdsPrice;	//중고 상품 가격
+	private String odrNo;			//주문 번호
 	private String odrDt;			//주문 일자
 	private String gdsPrice;		//렌탈 상품 가격
 	private int odrQty;				//주문수량
@@ -37,7 +38,20 @@ public class CallVo {
 	private String cnt; 			//회원이 해당상품에 쓴 후기 갯수
 	private String cartSeq;			//장바구니 일련번호
 	private String userNm; 			//회원 이름
+	private String actBidStsCd;		//회원 경매 상태
+	private String gdsCdDetail;		//경매상품 디테일코드
+	private String img1;			//경매상품 대표이미지
 	
+	
+	
+	public String getActBidStsCd() {
+		return actBidStsCd;
+	}
+
+	public void setActBidStsCd(String actBidStsCd) {
+		this.actBidStsCd = actBidStsCd;
+	}
+
 	public String getUserNm() {
 		return userNm;
 	}
@@ -45,7 +59,15 @@ public class CallVo {
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
 	}
+	
+	public String getOdrNo() {
+		return odrNo;
+	}
 
+	public void setOdrNo(String odrNo) {
+		this.odrNo = odrNo;
+	}
+	
 	public String getCartSeq() {
 		return cartSeq;
 	}
@@ -381,6 +403,19 @@ public class CallVo {
 				+ ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", modelNm=" + modelNm
 				+ ", usedGdsPrice=" + usedGdsPrice + ", odrDt=" + odrDt + ", gdsPrice=" + gdsPrice + ", odrQty="
 				+ odrQty + ", odrAmt=" + odrAmt + ", agreeTerm=" + agreeTerm + ", odrStsGbCd=" + odrStsGbCd + "]";
+	}
+
+	public String getGdsCdDetail() {
+		return gdsCdDetail;
+	}
+	public void setGdsCdDetail(String gdsCdDetail) {
+		this.gdsCdDetail = gdsCdDetail;
+	}
+	public String getImg1() {
+		return img1;
+	}
+	public void setImg1(String img1) {
+		this.img1 = img1;
 	}
 	
 }

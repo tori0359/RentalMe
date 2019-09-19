@@ -27,5 +27,9 @@ public interface RentalAppliDao {
 	List<RentalAppliVo> rentalGdsTotCntList2(RentalAppliVo rentalAppliVo);
 	List<RentalAppliVo> rentalGdsTotCntList(RentalAppliVo rentalAppliVo);
 	
+	int cartOdr(RentalAppliVo rentalAppliVo);
+	int cartDetailOdr(RentalAppliVo rentalAppliVo);
+	int decisionOdr(RentalAppliVo rentalAppliVo);
+	
 
 }

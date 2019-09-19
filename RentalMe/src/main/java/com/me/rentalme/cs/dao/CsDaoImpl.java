@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.paging.Search;
 
 
 @Repository
@@ -20,9 +22,9 @@ public class CsDaoImpl implements CsDao {
 	SqlSession sqlSession; 
 	
 	@Override
-	public List<CsVo> faqSelectAll() throws SQLException {
+	public List<CsVo> faqSelectAll(Search search) throws SQLException {
 		
-		return sqlSession.selectList("csCenter.faqSelectAll");
+		return sqlSession.selectList("csCenter.faqSelectAll",search);
 	}
 
 	
@@ -86,15 +88,15 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public List<CsVo> noticeSelectAll() throws SQLException {
-		return sqlSession.selectList("csCenter.noticeSelectAll");
+	public List<CsVo> noticeSelectAll(Paging paging) throws SQLException {
+		return sqlSession.selectList("csCenter.noticeSelectAll",paging);
 	}
 
 
 	@Override
-	public List<CsVo> inqSelectAll() throws SQLException {
+	public List<CsVo> inqSelectAll(Paging paging) throws SQLException {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("csCenter.inqSelectAll");
+		return sqlSession.selectList("csCenter.inqSelectAll",paging);
 	}
 
 	@Override
@@ -154,6 +156,39 @@ public class CsDaoImpl implements CsDao {
 		String pquestNo=num;
 		return sqlSession.update("csCenter.inqAnswer", pquestNo);
 	}
+
+
+	//°Ô½Ã±Û °¹¼ö
+	@Override
+	public int faqListCnt(Search search) throws SQLException {
+		System.out.println("faqÆäÀÌÂ¡ dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csFaqListCnt",search);
+		System.out.println("faq°¹¼ö:"+cnt);
+		return cnt;
+	}
+	
+	@Override
+	public int noticListCnt() throws SQLException {
+		System.out.println("noticÆäÀÌÂ¡ dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csNoticListCnt");
+		System.out.println("notic°¹¼ö:"+cnt);
+		return cnt;
+	}
+
+
+	@Override
+	public int inquiryListCnt() throws SQLException {
+		
+		System.out.println("inqÆäÀÌÂ¡ dao");
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csInquiryListCnt");
+		System.out.println("inq°¹¼ö:"+cnt);
+		return cnt;
+	}
+	
+	
 
 
 

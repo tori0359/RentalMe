@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.mp.mng.service.MngService;
+import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 @Controller
 @RequestMapping("/mp/mng")
@@ -24,6 +27,9 @@ public class MngOrderController {
 	
 	@Inject
 	MngService mngService;
+	
+	@Inject
+	RentalAppliService rentalAppliService; 
 	
 	
 	/**
@@ -69,7 +75,7 @@ public class MngOrderController {
 	 * @author 박재환
 	 * @exception 
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/mp/mng/decision", method = RequestMethod.POST)
 	public String getMngOrderUpdate(@RequestParam(value = "odrNo") String odrNo) throws SQLException {
 		String[] array;
 		array=odrNo.split(",");
@@ -77,6 +83,28 @@ public class MngOrderController {
 		for(int i=0; i<array.length; i++) {
 			mngService.updateStsPC(array[i]);
 		}
+		return "redirect:/mp/mng/list";
+	}
+	
+	/**
+	 * 주문관리> 입급확인 or 반품확인
+	 * 
+	 * @param  
+	 * @return String 
+	 * @author 황태연
+	 * @exception 
+	 */
+	@RequestMapping(value = "/decision", method = RequestMethod.POST) 
+	public String modifyDecisionOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("odrNo")String odrNo,
+			RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
+		
+		rentalAppliVo.setCrudGbCd(crudGbCd);
+		rentalAppliVo.setOdrGbCd(odrGbCd);
+		rentalAppliVo.setOdrNo(odrNo);
+		rentalAppliVo.setMbNo((String) session.getAttribute("loginMbNo"));
+		
+		int result1 = rentalAppliService.decisionOdr(rentalAppliVo);			// 주문자료 생성
+		model.addAttribute("rtnCd", Integer.toString(result1));
 		return "redirect:/mp/mng/list";
 	}
 

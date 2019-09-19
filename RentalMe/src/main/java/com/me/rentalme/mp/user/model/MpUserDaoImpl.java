@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -72,12 +73,15 @@ public class MpUserDaoImpl implements MpUserDao{
 
 	//후기등록
 	@Override
-	public int InsertReview(String gdsCd, String userId, String content,String grade, String mbNo) throws SQLException {
+	public int InsertReview(String gdsCd, String userId, String content,String grade, String odrNo,  String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
+		map.put("gdsCd", gdsCd);
 		map.put("gdsCd", gdsCd);
 		map.put("userId", userId);
 		map.put("content", content);
 		map.put("grade", grade);
+		map.put("odrNo", odrNo);
+		
 		map.put("mbNo", mbNo);
 		
 		log.debug("gdscd="+gdsCd+", userId="+userId+", content="+content+", grade="+grade+ " 후기 입력 DaoImpl...");
@@ -106,8 +110,18 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.inserDeposit",map);
 	}
 
+	//예치금 환불 요청
 	@Override
-
+	public int refundCharge(String refund, String mbNo) throws SQLException {
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("refund", refund);
+		map.put("mbNo", mbNo);
+		
+		return sqlSession.insert("mpUser.refundDeposit",map);
+	}
+	
+	
+	@Override
 	public void updateDeposit(String chargeDeposit, String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("chargeDeposit", chargeDeposit);
@@ -117,15 +131,32 @@ public class MpUserDaoImpl implements MpUserDao{
 		
 	}
 
-	public List<CsVo> myQuestList(CsVo csVo,HttpSession session) throws SQLException {
-		Map<String, String> map=new HashMap<String, String>();
+	public List<CsVo> myQuestList(CsVo csVo,HttpSession session,int startListNum,int listSize) throws SQLException {
+		Map<String, Object> map=new HashMap<String, Object>();
+		//Map<String,Integer> map2=new HashMap<String,Integer>();
 		String mbNo=(String)session.getAttribute("loginMbNo");
 		System.out.println(mbNo+"dd");
+		
+		System.out.println("startListNum"+startListNum);
+		System.out.println("listSize"+listSize);
+		
+		
+		
+		//map2.put("startListNum", startListNumber);
+		//map2.put("listSize", listSized);
+		
 		map.put("mbNo",mbNo);
+		map.put("startListNum", startListNum); 
+		map.put("listSize", listSize);
+		
+
 		csVo.setMbNo(mbNo);
 		System.out.println(csVo.getMbNo());
 		System.out.println("sql로..");
+		
+		//sqlSession.selectList("csCenter.myQuestList", map);
 		return sqlSession.selectList("csCenter.myQuestList",map);
+		
 	}
 
 	@Override
@@ -198,6 +229,17 @@ public class MpUserDaoImpl implements MpUserDao{
 		System.out.println("DB 결과 : "+result);
 		
 		return result;
+	}
+
+	@Override
+	public int myInquiryListCnt(HttpSession session) throws SQLException {
+		System.out.println("inq페이징 dao");
+		String mbNo=(String)session.getAttribute("loginMbNo");
+		session.getAttribute(mbNo);
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.myInquiryListCnt",mbNo);
+		System.out.println("inq갯수:"+cnt);
+		return cnt;
 	}
 
 
