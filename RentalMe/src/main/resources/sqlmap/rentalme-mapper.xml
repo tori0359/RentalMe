@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectOrdList" resultType="com.me.rentalme.model.entity.CallVo">
-		SELECT 	A.MB_NO, A.ODR_DT, B.USER_ID 
+		SELECT 	A.MB_NO, DATE_FORMAT(A.ODR_DT, '%Y-%m-%d') AS ODR_DT, B.USER_ID 
 		FROM 	TB_ODR100 A,TB_USER100 B 
 		WHERE 	A.MB_NO = B.MB_NO 
 		ORDER BY ODR_DT DESC
@@ -27,5 +27,9 @@
 		ORDER BY cnt DESC 
 		LIMIT 	12
 	
+	</select>
+	
+	<select id="selectCsList" resultType="com.me.rentalme.cs.entity.CsVo">
+		SELECT NOTIC_NO,SUB FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC LIMIT 5;
 	</select>
 </mapper> 

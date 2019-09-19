@@ -1,11 +1,6 @@
 package com.me.rentalme;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -40,7 +35,7 @@ public class HomeController {
 	
 	
 	/**
-	 * 실시간 접수 현황 리스트, 베스트 아이템 리스트
+	 * 실시간 접수 현황 리스트, 베스트 아이템 리스트, 공지사항 리스트
 	 * 
 	 * @param  
 	 * @return ModelAndView 
@@ -54,6 +49,7 @@ public class HomeController {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("ordlist",rentalmeService.ordList());
 		mav.addObject("bestitem",rentalmeService.bestList());
+		mav.addObject("cs",rentalmeService.csList());
 		
 		mav.setViewName("rental/rentalMain");
 		
@@ -83,5 +79,6 @@ public class HomeController {
 	 * 
 	 * return mav; }
 	 */
+	
 	
 }

@@ -52,7 +52,7 @@
 		width: 250px;
 		padding-right:10px;
 	}
-	#ordlist{
+	.ordlist{
 		border-bottom-left-radius: 10px;
 		border-bottom-right-radius: 10px;
 		border-top-left-radius: 10px;
@@ -60,7 +60,7 @@
 		height:30px;
 		background-color: #F1C528;
 	}
-	#ordlist p{
+	.ordlist p{
 		line-height: 30px;
 		font-family: "nanumB";
 		font-weight:bolder;
@@ -115,6 +115,14 @@
 		font-family: "nanumEB";
 		font-size:14pt;
 	}
+	#banner a {
+		color: orange;
+	}
+	#banner a:hover{
+		color: orange;
+		text-decoration:none;
+		background-color:black;
+	}
 	#auctionimg {
 		width:170px;
 	}
@@ -146,8 +154,21 @@
 		-moz-transform:scale(1.1);     /* FireFox */
 		-o-transform:scale(1.1);  
 	}
-	#selfimg{
-	
+	#adimg{
+		margin-top:40px;
+	}
+	.csText{
+		font-family:"nanumB";
+		font-size: 9pt;
+		margin-left:4px;
+		padding: 1px;
+		line-height:9px;
+		color:black;
+	}
+	.csText:hover{
+		text-decoration:none;
+		font-weight: bolder;
+		color:black;
 	}
 </style>
 <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
@@ -189,24 +210,20 @@
 					});
 			
 		//best상품 carousel
-		window.onload=function(){
-			$('.owl-carousel').owlCarousel({
-				loop:true,
-				margin:10,
-				nav:true,
-				responsive:{
-					0:{
-						items:1
-					},
-					600:{
-						items:3
-					},
-					1000:{
-						items:5
-					}
-				}
-			})
-		}
+	
+		$(document).ready(function() {
+			 
+			  $(".owl-carousel").owlCarousel({
+			 
+			      autoPlay: 2000, 
+			 
+			      items : 5,
+			      itemsDesktop : [1199,3],
+			      itemsDesktopSmall : [979,3]
+			 
+			  });
+			 
+			});
 				
 </script>
 </head>
@@ -267,11 +284,12 @@
 				
 	</div>
 </div>
+
 <div style="background-color:#FAF1E2; height:240px; margin-top:30px;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-3 eventlist" >
-			<div id="ordlist"><p>&nbsp;렌탈미 실시간 접수 현황</p></div>
+			<div class="ordlist"><p>&nbsp;렌탈미 실시간 접수 현황</p></div>
 			<div style="height:100px; margin-top:10px;">
 				<div class="block">
 				    <ul id="ticker">
@@ -286,17 +304,24 @@
 			</div>
 		</div>
 		
-		<div class="col-md-3" style="margin-top:40px; padding:0; margin-left:4px;">
-			<img style="height:160px;" src="imgs/card.PNG"/>
+		<div class="col-md-3 eventlist" style="margin-top:40px; margin-left:15px;">
+			<div style="background-color:lightgrey;"class="ordlist"><p>&nbsp;공지사항</p></div>
+			<div style="margin-top:10px; height:100px; border:1px solid #E6E6E6;">
+				<c:forEach items="${cs}" var="cs">
+					<a class="csText" href="/cs/csNotice">※&nbsp;${cs.sub}</a><br>
+					
+				</c:forEach>
+			
+			</div>
 		</div>
 		
-		<div class="col-md-5 eventlist" style="border:1px solid #E6E6E6; display:inline-block; height:165px; margin-left:70px;">
+		<div class="col-md-5 eventlist" style="border:1px solid #E6E6E6; display:inline-block; height:165px; margin-left:15px;">
 			<div style="border:0px solid red; display:inline-block;" >
 				<img id="auctionimg" src="imgs/auction.png"/>
 			</div>
 			<div id="banner" style="border:0px solid blue; display:inline-block;"> 
 				<!-- <img id="auctionimg" src="imgs/event2.jpg"/> -->
-					<p><span style="font-size:10pt; color:grey; font-family:'nanumB';">렌탈미에서만 진행하는</span> <br>땡 잡았다! <br><a href="${pageContext.request.contextPath}/act/">이벤트 경매 바로가기</a></p> 
+					<p><span style="font-size:10pt; color:grey; font-family:'nanumB'; ">렌탈미에서만 진행하는</span> <br>땡 잡았다! <br><a href="${pageContext.request.contextPath}/act/">이벤트 경매 바로가기</a></p> 
 			</div>
 		
 		</div>
@@ -304,8 +329,15 @@
 	</div>
 </div>
 </div>
-<div style="border:1px solid red;">
-	<h3>오늘의 이벤트 경매</h3>
+<div class="container-fluid" style="margin:0px auto; text-align:center;">
+	<div style="display:inline-block;">
+		<img id="adimg" src="/imgs/ad.png"/>
+	</div>
+	<div style="display:inline-block;">
+		<img id="adimg" src="/imgs/goods.PNG"/>
+	</div>
+
+
 </div>
 </body>
 

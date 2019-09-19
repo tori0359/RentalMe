@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.RentalMeDao;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalMeVo;
@@ -32,6 +33,12 @@ public class RentalMeServiceImpl implements RentalMeService {
 	@Override
 	public List<CallVo> bestList() throws SQLException {
 		return rentalmeDao.selectBestList();
+	}
+
+	//공지사항 리스트
+	@Override
+	public List<CsVo> csList() throws SQLException {
+		return rentalmeDao.selectCsList();
 	}
 
 

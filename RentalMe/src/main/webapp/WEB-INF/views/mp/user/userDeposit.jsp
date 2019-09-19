@@ -159,24 +159,33 @@
 			//입력한 환불 요청 금액 저장
 			var refundinput = $('#refundinput').val();
 
+			//현재 예치금 
+			var remnDepositInput = $('#remnDepositInput').val();
+
+		
 			var refund;
-			
+			var remnDeposit;
 			//환불 요청 금액이 공백이 아닐 때
 			if(refundinput != ""){
 				$('#refund').val(refundinput);
 				refund = $('#refund').val();
-			
+
+				$('#remnDeposit').val(refundinput);
+				remnDeposit = $('#remnDeposit').val();
+
 				$.ajax({
 					url:"deposit/refund",
 					type: "post",
-					data: { "refund" : refund },
+					data: { "refund" : refund, "remnDeposit" : remnDeposit },
 					success : function(data){
 						var msg = data;
 						
 						if(msg == "duplication"){
 							$('#refundtext').text("이미 요청된 환불이 있습니다.");
-						}else{
+						}else if(msg == "not duplication"){
 							$('#refundtext').text("관리자에게 환불이 요청되었습니다.");
+						}else{
+							$('#refundtext').text("예치금이 부족합니다.");
 						}
 					}				
 				});
@@ -344,6 +353,7 @@
 						${remnDeposit}
 					</c:if>
        			</fmt:formatNumber> 원
+       			<input type="hidden" id="remnDepositInput" name="remnDepositInput" value="${remnDeposit}"/>
 				</td>
        			
        		</tr>
@@ -355,10 +365,14 @@
        			<th class="active" style="text-align:center;">환불수단</th>
        			<td>
        				<input type="radio" name="refund2" value="계좌이체">무통장입금 &nbsp;
-       				<input type="radio" name="refund3" value="신용카드">카드취소<br>
        			</td>
        		</tr>
+       		
 	</table>
+	<div>
+       			<p style="font-family:'nanumB';"> *환불요청 확인 후 유선으로 처리 도와드리겠습니다.</p>
+       		</div>
+       		
 	<div class="chargediv">
        		<button style="width:150px; margin-left:50px;" class="btn btn-danger" id="refund_button">환불 신청하기</button>
     </div>
@@ -374,6 +388,7 @@
 	      </div>
 	      <div class="modal-body">
 	       <input type="hidden" id="refund" name="refund"/>
+	       <input type="hidden" id="remnDeposit" name="remnDeposit"/>
 	       <div style="text-align:center;">
 	       <span id="refundtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
 	       </div>
