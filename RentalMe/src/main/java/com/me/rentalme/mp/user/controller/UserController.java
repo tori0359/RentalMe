@@ -377,7 +377,7 @@ public class UserController {
 		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userVo", mpUserService.getName(mbNo));
-
+		mav.addObject("sessionMbNo", mbNo);
 		mav.addObject("alist", mpUserService.AuctList(mbNo));
 
 		mav.setViewName("mp/user/userAuctList");
