@@ -22,5 +22,7 @@ public interface JoinDao {
 	void insertMemnoSeq(); 								//회원번호 시퀀스 추가
 
 	String getMemNo();									//회원번호 조회
+	
+	int insertMb(String mbNo);							//회원예치금 0원
 
 }

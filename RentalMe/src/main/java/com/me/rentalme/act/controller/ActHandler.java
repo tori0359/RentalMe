@@ -97,6 +97,12 @@ public class ActHandler extends TextWebSocketHandler{
 			}else if(String.valueOf(mapping.get("type")).equals("countDown")) {
 				interup=true;
 				timeThread();
+			}else if(String.valueOf(mapping.get("type")).equals("endBid")) {
+				totalprice=0;
+				premap.clear();
+				pricemap.clear();
+				bidList.clear();
+				prebidList.clear();
 			}
 			
 			json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mapping);

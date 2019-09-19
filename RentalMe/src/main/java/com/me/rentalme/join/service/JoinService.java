@@ -15,5 +15,6 @@ public interface JoinService {
 	String 	getId(String userId); 	//아이디 중복체크
 	void 	addMemNoSeq();			//회원번호 시퀀스 추가
 	String 	getMemNo();				//회원번호 가져오기
+	int 	insertMb(String mbNo);	//회원예치금 0원
 	
 }

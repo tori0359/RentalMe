@@ -21,8 +21,13 @@
 		min-width: 470px;
 		margin-left: 10px;
 	}
-	#showInfo .row .col-md-2{
+	#showInfo .row .col-md-4{
 		font-weight: bold;
+		color: #E8512E;
+		font-size: 30px;
+	}
+	#showInfo .row .col-md-8{
+		font-size: 30px;
 	}
 	#mainInfo{
 		font-weight: bold;
@@ -53,21 +58,29 @@
 		width: 49%;
 		height: 500px;
 		border-right: 2px solid black;
+		color: #E8981E;
+		text-align: center;
 	}
 	#detailInfo>div{
-		border: 1px solid black;
 		margin: auto;
 		width: 95%;
 		height: 450px;
+		font-size: 30px;
+		color: black;
+		text-align: left;
 	}
 	#sellInfo{
 		display: inline-block;
 		width: 49%;
+		height: 500px;
+		color: #E8981E;
+		text-align: center;
 	}
 	#sellInfo>div{
 		margin: auto;
 		width: 95%;
 		cursor: pointer;
+		color: black;
 	}
 	#hiddenNM{
 		display: none;
@@ -235,8 +248,11 @@
 		float: right;
 		clear: both;
 	}
+	#rviBtn{
+		margin-bottom: 30px;
+	}
 	.storeCmtList{
-		border-top: 1px solid black;
+		border-bottom: 1px solid #E8DFCC;
 		position: relative;
 	}
 	.storeCmtList div{
@@ -244,6 +260,7 @@
 	}
 	.storeCmtList .mbNo{
 		display: inline-block;
+		color: #E8855D;
 	}
 	.storeCmtList .storeReviewDt{
 		float: right;
@@ -267,7 +284,10 @@
 		color: white;
 		text-decoration: none;
 	}
-	#declmodal
+	#declmodal #declReason{
+		margin-left: 1px;
+	}
+	
 	
 /*나의 상점 끝*/
 

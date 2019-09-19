@@ -35,4 +35,9 @@
 		SELECT MAX(CONCAT(RIGHT(DATE_FORMAT(NOW(),'%Y'),2), LPAD(SEQ,6,0))) AS mbNo
 		  FROM SEQ_MB100
 	</select>
+	<insert id="insertMb" parameterType="com.me.rentalme.model.entity.UserVo">
+		INSERT 
+		INTO TB_MB100 (MB_NO,REMN_DEPOSIT,LAST_DEPOSIT_DT)
+		VALUES (#{mbNo},0,DATE_FORMAT(NOW(),'%Y%m%d'))
+	</insert>
 </mapper>

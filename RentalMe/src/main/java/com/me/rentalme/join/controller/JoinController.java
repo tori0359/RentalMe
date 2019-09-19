@@ -112,6 +112,8 @@ public class JoinController {
 		//회원가입
 		joinService.addInfo(userVo);
 		
+		//회원예치금
+		joinService.insertMb(userVo.getMbNo());
 		//인증 메일 보내기 (2019-08-27 : 회원가입 양식에서 인증하는 방식으로 변경으로 인한 삭제)
 		//mailAuthService.mailSendWithUserKey(userVo.getEmail(), userVo.getUserId(), req);
 		

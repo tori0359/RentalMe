@@ -65,7 +65,7 @@
 			<div id="textAreaInput" >
 			<textarea class="form-control" name="content" rows="3"></textarea>
 			</div>
-			<button type="submit">후기등록</button>
+			<button id="rviBtn" class="btn btn-default btn-lg btn-block" type="submit">후기등록</button>
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">
@@ -100,7 +100,7 @@
         	<input id="declMbNo" type="text" name="mbNo">
         </div>
         <div> 
-			<input type="text" class="form-control" placeholder="신고사유">
+			<input type="text" id="declReason" class="form-control" placeholder="신고사유">
 		</div>
       </div>
       <div class="modal-footer">
