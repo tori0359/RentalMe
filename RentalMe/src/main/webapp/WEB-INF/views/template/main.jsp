@@ -89,6 +89,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/deposit">예치금관리</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/mp/mng/refund">환불관리</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

@@ -262,4 +262,23 @@
 	<insert id="insertSeq">
 		INSERT INTO SEQ_GDS100 VALUES(NULL);
 	</insert>
+	
+	<!-- 관리자 - 회원 환불 리스트 -->
+	<select id="selectRefundList" resultType="com.me.rentalme.model.entity.RefundVo">
+		SELECT MB_NO,DEPOSIT_REFUND_SEQ,DEPOSIT_REFUND_DT,REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD,FN_NM('USER_NM', MB_NO) AS userNm
+		FROM TB_MB120 
+		WHERE DEPOSIT_REFUND_GB_CD='1'
+	</select>
+	<!-- 관리자 - 회원 환불 확인 -->
+	<update id="updateRefundConfirm">
+		UPDATE TB_MB120
+		SET DEPOSIT_REFUND_GB_CD='2'
+		WHERE DEPOSIT_REFUND_GB_CD='1' AND MB_NO=#{mbNo}
+	</update>
+	<!-- 관리자 - 회원 환불 반려 -->
+	<update id="updateRefundCancel">
+		UPDATE TB_MB120
+		SET DEPOSIT_REFUND_GB_CD='3'
+		WHERE DEPOSIT_REFUND_GB_CD='1' AND MB_NO=#{mbNo}
+	</update>
 </mapper>

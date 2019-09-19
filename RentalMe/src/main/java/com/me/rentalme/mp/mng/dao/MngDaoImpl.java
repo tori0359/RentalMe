@@ -17,6 +17,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -278,6 +279,45 @@ public class MngDaoImpl implements MngDao{
 	@Override
 	public void rentalSeq() {
 		sqlSession.insert("mpMng.insertSeq");
+	}
+
+	/**
+	* 관리자 - 회원 환불 리스트 출력
+	* 
+	* @param  
+	* @return List
+	* @author 박재환
+	* 등록일자 : 2019.09.19
+	*/	
+	@Override
+	public List<RefundVo> selectRefundList() throws SQLException {
+		return sqlSession.selectList("mpMng.selectRefundList");
+	}
+
+	/**
+	* 관리자 - 회원 환불 확인
+	* 
+	* @param  
+	* @return int
+	* @author 박재환
+	* 등록일자 : 2019.09.19
+	*/	
+	@Override
+	public int updateRefundConfirm(String mbNo) throws SQLException {
+		return sqlSession.update("mpMng.updateRefundConfirm", mbNo);
+	}
+
+	/**
+	* 관리자 - 회원 환불 반려
+	* 
+	* @param  
+	* @return int
+	* @author 박재환
+	* 등록일자 : 2019.09.19
+	*/	
+	@Override
+	public int updateRefundCancel(String mbNo) throws SQLException {
+		return sqlSession.update("mpMng.updateRefundCancel", mbNo);
 	}
 	
 }
