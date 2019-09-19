@@ -13,8 +13,10 @@ function userDatail(mbNo){
 			if(userInfo.levelGbCd == '1'){														//구분
 				$('input:radio[name=levelGbCd][value=1]').prop('checked', 'checked');
 				$('input:radio[name=levelGbCd][value=2]').prop('checked', false);
+				$('input:radio[name=levelGbCd][value=2]').attr('disabled', 'disabled');
 			}else{
 				$('input:radio[name=levelGbCd][value=1]').prop('checked', false);
+				$('input:radio[name=levelGbCd][value=1]').attr('disabled', 'disabled');
 				$('input:radio[name=levelGbCd][value=2]').prop('checked', 'checked');
 			}
 			$('#userId').text(userInfo.userId);													//아이디
@@ -23,8 +25,10 @@ function userDatail(mbNo){
 			if(userInfo.genderGbCd == '1'){														//성별
 				$('input:radio[name=genderGbCd][value=1]').prop('checked', 'checked');
 				$('input:radio[name=genderGbCd][value=2]').prop('checked', false);
+				$('input:radio[name=genderGbCd][value=2]').attr('disabled', 'disabled');
 			}else{
 				$('input:radio[name=genderGbCd][value=1]').prop('checked', false);
+				$('input:radio[name=genderGbCd][value=1]').attr('disabled', 'disabled');
 				$('input:radio[name=genderGbCd][value=2]').prop('checked', 'checked');
 			}
 			$('#hp').text(userInfo.hp);															//핸드폰
@@ -43,14 +47,20 @@ function userDatail(mbNo){
 			if(userInfo.userStsCd == '1'){														//회원상태 선택
 				$('input:radio[name=userStsCd][value=1]').prop('checked', 'checked');
 				$('input:radio[name=userStsCd][value=2]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=2]').attr('disabled', 'disabled');
 				$('input:radio[name=userStsCd][value=3]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=3]').attr('disabled', 'disabled');
 			}else if(userInfo.userStsCd == '2'){
 				$('input:radio[name=userStsCd][value=1]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=1]').attr('disabled', 'disabled');
 				$('input:radio[name=userStsCd][value=2]').prop('checked', 'checked');
-				$('input:radio[name=userStsCd][value=3]').prop('checked', false);				
+				$('input:radio[name=userStsCd][value=3]').prop('checked', false);	
+				$('input:radio[name=userStsCd][value=3]').attr('disabled', 'disabled');
 			}else{
 				$('input:radio[name=userStsCd][value=1]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=1]').attr('disabled', 'disabled');
 				$('input:radio[name=userStsCd][value=2]').prop('checked', false);
+				$('input:radio[name=userStsCd][value=2]').attr('disabled', 'disabled');
 				$('input:radio[name=userStsCd][value=3]').prop('checked', 'checked');
 
 			}
@@ -89,22 +99,53 @@ function userDatail(mbNo){
 }
 //탈퇴하기 버튼을 눌렀을 때
 function userLeave(mbNo){
-	 $.ajax({
- 		type : 'POST',
- 		url  : 'userLeave',
- 		data : {'mbNo' : mbNo},
- 		dataType : 'json',
- 		success: function(data) {
- 			var msg = data;
- 			if(msg == 'success'){
- 				alert('정상적으로 탈퇴되었습니다.')
- 				location.reload();
- 			}
- 		},
- 		error:function(){
- 			alert('예상치 못한 오류로 인해 회원탈퇴가 취소되었습니다.');
- 		}
-   	 });
+	
+	 Swal.fire({
+		  title: '정말 탈퇴처리 하시겠습니까?',
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: '탈퇴',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		    if (result.value) {
+				    
+		   	 $.ajax({
+		  		type : 'POST',
+		  		url  : 'userLeave',
+		  		data : {'mbNo' : mbNo},
+		  		dataType : 'json',
+		  		success: function(data) {
+		  			var msg = data;
+		  			if(msg == 'success'){
+		 				Swal.fire({
+		 					  position: 'top-middle',
+		 					  type: 'success',
+		 					  title: '탈퇴처리되었습니다.',
+		 					  showConfirmButton: false,
+		 					  timer: 1500
+		 					});
+		 				setTimeout('location.reload()',1500); 
+		  			}
+		  		},
+		  		error:function(){
+		 			Swal.fire({
+		 				  position: 'top-middle',
+		 				  type: 'error',
+		 				  title: '예상치 못한 오류로 인해 탈퇴가 취소되었습니다.',
+		 				  showConfirmButton: false,
+		 				  timer: 1500
+		 				});
+		 			setTimeout('location.reload()',1500); 
+		  		}
+		    	 });		    	
+		    }
+		})
+	
+	
+	
+
 }
 /*
 //탈퇴하기 버튼을 눌렀을 때
