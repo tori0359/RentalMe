@@ -129,6 +129,20 @@ public class JoinDaoImpl implements JoinDao {
 		
 		return result;
 	}
+	
+	/**
+	* 회원예치금 초기화
+	* 
+	* @param  String mbNo - 사용자 회원번호
+	* @return int
+	* @author 박재환
+	* @exception 
+	*/
+	@Override
+	public int insertMb(String mbNo) {
+		log.debug("회원예치금 초기화");
+		return sqlSession.insert("join.insertMb", mbNo);
+	}
 
 
 }

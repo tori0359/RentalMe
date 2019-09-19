@@ -78,24 +78,24 @@ public class ActController {
 	* @author ½ÅÁö¿µ
 	* @exception 
 	*/
-	@RequestMapping(value="/{gdsCdDetail}", method=RequestMethod.GET)
-	public ModelAndView getActDetail(@PathVariable("gdsCdDetail") String gdsCdDetail, ActVo actVo, HttpSession session) throws SQLException {
+	@RequestMapping(value="/{gdsCd}", method=RequestMethod.GET)
+	public ModelAndView getActDetail(@PathVariable("gdsCd") String gdsCd, ActVo actVo, HttpSession session) throws SQLException {
 		System.out.println(String.valueOf(session.getAttribute("loginMbNo")).equals(null));
 		System.out.println(session.getAttribute("loginMbNo"));
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list1", actService.actDetail(gdsCdDetail));
-		mav.addObject("list2", actService.actDetailAuction(gdsCdDetail));
+		mav.addObject("list1", actService.actDetail(gdsCd));
+		mav.addObject("list2", actService.actDetailAuction(gdsCd));
 		
 		mav.setViewName("act/actDetail");
 		return mav;
 	}
-	@RequestMapping(value="/admin/{gdsCdDetail}", method=RequestMethod.GET)
-	public ModelAndView getActDetailAdmin(@PathVariable("gdsCdDetail") String gdsCdDetail, ActVo actVo, HttpSession session) throws SQLException {
+	@RequestMapping(value="/admin/{gdsCd}", method=RequestMethod.GET)
+	public ModelAndView getActDetailAdmin(@PathVariable("gdsCd") String gdsCd, ActVo actVo, HttpSession session) throws SQLException {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list1", actService.actDetail(gdsCdDetail));
-		mav.addObject("list2", actService.actDetailAuction(gdsCdDetail));
-		actService.updateMngActStsCd(gdsCdDetail);
+		mav.addObject("list1", actService.actDetail(gdsCd));
+		mav.addObject("list2", actService.actDetailAuction(gdsCd));
+		actService.updateMngActStsCd(gdsCd);
 		mav.setViewName("act/actAdmin");
 		return mav;
 	}
@@ -136,10 +136,6 @@ public class ActController {
 	@RequestMapping(value="/result", method=RequestMethod.POST)
 	public String getActResult(@RequestParam("bidresult") String bidresult,
 								@RequestParam("gdsCd") String gdsCd) throws SQLException {
-		StringBuilder sb=new StringBuilder(gdsCd);
-		sb.setCharAt(0, '3');
-		sb.setCharAt(1, '0');
-		gdsCd=sb.toString();
 		System.out.println("gdsCd:"+gdsCd);
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Map<String,Integer>> map=new HashMap<String, Map<String,Integer>>();

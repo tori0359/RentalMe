@@ -162,7 +162,7 @@
 						</div>
 						<div class="col-md-3" id="contentDiv">
 							<input id="hiddenStsCd" type="hidden" value="${bean.actStsCd }">
-							<input id="hiddenCd" type="hidden" value="${bean.gdsCdDetail}"/>
+							<input id="hiddenCd" type="hidden" value="${bean.gdsCd}"/>
 							<input class="hiddenPrice" type="hidden" value="${bean.gdsStPrice}"/>							
 							<div><h4 id="brandNmStyle">${bean.brandNm}</h4></div>
 							<div><h2 style="font-family:'nanumEB' ">${bean.gdsNm }</h2></div>

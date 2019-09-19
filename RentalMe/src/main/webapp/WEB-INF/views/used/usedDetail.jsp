@@ -57,12 +57,12 @@
 		</div>
 		<hr>
 		<div class="row">
-		  <div class="col-md-2">브랜드</div>
-		  <div class="col-md-10">${UsedVo.brandNm }</div>
+		  <div id="showbrand" class="col-md-4">브랜드</div>
+		  <div id="showcategory" class="col-md-8">${UsedVo.brandNm }</div>
 		</div>
 		<div class="row">
-		  <div class="col-md-2">카테고리</div>
-		  <div class="col-md-10">${UsedVo.mcnm }</div>
+		  <div class="col-md-4">카테고리</div>
+		  <div class="col-md-8">${UsedVo.mcnm }</div>
 		</div>
 	</div>
 	<div id="subImgF">
@@ -75,12 +75,12 @@
 		<li class="tab">상품설명</li>
 		<li class="tab">상점문의</li>	
 	</ul>
-	<div id="bigInfo">
-		<div id="detailInfo">
+	<div id="bigInfo" class="row">
+		<div id="detailInfo" class="col-md-6">
 			상품정보
 			<div>${UsedVo.content }</div>
 		</div>
-		<div id="sellInfo">
+		<div id="sellInfo" class="col-md-6">
 			판매자 정보
 			<div id="sellManId">${UsedVo.userId }</div>
 			<div id="hiddenNM">${UsedVo.mbNo }</div>

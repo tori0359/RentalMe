@@ -22,7 +22,7 @@
 		</ul>
 		<div id="joinus">
 			<h3>가입해주셔서 감사합니다 :&#41;</h3>
-			<a href="#" class="btn btn-lg btn-block" id="join_btn"
+			<a href="/main" class="btn btn-lg btn-block" id="join_btn"
 				role="button">메인으로</a>
 		</div>
 	</div>

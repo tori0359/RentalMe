@@ -66,7 +66,7 @@ encoding="UTF-8"?>
 		WHERE A.GDS_CD = B.GDS_CD
 		AND   A.GDS_CD = C.GDS_CD_DETAIL
 		AND   B.GDS_CD = C.GDS_CD_DETAIL
-		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
+		AND   C.GDS_CD=#{gdsCd}
 	</select>	
 	<select id="selectActDetail2" resultType="com.me.rentalme.model.entity.ActVo">
 		SELECT   C.GDS_CD
@@ -94,7 +94,7 @@ encoding="UTF-8"?>
 		WHERE A.GDS_CD = B.GDS_CD
 		AND   A.GDS_CD = C.GDS_CD_DETAIL
 		AND   B.GDS_CD = C.GDS_CD_DETAIL
-		AND   C.GDS_CD_DETAIL=#{gdsCdDetail}
+		AND   C.GDS_CD=#{gdsCd}
 	</select>
 	
 	<insert id="insertActResult" parameterType="com.me.rentalme.model.entity.ActResultVo">	
@@ -154,6 +154,6 @@ encoding="UTF-8"?>
 	<update id="updateMngActStsCd">
 		UPDATE tb_gds300
 		SET ACT_STS_CD='2'
-		WHERE GDS_CD_DETAIL=#{gdsCdDetail} AND ACT_STS_CD='1' 
+		WHERE GDS_CD=#{gdsCd} AND ACT_STS_CD='1' 
 	</update>
 </mapper>

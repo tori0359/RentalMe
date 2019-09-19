@@ -18,47 +18,64 @@
 	}
 	.usedList #search{
 		display: inline-block;
-		margin-left: 10px;
+		margin-left: 5px;
+		height: 32px;
 	}
 	.usedList h3{
 		display: inline-block;
 		margin: auto 20px;
+		margin-bottom: 20px;
+		font-weight: bold;
+		font-size: 30px;
 	}
 	.usedList select{
 		display: inline-block;
 		float: left;
 		width: 10%;
-		height: 30px;
+		height: 31px;
 		min-width: 100px;
 	}
-	#goUsedManager{
-		background-color: black;
-		color: white;
-		float: right;
-		width: 120px;
-		height: 30px;
-		text-align: center;
-		line-height: 30px;
-		margin-left: 5px;
-		font-size: 15px;
-		font-weight: bold;
-		clear: both;
-		margin-bottom: 10px;
+	
+	 #goUsedManager{
+	  background-color: #f4511e;
+	  border: none;
+	  color: white;
+	  padding: 16px 32px;
+	  text-align: center;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  opacity: 0.6;
+	  transition: 0.3s;
+	  float: right;
+	  margin-top: -50px;
+	}
+	#goUsedManager:hover{
+		text-decoration: none;
+		opacity: 1;
 	}
 	.used_modelNm{
 		font-size: 2.2em;
 		font-weight: bold;
+		margin-left: 10px;
 	}
 	.used_price{
 		font-size: 1.5em;
 		font-weight: bold;
+		color: #FF976E;
+		margin-left: 10px;
 	}
 	.whattab{
 		font-size: 1em;
 		color: gray;
+		margin-bottom: 10px;
 	}
 	#form_tab{
+		margin-top: 50px;
 		clear: both;
+		margin-bottom: 100px;
+	}
+	#form_tab .tabcl:last-child .tab_btn{
+		border-right: 1px solid black;
 	}
 	.tabcl{
 		display: inline-block;
@@ -67,9 +84,10 @@
 	}
 	.tabcl>.tab_btn{
 		width: 100%;
-		background-color: white; 
 		outline: 0;
-		border: 1px solid black; 
+		background-color: white;
+		color: black;
+		border-left: 1px solid black;
 	}
 
 
@@ -79,15 +97,25 @@
 	}
 	.line_thing{
 		width: 200px;
-		height: 320px;
+		height: 350px;
 		margin-left: 20px;
 		margin-bottom: 40px;
 		display: inline-block;
 		cursor: pointer;
+		border: 1px solid #DFD9C7;
 	}
 	.line_thing:hover{
-		border: 2px solid black;
+		border: 2px solid #E8BD58;
 		margin-top: -2px;
+		box-shadow: 0px 0px 10px 10px rgba(42, 44, 44, 0.2);
+	}
+	.line_thing>div:first-child:not(){
+		margin-left: 5px;
+	}
+	.used_brandNm{
+		font-size: 20px;
+		margin-bottom: 10px;
+		margin-left: 15px;
 	}
 	.used_thing_img{
 		width: 200px;
@@ -102,9 +130,48 @@
 		float: none;
 	}
 	.tabcl>.activeTab{
-		background-color: black;
-		color: white;
+		color: #FF976E;
+		background-color: white;
 	}
+	
+	
+	
+	.tab_btn{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.tab_btn:hover{
+  background:#fff;
+  color:#E8BD58;
+}
+.tab_btn:before,.tab_btn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #E8BD58;
+  transition:400ms ease all;
+}
+.tab_btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.tab_btn:hover:before,.tab_btn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
 </style>
 <script type="text/javascript">
@@ -155,10 +222,10 @@
 		}
 
 	 	$('.line_thing').mouseover(function(){
-			$(this).children('div').children('img').css('width','196px');
+			$(this).children('div').children('img').css('margin-left','-2px');
 		});		
 		$('.line_thing').mouseout(function(){
-			$(this).children('div').children('img').css('width','200px');
+			$(this).children('div').children('img').css('margin-left','0px');
 		});
 
 		
@@ -191,38 +258,38 @@
 			<option value="2">낮은 가격순</option>
 			<option value="3">높은 가격순</option>
 		</select>
-		<button type="submit">검색</button>
+		<button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
 	</div>
 	</form>
 	<div>
 	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
 	</div>
 <div id="form_tab">
-	<form class="tabcl" action="/used/big">
+	<form class="tabcl" action="/used/big#btn_top">
 		<input type="hidden" name="startPage" value="0">
 		<input type="hidden" name="modelNm">
 		<input type="hidden" name="align" value="1">			
-		<button class="tab_btn" type="submit">대형가전</button>
+		<button id="btn_top" class="tab_btn" type="submit">대형가전</button>
 	</form>
-	<form class="tabcl" action="/used/sml">
+	<form class="tabcl" action="/used/sml#btn_top">
 		<input type="hidden" name="startPage" value="0">
 		<input type="hidden" name="modelNm">
 		<input type="hidden" name="align" value="1">			
 		<button class="tab_btn" type="submit">소형가전</button>
 	</form>
-	<form class="tabcl" action="/used/kit">
+	<form class="tabcl" action="/used/kit#btn_top">
 		<input type="hidden" name="startPage" value="0">
 		<input type="hidden" name="modelNm">
 		<input type="hidden" name="align" value="1">			
 		<button class="tab_btn" type="submit">주방가전</button>
 	</form>
-	<form class="tabcl" action="/used/app">
+	<form class="tabcl" action="/used/app#btn_top">
 		<input type="hidden" name="startPage" value="0">
 		<input type="hidden" name="modelNm">
 		<input type="hidden" name="align" value="1">			
 		<button class="tab_btn" type="submit">가구</button>
 	</form>
-	<form class="tabcl" action="/used/etc">
+	<form class="tabcl" action="/used/etc#btn_top">
 		<input type="hidden" name="startPage" value="0">
 		<input type="hidden" name="modelNm">
 		<input type="hidden" name="align" value="1">			
@@ -232,11 +299,11 @@
 	<div class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
 		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
-			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div>
+			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%; padding: 4px;"></div>
 			<div class="whattab">${bean.mclassName } > ${bean.sclassName }</div>
 			<div class="used_brandNm">${bean.brandNm }</div>
 			<div class="used_modelNm">${bean.modelNm }</div>
-			<div class="used_price">${bean.usedGdsPrice }원</div>
+			<div class="used_price">${bean.usedGdsPrice } 원</div>
 		</div>
 	</c:forEach>
 	</div>

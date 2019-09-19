@@ -204,7 +204,7 @@
 
 	};
 	sock.onclose=function(event){
-		alert('경매가 끝났습니다.<br/> 이용해주셔서 감사합니다.');
+		alert('이용해주셔서 감사합니다.');
 		window.location.href='/act/';
 	};
 	$(function(){
@@ -300,14 +300,12 @@
 									<h4 id="optionSelect1">브랜드</h4>
 									<h4 id="optionSelect1">제품코드</h4>
 									<h4 class="detailText" id="optionSelect1">시작가</h4>
-									<h4 class="detailText" id="optionSelect1">응찰단위</h4>
 									<h4 class="detailText" id="optionSelect1">경매 시작 시간</h4>
 								</div>
 								<div class="col-md-6" style="display:inline-block">
 									<h4 id="optionSelect1">${list1.brandNm }</h4>
 									<h4 id="optionSelect1">${list1.gdsCd }</h4>
 									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###"> ${list2.gdsStPrice }</fmt:formatNumber> 원</h4>
-									<h4 id="optionSelect1"><fmt:formatNumber pattern="#,###.###">${list2.unitPrice }</fmt:formatNumber> 원</h4>
 									<h4 id="optionSelect1">${list2.actStTime }</h4>
 
 								</div>
