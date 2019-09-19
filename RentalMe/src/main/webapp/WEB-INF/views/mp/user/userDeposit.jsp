@@ -223,6 +223,7 @@
 			</c:if>
 			<c:if test="${!empty callVo.remnDeposit}">
 				${callVo.remnDeposit}
+				
 			</c:if>
 		  </fmt:formatNumber> 원</h2>
 	  </div>

@@ -146,6 +146,9 @@
 		-moz-transform:scale(1.1);     /* FireFox */
 		-o-transform:scale(1.1);  
 	}
+	#selfimg{
+	
+	}
 </style>
 <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 <script type="text/javascript">
@@ -211,7 +214,7 @@
 <div id="carousel-example-generic" class="maincar carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner" role="">
     <div class="item active">
       <img class="mainimg" src="imgs/main1.png" alt="...">
       <div class="carousel-caption">
@@ -259,10 +262,11 @@
 				</div>
 			</c:forEach>
 			</div>
+			
+			
 				
 	</div>
 </div>
-
 <div style="background-color:#FAF1E2; height:240px; margin-top:30px;">
 <div class="container">
 	<div class="row">
@@ -283,7 +287,7 @@
 		</div>
 		
 		<div class="col-md-3" style="margin-top:40px; padding:0; margin-left:4px;">
-			<img style="height:160px;" src="imgs/self2.png"/>
+			<img style="height:160px;" src="imgs/card.PNG"/>
 		</div>
 		
 		<div class="col-md-5 eventlist" style="border:1px solid #E6E6E6; display:inline-block; height:165px; margin-left:70px;">
