@@ -87,7 +87,7 @@ public class MngOrderController {
 	}
 	
 	/**
-	 * 주문관리> 입급확인 or 반품확인
+	 * 주문관리> 입급확인
 	 * 
 	 * @param  
 	 * @return String 
@@ -97,7 +97,7 @@ public class MngOrderController {
 	@RequestMapping(value = "/decision", method = RequestMethod.POST) 
 	public String modifyDecisionOdr(@RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("odrNo")String odrNo,
 			RentalAppliVo rentalAppliVo, Model model, HttpSession session ){
-		
+				
 		rentalAppliVo.setCrudGbCd(crudGbCd);
 		rentalAppliVo.setOdrGbCd(odrGbCd);
 		rentalAppliVo.setOdrNo(odrNo);

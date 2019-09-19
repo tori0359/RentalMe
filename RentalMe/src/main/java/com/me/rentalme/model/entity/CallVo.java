@@ -44,6 +44,7 @@ public class CallVo {
 	private String refund;			//환불 요청 예치금 금액
 	private String gdsSclassCd;		//상품 소분류 코드
 	private String gdsMclassCd;		//상품 중분류 코드
+	private String payGbCd;			// 상품결제구분코드
 	
 	public CallVo() {
 	}
@@ -55,7 +56,7 @@ public class CallVo {
 			String chargeDeposit, String useDeposit, String refundDeposit, String depositGbCd, String remnDeposit,
 			String bidPrice, String bidTime, String rImg1, String uImg1, String cnt, String cartSeq, String userNm,
 			String actBidStsCd, String gdsCdDetail, String img1, String refund, String gdsSclassCd,
-			String gdsMclassCd) {
+			String gdsMclassCd, String payGbCd) {
 		super();
 		this.usedGdsNo = usedGdsNo;
 		this.mbNo = mbNo;
@@ -659,5 +660,11 @@ public class CallVo {
 				+ ", getRefund()=" + getRefund() + ", getGdsSclassCd()=" + getGdsSclassCd() + ", getGdsMclassCd()="
 				+ getGdsMclassCd() + ", hashCode()=" + hashCode() + ", getClass()=" + getClass() + ", toString()="
 				+ super.toString() + "]";
+	}
+	public String getPayGbCd() {
+		return payGbCd;
+	}
+	public void setPayGbCd(String payGbCd) {
+		this.payGbCd = payGbCd;
 	}
 }

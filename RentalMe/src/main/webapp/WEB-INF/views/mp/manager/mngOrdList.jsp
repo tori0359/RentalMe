@@ -110,13 +110,13 @@
 																data-target="#myModal" data-odr-no="${bean.odrNo}">입금확인</button>
 														</c:if> 
 														<c:if test="${bean.odrStsGbCd eq 'OC'}">
-															<button id="disabled" style="opacity: 0.5;" type="button"
+															<button id="disabled" style="opacity: 0.3; background: #151515; color: white;"  type="button"
 																class="btn btn-default" style="font-size: 9pt;"
 																disabled="disabled">주문확정</button>
 														</c:if> 
 														<c:if test="${bean.odrStsGbCd eq 'PC'}">
-															<button id="disabled" style="opacity: 0.5;" type="button"
-																class="btn btn-primary" style="font-size: 9pt;"
+															<button id="disabled" style="opacity: 0.3; background: #151515; color: white;" type="button"
+																class="btn btn-default" style="font-size: 9pt;"
 																disabled="disabled">구매확정</button>
 														</c:if> 
 														<c:if test="${bean.odrStsGbCd eq 'RW'}">
@@ -188,7 +188,7 @@
 		</form>
 		<!-- 모달 끝 -->
 		<!-- 반품확인 모달 -->
-        <form id="target" action="/mp/mng/decision" method="post">
+        <form id="target" action="/mp/mng/cart/decision" method="post">
 		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
