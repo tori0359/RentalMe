@@ -110,12 +110,23 @@ public class MpUserDaoImpl implements MpUserDao{
 		return sqlSession.insert("mpUser.inserDeposit",map);
 	}
 
+	//예치금 환불 요청 중복 확인
+	@Override
+	public int selectRefund(String mbNo) throws SQLException {
+		return sqlSession.selectOne("mpUser.selectRefund",mbNo);
+	}
+
+	
+	
 	//예치금 환불 요청
 	@Override
 	public int refundCharge(String refund, String mbNo) throws SQLException {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("refund", refund);
 		map.put("mbNo", mbNo);
+		
+		System.out.println("refund: "+refund);
+		
 		
 		return sqlSession.insert("mpUser.refundDeposit",map);
 	}
@@ -241,6 +252,5 @@ public class MpUserDaoImpl implements MpUserDao{
 		System.out.println("inq갯수:"+cnt);
 		return cnt;
 	}
-
 
 }

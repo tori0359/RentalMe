@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.service.RentalMeService;
 
@@ -37,10 +38,50 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	/**
+	 * 실시간 접수 현황 리스트, 베스트 아이템 리스트
+	 * 
+	 * @param  
+	 * @return ModelAndView 
+	 * @author 신지영
+	 * @exception 
+	 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String getActList(Model model) throws SQLException {
+	public ModelAndView getOrdList(Model model) throws SQLException {
 		logger.debug("main");
-		return "rental/rentalMain";
+		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("ordlist",rentalmeService.ordList());
+		mav.addObject("bestitem",rentalmeService.bestList());
+		
+		mav.setViewName("rental/rentalMain");
+		
+		return mav;
 	}
+	
+	/**
+	 * 베스트 상품 상세페이지로 이동
+	 * 
+	 * @param  
+	 * @return ModelAndView 
+	 * @author 신지영
+	 * @exception 
+	 */
+	/*
+	 * @RequestMapping(value = "/rentalme/appli/${menu}/detail/${best.gdsCd} ",
+	 * method = RequestMethod.GET) public ModelAndView
+	 * getbestDetail(@PathVariable("menu") String
+	 * gdsSclassCd, @PathVariable("gdsCd") String gdsCd, Model model) throws
+	 * SQLException { logger.debug("main");
+	 * 
+	 * ModelAndView mav= new ModelAndView();
+	 * mav.addObject("ordlist",rentalmeService.ordList());
+	 * mav.addObject("bestitem",rentalmeService.bestList());
+	 * 
+	 * mav.setViewName("rental/rentalMain");
+	 * 
+	 * return mav; }
+	 */
 	
 }

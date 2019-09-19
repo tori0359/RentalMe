@@ -265,23 +265,31 @@ public class UserController {
 	 * @param @return ModelAndView @author 신지영 @exception
 	 */
 	@RequestMapping(value = "/deposit/refund", method = RequestMethod.POST)
-	public ModelAndView refundtDeposit(String refund,
-			HttpSession session) throws SQLException {
+	@ResponseBody
+	public String refundtDeposit(@RequestParam String refund, HttpSession session) throws SQLException {
 		log.debug("예치금 환불 컨트롤러...");
+		
 
 		// 세션에서 mbno를 불러와서 이름 가져오기
 		String mbNo = (String) session.getAttribute("loginMbNo");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userVo", mpUserService.getName(mbNo));
 		
-		//예치금 환불 요청하기
-		mpUserService.refundCharge(refund,mbNo);
+		//예치금 환불 요청 전 중복 환불 요청인지 확인하기
+		String duplmsg = mpUserService.selectRefund(mbNo);
+			if(duplmsg.equals("duplication")) {
+				
+				duplmsg="duplication";
+				 
+			}else {
+				//중복 환불 요청건이 없으면 요청건 입력하기
+				mpUserService.refundCharge(refund,mbNo);
+				duplmsg="not duplication";
+				
+			}
 
-		// 현재 예치금금액으로 update
-		//mpUserService.updateDeposit(chargeDeposit, mbNo);
 
-		mav.setViewName("redirect:/mp/deposit");
-		return mav;
+		return duplmsg;
 	}
 
 	/**

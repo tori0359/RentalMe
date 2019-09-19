@@ -44,6 +44,9 @@ public interface MpUserDao {
 	//예치금 충전
 	int insertCharge(String userId, String depositGbCd, String chargeDeposit,String mbNo) throws SQLException;
 
+	//예치금 환불 요청 중복 확인
+	public int selectRefund(String mbNo) throws SQLException;
+	
 	//예치금 환불 요청
 	int refundCharge(String refund, String mbNo) throws SQLException;
 	
@@ -78,6 +81,8 @@ public interface MpUserDao {
 
 	//사용자 비밀번호 변경
 	int updPw(String userId, String hashPw);
+
+	
 
 
 	
