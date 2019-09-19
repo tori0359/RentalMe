@@ -16,6 +16,8 @@ public class ProductVo {
 	private String prdAsContent;	// AS내용
 	private String delStat;			// 삭제여부 
 	
+	
+	//추가
 	private String img1			;		// 이미지경로1
 	private String img2			;		// 이미지경로2
 	private String img3			;		// 이미지경로3

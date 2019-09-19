@@ -30,7 +30,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<style type="text/css">
 		#noticeBar{
-			height:250px;
+			height:230px;
 		}
 		#noticeBar table{
 			margin-top: 80px;
@@ -62,21 +62,32 @@
 			width:100%;
 			height:50px;
 		}
-		#content>table>tr>th:nth-child(1){
+		th:nth-child(1){
 			width:20%;
-			background:blue;
 		}
-		#content>table>tr>th:nth-child(2){
+		th:nth-child(2){
 			width:60%;
 		}
-		#content>table>tr>th:nth-child(3){
+		th:nth-child(3){
 			width:20%;
 		}
 		#csContent{
 			height:800px;
 		}
 		#mainTable{
-			height:1000px;
+			height:900px;
+		}
+		#firTable tr>td{
+			cursor:pointer;
+		}
+		#aSub{
+			text-decoration:none;
+		}
+		#aSub:hover{
+			color:red;
+		}
+		th{
+			text-align:center;
 		}
 	</style>
 </head>
@@ -87,7 +98,7 @@
 	
 </div>
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
-	<table>
+	<table id="firTable">
 		<tr>
 			<td>공지사항</td>
 			<td>FAQ</td>
@@ -99,14 +110,14 @@
 	<div>
 	<table class="table table-hover" >
 		<tr>
-			<td align="center">번호</td>
-			<td align="center">제목</td>
-			<td align="center">작성일</td>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성일</th>
 		</tr>
 			<c:forEach items="${alist}" var="bean">
 				<tr>
 					<td align="center">${bean.noticNo }</td>
-					<td align="center"><a href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td align="left"><a id="aSub" href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
 					<td align="center">${bean.regDt }</td>
 				</tr>
 			</c:forEach>

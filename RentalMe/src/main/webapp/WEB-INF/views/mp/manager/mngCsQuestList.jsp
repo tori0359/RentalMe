@@ -12,14 +12,20 @@
 	#uptext{
 		height:130px;
 	}
-	#upmenu{
-		text-align:center;
-	}
 	#ansNo{
 		color:red;
 	}
 	#ansYe{
 		color:blue;
+	}
+	#aSub{
+		text-decoration:none;
+	}
+	#aSub:hover{
+		color:red;
+	}
+	#upMenu>th{
+		text-align:center;
 	}
 </style>
 </head>
@@ -33,19 +39,19 @@
 	</div>
 	
 	<table class="table table-hover">
-		<tr align="center">
-			<td>회원번호</td>
-			<td>번호</td>
-			<td>제목</td>
-			<td>등록일</td>
-			<td>답변유무</td>
+		<tr id="upMenu">
+			<th>회원번호</th>
+			<th>번호</th>
+			<th>제목</th>
+			<th>등록일</th>
+			<th>답변유무</th>
 		</tr>
 			<!-- <form action="" method="get"> -->
 			<c:forEach items="${inqlist}" var="bean">
 				<tr align="center">
 						<td>${bean.mbNo}</td>
 						<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
-						<td><a href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
+						<td style="text-align:left"><a id="aSub" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
 						<td>${bean.regDt}</td>
 						<c:if test="${bean.questStsCd eq '1'}">
 							<td id="ansNo">N</td>

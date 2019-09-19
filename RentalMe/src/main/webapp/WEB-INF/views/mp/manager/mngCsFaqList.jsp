@@ -9,16 +9,20 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function(){
 	
-
-	});
 </script>
 <style type="text/css">
 	#btn00{
 		text-align:right;
 	}
-	
+	#notcH{
+		text-decoration:none;
+		color:red;
+	}
+	#faqH{
+		text-decoration:none;
+		color:blue;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
@@ -29,7 +33,7 @@
 <!-- 관리자 공지게시판 리스트 -->
 <h1>공지/FAQ</h1>
 <div id="content" class="col-md-10 col-md-offset-1">
-<div align="right"><a href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
+<div align="right" id="text"><a id="notcH" href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a id="faqH" href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
 	<table class="table table-hover">
 		<tr>
 			<th>번호</th>

@@ -236,7 +236,7 @@
 	      window.onload=function(){
 					$('#cancel').click(function(){
 							window.history.back();
-						})
+					})
 						
 		         $('#modalBtn').click(function(){
 		         
@@ -440,34 +440,6 @@
             	<td><label>제품설명</label></td>
             	<td><textarea style="resize:none;" name="content"></textarea></td>
             </tr>
-             <tr>
-	             <td><label for="imgfile" id="imgfile_label">이미지 업로드</label></td>
-	             <td>
-	                <p>* 상품이미지는 640x640에 최적화 되어 있습니다.<br/>
-			           - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br/>
-			           - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
-			           최대 지원 사이즈인 640x640으로 리사이즈 해서 올려주세요<br/>
-			           (개당 이미지 최대 10M)
-		            </p>
-	             		<div id="used_imgUpload">
-	                        <input type="file" id="imgfile" name="imgfile" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp">
-	                    </div>
-	                    <div id="used_main_img">
-	                    
-                   		</div>
-                    <div id="used_sub_img_group">
-	                        <div class="used_sub_img" id="sub_img1">
-									
-	                        </div>
-	                        <div class="used_sub_img" id="sub_img2">
-	
-	                        </div>
-	                        <div class="used_sub_img" id="sub_img3">
-	
-	                        </div>
-	                </div>
-	             </td>
-             </tr>
             <tr>
             	<td></td>
                 <td id="daeButton" >

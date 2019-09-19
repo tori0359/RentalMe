@@ -83,7 +83,7 @@
 		WHERE DECL_NO=#{declNo}
 	</update>
 	
-	<!--민수 -->
+	<!--추가 -->
 	
 	<!--렌탈상품리스트 -->
 	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
@@ -150,13 +150,28 @@
   		SELECT COUNT(GDS_CD) AS CNT FROM TB_GDS100 where GDS_MCLASS_CD='60';
   	</select>
   	
+  	<!--렌탈 상품등록  -->
   	<insert id="rentalGoodsAdd100" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
   		INSERT INTO TB_GDS100(GDS_CD,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_NM,BRAND_NM,MODEL_NM,GDS_GB_CD) 
-  		VALUES(#{gdsCd},#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})
+  		VALUES(
+		  (SELECT CONCAT('10','${gdsMclassCd}','${gdsSclassCd}',(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100 a),'10',#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})
   	</insert>
   	<insert id="rentalGoodsAdd200" parameterType="com.me.rentalme.model.entity.ProductVo">
-  		insert into tb_gds200(GDS_CD,GDS_PRICE,AGREE_TERM,DELIVER_COST,INSTAL_COST,AS_CONDITION,IMG1,IMG2,IMG3,IMG4,IMG5,IMG6,IMG7,IMG8,IMG9,IMG10,IMG11,IMG12) 
-  		values(#{prdCode},#{prdPrice},#{prdContDate},#{prdDeliveryCost},#{prdInstCost},#{prdAsContent},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10},#{img11},#{img12})
+  		INSERT INTO TB_GDS200(GDS_CD,GDS_PRICE,AGREE_TERM,DELIVER_COST,INSTAL_COST,AS_CONDITION,IMG1,IMG2,IMG3,IMG4,IMG5,IMG6,IMG7,IMG8,IMG9,IMG10,IMG11,IMG12) 
+  		VALUES(
+  		(SELECT CONCAT(#{prdCode},(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100 a),#{prdPrice},#{prdContDate},#{prdDeliveryCost},#{prdInstCost},#{prdAsContent},#{img1},#{img2},#{img3},#{img4},#{img5},#{img6},#{img7},#{img8},#{img9},#{img10},#{img11},#{img12})
   	</insert>
-	
+  	
+  	<!-- 렌탈상품등록 리스트 -->
+  	<select id="searchScGoods">
+  		SELECT * FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}
+  	</select>
+  	<select id="selectNum" resultType="long">
+  		SELECT CONCAT('10',${mGoodsNum},${sGoodsNum},(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100;
+  	</select>
+  	
+	<!-- 시퀀스 증가 -->
+	<insert id="insertSeq">
+		INSERT INTO SEQ_GDS100 VALUES(NULL);
+	</insert>
 </mapper>

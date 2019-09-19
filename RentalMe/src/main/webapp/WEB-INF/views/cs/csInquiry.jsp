@@ -96,6 +96,9 @@
 		#contentcenter{
 			height:400px;
 		}
+		#firTable tr>td{
+			cursor:pointer;
+		}
 		
 	</style>
 </head>
@@ -106,7 +109,7 @@
 	
 </div>
 	<div id="noticeBar" class="col-md-10 col-md-offset-1">
-		<table>
+		<table id="firTable">
 			<tr>
 				<td>공지사항</td>
 				<td>FAQ</td>

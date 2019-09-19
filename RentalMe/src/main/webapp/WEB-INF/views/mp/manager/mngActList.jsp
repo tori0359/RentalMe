@@ -56,8 +56,9 @@
 <body>
 <div id="head"><h2>경매상품 리스트</h2></div>
 <script>
-		 $("#choosedel").click(function(){
-		  var confirm_val = confirm("정말 삭제하시겠습니까?");
+		$('#choosedel').click(function(){
+			 console.log("hh");
+		 var confirm_val = confirm("정말 삭제하시겠습니까?");
 		  
 		  if(confirm_val) {
 		   var checkArr = new Array();
@@ -75,7 +76,7 @@
 		    }
 		   });
 		  } 
-		 });
+	});
 </script>
 <div id="contentTable" class="col-md-10 col-md-offset-1">
 <a id="choosedel">선택삭제</a>
@@ -91,7 +92,7 @@
 				<tr>
 					<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
        				</td>
-					<td style="text-align:center"><input type="hidden" name="num" value="${bean.gdsCd}" />${bean.gdsCd}</td>
+					<td style="text-align:center"><input type="hidden" name="num" value="${bean.gdsCd}"/>${bean.gdsCd}</td>
 					<td><a>${bean.gdsNm}</a></td>
 					<td style="text-align:center">${bean.regDt}</td>
 					<c:choose>
