@@ -80,12 +80,24 @@
 		};
 		sock.send(JSON.stringify(msg));
 	}
+	function endBid(){
+		var msg={
+			type: "endBid",
+			text: 'endBid',
+			id: 'admin',
+			cnt: 0
+		};
+		sock.send(JSON.stringify(msg));
+	}
 	$(function(){
 		$('.sendMsg').click(function(){
 			sendServer($(this));
 		});
 		$('#countDown').click(function(){
 			countDown();
+		});
+		$('#bidEndBtn').click(function(){
+			endBid();
 		});
 	});
 </script>
@@ -107,7 +119,7 @@
 	<form action="/act/result" method="post">
 	<input type="text" name="gdsCd" value="${list1.gdsCd }">
 	<input type="text" id="bidresult" name="bidresult">
-	<button>종료</button>
+	<button id="bidEndBtn">종료</button>
 	</form>
 </body>
 </html>

@@ -48,4 +48,5 @@ public interface ActDao {
 
 	void deleteActList(String gdsCd) throws SQLException;
 	int actListCnt() throws SQLException;
+	int updateMngActStsCd(String gdsCd) throws SQLException;
 }

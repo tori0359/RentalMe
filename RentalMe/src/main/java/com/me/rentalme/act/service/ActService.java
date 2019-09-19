@@ -50,4 +50,5 @@ public interface ActService {
 	
 	//경매상품리스트 갯수
 	int actListCnt() throws SQLException;
+	int updateMngActStsCd(String gdsCd) throws SQLException;
 }
