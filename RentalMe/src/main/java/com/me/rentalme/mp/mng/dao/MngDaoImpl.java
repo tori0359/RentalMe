@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,8 +90,14 @@ public class MngDaoImpl implements MngDao{
 	}
 
 	@Override
-	public int changeDeclSts(String declNo) throws SQLException {
-		return sqlSession.update("mpMng.changeDeclSts", declNo);		//신고상태 처리완료로 바꾸기
+	public int changeDeclSts(String declNo) throws SQLException {		//신고상태 처리완료 업데이트
+				
+		String[] arr=declNo.split(",");
+		for(int i=0; i<arr.length; i++) {
+			sqlSession.update("mpMng.changeDeclSts", arr[i]);
+		}
+		
+		return 0;
 	}
 	
 	@Override

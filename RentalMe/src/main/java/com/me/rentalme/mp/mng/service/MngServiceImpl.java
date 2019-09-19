@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -87,7 +88,20 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
-	public int changeDeclSts(String declNo) throws SQLException {
+	public int changeDeclSts(List<String> declList) throws SQLException {
+		
+		String declNo = "";
+		for(String strDeclNo : declList){
+			if(strDeclNo ==null) {
+				declNo = strDeclNo;
+			}else {
+				declNo = strDeclNo+","+ declNo;
+				
+			}
+		}
+		
+		declNo = declNo.substring(0, declNo.length()-1);
+		
 		return mngDao.changeDeclSts(declNo);					//신고상태 처리완료로 바꾸기
 	}
 	

@@ -2,6 +2,7 @@ package com.me.rentalme.mp.mng.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.CallVo;
@@ -31,7 +32,7 @@ public interface MngDao {
 	int updateStsRtn(String ordNo) throws SQLException;						//상품상태 반품확정으로 바꾸기
 	
 	List<DeclVo> selectDecl() throws SQLException;							//전체 신고 리스트
-	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
+	int changeDeclSts(String declNo) throws SQLException;		//신고상태 처리완료로 바꾸기
 	
 	int selectusedListCnt();												//전체 중고 리스트 총갯수
 	

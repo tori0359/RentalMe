@@ -97,7 +97,7 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">렌탈상품 관리</a>
+                                            <a class="nav-link" href="/mp/mng/goodsList">렌탈상품 관리</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/actList">경매상품 관리</a>
@@ -106,8 +106,18 @@
                                 </div>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fab fa-fw fa-wpforms"></i>중고거래관리<span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fab fa-fw fa-wpforms"></i>경매관리<span class="badge badge-success">6</span></a>
                                 <div id="submenu-3" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/mp/mng/act/spec">경매관리</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>중고거래관리<span class="badge badge-success">6</span></a>
+                                <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/used">중고거래 관리</a>
@@ -119,8 +129,8 @@
                                 </div>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-quora"></i>고객센터관리<span class="badge badge-success">6</span></a>
-                                <div id="submenu-4" class="collapse submenu" style="">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fab fa-quora"></i>고객센터관리<span class="badge badge-success">6</span></a>
+                                <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/csNoticeList">공지사항/FAQ관리</a>
@@ -132,8 +142,8 @@
                                 </div>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fa fa-fw fa-user-circle"></i>사용자관리<span class="badge badge-success">6</span></a>
-                                <div id="submenu-5" class="collapse submenu" style="">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i>사용자관리<span class="badge badge-success">6</span></a>
+                                <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/userList">사용자관리</a>

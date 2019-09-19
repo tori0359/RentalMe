@@ -11,7 +11,12 @@
 <style type="text/css">
 	#headAct{
 		clear: both;
-		height: 300px;
+		height: 100%;
+		margin-top:100px;
+	}
+	#countimg{
+		width:100px;
+		padding:10px;
 	}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
@@ -43,7 +48,7 @@
 			$('#bidList').empty();
 		}else if(typeof(msg)=='number'){
 			$('#countView').text('');
-			$('#countView').append('<img alt="count" src="/imgs/'+msg+'.png">');
+			$('#countView').append('<img id="countimg" alt="count" src="/imgs/'+msg+'.png">');
 		}else if(type=='endMsg'){
 			$('#sendMsg').attr('disabled', true);
 			$('#countView').text('');
@@ -102,24 +107,31 @@
 	});
 </script>
 </head>
-<div id="headAct"></div>
 <body>
-	<div id="nowPrice"></div>
-	<div id="actLive"></div>
-	<input type="button" class="sendMsg" value="1000">
-	<input type="button" class="sendMsg" value="5000">
-	<input type="button" class="sendMsg" value="10000">
-	<input type="button" class="sendMsg" value="50000">
-	<input type="button" class="sendMsg" value="100000">
-	<div id="countView"></div>
-	<button id="countDown">끝내기 카운트</button>
-	<ol id="bidList"></ol>
-	<ol id="listMsg">
-	</ol>
-	<form action="/act/result" method="post">
-	<input type="text" name="gdsCd" value="${list1.gdsCd }">
-	<input type="text" id="bidresult" name="bidresult">
-	<button id="bidEndBtn">종료</button>
-	</form>
+<div id="headAct" class="container">
+	<div class="row">
+	<h3 style="text-align:center;">경매 관리자 페이지</h3>
+		<div class="col-md-4 col-md-offset-4" style="border:1px solid lightgrey; padding:30px;">
+			<div id="nowPrice"></div>
+			<div id="actLive"></div>
+			<input type="button" class="sendMsg" value="1000">
+			<input type="button" class="sendMsg" value="5000">
+			<input type="button" class="sendMsg" value="10000">
+			<input type="button" class="sendMsg" value="50000">
+			<input type="button" class="sendMsg" value="100000">
+			<div id="countView"></div>
+			<button id="countDown">끝내기 카운트</button>
+			<ol id="bidList"></ol>
+			<ol id="listMsg">
+			</ol>
+			<form action="/act/result" method="post">
+			<input type="text" name="gdsCd" value="${list1.gdsCd }">
+			<input type="text" id="bidresult" name="bidresult">
+			<button id="bidEndBtn">종료</button>
+			</form>
+		</div>
+	</div>
+</div>
+<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>

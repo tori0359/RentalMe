@@ -89,7 +89,6 @@ function userDatail(mbNo){
 }
 //탈퇴하기 버튼을 눌렀을 때
 function userLeave(mbNo){
-	alert(mbNo);
 	 $.ajax({
  		type : 'POST',
  		url  : 'userLeave',

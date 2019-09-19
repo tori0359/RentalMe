@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.mp.mng.service.MngService;
 
 @Controller
@@ -51,7 +53,21 @@ public class MngDepositController {
 	 */
 	@RequestMapping(value = "/deposit/{idx}", method = RequestMethod.GET)
 	public String getMngDepositDetail(Model model,@PathVariable("idx") String mbNo) throws SQLException {
-		model.addAttribute("alist", mngService.selectDepOne(mbNo));
+		
+		List<CallVo> list = mngService.selectDepOne(mbNo);
+		String userId = "";
+		String userNm = "";
+		if(list.size() != 0) {
+			userId = list.get(0).getUserId();
+			userNm = list.get(0).getUserNm();
+		}else {
+			userId = "";
+			userNm = "";
+		}
+		
+		model.addAttribute("alist", list);
+		model.addAttribute("userId", userId);
+		model.addAttribute("userNm", userNm);
 		
 		return "mp/manager/mngDepositDetail";
 	}
