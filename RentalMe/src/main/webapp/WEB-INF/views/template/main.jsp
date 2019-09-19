@@ -97,7 +97,7 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">렌탈상품 관리</a>
+                                            <a class="nav-link" href="/mp/mng/goodsList">렌탈상품 관리</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/actList">경매상품 관리</a>

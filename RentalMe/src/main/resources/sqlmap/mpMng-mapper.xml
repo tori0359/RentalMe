@@ -37,10 +37,16 @@
 		ORDER BY B.CHG_DT DESC
 	</select>
 	<select id="selectDepOne" resultType="com.me.rentalme.model.entity.CallVo">
-		SELECT DEPOSIT_SEQ,CHARGE_DEPOSIT,USE_DEPOSIT,REFUND_DEPOSIT,CHG_DT
-		FROM tb_mb110
-		WHERE MB_NO=#{mbNo}
-		ORDER by CHG_DT DESC
+		SELECT B.DEPOSIT_SEQ
+		     , B.CHARGE_DEPOSIT
+		     , B.USE_DEPOSIT
+		     , B.REFUND_DEPOSIT
+		     , B.CHG_DT
+		     , (SELECT A.USER_NM FROM TB_USER100 A WHERE A.MB_NO=B.MB_NO) AS USER_NM
+		     , (SELECT A.USER_ID FROM TB_USER100 A WHERE A.MB_NO=B.MB_NO) AS USER_ID
+		FROM TB_MB110 B
+		WHERE B.MB_NO=#{mbNo}
+		ORDER by B.CHG_DT DESC
 	</select>
 	
 	<!-- 중고 -->
