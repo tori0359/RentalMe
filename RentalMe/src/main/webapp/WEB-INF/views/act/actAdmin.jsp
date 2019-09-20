@@ -11,6 +11,7 @@
 <style type="text/css">
 	#headAct{
 		clear: both;
+		width: 800px;
 		height: 100%;
 		margin-top:100px;
 	}
@@ -18,6 +19,116 @@
 		width:100px;
 		padding:10px;
 	}
+ 	#actLive{
+ 		height: 500px;
+ 		overflow: auto;
+ 	}
+ 	#bidListDiv{
+ 		height: 500px;
+ 	}
+ 	.sendMsg{
+ 		width: 20%;
+		background-color: white;
+		height: 50px;
+		color: black;
+		border: 2px solid black;
+		transition-duration: 0.4s;
+		float: left;
+		font-weight: bold;
+		font-size: 30px;
+	}
+	.sendMsg:hover {
+		background-color: black;
+  		color: white;
+	}
+/*	
+	#countDown{
+		background-color: white;
+		color: black;
+		border: 2px solid #4CAF50;
+		transition-duration: 0.4s;
+	}
+	#countDown:hover{
+		background-color: #4CAF50;
+  		color: white;
+	} 
+	 */
+	 #countDownDiv{
+	 	text-align: center;
+	 }
+	 #countDown{
+	margin: 0px auto;
+  position:relative;
+  display:inline-block;
+  margin:20px;
+  cursor: pointer;
+}
+
+#countDown a{
+  color:white;
+  font-family:Helvetica, sans-serif;
+  font-weight:bold;
+  font-size:20px;
+  text-align: center;
+  text-decoration:none;
+  background-color:#FFA12B;
+  display:block;
+  position:relative;
+  padding:20px 30px;
+  width: 200px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=#000, offx=0px, offy=1px);
+  
+  -webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  -moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+  
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#countDown a:active{
+  top:10px;
+  background-color:#F78900;
+  
+  -webkit-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  -moz-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+  box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+}
+
+#countDown:after{
+  content:"";
+  height:100%;
+  width:104%;
+  padding:4px;
+  position: absolute;
+  bottom:-15px;
+  left:-4px;
+  z-index:-1;
+  background-color:#2B1800;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#bidEndBtn{
+	margin-top: -10px;
+	float: right;
+}
+
+#moneyIn{
+	font-family:"nanumB";
+	font-weight: bold;
+	font-size: 17px;
+}
+#userMsg{
+	clear: both;
+}
+#adMsg{
+	float: right;
+	clear: both;
+}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 <script type="text/javascript">
@@ -36,15 +147,15 @@
 		
 		$('#liveviewcnt').text(msg.cnt);
 		if(type=='bid'){
-			$('#actLive').append(id+"님께서 응찰하셨습니다<br/>");
+			$('#actLive').append('<div id="userMsg">'+id+"님께서 응찰하셨습니다</div>");
 			$('#bidList').append("<li>"+id+"</li>");
 			$('#countView').text('');
 		}else if(type=='enter'){
 			$('#actLive').append(id+"님이 경매장에 입장하셨습니다<br/>");
 		}else if(type=='adminMsg'){
-			$('#actLive').append(text+"원 응찰하실 분?<br/>");
+			$('#actLive').append('<div id="adMsg"><span id="moneyIn">'+text+"</span>원 응찰하실 분?</div>");
 			$('#nowPrice').text('');
-			$('#nowPrice').append("현재가격: "+text+"원");
+			$('#nowPrice').append("현재가격: <span id='moneyIn'>"+text+"<span>원");
 			$('#bidList').empty();
 		}else if(typeof(msg)=='number'){
 			$('#countView').text('');
@@ -94,6 +205,7 @@
 		};
 		sock.send(JSON.stringify(msg));
 	}
+	
 	$(function(){
 		$('.sendMsg').click(function(){
 			sendServer($(this));
@@ -104,6 +216,9 @@
 		$('#bidEndBtn').click(function(){
 			endBid();
 		});
+		$('#actLive').bind("DOMSubtreeModified",function(){
+			$('#actLive').scrollTop($('#actLive').prop('scrollHeight'));
+		});
 	});
 </script>
 </head>
@@ -111,23 +226,22 @@
 <div id="headAct" class="container">
 	<div class="row">
 	<h3 style="text-align:center;">경매 관리자 페이지</h3>
-		<div class="col-md-4 col-md-offset-4" style="border:1px solid lightgrey; padding:30px;">
-			<div id="nowPrice"></div>
-			<div id="actLive"></div>
+		<div id="actLive" class="col-md-9" style="border:1px solid black;"></div>
+		<div id="bidListDiv" class="col-md-3" style="border:1px solid black;"><div id="nowPrice"></div><ol id="bidList"></ol></div>
+		<div style="border:1px solid lightgrey; padding:30px;">
 			<input type="button" class="sendMsg" value="1000">
 			<input type="button" class="sendMsg" value="5000">
 			<input type="button" class="sendMsg" value="10000">
 			<input type="button" class="sendMsg" value="50000">
 			<input type="button" class="sendMsg" value="100000">
 			<div id="countView"></div>
-			<button id="countDown">끝내기 카운트</button>
-			<ol id="bidList"></ol>
+			<div id="countDownDiv"><div id="countDown"><a>끝내기 카운트</a></div></div>
 			<ol id="listMsg">
 			</ol>
 			<form action="/act/result" method="post">
-			<input type="text" name="gdsCd" value="${list1.gdsCd }">
-			<input type="text" id="bidresult" name="bidresult">
-			<button id="bidEndBtn">종료</button>
+			<input type="hidden" name="gdsCd" value="${list1.gdsCd }">
+			<input type="hidden" id="bidresult" name="bidresult">
+			<button id="bidEndBtn" class="btn btn-danger">경매종료</button>
 			</form>
 		</div>
 	</div>
