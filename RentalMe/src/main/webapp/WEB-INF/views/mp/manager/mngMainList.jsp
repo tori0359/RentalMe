@@ -144,6 +144,9 @@
                     <!-- ============================================================== -->
                 </div>
                 <input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
+                <a href="${pageContext.request.contextPath}/mp/mng/rentalAddPage">
+                	<input class="btn btn-primary btn-sm" type="button" id="btn01" value="등록">
+                </a>
 			</div>
 			<jsp:include page="../../template/footerAdmin.jsp"></jsp:include>
 		</div>
