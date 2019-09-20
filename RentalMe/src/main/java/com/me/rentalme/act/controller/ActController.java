@@ -203,10 +203,10 @@ public class ActController {
 		return "redirect:/act/";
 	}
 	
+	/* 사용자 경매내역 취소(포기) */
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
 	public String getActCancel(Model model,
 			@RequestParam("gdsCd") String gdsCd) throws SQLException {
-		
 		actService.updateMngBidCancel(gdsCd);
 		actService.updateBidWin(gdsCd);
 		
