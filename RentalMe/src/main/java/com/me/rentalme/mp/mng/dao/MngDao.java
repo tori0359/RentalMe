@@ -10,6 +10,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.QuestVo;
 import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
@@ -85,4 +86,6 @@ public interface MngDao {
 	int updateRefundCancel(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
 	void deleteAppli(String gdsCd) throws SQLException;
 	
+	List<QuestVo> selectQuestList() throws SQLException;						//관리자 회원 상담관리 리스트 출력
+	int updateQuest(String questNo) throws SQLException;						//관리자 회원 상담 확인
 }

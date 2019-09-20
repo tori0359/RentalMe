@@ -141,6 +141,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="/mp/mng/InqList">1:1문의관리</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/mp/mng/quest">상담관리</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
