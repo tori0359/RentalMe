@@ -266,7 +266,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/deposit/refund", method = RequestMethod.POST)
 	@ResponseBody
-	public String refundtDeposit(@RequestParam String refund, HttpSession session) throws SQLException {
+	public String refundtDeposit(@RequestParam String refund,@RequestParam String remnDeposit , HttpSession session) throws SQLException {
 		log.debug("예치금 환불 컨트롤러...");
 		
 
@@ -277,18 +277,26 @@ public class UserController {
 		
 		//예치금 환불 요청 전 중복 환불 요청인지 확인하기
 		String duplmsg = mpUserService.selectRefund(mbNo);
-			if(duplmsg.equals("duplication")) {
-				
-				duplmsg="duplication";
-				 
-			}else {
-				//중복 환불 요청건이 없으면 요청건 입력하기
-				mpUserService.refundCharge(refund,mbNo);
-				duplmsg="not duplication";
-				
-			}
-
-
+		
+		int refund2 = Integer.parseInt(refund);
+		int remnDeposit2 = Integer.parseInt(remnDeposit);
+		
+		//예치금이 환불 요청 금액보다 클때만 중복 확인
+		if(remnDeposit2 > refund2) {
+					
+				if(duplmsg.equals("duplication")) {
+							
+					duplmsg="duplication";
+							 
+				}else {
+						//중복 환불 요청건이 없으면 요청건 입력하기
+						mpUserService.refundCharge(refund,mbNo);
+						duplmsg="not duplication";
+				}
+		}else {
+			duplmsg="not enough deposit";
+		}
+					
 		return duplmsg;
 	}
 

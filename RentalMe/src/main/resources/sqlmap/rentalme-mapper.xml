@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectOrdList" resultType="com.me.rentalme.model.entity.CallVo">
-		SELECT 	A.MB_NO, A.ODR_DT, B.USER_ID 
+		SELECT 	A.MB_NO, DATE_FORMAT(A.ODR_DT, '%Y-%m-%d') AS ODR_DT, B.USER_ID 
 		FROM 	TB_ODR100 A,TB_USER100 B 
 		WHERE 	A.MB_NO = B.MB_NO 
 		ORDER BY ODR_DT DESC
@@ -22,10 +22,21 @@
 	<select id="selectBestList" resultType="com.me.rentalme.model.entity.CallVo">
 		SELECT 	A.GDS_CD, A.GDS_REVIEW_NO, COUNT(*) as cnt, B.GDS_NM, B.BRAND_NM, B.GDS_SCLASS_CD, B.GDS_MCLASS_CD, C.GDS_PRICE, C.IMG1 AS RImg1
 		FROM 	TB_GDS210 A, TB_GDS100 B, TB_GDS200 C 
-		where a.GDS_CD = b.gds_cd and a.GDS_CD = C.GDS_CD
+		WHERE A.GDS_CD = B.GDS_CD AND A.GDS_CD = C.GDS_CD
 		GROUP BY GDS_CD 
 		ORDER BY cnt DESC 
 		LIMIT 	12
+	</select>
 	
+	<select id="selectNewList" resultType="com.me.rentalme.model.entity.CallVo">
+		SELECT 	(select right(A.GDS_CD,'2')) as GDS_CD, B.GDS_NM, B.BRAND_NM, B.GDS_SCLASS_CD, B.GDS_MCLASS_CD, C.GDS_PRICE, C.IMG1 AS RImg1
+		FROM 	TB_GDS210 A, TB_GDS100 B, TB_GDS200 C 
+		WHERE A.GDS_CD = B.GDS_CD AND A.GDS_CD = C.GDS_CD
+		ORDER BY  GDS_CD DESC 
+		LIMIT 	12
+	</select>
+	
+	<select id="selectCsList" resultType="com.me.rentalme.cs.entity.CsVo">
+		SELECT NOTIC_NO,SUB FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC LIMIT 5;
 	</select>
 </mapper> 
