@@ -83,4 +83,6 @@ public interface MngDao {
 	List<RefundVo> selectRefundList() throws SQLException;						//관리자 회원 환불 리스트출력
 	int updateRefundConfirm(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
 	int updateRefundCancel(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
+	void deleteAppli(String gdsCd) throws SQLException;
+	
 }

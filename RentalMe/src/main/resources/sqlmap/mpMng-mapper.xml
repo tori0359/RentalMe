@@ -273,6 +273,7 @@
 	<insert id="insertSeq">
 		INSERT INTO SEQ_GDS100 VALUES(NULL);
 	</insert>
+
 	
 	<!-- 관리자 - 회원 환불 리스트 -->
 	<select id="selectRefundList" resultType="com.me.rentalme.model.entity.RefundVo">
@@ -291,5 +292,8 @@
 		UPDATE TB_MB120
 		SET DEPOSIT_REFUND_GB_CD='3'
 		WHERE DEPOSIT_REFUND_GB_CD='1' AND MB_NO=#{mbNo}
+	</update>
+	<update id="deleteAppli" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+		UPDATE TB_GDS100 SET DEL_YN='Y' WHERE GDS_CD=#{GDSCD}
 	</update>
 </mapper>

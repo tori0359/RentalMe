@@ -126,14 +126,17 @@ public class CsServiceImpl implements CsService {
 
 	@Override
 	public int noticListCnt() throws SQLException {
-		// TODO Auto-generated method stub
 		return csDao.noticListCnt();
 	}
 
 	@Override
 	public int inquiryListCnt() throws SQLException {
-		// TODO Auto-generated method stub
 		return csDao.inquiryListCnt();
+	}
+
+	@Override
+	public int faqListCnt12(Search search) throws SQLException {
+		return 0;
 	}
 
 

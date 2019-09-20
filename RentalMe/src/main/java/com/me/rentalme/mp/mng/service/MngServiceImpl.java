@@ -327,5 +327,10 @@ public class MngServiceImpl implements MngService {
 		return mngDao.updateRefundCancel(mbNo);
 	}
 	
+	@Override
+	public void deleteAppli(String gdsCd) throws SQLException {
+		mngDao.deleteAppli(gdsCd);		
+	}
+	
 
 }

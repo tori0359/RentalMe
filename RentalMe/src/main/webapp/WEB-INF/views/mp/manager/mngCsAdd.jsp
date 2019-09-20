@@ -26,6 +26,9 @@
      h2{
      	padding:0px 0px 35px 20px;
      }
+     #daeContent{
+     
+     }
      #daeContent tr>td:nth-child(1){
      	width:250px;
      	text-align:center;
@@ -81,7 +84,8 @@
 <div id="csContent">
 <form action="/mp/mng/csNoticeAdd" method="post">
 		<h2>공지/FAQ등록</h2>
-        <table class="table" id="daeContent">
+		<div id="daeContent">
+        <table class="table">
             <tr>
                 <td><label for="" >작 성 자</label></td>
                 <td>관 리 자</td>
@@ -136,6 +140,7 @@
                 </td>
             </tr>
         </table>
+		</div>
 </form>
 </div>
 </body>

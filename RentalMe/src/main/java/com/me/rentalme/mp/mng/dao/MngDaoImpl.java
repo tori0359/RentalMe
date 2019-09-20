@@ -326,4 +326,9 @@ public class MngDaoImpl implements MngDao{
 		return sqlSession.update("mpMng.updateRefundCancel", mbNo);
 	}
 	
+	@Override
+	public void deleteAppli(String gdsCd) throws SQLException {
+		sqlSession.update("mpMng.deleteAppli", gdsCd);
+	}
+	
 }

@@ -143,7 +143,18 @@ public class CsController {
 		return mav;
 	}
 	
+	//실험
 	
+	 
+	
+	@RequestMapping(value="/ordlist")
+	public ModelAndView headMenu(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range
+			, @RequestParam("param") String param) {
+		System.out.println("컨트롤러"+param);
+		
+		ModelAndView mav=new ModelAndView();
+		return mav;
+	}
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
 	public ModelAndView csFaq(Model model,
