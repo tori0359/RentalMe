@@ -34,6 +34,7 @@ import com.me.rentalme.act.service.ActService;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.mp.mng.service.MngService;
 
 
 /**
@@ -52,6 +53,9 @@ public class MngActController {
 	
 	@Inject
 	ActService actService;
+	
+	@Inject
+	MngService mngService;
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -197,6 +201,7 @@ public class MngActController {
 	            }
 	        }
 		 
+		mngService.rentalseq(); 
 		actService.addAct300(actVo);
 		actService.addAct100(actVo);
 		return "redirect:/mp/mng/actList";
