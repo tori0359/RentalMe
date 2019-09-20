@@ -244,6 +244,7 @@
 		}
 		#aSub:hover{
 			color:red;
+			font-weight: bold;
 		}
 		#noticeMenuBar tr>td{
 			cursor:pointer;

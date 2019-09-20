@@ -132,7 +132,7 @@
 					1:1문의를 통해 상세히 답변드리겠습니다.
 				</div>
 				<div class="col-md-2">
-					<button id="btn" type="button" class="btn btn-warning" style="width:100px; height:80px; font-size:18px; font-weight: bold;">문의하기</button>
+					<button id="btn" type="button" class="btn btn-danger" style="width:100px; height:80px; font-size:18px; font-weight: bold;">문의하기</button>
 				</div>
 			</c:if>
 			<c:if test="${UserId eq 'minminad'}">

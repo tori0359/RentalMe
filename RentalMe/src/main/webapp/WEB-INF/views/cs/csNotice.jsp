@@ -66,9 +66,12 @@
 			width:20%;
 		}
 		th:nth-child(2){
-			width:60%;
+			width:40%;
 		}
 		th:nth-child(3){
+			width:20%;
+		}
+		th:nth-child(4){
 			width:20%;
 		}
 		#csContent{
@@ -82,9 +85,11 @@
 		}
 		#aSub{
 			text-decoration:none;
+			color:black;
 		}
 		#aSub:hover{
 			color:red;
+			font-weight: bold;
 		}
 		th{
 			text-align:center;
@@ -112,12 +117,14 @@
 		<tr>
 			<th style="height:40px;">번호</th>
 			<th>제목</th>
+			<th>작성자</th>
 			<th>작성일</th>
 		</tr>
 			<c:forEach items="${alist}" var="bean">
-				<tr class="active">
+				<tr>
 					<td style="height:40px;" align="center">${bean.noticNo }</td>
-					<td align="left" style="color:black;"><a id="aSub" href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td align="left" ><a id="aSub" href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+					<td style="text-align:center;">관리자</td>
 					<td align="center">${bean.regDt }</td>
 				</tr>
 			</c:forEach>
