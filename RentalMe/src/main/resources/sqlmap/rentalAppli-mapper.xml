@@ -598,6 +598,14 @@
 			,B.IMG2
 			,B.IMG3
 			,B.IMG4
+			,B.IMG5
+			,B.IMG6
+			,B.IMG7
+			,B.IMG8
+			,B.IMG9
+			,B.IMG10
+			,B.IMG11
+			,B.IMG12
 		from TB_GDS100 A		/* 공통상품 */
 			,TB_GDS200 B		/* 렌탈상품상세 */
 		WHERE A.GDS_CD = B.GDS_CD
