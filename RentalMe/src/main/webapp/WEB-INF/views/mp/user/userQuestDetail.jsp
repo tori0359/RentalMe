@@ -73,12 +73,12 @@
                 <td><input type="hidden" name="mbNo" value="${bean.mbNo }">일반회원</td>
             </tr> --%>
             <tr>
-                <td><label for="id" >글 번 호</label></td>
+                <td align="center"><label for="id" >글 번 호</label></td>
                 <td><input type="hidden" name="mbNo" value="${bean.mbNo }"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
                
             </tr>
             <tr>
-                <td><label for="">분류</label></td>
+                <td align="center"><label>분류</label></td>
                 <c:if test="${bean.csClassGbCd eq '1'}">
                 <td>주문</td>
                 </c:if>
@@ -99,20 +99,17 @@
                 </c:if>
             </tr>
             <tr>
-                <td><label for="" >제목</label></td>
+                <td align="center"><label>제목</label></td>
                 <td>${bean.sub}</td>
             </tr>
             <tr>
-                <td><label for="" >내용</label></td>
-                <td>${bean.content}</td>
+                <td style="padding-top:70px;" align="center"><label>내용</label></td>
+                <td style="height:150px; padding-top:70px;">${bean.content}</td>
             </tr>
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                  <input id="cancel" type="reset" value="뒤로">
-                  <c:if test="${id ne 'minminad'}">
-                 	 <input  type="submit" value="삭제"/>
-                  </c:if>
+                  <input class="btn btn-default" id="cancel" type="reset" value="뒤로">
                 </td>
             </tr>
         </table>

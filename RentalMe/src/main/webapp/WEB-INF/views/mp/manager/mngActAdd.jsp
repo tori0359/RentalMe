@@ -70,9 +70,7 @@
             	width:100px;
             }
             #modalBtn{
-            	color:black;
-            	background:white;
-            	border-radius:2px;
+            	
             }
             #classifi{
             	width:150px;
@@ -332,7 +330,7 @@
 
 
 <div class="col-md-8 col-md-offset-2" id="actContent">
-		<h2>경매상품등록</h2>
+		<h2>렌탈상품등록</h2>
         <table class="table" id="daeContent">
             <tr>
                 <td width="120px"><label>작 성 자</label></td>
@@ -372,7 +370,7 @@
 		                        <select class="form-control" id="goods">
 		                           <option value="">선택하세요</option>
 		                        </select><br>
-					       <div><button id="modalBtn" >검색</button></div>
+					       <div><button id="modalBtn" class="btn btn-danger">상품찾기</button></div>
 				      </div>
 				    <label id="goodscode">상품코드</label>
 				      <div id="left2">
@@ -405,18 +403,18 @@
             <div id="hihi">
 	            <tr>
 	                <td><label>상품코드</label></td>
-	                <td><input type="text" name="gdsCd" id="gdsCd"/>&nbsp&nbsp모델명&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm" id="modelNm"/></td>
+	                <td><input type="text" name="gdsCd" id="gdsCd" readonly="readonly"/>&nbsp&nbsp<label>모델명</label>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm" id="modelNm"/></td>
 	            </tr>
 	            <tr>
 	            	<td><label>상품명</label></td>
-	                <td><input type="text" name="gdsNm" id="gdsNm">&nbsp&nbsp브랜드명&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
+	                <td><input type="text" name="gdsNm" id="gdsNm">&nbsp&nbsp<label>브랜드명</label>&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
 	            </tr>
 	            <tr>
 	            	<td><label>시작가</label></td>
-	            	<td><input type="text" name="gdsStPrice" id="gdsStPrice"/>&nbsp&nbsp상세코드&nbsp&nbsp<input type="text" id="gdsCdDetail" name="gdsCdDetail"/></td>
+	            	<td><input type="text" name="gdsStPrice" id="gdsStPrice"/>&nbsp&nbsp<label>상세코드</label>&nbsp&nbsp<input type="text" id="gdsCdDetail" name="gdsCdDetail"/></td>
 	            </tr>
             </div>
-            <tr>
+         <!--    <tr>
             	<td><label>응찰단위</label></td>
             	<td>
             		<select id="biddingUnit" name="unitPrice">
@@ -427,15 +425,15 @@
             			<option value="50000">50000</option>
             		</select>&nbsp원<input type="hidden" value="30" name="GdsLclassCd"><input type="hidden" value="80" name="GdsMclassCd">
             	</td>
-            </tr>
+            </tr> -->
             <tr>
             	<td><label>시작시간</label></td>
             	<td><input id="startTime" type="datetime-local" name="actStTime"/></td>
             </tr>
-            <tr>
+            <!-- <tr>
             	<td><label>종료시간</label></td>
             	<td><input id="endTime" type="datetime-local" name="actEdTime"/></td>
-            </tr>
+            </tr> -->
             <tr>
             	<td><label>제품설명</label></td>
             	<td><textarea style="resize:none;" name="content"></textarea></td>

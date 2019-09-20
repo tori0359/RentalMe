@@ -26,14 +26,51 @@
 	#maincontent td:nth-child(n){
 		text-align:center;
 	}
-	#headMenu>a{
+	#headMenu>a:not(a:last-child()){
 		text-decoration:none;
 		color:gray;
 	}
 	#headMenu>a:hover{
 		color:blue;
+		text-decoration:none;
+	}
+	#choosedel{
+		color:red;
+		margin-left:3px;
+		margin-bottom:5px;
+	}
+	#choosedel:hover{
+		cursor:pointer;
+		text-decoration:none;
+		color:red;
 	}
 </style>
+<script>
+
+window.onload=function(){
+	$('#choosedel').click(function(){
+		 var confirm_val = confirm("정말 삭제하시겠습니까?");
+		  
+		  if(confirm_val) {
+			   var checkArr = new Array();
+			   
+			   $("input[class='chBox']:checked").each(function(){
+			    checkArr.push($(this).attr("data-actNum"));
+			   });
+			    
+			   $.ajax({
+				    url : "/mp/mng/deleteAppliList",
+				    type : "post",
+				    data : { chbox : checkArr},
+				    success : function(){
+				    	location.href = "/mp/mng/goodsList";
+			    	}
+			   });
+		  } 
+	 });
+}
+
+</script>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 </head>
@@ -48,7 +85,8 @@
 <a href="${pageContext.request.contextPath}/mp/mng/Appli/sm">[소형가전]</a>&nbsp
 <a href="${pageContext.request.contextPath}/mp/mng/Appli/furn">[가구]</a>&nbsp
 <a href="${pageContext.request.contextPath}/mp/mng/Appli/rest">[기타]</a>&nbsp
-<a href="${pageContext.request.contextPath}/mp/mng/Appli/pkg">[패키지]</a>
+<a href="${pageContext.request.contextPath}/mp/mng/Appli/pkg">[패키지]</a>&nbsp
+<a id="choosedel">삭제처리</a>
 </div>
 	<table class="table table-hover">
 		<tr id="head">
@@ -59,6 +97,7 @@
 			<th>브랜드명</th>
 			<th>모델명</th>
 			<th>삭제여부</th>
+			<td><input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/></td>
 		</tr>
 			<c:forEach items="${rlist}" var="bean">
 				<tr id="maincontent">
@@ -76,10 +115,13 @@
 							<td>${bean.modelNm}</td>
 							<c:if test="${bean.delYn  eq 'N'}">
 								<td style="color:red;">N</td>
-							</c:if>
-							<c:if test="${bean.delYn  eq 'Y'}">
-								<td style="color:blue;">Y</td>
-							</c:if>
+							<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
+       				</td>
+						</c:if>
+						<c:if test="${bean.delYn  eq 'Y'}">
+						<td style="color:blue;">Y</td>
+						<td></td>
+						</c:if>
 						</c:if>
 				</tr>
 			</c:forEach>

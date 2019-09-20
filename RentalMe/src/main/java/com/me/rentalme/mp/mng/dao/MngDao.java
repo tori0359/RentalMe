@@ -77,4 +77,6 @@ public interface MngDao {
 	//시퀀스 증가
 	void rentalSeq();
 	
+	void deleteAppli(String gdsCd) throws SQLException;
+	
 }

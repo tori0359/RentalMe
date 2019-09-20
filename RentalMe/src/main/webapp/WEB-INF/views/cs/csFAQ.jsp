@@ -28,14 +28,16 @@
 			$("#noticeBar td:nth-child(3)").click(function(){
 				location.replace("/cs/csInquiry");
 			});
-			$(".list0").hide();
+			$(".list0").hide(); 
 			//전체보기
 			$("#noticeMenuBar td:nth-child(1)").click(function(){
 				$(this).css("background","black").css("color","white");
+				location.href="/cs/csFAQ";
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list0").show();
 				$(".list1 ,.list2, .list3, .list4, .list5, .list6").hide();
 				i=0;
+
 			})
 			//주문
 			$("#noticeMenuBar td:nth-child(2)").click(function(){
@@ -43,6 +45,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list1").show();
 				$(".list0, .list2, .list3, .list4, .list5, .list6").hide();
+				$("#paginationBox").hide();
 			})
 			//배송
 			$("#noticeMenuBar td:nth-child(3)").click(function(){
@@ -50,6 +53,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list2").show();
 				$(".list0, .list1, .list3, .list4, .list5, .list6").hide();
+				$("#paginationBox").hide();
 			})
 			//결제
 			$("#noticeMenuBar td:nth-child(4)").click(function(){
@@ -57,6 +61,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list3").show();
 				$(".list0, .list1, .list2, .list4, .list5, .list6").hide();
+				$("#paginationBox").hide();
 			})
 			//교환취소
 			$("#noticeMenuBar td:nth-child(5)").click(function(){
@@ -64,6 +69,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list4").show();
 				$(".list0, .list1, .list2, .list3,  .list5, .list6").hide();
+				$("#paginationBox").hide();
 			})
 			//회원정보
 			$("#noticeMenuBar td:nth-child(6)").click(function(){
@@ -71,6 +77,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list5").show();
 				$(".list0, .list1, .list2, .list3, .list4, .list6").hide();
+				$("#paginationBox").hide();
 				
 			})
 			//기타
@@ -79,6 +86,7 @@
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list6").show();
 				$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
+				$("#paginationBox").hide();
 			});
 
 			$('#btnSearch').click(function(e){
@@ -94,6 +102,21 @@
 			});
 	
 		})
+		
+		function menuClick(s) {
+			$.ajax({
+				url:'ordlist',
+				type:'GET',
+				data:{param:s},
+				success:function(result){
+					alert(result);
+				},
+				erro:function(jqXHR,testStatus,errorThrown){
+					alert('오류가 발생했습니다');
+				}
+
+			}) 
+		}
 	</script>
 	<style type="text/css">
 		#noticeBar{
@@ -137,8 +160,6 @@
 			background:white;
 			color:black;
 		}
-		
-		
 		#noticeMenuBarSpace{
 			height:50px;
 		}
@@ -170,9 +191,9 @@
 			float:right;
 		}
 		#csContent{
-			height:1000px;
+			height:800px;
 		}
-		#all{
+		#all:not(#aSub){
 			text-align: center;
 		}
 		#allnext th:nth-child(1){
@@ -197,7 +218,7 @@
 		}
 		#aSub{
 			text-decoration:none;
-			
+			text-align:left;
 		}
 		#aSub:hover{
 			color:red;
@@ -226,7 +247,7 @@
 			<table id="noticeMenuBar" class="col-md-6">
 				<tr>
 					<td>전체보기</td>
-					<td>주문</td>
+					<td onclick="menuClick('order');">주문</td>
 					<td>배송</td>
 					<td>결제</td>
 					<td>교환취소</td>
@@ -245,7 +266,7 @@
 </div>
 <div id="contentList" class="col-md-10 col-md-offset-1">
 	<table id="all" class="table table-hover">
-		<tr id="allnext">
+		<tr id="allnext" >
 			<th>번호</th>
 			<th>분류</th>
 			<th>제목</th>
@@ -253,26 +274,26 @@
 		<tr>
 			<c:forEach items="${blist}" var="bean">
 					<tr class="list0">
-						<td>${bean.faqNo}</td>
+						<td style="text-align:center;">${bean.faqNo}</td>
 						<c:if test="${bean.csClassGbCd eq '1' }">
-						<td>주문</td>
+						<td style="text-align:center;">주문</td>
 						</c:if>
 						<c:if test="${bean.csClassGbCd eq '2' }">
-						<td>배송</td>
+						<td style="text-align:center;">배송</td>
 						</c:if>
 						<c:if test="${bean.csClassGbCd eq '3' }">
-						<td>결제</td>
+						<td style="text-align:center;">결제</td>
 						</c:if>
 						<c:if test="${bean.csClassGbCd eq '4' }">
-						<td>교환취소</td>
+						<td style="text-align:center;">교환취소</td>
 						</c:if>
 						<c:if test="${bean.csClassGbCd eq '5' }">
-						<td>회원정보</td>
+						<td style="text-align:center;">회원정보</td>
 						</c:if>
 						<c:if test="${bean.csClassGbCd eq '6' }">
-						<td>기타</td>
+						<td style="text-align:center;">기타</td>
 						</c:if>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			</c:forEach>
 		</tr>
@@ -283,7 +304,7 @@
 					<tr class="list1">
 						<td>${bean.faqNo}</td>
 						<td>주문</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -295,8 +316,8 @@
 				<c:if test="${bean.csClassGbCd eq '2'}">
 					<tr class="list2">
 						<td>${bean.faqNo}</td>
-						<td>배송</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td style="text-align:center;">배송</td>
+						<td id="aSub" style="text-align:left;"><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -307,8 +328,8 @@
 				<c:if test="${bean.csClassGbCd eq '3'}">
 					<tr class="list3">
 						<td>${bean.faqNo}</td>
-						<td>결제</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td style="text-align:center;">결제</td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -318,8 +339,8 @@
 			 <c:if test="${bean.csClassGbCd eq '4'}">
 					<tr class="list4">
 						<td>${bean.faqNo}</td>
-						<td>교환취소</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td style="text-align:center;">교환취소</td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 			  </c:if>
 			</c:forEach>
@@ -329,8 +350,8 @@
 				<c:if test="${bean.csClassGbCd eq '5'}">
 					<tr class="list5">
 						<td>${bean.faqNo}</td>
-						<td>회원정보</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td style="text-align:center;">회원정보</td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -340,8 +361,8 @@
 				<c:if test="${bean.csClassGbCd eq '6'}">
 					<tr class="list6">
 						<td>${bean.faqNo}</td>
-						<td>기타</td>
-						<td><a id="aSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td style="text-align:center;">기타</td>
+						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
 				</c:if>
 			 
@@ -355,6 +376,8 @@
 		System.out.println(searchType);
 		System.out.println(keyword);
 	%>
+</div>
+</div>
 	<div align="center" width="100%">
 				<div id="paginationBox">
 						<ul class="pagination">
@@ -382,8 +405,6 @@
 						</ul>
 					</div>
 	</div>
-</div>
-</div>
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

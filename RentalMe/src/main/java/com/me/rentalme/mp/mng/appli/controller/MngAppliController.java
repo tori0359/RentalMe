@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.appli.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
+import com.me.rentalme.model.entity.RentalAppliVo;
 
 /**
 * 마이페이지(관리자) 리스트 컨트롤러
@@ -248,6 +250,25 @@ public class MngAppliController {
 		mav.setViewName("mp/manager/mngAppliPkgList");
 		return mav;
 	}
+	
+	//렌탈상품 선택삭제
+		@RequestMapping(value = "/mng/deleteAppliList", method = RequestMethod.POST)
+		public ModelAndView deleteCart(@RequestParam(value = "chbox[]") List<String> chArr
+				,RentalAppliVo rentalAppliVo) throws SQLException {
+		
+			System.out.println("경매상품 삭제 컨트롤러");
+			
+			ModelAndView mav=new ModelAndView();
+
+			for (String gdsCd : chArr) {
+				rentalAppliVo.setGdsCd(gdsCd);
+				
+				MngService.deleteAppli(gdsCd);
+			}
+
+			mav.setViewName("/mp/manager/mngMainList");
+			return mav;
+		}
 
 	
 }

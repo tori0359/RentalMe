@@ -12,36 +12,71 @@
 	#uptext{
 		height:130px;
 	}
-	#upmenu{
-		text-align:center;
-	}
 	#ansNo{
 		color:red;
 	}
 	#ansYe{
 		color:blue;
 	}
+	#contentTable th{
+		text-align:center;
+	}
+	#subText{
+		text-decoration:none;
+		color:black;
+	}
+	#subText:hover{
+		color:red;
+		font-weight: bold;
+	}
+	#info{
+			width:93%;
+			margin:20px 0px 10px 20px;
+			border:5px solid #E0EBFF;
+			padding: 10px;
+		}
 </style>
+<script>
+window.onload=function(){
+	$('#choosedel').click(function(){
+		 var confirm_val = confirm("정말 삭제하시겠습니까?");
+		
+	 });
+}
+</script>
 </head>
 <body>
 <div id="content" class="col-md-10 col-md-offset-1">
-<div  id="uptext"align="center"><h1>내 문의 보기</h1></div>
-	<div>
-	나의활동>내 문의 보기
+	<div id="dae">
+		<br/>
+		    <span style="font-weight: bold; font-size: 25px">내 문의 보기</span>
+	     <br/>
+	     <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
 	</div>
+	<div id="info" class=" col-md-offset-4" >
+     <p class=" col-md-offset-1">
+     	<input type="hidden" value="${id}">
+	     	<p style="font-weight: bold;">연락 드리겠습니다</p>
+	     
+     </p>
+     </div>
 	
-	<table class="table table-hover">
-		<tr align="center">
-			<td>번호</td>
-			<td>제목</td>
-			<td>등록일</td>
-			<td>답변유무</td>
+	
+	<table class="table table-hover" id="contentTable">
+		<tr class="danger">
+			<th style="width:15%;">번호</th>
+			<th>제목</th>
+			<th>등록일</th>
+			<th>답변유무</th>
+			<th>삭제</th>
 		</tr>
 			<!-- <form action="" method="get"> -->
 			<c:forEach items="${mylist}" var="bean">
 				<tr align="center">
-						<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
-						<td><a href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
+						<form action="/mp/mp/QuestDelete" method="get">
+						<td><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
+						<input type="hidden" name="mbNo" value="${bean.mbNo}"/>${bean.pquestNo}</td>
+						<td style="text-align:left;"><a id="subText" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
 						<td>${bean.regDt}</td>
 						<c:if test="${bean.questStsCd eq '1'}">
 							<td id="ansNo">N</td>
@@ -49,6 +84,8 @@
 						<c:if test="${bean.questStsCd eq '2'}">
 							<td id="ansYe">Y</td>
 						</c:if>
+							<td style="text-align: center;"><input id="choosedel" class="btn btn-danger" type="submit" value="삭제"/></td>
+						</form>
 				</tr>
 			</c:forEach>
 			<!-- </form> -->

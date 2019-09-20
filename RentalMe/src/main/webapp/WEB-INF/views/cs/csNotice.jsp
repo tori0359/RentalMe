@@ -108,16 +108,16 @@
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
 	<div>
-	<table class="table table-hover" >
-		<tr>
-			<th>번호</th>
+	<table class="table table-condensed" >
+		<tr class="info">
+			<th style="height:40px;">번호</th>
 			<th>제목</th>
 			<th>작성일</th>
 		</tr>
 			<c:forEach items="${alist}" var="bean">
-				<tr>
-					<td align="center">${bean.noticNo }</td>
-					<td align="left"><a id="aSub" href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
+				<tr class="active">
+					<td style="height:40px;" align="center">${bean.noticNo }</td>
+					<td align="left" style="color:black;"><a id="aSub" href="csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub }</a></td>
 					<td align="center">${bean.regDt }</td>
 				</tr>
 			</c:forEach>

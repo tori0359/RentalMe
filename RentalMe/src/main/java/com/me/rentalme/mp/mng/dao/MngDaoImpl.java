@@ -272,5 +272,10 @@ public class MngDaoImpl implements MngDao{
 	public void rentalSeq() {
 		sqlSession.insert("mpMng.insertSeq");
 	}
+
+	@Override
+	public void deleteAppli(String gdsCd) throws SQLException {
+		sqlSession.update("mpMng.deleteAppli", gdsCd);
+	}
 	
 }

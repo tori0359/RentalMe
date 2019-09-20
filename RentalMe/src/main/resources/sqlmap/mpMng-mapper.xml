@@ -254,4 +254,7 @@
 	<insert id="insertSeq">
 		INSERT INTO SEQ_GDS100 VALUES(NULL);
 	</insert>
+	<update id="deleteAppli" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+		UPDATE TB_GDS100 SET DEL_YN='Y' WHERE GDS_CD=#{GDSCD}
+	</update>
 </mapper>

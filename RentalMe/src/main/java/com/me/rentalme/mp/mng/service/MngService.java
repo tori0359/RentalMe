@@ -63,6 +63,8 @@ public interface MngService {
 	int otherGoodsListCnt();
 	int pacGoodsListCnt();
 	
+	void deleteAppli(String gdsCd) throws SQLException;
+	
 	//∑ª≈ªªÛ«∞µÓ∑œ
 	int rentalGoodsAdd100(RentalAppliVo rentalAppliVo);
 	int rentalGoodsAdd200(ProductVo productVo);	

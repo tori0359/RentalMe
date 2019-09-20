@@ -291,6 +291,11 @@ public class MngServiceImpl implements MngService {
 		mngDao.rentalSeq();
 		
 	}
+
+	@Override
+	public void deleteAppli(String gdsCd) throws SQLException {
+		mngDao.deleteAppli(gdsCd);		
+	}
 	
 
 }

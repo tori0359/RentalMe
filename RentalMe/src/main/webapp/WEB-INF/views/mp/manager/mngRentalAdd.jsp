@@ -28,21 +28,22 @@
 		width:80px;
 	}
 	#daeButton{
-		float:right;
+		/* float:right; */
+		text-align:right;
 		padding-right:110px;
 	}
 	p{
 		font-size:4px;
 	}
-	#used_main_img{
+			#used_main_img{
                 border: 0.2px solid gray;
-                width: 370px;
+                width: 385px;
                 height: 170px;
                 margin-top:10px;
                 float:left;
             }
             #used_sub_img_group{
-                width: 500px;
+                width: 400px;
             }
             .used_sub_img{
                 display: inline-block;
@@ -114,7 +115,12 @@
             	text-decoration: none;
             	font-weight: bolder;
             }
-            
+            #firSelect{
+            	height:28px;
+            }
+            #secSelect{
+            	height:28px;
+            }
             
             
 </style>
@@ -286,7 +292,7 @@
  
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    var main_img_html = "<img width='370' height='170' src=\"" + e.target.result + "\" />";
+                    var main_img_html = "<img width='385' height='170' src=\"" + e.target.result + "\" />";
                     var img_html = "<img width='60' height='60' src=\"" + e.target.result + "\" />";
                     if(cnt==0){
                         $("#used_main_img").append(main_img_html);
@@ -374,7 +380,7 @@
 	        </tr>
 	        <tr>
 	        	<td><label>상품 가격</label></td><td><input type="text" name="prdPrice">&nbsp&nbsp&nbsp<label>&nbsp렌탈 기간</label>&nbsp
-	        	<select name="prdContDate">
+	        	<select name="prdContDate" style="height:28px;">
 	        			<option value="3">3개월</option>
 	        			<option value="6">6개월</option>
 	        			<option value="9">9개월</option>
@@ -411,7 +417,8 @@
 	                    <div id="used_main_img">
 	                    
                    		</div>
-                    <div id="used_sub_img_group">
+                    	<div id="used_sub_img_group">
+                   		<br/><br/><br/><br/><br/><br/><br/><br/>
 	                        <div class="used_sub_img" id="sub_img1">
 									
 	                        </div>
@@ -445,7 +452,7 @@
 	                        <div class="used_sub_img" id="sub_img11">
 	
 	                        </div>
-	                </div>
+	                	</div>
 	             </td>
              </tr>
             <tr>

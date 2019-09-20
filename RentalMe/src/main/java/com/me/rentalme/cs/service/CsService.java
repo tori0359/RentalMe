@@ -40,4 +40,6 @@ public interface CsService {
 	int faqListCnt1(Search search) throws SQLException;
 	int noticListCnt() throws SQLException;
 	int inquiryListCnt() throws SQLException;
+	
+	int faqListCnt12(Search search) throws SQLException;
 }
