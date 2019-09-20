@@ -16,8 +16,12 @@ public interface RentalMeService {
 
 	//베스트 아이템 리스트
 	List<CallVo> bestList() throws SQLException;
+	//새로운 아이템 리스트
+	List<CallVo> newList() throws SQLException;
 
 	//공지사항 리스트
 	List<CsVo> csList() throws SQLException;
+
+	
 
 }

@@ -34,12 +34,20 @@ public class RentalMeServiceImpl implements RentalMeService {
 	public List<CallVo> bestList() throws SQLException {
 		return rentalmeDao.selectBestList();
 	}
+	
+	//새로운 아이템 리스트
+	@Override
+	public List<CallVo> newList() throws SQLException {
+		return rentalmeDao.selectNewList();
+	}
 
 	//공지사항 리스트
 	@Override
 	public List<CsVo> csList() throws SQLException {
 		return rentalmeDao.selectCsList();
 	}
+
+
 
 
 }

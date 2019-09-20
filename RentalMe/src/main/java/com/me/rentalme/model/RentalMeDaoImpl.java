@@ -35,10 +35,18 @@ public class RentalMeDaoImpl implements RentalMeDao {
 		return sqlSession.selectList("rentalme.selectBestList");
 	}
 	
+	//새로운 아이템 리스트
+	@Override
+	public List<CallVo> selectNewList() throws SQLException {
+		return sqlSession.selectList("rentalme.selectNewList");
+	}
+	
 	//공지사항 리스트
 	@Override
 	public List<CsVo> selectCsList() throws SQLException {
 		return sqlSession.selectList("rentalme.selectCsList");
 	}
+
+	
 
 }

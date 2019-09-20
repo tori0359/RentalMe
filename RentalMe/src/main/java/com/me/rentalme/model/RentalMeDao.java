@@ -16,9 +16,12 @@ public interface RentalMeDao {
 
 	//베스트 아이템 리스트
 	List<CallVo> selectBestList() throws SQLException;
+	//새로운 아이템 리스트
+	List<CallVo> selectNewList() throws SQLException;
 
 	//공지사항 리스트
 	List<CsVo> selectCsList() throws SQLException;
+
 
 	
 }

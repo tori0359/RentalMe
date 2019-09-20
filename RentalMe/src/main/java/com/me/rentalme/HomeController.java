@@ -35,7 +35,8 @@ public class HomeController {
 	
 	
 	/**
-	 * 실시간 접수 현황 리스트, 베스트 아이템 리스트, 공지사항 리스트
+	 * 메인
+	 * 
 	 * 
 	 * @param  
 	 * @return ModelAndView 
@@ -47,9 +48,20 @@ public class HomeController {
 		logger.debug("main");
 		
 		ModelAndView mav= new ModelAndView();
+		
+		//실시간 주문 리스트
 		mav.addObject("ordlist",rentalmeService.ordList());
+		
+		//베스트 아이템 리스트
 		mav.addObject("bestitem",rentalmeService.bestList());
+		//새로운 아이템 리스트
+		mav.addObject("newitem",rentalmeService.newList());
+		
+		
+		//공지사항 리스트
 		mav.addObject("cs",rentalmeService.csList());
+		
+	
 		
 		mav.setViewName("rental/rentalMain");
 		
