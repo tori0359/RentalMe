@@ -186,7 +186,8 @@
 		vSumTotPrice = vSumTotPrice + ${(bean.gdsPrice * bean.odrQty)};
 	</c:forEach>
 	vSumTotPrice += "";	// 타입변환
-	
+
+	var radioVal = "90";		// 결제정보 (10:카드  90:무통장(default))
 	
 	/**************************/
 	/**** 전역변수 선언끝 *****/

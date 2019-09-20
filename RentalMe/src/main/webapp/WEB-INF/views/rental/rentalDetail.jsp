@@ -279,7 +279,7 @@ input::-moz-focus-inner { border: 0; }
 
 .product-slider #thumbcarousel .item { text-align: center; }
 
-.product-slider #thumbcarousel .item .thumb { border: 1px solid #cecece; width: %; margin: 0 2%; display: inline-block; vertical-align: middle; cursor: pointer; max-width: 75px; }
+.product-slider #thumbcarousel .item .thumb { border: 1px solid #cecece; width: %; margin: 0 1%; display: inline-block; vertical-align: middle; cursor: pointer; max-width: 100px; }
 
 .product-slider #thumbcarousel .item .thumb:hover { border: 3px solid; border-color: black; }
 
