@@ -281,35 +281,36 @@ span em.warning{
        for(var i=0; i<vCnt; i++) {
            //alert($("#odrNo"+i).text()); //현재 선택한 버튼의 주문번호
            var odrStsGbCd = $("#odrBtn"+i).val();
+           //alert("i = " + i + "..." + odrStsGbCd);
            if(odrStsGbCd == "DW") {
         	   $("#odrBtn"+i).val("입금대기");
         	   $("#odrBtn"+i).css({opacity:0.5});
         	   $('#odrBtn'+i).attr('class','btn btn-success');
         	   $("#odrBtn"+i).attr('disabled', true);
-        	   $("#odrBtn2"+i).hide();
+        	   $("#odrBtnS"+i).hide();
            } else if(odrStsGbCd == "OC") {
         	   $("#odrBtn"+i).val("구매");
         	   $("#odrBtn"+i).css({opacity:1.0});
-        	   $("#odrBtn2"+i).val("반품");
+        	   $("#odrBtnS"+i).val("반품");
         	   $("#odrBtn"+i).css({opacity:1.0});
 		   } else if(odrStsGbCd == "PC") {
         	   $("#odrBtn"+i).val("구매확정");
         	   $("#odrBtn"+i).css({opacity:0.5});
         	   $('#odrBtn'+i).attr('class','btn btn-primary');
         	   $("#odrBtn"+i).attr('disabled', true);
-        	   $("#odrBtn2"+i).hide();
+        	   $("#odrBtnS"+i).hide();
 		   } else if(odrStsGbCd == "RW") {
         	   $("#odrBtn"+i).val("반품대기");
         	   $("#odrBtn"+i).css({opacity:0.5});
         	   $('#odrBtn'+i).attr('class','btn btn-warning');
         	   $("#odrBtn"+i).attr('disabled', true);
-        	   $("#odrBtn2"+i).hide();
+        	   $("#odrBtnS"+i).hide();
 		   } else if(odrStsGbCd == "RC"){
         	   $("#odrBtn"+i).val("반품확정");
         	   $("#odrBtn"+i).css({opacity:0.5});
         	   $('#odrBtn'+i).attr('class','btn btn-danger');
         	   $("#odrBtn"+i).attr('disabled', true);
-        	   $("#odrBtn2"+i).hide();
+        	   $("#odrBtnS"+i).hide();
 		   }
        }
 		
@@ -385,7 +386,7 @@ span em.warning{
                 <td class="gubun2" style="vertical-align:middle;">
                 	<p class="tdtext1" style="text-align:center;">
                 		<input type="button" id="odrBtn${status.index }" type="button" class="btn btn-primary" type="button" class="btn" style="font-size: 10pt;" data-toggle="modal" data-target="#myModal2" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
-                		<input type="button" id="odrBtn2${status.index }" type="button" class="btn btn-danger" type="button" class="btn" style="font-size: 10pt;" data-toggle="modal" data-target="#myModal3" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
+                		<input type="button" id="odrBtnS${status.index }" type="button" class="btn btn-danger" type="button" class="btn" style="font-size: 10pt;" data-toggle="modal" data-target="#myModal3" data-odr-no="${bean.odrNo}" value="${bean.odrStsGbCd }">
                		</p>
                		<p class="tdtext2" id="odrNo${status.index }" style="text-align:center; color:white; display: none;">
                			${bean.odrNo}

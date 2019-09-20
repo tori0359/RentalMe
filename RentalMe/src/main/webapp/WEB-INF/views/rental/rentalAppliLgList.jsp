@@ -16,13 +16,15 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
 <style type="text/css">
 .content {
 	height: 100%;
 }
 .content-inner {
-	margin-left:200px;
-	margin-right:200px;
+	margin-left:205px;
+	margin-right:205px;
 }
 #cip {
 	font-weight: bolder;
@@ -44,7 +46,13 @@
 }
 #pathStyle {
 	color: black;
-	text-decoration: none !important
+	text-decoration: none !important;
+}
+#pathStyleMain {
+	color: black;
+	text-decoration: none !important;
+	font-family:"nanumEB";
+	font-size:40pt;
 }
 /* -스크롤 -*/
 .scrolltop {
@@ -77,15 +85,20 @@
 }
 #menuBtn11, #menuBtn21, #menuBtn31, #menuBtn41, #menuBtn51, #menuBtn61 {
 	border-left:0px solid #999;
+	font-family:"nanumEB";
+
 }
 #menuBtn16, #menuBtn26, #menuBtn36, #menuBtn46, #menuBtn56, #menuBtn66 {
 	border-left:0px solid #999;
+	font-family:"nanumEB";
 }
 #menuBtn15, #menuBtn25, #menuBtn35, #menuBtn45, #menuBtn55, #menuBtn65 {
 	border-right:0px solid #999;
+	font-family:"nanumEB";
 }
 #menuBtn20, #menuBtn30, #menuBtn40, #menuBtn50, #menuBtn60, #menuBtn70 {
 	border-right:0px solid #999;
+	font-family:"nanumEB";
 }
 
 /* ---------- 소메뉴 영역 끝 -------- */
@@ -139,6 +152,18 @@ h6 {
 #optionStyle{
 	display: inline;
 }
+
+/* BEST 인기상품 케러셀 명 시작 */
+#best1 {
+	font-family:"nanumEB";
+	font-size:30pt;
+} 
+#best2 {
+	font-family:"nanumEB";
+	font-size:19pt;
+}
+
+/* BEST 인기상품 케러셀 명 끝 */
 
 /* --------- BEST 영역 시작 --------- */
 /* List style */
@@ -773,7 +798,7 @@ input::-moz-focus-inner { border: 0; }
 			</div>
 			<div class="content-inner-path" id="cip">
 				<c:forEach items="${path }" var="path">
-					<a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyle">${path.gdsMclassNm }</a>
+					<a href="/rental/Appli/lg/${path.homeCd }?" id="pathStyleMain">${path.gdsMclassNm }</a>
 				</c:forEach>
 			</div>
 			<div class="content-inner-menu" id="cim">
@@ -916,8 +941,8 @@ input::-moz-focus-inner { border: 0; }
 			<c:forEach items="${path }" var="path1">
 			<c:if test="${empty path1.gdsSclassNm}">
 			<div class="content-inner-best">
-				<h1>BEST 인기상품</h1>
-				<div class="content-inner-best-path">
+				<h1 id="best1">BEST 인기상품</h1>
+				<div class="content-inner-best-path" id="best2">
 					<c:forEach items="${path }" var="path2">
 						${path2.gdsMclassNm }
 					</c:forEach>

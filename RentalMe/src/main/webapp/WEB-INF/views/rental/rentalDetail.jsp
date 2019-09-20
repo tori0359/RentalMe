@@ -279,7 +279,7 @@ input::-moz-focus-inner { border: 0; }
 
 .product-slider #thumbcarousel .item { text-align: center; }
 
-.product-slider #thumbcarousel .item .thumb { border: 1px solid #cecece; width: %; margin: 0 2%; display: inline-block; vertical-align: middle; cursor: pointer; max-width: 75px; }
+.product-slider #thumbcarousel .item .thumb { border: 1px solid #cecece; width: %; margin: 0 1%; display: inline-block; vertical-align: middle; cursor: pointer; max-width: 100px; }
 
 .product-slider #thumbcarousel .item .thumb:hover { border: 3px solid; border-color: black; }
 
@@ -579,7 +579,51 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		}
+		} else if(boxValue == 42) {
+			gdsPriceTemp = String((gdsPriceTemp*0.85));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} else if(boxValue == 48) {
+			gdsPriceTemp = String((gdsPriceTemp*0.85));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} else if(boxValue == 54) {
+			gdsPriceTemp = String((gdsPriceTemp*0.80));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} else if(boxValue == 60) {
+			gdsPriceTemp = String((gdsPriceTemp*0.80));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} 
 	}
 
 	// 수량 셀렉트박스 클릭
@@ -784,10 +828,12 @@ input::-moz-focus-inner { border: 0; }
 							<div id="thumbcarousel" class="carousel slide" data-interval="false">
 								<div class="carousel-inner">
 									<div class="item active">
-										<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="/imgs/sample1.jpg"></div>
-										<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="/imgs/sample2.jpg"></div>
-										<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="/imgs/sample3.jpg"></div>
-										<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="/imgs/sample4.jpg"></div>
+										<c:forEach items="${list1 }" var="list1">
+										<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="${list1.img1 }"></div>
+										<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="${list1.img2 }"></div>
+										<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="${list1.img3 }"></div>
+										<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="${list1.img4 }"></div>
+										</c:forEach>
 									</div>
 								</div>
 						    	<!-- /carousel-inner --> 
@@ -845,6 +891,10 @@ input::-moz-focus-inner { border: 0; }
 										<option value="${list1.agreeTerm*4 }">${list1.agreeTerm*4 }개월</option>
 										<option value="${list1.agreeTerm*5 }">${list1.agreeTerm*5 }개월</option>
 										<option value="${list1.agreeTerm*6 }">${list1.agreeTerm*6 }개월</option>
+										<option value="${list1.agreeTerm*7 }">${list1.agreeTerm*7 }개월</option>
+										<option value="${list1.agreeTerm*8 }">${list1.agreeTerm*8 }개월</option>
+										<option value="${list1.agreeTerm*9 }">${list1.agreeTerm*9 }개월</option>
+										<option value="${list1.agreeTerm*10 }">${list1.agreeTerm*10 }개월</option>
 									</select>
 								</div><br>
 								<h4>${list1.deliverCost }</h4><h6><br></h6>
@@ -1053,16 +1103,19 @@ input::-moz-focus-inner { border: 0; }
 							</div>
 							<div id="info1">
 								<br><br><br>
-								<!-- for문.. -->
-								<div id="imgs1">
-									<img src="/imgs/inner1.jpg">
+								<!-- 제품 상세정보 이미지영역 -->
+								<c:forEach items="${list1 }" var="list1" varStatus="status">
+								<div id="imgs${status.index }">
+									<img src="${list1.img5 }">
+									<img src="${list1.img6 }">
+									<img src="${list1.img7 }">
+									<img src="${list1.img8 }">
+									<img src="${list1.img9 }">
+									<img src="${list1.img10 }">
+									<img src="${list1.img11 }">
+									<img src="${list1.img12 }">
 								</div>
-								<div id="imgs2">
-									<img src="/imgs/inner2.jpg">
-								</div>
-								<div id="imgs3">
-									<img src="/imgs/inner3.jpg">
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div id="area2">
