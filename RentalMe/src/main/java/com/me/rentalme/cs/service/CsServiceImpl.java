@@ -135,9 +135,16 @@ public class CsServiceImpl implements CsService {
 	}
 
 	@Override
-	public int faqListCnt12(Search search) throws SQLException {
-		return 0;
+	public int faqListCnt22(String csClassGbCd) throws SQLException {
+		return csDao.faqListCnt22(csClassGbCd);
 	}
 
+	@Override
+	public List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException {
+		
+		return csDao.csFaqHeadList(paging,tapName);
+	}
+
+	
 
 }

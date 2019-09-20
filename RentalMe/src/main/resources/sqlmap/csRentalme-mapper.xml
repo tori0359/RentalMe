@@ -17,6 +17,12 @@
 		ORDER BY FAQ_NO DESC
   		LIMIT #{startListNum}, #{listSize}
   	</select>
+  	
+  	<select id="csFaqHeadList" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT FAQ_NO,Cs_Class_Gb_Cd,Sub FROM TB_FAQ100 WHERE CS_CLASS_GB_CD=#{tapName} ORDER BY FAQ_NO DESC
+  		LIMIT #{startListNum},#{listSize}
+  	</select>
+  	
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
   		LIMIT #{startListNum},#{listSize}
@@ -38,6 +44,9 @@
       </if>
 	</trim>
 	
+  	</select>
+  	<select id="csFaqTapListCnt" resultType="int">
+  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100 WHERE CS_CLASS_GB_CD=#{csClassGbCd};
   	</select>
   	<select id="csNoticListCnt" resultType="int">
   		SELECT COUNT(NOTIC_NO) AS CNT FROM TB_NOTIC100;

@@ -187,6 +187,28 @@ public class CsDaoImpl implements CsDao {
 		System.out.println("inq°¹¼ö:"+cnt);
 		return cnt;
 	}
+
+
+	@Override
+	public int faqListCnt22(String csClassGbCd) {
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csFaqTapListCnt",csClassGbCd);
+		System.out.println("À½..."+cnt);
+		return cnt;
+	}
+
+
+	@Override
+	public List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException {
+		int startListNum=paging.getstartListNum();
+		int listSize=paging.getListSize();
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("startListNum", startListNum);
+		map.put("listSize", listSize);
+		map.put("tapName", tapName);
+		
+		return sqlSession.selectList("csCenter.csFaqHeadList", map);
+	}
 	
 	
 

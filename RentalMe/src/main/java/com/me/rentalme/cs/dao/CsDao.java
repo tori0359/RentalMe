@@ -25,6 +25,7 @@ public interface CsDao {
 	int faqListCnt(Search search) throws SQLException;
 	int noticListCnt() throws SQLException;
 	int inquiryListCnt() throws SQLException;
+	int faqListCnt22(String csClassGbCd);
 	
 	//faq »ó¼¼
 	CsVo csFaqDetail(CsVo csVo) throws SQLException;	
@@ -44,4 +45,6 @@ public interface CsDao {
 	int noticDel(String num) throws SQLException;
 	int faqDel(String num) throws SQLException;
 	int inqAnswer(String num) throws SQLException;
+	
+	List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException;
 }

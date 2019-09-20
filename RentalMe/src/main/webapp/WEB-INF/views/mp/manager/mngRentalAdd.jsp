@@ -381,11 +381,16 @@
 	        <tr>
 	        	<td><label>상품 가격</label></td><td><input type="text" name="prdPrice">&nbsp&nbsp&nbsp<label>&nbsp렌탈 기간</label>&nbsp
 	        	<select name="prdContDate" style="height:28px;">
-	        			<option value="3">3개월</option>
 	        			<option value="6">6개월</option>
-	        			<option value="9">9개월</option>
 	        			<option value="12">12개월</option>
+	        			<option value="18">18개월</option>
 	        			<option value="24">24개월</option>
+	        			<option value="30">30개월</option>
+	        			<option value="36">36개월</option>
+	        			<option value="42">42개월</option>
+	        			<option value="48">48개월</option>
+	        			<option value="54">54개월</option>
+	        			<option value="60">60개월</option>
 	        	</select>
 	        	</td>
 	        </tr>

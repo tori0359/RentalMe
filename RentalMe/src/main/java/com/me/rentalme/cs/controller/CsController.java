@@ -1,7 +1,10 @@
 package com.me.rentalme.cs.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
@@ -146,14 +150,105 @@ public class CsController {
 	//실험
 	
 	 
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="/ordlist")
-	public ModelAndView headMenu(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range
-			, @RequestParam("param") String param) {
+	public @ResponseBody List<CsVo> headMenu(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range
+			, @RequestParam("param") String param) throws SQLException {
 		System.out.println("컨트롤러"+param);
 		
+		ArrayList<String> array=new ArrayList();
+		
+		
+		Paging paging=new Paging();
+		
+		pagingPath="/cs";
+		pagingPath+="/ordlist";
+		CsVo csVo=new CsVo();
+		csVo.setCsClassGbCd(param);
+		
+		//headTap 분류번호
+		String tapName=csVo.getCsClassGbCd();
+		System.out.println(csVo.getCsClassGbCd());
+		
+		//게시물 갯수
+		int listCnt=csService.faqListCnt22(csVo.getCsClassGbCd());
+		
+		//페이징 정보
+		paging.pageInfo(page, range,listCnt); 
+		
+		//jsp에 넘길 페이징정보
+		model.addAttribute("pathPaging", pagingPath);
+		model.addAttribute("paging", paging);
+		
+		//해당 분류번호 리스트
+		List<CsVo> goodsList=csService.csFaqHeadList(paging,tapName);
+//		Map<String,Object> map=new HashMap<String,Object>();
+//		for(int i = 0; i < goodsList.size(); i++) {
+//			System.out.println(goodsList.get(i).toString());
+//			
+//		}
+		
+		
+		
+//		for(int i=0;i<goodsList.size();i++) {
+//			System.out.println("번호..!!"+goodsList.get(i).getFaqNo());
+//			System.out.println("분류..!!"+goodsList.get(i).getCsClassGbCd());
+//			System.out.println("제목..!!"+goodsList.get(i).getSub());
+//			map.put("FaqNo"+i, goodsList.get(i).getFaqNo());	
+//			map.put("tapName"+i, tapName);	
+//			map.put("sub"+i,goodsList.get(i).getSub() );	
+//			
+//		}
+//		for(int i=0;i<goodsList.size();i++ ) {
+//			System.out.println("맵의 번호.."+map.get("FaqNo"+i));
+//			System.out.println("맵의 분류.."+map.get("tapName"+i));
+//			System.out.println("맵의 제목.."+map.get("sub"+i));
+//		}
+		
+//		for(Map.Entry<String, Object> entry : map.entrySet()) {
+//			System.out.println("key : "+ entry.getKey() + ", value :"+ entry.getValue());
+//		}
+		
+		
+		//csVo.setStartListNum(csPaging.getstartListNum());
+				System.out.println("시작넘버:"+paging.getstartListNum());
+				//csVo.setListSize(csPaging.getListSize());
+				System.out.println("게시물 갯수:"+paging.getListSize());
+				////////////////////////////////////
+		
+		
+		System.out.println("여기 리스트 갯수"+listCnt);
 		ModelAndView mav=new ModelAndView();
-		return mav;
+		mav.addObject("blist", csService.csFaqHeadList(paging,tapName));
+		mav.setViewName("cs/csFAQ");
+		for(int i=0;i<goodsList.size();i++) {
+			
+			if(goodsList.get(i).getCsClassGbCd().equals("1")) {
+				
+				goodsList.get(i).setCsClassGbCd("주문");
+			}
+			if(goodsList.get(i).getCsClassGbCd().equals("2")) {
+				
+				goodsList.get(i).setCsClassGbCd("배송");
+			}
+			if(goodsList.get(i).getCsClassGbCd().equals("3")) {
+				
+				goodsList.get(i).setCsClassGbCd("결제");
+			}
+			if(goodsList.get(i).getCsClassGbCd().equals("4")) {
+				
+				goodsList.get(i).setCsClassGbCd("교환취소");
+			}
+			if(goodsList.get(i).getCsClassGbCd().equals("5")) {
+				
+				goodsList.get(i).setCsClassGbCd("회원정보");
+			}
+			if(goodsList.get(i).getCsClassGbCd().equals("6")) {
+				
+				goodsList.get(i).setCsClassGbCd("기타");
+			}
+		}
+		return goodsList;
 	}
 	//faq게시판
 	@RequestMapping(value="/csFAQ")
