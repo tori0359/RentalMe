@@ -35,8 +35,7 @@
 		height: 31px;
 		min-width: 100px;
 	}
-	
-	 #goUsedManager{
+/* 	 #goUsedManager{
 	  background-color: #f4511e;
 	  border: none;
 	  color: white;
@@ -52,7 +51,49 @@
 	#goUsedManager:hover{
 		text-decoration: none;
 		opacity: 1;
+	} */
+	#goUsedManager{
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: #FFC50D;
+	  border: none;
+	  color: #FFFFFF;
+	  text-align: center;
+	  font-size: 20px;
+	  padding: 20px;
+	  width: 200px;
+	  transition: all 0.5s;
+	  cursor: pointer;
+	  margin: 5px;
+	  float: right;
+	  margin-top: -30px;
+	  margin-bottom: 20px;
 	}
+	#goUsedManager span {
+	  cursor: pointer;
+	  display: inline-block;
+	  position: relative;
+	  transition: 0.5s;
+	}
+	
+	#goUsedManager span:after {
+	  content: '\00bb';
+	  position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+	
+	#goUsedManager:hover span {
+	  padding-right: 25px;
+	}
+
+	#goUsedManager:hover span:after {
+	  opacity: 1;
+	  right: 0;
+	}
+	
 	.used_modelNm{
 		font-size: 2.2em;
 		font-weight: bold;
@@ -270,11 +311,11 @@
 			<option value="2">낮은 가격순</option>
 			<option value="3">높은 가격순</option>
 		</select>
-		<button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
+		<button id="searchBtn" class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
 	</div>
 	</form>
 	<div id="hideBtnMbno">
-	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
+	<a href="/used/store/${loginMbNo }" id="goUsedManager"><span>중고거래 관리</span></a>
 	</div>
 <div id="form_tab">
 	<form class="tabcl" action="/used/big#btn_top">
