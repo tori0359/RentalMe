@@ -404,18 +404,7 @@ public class UserController {
 	public String addLgDetailOdr(@RequestParam("totOdrAmt")int totOdrAmt, @RequestParam("crudGbCd")String crudGbCd, @RequestParam("odrGbCd")String odrGbCd, @RequestParam("payGbCd")String payGbCd, 
 			@RequestParam("seq")String seq, @RequestParam("mbNo")String mbNo, @RequestParam("gdsCd")String gdsCd, RentalAppliVo rentalAppliVo, Model model, HttpSession session ) {
 		
-		System.out.println("경매결제 왔능가");
-		
-		/* RequestParam text */
-//		System.out.println(mbNo);
-//		System.out.println(gdsCd);
-//		System.out.println(rentalAppliVo.getGdsSclassCd());
-//		System.out.println(gdsPrice);
-//		System.out.println(agreeTerm);
-//		System.out.println(deliverCost);
-//		System.out.println(instalCost);
-//		System.out.println(asCondition);
-//		System.out.println(odrQty);
+//		System.out.println("경매결제 왔능가");
 		
 		rentalAppliVo.setCrudGbCd(crudGbCd);
 		rentalAppliVo.setOdrGbCd(odrGbCd);
@@ -427,17 +416,6 @@ public class UserController {
 		rentalAppliVo.setGdsPrice(totOdrAmt);
 		rentalAppliVo.setOdrQty(1);
 		rentalAppliVo.setAgreeTerm("0");
-		
-//		System.out.println("crudGbCd 		= " +rentalAppliVo.getCrudGbCd());
-//		System.out.println("odrGbCd	 		= " +rentalAppliVo.getOdrGbCd());
-//		System.out.println("payGbCd			= " +rentalAppliVo.getPayGbCd());
-//		System.out.println("seq				= " +rentalAppliVo.getSeq());
-//		System.out.println("mbNo			= " +rentalAppliVo.getMbNo());
-//		System.out.println("gdsCd 			= " +rentalAppliVo.getGdsCd());
-//		System.out.println("gdsPrice 		= " +rentalAppliVo.getGdsPrice());
-//		System.out.println("agreeTerm 		= " +rentalAppliVo.getAgreeTerm());
-//		System.out.println("odrQty 			= " +rentalAppliVo.getOdrQty());
-//		System.out.println("totOdrAmt 		= " +rentalAppliVo.getTotOdrAmt());
 		
 		int result1 = rentalAppliService.rentalGdsOdr(rentalAppliVo);			// 주문자료 생성
 		int result2 = rentalAppliService.rentalGdsDetailOdr(rentalAppliVo);		// 주문상세자료 생성

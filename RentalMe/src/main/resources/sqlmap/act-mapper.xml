@@ -139,10 +139,47 @@ encoding="UTF-8"?>
 		limit 1
 	</update>
 	
+	<!-- 관리자 경매내역 -->
 	<select id="SelectMngActSpec" resultType="com.me.rentalme.model.entity.ActResultVo">
-		SELECT GDS_CD,ACT_SEQ,MB_NO,BID_PRICE,BID_TIME,ACT_BID_STS_CD
-		FROM tb_act100
-		WHERE ACT_BID_STS_CD=1
+		SELECT
+			AA.GDS_CD
+			,AA.GDS_NM
+			,AA.ACT_SEQ
+			,AA.MB_NO
+			,AA.USER_NM
+			,AA.BID_PRICE
+			,AA.BID_TIME
+			,AA.ACT_BID_STS_CD
+			,BB.ODR_NO
+			,BB.PAY_GB_CD
+			,BB.ODR_STS_GB_CD
+		FROM
+			(
+				SELECT 
+					A.GDS_CD
+					,CAST(REPLACE(SUBSTRING(A.GDS_CD,7,6),'0','') AS UNSIGNED) AS GDS_CD2
+					,FN_NM('GDS_NM2', A.GDS_CD) AS GDS_NM
+					,A.ACT_SEQ
+					,A.MB_NO
+					,FN_NM('USER_NM', A.MB_NO) AS USER_NM
+					,A.BID_PRICE
+					,A.BID_TIME
+					,A.ACT_BID_STS_CD
+				FROM TB_ACT100 A
+				WHERE A.ACT_BID_STS_CD = 1
+			) AA LEFT OUTER JOIN (	
+				SELECT
+					B.GDS_CD
+					,A.ODR_NO
+					,A.PAY_GB_CD
+					,A.ODR_STS_GB_CD
+			   FROM TB_ODR100 A,
+					  TB_ODR110 B
+				WHERE A.ODR_NO = B.ODR_NO
+				AND A.ODR_GB_CD = '30'	/* 경매상품 고정 */
+			) BB
+		ON AA.GDS_CD = BB.GDS_CD
+		ORDER BY AA.GDS_CD2 DESC
 	</select>
 	
 	<update id="updateMngBidCancel">

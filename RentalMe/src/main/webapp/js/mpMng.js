@@ -50,25 +50,7 @@ $(function(){
 		});
 		
 		
-		$.ajax({
-			type : 'POST',
-			url  : '/mp/mng/decl/update',
-			contentType: 'application/json; charset=utf-8',
-			data : JSON.stringify(checkedDeclArray),	//3.배열을 json형태로 변환하여 서버로 보낸다.
-			success: function(data) {
-				Swal.fire({
-					  position: 'top-middle',
-					  type: 'success',
-					  title: '정상적으로 처리되었습니다.',
-					  showConfirmButton: false,
-					  timer: 1500
-					});
-				setTimeout('location.reload()',1500); 
-			},
-			error:function(request, status, error){
-				alert("code="+request.status+", message="+request.responseText+", error="+error)
-			}			
-		});
+		
 	});
 	
 	

@@ -110,7 +110,13 @@
 	       // 포기 모달
 	       $('#myModal2').on('shown.bs.modal', function (e) {
 	    	   var gdsCd = $(e.relatedTarget).data('gds-cd');
+	    	   var gdsNm = $(e.relatedTarget).data('gds-nm');
+	    	   var bidPrice = $(e.relatedTarget).data('bid-price');
+				$(e.currentTarget).find('input[name="crudGbCd"]').val("UUPC");
+				$(e.currentTarget).find('input[name="odrGbCd"]').val("10");
 				$(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd);
+				$(e.currentTarget).find('input[name="gdsNm"]').val(gdsNm);
+				$(e.currentTarget).find('input[name="bidPrice"]').val(bidPrice);
 				//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
 	      });
 		
@@ -145,7 +151,7 @@
 	$(document).on("click", "#realSubmit", function(){
 		var amount = $('#realBidPrice').val();	// 결제할 실제 금액
 		var userId = "${loginUserId}";
-		var crudGbCd = "II";
+		var crudGbCd = "IIACTC";
 		var odrGbCd = "30";
 		var payGbCd = radioVal;
 		var seq	= "001";
@@ -248,7 +254,6 @@
        			<th>낙찰가격</th>
        			<th>낙찰상태</th>
        			<th>주문상태/주문번호</th>
-       			<th>임시용</th>
        		</tr>
        	</thead>
        	<tbody>
@@ -293,7 +298,6 @@
        			<c:if test="${bean.actBidStsCd eq 3}">
        				<td style="vertical-align:middle;">종료</td><td></td>
        			</c:if>
-       			<td>${bean.odrStsGbCd }</td>
        		</tr>
        	</c:forEach>
        	</tbody>
@@ -351,7 +355,7 @@
 	</div>
 	<!-- 모달 끝 -->		
 	</c:forEach>
-	<!-- 반품 모달 -->
+	<!-- 포기 모달 -->
 	<form id="target" action="/act/cancel" method="post">
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
