@@ -128,6 +128,7 @@
 		height: 400px;
 		overflow-y: auto;
 		border: 1px solid lightgrey;
+		padding-bottom: 50px;
 
 	}
 	#bidListBody{
@@ -250,7 +251,7 @@
 			console.log('연결끊김');
 			sock.close();
 		}
-
+ 		$('#actLive').scrollTop($('#actLive').prop('scrollHeight'));
 	};
 	sock.onclose=function(event){
 		alert('이용해주셔서 감사합니다.');
@@ -267,8 +268,8 @@
 			console.log('클릭함');
 			$('#sendMsg').attr('disabled', true);
 			sendBid();
-			
 		}); 
+		
 	});
 	function enterAct(){
 		var msg={
