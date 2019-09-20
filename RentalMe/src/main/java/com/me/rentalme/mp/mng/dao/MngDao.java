@@ -55,6 +55,7 @@ public interface MngDao {
 	//렌탈 전체 상품 리스트(카운트)
 	List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException;
 	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;

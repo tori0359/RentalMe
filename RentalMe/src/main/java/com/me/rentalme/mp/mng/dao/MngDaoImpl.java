@@ -117,8 +117,14 @@ public class MngDaoImpl implements MngDao{
 	////추가--------------
 	@Override
 	public List<RentalAppliVo> selectGoodsList() throws SQLException {
+		return sqlSession.selectList("mpMng.selectRentalAllList");
+	}
+	@Override
+	public List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException {
 		
-		return sqlSession.selectList("mpMng.selectRentalList");
+		System.out.println("service에서 넘어온 중분류코드 : "+ gdsMclassCd);
+		
+		return sqlSession.selectList("mpMng.selectRentalList", gdsMclassCd);
 	}
 
 	@Override

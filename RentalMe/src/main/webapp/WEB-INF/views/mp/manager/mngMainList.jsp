@@ -59,12 +59,13 @@
                 <!-- end pageheader -->
                 <!-- ============================================================== -->
                 <div align="right" id="headMenu">
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList?gdsLclassCd=10">[전체상품]</a>
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList?gdsLclassCd=20">[대형가전]</a>
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/Appli/sm">[소형가전]</a>
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/Appli/furn">[가구]</a>
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/Appli/rest">[기타]</a>
-					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/Appli/pkg">[패키지]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList">[전체상품]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/10">[대형가전]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/20">[소형가전]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/30">[주방가전]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/40">[가구]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/50">[기타]</a>
+					<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/goodsList/60">[패키지]</a>
 				</div>
                 <div class="row">
                     <!-- ============================================================== -->

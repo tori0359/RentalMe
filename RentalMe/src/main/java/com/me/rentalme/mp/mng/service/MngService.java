@@ -51,6 +51,7 @@ public interface MngService {
 	
 	//∑ª≈ª ªÛ«∞ ∏ÆΩ∫∆Æ ∆‰¿Ã¬°
 	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;

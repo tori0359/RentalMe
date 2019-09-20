@@ -34,10 +34,10 @@ public class MngAppliController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 
-	
+
 	/**
 	 * @throws SQLException 
-	* 마이페이지(관리자) - 메인 리스트
+	* 마이페이지(관리자) - 렌탈상품 전체 리스트
 	* 
 	* @param  
 	* @return ModelAndView 
@@ -46,11 +46,30 @@ public class MngAppliController {
 	*/
 	@RequestMapping(value = "/mng/goodsList",method = RequestMethod.GET)
 	public ModelAndView getMainList(Model model) throws SQLException {
-		log.debug("마이페이지(관리자) 메인 컨트롤러");
-		
+		log.debug("마이페이지(관리자) 전체 리스트 컨트롤러");
+				
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("rlist", MngService.selectGoodsList());
+		mav.setViewName("mp/manager/mngMainList");
+		return mav;
+	}
+	/**
+	 * @throws SQLException 
+	* 마이페이지(관리자) - [대형가전, 소형가전, 주방가전, 가구, 기타, 패키지 리스트]
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 황인준
+	* @exception 
+	*/
+	@RequestMapping(value = "/mng/goodsList/{gdsMclassCd}",method = RequestMethod.GET)
+	public ModelAndView getMainList(Model model, @PathVariable String gdsMclassCd) throws SQLException {
+		log.debug("마이페이지(관리자) 메인 컨트롤러");
+				
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("rlist", MngService.selectGoodsList(gdsMclassCd));
 		mav.setViewName("mp/manager/mngMainList");
 		return mav;
 	}

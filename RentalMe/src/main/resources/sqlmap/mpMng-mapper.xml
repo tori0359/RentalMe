@@ -174,8 +174,20 @@
 	</update>
 	<!--민수 -->
 	<!--렌탈상품리스트 -->
-	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT * FROM TB_GDS100 ORDER BY REG_DT DESC
+	<select id="selectRentalAllList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * 
+		  FROM TB_GDS100
+		 WHERE GDS_LCLASS_CD = '10'
+		 ORDER 
+		    BY REG_DT DESC
+	</select>
+	<select id="selectRentalList" parameterType="String" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * 
+		  FROM TB_GDS100
+		 WHERE GDS_LCLASS_CD = '10'
+		   AND GDS_MCLASS_CD = #{gdsMclassCd}
+		 ORDER 
+		    BY REG_DT DESC
 	</select>
 	<!--대형 상품리스트 -->
 	<select id="selectLgoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">

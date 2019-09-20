@@ -209,6 +209,11 @@ public class MngServiceImpl implements MngService {
 		
 		return mngDao.selectGoodsList();
 	}
+	@Override
+	public List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException{
+		
+		return mngDao.selectGoodsList(gdsMclassCd);
+	}
 
 	@Override
 	public int goodsListCnt() {
