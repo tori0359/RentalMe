@@ -29,7 +29,7 @@
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngAct.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngRental.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
 </head>
 <body>
@@ -80,6 +80,9 @@
                                     <table id="dt" class="table table-striped table-bordered first">
                                         <thead>
                                             <tr>
+												<th style="text-align:center; padding: 10px 30px">
+													<input type="checkbox" name="allCheck" id="allCheck" onclick="checkAll();"/>
+												</th>
 												<th>상품코드</th>
 												<th>상품상태</th>
 												<th>상품분류</th>
@@ -92,52 +95,55 @@
                                         <tbody>
 										<c:forEach items="${rlist}" var="bean">
 											<tr id="maincontent">
-													<td>${bean.gdsCd}</td>
-													<c:if test="${bean.gdsLclassCd eq '10'}">
-													<td>새상품</td>
-													</c:if>
-													<c:if test="${bean.gdsLclassCd eq '20'}">
-													<td style="color:gray;">*중고</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '10'}">
-													<td>대형가전</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '20'}">
-													<td>소형가전</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '30'}">
-													<td>주방가전</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '40'}">
-													<td>가구</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '50'}">
-													<td>기타</td>
-													</c:if>
-													<c:if test="${bean.gdsMclassCd eq '60'}">
-													<td>패키지</td>
-													</c:if>
-													<td>${bean.gdsNm}</td>
-													<td>${bean.brandNm}</td>
-													<td>${bean.modelNm}</td>
-													<c:if test="${bean.delYn  eq 'N'}">
-													<td style="color:red;">N</td>
-													</c:if>
-													<c:if test="${bean.delYn  eq 'Y'}">
-													<td style="color:blue;">Y</td>
-													</c:if>
+												<td style="text-align:center"><input type="checkbox" class="chBox" name="chBox" data-actNum="${bean.gdsCd}">
+							       				</td>
+												<td>${bean.gdsCd}</td>
+												<c:if test="${bean.gdsLclassCd eq '10'}">
+												<td>새상품</td>
+												</c:if>
+												<c:if test="${bean.gdsLclassCd eq '20'}">
+												<td style="color:gray;">*중고</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '10'}">
+												<td>대형가전</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '20'}">
+												<td>소형가전</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '30'}">
+												<td>주방가전</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '40'}">
+												<td>가구</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '50'}">
+												<td>기타</td>
+												</c:if>
+												<c:if test="${bean.gdsMclassCd eq '60'}">
+												<td>패키지</td>
+												</c:if>
+												<td>${bean.gdsNm}</td>
+												<td>${bean.brandNm}</td>
+												<td>${bean.modelNm}</td>
+												<c:if test="${bean.delYn  eq 'N'}">
+												<td id="delYn" style="color:red;">N</td>
+												</c:if>
+												<c:if test="${bean.delYn  eq 'Y'}">
+												<td id="delYn" style="color:blue;">Y</td>
+												</c:if>
 											</tr>
 										</c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
                             </div> 
-                        </div>                    
+                        </div>   
                     </div>
                     <!-- ============================================================== -->
                     <!-- end table  -->
                     <!-- ============================================================== -->
                 </div>
+                <input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
 			</div>
 			<jsp:include page="../../template/footerAdmin.jsp"></jsp:include>
 		</div>

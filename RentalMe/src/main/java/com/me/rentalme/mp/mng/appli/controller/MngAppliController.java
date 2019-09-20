@@ -257,12 +257,11 @@ public class MngAppliController {
 		return mav;
 	}
 	
-	//렌탈상품 선택삭제
+		//렌탈상품 선택삭제
 		@RequestMapping(value = "/mng/deleteAppliList", method = RequestMethod.POST)
 		public ModelAndView deleteCart(@RequestParam(value = "chbox[]") List<String> chArr
 				,RentalAppliVo rentalAppliVo) throws SQLException {
-		
-			System.out.println("경매상품 삭제 컨트롤러");
+			System.out.println("렌탈상품 삭제 컨트롤러");
 			
 			ModelAndView mav=new ModelAndView();
 
