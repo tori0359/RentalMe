@@ -145,6 +145,12 @@ public class CsServiceImpl implements CsService {
 		return csDao.csFaqHeadList(paging,tapName);
 	}
 
+	@Override
+	public UserVo userLevel(String userLevel) {
+		
+		return csDao.userLevel(userLevel);
+	}
+
 	
 
 }

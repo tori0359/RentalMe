@@ -7,6 +7,7 @@ import java.util.Map;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.paging.Search;
+import com.me.rentalme.model.entity.UserVo;
 
 public interface CsDao {
 
@@ -46,5 +47,6 @@ public interface CsDao {
 	int faqDel(String num) throws SQLException;
 	int inqAnswer(String num) throws SQLException;
 	
+	UserVo userLevel(String userLevel);
 	List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException;
 }

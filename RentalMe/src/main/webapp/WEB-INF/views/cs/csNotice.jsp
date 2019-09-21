@@ -100,12 +100,11 @@
 <div id="csContent">
 
 <div class="hr">
-	
 </div>
 <div id="noticeBar" class="col-md-10 col-md-offset-1">
 	<table id="firTable">
 		<tr>
-			<td>공지사항</td>
+			<td class="pulse">공지사항</td>
 			<td>FAQ</td>
 			<td>1:1문의</td>
 		</tr>

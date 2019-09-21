@@ -113,6 +113,11 @@
 	<update id="csFaqUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
 		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAQ_NO=#{faqNo}
 	</update>
+	
+	
+	<select id="userLevel" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT LEVEL_GB_CD FROM TB_USER100 WHERE MB_NO=#{userLevel}
+	</select>
   </mapper>
   
   

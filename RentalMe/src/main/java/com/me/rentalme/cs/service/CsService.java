@@ -44,4 +44,5 @@ public interface CsService {
 	
 	List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException;
 	
+	UserVo userLevel(String userLevel);
 }

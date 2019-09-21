@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.paging.Search;
+import com.me.rentalme.model.entity.UserVo;
 
 
 @Repository
@@ -208,6 +209,13 @@ public class CsDaoImpl implements CsDao {
 		map.put("tapName", tapName);
 		
 		return sqlSession.selectList("csCenter.csFaqHeadList", map);
+	}
+
+
+	@Override
+	public UserVo userLevel(String userLevel) {
+		System.out.println("´Ù¿ì");
+		return sqlSession.selectOne("csCenter.userLevel",userLevel);
 	}
 	
 	

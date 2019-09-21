@@ -21,6 +21,7 @@ import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.UserVo;
 
 
 /**
@@ -55,17 +56,22 @@ public class MngCsController {
 	public ModelAndView getCsNotice(HttpSession session,Model model,
 			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
 		log.debug("공지/FAQ 컨트롤러");
-		
+		ModelAndView mav = new ModelAndView();
 		pagingPath="/mp/mng";
 		pagingPath+="/csNoticeList";
-		
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		mav.addObject("levelGbCd",userLevel);
 		int listCnt=csService.noticListCnt();
 		
 		Paging csPaging=new Paging();
 		
 		csPaging.pageInfo(page, range, listCnt);
 		
-		ModelAndView mav = new ModelAndView();
+	
 		
 		System.out.println("mapping..");
 		
@@ -89,6 +95,15 @@ public class MngCsController {
 		pagingPath="/mp/mng";
 		pagingPath+="/csFaqList";
 		
+		ModelAndView mav = new ModelAndView();
+		
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		mav.addObject("levelGbCd",userLevel);
+		
 		Search search=new Search();
 		int listCnt=csService.faqListCnt1(search);
 		
@@ -96,7 +111,6 @@ public class MngCsController {
 		
 		csPaging.pageInfo(page, range, listCnt);
 		
-		ModelAndView mav = new ModelAndView();
 		String userId=(String)session.getAttribute("loginUserId");
 		mav.addObject("id", userId);
 		
@@ -127,13 +141,24 @@ public class MngCsController {
 		pagingPath="/mp/mng";
 		pagingPath+="/InqList";
 		
+		ModelAndView mav = new ModelAndView();
+		
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		mav.addObject("levelGbCd",userLevel);
+		
+		
+		
 		int listCnt=csService.inquiryListCnt();
 		System.out.println("inq리스트 갯수:"+listCnt);
 		
 		Paging csPaging=new Paging();
 		
 		csPaging.pageInfo(page, range, listCnt);
-		ModelAndView mav = new ModelAndView();
+		
 		
 		mav.addObject("inqlist", csService.csInqList(csPaging));
 		
