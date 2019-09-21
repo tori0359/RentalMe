@@ -23,8 +23,6 @@ public class LoginRememberInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-		
-		System.out.println("로그인 쿠키 : "+loginCookie);
 
 		//접속한 사용자가 쿠키를 가지고 있을 경우
 		if(loginCookie != null) {
@@ -36,7 +34,6 @@ public class LoginRememberInterceptor extends HandlerInterceptorAdapter {
 			//회원번호를 세션에 저장한다.(sessionMbNo : loginMbNo)
 			session.setAttribute("loginMbNo", userVo.getMbNo());
 		}
-		
 		
 		return true;
 	}

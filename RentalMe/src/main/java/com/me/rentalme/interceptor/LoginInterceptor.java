@@ -29,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			session.setAttribute("loginMbNo", userVo.getMbNo());
 			
 			//자동로그인 체크가 되어있을 경우
-			if(request.getParameter("isUseLogin") != null) {
+			if(request.getParameter("useLogin") != null) {
 				//쿠키생성
 				Cookie loginCookie = new Cookie("loginCookie", session.getId());
 				loginCookie.setPath("/");
