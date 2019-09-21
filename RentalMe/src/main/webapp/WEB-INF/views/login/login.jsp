@@ -44,7 +44,7 @@
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
 					<div class="checkbox">
-						<label> <input type="checkbox" name="isUseLogin"> 자동 로그인
+						<label> <input type="checkbox" name="useLogin"> 자동 로그인
 						</label>
 					</div>
 				</div>

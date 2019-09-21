@@ -35,12 +35,12 @@
 	</beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/login"/>
-			<beans:ref bean="loginInterceptor"/>
-		</interceptor>
-		<interceptor>
 			<mapping path="/**/"/>
 			<beans:ref bean="loginRememberInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/login"/>
+			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/login"/>
@@ -48,10 +48,6 @@
 			<mapping path="/join/info"/>
 			<mapping path="/join/compl"/>
 			<beans:ref bean="loginAfterInterceptor"/>
-		</interceptor>
-		<interceptor>
-			<mapping path="/**/"/>
-			<beans:ref bean="webContentInterceptor"/>
 		</interceptor>
 	</interceptors>
 

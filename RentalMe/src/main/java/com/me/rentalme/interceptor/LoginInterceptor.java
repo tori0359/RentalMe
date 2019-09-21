@@ -1,6 +1,5 @@
 package com.me.rentalme.interceptor;
 
-import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,13 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.me.rentalme.login.service.LoginService;
 import com.me.rentalme.model.entity.UserVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
-	
-	@Inject
-	LoginService loginService;
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -53,14 +48,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		//기존의 로그인 정보를 제거
-		if(session.getAttribute("loginUserId") != null && session.getAttribute("loginMbNo") != null) {		
+		if(session.getAttribute("loginUserId") != null && session.getAttribute("loginMbNo") != null) {
 			session.removeAttribute("loginUserId");
 			session.removeAttribute("loginMbNo");
 		}
 		
 		return true;
 	}
-	
-	
 
 }
