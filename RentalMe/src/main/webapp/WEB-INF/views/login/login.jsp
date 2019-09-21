@@ -100,7 +100,7 @@
 							class="btn btn-default btn-block" >찾기</button>
 					</div>
 				</div>
-				<form action="pwFind" method="get">
+				<form action="pwFind" method="POST">
 					<div id="pw_find">
 						<div id="insert_id">
 							<input type="text" placeholder="아이디"  name="userId" id="pwUserId"/>

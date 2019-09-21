@@ -24,4 +24,7 @@ public interface LoginFindDao {
 	//입력한 핸드폰번호의 동의여부를 체크한다.
 	int selectHpYn(String hp);
 
+	//비밀번호 찾기 - 핸드폰으로 찾기 - 데이터 체크
+	int checkPwHp(String userId, String hp);
+
 }
