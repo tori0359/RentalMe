@@ -172,6 +172,7 @@
 
 				$('#remnDeposit').val(refundinput);
 				remnDeposit = $('#remnDeposit').val();
+				 
 
 				$.ajax({
 					url:"deposit/refund",
