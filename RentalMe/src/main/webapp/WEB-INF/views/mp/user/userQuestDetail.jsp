@@ -53,6 +53,17 @@
         	border-radius:5px;
         	
         }
+        #comment{
+        	font-size:2em;
+        	font-style: italic;
+        	font-weight: bold;
+        	border-bottom:1px solid;
+        	
+        }
+        #replyed{
+        	font-size:18px;
+        	font-weight:lighter;
+        }
 	</style>
 </head>
 <body>
@@ -113,19 +124,25 @@
         </table>
         <br/>
         <div>
+        <c:if test="${reply.replyContent ne null }">
+       		<div id="comment" >
+        		Comment
+        	</div>
+        </c:if>
         	<c:if test="${levelGbCd=='2'}">
         	<c:if test="${bean.questStsCd=='1'}">
 	        	<form action="/mp/mng/csInqReply" method="get">
-	        	<div class="col-md-offset-3">
-	            	<input style="width:100%;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="엔터로 입력"/>
+	        	<div class="col-md-10 col-md-offset-1">
+	            	<input style="width:100%;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="답글을 달아주세요"/>
 	        	</div>
 	            	<input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
 	            	<input type="hidden" name="mbNo" value="${bean.mbNo}"/>
 	        	</form>
         	</c:if>
         	</c:if>
-        	<div>
-        		${reply.replyContent}
+        	
+        	<div id="replyed" class="col-md-offset-2">
+        		<br/><br/><span></span><span>${reply.replyContent}</span><span></span>
         	</div>
         </div>
             	<div id="daeButton">

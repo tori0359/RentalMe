@@ -403,11 +403,11 @@
             <div id="hihi">
 	            <tr>
 	                <td><label>상품코드</label></td>
-	                <td><input type="text" name="gdsCd" id="gdsCd" readonly="readonly"/>&nbsp&nbsp<label>모델명</label>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm" id="modelNm"/></td>
+	                <td><input type="text" class="form-control" name="gdsCd" id="gdsCd" readonly="readonly"/>&nbsp&nbsp<label>모델명</label>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="modelNm" id="modelNm"/></td>
 	            </tr>
 	            <tr>
 	            	<td><label>상품명</label></td>
-	                <td><input type="text" name="gdsNm" id="gdsNm">&nbsp&nbsp<label>브랜드명</label>&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
+	                <td><input type="text" class="form-control" name="gdsNm" id="gdsNm">&nbsp&nbsp<label>브랜드명</label>&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
 	            </tr>
 	            <tr>
 	            	<td><label>시작가</label></td>

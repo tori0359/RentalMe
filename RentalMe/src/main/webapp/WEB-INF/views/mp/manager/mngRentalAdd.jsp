@@ -348,7 +348,7 @@
         <table class="table" id="daeContent">
             <tr>
                 <td><label>작 성 자</label></td>
-                <td>관 리 자</td>
+                <td style="width:center">관 리 자</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -356,7 +356,7 @@
 	<form action="/mp/mng/rentalInsert" enctype="multipart/form-data" method="post">
             <tr>
             	<td><label>상품-대분류</label></td>
-            	<td>
+            	<td style="width:center">
 	            	<input type="hidden" value="10" name="gdsLclassCd">렌탈상품
             	</td>
             	<td></td>
@@ -399,16 +399,16 @@
 	        	<td><label>상품 가격</label></td><td><input style="width:75%;height:40px;" type="text" class="form-control" name="prdPrice"></td><td><label>렌탈 기간</label></td>
 	        	<td>
 	        	<select style="width:75%;height:40px;" class="form-control" name="prdContDate" style="height:28px;">
+	        			<option value="3">3개월</option>
 	        			<option value="6">6개월</option>
+	        			<option value="9">9개월</option>
 	        			<option value="12">12개월</option>
+	        			<option value="15">15개월</option>
 	        			<option value="18">18개월</option>
+	        			<option value="21">21개월</option>
 	        			<option value="24">24개월</option>
+	        			<option value="27">27개월</option>
 	        			<option value="30">30개월</option>
-	        			<option value="36">36개월</option>
-	        			<option value="42">42개월</option>
-	        			<option value="48">48개월</option>
-	        			<option value="54">54개월</option>
-	        			<option value="60">60개월</option>
 	        	</select>
 	        	</td>
 	        </tr>
@@ -425,7 +425,7 @@
 	        	<td><input style="width:75%;height:40px;" type="text" name="prdAsContent" class="form-control" value="렌탈기간 내 무상 AS"/></td>
 	        	<td><label>상품상태</label></td>
 	        	<td style="vertical-align:middle;">
-	        		새상품<input style="width:40px;" type="checkbox" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="Y">
+	        		새상품<input style="width:40px;" type="checkbox" checked="checked" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="Y">
 	            </td>
 	        </tr>
 	        <tr>
