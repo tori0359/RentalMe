@@ -89,19 +89,28 @@ public class FindController {
 	* @author 황인준
 	* @exception
 	* 등록일자 : 2019-09-04 
+	* 수정일자 : 2019-09-27
 	*/
-	@RequestMapping(value = "/pwFind", method = RequestMethod.GET)
+	@RequestMapping(value = "/pwFind", method = RequestMethod.POST)
 	public ModelAndView findEmailPw(@ModelAttribute UserVo userVo) {
 		log.debug("등록된 이메일로 비밀번호 찾기 컨트롤러");
+		
 		
 		//받아온 데이터가 맞는지 체크
 		String str = loginFindService.checkData(userVo);
 		
 		ModelAndView mav = new ModelAndView("login/login");
 		
-		if(str.equals("not empty")) {
+		if(str.equals("not empty")) {							//이메일로 비밀번호 찾기인 경우
+						
 			mav.addObject("pwMsg", "notEmpty");
-			mav.addObject("pwEmail", userVo.getEmail());
+			if(userVo.getEmail() != null) {
+				mav.addObject("pwEmail", userVo.getEmail());
+			}
+			
+			if(userVo.getHp() != null) {						//핸드폰으로 비밀번호 찾기인 경우
+				mav.addObject("pwHp", userVo.getHp());
+			}
 			mav.addObject("pwId", userVo.getUserId());
 		}else if(str.equals("empty")) {
 			mav.addObject("pwMsg", "empty");

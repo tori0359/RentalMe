@@ -29,7 +29,7 @@ public class UserVo {
 	private Date	regDt;			// 등록일자
 	private String  sessionKey;		// 세션키 (쿠기값 저장)
 	private Date	sessionDt;		// 세션일자
-	private boolean isUseLogin;		// 자동로그인 여부
+	private boolean useLogin;		// 자동로그인 여부
 	private String  loginStsCd;		// 로그인 상태 값 (1 : 로그인, 2 : 로그오프)
 	private String  browserStsCd;	// 브라우저 상태 값 (1:IE, 2:Opera, 3:FireFox, 4: Chrome, 5:Safari)
 	
@@ -42,7 +42,7 @@ public class UserVo {
 	public UserVo(String userId, String mbNo, String userNM, String birthDay, String genderGbCd, String hp, String hpYn,
 			String hpKey, String email, String emailYn, String emailKey, String addr, String addrDetail, String zipCode,
 			String userPw, String pwFailCnt, Date pwAdjDt, String levelGbCd, String joinDt, String userStsCd,
-			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean isUseLogin,
+			String chgId, Date chgDt, String regId, Date regDt, String sessionKey, Date sessionDt, boolean useLogin,
 			String loginStsCd, String browserStsCd) {
 		super();
 		this.userId = userId;
@@ -71,7 +71,7 @@ public class UserVo {
 		this.regDt = regDt;
 		this.sessionKey = sessionKey;
 		this.sessionDt = sessionDt;
-		this.isUseLogin = isUseLogin;
+		this.useLogin = useLogin;
 		this.loginStsCd = loginStsCd;
 		this.browserStsCd = browserStsCd;
 	}
@@ -338,12 +338,12 @@ public class UserVo {
 
 
 	public boolean isUseLogin() {
-		return isUseLogin;
+		return useLogin;
 	}
 
 
-	public void setUseLogin(boolean isUseLogin) {
-		this.isUseLogin = isUseLogin;
+	public void setUseLogin(boolean useLogin) {
+		this.useLogin = useLogin;
 	}
 
 
@@ -368,198 +368,6 @@ public class UserVo {
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((addr == null) ? 0 : addr.hashCode());
-		result = prime * result + ((addrDetail == null) ? 0 : addrDetail.hashCode());
-		result = prime * result + ((birthDay == null) ? 0 : birthDay.hashCode());
-		result = prime * result + ((browserStsCd == null) ? 0 : browserStsCd.hashCode());
-		result = prime * result + ((chgDt == null) ? 0 : chgDt.hashCode());
-		result = prime * result + ((chgId == null) ? 0 : chgId.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((emailKey == null) ? 0 : emailKey.hashCode());
-		result = prime * result + ((emailYn == null) ? 0 : emailYn.hashCode());
-		result = prime * result + ((genderGbCd == null) ? 0 : genderGbCd.hashCode());
-		result = prime * result + ((hp == null) ? 0 : hp.hashCode());
-		result = prime * result + ((hpKey == null) ? 0 : hpKey.hashCode());
-		result = prime * result + ((hpYn == null) ? 0 : hpYn.hashCode());
-		result = prime * result + (isUseLogin ? 1231 : 1237);
-		result = prime * result + ((joinDt == null) ? 0 : joinDt.hashCode());
-		result = prime * result + ((levelGbCd == null) ? 0 : levelGbCd.hashCode());
-		result = prime * result + ((loginStsCd == null) ? 0 : loginStsCd.hashCode());
-		result = prime * result + ((mbNo == null) ? 0 : mbNo.hashCode());
-		result = prime * result + ((pwAdjDt == null) ? 0 : pwAdjDt.hashCode());
-		result = prime * result + ((pwFailCnt == null) ? 0 : pwFailCnt.hashCode());
-		result = prime * result + ((regDt == null) ? 0 : regDt.hashCode());
-		result = prime * result + ((regId == null) ? 0 : regId.hashCode());
-		result = prime * result + ((sessionDt == null) ? 0 : sessionDt.hashCode());
-		result = prime * result + ((sessionKey == null) ? 0 : sessionKey.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((userNM == null) ? 0 : userNM.hashCode());
-		result = prime * result + ((userPw == null) ? 0 : userPw.hashCode());
-		result = prime * result + ((userStsCd == null) ? 0 : userStsCd.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserVo other = (UserVo) obj;
-		if (addr == null) {
-			if (other.addr != null)
-				return false;
-		} else if (!addr.equals(other.addr))
-			return false;
-		if (addrDetail == null) {
-			if (other.addrDetail != null)
-				return false;
-		} else if (!addrDetail.equals(other.addrDetail))
-			return false;
-		if (birthDay == null) {
-			if (other.birthDay != null)
-				return false;
-		} else if (!birthDay.equals(other.birthDay))
-			return false;
-		if (browserStsCd == null) {
-			if (other.browserStsCd != null)
-				return false;
-		} else if (!browserStsCd.equals(other.browserStsCd))
-			return false;
-		if (chgDt == null) {
-			if (other.chgDt != null)
-				return false;
-		} else if (!chgDt.equals(other.chgDt))
-			return false;
-		if (chgId == null) {
-			if (other.chgId != null)
-				return false;
-		} else if (!chgId.equals(other.chgId))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (emailKey == null) {
-			if (other.emailKey != null)
-				return false;
-		} else if (!emailKey.equals(other.emailKey))
-			return false;
-		if (emailYn == null) {
-			if (other.emailYn != null)
-				return false;
-		} else if (!emailYn.equals(other.emailYn))
-			return false;
-		if (genderGbCd == null) {
-			if (other.genderGbCd != null)
-				return false;
-		} else if (!genderGbCd.equals(other.genderGbCd))
-			return false;
-		if (hp == null) {
-			if (other.hp != null)
-				return false;
-		} else if (!hp.equals(other.hp))
-			return false;
-		if (hpKey == null) {
-			if (other.hpKey != null)
-				return false;
-		} else if (!hpKey.equals(other.hpKey))
-			return false;
-		if (hpYn == null) {
-			if (other.hpYn != null)
-				return false;
-		} else if (!hpYn.equals(other.hpYn))
-			return false;
-		if (isUseLogin != other.isUseLogin)
-			return false;
-		if (joinDt == null) {
-			if (other.joinDt != null)
-				return false;
-		} else if (!joinDt.equals(other.joinDt))
-			return false;
-		if (levelGbCd == null) {
-			if (other.levelGbCd != null)
-				return false;
-		} else if (!levelGbCd.equals(other.levelGbCd))
-			return false;
-		if (loginStsCd == null) {
-			if (other.loginStsCd != null)
-				return false;
-		} else if (!loginStsCd.equals(other.loginStsCd))
-			return false;
-		if (mbNo == null) {
-			if (other.mbNo != null)
-				return false;
-		} else if (!mbNo.equals(other.mbNo))
-			return false;
-		if (pwAdjDt == null) {
-			if (other.pwAdjDt != null)
-				return false;
-		} else if (!pwAdjDt.equals(other.pwAdjDt))
-			return false;
-		if (pwFailCnt == null) {
-			if (other.pwFailCnt != null)
-				return false;
-		} else if (!pwFailCnt.equals(other.pwFailCnt))
-			return false;
-		if (regDt == null) {
-			if (other.regDt != null)
-				return false;
-		} else if (!regDt.equals(other.regDt))
-			return false;
-		if (regId == null) {
-			if (other.regId != null)
-				return false;
-		} else if (!regId.equals(other.regId))
-			return false;
-		if (sessionDt == null) {
-			if (other.sessionDt != null)
-				return false;
-		} else if (!sessionDt.equals(other.sessionDt))
-			return false;
-		if (sessionKey == null) {
-			if (other.sessionKey != null)
-				return false;
-		} else if (!sessionKey.equals(other.sessionKey))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		if (userNM == null) {
-			if (other.userNM != null)
-				return false;
-		} else if (!userNM.equals(other.userNM))
-			return false;
-		if (userPw == null) {
-			if (other.userPw != null)
-				return false;
-		} else if (!userPw.equals(other.userPw))
-			return false;
-		if (userStsCd == null) {
-			if (other.userStsCd != null)
-				return false;
-		} else if (!userStsCd.equals(other.userStsCd))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
-			return false;
-		return true;
-	}
-
-
-	@Override
 	public String toString() {
 		return "UserVo [userId=" + userId + ", mbNo=" + mbNo + ", userNM=" + userNM + ", birthDay=" + birthDay
 				+ ", genderGbCd=" + genderGbCd + ", hp=" + hp + ", hpYn=" + hpYn + ", hpKey=" + hpKey + ", email="
@@ -567,19 +375,11 @@ public class UserVo {
 				+ addrDetail + ", zipCode=" + zipCode + ", userPw=" + userPw + ", pwFailCnt=" + pwFailCnt + ", pwAdjDt="
 				+ pwAdjDt + ", levelGbCd=" + levelGbCd + ", joinDt=" + joinDt + ", userStsCd=" + userStsCd + ", chgId="
 				+ chgId + ", chgDt=" + chgDt + ", regId=" + regId + ", regDt=" + regDt + ", sessionKey=" + sessionKey
-				+ ", sessionDt=" + sessionDt + ", isUseLogin=" + isUseLogin + ", loginStsCd=" + loginStsCd
-				+ ", browserStsCd=" + browserStsCd + ", getUserId()=" + getUserId() + ", getMbNo()=" + getMbNo()
-				+ ", getUserNM()=" + getUserNM() + ", getBirthDay()=" + getBirthDay() + ", getGenderGbCd()="
-				+ getGenderGbCd() + ", getHp()=" + getHp() + ", getHpYn()=" + getHpYn() + ", getHpKey()=" + getHpKey()
-				+ ", getEmail()=" + getEmail() + ", getEmailYn()=" + getEmailYn() + ", getEmailKey()=" + getEmailKey()
-				+ ", getAddr()=" + getAddr() + ", getAddrDetail()=" + getAddrDetail() + ", getZipCode()=" + getZipCode()
-				+ ", getUserPw()=" + getUserPw() + ", getPwFailCnt()=" + getPwFailCnt() + ", getPwAdjDt()="
-				+ getPwAdjDt() + ", getLevelGbCd()=" + getLevelGbCd() + ", getJoinDt()=" + getJoinDt()
-				+ ", getUserStsCd()=" + getUserStsCd() + ", getChgId()=" + getChgId() + ", getChgDt()=" + getChgDt()
-				+ ", getRegId()=" + getRegId() + ", getRegDt()=" + getRegDt() + ", getSessionKey()=" + getSessionKey()
-				+ ", getSessionDt()=" + getSessionDt() + ", isUseLogin()=" + isUseLogin() + ", getLoginStsCd()="
-				+ getLoginStsCd() + ", getBrowserStsCd()=" + getBrowserStsCd() + ", hashCode()=" + hashCode()
-				+ ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+				+ ", sessionDt=" + sessionDt + ", useLogin=" + useLogin + ", loginStsCd=" + loginStsCd
+				+ ", browserStsCd=" + browserStsCd + "]";
 	}
+
+
+	
 
 }
