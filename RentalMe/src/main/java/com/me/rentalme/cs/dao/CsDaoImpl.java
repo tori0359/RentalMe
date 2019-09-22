@@ -217,6 +217,20 @@ public class CsDaoImpl implements CsDao {
 		System.out.println("다우");
 		return sqlSession.selectOne("csCenter.userLevel",userLevel);
 	}
+
+
+	@Override
+	public int insertReply(CsVo csVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("csCenter.insertReply", csVo);
+	}
+
+
+	@Override
+	public CsVo selectReply(String pquestNo) {
+		System.out.println("dao 답글"+pquestNo);
+		return sqlSession.selectOne("csCenter.selectReply", pquestNo);
+	}
 	
 	
 

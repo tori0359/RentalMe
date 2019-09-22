@@ -151,6 +151,18 @@ public class CsServiceImpl implements CsService {
 		return csDao.userLevel(userLevel);
 	}
 
+	@Override
+	public int insertReply(CsVo csVo) {
+		// TODO Auto-generated method stub
+		return csDao.insertReply(csVo);
+	}
+
+	@Override
+	public CsVo selectReply(String pquestNo) {
+		// TODO Auto-generated method stub
+		return csDao.selectReply(pquestNo);
+	}
+
 	
 
 }

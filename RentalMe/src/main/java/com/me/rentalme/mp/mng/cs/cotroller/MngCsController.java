@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,7 @@ import com.me.rentalme.model.entity.UserVo;
 /**
 * 고객센터 컨트롤러 - 공지/FAQ, 1:1문의
 * 
-* @author 황인준
+* @author 강민수
 * @version ver1.0
 * @see 
 * 등록일자 : 2019.08.14
@@ -49,7 +50,7 @@ public class MngCsController {
 	* 
 	* @param  String code - c : 공지/FAQ 등록 폼, R : 공지/FAQ 리스트
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/csNoticeList", method = RequestMethod.GET)
@@ -87,6 +88,7 @@ public class MngCsController {
 		return mav;
 	}
 	
+	//FAQ리스트
 	@RequestMapping(value = "/csFaqList", method = RequestMethod.GET)
 	public ModelAndView getCsFaq(HttpSession session,Model model,
 			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
@@ -178,7 +180,7 @@ public class MngCsController {
 	* 
 	* @param  ProductVo - 상품
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/csNoticeAdd", method = RequestMethod.POST)
@@ -307,16 +309,15 @@ public class MngCsController {
 		* @author 강민수
 		* @exception 
 		*/
-		@RequestMapping(value="/answer")
-		public ModelAndView questAnswer(@RequestParam("pquestNo") String num,HttpSession session) throws SQLException{
-			System.out.println(num);
-			ModelAndView mav=new ModelAndView();
-			String userId=(String)session.getAttribute("loginUserId");
-			mav.addObject("id", userId);
-			mav.addObject("answer",csService.inqAnswer(num));
-			mav.setViewName("redirect:/mp/mng/InqList");
-			return mav;
-		}
+	/*
+	 * @RequestMapping(value="/answer") public ModelAndView
+	 * questAnswer(@RequestParam("pquestNo") String num,HttpSession session) throws
+	 * SQLException{ System.out.println(num); ModelAndView mav=new ModelAndView();
+	 * String userId=(String)session.getAttribute("loginUserId");
+	 * mav.addObject("id", userId);
+	 * mav.addObject("answer",csService.inqAnswer(num));
+	 * mav.setViewName("redirect:/mp/mng/InqList"); return mav; }
+	 */
 		
 		@RequestMapping(value="/csList")
 		@ResponseBody
@@ -335,7 +336,7 @@ public class MngCsController {
 	* 
 	* @param  String code - c : 1:1문의 등록 폼, R : 1:1문의 리스트
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/csQuest", method = RequestMethod.GET)
@@ -359,7 +360,7 @@ public class MngCsController {
 	* 
 	* @param  ProductVo - 상품
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/csQuest", method = RequestMethod.POST)
@@ -372,4 +373,26 @@ public class MngCsController {
 		return mav;
 	}
 	
+	//상세페이지 답글 등록
+	@RequestMapping(value="/csInqReply")
+	public ModelAndView addReply(@RequestParam("mbNo") String mbNo,@RequestParam("pquestNo") String pquestNo,@ModelAttribute CsVo csVo) throws SQLException {
+		System.out.println("답글 컨트롤러");
+		ModelAndView mav=new ModelAndView();
+		
+		csService.insertReply(csVo);
+		csService.inqAnswer(pquestNo);
+		
+		mav.setViewName("redirect:/mp/mp/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
+		return mav;
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+

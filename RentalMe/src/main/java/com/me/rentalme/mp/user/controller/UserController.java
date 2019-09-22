@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -46,6 +47,8 @@ public class UserController {
 	@Inject
 	RentalAppliService rentalAppliService; 
 
+	@Inject
+	CsService csService;
 	/**
 	 * @throws SQLException 주문내역
 	 * 
@@ -430,10 +433,21 @@ public class UserController {
 	 * @param @return ModelAndView @author 강민수 @exception
 	 */
 	@RequestMapping(value = "/mp/questDetail")
-	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo) throws SQLException {
-		String user = (String) session.getAttribute("loginUserId");
+	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
+		
 		ModelAndView mav = new ModelAndView();
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		csVo.setPquestNo(pquestNo);
+		
+		csService.selectReply(csVo.getPquestNo());
+		System.out.println("답글은..."+csVo.getReplyContent());
+		mav.addObject("levelGbCd",userLevel);
 		mav.addObject("bean", mpUserService.myInqDetail(csVo));
+		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
 		mav.addObject("id", user);
 		mav.setViewName("mp/user/userQuestDetail");
 		return mav;

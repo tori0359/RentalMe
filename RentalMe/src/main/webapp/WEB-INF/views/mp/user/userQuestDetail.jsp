@@ -27,9 +27,6 @@
         #daeButton input{
             float:right;
             margin:5px 10px 5px 10px;
-            background:white;
-            border-radius:5px;
-            outline:none;
         }
        
         #daeButton>button:nth-child(1){
@@ -61,12 +58,12 @@
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
-		<c:if test="${id == 'minminad' }">
-			<c:if test="${bean.questStsCd eq '1' }">
+	<%-- 	<c:if test="${levelGbCd == '2'}">
+			<c:if test="${bean.questStsCd eq '1'}">
 	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
 			</c:if>
-		</c:if>
-			<form action="/mp/mp/QuestDelete" method="get">
+		</c:if> --%>
+			
         <table class="table" id="daeContent">
            <%--  <tr>
                 <td><label for="id" >작 성 자</label></td>
@@ -74,7 +71,7 @@
             </tr> --%>
             <tr>
                 <td align="center"><label for="id" >글 번 호</label></td>
-                <td><input type="hidden" name="mbNo" value="${bean.mbNo }"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo}"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
                
             </tr>
             <tr>
@@ -106,14 +103,35 @@
                 <td style="padding-top:70px;" align="center"><label>내용</label></td>
                 <td style="height:150px; padding-top:70px;">${bean.content}</td>
             </tr>
-            <tr>
+           
+            <!-- <tr>
                 <td></td>
                 <td id="daeButton" >
                   <input class="btn btn-default" id="cancel" type="reset" value="뒤로">
                 </td>
-            </tr>
+            </tr> -->
         </table>
-			</form>
+        <br/>
+        <div>
+        	<c:if test="${levelGbCd=='2'}">
+        	<c:if test="${bean.questStsCd=='1'}">
+	        	<form action="/mp/mng/csInqReply" method="get">
+	        	<div class="col-md-offset-3">
+	            	<input style="width:100%;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="엔터로 입력"/>
+	        	</div>
+	            	<input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
+	            	<input type="hidden" name="mbNo" value="${bean.mbNo}"/>
+	        	</form>
+        	</c:if>
+        	</c:if>
+        	<div>
+        		${reply.replyContent}
+        	</div>
+        </div>
+            	<div id="daeButton">
+      			  <input class="btn btn-primary" type="reset" id="cancel" value="뒤로">
+            	</div>
+			
 	</div>
 </div>
 </body>

@@ -49,4 +49,7 @@ public interface CsDao {
 	
 	UserVo userLevel(String userLevel);
 	List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException;
+	int insertReply(CsVo csVo);
+	CsVo selectReply(String pquestNo);
+	
 }
