@@ -250,7 +250,12 @@
 	      	<a href="/join/terms" class="navbar-link">회원가입</a>
       	</c:when>
       	<c:otherwise>
-      		<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+      		<c:if test="${'1' eq loginSts }">
+      			<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+      		</c:if>
+      		<c:if test="${'2' eq loginSts }">
+	      		<a href="/mp/mng/list" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ      		
+      		</c:if>
 	      	<a href="/logout" class="navbar-link">로그아웃</a>
       	</c:otherwise>
       </c:choose>

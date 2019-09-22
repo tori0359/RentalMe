@@ -27,6 +27,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			session.setAttribute("loginUserId", userVo.getUserId());
 			//회원번호를 세션에 저장한다.(sessionMbNo : loginMbNo)
 			session.setAttribute("loginMbNo", userVo.getMbNo());
+			//회원상태값을 세션에 저장한다. (관리자와 일반유저를 구분하기 위함)
+			System.out.println("userVo에 저장된 값 : " + userVo.getLevelGbCd());
+			session.setAttribute("loginSts", userVo.getLevelGbCd());
+			
+			System.out.println("session에 저장된 상태 값 : "+session.getAttribute("loginSts"));
 			
 			//자동로그인 체크가 되어있을 경우
 			if(request.getParameter("useLogin") != null) {
