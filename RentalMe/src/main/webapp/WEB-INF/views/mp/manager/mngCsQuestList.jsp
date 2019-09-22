@@ -31,7 +31,7 @@
 </head>
 <body>
 <c:choose>
-<c:when test="${id eq 'minminad'}">
+<c:when test="${levelGbCd eq '2'}">
 <div id="content" class="col-md-10 col-md-offset-1">
 <div  id="uptext"align="center"><h1>1:1 문의 관리</h1></div>
 	<div>

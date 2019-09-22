@@ -55,7 +55,7 @@
 </head>
 <body>
 <c:choose>
-<c:when test="${id eq 'minminad'}">
+<c:when test="${levelGbCd eq '2'}">
 <!-- 관리자 공지게시판 리스트 -->
 <h1><span id="span1">공지</span><span id="span2">/FAQ</span></h1>
 <div id="content" class="col-md-10 col-md-offset-1">

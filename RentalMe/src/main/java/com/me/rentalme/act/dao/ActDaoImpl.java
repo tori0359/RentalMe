@@ -21,9 +21,9 @@ public class ActDaoImpl implements ActDao{
 	
 	
 	@Override
-	public List<ActVo> selectMngActList(Paging actPaging) throws SQLException {
+	public List<ActVo> selectMngActList() throws SQLException {
 		System.out.println("sql문으로 리스트뽑기");
-		return sqlSession.selectList("actRental.actList",actPaging);
+		return sqlSession.selectList("actRental.actList");
 	}
 
 	@Override

@@ -37,9 +37,14 @@ public interface CsService {
 	int inqAnswer(String num) throws SQLException;
 	
 	//°Ô½Ã±Û ÃÑ °¹¼ö
+	int faqListCnt22(String csClassGbCd) throws SQLException;
 	int faqListCnt1(Search search) throws SQLException;
 	int noticListCnt() throws SQLException;
 	int inquiryListCnt() throws SQLException;
 	
-	int faqListCnt12(Search search) throws SQLException;
+	List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException;
+	
+	int insertReply(CsVo csVo);
+	CsVo selectReply(String pquestNo);
+	UserVo userLevel(String userLevel);
 }

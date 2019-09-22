@@ -125,20 +125,20 @@
 		<div>
 			
 		</div>
-			<c:if test="${UserId ne 'minminad'}">
+			<c:if test="${levelGbCd ne '2'}">
 				<div id="conetent1" class="col-md-6 col-md-offset-2">
-					<%if(userId!=null){ %><h3>${UserId }님</h3><%} %>
+					<%if(userId!=null){ %><h3>${UserId }님	</h3><%} %>
 					FAQ를 통해 충분한 답변을 얻지 못하셨다면 '문의하기'버튼을 클릭하세요<br/>
 					1:1문의를 통해 상세히 답변드리겠습니다.
 				</div>
 				<div class="col-md-2">
-					<button id="btn" type="button" class="btn btn-warning" style="width:100px; height:80px; font-size:18px; font-weight: bold;">문의하기</button>
+					<button id="btn" type="button" class="btn btn-danger" style="width:100px; height:80px; font-size:18px; font-weight: bold;">문의하기</button>
 				</div>
 			</c:if>
-			<c:if test="${UserId eq 'minminad'}">
-			<div id="conetent1" class="col-md-6 col-md-offset-2">
-					<h2 align="center">회원전용 페이지 입니다.</h2>
-			</div>
+			<c:if test="${levelGbCd eq '2'}">
+				<div id="conetent1" class="col-md-6 col-md-offset-2">
+						<h2 align="center">회원전용 페이지 입니다.</h2>
+				</div>
 			</c:if>
 	</div>
 </div>
