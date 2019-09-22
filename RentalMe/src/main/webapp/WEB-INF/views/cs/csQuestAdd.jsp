@@ -21,7 +21,8 @@
 	%>
 	<style type="text/css">
         #dae{
-            font-size:30pt;
+            font-size:25pt;
+            font-style:italic;
             padding-top:-20px;
             marging-right:-10px;
         }
@@ -31,6 +32,9 @@
         #daeContent tr>td:nth-child(2){
             width:85%;
         }
+        #daeContent{
+        	width:100%;
+        }
         #daeButton input{
             float:right;
             margin:5px 10px 5px 10px;
@@ -38,10 +42,6 @@
             outline:none;
             font-weight: bold;
         }
-        #daeContent{
-        	width:700px;
-        }
-       
       	#select{
       		width:125px;
       	}
@@ -55,6 +55,7 @@
         	height:250px;
         }
         tr>td:nth-child(1){
+        	vertical-align:middle;
         	text-align:center;
         }
         .ck-editor__editable {
@@ -63,7 +64,7 @@
 		#info{
 			width:93%;
 			margin:40px 0px 0px 60px;
-			border:7px solid #A0A0FF;
+			border:3px solid #BDBDBD;
 			padding: 15px;
 		}
 	</style>
@@ -71,25 +72,27 @@
 <body>
 <div id="csContent">
 
-	<div id="dae" class=" col-md-offset-1">
+	<div id="dae">
 		<br/>
 		    1:1문의
 	     <br/>
 	     <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
 	</div>
-	 <div id="info" class=" col-md-offset-4" >
+	 <div id="info" class=" col-md-offset-1" >
      <p class=" col-md-offset-1">
      	<input type="hidden" value="${id}">
-	     	<p>문의하시죠 ${id}님 성심성의것 답변해 드리겠습니다</p>
+	     	<p>문의하시죠&nbsp<span style="font-size:18px; font-weight:bold;">${id}</span>님 성심성의것 답변해 드리겠습니다</p>
 	     
      </p>
      </div>
-	<div class="col-md-6 col-md-offset-1">
+	
 	    <form action="/cs/csInquiryAdd" method="post">
 	    <br/>
-	        <table class="table" id="daeContent">
+	    <div id="daeContent">
+	    
+	        <table style="width:100%"class="table">
 	            <tr>
-	                <td><label for="id" >아 이 디</label></td>
+	                <td><label style="vertical-align:middle;">아 이 디</label></td>
 	                <td><input type="hidden"/>${id}</td>
 	                <td><input type="hidden" name="csGbCd" value="30"/></td>
 	            </tr>
@@ -110,11 +113,11 @@
 	           </td>
 	            </tr>
 	            <tr>
-	                <td><label>제목</label></td>
-	                <td><input id="text" type="text" name="sub"></td>
+	                <td style="vertical-align:middle;"><label style="vertical-align:middle;">제목</label></td>
+	                <td><input class="form-control" id="text" type="text" name="sub"></td>
 	            </tr>
 	            <tr>
-	                <td><label>내용</label></td>
+	                <td style="vertical-align:middle;"><label style="vertical-align:middle;">내용</label></td>
 	                <td><textarea id="editor" name="content" style="resize:none;"></textarea>
 	                 <script>
 					   		 ClassicEditor
@@ -132,13 +135,14 @@
 	                <td></td>
 	                <td id="daeButton" >
 	                   <input class="btn btn-default" id="cancel" type="reset" value="취소">
-	                   <input class="btn btn-warning" type="submit" value="문의하기" />
+	                   <input class="btn btn-danger" type="submit" value="문의하기" />
 	                </td>
 	            </tr>
 	        </table>
+	        </div>
 	    </form>
 	</div>
-</div>
+
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

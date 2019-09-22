@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <jsp:include page="../../template/header.jsp"></jsp:include>
 <script type="text/javascript">
-	 	$(document).ready(function(){
+	 	$(docu	ment).ready(function(){
 			$("#cancel").click(function(){
 					window.history.back();
 				})
