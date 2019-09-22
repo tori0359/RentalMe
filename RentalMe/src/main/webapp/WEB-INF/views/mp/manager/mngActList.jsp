@@ -106,8 +106,10 @@
 							</div>
 						</div>
 					</div>
-					<input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
-					<a href="/mp/mng/actInsertPage" type="button" id="btn00" class="btn btn-info btn-sm">등록</a>
+					<c:if test="${not empty  actList}">
+						<input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
+						<a href="/mp/mng/actInsertPage" type="button" id="btn00" class="btn btn-info btn-sm">등록</a>
+					</c:if>
 				</div>
 				<!-- ============================================================== -->
 				<!-- end table  -->

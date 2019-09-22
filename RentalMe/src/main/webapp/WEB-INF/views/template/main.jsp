@@ -113,7 +113,7 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/mp/mng/act/spec">경매관리</a>
+                                            <a class="nav-link" href="/mp/mng/act/spec">경매내역</a>
                                         </li>
                                     </ul>
                                 </div>
