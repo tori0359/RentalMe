@@ -162,8 +162,8 @@ public class MngActController {
 		System.out.println("현재시간"+format_time1);
 		
 		
-		String uploadDir="C:\\java\\workspace4\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\RentalMe\\imgs\\";
-//		String uploadDir="/var/lib/tomcat8/webapps/rentalme/imgs/";
+//		String uploadDir="C:\\java\\workspace4\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\RentalMe\\imgs\\";
+		String uploadDir="/var/lib/tomcat8/webapps/rentalme/imgs/";
 		String uploadRDS="/imgs/";
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("imgfile");

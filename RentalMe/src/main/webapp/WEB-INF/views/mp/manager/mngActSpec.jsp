@@ -30,7 +30,11 @@
    	   // 구매 모달
        $('#myModal2').on('shown.bs.modal', function (e) {
     	   var gdsCd = $(e.relatedTarget).data('gds-cd');
+    	   var mbNo = $(e.relatedTarget).data('mbno');
+    	   var gdsStPrice = $(e.relatedTarget).data('st-price');
 			$(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd);
+			$(e.currentTarget).find('input[name="mbNo"]').val(mbNo);
+			$(e.currentTarget).find('input[name="gdsStPrice"]').val(gdsStPrice);
        });
 
        
@@ -87,7 +91,7 @@
 							<button class="btn btn-default btn-sm" style="opacity: 0.7;" disabled="disabled" >취소</button>
 						</c:when>
 						<c:otherwise>
-							<button class="btn btn-danger btn-sm" type="submit" style="font-size: 9pt;  margin-top:15px; margin-bottom:15px;"  data-toggle="modal" data-target="#myModal2" data-gds-cd="${bean.gdsCd }" >취소</button>
+							<button class="btn btn-danger btn-sm" type="submit" style="font-size: 9pt;  margin-top:15px; margin-bottom:15px;"  data-toggle="modal" data-target="#myModal2" data-gds-cd="${bean.gdsCd }" data-mbno="${bean.mbNo }" data-st-price="${bean.gdsStPrice }" >취소</button>
 						</c:otherwise>	
 					</c:choose>
 				</td>
@@ -163,6 +167,8 @@
 			    </div>
 				<div class="modal-body">
 			    	<input type="hidden" class="custom-control-input" name="gdsCd" value="gdsCd"/>
+			    	<input type="hidden" name="mbNo" value="mbNo">
+					<input type="hidden" name="gdsStPrice" value="gdsStPrice">
 			    	낙찰취소 하시겠습니까?
 				</div>
 			    <div class="modal-footer">

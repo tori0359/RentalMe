@@ -95,7 +95,7 @@
 	}
 	
 	.used_modelNm{
-		font-size: 2.2em;
+		font-size: 2em;
 		font-weight: bold;
 		margin-left: 10px;
 	}

@@ -25,16 +25,16 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      	<img src="${UsedVo.img1 }"style="width: 100%; height: 100%;">
+      	<img src="${UsedVo.img1 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-      	<img src="${UsedVo.img2 }"style="width: 100%; height: 100%;">
+      	<img src="${UsedVo.img2 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-    	<img src="${UsedVo.img3 }"style="width: 100%; height: 100%;">
+    	<img src="${UsedVo.img3 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-    	<img src="${UsedVo.img4 }"style="width: 100%; height: 100%;">
+    	<img src="${UsedVo.img4 }"style="width: 490px; height: 490px;">
     </div>
   </div>
 

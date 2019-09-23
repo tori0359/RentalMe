@@ -3,9 +3,7 @@ package com.me.rentalme.act.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -27,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.me.rentalme.act.service.ActService;
 import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.CallVo;
 
 
 
@@ -206,13 +205,21 @@ public class ActController {
 	/* 사용자 경매내역 취소(포기) */
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
 	public String getActCancel(Model model,
-			@RequestParam("gdsCd") String gdsCd) throws SQLException {
+			@RequestParam("gdsCd") String gdsCd,
+			@RequestParam("mbNo") String mbNo,
+			@RequestParam("gdsStPrice") String gdsStPrice) throws SQLException {
+		CallVo bean = new CallVo();
+		bean.setMbNo(mbNo);
+		bean.setGdsStPrice(gdsStPrice);
 		actService.updateMngBidCancel(gdsCd);
 		actService.updateBidWin(gdsCd);
-		
+		actService.insertUserActMoney(bean);
+		actService.updateUserActMoney(bean);
 		
 		return "redirect:/mp/auctList";
 	}
+	
+	
 	
 	
 	

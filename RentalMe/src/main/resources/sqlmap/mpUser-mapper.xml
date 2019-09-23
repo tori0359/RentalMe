@@ -182,6 +182,7 @@ encoding="UTF-8"?>
 			,AA.ACT_BID_STS_CD
 			,AA.GDS_CD_DETAIL
 			,AA.IMG1
+			,AA.GDS_ST_PRICE
 			,BB.ODR_NO
 			,BB.PAY_GB_CD
 			,BB.ODR_STS_GB_CD
@@ -194,10 +195,11 @@ encoding="UTF-8"?>
 					A.BID_PRICE,
 					A.ACT_BID_STS_CD,
 					B.GDS_CD_DETAIL,
-					B.IMG1
+					B.IMG1,
+					B.GDS_ST_PRICE
 				FROM TB_ACT100 A, 
 					 TB_GDS300 B
-				WHERE A.MB_NO = #{mbNo}
+				WHERE A.MB_NO = '19000035'
 				AND A.GDS_CD = B.GDS_CD
 				ORDER BY A.GDS_CD DESC
 		) AA LEFT OUTER JOIN (
@@ -209,7 +211,7 @@ encoding="UTF-8"?>
 				from TB_ODR100 A,
 					TB_ODR110 B
 				WHERE A.ODR_NO = B.ODR_NO
-				AND A.MB_NO = #{mbNo}
+				AND A.MB_NO = '19000035'
 		) BB
 		ON AA.GDS_CD = BB.GDS_CD
 		ORDER BY AA.GDS_CD2 DESC

@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.me.rentalme.act.service.ActService;
-import com.me.rentalme.common.Paging;
-import com.me.rentalme.model.entity.DeclVo;
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
-import com.me.rentalme.mp.mng.service.MngService;
 import com.me.rentalme.rental.Appli.service.RentalAppliService;
 
 @Controller
@@ -46,11 +44,17 @@ public class MngActSpecController {
 	public String getMngActSpecCancel(Model model,
 			@RequestParam(required = false, defaultValue = "1")int page, 
 			@RequestParam(required = false, defaultValue = "1")int range,
-			@RequestParam("gdsCd") String gdsCd) throws SQLException {
+			@RequestParam("gdsCd") String gdsCd,
+			@RequestParam("mbNo") String mbNo,
+			@RequestParam("gdsStPrice") String gdsStPrice) throws SQLException {
 		
+		CallVo bean=new CallVo();
+		bean.setMbNo(mbNo);
+		bean.setGdsStPrice(gdsStPrice);
 		actService.updateMngBidCancel(gdsCd);
 		actService.updateBidWin(gdsCd);
-		
+		actService.insertUserActMoney(bean);
+		actService.updateUserActMoney(bean);
 		
 		return "redirect:/mp/mng/act/spec";
 	}
