@@ -42,12 +42,12 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">상담관리</h2>
+                            <h2 class="pageheader-title">1:1문의관리</h2>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">고객센터관리</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">상담관리</li>
+                                        <li class="breadcrumb-item active" aria-current="page">1:1문의관리</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -63,7 +63,7 @@
                     <!-- ============================================================== -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">상담 목록</h5>
+                            <h5 class="card-header">1:1문의 목록</h5>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="dt" class="table table-striped table-bordered first">
@@ -82,7 +82,11 @@
 												<tr align="center">
 														<td>${bean.mbNo}</td>
 														<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
-														<td style="text-align:left"><a id="aSub" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
+														<td style="text-align:left">
+															<a id="aSub" href="questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">
+																${bean.sub }
+															</a>
+														</td>
 														<td>${bean.regDt}</td>
 														<td>${bean.chgDt}</td>
 														<c:if test="${bean.questStsCd eq '1'}">

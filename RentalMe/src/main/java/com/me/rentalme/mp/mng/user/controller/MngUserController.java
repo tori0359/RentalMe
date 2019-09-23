@@ -1,8 +1,10 @@
 package com.me.rentalme.mp.mng.user.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
+import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.service.MngService;
+import com.me.rentalme.mp.user.service.MpUserService;
 
 /**
 * 마이페이지(관리자) - 사용자관리
@@ -36,6 +41,12 @@ public class MngUserController {
 	
 	@Inject
 	MngService mngService; 
+	
+	@Inject
+	CsService csService;
+	
+	@Inject
+	MpUserService mpUserService;
 	
 	/**
 	* 사용자 리스트
@@ -75,6 +86,32 @@ public class MngUserController {
 		
 				
 		return userVo;
+	}
+	
+	/**
+	 * @throws SQLException 내 문의 상세
+	 * 
+	 * @param @return ModelAndView @author 강민수 @exception
+	 */
+	@RequestMapping(value = "/questDetail")
+	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
+		
+		ModelAndView mav = new ModelAndView();
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		csVo.setPquestNo(pquestNo);
+		
+		csService.selectReply(csVo.getPquestNo());
+		System.out.println("답글은..."+csVo.getReplyContent());
+		mav.addObject("levelGbCd",userLevel);
+		mav.addObject("bean", mpUserService.myInqDetail(csVo));
+		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
+		mav.addObject("id", user);
+		mav.setViewName("mp/manager/mngQuestDetail");
+		return mav;
 	}
 	
 	/**
