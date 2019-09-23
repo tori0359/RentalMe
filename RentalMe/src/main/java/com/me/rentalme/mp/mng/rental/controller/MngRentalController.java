@@ -96,7 +96,8 @@ public class MngRentalController {
 		int cnt=1;
 		String currentTime=System.currentTimeMillis()+"";
 		
-		String uploadDir="C:\\java\\workspace4\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\RentalMe\\imgs\\";
+//		String uploadDir="C:\\java\\workspace4\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\RentalMe\\imgs\\";
+		String uploadDir="/var/lib/tomcat8/webapps/rentalme/imgs/";
 		String uploadRDS="/imgs/";
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("imgfile");
@@ -197,6 +198,7 @@ public class MngRentalController {
 	        	 goodsList.add("TV");
 	        	 goodsList.add("세탁기");
 	        	 goodsList.add("빨래건조기");
+	        	 goodsList.add("정수기");
 	        	 goodsList.add("공기청정기");
 	        	 goodsList.add("복합기/프린터");
 	         }
@@ -207,6 +209,7 @@ public class MngRentalController {
 	        	 goodsList.add("드라이어");
 	        	 goodsList.add("빔프로젝터");
 	        	 goodsList.add("컴퓨터/노트북");
+	        	 goodsList.add("무선스피커");
 	        	 goodsList.add("비데");
 	        	 goodsList.add("면도기");
 	         }
@@ -215,13 +218,12 @@ public class MngRentalController {
 	        	 goodsList.add("음식물처리기");
 	        	 goodsList.add("제빙기");
 	        	 goodsList.add("전자레인지");
-	        	 goodsList.add("컴퓨터/에어프라이어");
+	        	 goodsList.add("에어프라이어");
 	        	 goodsList.add("오븐");
 	         }
 	         else if(classifi.equals("40")) {
-	        	 
+	        	 goodsList.add("침대(매트리스+프레임)");
 	        	 goodsList.add("침대");
-	        	 goodsList.add("매트리스");
 	        	 goodsList.add("쇼파");
 	        	 goodsList.add("책상");
 	         }
@@ -242,7 +244,7 @@ public class MngRentalController {
 		            jsonArray.put(goodsList.get(i).toString());
 		     }
 		         
-		         
+		         System.out.println("들어갔나요??");
 		         PrintWriter pw = res.getWriter();
 		         pw.print(jsonArray.toString());
 		         pw.flush();

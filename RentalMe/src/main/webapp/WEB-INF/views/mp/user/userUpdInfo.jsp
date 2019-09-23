@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
+	body{
+		font-family:'nanumB';
+	}
 		#title2{
 	   		font-size: 15pt;
 	   		font-weight: bolder;
@@ -79,6 +82,8 @@
       }
       #drop:hover{
       	color:grey;
+      	text-decoration:none;
+      	font-weight:bolder;
       }
  
 </style>
@@ -372,16 +377,27 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="height:10px;" aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel"></h4>
+	        <h4 style="font-family:'nanumEB';" class="modal-title" id="myModalLabel">회원 탈퇴</h4>
 	      </div>
 	      <div class="modal-body">
-	      <p style="font-family:'nanumB'">정말 렌탈미를 탈퇴하시겠습니까?</p>
-	       <div style="text-align:center;">
-	       <span id="refundtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
+	      <p style="font-family:'nanumB';">렌탈미 서비스를 이용하는데 불편함이 있으셨나요?</p>
+	      <select style="font-size:10pt; width:180px; height:25px;" id="dropmenu" name="dropmenu">
+	      		<option selected="selected" value="없음">없음</option>
+	      		<option value="상품부족">상품 부족</option>
+	      		<option value="서비스 불만">서비스 불만</option>
+	      		<option value="이용 불편">이용 불편</option>
+	      		<option value="기타">기타</option>
+	      </select>
+	       <div style="border:0px solid lightgrey; margin-top:30px;">
+	       <p style="font-family:'nanumB'; font-weight:bolder;">회원탈퇴 전, 유의사항을 확인해 주시기 바랍니다.</p>
+				<p style="font-size:10pt;">- 회원탈퇴 시 회원전용 웹 서비스 이용이 불가합니다.<br/>
+				- 보유하셨던 예치금은 탈퇴와 함께 삭제되며 환불되지 않습니다.<br/>
+				- 회원탈퇴 후 쿠팡 서비스에 입력하신 상품문의 및 후기, 댓글은 삭제되지 않습니다. <br/>
+				- 이미 결제가 완료된 건은 탈퇴로 취소되지 않습니다.</p>
 	       </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button style="background:black;" id="dropconfirm" class="btn btn-primary">확인</button>
+	        <button style="background:black;" id="dropconfirm" class="btn btn-primary">탈퇴하기</button>
 	      </div>
 	    </div>
 	  </div>

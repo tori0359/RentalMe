@@ -6,6 +6,7 @@ import java.util.List;
 import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 public interface ActDao {
@@ -16,7 +17,7 @@ public interface ActDao {
 	List<RentalAppliVo> selectActEnd() throws SQLException;
 	
 	//관리자 경매 리스트
-	List<ActVo> selectMngActList(Paging actPaging) throws SQLException;
+	List<ActVo> selectMngActList() throws SQLException;
 	int insertAct300(ActVo actVo) throws SQLException;
 	int insertAct100(ActVo actVo) throws SQLException;
 	List<ActVo> selectGoodsList(String goodsNum) throws SQLException;
@@ -49,4 +50,6 @@ public interface ActDao {
 	void deleteActList(String gdsCd) throws SQLException;
 	int actListCnt() throws SQLException;
 	int updateMngActStsCd(String gdsCd) throws SQLException;
+	int insertUserActMoney(CallVo bean) throws SQLException;
+	int updateUserActMoney(CallVo bean) throws SQLException;
 }

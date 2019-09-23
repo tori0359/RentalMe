@@ -165,11 +165,10 @@
 							<input id="hiddenCd" type="hidden" value="${bean.gdsCd}"/>
 							<input class="hiddenPrice" type="hidden" value="${bean.gdsStPrice}"/>							
 							<div><h4 id="brandNmStyle">${bean.brandNm}</h4></div>
-							<div><h2 style="font-family:'nanumEB' ">${bean.gdsNm }</h2></div>
+							<div><h2 style="font-family:'nanumEB'; font-size:19pt;">${bean.gdsNm }</h2></div>
 							<div><p style="font-family:'nanumB';">${bean.content }</p></div><br>
 							<div><h4 class="text"><span class="color">시작가</span><span class="startPrice">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<fmt:formatNumber pattern="#,###.##"> ${bean.gdsStPrice }</fmt:formatNumber> 원</span></h4></div>
 							<div><h4 class="text" ><span class="color">경매 시작 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actStTime }</span></h4></div>
-							<div><h4 class="text" ><span class="color">경매 종료 시간</span>&emsp;&emsp;&emsp;<span class="span"> ${bean.actEdTime }</span></h4></div>
 						</div>
 					</div>
 				</div>

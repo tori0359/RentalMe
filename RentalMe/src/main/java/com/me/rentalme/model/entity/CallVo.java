@@ -45,6 +45,7 @@ public class CallVo {
 	private String gdsSclassCd;		//상품 소분류 코드
 	private String gdsMclassCd;		//상품 중분류 코드
 	private String payGbCd;			// 상품결제구분코드
+	private String gdsStPrice;		//상품 초기값
 	
 	public CallVo() {
 	}
@@ -360,6 +361,15 @@ public class CallVo {
 	public void setGdsMclassCd(String gdsMclassCd) {
 		this.gdsMclassCd = gdsMclassCd;
 	}
+	
+	public String getGdsStPrice() {
+		return gdsStPrice;
+	}
+
+	public void setGdsStPrice(String gdsStPrice) {
+		this.gdsStPrice = gdsStPrice;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

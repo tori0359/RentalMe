@@ -9,7 +9,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-
 			var i=0;
 			$("#noticeBar td:nth-child(1)").mouseover(function(){
 			  $(this).css("background", "black").css("color","white");
@@ -37,14 +36,13 @@
 				$(".list0").show();
 				$(".list1 ,.list2, .list3, .list4, .list5, .list6").hide();
 				i=0;
-
 			})
 			//주문
 			$("#noticeMenuBar td:nth-child(2)").click(function(){
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list1").show();
-				$(".list0, .list2, .list3, .list4, .list5, .list6").hide();
+				//$(".list0, .list2, .list3, .list4, .list5, .list6").hide();
 				$("#paginationBox").hide();
 			})
 			//배송
@@ -52,7 +50,7 @@
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list2").show();
-				$(".list0, .list1, .list3, .list4, .list5, .list6").hide();
+				//$(".list0, .list1, .list3, .list4, .list5, .list6").hide();
 				$("#paginationBox").hide();
 			})
 			//결제
@@ -60,7 +58,7 @@
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list3").show();
-				$(".list0, .list1, .list2, .list4, .list5, .list6").hide();
+				//$(".list0, .list1, .list2, .list4, .list5, .list6").hide();
 				$("#paginationBox").hide();
 			})
 			//교환취소
@@ -68,7 +66,7 @@
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list4").show();
-				$(".list0, .list1, .list2, .list3,  .list5, .list6").hide();
+				//$(".list0, .list1, .list2, .list3,  .list5, .list6").hide();
 				$("#paginationBox").hide();
 			})
 			//회원정보
@@ -76,7 +74,7 @@
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list5").show();
-				$(".list0, .list1, .list2, .list3, .list4, .list6").hide();
+				//$(".list0, .list1, .list2, .list3, .list4, .list6").hide();
 				$("#paginationBox").hide();
 				
 			})
@@ -85,36 +83,45 @@
 				$(this).css("background","black").css("color","white");
 				$("#noticeMenuBar td").not($(this)).css("background","white").css("color","black");
 				$(".list6").show();
-				$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
+				//$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
 				$("#paginationBox").hide();
-			});
-
+			}); 
 			$('#btnSearch').click(function(e){
-
 				e.preventDefault();
-
 				var url = "${pageContext.request.contextPath}/cs/csFAQ";
 				url = url + "?searchType=" + $('#searchType').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 				console.log(url);
-
 			});
 	
 		})
+		 
 		
 		function menuClick(s) {
 			$.ajax({
 				url:'ordlist',
 				type:'GET',
 				data:{param:s},
+				dataType:'json',
 				success:function(result){
-					alert(result);
+					var goodsList = result;
+					console.log('삭제');
+					$('.hihi').remove();
+					console.log(goodsList);
+					$('.hi').empty();
+					for(var i=0; i<goodsList.length; i++){
+ 						$('.hi').append('<tr><td>'+goodsList[i].faqNo+'</td><td>'+goodsList[i].csClassGbCd+'</td><td id=\"aSub\"><a id=\"bSub\" href=\"csFaqDetail?csGbCd=20&faqNo='+goodsList[i].faqNo+'&csClassGbCd=1\">'+goodsList[i].sub+'</a></td></tr>');
+								 	
+								 
+						console.log("질문번호 : "+ goodsList[i].faqNo);
+						console.log("분류 : "+goodsList[i].csClassGbCd);
+						console.log("질문의제목 : "+goodsList[i].sub);
+					}
 				},
 				erro:function(jqXHR,testStatus,errorThrown){
 					alert('오류가 발생했습니다');
 				}
-
 			}) 
 		}
 	</script>
@@ -220,8 +227,16 @@
 			text-decoration:none;
 			text-align:left;
 		}
+		#bSub{
+			text-decoration:none;
+			color:black;
+		}
+		#bSub:hover{
+			color:red;
+		}
 		#aSub:hover{
 			color:red;
+			font-weight: bold;
 		}
 		#noticeMenuBar tr>td{
 			cursor:pointer;
@@ -247,18 +262,18 @@
 			<table id="noticeMenuBar" class="col-md-6">
 				<tr>
 					<td>전체보기</td>
-					<td onclick="menuClick('order');">주문</td>
-					<td>배송</td>
-					<td>결제</td>
-					<td>교환취소</td>
-					<td>회원정보</td>
-					<td>기타</td>
+					<td onclick="menuClick('1');">주문</td>
+					<td onclick="menuClick('2');">배송</td>
+					<td onclick="menuClick('3');">결제</td>
+					<td onclick="menuClick('4');">교환취소</td>
+					<td onclick="menuClick('5');">회원정보</td>
+					<td onclick="menuClick('6');">기타</td>
 					<td>
-						<select style="height:25px;" name="searchType" id="searchType">
+						<select style="height:23px;" name="searchType" id="searchType">
 							<option>선택하기</option>
 							<option value="title">제목</option>
 						</select>
-						<input type="text" name="keyword" id="keyword">
+						<input  style="height:100%;" type="text" name="keyword" id="keyword">
 						<button name="btnSearch" id="btnSearch">검색</button>
 					</td>
 				</tr>
@@ -266,15 +281,18 @@
 </div>
 <div id="contentList" class="col-md-10 col-md-offset-1">
 	<table id="all" class="table table-hover">
-		<tr id="allnext" >
-			<th>번호</th>
-			<th>분류</th>
-			<th>제목</th>
-		</tr>
-		<tr>
+		<thead>
+			<tr id="allnext" >
+				<th>번호</th>
+				<th>분류</th>
+				<th>제목</th>
+			</tr>
+		</thead>	
+		<tbody class="hihi">
 			<c:forEach items="${blist}" var="bean">
-					<tr class="list0">
-						<td style="text-align:center;">${bean.faqNo}</td>
+					<tr >
+						
+						<td id="faqNo" style="text-align:center;">${bean.faqNo}</td>
 						<c:if test="${bean.csClassGbCd eq '1' }">
 						<td style="text-align:center;">주문</td>
 						</c:if>
@@ -293,11 +311,16 @@
 						<c:if test="${bean.csClassGbCd eq '6' }">
 						<td style="text-align:center;">기타</td>
 						</c:if>
-						<td id="aSub" style="text-align:left;"><a href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
+						<td id="aSub" style="text-align:left;"><a id="bSub" href="csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}">${bean.sub}</a></td>
 					</tr>
-			</c:forEach>
-		</tr>
-		<tr> 
+					</c:forEach>
+		</tbody>
+		<tbody class="hi">
+		</tbody>
+
+			
+		
+		<%-- <tr> 
 			<c:forEach items="${blist}" var="bean">
 			
 				<c:if test="${bean.csClassGbCd eq '1'}">
@@ -322,6 +345,7 @@
 				</c:if>
 			 
 			</c:forEach>
+			
 		</tr>
 		<tr>
 			<c:forEach items="${blist}" var="bean">
@@ -367,7 +391,7 @@
 				</c:if>
 			 
 			</c:forEach>
-		</tr>
+		</tr> --%>
 	</table>
 	<%
 		String searchType=request.getParameter("searchType"); 
@@ -408,4 +432,3 @@
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>
-

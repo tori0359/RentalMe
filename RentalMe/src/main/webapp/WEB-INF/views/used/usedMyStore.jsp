@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="usedStore">
-	<h2 id="topStore">${userNm }님의 상점</h2>
+	<h2 id="topStore"><span>${userNm }&nbsp;</span>님의 상점</h2>
 	<div>
 		<div class="hideenMbNo">${mbNo }</div>
 		<div class="hiddenLoginId">${loginMbNo}</div>
@@ -46,8 +46,15 @@
 		<c:forEach items="${alist }" var="bean">
 		<ul class="myUsedLt">
 			<li><div><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div></li>
-			<li>${bean.usedGdsResStsCd }</li>
-			<li>${bean.modelNm }</li>
+			<li class="usedSts">
+			<c:if test="${bean.usedGdsResStsCd eq 1}">
+				<button class="btn btn-info updateSts">판매중</button>
+			</c:if>
+			<c:if test="${bean.usedGdsResStsCd eq 2}">
+				<button class="btn btn-default disabled">판매완료</button>
+			</c:if>
+			</li>
+			<li><a href="/used/detail/${bean.usedGdsNo }">${bean.modelNm }</a></li>
 			<li>${bean.usedGdsPrice }</li>
 			<li>${bean.chgDt }</li>
 			<li><form action="/used/store/del/${bean.usedGdsNo }" method="POST">
@@ -65,7 +72,7 @@
 			<div id="textAreaInput" >
 			<textarea class="form-control" name="content" rows="3"></textarea>
 			</div>
-			<button id="rviBtn" class="btn btn-default btn-lg btn-block" type="submit">후기등록</button>
+			<button style="background-color:black; margin-top:20px; color:white;" id="rviBtn" class="btn btn-lg btn-block" type="submit">후기등록</button>
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">

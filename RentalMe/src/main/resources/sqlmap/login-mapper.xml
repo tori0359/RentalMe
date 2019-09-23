@@ -12,7 +12,8 @@
 			   USER_STS_CD    AS userStsCd,
 			   PW_FAIL_CNT	  AS pwFailCnt,
 			   LOGIN_STS_CD   AS loginStsCd,
-			   BROWSER_STS_CD AS browserStsCd  
+			   BROWSER_STS_CD AS browserStsCd,
+			   LEVEL_GB_CD	  AS levelGbCd  
 		  FROM TB_USER100
 		 WHERE USER_ID		= #{userId}
 	</select>

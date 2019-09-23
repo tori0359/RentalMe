@@ -149,6 +149,7 @@ encoding="UTF-8"?>
 			,AA.USER_NM
 			,AA.BID_PRICE
 			,AA.BID_TIME
+			,AA.GDS_ST_PRICE
 			,AA.ACT_BID_STS_CD
 			,BB.ODR_NO
 			,BB.PAY_GB_CD
@@ -165,8 +166,9 @@ encoding="UTF-8"?>
 					,A.BID_PRICE
 					,A.BID_TIME
 					,A.ACT_BID_STS_CD
-				FROM TB_ACT100 A
-				WHERE A.ACT_BID_STS_CD = 1
+					,B.GDS_ST_PRICE
+				FROM TB_ACT100 A, tb_gds300 B
+				WHERE A.ACT_BID_STS_CD = 1 AND A.GDS_CD = B.GDS_CD
 			) AA LEFT OUTER JOIN (	
 				SELECT
 					B.GDS_CD
@@ -193,4 +195,20 @@ encoding="UTF-8"?>
 		SET ACT_STS_CD='2'
 		WHERE GDS_CD=#{gdsCd} AND ACT_STS_CD='1' 
 	</update>
+	
+	<update id="updateUserActMoney">
+		UPDATE TB_MB100
+		SET REMN_DEPOSIT = REMN_DEPOSIT - #{gdsStPrice}
+		WHERE MB_NO=#{mbNo}
+	</update>
+	
+	<insert id="insertUserActMoney">
+		INSERT INTO TB_MB110 (MB_NO,DEPOSIT_SEQ,DEPOSIT_DT,USE_DEPOSIT,DEPOSIT_GB_CD)
+		VALUES (
+		#{mbNo},
+		(SELECT LPAD((SELECT COUNT(MB_NO)+1 FROM TB_MB110 A WHERE MB_NO=#{mbNo}),6,'0')),
+		(SELECT DATE_FORMAT(NOW(),'%Y-%m-%d')),
+		#{gdsStPrice},
+		'2')
+	</insert>
 </mapper>

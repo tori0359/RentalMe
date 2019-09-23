@@ -13,6 +13,7 @@ import com.me.rentalme.act.dao.ActDao;
 import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 @Service
@@ -58,9 +59,9 @@ public class ActServiceImpl implements ActService{
 	}
 
 	@Override
-	public List<ActVo> mngListAct(Paging actPaging) throws SQLException {
+	public List<ActVo> mngListAct() throws SQLException {
       System.out.println("actlistdao·Î ¤¡¤¡");
-      return actDao.selectMngActList(actPaging);		
+      return actDao.selectMngActList();		
 	}
 
 	/*
@@ -127,6 +128,16 @@ public class ActServiceImpl implements ActService{
 	@Override
 	public int updateMngActStsCd(String gdsCd) throws SQLException {
 		return actDao.updateMngActStsCd(gdsCd);
+	}
+
+	@Override
+	public int insertUserActMoney(CallVo bean) throws SQLException {
+		return actDao.insertUserActMoney(bean);
+	}
+
+	@Override
+	public int updateUserActMoney(CallVo bean) throws SQLException {
+		return actDao.updateUserActMoney(bean);
 	}
 
 }

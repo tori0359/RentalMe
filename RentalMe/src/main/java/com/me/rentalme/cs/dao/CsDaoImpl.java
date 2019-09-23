@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.cs.paging.Search;
+import com.me.rentalme.model.entity.UserVo;
 
 
 @Repository
@@ -186,6 +187,49 @@ public class CsDaoImpl implements CsDao {
 		cnt=sqlSession.selectOne("csCenter.csInquiryListCnt");
 		System.out.println("inq갯수:"+cnt);
 		return cnt;
+	}
+
+
+	@Override
+	public int faqListCnt22(String csClassGbCd) {
+		int cnt=0;
+		cnt=sqlSession.selectOne("csCenter.csFaqTapListCnt",csClassGbCd);
+		System.out.println("음..."+cnt);
+		return cnt;
+	}
+
+
+	@Override
+	public List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException {
+		int startListNum=paging.getstartListNum();
+		int listSize=paging.getListSize();
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("startListNum", startListNum);
+		map.put("listSize", listSize);
+		map.put("tapName", tapName);
+		
+		return sqlSession.selectList("csCenter.csFaqHeadList", map);
+	}
+
+
+	@Override
+	public UserVo userLevel(String userLevel) {
+		System.out.println("다우");
+		return sqlSession.selectOne("csCenter.userLevel",userLevel);
+	}
+
+
+	@Override
+	public int insertReply(CsVo csVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("csCenter.insertReply", csVo);
+	}
+
+
+	@Override
+	public CsVo selectReply(String pquestNo) {
+		System.out.println("dao 답글"+pquestNo);
+		return sqlSession.selectOne("csCenter.selectReply", pquestNo);
 	}
 	
 	

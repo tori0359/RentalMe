@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>RentalMe - 렌탈상품관리 전체 리스트</title>
+	<title>RentalMe - 렌탈상품관리 리스트</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -74,7 +74,7 @@
                     <!-- ============================================================== -->
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
-                            <h5 class="card-header">사용자 목록</h5>
+                            <h5 class="card-header">렌탈상품 리스트</h5>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="dt" class="table table-striped table-bordered first">
@@ -122,7 +122,7 @@
 												<c:if test="${bean.gdsMclassCd eq '60'}">
 												<td>패키지</td>
 												</c:if>
-												<td>${bean.gdsNm}</td>
+												<td><a href="${pageContext.request.contextPath}/rental/Appli/lg/${bean.gdsSclassCd }/detail/${bean.gdsCd}">${bean.gdsNm}</a></td>
 												<td>${bean.brandNm}</td>
 												<td>${bean.modelNm}</td>
 												<c:if test="${bean.delYn  eq 'N'}">
@@ -143,10 +143,12 @@
                     <!-- end table  -->
                     <!-- ============================================================== -->
                 </div>
-                <input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
-                <a href="${pageContext.request.contextPath}/mp/mng/rentalAddPage">
-                	<input class="btn btn-primary btn-sm" type="button" id="btn01" value="등록">
-                </a>
+                <c:if test="${not empty rlist}">
+	                <input id="choosedel" type="button" class="btn btn-success btn-sm" value="선택삭제" >
+	                <a href="${pageContext.request.contextPath}/mp/mng/rentalAddPage">
+	                	<input class="btn btn-primary btn-sm" type="button" id="btn01" value="등록">
+	                </a>
+                </c:if>
 			</div>
 			<jsp:include page="../../template/footerAdmin.jsp"></jsp:include>
 		</div>

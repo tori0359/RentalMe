@@ -114,40 +114,48 @@
 			
 			var amount = $('#chargeDeposit').val();
 			var userId = $('#UserId').val();
-			
-			alert(amount+"원을 충전하시겠습니까?");
-			
-			var IMP = window.IMP;
-			IMP.init('imp86711610');
-			IMP.request_pay({
-			    pg : 'kakaopay',
-			    pay_method : 'vbank',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '렌탈미 예치금 충전',
-			    amount : amount,
-			    buyer_name : userId
-			}, function(rsp) {
-			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        
-					$.ajax({
-						url: "/mp/deposit",
-						type: "post",
-						data: { "chargeDeposit" : rsp.paid_amount },
-						success : function(){
-							location.href = "/mp/deposit";
-						}
 
+			if(amount>0){
+				$('#myModal2').modal('show');
+				$('#inputtext').text("충전하시겠습니까?");
+
+				$('#modalconfirm2').click(function(){
+					var IMP = window.IMP;
+					IMP.init('imp86711610');
+					IMP.request_pay({
+					    pg : 'kakaopay',
+					    pay_method : 'vbank',
+					    merchant_uid : 'merchant_' + new Date().getTime(),
+					    name : '렌탈미 예치금 충전',
+					    amount : amount,
+					    buyer_name : userId
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					        var msg = '결제가 완료되었습니다.';
+					        
+							$.ajax({
+								url: "/mp/deposit",
+								type: "post",
+								data: { "chargeDeposit" : rsp.paid_amount },
+								success : function(){
+									location.href = "/mp/deposit";
+								}
+		
+							});
+					        
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					    }
 					});
-			        
-			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			    }
-
-			    alert(msg);
+			
 			});
-
+			}else{
+				$('#myModal2').modal('show');
+				$('#inputtext').text("충전할 금액을 입력해주세요.");
+				$('#modalconfirm2').click(function(){
+					$('#myModal2').modal('hide');
+				});
+			}
 
 			
 		});
@@ -158,6 +166,7 @@
 
 			//입력한 환불 요청 금액 저장
 			var refundinput = $('#refundinput').val();
+		
 
 			//현재 예치금 
 			var remnDeposit = $('#remnDeposit').val();
@@ -331,8 +340,8 @@
        		</tr>
        		<tr>
        			<th class="active" style="text-align:center;">결제수단</th>
-       			<td><input type="radio" name="pay" value="계좌이체">계좌이체 &nbsp;
-       			<input type="radio" name="pay" value="신용카드">신용카드</td>
+       			<td>
+       			<input type="radio" name="pay" value="카카오페이">카카오페이</td>
        		</tr>
        	</table>
        	<div class="chargediv">
@@ -403,6 +412,25 @@
 	</div>
 	<!-- </form> -->
 </div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="height:10px;" aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"></h4>
+	      </div>
+	      <div class="modal-body">
+	       <div style="text-align:center;">
+	       <span id="inputtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
+	       </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button style="background:black;" type="submit" id="modalconfirm2" class="btn btn-primary">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

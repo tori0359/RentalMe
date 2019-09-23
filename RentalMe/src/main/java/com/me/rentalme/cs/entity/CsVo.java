@@ -24,26 +24,15 @@ public class CsVo {
 	private int listSize;		//목록갯수
 	private int cnt;			//글 전체 카운트
 	
+	private String pquestReplyNo;   //답글번호
+	private String pquestReplyDate; //답글일자
+	private String replyContent;
+	private String replySub;
+	private String replyChgId;  
+	private Date replyCghDt;
+	private String replyRegId;  //작성아이디
+	private Date replyRegDt;	   //등록날짜
 	
-	
-	public int getStartListNum() {
-		return startListNum;
-	}
-	public void setStartListNum(int startListNum) {
-		this.startListNum = startListNum;
-	}
-	public int getListSize() {
-		return listSize;
-	}
-	public void setListSize(int listSize) {
-		this.listSize = listSize;
-	}
-	public int getCnt() {
-		return cnt;
-	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
-	}
 	public String getFaqNo() {
 		return faqNo;
 	}
@@ -128,13 +117,83 @@ public class CsVo {
 	public void setQuestStsCd(String questStsCd) {
 		this.questStsCd = questStsCd;
 	}
+	public int getStartListNum() {
+		return startListNum;
+	}
+	public void setStartListNum(int startListNum) {
+		this.startListNum = startListNum;
+	}
+	public int getListSize() {
+		return listSize;
+	}
+	public void setListSize(int listSize) {
+		this.listSize = listSize;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public String getPquestReplyNo() {
+		return pquestReplyNo;
+	}
+	public void setPquestReplyNo(String pquestReplyNo) {
+		this.pquestReplyNo = pquestReplyNo;
+	}
+	public String getPquestReplyDate() {
+		return pquestReplyDate;
+	}
+	public void setPquestReplyDate(String pquestReplyDate) {
+		this.pquestReplyDate = pquestReplyDate;
+	}
+	public String getReplyContent() {
+		return replyContent;
+	}
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+	public String getReplySub() {
+		return replySub;
+	}
+	public void setReplySub(String replySub) {
+		this.replySub = replySub;
+	}
+	public String getReplyChgId() {
+		return replyChgId;
+	}
+	public void setReplyChgId(String replyChgId) {
+		this.replyChgId = replyChgId;
+	}
+	public Date getReplyCghDt() {
+		return replyCghDt;
+	}
+	public void setReplyCghDt(Date replyCghDt) {
+		this.replyCghDt = replyCghDt;
+	}
+	public String getReplyRegId() {
+		return replyRegId;
+	}
+	public void setReplyRegId(String replyRegId) {
+		this.replyRegId = replyRegId;
+	}
+	public Date getReplyRegDt() {
+		return replyRegDt;
+	}
+	public void setReplyRegDt(Date replyRegDt) {
+		this.replyRegDt = replyRegDt;
+	}
 	@Override
 	public String toString() {
 		return "CsVo [faqNo=" + faqNo + ", noticNo=" + noticNo + ", csGbCd=" + csGbCd + ", csClassGbCd=" + csClassGbCd
 				+ ", sub=" + sub + ", content=" + content + ", chgId=" + chgId + ", cghDt=" + cghDt + ", regId=" + regId
 				+ ", regDt=" + regDt + ", pquestNo=" + pquestNo + ", pquestDt=" + pquestDt + ", mbNo=" + mbNo
-				+ ", questStsCd=" + questStsCd + "]";
+				+ ", questStsCd=" + questStsCd + ", startListNum=" + startListNum + ", listSize=" + listSize + ", cnt="
+				+ cnt + ", pquestReplyNo=" + pquestReplyNo + ", pquestReplyDate=" + pquestReplyDate + ", replyContent="
+				+ replyContent + ", replySub=" + replySub + ", replyChgId=" + replyChgId + ", replyCghDt=" + replyCghDt
+				+ ", replyRegId=" + replyRegId + ", replyRegDt=" + replyRegDt + "]";
 	}
+	
 	
 	
 	

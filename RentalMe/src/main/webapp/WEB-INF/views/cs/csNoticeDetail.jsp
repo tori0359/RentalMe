@@ -41,11 +41,23 @@
         #content{
         	height:600px;
         }
+        #content tr>td:nth-child(1){
+        	text-align:center;
+        }
+        #comment{
+        	font-size:2em;
+        	font-style: italic;
+        	font-weight: bold;
+        	border-bottom:1px solid;
+        }
 	</style>
 </head>
 <body>
 <div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
+		<div id="comment" >
+					Notice-Content
+        </div>
 	<form action="/mp/mng/csNoticeUpdatePage">
         <table class="table" id="daeContent">
             <tr>
@@ -62,12 +74,12 @@
             	<td>${adetail.regDt}</td>
             </tr>
             <tr>
-                <td><label for="" >제목</label></td>
+                <td><label>제목</label></td>
                 <td><input type="hidden" value="${adetail.sub}">${adetail.sub}</td>
             </tr>
             <tr>
-                <td><label for="" >내용</label></td>
-                <td><input type="hidden" value="${adetail.content}">${adetail.content}</td>
+                <td style="height:120px; vertical-align:middle;"><label>내용</label></td>
+                <td style="vertical-align:middle;" ><input type="hidden" value="${adetail.content}">${adetail.content}</td>
             </tr>
             <tr>
                 <td></td>

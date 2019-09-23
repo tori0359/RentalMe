@@ -8,11 +8,14 @@
 <jsp:include page="../../template/header.jsp"></jsp:include>
 <script type="text/javascript">
 	 	$(document).ready(function(){
-			$("#cancel").click(function(){
+			$("#back").click(function(){
 					window.history.back();
-				})
+			})
+			$("#list").click(function(){
+					location.href="/mp/mng/InqList";
+			})
 		})
-</script>
+	</script>
 <style type="text/css">
         #daeContent{
         	margin-top:70px;
@@ -27,9 +30,6 @@
         #daeButton input{
             float:right;
             margin:5px 10px 5px 10px;
-            background:white;
-            border-radius:5px;
-            outline:none;
         }
        
         #daeButton>button:nth-child(1){
@@ -56,31 +56,42 @@
         	border-radius:5px;
         	
         }
+        #comment{
+        	font-size:2em;
+        	font-style: italic;
+        	font-weight: bold;
+        	border-bottom:1px solid;
+        	
+        }
+        #replyed{
+        	font-size:18px;
+        	font-weight:lighter;
+        }
 	</style>
 </head>
 <body>
-<div class="container">
-<div id="content" class="row">
+<div id="content">
 	<div class="col-md-10 col-md-offset-1"> 
-		<c:if test="${id == 'minminad' }">
-			<c:if test="${bean.questStsCd eq '1' }">
+	<%-- 	<c:if test="${levelGbCd == '2'}">
+			<c:if test="${bean.questStsCd eq '1'}">
 	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
 			</c:if>
-		</c:if>
-		<p style="margin-top:40px; font-family:nanumEB; font-size:18pt;">1:1문의 상세보기</p>
-			<form action="/mp/mp/QuestDelete" method="get">
-        <table class="table" id="daeContent" style="border-top:4px solid black; margin-top:0px;">
+		</c:if> --%>
+			<div id="comment" >
+					Inquiries
+        	</div>
+        <table class="table" id="daeContent">
            <%--  <tr>
                 <td><label for="id" >작 성 자</label></td>
                 <td><input type="hidden" name="mbNo" value="${bean.mbNo }">일반회원</td>
             </tr> --%>
             <tr>
-                <td class="active" align="center"><label for="id" >글 번 호</label></td>
-                <td><input type="hidden" name="mbNo" value="${bean.mbNo }"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+                <td align="center"><label for="id" >글 번 호</label></td>
+                <td><input type="hidden" name="mbNo" value="${bean.mbNo}"><input type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
                
             </tr>
             <tr>
-                <td class="active" align="center"><label>분류</label></td>
+                <td align="center"><label>분류</label></td>
                 <c:if test="${bean.csClassGbCd eq '1'}">
                 <td>주문</td>
                 </c:if>
@@ -101,23 +112,55 @@
                 </c:if>
             </tr>
             <tr>
-                <td class="active" align="center"><label>제목</label></td>
+                <td align="center"><label>제목</label></td>
                 <td>${bean.sub}</td>
             </tr>
             <tr>
-                <td class="active" style="padding-top:10px;" align="center"><label>내용</label></td>
+                <td style="padding-top:70px;" align="center"><label>내용</label></td>
                 <td style="height:150px; padding-top:70px;">${bean.content}</td>
             </tr>
-            <tr>
+           
+            <!-- <tr>
                 <td></td>
                 <td id="daeButton" >
                   <input class="btn btn-default" id="cancel" type="reset" value="뒤로">
                 </td>
-            </tr>
+            </tr> -->
         </table>
-			</form>
+        <br/>
+        <div>
+        <c:if test="${reply.replyContent ne null }">
+        </c:if>
+       		<div id="comment" >
+        		Comment
+        	</div>
+        	<c:if test="${levelGbCd=='2'}">
+        	<c:if test="${bean.questStsCd=='1'}">
+	        	<form action="/mp/mng/csInqReply" method="get">
+		        	<div class="col-md-10 col-md-offset-1">
+			        	<br/><br/><br/>
+			            	<input style="width:100%; margin-top:-10px;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="답글을 달아주세요(엔터로 입력)"/>
+			      </div>
+	            	<input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
+	            	<input type="hidden" name="mbNo" value="${bean.mbNo}"/>
+	        	</form>
+        	</c:if>
+        	</c:if>
+        	
+        	<div id="replyed" class="col-md-offset-2">
+        		<br/><br/><span></span><span style="font-weight: bold;">${reply.replyContent}</span><span></span>
+        	</div>
+        </div>
+            	<div id="daeButton">
+            	<c:if test="${levelGbCd=='1'}">
+      			  <input class="btn btn-primary" type="reset" id="back" value="뒤로">
+            	</c:if>
+            	<c:if test="${levelGbCd=='2'}">
+      			  <input class="btn btn-primary" type="reset" id="list" value="목록으로">
+            	</c:if>
+            	</div>
+			
 	</div>
-</div>
 </div>
 </body>
 <jsp:include page="../../template/footer.jsp"></jsp:include>

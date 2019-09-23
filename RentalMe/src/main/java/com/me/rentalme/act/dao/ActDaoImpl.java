@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.me.rentalme.model.entity.ActResultVo;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
+import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 
 @Repository
@@ -21,9 +22,9 @@ public class ActDaoImpl implements ActDao{
 	
 	
 	@Override
-	public List<ActVo> selectMngActList(Paging actPaging) throws SQLException {
+	public List<ActVo> selectMngActList() throws SQLException {
 		System.out.println("sql문으로 리스트뽑기");
-		return sqlSession.selectList("actRental.actList",actPaging);
+		return sqlSession.selectList("actRental.actList");
 	}
 
 	@Override
@@ -122,5 +123,15 @@ public class ActDaoImpl implements ActDao{
 	@Override
 	public int updateMngActStsCd(String gdsCd) throws SQLException {
 		return sqlSession.update("act.updateMngActStsCd", gdsCd);
+	}
+
+	@Override
+	public int insertUserActMoney(CallVo bean) throws SQLException {
+		return sqlSession.insert("act.insertUserActMoney", bean);
+	}
+
+	@Override
+	public int updateUserActMoney(CallVo bean) throws SQLException {
+		return sqlSession.update("act.updateUserActMoney", bean);
 	}
 }

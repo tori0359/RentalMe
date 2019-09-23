@@ -51,13 +51,13 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="page-header">
-						<h2 class="pageheader-title">회원 예치금 환불내역</h2>
+						<h2 class="pageheader-title">예치금 환불관리</h2>
 						<div class="page-breadcrumb">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#"
-										class="breadcrumb-link">회원 예치금 환불내역</a></li>
-									<li class="breadcrumb-item active" aria-current="page">회원 예치금 환불내역</li>
+										class="breadcrumb-link">예치금 환불관리</a></li>
+									<li class="breadcrumb-item active" aria-current="page">예치금 환불내역</li>
 								</ol>
 							</nav>
 						</div>
@@ -73,7 +73,7 @@
 				<!-- ============================================================== -->
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="card">
-						<h5 class="card-header">중고거래 목록</h5>
+						<h5 class="card-header">예치금 환불내역</h5>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table id="dt" class="table table-striped table-bordered first">

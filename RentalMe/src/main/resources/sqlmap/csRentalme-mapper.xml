@@ -17,6 +17,12 @@
 		ORDER BY FAQ_NO DESC
   		LIMIT #{startListNum}, #{listSize}
   	</select>
+  	
+  	<select id="csFaqHeadList" resultType="com.me.rentalme.cs.entity.CsVo">
+  		SELECT FAQ_NO,Cs_Class_Gb_Cd,Sub FROM TB_FAQ100 WHERE CS_CLASS_GB_CD=#{tapName} ORDER BY FAQ_NO DESC
+  		LIMIT #{startListNum},#{listSize}
+  	</select>
+  	
   	<select id="noticeSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
   		SELECT * FROM TB_NOTIC100 ORDER BY NOTIC_NO DESC
   		LIMIT #{startListNum},#{listSize}
@@ -38,6 +44,9 @@
       </if>
 	</trim>
 	
+  	</select>
+  	<select id="csFaqTapListCnt" resultType="int">
+  		SELECT COUNT(FAQ_NO) AS CNT FROM TB_FAQ100 WHERE CS_CLASS_GB_CD=#{csClassGbCd};
   	</select>
   	<select id="csNoticListCnt" resultType="int">
   		SELECT COUNT(NOTIC_NO) AS CNT FROM TB_NOTIC100;
@@ -62,7 +71,9 @@
   		LIMIT #{startListNum},#{listSize}
   	</select>
   	<select id="myQuestDetail" resultType="com.me.rentalme.cs.entity.CsVo">
+  		
   		SELECT * FROM TB_PQUEST100 WHERE MB_NO=#{mbNo} and PQUEST_NO=#{pquestNo}
+  		 <!-- WHERE A.MB_NO=#{mbNo} and A.PQUEST_NO=#{pquestNo} -->
   	</select>
   	<insert id="csInsertNocOne" parameterType="com.me.rentalme.cs.entity.CsVo">
 		INSERT INTO tb_notic100 (notic_no,sub,content,REG_DT) SELECT MAX(LPAD(SEQ,3,0)),#{sub},#{content},DATE_FORMAT(now(), '%Y%m%d') FROM seq_notic100;
@@ -104,6 +115,18 @@
 	<update id="csFaqUpdate" parameterType="com.me.rentalme.cs.entity.CsVo">
 		UPDATE TB_FAQ100 SET SUB=#{sub}, CONTENT=#{content} WHERE FAQ_NO=#{faqNo}
 	</update>
+	
+	
+	<select id="userLevel" resultType="com.me.rentalme.model.entity.UserVo">
+		SELECT LEVEL_GB_CD FROM TB_USER100 WHERE MB_NO=#{userLevel}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.me.rentalme.cs.entity.CsVo">
+		INSERT INTO TB_PQUEST110(PQUEST_NO,REPLY_CONTENT) values(#{pquestNo},#{replyContent})
+	</insert>
+	<select id="selectReply" resultType="com.me.rentalme.cs.entity.CsVo">
+		SELECT * FROM TB_PQUEST110 WHERE PQUEST_NO=#{pquestNo}
+	</select>
   </mapper>
   
   

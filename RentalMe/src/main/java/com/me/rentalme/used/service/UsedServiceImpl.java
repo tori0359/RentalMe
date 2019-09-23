@@ -115,4 +115,9 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.userId(mbNo);
 	}
 
+	@Override
+	public int updateStoreSts(String usedGdsNo) throws SQLException {
+		return usedDao.updateStoreSts(usedGdsNo);
+	}
+
 }

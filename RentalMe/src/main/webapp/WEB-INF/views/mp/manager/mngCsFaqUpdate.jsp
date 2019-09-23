@@ -29,6 +29,7 @@
      #daeContent tr>td:nth-child(1){
      	width:250px;
      	text-align:center;
+     	vertical-align:middle;
      }
      #selected{
      	display:visible;
@@ -114,8 +115,8 @@
 			      </td> -->
             </tr>
             <tr>
-                <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text" value="${qdetail.sub }"/></td>
+                <td style="vertical-align: middle;"><label for="sub" >제목</label></td>
+                <td><input type="text" class="form-control" name="sub" id="text" value="${qdetail.sub }"/></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>

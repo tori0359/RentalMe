@@ -33,8 +33,9 @@
 	<select id="selectOne" resultType="com.me.rentalme.model.entity.UsedVo"> <!-- 중고list 검색 USED_GDS_NO,BRAND_NM,MODEL_NM,USED_GDS_PRICE,IMG1 -->
 		 SELECT *,FN_NM('GDS_MCLASS_NM', GDS_MCLASS_CD) as MCLASS_NAME,FN_NM('GDS_SCLASS_NM', GDS_SCLASS_CD) as SCLASS_NAME 
 		 FROM tb_used100
-		 WHERE GDS_MCLASS_CD=#{gdsMclassCd}
-		  AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
+		 WHERE DEL_YN='N' 
+		 AND GDS_MCLASS_CD=#{gdsMclassCd}
+		 AND MODEL_NM LIKE CONCAT('%',#{modelNm},'%')
 			<if test="align == null">
 			 	ORDER BY REG_DT DESC
 			</if>
@@ -147,5 +148,10 @@
 		FROM tb_decl100
 	</insert>
 	
+	<update id="updateStoreSts">
+		UPDATE TB_USED100
+		SET USED_GDS_RES_STS_CD='2'
+		WHERE USED_GDS_NO=#{usedGdsNo}
+	</update>
 	
 </mapper>

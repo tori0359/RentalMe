@@ -32,7 +32,11 @@
 	#info{
 			width:93%;
 			margin:20px 0px 10px 20px;
+<<<<<<< HEAD
 			border:5px solid #E6E6E6;
+=======
+			border:4px solid #A4A4A4;
+>>>>>>> refs/remotes/origin/hij
 			padding: 10px;
 		}
 	.titlediv{
@@ -49,7 +53,7 @@
 <script>
 window.onload=function(){
 	$('#choosedel').click(function(){
-		 var confirm_val = confirm("정말 삭제하시겠습니까?");
+		
 		
 	 });
 }
@@ -108,7 +112,7 @@ window.onload=function(){
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a style="cursor:pointer;" class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>
