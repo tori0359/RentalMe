@@ -135,9 +135,34 @@ public class CsServiceImpl implements CsService {
 	}
 
 	@Override
-	public int faqListCnt12(Search search) throws SQLException {
-		return 0;
+	public int faqListCnt22(String csClassGbCd) throws SQLException {
+		return csDao.faqListCnt22(csClassGbCd);
 	}
 
+	@Override
+	public List<CsVo> csFaqHeadList(Paging paging,String tapName) throws SQLException {
+		
+		return csDao.csFaqHeadList(paging,tapName);
+	}
+
+	@Override
+	public UserVo userLevel(String userLevel) {
+		
+		return csDao.userLevel(userLevel);
+	}
+
+	@Override
+	public int insertReply(CsVo csVo) {
+		// TODO Auto-generated method stub
+		return csDao.insertReply(csVo);
+	}
+
+	@Override
+	public CsVo selectReply(String pquestNo) {
+		// TODO Auto-generated method stub
+		return csDao.selectReply(pquestNo);
+	}
+
+	
 
 }

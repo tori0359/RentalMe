@@ -7,7 +7,6 @@
   	<!--상품 리스트  -->
   	<select id="actList" resultType="com.me.rentalme.model.entity.ActVo"> 
   		SELECT A.GDS_CD,GDS_NM, A.REG_DT, A.ACT_ED_TIME,A.ACT_STS_CD FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD_DETAIL=B.GDS_CD ORDER BY REG_DT DESC
-  		LIMIT #{startListNum}, #{listSize}
   	</select>
   	<select id="goodsList" resultType="com.me.rentalme.model.entity.ActVo">
   		SELECT  GDS_NM,GDS_CD,MODEL_NM,BRAND_NM FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}

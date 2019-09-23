@@ -80,7 +80,16 @@ public class LoginFindServiceImpl implements LoginFindService {
 			}	
 
 		}else if(!userVo.getHp().equals("") && userVo.getHp()!=null) {	//핸드폰찾기 인 경우
-
+			String userId	= userVo.getUserId();		//입력한 사용자 아이디
+			String hp		= userVo.getHp();
+						
+			int result = loginFindDao.checkPwHp(userId, hp);
+			
+			if(result > 0) {	//데이터가 일치
+				return "not empty";
+			}else {				//데이터가 불일치
+				return "empty";
+			}
 		}		
 		
 		return "empty";

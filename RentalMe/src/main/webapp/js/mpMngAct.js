@@ -4,7 +4,7 @@ $(function(){
 		window.location.href='/act/admin/10'+link;
 	});	 
 	
-	$('#choosedel').click(function(){		 
+	$('#choosedel').click(function(){
 		 Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  type: 'warning',

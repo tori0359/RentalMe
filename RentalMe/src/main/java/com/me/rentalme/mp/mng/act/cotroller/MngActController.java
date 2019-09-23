@@ -69,31 +69,13 @@ public class MngActController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/actList", method = RequestMethod.GET)
-	public ModelAndView getAct(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException{
+	public ModelAndView getAct(Model model) throws SQLException{
 		
-		pagingPath="/mp/mng";
-		pagingPath+="/actList";
 		System.out.println("actlist 컨트롤러");
-		int listCnt=actService.actListCnt();
-		
-		Paging actPaging=new Paging();
-		actPaging.pageInfo(page, range, listCnt);
-		//csVo.setStartListNum(csPaging.getstartListNum());
-		System.out.println("시작넘버:"+actPaging.getstartListNum());
-		//csVo.setListSize(csPaging.getListSize());
-		System.out.println("게시물 갯수:"+actPaging.getListSize());
-		////////////////////////////////////
-		
-		/////
-		///////
-		//ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
+				
 		ModelAndView mav=new ModelAndView();
 		
-		//mav.addObject("actList", actService.actList() );
-		mav.addObject("actList", actService.mngListAct(actPaging));
-		model.addAttribute("pathPaging", pagingPath);
-		model.addAttribute("paging", actPaging);
-		//System.out.println(actService.mngListAct());	
+		mav.addObject("actList", actService.mngListAct());
 		
 		mav.setViewName("/mp/manager/mngActList");
 		

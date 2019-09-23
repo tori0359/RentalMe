@@ -77,6 +77,25 @@ public class LoginFindDaoImpl implements LoginFindDao {
 		int result = sqlSession.selectOne("loginFind.checkPwEmail", map);
 		return result;
 	}
+	
+	/**
+	* 등록된 핸드폰으로 비밀번호 찾기 
+	* 
+	* @param  String userId : 입력한 사용자 아이디 
+	* @param  String hp  : 입력한 사용자 핸드폰번호
+	* @return int 
+	* @author 황인준
+	* 등록일자 : 2019-09-21
+	*/
+	@Override
+	public int checkPwHp(String userId, String hp) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("hp", hp);
+		int result =  sqlSession.selectOne("loginFind.checkPwHp", map);
+		System.out.println("result : "+result);
+		return result;
+	}
 
 	/**
 	* 비밀번호 변경 
@@ -126,5 +145,7 @@ public class LoginFindDaoImpl implements LoginFindDao {
 		//두개로 분리할 경우 - (코드가 꼬여서 중복으로 실행되는 버그가 있음)
 		return sqlSession.selectList("loginFind.hpFindId", hp);
 	}
+	
+
 
 }

@@ -44,7 +44,7 @@
 			<div class="row row-no-gutters">
 				<div class="col-xs-6">
 					<div class="checkbox">
-						<label> <input type="checkbox" name="isUseLogin"> 자동 로그인
+						<label> <input type="checkbox" name="useLogin"> 자동 로그인
 						</label>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 							class="btn btn-default btn-block" >찾기</button>
 					</div>
 				</div>
-				<form action="pwFind" method="get">
+				<form action="pwFind" method="POST">
 					<div id="pw_find">
 						<div id="insert_id">
 							<input type="text" placeholder="아이디"  name="userId" id="pwUserId"/>

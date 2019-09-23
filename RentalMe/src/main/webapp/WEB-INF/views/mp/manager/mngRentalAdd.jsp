@@ -10,6 +10,14 @@
 	#actContent{
 		
 	}
+	#daeContent td:nth-child(odd){
+		width:20%;
+		vertical-align:middle;
+	}
+	#daeContent td:nth-child(even){
+		width:30%;
+		vertical-align:middle;
+	}
 	h2{
 		padding-top:50px;
 		padding-bottom:50px;
@@ -24,13 +32,14 @@
 	tr>td:nth-child(1){
 		text-align:center;
 	}
+	tr>td:nth-child(2){
+		
+	}
+	tr>td:nth-child(3){
+		text-align:center;
+	}
 	#biddingUnit{
 		width:80px;
-	}
-	#daeButton{
-		/* float:right; */
-		text-align:right;
-		padding-right:110px;
 	}
 	p{
 		font-size:4px;
@@ -127,7 +136,7 @@
 <script type="text/javascript">
 
 		window.onload=function(){
-			$('.cancel').click(function(){
+			$('#cancel').click(function(){
 				window.history.back();
 		    })
 		    
@@ -338,21 +347,25 @@
 		<h2>경매상품등록</h2>
         <table class="table" id="daeContent">
             <tr>
-                <td width="120px"><label>작 성 자</label></td>
-                <td>관 리 자</td>
+                <td><label>작 성 자</label></td>
+                <td style="width:center">관 리 자</td>
+                <td></td>
+                <td></td>
             </tr>
         
 	<form action="/mp/mng/rentalInsert" enctype="multipart/form-data" method="post">
             <tr>
             	<td><label>상품-대분류</label></td>
-            	<td>
+            	<td style="width:center">
 	            	<input type="hidden" value="10" name="gdsLclassCd">렌탈상품
             	</td>
+            	<td></td>
+            	<td></td>
             </tr>
 	        <tr>
 	            <td><label>상품-중분류</label></td>
 	            <td>
-	            <select id="firSelect" name="gdsMclassCd" onchange="selectMcGoods(this.value);">
+	            <select style="width:75%;height:40px;" class="form-control" id="firSelect" name="gdsMclassCd" onchange="selectMcGoods(this.value);">
 	            	<option selected="selected" value="">대분류상품</option>
 	            	<option value="10">대형가전</option>	
 	            	<option value="20">소형가전</option>	
@@ -360,51 +373,66 @@
 	            	<option value="40">가구</option>	
 	            	<option value="50">기타</option>	
 	            	<option value="60">패키지</option>	
-	            </select>
-	            &nbsp&nbsp&nbsp&nbsp&nbsp<label>상품-소분류</label>&nbsp&nbsp&nbsp&nbsp&nbsp
-	            <select id="secSelect" name="gdsSclassCd" onchange="selectScGoods(this.value);">
+	            </select><td><label>상품-소분류</label></td>
+	            <td>
+	            <select style="width:75%;height:40px;" class="form-control" id="secSelect" name="gdsSclassCd" onchange="selectScGoods(this.value);">
 	            	<option selected="selected" value="">소분류상품</option>
-	            </select></td>
+	            </select>
+	            </td>
 	        </tr>
 	        <tr>
 	            <td><label>상품명</label></td>
-	            <td><input type="text" name="gdsNm" id="gdsNm">&nbsp&nbsp<label>브랜드명</label>&nbsp&nbsp<input type="text" name="brandNm" id="brandNm"></td>
+	            <td><input style="width:75%;height:40px;" class="form-control" type="text" name="gdsNm" id="gdsNm"></td>
+	            <td><label>브랜드명</label></td>
+	            <td><input style="width:75%;height:40px;" class="form-control" type="text" name="brandNm" id="brandNm"></td>
 	        </tr>
 	        <tr>
 	        	<td><label>모델명</label></td>
-	            <td><input type="text" name="modelNm" id="gdsNm"></td>
+	            <td><input style="width:75%;height:40px;" class="form-control" type="text" name="modelNm" id="gdsNm"></td>
+	            <td></td><td></td>
 	        </tr>
-	        <tr id="ajax">
+	     <!--    <tr id="ajax">
 	        	<td><label>상품코드</label></td>
 	        	<td><input type="text" id="gdsCd" name="gdsCd"/></td>
-	        </tr>
+	        </tr> -->
 	        <tr>
-	        	<td><label>상품 가격</label></td><td><input type="text" name="prdPrice">&nbsp&nbsp&nbsp<label>&nbsp렌탈 기간</label>&nbsp
-	        	<select name="prdContDate" style="height:28px;">
+	        	<td><label>상품 가격</label></td><td><input style="width:75%;height:40px;" type="text" class="form-control" name="prdPrice"></td><td><label>렌탈 기간</label></td>
+	        	<td>
+	        	<select style="width:75%;height:40px;" class="form-control" name="prdContDate" style="height:28px;">
 	        			<option value="3">3개월</option>
 	        			<option value="6">6개월</option>
 	        			<option value="9">9개월</option>
 	        			<option value="12">12개월</option>
+	        			<option value="15">15개월</option>
+	        			<option value="18">18개월</option>
+	        			<option value="21">21개월</option>
 	        			<option value="24">24개월</option>
+	        			<option value="27">27개월</option>
+	        			<option value="30">30개월</option>
 	        	</select>
 	        	</td>
 	        </tr>
 	        <tr>
-	        	<td><label>배송비용</label></td><td><input type="text" name="prdDeliveryCost"/>
-	        	&nbsp&nbsp<label>&nbsp설치비용</label>&nbsp&nbsp<input type="text" name="prdInstCost"/>
+	        	<td><label>배송비용</label></td>
+	        	<td><input style="width:75%;height:40px;" class="form-control" type="text" name="prdDeliveryCost" value="5000"/></td>
+	        	<td><label>설치비용</label></td>
+	        	<td>
+	        		<input style="width:75%;height:40px;" class="form-control" type="text" value="무료" name="prdInstCost"/>
 	        	</td>
 	        </tr>
 	        <tr>
 	        	<td><label>AS조건</label></td>
-	        	<td><input type="text" name="prdAsContent" value="렌탈기간 내 무상 AS"/>&nbsp&nbsp&nbsp&nbsp<label>상품상태</label>&nbsp&nbsp
-	            새상품&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="N">&nbsp&nbsp&nbsp&nbsp중고상품&nbsp&nbsp<input type="checkbox" name="gdsGbCd" value="Y"></td>
-	        </td>
+	        	<td><input style="width:75%;height:40px;" type="text" name="prdAsContent" class="form-control" value="렌탈기간 내 무상 AS"/></td>
+	        	<td><label>상품상태</label></td>
+	        	<td style="vertical-align:middle;">
+	        		새상품<input style="width:40px;" type="checkbox" checked="checked" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="Y">
+	            </td>
 	        </tr>
 	        <tr>
 	        </tr>
              <tr>
-	             <td><label for="imgfile" id="imgfile_label">이미지 업로드</label></td>
-	             <td>
+	             <td  style="vertical-align:middle;"><label>이미지 업로드</label></td>
+	             <td colspan="3">
 	                <p>* 상품이미지는 640x640에 최적화 되어 있습니다.<br/>
 			           - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br/>
 			           - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
@@ -457,9 +485,12 @@
              </tr>
             <tr>
             	<td></td>
-                <td id="daeButton" >
-                   <input type="submit" value="등록"/>
-                   <input class="cancel" type="reset" value="취소">
+            	<td></td>
+            	<td style="text-align:right;">
+            	</td>
+                <td>
+                   <input class="btn btn-primary" type="submit" value="등록"/>
+                   <input id="cancel" class="btn btn-danger" type="reset" value="취소">
                 </td>
             </tr>
 	</form>

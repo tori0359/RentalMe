@@ -59,9 +59,9 @@ public class ActServiceImpl implements ActService{
 	}
 
 	@Override
-	public List<ActVo> mngListAct(Paging actPaging) throws SQLException {
+	public List<ActVo> mngListAct() throws SQLException {
       System.out.println("actlistdao·Î ¤¡¤¡");
-      return actDao.selectMngActList(actPaging);		
+      return actDao.selectMngActList();		
 	}
 
 	/*

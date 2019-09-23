@@ -12,7 +12,7 @@ import com.me.rentalme.model.entity.RentalAppliVo;
 public interface ActService {
 
 	//包府磊 版概包府 府胶飘
-	List<ActVo> mngListAct(Paging actPaging) throws SQLException;
+	List<ActVo> mngListAct() throws SQLException;
 	
 	int addAct100(ActVo actVo) throws SQLException;
 	int addAct300(ActVo actVo) throws SQLException;
