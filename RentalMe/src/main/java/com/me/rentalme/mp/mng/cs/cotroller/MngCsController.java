@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.cs.cotroller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -136,41 +137,15 @@ public class MngCsController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/InqList", method = RequestMethod.GET)
-	public ModelAndView getQuestList(HttpSession session,CsVo csVo,Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
+	public ModelAndView getQuestList(HttpSession session,CsVo csVo,Model model) throws SQLException {
 		log.debug("문의 보기 컨트롤러...");
-		
-		pagingPath="/mp/mng";
-		pagingPath+="/InqList";
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		mav.addObject("levelGbCd",userLevel);
+		mav.addObject("inqlist", csService.csInqList());
 		
-		
-		
-		int listCnt=csService.inquiryListCnt();
-		System.out.println("inq리스트 갯수:"+listCnt);
-		
-		Paging csPaging=new Paging();
-		
-		csPaging.pageInfo(page, range, listCnt);
-		
-		
-		mav.addObject("inqlist", csService.csInqList(csPaging));
-		
-		System.out.println("list뽑고 넘기기");
-		String userId=(String)session.getAttribute("loginUserId");
-		mav.addObject("id", userId);
-		
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", csPaging);
 		mav.setViewName("mp/manager/mngCsQuestList");
+		
 		return mav;
 	}
 	

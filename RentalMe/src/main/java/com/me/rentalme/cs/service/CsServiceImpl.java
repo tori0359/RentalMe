@@ -38,9 +38,9 @@ public class CsServiceImpl implements CsService {
 
 	//문의
 	@Override
-	public List<CsVo> csInqList(Paging paging) throws SQLException {
+	public List<CsVo> csInqList() throws SQLException {
 		
-		return csDao.inqSelectAll(paging);
+		return csDao.inqSelectAll();
 	}
 	
 	//faq게시글 상세

@@ -29,8 +29,17 @@
   	</select>
   	
   	<select id="inqSelectAll" resultType="com.me.rentalme.cs.entity.CsVo">
-  		SELECT * FROM TB_PQUEST100 ORDER BY PQUEST_NO DESC
-  		LIMIT #{startListNum},#{listSize}
+  		SELECT A.MB_NO
+  		     , A.PQUEST_NO
+  		     , A.SUB
+  		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+  		     , A.QUEST_STS_CD
+  		     , (SELECT DATE_FORMAT(B.REG_DT, '%Y-%m-%d') 
+  		          FROM TB_PQUEST110 B 
+  		         WHERE A.PQUEST_NO = B.PQUEST_NO) AS CHG_DT
+  		  FROM TB_PQUEST100 A
+  		 ORDER 
+  		    BY REG_DT DESC;
   	</select>
   	
   	<!--  검색 게시글 갯수-->
@@ -125,7 +134,16 @@
 		INSERT INTO TB_PQUEST110(PQUEST_NO,REPLY_CONTENT) values(#{pquestNo},#{replyContent})
 	</insert>
 	<select id="selectReply" resultType="com.me.rentalme.cs.entity.CsVo">
-		SELECT * FROM TB_PQUEST110 WHERE PQUEST_NO=#{pquestNo}
+		SELECT PQUEST_NO
+		     , PQUEST_REPLY_NO
+		     , PQUEST_REPLY_DATE
+		     , REPLY_SUB
+		     , REPLY_CONTENT
+		     , CHG_ID
+		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d')
+		     , REG_ID
+		     , DATE_FORMAT(REG_DT, '%Y-%m-%d')
+		  FROM TB_PQUEST110 WHERE PQUEST_NO=#{pquestNo}
 	</select>
   </mapper>
   

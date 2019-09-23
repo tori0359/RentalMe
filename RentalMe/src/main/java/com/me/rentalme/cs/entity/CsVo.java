@@ -11,7 +11,7 @@ public class CsVo {
 	private String sub;    //제목
 	private String content;//내용
 	private String chgId;  
-	private Date cghDt;
+	private String chgDt;
 	private String regId;  //작성아이디
 	private Date regDt;	   //등록날짜
 	
@@ -75,11 +75,13 @@ public class CsVo {
 	public void setChgId(String chgId) {
 		this.chgId = chgId;
 	}
-	public Date getCghDt() {
-		return cghDt;
+
+	
+	public String getChgDt() {
+		return chgDt;
 	}
-	public void setCghDt(Date cghDt) {
-		this.cghDt = cghDt;
+	public void setChgDt(String chgDt) {
+		this.chgDt = chgDt;
 	}
 	public String getRegId() {
 		return regId;
@@ -186,13 +188,26 @@ public class CsVo {
 	@Override
 	public String toString() {
 		return "CsVo [faqNo=" + faqNo + ", noticNo=" + noticNo + ", csGbCd=" + csGbCd + ", csClassGbCd=" + csClassGbCd
-				+ ", sub=" + sub + ", content=" + content + ", chgId=" + chgId + ", cghDt=" + cghDt + ", regId=" + regId
+				+ ", sub=" + sub + ", content=" + content + ", chgId=" + chgId + ", chgDt=" + chgDt + ", regId=" + regId
 				+ ", regDt=" + regDt + ", pquestNo=" + pquestNo + ", pquestDt=" + pquestDt + ", mbNo=" + mbNo
 				+ ", questStsCd=" + questStsCd + ", startListNum=" + startListNum + ", listSize=" + listSize + ", cnt="
 				+ cnt + ", pquestReplyNo=" + pquestReplyNo + ", pquestReplyDate=" + pquestReplyDate + ", replyContent="
 				+ replyContent + ", replySub=" + replySub + ", replyChgId=" + replyChgId + ", replyCghDt=" + replyCghDt
-				+ ", replyRegId=" + replyRegId + ", replyRegDt=" + replyRegDt + "]";
+				+ ", replyRegId=" + replyRegId + ", replyRegDt=" + replyRegDt + ", getFaqNo()=" + getFaqNo()
+				+ ", getNoticNo()=" + getNoticNo() + ", getCsGbCd()=" + getCsGbCd() + ", getCsClassGbCd()="
+				+ getCsClassGbCd() + ", getSub()=" + getSub() + ", getContent()=" + getContent() + ", getChgId()="
+				+ getChgId() + ", getChgDt()=" + getChgDt() + ", getRegId()=" + getRegId() + ", getRegDt()="
+				+ getRegDt() + ", getPquestNo()=" + getPquestNo() + ", getPquestDt()=" + getPquestDt() + ", getMbNo()="
+				+ getMbNo() + ", getQuestStsCd()=" + getQuestStsCd() + ", getStartListNum()=" + getStartListNum()
+				+ ", getListSize()=" + getListSize() + ", getCnt()=" + getCnt() + ", getPquestReplyNo()="
+				+ getPquestReplyNo() + ", getPquestReplyDate()=" + getPquestReplyDate() + ", getReplyContent()="
+				+ getReplyContent() + ", getReplySub()=" + getReplySub() + ", getReplyChgId()=" + getReplyChgId()
+				+ ", getReplyCghDt()=" + getReplyCghDt() + ", getReplyRegId()=" + getReplyRegId() + ", getReplyRegDt()="
+				+ getReplyRegDt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	
 	
 	
 	

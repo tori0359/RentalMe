@@ -95,9 +95,8 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public List<CsVo> inqSelectAll(Paging paging) throws SQLException {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("csCenter.inqSelectAll",paging);
+	public List<CsVo> inqSelectAll() throws SQLException {
+		return sqlSession.selectList("csCenter.inqSelectAll");
 	}
 
 	@Override
@@ -214,7 +213,6 @@ public class CsDaoImpl implements CsDao {
 
 	@Override
 	public UserVo userLevel(String userLevel) {
-		System.out.println("´Ù¿ì");
 		return sqlSession.selectOne("csCenter.userLevel",userLevel);
 	}
 

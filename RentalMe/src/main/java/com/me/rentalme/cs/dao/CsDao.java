@@ -20,7 +20,7 @@ public interface CsDao {
 	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//문의 리스트
-	List<CsVo> inqSelectAll(Paging paging) throws SQLException;
+	List<CsVo> inqSelectAll() throws SQLException;
 	
 	//게시글 총 갯수
 	int faqListCnt(Search search) throws SQLException;
