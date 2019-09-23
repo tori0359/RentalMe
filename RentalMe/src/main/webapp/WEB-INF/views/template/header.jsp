@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
         <meta http-equiv="Expires" content="0"/>
    <meta http-equiv="Pragma" content="no-cache"/>
+   <link rel="icon"  href="/imgs/faviconimg.ico">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
    <style type="text/css">
@@ -225,8 +226,13 @@
          position: relative;
          z-index:1;
       }
-      
-      #content>div{
+     
+       #cartimg{
+       	 width:30px;
+       	 transition: all ease 2s;
+      }
+       #cartimg:hover{
+      	 transform: translateX(-182px);
       }
 
    
@@ -251,7 +257,8 @@
       	</c:when>
       	<c:otherwise>
       		<c:if test="${'1' eq loginSts }">
-      			<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ
+      			<a href="/mp/" class="navbar-link">${loginUserId }(${loginMbNo})님</a> 
+      			&nbsp;<a id="carta" href="/mp/cart"><img id="cartimg" src="/imgs/cart.png"/></a>ㅣ
       		</c:if>
       		<c:if test="${'2' eq loginSts }">
 	      		<a href="/mp/mng/list" class="navbar-link">${loginUserId }(${loginMbNo})님</a> ㅣ      		

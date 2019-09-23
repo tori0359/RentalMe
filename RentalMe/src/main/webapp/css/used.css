@@ -139,8 +139,15 @@
 	}
 	.usedStore h2{
 		text-align:center;
-		border: 5px solid lightgray;
+		border: 8px solid lightgray;
 		cursor: default;
+		line-height:80px;
+		font-size: 16pt;
+	}
+	.usedStore h2 span{
+		font-family:"nanumEB";
+		font-size: 18pt;
+	
 	}
 	.usedStore select{
 		display: inline-block;
@@ -372,4 +379,5 @@
            }
            #imgfile{
            }
+        
 /*  usedMng end */

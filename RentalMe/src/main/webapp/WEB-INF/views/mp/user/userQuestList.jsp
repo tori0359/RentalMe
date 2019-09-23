@@ -32,9 +32,23 @@
 	#info{
 			width:93%;
 			margin:20px 0px 10px 20px;
+<<<<<<< HEAD
+			border:5px solid #E6E6E6;
+=======
 			border:4px solid #A4A4A4;
+>>>>>>> refs/remotes/origin/hij
 			padding: 10px;
 		}
+	.titlediv{
+            height:40px;
+      }
+      #title2{
+	   		font-size: 15pt;
+	   		font-weight: bolder;
+	   		font-family: "nanumB";
+	   		margin: 60px 0 50px 0;;
+	   }
+      
 </style>
 <script>
 window.onload=function(){
@@ -46,24 +60,20 @@ window.onload=function(){
 </script>
 </head>
 <body>
-<div id="content" class="col-md-10 col-md-offset-1">
-	<div id="dae">
-		<br/>
-		    <span style="font-weight: bold; font-size: 25px">내 문의 보기</span>
-	     <br/>
-	     <div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
+<div style="height:100%;">
+	<div class="titlediv">
+		    <p id="title2">내 문의 보기</p>
 	</div>
-	<div id="info" class=" col-md-offset-4" >
+	<div class="hr" style="height:3px; background-color: black;"></div>
+	<div id="info">
      <p class=" col-md-offset-1">
      	<input type="hidden" value="${id}">
 	     	<p style="font-weight: bold;">연락 드리겠습니다</p>
-	     
-     </p>
      </div>
 	
 	
 	<table class="table table-hover" id="contentTable">
-		<tr class="danger">
+		<tr class="active">
 			<th style="width:15%;">번호</th>
 			<th>제목</th>
 			<th>등록일</th>

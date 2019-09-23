@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
+	body{
+		font-family:'nanumB';
+	}
 		#title2{
 	   		font-size: 15pt;
 	   		font-weight: bolder;
@@ -70,6 +73,17 @@
       }
       .table tr{
       		font-family:"nanumB";
+      }
+      #drop{
+      	color: grey;
+      	font-size:10pt;
+      	margin-top:10px;
+      	cursor: pointer;
+      }
+      #drop:hover{
+      	color:grey;
+      	text-decoration:none;
+      	font-weight:bolder;
       }
  
 </style>
@@ -230,10 +244,22 @@
 				type: "post",
 				data: { "userPw" : newpw},
 				success : function(){
-					alert("비밀번호가 변경되었습니다!");
+					alert("비밀번호가 성공적으로 변경되었습니다!");
+					location.href="/mp/updInfo";
 				}
 			});
         });
+
+
+
+/* 		 $('#dropconfirm').click(function(){
+            $.ajax({
+				
+				url: "dropMember",
+				type: "GET"
+		
+			}); 
+       	}); */
 
      } 
 
@@ -279,7 +305,7 @@
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">연락처</th>
-     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value=""></td>
+     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value="${userVo.hp}"></td>
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">비밀번호 변경</th>
@@ -292,20 +318,20 @@
 	     		<div>
 	     			<label for="pw">현재 비밀번호</label>
 	     			
-	     			<input style="margin-left:32px;" type="text" name="inputPw" id="inputPw">
+	     			<input style="margin-left:32px;" type="password" name="inputPw" id="inputPw">
 	     			<div style="color: #04B404;" class="pw-chk" id="pw-success">비밀번호가 일치합니다</div>
 	     			<div class="pw-chk" id="pw-notsuccess">현재 비밀번호와 일치하지 않습니다.</div>
 	     		</div>
 	     		<div>
 	     			<label for="newpw">신규 비밀번호</label>
-	     			<input style="margin-left:32px;" type="text" name="newpw" id="newpw"> 
+	     			<input style="margin-left:32px;" type="password" name="newpw" id="newpw"> 
 	     			<div class="pw-chk" id="pw-danger">비밀번호가 다릅니다</div>
 	     			<div class="pw-chk" id="pw-danger2">8~20자 영문+숫자+특수문자 조합하여 입력해주세요.</div>
 	     		
 	     		</div>
 	     		<div>
 	     			<label for="newpwre">신규 비밀번호 확인</label>
-	     			<input style="margin-left:4px;" type="text" name="newpwre" id="newpwre">
+	     			<input style="margin-left:4px;" type="password" name="newpwre" id="newpwre">
 	     			<button type="button" class="delete_btn1 btn" id="pwchange">비밀번호 변경</button><br>
 	     		</div>
 				
@@ -330,10 +356,55 @@
      </div>
      <div id="infobtn">
 	     <button type="submit" id="update" class="delete_btn2 btn">확인</button>
+	     <a id="drop">&emsp;회원 탈퇴하기></a>
      </div>
      </form>
-      
-      
+     <script>
+     	$('#drop').click(function(){
+			$('#myModal').modal('show');
+
+        });
+
+     
+     </script>
+     
+
+    <!-- <form action="/mp/deposit/refund" method="post"> -->
+	<!-- Modal -->
+	<form action="dropMember" method="get">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="height:10px;" aria-hidden="true">&times;</span></button>
+	        <h4 style="font-family:'nanumEB';" class="modal-title" id="myModalLabel">회원 탈퇴</h4>
+	      </div>
+	      <div class="modal-body">
+	      <p style="font-family:'nanumB';">렌탈미 서비스를 이용하는데 불편함이 있으셨나요?</p>
+	      <select style="font-size:10pt; width:180px; height:25px;" id="dropmenu" name="dropmenu">
+	      		<option selected="selected" value="없음">없음</option>
+	      		<option value="상품부족">상품 부족</option>
+	      		<option value="서비스 불만">서비스 불만</option>
+	      		<option value="이용 불편">이용 불편</option>
+	      		<option value="기타">기타</option>
+	      </select>
+	       <div style="border:0px solid lightgrey; margin-top:30px;">
+	       <p style="font-family:'nanumB'; font-weight:bolder;">회원탈퇴 전, 유의사항을 확인해 주시기 바랍니다.</p>
+				<p style="font-size:10pt;">- 회원탈퇴 시 회원전용 웹 서비스 이용이 불가합니다.<br/>
+				- 보유하셨던 예치금은 탈퇴와 함께 삭제되며 환불되지 않습니다.<br/>
+				- 회원탈퇴 후 쿠팡 서비스에 입력하신 상품문의 및 후기, 댓글은 삭제되지 않습니다. <br/>
+				- 이미 결제가 완료된 건은 탈퇴로 취소되지 않습니다.</p>
+	       </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button style="background:black;" id="dropconfirm" class="btn btn-primary">탈퇴하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</form>
+	<!-- </form> -->
+
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

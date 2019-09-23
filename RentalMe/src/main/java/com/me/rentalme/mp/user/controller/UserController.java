@@ -71,7 +71,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 주문내역> 후기등록
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	public ModelAndView addReview(CallVo callVo, HttpSession session) throws SQLException {
@@ -112,7 +115,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 장바구니
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public ModelAndView getCartList(HttpSession session) throws SQLException {
@@ -132,7 +138,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 장바구니 선택 삭제
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
 	public ModelAndView deleteCart(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
@@ -177,7 +186,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 찜한 상품
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/wish", method = RequestMethod.GET)
 	public ModelAndView getWishList(Model model, HttpSession session) throws SQLException {
@@ -196,7 +208,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 찜한 상품 선택 삭제
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영
+	 * @exception
 	 */
 	@RequestMapping(value = "/deleteWish", method = RequestMethod.POST)
 	public ModelAndView deleteWish(HttpSession session, @RequestParam(value = "chbox[]") List<String> chArr,
@@ -219,7 +234,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 예치금
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/deposit", method = RequestMethod.GET)
 	public ModelAndView getDeposit(CallVo callVo, HttpSession session) throws SQLException {
@@ -241,7 +259,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 예치금 충전
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
 	public ModelAndView insertDeposit(@RequestParam("chargeDeposit") String chargeDeposit, CallVo callVo,
@@ -265,7 +286,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 예치금 충전
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/deposit/refund", method = RequestMethod.POST)
 	@ResponseBody
@@ -283,7 +307,8 @@ public class UserController {
 		
 		int refund2 = Integer.parseInt(refund);
 		int remnDeposit2 = Integer.parseInt(remnDeposit);
-		//System.out.println(remnDeposit2 > refund2);
+		System.out.println("남은 예치금이 얼마니?"+(remnDeposit));
+		System.out.println("예치금이 충분하니?"+ (remnDeposit2> refund2));
 		
 		//예치금이 환불 요청 금액보다 클때만 중복 확인
 		if(remnDeposit2 > refund2) {
@@ -307,7 +332,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 정보 수정 폼
 	 * 
-	 * @param @return String @author 신지영 @exception
+	 * @param 
+	 * @return String 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/updInfo", method = RequestMethod.GET)
 	public ModelAndView modifyInfo(UserVo userVo, HttpSession session) throws SQLException {
@@ -328,7 +356,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 정보 수정 : 비밀번호 체크
 	 * 
-	 * @param UserVo @return String @author 신지영 @exception
+	 * @param UserVo 
+	 * @return String 
+	 * @author 신지영
+	 * @exception
 	 */
 	@RequestMapping(value = "/checkPw", method = RequestMethod.POST)
 	@ResponseBody
@@ -346,7 +377,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 비밀번호 수정
 	 * 
-	 * @param UserVo @return String @author 신지영 @exception
+	 * @param UserVo 
+	 * @return String 
+	 * @author 신지영 
+	 * @exception
 	 */
 	
 	  @RequestMapping(value = "/changePw", method = RequestMethod.POST)
@@ -367,7 +401,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 정보 수정
 	 * 
-	 * @param UserVo @return String @author 신지영 @exception
+	 * @param UserVo 
+	 * @return String
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/updInfo", method = RequestMethod.POST)
 	public String modifyInfo2(UserVo userVo, HttpSession session) throws SQLException {
@@ -387,7 +424,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 경매내역
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/auctList", method = RequestMethod.GET)
 	public ModelAndView getAuctList(HttpSession session) throws SQLException {
@@ -439,7 +479,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 문의 보기
 	 * 
-	 * @param @return ModelAndView @author 강민수 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 강민수 
+	 * @exception
 	 */
 	@RequestMapping(value = "/mp/quest", method = RequestMethod.GET)
 	public ModelAndView getQuestList(CsVo csVo, HttpSession session,Model model,
@@ -471,7 +514,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 문의 상세
 	 * 
-	 * @param @return ModelAndView @author 강민수 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 강민수 
+	 * @exception
 	 */
 	@RequestMapping(value = "/mp/questDetail")
 	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
@@ -497,7 +543,10 @@ public class UserController {
 	/**
 	 * @throws SQLException 내 문의 삭제
 	 * 
-	 * @param @return ModelAndView @author 강민수 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 강민수 
+	 * @exception
 	 */
 	@RequestMapping(value = "/mp/QuestDelete")
 	public ModelAndView myQuestDe(@RequestParam("pquestNo") String pquestNo, @RequestParam("mbNo") String mbNo,
@@ -515,7 +564,10 @@ public class UserController {
 	/**
 	 * 나의 중고 상점
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param 
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/used", method = RequestMethod.GET)
 	public ModelAndView getUsedList() {
@@ -529,7 +581,10 @@ public class UserController {
 	/**
 	 * 거래내역
 	 * 
-	 * @param @return ModelAndView @author 신지영 @exception
+	 * @param
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
 	 */
 	@RequestMapping(value = "/act", method = RequestMethod.GET)
 	public ModelAndView getActList() {
@@ -538,6 +593,30 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mp/user/userActList");
 		return mav;
+	}
+	
+	/**
+	 * @throws SQLException 
+	 * 회원 탈퇴
+	 * 
+	 * @param
+	 * @return ModelAndView 
+	 * @author 신지영 
+	 * @exception
+	 */
+	@RequestMapping(value = "/dropMember", method = RequestMethod.GET)
+	public String dropMember(Model model, HttpSession session) throws SQLException {
+		log.debug("회원 탈퇴 컨트롤러...");
+		
+		// 세션에서 mbno가져오기
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		
+		model.addAttribute(mpUserService.dropMember(mbNo));
+		
+		//로그인 되어있는 세션 삭제
+		session.invalidate();
+		
+		return "redirect:/main";
 	}
 
 }
