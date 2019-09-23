@@ -42,12 +42,6 @@ public class MngUserController {
 	@Inject
 	MngService mngService; 
 	
-	@Inject
-	CsService csService;
-	
-	@Inject
-	MpUserService mpUserService;
-	
 	/**
 	* 사용자 리스트
 	* 
@@ -86,32 +80,6 @@ public class MngUserController {
 		
 				
 		return userVo;
-	}
-	
-	/**
-	 * @throws SQLException 내 문의 상세
-	 * 
-	 * @param @return ModelAndView @author 강민수 @exception
-	 */
-	@RequestMapping(value = "/questDetail")
-	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
-		
-		ModelAndView mav = new ModelAndView();
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		csVo.setPquestNo(pquestNo);
-		
-		csService.selectReply(csVo.getPquestNo());
-		System.out.println("답글은..."+csVo.getReplyContent());
-		mav.addObject("levelGbCd",userLevel);
-		mav.addObject("bean", mpUserService.myInqDetail(csVo));
-		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
-		mav.addObject("id", user);
-		mav.setViewName("mp/manager/mngQuestDetail");
-		return mav;
 	}
 	
 	/**

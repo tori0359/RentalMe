@@ -24,6 +24,7 @@ import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.ProductVo;
 import com.me.rentalme.model.entity.UserVo;
+import com.me.rentalme.mp.user.service.MpUserService;
 
 
 /**
@@ -42,6 +43,9 @@ public class MngCsController {
 	
 	@Inject
 	CsService csService;
+	
+	@Inject
+	MpUserService mpUserService;
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -174,15 +178,16 @@ public class MngCsController {
 	
 	
 	/**
-	 * @throws SQLException 
-	*  공지/FAQ 수정
+	*  공지사항 수정
 	* 
-	* @param  ProductVo - 상품
+	* @param HttpSession session
+	* @param CsVo csVo
 	* @return ModelAndView 
 	* @author 강민수
-	* @exception 
+	* 수정자 : 황인준
+	* 수정일자 : 2019-09-24
+	* @exception SQLException
 	*/
-	//notic수정페이지로 이동
 	@RequestMapping(value="/csNoticeUpdatePage")
 	public ModelAndView noticup(HttpSession session,CsVo csVo) throws SQLException{
 		
@@ -319,6 +324,57 @@ public class MngCsController {
 		
 		mav.setViewName("redirect:/mp/mp/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
 		return mav;
+	}
+	
+	/**
+	 * 1:1문의 상세보기
+	 * 
+	 * @param  HttpSession session  
+	 * @param  CsVo csVo
+	 * @param  String pquestNo
+	 * @return ModelAndView 
+	 * @author 황인준 
+	 * 등록일자 : 2019-09-24
+	 */
+	@RequestMapping(value = "/questDetail")
+	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
+		
+		ModelAndView mav = new ModelAndView();
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		csVo.setPquestNo(pquestNo);
+		
+		csService.selectReply(csVo.getPquestNo());
+		mav.addObject("levelGbCd",userLevel);
+		mav.addObject("bean", mpUserService.myInqDetail(csVo));
+		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
+		mav.addObject("id", user);
+		mav.setViewName("mp/manager/mngQuestDetail");
+		return mav;
+	}
+	
+	/**
+	 * 공지사항 상세보기
+	 * 
+	 * @param HttpSession session : get userId
+	 * @param CsVo csVo 
+	 * @return ModelAndView 
+	 * @author 황인준
+	 * 등록일자 : 2019-09-24
+	 */
+	@RequestMapping(value = "/mngCsNoticeDetail", method = RequestMethod.GET)
+	public ModelAndView csNoticeDetail(HttpSession session, CsVo csVo) throws Exception {
+
+		ModelAndView mav = new ModelAndView("mp/manager/mngCsNoticeDetail");
+		String userId = (String) session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
+		csService.csNoticeDetail(csVo);
+		mav.addObject("adetail", csService.csNoticeDetail(csVo));
+
+		return mav;
+
 	}
 	
 	
