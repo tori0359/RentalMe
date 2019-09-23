@@ -134,7 +134,7 @@
 <script type="text/javascript">
 	var sock=new SockJS("${root}act/ac");
 	sock.onopen=function(event){
-		
+		sendEnterServer($('#stPrice').text());
 	};
 	sock.onmessage=function(event){			//이 서버에서 메시지를 받았을 때
 		
@@ -177,6 +177,18 @@
 			$('#bidresult').val(text);
 		}
 	};
+
+	function sendEnterServer(who){
+		var msg={
+			type: "adminMsg",
+			text: who,
+			id: "admin",
+			cnt: 0
+		};
+		
+		sock.send(JSON.stringify(msg));
+	}
+	
 	function sendServer(who){
 		var msg={
 			type: "adminMsg",
@@ -226,6 +238,20 @@
 <div id="headAct" class="container">
 	<div class="row">
 	<h3 style="text-align:center;">경매 관리자 페이지</h3>
+		<table class="table">
+			<tr>
+				<th>상품코드</th>
+				<th>상품명</th>
+				<th>브랜드명</th>
+				<th>시작가</th>
+			</tr>
+			<tr>
+				<td>${list1.gdsCd }</td>
+				<td>${list1.gdsNm }</td>
+				<td>${list1.brandNm }</td>
+				<td id="stPrice">${list1.gdsStPrice }</td>
+			</tr>
+		</table>
 		<div id="actLive" class="col-md-9" style="border:1px solid black;"></div>
 		<div id="bidListDiv" class="col-md-3" style="border:1px solid black;"><div id="nowPrice"></div><ol id="bidList"></ol></div>
 		<div style="border:1px solid lightgrey; padding:30px;">
