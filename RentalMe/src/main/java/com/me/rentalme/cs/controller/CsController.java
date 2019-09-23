@@ -279,7 +279,7 @@ public class CsController {
 		////////////////////////////////////
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("blist", csService.csFaqList(search));
+		mav.addObject("blist", csService.csFaqList(search, csPaging));
 		model.addAttribute("pathPaging", pagingPath);
 		model.addAttribute("paging", search);
 		System.out.println("1" + search.getKeyword());
