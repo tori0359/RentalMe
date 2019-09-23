@@ -283,7 +283,7 @@ input::-moz-focus-inner { border: 0; }
 
 .product-slider #thumbcarousel .item .thumb:hover { border: 3px solid; border-color: black; }
 
-.product-slider .item img { width: 100%; height: auto; }
+.product-slider .item img { width: 100%; height: 200px; }
 
 .carousel-control { color: #0284b8; text-align: center; text-shadow: none; font-size: 30px; width: 30px; height: 30px; line-height: 20px; top: 23%; }
 

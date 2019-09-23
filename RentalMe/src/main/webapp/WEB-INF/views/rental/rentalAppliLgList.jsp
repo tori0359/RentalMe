@@ -223,6 +223,11 @@ li.col-sm-3:hover {
 .stsAlignU{
 	color:pink;
 }
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: 180px;
+}
 
 /* ------ 하단 정렬 시작------- */
 #sort-btn1, #sort-btn2, #sort-btn3, #sort-btn4, #sort-btn5, #sort-btn6 {
@@ -963,7 +968,7 @@ input::-moz-focus-inner { border: 0; }
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
 												<div class="thumbnail">
-													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
+													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt="" ></a>
 												</div>
 												<div class="caption-box">
 													<a href="${menu }/detail/${list4.gdsCd }">
