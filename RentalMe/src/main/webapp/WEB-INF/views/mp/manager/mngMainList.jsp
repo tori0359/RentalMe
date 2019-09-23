@@ -122,7 +122,7 @@
 												<c:if test="${bean.gdsMclassCd eq '60'}">
 												<td>패키지</td>
 												</c:if>
-												<td>${bean.gdsNm}</td>
+												<td><a href="${pageContext.request.contextPath}/rental/Appli/lg/${bean.gdsSclassCd }/detail/${bean.gdsCd}">${bean.gdsNm}</a></td>
 												<td>${bean.brandNm}</td>
 												<td>${bean.modelNm}</td>
 												<c:if test="${bean.delYn  eq 'N'}">

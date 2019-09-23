@@ -154,6 +154,8 @@ p {
 	               //option 추가
 	               $.each(result, function(i){
 		               console.log(result[i]);
+
+		               //대형가전
 		               if(result[i]=='에어컨'){
 	                  $('#goods').append('<option name="goods" value="'+11+'">'+result[i]+'</option>');}
 		               if(result[i]=='냉난방기'){
@@ -172,35 +174,41 @@ p {
 	                  $('#goods').append('<option name="goods" value="'+18+'">'+result[i]+'</option>');}
 		               if(result[i]=='복합기/프린터'){
 	                  $('#goods').append('<option name="goods" value="'+19+'">'+result[i]+'</option>');}
+
+		              //소형가전
 		               if(result[i]=='커피머신'){
 	                  $('#goods').append('<option name="goods" value="'+21+'">'+result[i]+'</option>');}
 		               if(result[i]=='제습기'){
 	                  $('#goods').append('<option name="goods" value="'+22+'">'+result[i]+'</option>');}
-		               if(result[i]=='드라이어'){
+		               if(result[i]=='청소기'){
 	                  $('#goods').append('<option name="goods" value="'+23+'">'+result[i]+'</option>');}
-		               if(result[i]=='빔프로젝터'){
+		               if(result[i]=='드라이어'){
 	                  $('#goods').append('<option name="goods" value="'+24+'">'+result[i]+'</option>');}
-		               if(result[i]=='컴퓨터/노트북'){
+		               if(result[i]=='빔프로젝터'){
 	                  $('#goods').append('<option name="goods" value="'+25+'">'+result[i]+'</option>');}
-		               if(result[i]=='무선스피커'){
+		               if(result[i]=='컴퓨터/노트북'){
 	                  $('#goods').append('<option name="goods" value="'+26+'">'+result[i]+'</option>');}
-		               if(result[i]=='비데'){
+		               if(result[i]=='무선스피커'){
 	                  $('#goods').append('<option name="goods" value="'+27+'">'+result[i]+'</option>');}
-		               if(result[i]=='면도기'){
+		               if(result[i]=='비데'){
 	                  $('#goods').append('<option name="goods" value="'+28+'">'+result[i]+'</option>');}
-		               if(result[i]=='음식물처리기'){
+		               if(result[i]=='면도기'){
 	                  $('#goods').append('<option name="goods" value="'+29+'">'+result[i]+'</option>');}
-		               if(result[i]=='제빙기'){
+
+					  //주방	
+		               if(result[i]=='음식물처리기'){
 	                  $('#goods').append('<option name="goods" value="'+31+'">'+result[i]+'</option>');}
-		               if(result[i]=='전자레인지'){
+		               if(result[i]=='제빙기'){
 	                  $('#goods').append('<option name="goods" value="'+32+'">'+result[i]+'</option>');}
-		               if(result[i]=='에어프라이어'){
+		               if(result[i]=='전자레인지'){
 	                  $('#goods').append('<option name="goods" value="'+33+'">'+result[i]+'</option>');}
-		               if(result[i]=='오븐'){
+		               if(result[i]=='에어프라이어'){
 	                  $('#goods').append('<option name="goods" value="'+34+'">'+result[i]+'</option>');}
 		               if(result[i]=='오븐'){
 	                  $('#goods').append('<option name="goods" value="'+35+'">'+result[i]+'</option>');}
-		               if(result[i]=='침대(매트리스+프레임)'){
+
+					  //가구 
+			           if(result[i]=='침대(매트리스+프레임)'){
 	                  $('#goods').append('<option name="goods" value="'+41+'">'+result[i]+'</option>');}
 		               if(result[i]=='침대'){
 	                  $('#goods').append('<option name="goods" value="'+42+'">'+result[i]+'</option>');}
@@ -208,13 +216,17 @@ p {
 	                  $('#goods').append('<option name="goods" value="'+43+'">'+result[i]+'</option>');}
 		               if(result[i]=='책상'){
 	                  $('#goods').append('<option name="goods" value="'+44+'">'+result[i]+'</option>');}
+
+		              //기타    
 		               if(result[i]=='악기'){
 	                  $('#goods').append('<option name="goods" value="'+51+'">'+result[i]+'</option>');}
 		               if(result[i]=='명품'){
 	                  $('#goods').append('<option name="goods" value="'+52+'">'+result[i]+'</option>');}
 		               if(result[i]=='귀금속'){
 	                  $('#goods').append('<option name="goods" value="'+53+'">'+result[i]+'</option>');}
-		               if(result[i]=='침실패키지'){
+
+						//패키지
+			          if(result[i]=='침실패키지'){
 	                  $('#goods').append('<option name="goods" value="'+61+'">'+result[i]+'</option>');}
 		               if(result[i]=='주방패키지'){
 	                  $('#goods').append('<option name="goods" value="'+62+'">'+result[i]+'</option>');}

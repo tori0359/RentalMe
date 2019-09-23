@@ -8,9 +8,12 @@
 <jsp:include page="../../template/header.jsp"></jsp:include>
 <script type="text/javascript">
 	 	$(document).ready(function(){
-			$("#cancel").click(function(){
+			$("#back").click(function(){
 					window.history.back();
-				})
+			})
+			$("#list").click(function(){
+					location.href="/mp/mng/InqList";
+			})
 		})
 	</script>
 <style type="text/css">
@@ -74,7 +77,9 @@
 	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
 			</c:if>
 		</c:if> --%>
-			
+			<div id="comment" >
+					Inquiries
+        	</div>
         <table class="table" id="daeContent">
            <%--  <tr>
                 <td><label for="id" >작 성 자</label></td>
@@ -125,16 +130,17 @@
         <br/>
         <div>
         <c:if test="${reply.replyContent ne null }">
+        </c:if>
        		<div id="comment" >
         		Comment
         	</div>
-        </c:if>
         	<c:if test="${levelGbCd=='2'}">
         	<c:if test="${bean.questStsCd=='1'}">
 	        	<form action="/mp/mng/csInqReply" method="get">
-	        	<div class="col-md-10 col-md-offset-1">
-	            	<input style="width:100%;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="답글을 달아주세요"/>
-	        	</div>
+		        	<div class="col-md-10 col-md-offset-1">
+			        	<br/><br/><br/>
+			            	<input style="width:100%; margin-top:-10px;"type="text" class="form-control" id="repleContentInput" name="replyContent" placeholder="답글을 달아주세요(엔터로 입력)"/>
+			      </div>
 	            	<input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
 	            	<input type="hidden" name="mbNo" value="${bean.mbNo}"/>
 	        	</form>
@@ -142,11 +148,16 @@
         	</c:if>
         	
         	<div id="replyed" class="col-md-offset-2">
-        		<br/><br/><span></span><span>${reply.replyContent}</span><span></span>
+        		<br/><br/><span></span><span style="font-weight: bold;">${reply.replyContent}</span><span></span>
         	</div>
         </div>
             	<div id="daeButton">
-      			  <input class="btn btn-primary" type="reset" id="cancel" value="뒤로">
+            	<c:if test="${levelGbCd=='1'}">
+      			  <input class="btn btn-primary" type="reset" id="back" value="뒤로">
+            	</c:if>
+            	<c:if test="${levelGbCd=='2'}">
+      			  <input class="btn btn-primary" type="reset" id="list" value="목록으로">
+            	</c:if>
             	</div>
 			
 	</div>

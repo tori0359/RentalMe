@@ -97,11 +97,11 @@
           		</td>
             </tr>
             <tr>
-                <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td style="vertical-align: middle;"><label>제목</label></td>
+                <td><input type="text" name="sub" value="${detail.sub}" id="text" class="form-control"></td>
             </tr>
             <tr>
-                <td><label for="id" >내용</label></td>
+                <td><label>내용</label></td>
                 <td>
 	                <textarea id="editor" name="content" style="resize:none;"></textarea>
 	                <script>

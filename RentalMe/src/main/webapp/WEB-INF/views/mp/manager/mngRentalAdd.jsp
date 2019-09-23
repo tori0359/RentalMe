@@ -157,6 +157,8 @@
 	               //option 추가
 	               $.each(result, function(i){
 		               console.log(result[i]);
+
+		               //대형가전
 		               if(result[i]=='에어컨'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+11+'">'+result[i]+'</option>');}
 		               if(result[i]=='냉난방기'){
@@ -175,34 +177,40 @@
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+18+'">'+result[i]+'</option>');}
 		               if(result[i]=='복합기/프린터'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+19+'">'+result[i]+'</option>');}
+
+						//소형가전
 		               if(result[i]=='커피머신'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+21+'">'+result[i]+'</option>');}
 		               if(result[i]=='제습기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+22+'">'+result[i]+'</option>');}
-		               if(result[i]=='드라이어'){
+		               if(result[i]=='청소기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+23+'">'+result[i]+'</option>');}
-		               if(result[i]=='빔프로젝터'){
+		               if(result[i]=='드라이어'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+24+'">'+result[i]+'</option>');}
-		               if(result[i]=='컴퓨터/노트북'){
+		               if(result[i]=='빔프로젝터'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+25+'">'+result[i]+'</option>');}
-		               if(result[i]=='무선스피커'){
+		               if(result[i]=='컴퓨터/노트북'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+26+'">'+result[i]+'</option>');}
-		               if(result[i]=='비데'){
+		               if(result[i]=='무선스피커'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+27+'">'+result[i]+'</option>');}
-		               if(result[i]=='면도기'){
+		               if(result[i]=='비데'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+28+'">'+result[i]+'</option>');}
-		               if(result[i]=='음식물처리기'){
+		               if(result[i]=='면도기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+29+'">'+result[i]+'</option>');}
-		               if(result[i]=='제빙기'){
+
+					//주방
+		               if(result[i]=='음식물처리기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+31+'">'+result[i]+'</option>');}
-		               if(result[i]=='전자레인지'){
+		               if(result[i]=='제빙기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+32+'">'+result[i]+'</option>');}
-		               if(result[i]=='에어프라이어'){
+		               if(result[i]=='전자레인지'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+33+'">'+result[i]+'</option>');}
-		               if(result[i]=='오븐'){
+		               if(result[i]=='에어프라이어'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+34+'">'+result[i]+'</option>');}
 		               if(result[i]=='오븐'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+35+'">'+result[i]+'</option>');}
+
+					//가구
 		               if(result[i]=='침대(매트리스+프레임)'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+41+'">'+result[i]+'</option>');}
 		               if(result[i]=='침대'){
@@ -211,12 +219,16 @@
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+43+'">'+result[i]+'</option>');}
 		               if(result[i]=='책상'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+44+'">'+result[i]+'</option>');}
-		               if(result[i]=='악기'){
+
+					//기타
+			         if(result[i]=='악기'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+51+'">'+result[i]+'</option>');}
 		               if(result[i]=='명품'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+52+'">'+result[i]+'</option>');}
 		               if(result[i]=='귀금속'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+53+'">'+result[i]+'</option>');}
+
+					//패키지
 		               if(result[i]=='침실패키지'){
 	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+61+'">'+result[i]+'</option>');}
 		               if(result[i]=='주방패키지'){
