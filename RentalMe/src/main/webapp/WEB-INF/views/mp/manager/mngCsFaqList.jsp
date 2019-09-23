@@ -46,6 +46,9 @@
 		width:10%;
 		text-align:center;
 	}
+	#aasub:hover{
+	color:red;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
@@ -87,7 +90,7 @@
 					<c:if test="${bean.csClassGbCd eq '6'}">
 						<td style="text-align: center;">기타</td>
 					</c:if>
-					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
+					<td><a id="aasub" style="color:black; text-decoration:none;" href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
 					<td style="text-align: center;">${bean.regDt}</td>
 					<td style="text-align: center;"><input class="btn btn-danger" type="submit" value="삭제"/></td>
 				</form>

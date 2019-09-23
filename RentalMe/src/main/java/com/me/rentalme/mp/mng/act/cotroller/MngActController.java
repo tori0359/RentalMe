@@ -73,10 +73,10 @@ public class MngActController {
 		
 		System.out.println("actlist 컨트롤러");
 				
+		System.out.println(actService.mngListAct().get(0).getActStTime().substring(0, 10));
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("actList", actService.mngListAct());
-		
 		mav.setViewName("/mp/manager/mngActList");
 		
 		return mav;

@@ -76,6 +76,7 @@
 											</th>
 											<th style="text-align:center">상품코드</th>
 											<th style="text-align:center">상품명</th>
+											<th style="text-align:center">경매 시작시간 </th>
 											<th style="text-align:center">등록일</th>
 											<th style="text-align:center">경매여부</th>
 										</tr>
@@ -87,6 +88,7 @@
 							       				</td>
 												<td style="text-align:center"><input type="hidden" name="num" value="${bean.gdsCd}"/>${bean.gdsCd}</td>
 												<td><a href="/act/admin/${bean.gdsCd }">${bean.gdsNm}</a></td>
+												<td style="text-align:center">${bean.actStTime}</td>
 												<td style="text-align:center">${bean.regDt}</td>
 												<c:choose>
 													<c:when test="${bean.actStsCd eq '1'}">

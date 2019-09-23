@@ -46,6 +46,8 @@
 				location.href="/login";
 			})
 			<%}%>
+
+			
 		})
 	</script>
 	<style type="text/css">
@@ -100,6 +102,44 @@
 			cursor:pointer;
 		}
 		
+		/* @keyframes swing {
+			  20% {
+			    -webkit-transform: rotate3d(0, 0, 1, 15deg);
+			    transform: rotate3d(0, 0, 1, 15deg);
+			  }
+			
+			  40% {
+			    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+			    transform: rotate3d(0, 0, 1, -10deg);
+			  }
+			
+			  60% {
+			    -webkit-transform: rotate3d(0, 0, 1, 5deg);
+			    transform: rotate3d(0, 0, 1, 5deg);
+			  }
+			
+			  80% {
+			    -webkit-transform: rotate3d(0, 0, 1, -5deg);
+			    transform: rotate3d(0, 0, 1, -5deg);
+			  }
+			
+			  to {
+			    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+			    transform: rotate3d(0, 0, 1, 0deg);
+			  }
+			}
+
+		.swing {
+		  -webkit-transform-origin: top center;
+		  transform-origin: top center;
+		  -webkit-animation-name: swing;
+		  animation-name: swing;
+		}
+		.wrap{text-align: center;margin: 100px 0;}
+			h1{margin:50px 0;}
+		.bt{padding:10px 20px;}
+		.infinite{-webkit-animation-iteration-count:infinite;}
+		 */
 	</style>
 </head>
 <body>
@@ -137,9 +177,10 @@
 			</c:if>
 			<c:if test="${levelGbCd eq '2'}">
 				<div id="conetent1" class="col-md-6 col-md-offset-2">
-						<h2 align="center">회원전용 페이지 입니다.</h2>
+						<h2 align="center"><span class="animated flash">회원전용 페이지 입니다.</span></h2>
 				</div>
 			</c:if>
+			
 	</div>
 </div>
 </body>

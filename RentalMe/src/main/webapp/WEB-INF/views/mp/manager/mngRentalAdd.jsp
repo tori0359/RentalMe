@@ -437,7 +437,7 @@
 	        	<td><input style="width:75%;height:40px;" type="text" name="prdAsContent" class="form-control" value="렌탈기간 내 무상 AS"/></td>
 	        	<td><label>상품상태</label></td>
 	        	<td style="vertical-align:middle;">
-	        		새상품<input style="width:40px;" type="checkbox" checked="checked" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="Y">
+	        		새상품<input style="width:40px;" type="checkbox" checked="checked" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="U">
 	            </td>
 	        </tr>
 	        <tr>
