@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="rentalAppli">
-	
+	 
 	<!-- 렌탈 Path 조회 -->
 	<select id="pathRetrive" resultType="com.me.rentalme.model.entity.RentalAppliVo">
 		SELECT
