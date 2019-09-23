@@ -112,11 +112,14 @@
 	    	   var gdsCd = $(e.relatedTarget).data('gds-cd');
 	    	   var gdsNm = $(e.relatedTarget).data('gds-nm');
 	    	   var bidPrice = $(e.relatedTarget).data('bid-price');
+	    	   var bidStPrice = $(e.relatedTarget).data('gds-st');
 				$(e.currentTarget).find('input[name="crudGbCd"]').val("UUPC");
 				$(e.currentTarget).find('input[name="odrGbCd"]').val("10");
 				$(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd);
 				$(e.currentTarget).find('input[name="gdsNm"]').val(gdsNm);
 				$(e.currentTarget).find('input[name="bidPrice"]').val(bidPrice);
+				$(e.currentTarget).find('input[name="gdsStPrice"]').val(bidStPrice);
+				$(e.currentTarget).find('#stPriceAlarm').text('(주의) 보증금'+bidStPrice+'원이 빠져나갑니다');
 				//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
 	      });
 		
@@ -258,6 +261,7 @@
        	</thead>
        	<tbody>
        	<c:forEach items="${alist}" var="bean" varStatus="status">
+       		<input type="hidden" class="hiddenPrice" value="${bean.gdsStPrice }">
        		<tr>  
        			<td style="vertical-align:middle;">${bean.gdsCd }</td>
        			<td style="text-align:left; vertical-align:middle;">
@@ -269,14 +273,13 @@
        			<p>${fn:substring(bean.bidTime,11,19)}
        			</td>
        			<td style="vertical-align:middle;"><fmt:formatNumber pattern="##,###.##">${bean.bidPrice}</fmt:formatNumber>원
-       				<input id="auctPrice" type="hidden" value="${bean.bidPrice}"/>
        			</td>
        			<c:if test="${bean.actBidStsCd eq 1}">
        				<td style="vertical-align:middle;">낙찰</td>
        				<td style="vertical-align:middle;">
        				<c:if test="${empty bean.odrStsGbCd}">
 	       				 <button id="odrBtn${status.index }" type="button" class="btn btn-primary" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-cd="${bean.gdsCd }" data-gds-nm="${bean.gdsNm }" data-bid-price="${bean.bidPrice }"  >결제</button>
-	 					 <button id="odrBtn${status.index }" type="button" class="btn btn-danger" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-gds-cd="${bean.gdsCd }">포기</button><br>
+	 					 <button id="odrBtn${status.index }" type="button" class="btn btn-danger" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal2" data-gds-cd="${bean.gdsCd }" data-gds-st="${bean.gdsStPrice}">포기</button><br>
        				</c:if>
        				<c:if test="${bean.odrStsGbCd eq 'DW'}">
        					<button id="odrBtn${status.index }" type="button" class="btn btn-primary" style="font-size: 9pt; margin-top:20px; opacity:0.5" disabled="disabled" >입금대기</button><br>
@@ -366,9 +369,12 @@
 			    </div>
 				<div class="modal-body">
 					<input type="hidden" name="gdsCd" value="gdsCd"/>
+					<input type="hidden" name="mbNo" value="${sessionMbNo }">
+					<input type="hidden" name="gdsStPrice" value="gdsStPrice">
 				</div>
 				<div class="form-group">
 			    	<label for="name" id="cartConfirm">&nbsp;&nbsp;&nbsp;포기 하시겠습니까?</label>
+			    	<label id="stPriceAlarm"></label>
 				</div>
 			    <div class="modal-footer">
 			    	<button type="submit" id="questSubmit" class="btn btn-danger">포기</button>

@@ -17,6 +17,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.QuestVo;
 import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
@@ -330,6 +331,16 @@ public class MngServiceImpl implements MngService {
 	@Override
 	public void deleteAppli(String gdsCd) throws SQLException {
 		mngDao.deleteAppli(gdsCd);		
+	}
+
+	@Override
+	public List<QuestVo> selectQuestList() throws SQLException {
+		return mngDao.selectQuestList();
+	}
+
+	@Override
+	public int updateQuest(String questNo) throws SQLException {
+		return mngDao.updateQuest(questNo);
 	}
 	
 

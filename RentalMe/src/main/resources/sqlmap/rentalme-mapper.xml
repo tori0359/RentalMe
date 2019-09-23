@@ -4,13 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="rentalme">
-	<select id="selectAll" resultType="com.me.rentalme.model.entity.RentalMeVo">
-		SELECT * 
-		  FROM testqe 
-		 ORDER 
-		    BY NUM
-	</select>
-	
+
 	<select id="selectOrdList" resultType="com.me.rentalme.model.entity.CallVo">
 		SELECT 	A.MB_NO, DATE_FORMAT(A.ODR_DT, '%Y-%m-%d') AS ODR_DT, B.USER_ID 
 		FROM 	TB_ODR100 A,TB_USER100 B 

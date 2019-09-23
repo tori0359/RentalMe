@@ -10,6 +10,7 @@ public class ActResultVo {
 	private String bidTime;					//응찰시간
 	private String actBidStsCd;				//경매낙찰상태코드
 	private String userId;					//유저아이디
+	private String gdsStPrice;				//경매 초기값
 	
 	private String gdsNm;					// 상품명
 	private String userNm;					// 사용자명
@@ -95,6 +96,12 @@ public class ActResultVo {
 	}
 	public void setOdrStsGbCd(String odrStsGbCd) {
 		this.odrStsGbCd = odrStsGbCd;
+	}
+	public String getGdsStPrice() {
+		return gdsStPrice;
+	}
+	public void setGdsStPrice(String gdsStPrice) {
+		this.gdsStPrice = gdsStPrice;
 	}
 	
 	

@@ -296,4 +296,17 @@
 	<update id="deleteAppli" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
 		UPDATE TB_GDS100 SET DEL_YN='Y' WHERE GDS_CD=#{GDSCD}
 	</update>
+	
+	<!-- 관리자 - 회원 상담관리 리스트 -->
+	<select id="selectQuestList" resultType="com.me.rentalme.model.entity.QuestVo">
+		SELECT QUEST_NO,QUEST_DT,GDS_CD,QUEST_NM,HP,EMAIL,QUEST_STS_CD
+		FROM TB_QUEST100
+		ORDER BY CHG_DT DESC
+	</select>
+	<!-- 관리자 - 회원 상담 완료 -->
+	<update id="updateQuest">
+		UPDATE TB_QUEST100
+		SET QUEST_STS_CD='2'
+		WHERE QUEST_NO=#{questNo}
+	</update>
 </mapper>

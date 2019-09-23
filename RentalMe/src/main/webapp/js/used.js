@@ -63,7 +63,7 @@ $(function(){
             			removeCls(who);
             			showReview();
             		});
-            		$('.myUsedLt').click(function(){
+            		/*$('.myUsedLt').click(function(){
             			var myUsedThingLink = $(this).find('#hiddenNo').text();
             			window.location.href="/used/detail/"+myUsedThingLink;
             		});
@@ -73,17 +73,15 @@ $(function(){
             		});
             		$('.myUsedLt').mouseleave(function(){
             			$(this).children('li').css('background-color','white');
-            		});
+            		});*/
             		$('.myUsedLt').not('.used_del').click(function(){
             			console.log('상세정보');
             		});
             		
             		for(var i=0; i<$('.myUsedLt').length; i++){
 	            		if($('.myUsedLt').eq(i).find('li').eq(1).text()==1){
-	            			$('.myUsedLt').eq(i).find('li').eq(1).text('판매중')
 	            			$('.myUsedLt').eq(i).find('li').eq(1).css('color','blue');
 	            		}else if($('.myUsedLt').eq(i).find('li').eq(1).text()==2){
-	            			$('.myUsedLt').eq(i).find('li').eq(1).text('판매완료')
 	            			$('.myUsedLt').eq(i).find('li').eq(1).css('color','red');
 	            		}
             		}
@@ -109,7 +107,26 @@ $(function(){
 //            			$('#declmodal').find('#declSNo').val($(this).parent().find('.hiddenStoreNo').val());
             			$('#declmodal').find('#declMbNo').val($(this).parent().find('.mbNo').text());
             		});
-
+            		$('.updateSts').click(function(){
+            			var testSts= $(this).parent().parent().find('#hiddenNo').text();
+            			var lastSts= trim(testSts);
+            			var hiddenLog= $('.hiddenLoginId').text();
+            			console.log(lastSts);
+	            		$.ajax({
+	            			type: "POST",
+	            			url : "/used/store/update",
+	            			data: {"usedGdsNo" : lastSts},
+	            			success: function(data) {
+	            				location.href="/used/store/"+hiddenLog;
+	            			},
+	            			error: function(){
+	            				alert('잘못된 접근입니다');
+	            			}
+	            		});
+            		});
+            		if(chkIdnull==''){
+            			$('.usedSts').find('button').attr('disabled', 'disabled');
+            		}
             		
                 //나의 상점//
         ////////////////////////////////
@@ -262,6 +279,20 @@ function handleImgsFilesSelect(e) {
     		$('#storeReviewList').show();
     		$('#bigInfo').hide();
     	}
+    	function pad(n, width) {
+    		n = n + '';
+    		return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+    	}
+    	function trim(str) {
+    		   str = str.replace(/^\s+/, '');
+    		   for (var i = str.length - 1; i > 0; i--) {
+    		      if (/\S/.test(str.charAt(i))) {
+    		          str = str.substring(0, i + 1);
+    		          break;
+    		       }
+    		    }
+    		    return str;
+    		} 
 //나의 상점 함수//
     	
 
