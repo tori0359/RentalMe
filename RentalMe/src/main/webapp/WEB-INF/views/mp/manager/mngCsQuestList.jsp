@@ -10,7 +10,8 @@
 <title>Insert title here</title>
 <style type="text/css">	
 	#uptext{
-		height:130px;
+		height:100px;
+		
 	}
 	#ansNo{
 		color:red;
@@ -20,6 +21,7 @@
 	}
 	#aSub{
 		text-decoration:none;
+		color:black;
 	}
 	#aSub:hover{
 		color:red;
@@ -33,10 +35,13 @@
 <c:choose>
 <c:when test="${levelGbCd eq '2'}">
 <div id="content" class="col-md-10 col-md-offset-1">
-<div  id="uptext"align="center"><h1>1:1 문의 관리</h1></div>
-	<div>
-	나의활동>1:1문의 관리
-	</div>
+<div  id="uptext">
+<h1>1:1 문의 관리</h1>
+		<div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
+
+</div>
+
+	
 	
 	<table class="table table-hover">
 		<tr id="upMenu">

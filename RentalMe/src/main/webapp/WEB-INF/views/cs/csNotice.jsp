@@ -112,7 +112,7 @@
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
 	<div>
-	<table class="table table-condensed" >
+	<table class="table table-hover" >
 		<tr>
 			<th style="height:40px;">번호</th>
 			<th>제목</th>

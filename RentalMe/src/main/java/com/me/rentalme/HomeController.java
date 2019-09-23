@@ -26,11 +26,36 @@ public class HomeController {
 	@Inject
 	RentalMeService rentalmeService;
 	
+	/**
+	 * 메인(/main == /)
+	 * 
+	 * 
+	 * @return ModelAndView 
+	 * @author 황인준
+	 * @exception 
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) throws SQLException {
+	public ModelAndView home() throws SQLException {
 		
-		model.addAttribute("alist", rentalmeService.list());
-		return "home";
+		ModelAndView mav= new ModelAndView();
+		
+		//실시간 주문 리스트
+		mav.addObject("ordlist",rentalmeService.ordList());
+		
+		//베스트 아이템 리스트
+		mav.addObject("bestitem",rentalmeService.bestList());
+		//새로운 아이템 리스트
+		mav.addObject("newitem",rentalmeService.newList());
+		
+		
+		//공지사항 리스트
+		mav.addObject("cs",rentalmeService.csList());
+		
+	
+		
+		mav.setViewName("rental/rentalMain");
+		
+		return mav;
 	}
 	
 	

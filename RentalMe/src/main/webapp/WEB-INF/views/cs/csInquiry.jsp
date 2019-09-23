@@ -128,7 +128,7 @@
 			<c:if test="${levelGbCd ne '2'}">
 				<div id="conetent1" class="col-md-6 col-md-offset-2">
 					<%if(userId!=null){ %><h3>${UserId }님	</h3><%} %>
-					FAQ를 통해 충분한 답변을 얻지 못하셨다면 '문의하기'버튼을 클릭하세요<br/>
+					FAQ를 통해 충분한 답변을 얻지 못하셨다면 <span style="color:red;">문의하기 </span>버튼을 클릭하세요<br/>
 					1:1문의를 통해 상세히 답변드리겠습니다.
 				</div>
 				<div class="col-md-2">

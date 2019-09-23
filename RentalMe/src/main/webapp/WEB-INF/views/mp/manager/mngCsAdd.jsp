@@ -42,6 +42,9 @@
 	.ck.ck-editor {
 	    max-width: 690px;
 	}
+	#daeContent tr>td:nth-child(1){
+		vertical-align:middle;
+	}
 </style>
 <script type="text/javascript">
 
@@ -116,7 +119,7 @@
             </tr>
             <tr>
                 <td><label for="sub" >제목</label></td>
-                <td><input type="text" name="sub" id="text"></td>
+                <td><input class="form-control" type="text" name="sub" id="text"></td>
             </tr>
             <tr>
                 <td><label for="id" >내용</label></td>
@@ -135,8 +138,8 @@
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                   <input type="submit" value="등록"/>
-                   <input id="cancel" type="reset" value="취소">
+                   <input type="submit" class="btn btn-primary" value="등록"/>
+                   <input id="cancel" class="btn btn-danger" type="reset" value="취소">
                 </td>
             </tr>
         </table>
