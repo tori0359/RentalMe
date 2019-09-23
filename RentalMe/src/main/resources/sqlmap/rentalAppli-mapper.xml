@@ -102,6 +102,7 @@
 			DISTINCT BRAND_NM				/* 브랜드명 */
 		FROM TB_GDS100		/* 공통상품 */
 		WHERE 1=1
+		AND DEL_YN = 'N'
 		<if test="gdsSclassCd != null">
 			<choose>
 				<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -128,6 +129,7 @@
 			 FROM TB_GDS100 A		/* 공통상품 */
 			 	 ,TB_GDS200 B		/* 렌탈상품상세 */
 			WHERE A.GDS_CD = B.GDS_CD
+			AND A.DEL_YN = 'N'
 			<if test="gdsSclassCd != null">
 			<choose>
 				<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -184,6 +186,7 @@
 							FROM TB_GDS100 A	/* 공통상품 */
 								,TB_GDS200 B	/* 렌탈상품상세 */
 							WHERE A.GDS_CD = B.GDS_CD 
+							AND A.DEL_YN = 'N'
 							AND A.GDS_MCLASS_CD = #{gdsSclassCd}
 					) BB 
 					ON AA.GDS_CD = BB.GDS_CD
@@ -220,6 +223,7 @@
 				FROM TB_GDS100 A	/* 공통상품 */
 					,TB_GDS200 B	/* 렌탈상품상세 */
 				WHERE A.GDS_CD = B.GDS_CD
+				AND A.DEL_YN = 'N'
 				/* 중분류냐 소분류냐 선택에 따라 */
 				<choose> 
 					<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -311,6 +315,7 @@
 						FROM TB_GDS100 A	/* 공통상품 */
 							,TB_GDS200 B	/* 렌탈상품상세 */
 						WHERE A.GDS_CD = B.GDS_CD
+						AND A.DEL_YN = 'N'
 						 /* 중분류냐 소분류냐 선택에 따라 */
 						<choose> 
 							<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -389,6 +394,7 @@
 					FROM TB_GDS100 A	/* 공통상품 */
 						,TB_GDS200 B	/* 렌탈상품상세 */
 					WHERE A.GDS_CD = B.GDS_CD
+					AND A.DEL_YN = 'N'
 					/* 중분류냐 소분류냐 선택에 따라 */
 					<choose> 
 						<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -483,6 +489,7 @@
 							FROM TB_GDS100 A	/* 공통상품 */
 								,TB_GDS200 B	/* 렌탈상품상세 */
 							WHERE A.GDS_CD = B.GDS_CD
+							AND A.DEL_YN = 'N'
 							 /* 중분류냐 소분류냐 선택에 따라 */
 							<choose> 
 								<when test='gdsSclassCd.equals("10") or gdsSclassCd.equals("20") or gdsSclassCd.equals("30") or gdsSclassCd.equals("40")
@@ -574,6 +581,7 @@
 				FROM TB_GDS100 A		/* 공통상품 */
 					,TB_GDS200 B		/* 렌탈상품상세 */
 				WHERE A.GDS_CD = B.GDS_CD
+				AND A.DEL_YN = 'N'
 				AND A.GDS_CD = #{gdsCd}
 		) BB
 		ON AA.GDS_CD = BB.GDS_CD
@@ -609,6 +617,7 @@
 		from TB_GDS100 A		/* 공통상품 */
 			,TB_GDS200 B		/* 렌탈상품상세 */
 		WHERE A.GDS_CD = B.GDS_CD
+		AND A.DEL_YN = 'N'
 		AND B.GDS_CD = #{gdsCd}
 	</select>
 	
