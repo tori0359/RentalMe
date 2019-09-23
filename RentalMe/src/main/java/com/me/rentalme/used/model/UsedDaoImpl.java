@@ -179,6 +179,10 @@ public class UsedDaoImpl implements UsedDao {
 	public String userId(String mbNo) throws SQLException {
 		return sqlSession.selectOne("used.userId", mbNo);
 	}
+	@Override
+	public int updateStoreSts(String usedGdsNo) throws SQLException {
+		return sqlSession.update("used.updateStoreSts", usedGdsNo);
+	}
 
 
 

@@ -12,7 +12,12 @@ $(function(){
    	   // 구매 모달
        $('#myModal2').on('shown.bs.modal', function (e) {
     	   var gdsCd = $(e.relatedTarget).data('gds-cd');
+    	   var mbNo = $(e.relatedTarget).data('mbno');
+    	   var gdsStPrice = $(e.relatedTarget).data('st-price');
 			$(e.currentTarget).find('input[name="gdsCd"]').val(gdsCd);
+			$(e.currentTarget).find('input[name="mbNo"]').val(mbNo);
+			$(e.currentTarget).find('input[name="gdsStPrice"]').val(gdsStPrice);
        });
+
 
 });

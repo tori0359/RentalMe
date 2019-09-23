@@ -46,8 +46,15 @@
 		<c:forEach items="${alist }" var="bean">
 		<ul class="myUsedLt">
 			<li><div><img src="${bean.img1 }" style="width: 100%; height: 100%;"></div></li>
-			<li>${bean.usedGdsResStsCd }</li>
-			<li>${bean.modelNm }</li>
+			<li class="usedSts">
+			<c:if test="${bean.usedGdsResStsCd eq 1}">
+				<button class="btn btn-info updateSts">판매중</button>
+			</c:if>
+			<c:if test="${bean.usedGdsResStsCd eq 2}">
+				<button class="btn btn-default disabled">판매완료</button>
+			</c:if>
+			</li>
+			<li><a href="/used/detail/${bean.usedGdsNo }">${bean.modelNm }</a></li>
 			<li>${bean.usedGdsPrice }</li>
 			<li>${bean.chgDt }</li>
 			<li><form action="/used/store/del/${bean.usedGdsNo }" method="POST">

@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+.optionSelect1 {
+	font-weight: bolder;
+	font-family: "nanumB";
+	font-size:13pt;
+}		
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -25,16 +33,16 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      	<img src="${UsedVo.img1 }"style="width: 100%; height: 100%;">
+      	<img src="${UsedVo.img1 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-      	<img src="${UsedVo.img2 }"style="width: 100%; height: 100%;">
+      	<img src="${UsedVo.img2 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-    	<img src="${UsedVo.img3 }"style="width: 100%; height: 100%;">
+    	<img src="${UsedVo.img3 }"style="width: 490px; height: 490px;">
     </div>
     <div class="item">
-    	<img src="${UsedVo.img4 }"style="width: 100%; height: 100%;">
+    	<img src="${UsedVo.img4 }"style="width: 490px; height: 490px;">
     </div>
   </div>
 
@@ -52,17 +60,17 @@
 <!-- carousel -->
 	<div id="showInfo">
 		<div id="mainInfo">
-			<div>${UsedVo.modelNm }</div>
+			<div >${UsedVo.modelNm }</div>
 			<div class="used_price1">${UsedVo.usedGdsPrice }</div>
 		</div>
 		<hr>
 		<div class="row">
-		  <div id="showbrand" class="col-md-4">브랜드</div>
-		  <div id="showcategory" class="col-md-8">${UsedVo.brandNm }</div>
+		  <div id="showbrand" class="col-md-4"><h4 class="optionSelect1">브랜드</h4></div>
+		  <div id="showcategory" class="col-md-8"><h4 class="optionSelect1">${UsedVo.brandNm }</h4></div>
 		</div>
 		<div class="row">
-		  <div class="col-md-4">카테고리</div>
-		  <div class="col-md-8">${UsedVo.mcnm }</div>
+		  <div class="col-md-4"><h4 class="optionSelect1">카테고리</h4></div>
+		  <div class="col-md-8"><h4 class="optionSelect1">${UsedVo.mcnm }</h4></div>
 		</div>
 	</div>
 	<div id="subImgF">
@@ -75,17 +83,19 @@
 		<li class="tab">상품설명</li>
 		<li class="tab">상점문의</li>	
 	</ul>
+
 	<div id="bigInfo" class="row">
-		<div id="detailInfo" class="col-md-6">
-			상품정보
-			<div>${UsedVo.content }</div>
+		<div id="detailInfo" class="col-md-5" style="border:1px solid red;">
+			<p style="font-size:18pt;">상품정보</p>
+			<div><p style="font-size:12pt;">${UsedVo.content }</p></div>
 		</div>
-		<div id="sellInfo" class="col-md-6">
-			판매자 정보
-			<div id="sellManId">${UsedVo.userId }</div>
+		<div id="sellInfo" class="col-md-5" style="border:1px solid blue;">
+			<p style="font-size:18pt;">판매자 정보</p>
+			<div id="sellManId"><p style="font-size:12pt;">${UsedVo.userId }</p></div>
 			<div id="hiddenNM">${UsedVo.mbNo }</div>
 		</div>
 	</div>
+
 	<div id="storeReviewList">
 	<form action="/used/cmtAdd" method="post">
 		<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">

@@ -41,7 +41,7 @@
         .mpTable>tbody tr{
             height:30px;
             margin: 10px;
-            background-color:#EBEBEA;
+            background-color:#E6E6E6;
         }
         
         
