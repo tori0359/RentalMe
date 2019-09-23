@@ -176,7 +176,8 @@ li.col-sm-3 {
 	padding: 2px 2px 2px 2px;
 }
 li.col-sm-3:hover {
-	border-style: solid;
+	border: 2px solid black;
+	margin: -2px -0px;
 }
 .caption-box h4 {
     font-size: 1.50rem;
@@ -216,6 +217,9 @@ li.col-sm-3:hover {
 }
 #brandNmStyle{
 	font-weight:bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .stsAlignN{
 	font-weight:bold;
@@ -223,7 +227,17 @@ li.col-sm-3:hover {
 .stsAlignU{
 	color:pink;
 }
-.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+.thumbnailDiv{
+	border: 1px solid red;
+	height: 250px;
+	text-align: center;
+}
+.thumbnailDiv img{
+	display: block;
+	height: 240px;
+	max-height: 240px;
+}
+ .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
     display: block;
     max-width: 100%;
     height: 180px;
@@ -979,7 +993,9 @@ input::-moz-focus-inner { border: 0; }
 														<h5><fmt:formatNumber type="currency" value="${list4.gdsPrice }"></fmt:formatNumber>(월)</h5>
 													</a>
 												</div>
+												
 											</li>
+											
 											</c:forEach>
 										</ul>
 									</div>
@@ -1062,8 +1078,9 @@ input::-moz-focus-inner { border: 0; }
 									<ul class="thumbnails">
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
-											<div class="thumbnail">
-												<a href="${menu }/detail/${list5.gdsCd }" ><img src=${list5.img1 } alt=""></a>
+											<div class="thumbnail thumbnailDiv media-middle">
+												<%-- <a href="${menu }/detail/${list5.gdsCd }" ></a> --%>
+												<img src=${list5.img1 } alt="">
 											</div>
 											<div class="caption-box">
 												<a href="${menu }/detail/${list5.gdsCd }">
