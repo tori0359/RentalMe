@@ -32,9 +32,9 @@ public class CsServiceImpl implements CsService {
 	
 	//faq게시글 리스트(일반)
 	@Override
-	public List<CsVo> csFaqList(Search search, Paging paging) throws SQLException {
+	public List<CsVo> csFaqList(Search search) throws SQLException {
 		
-		return csDao.faqSelectAll(search, paging);
+		return csDao.faqSelectAll(search);
 	}
 	
 	//공지게시글 리스트(관리자)

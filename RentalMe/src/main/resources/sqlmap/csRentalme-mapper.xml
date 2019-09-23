@@ -16,18 +16,16 @@
 		     , REG_ID
 		     , REG_DT
 		  FROM TB_FAQ100
-		 <trim prefix="WHERE" prefixOverrides="AND|OR">
-	      <if test="keyword != null and keyword != '' ">
-	         <if test="searchType=='title'">
-	            AND SUB like CONCAT('%', #{keyword}, '%')
-	         </if>
-	      </if>
-		 </trim>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+				AND SUB like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
 		 ORDER 
 		    BY FAQ_NO ASC
-		 <if test="startListNum != null and listSize != null">
-		 	LIMIT #{startListNum}, #{listSize}
-		 </if>
+		<if test="startListNum != null and listSize != null">
+	    LIMIT #{startListNum}, #{listSize}
+	    </if>
   	</select>
   	
   	<select id="csFaqHeadList" resultType="com.me.rentalme.cs.entity.CsVo">

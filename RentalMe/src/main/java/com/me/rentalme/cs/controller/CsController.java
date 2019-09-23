@@ -247,7 +247,8 @@ public class CsController {
 
 	// faq°Ô½ÃÆÇ
 	@RequestMapping(value = "/csFAQ")
-	public ModelAndView csFaq(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+	public ModelAndView csFaq(Model model, 
+			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "title") String searchType,
 			@RequestParam(required = false) String keyword) throws SQLException {
@@ -279,7 +280,7 @@ public class CsController {
 		////////////////////////////////////
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("blist", csService.csFaqList(search, csPaging));
+		mav.addObject("blist", csService.csFaqList(search));
 		model.addAttribute("pathPaging", pagingPath);
 		model.addAttribute("paging", search);
 		System.out.println("1" + search.getKeyword());

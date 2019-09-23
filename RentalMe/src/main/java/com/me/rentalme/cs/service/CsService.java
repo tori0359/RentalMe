@@ -16,7 +16,7 @@ public interface CsService {
 
 	
 	List<CsVo> csFaqList() throws SQLException;    //faq리스트페이지(관리자)
-	List<CsVo> csFaqList(Search search, Paging paging) throws SQLException;    //faq리스트페이지(일반)
+	List<CsVo> csFaqList(Search search) throws SQLException;    //faq리스트페이지(일반)
 	List<CsVo> csNoticeList() throws SQLException;	//공지 리스트페이지(관리자)
 	List<CsVo> csNoticeList(Paging csPaging) throws SQLException;	//공지 리스트페이지(일반)
 	List<CsVo> csInqList() throws SQLException;	//문의 리스트페이지

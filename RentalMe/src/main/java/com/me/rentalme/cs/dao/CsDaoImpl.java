@@ -30,41 +30,9 @@ public class CsDaoImpl implements CsDao {
 	}
 	
 	@Override
-	public List<CsVo> faqSelectAll(Search search, Paging paging) throws SQLException {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		String keyword = "";
-		String searchType = "";
-		
-		if(search.getKeyword() != null) {
-			keyword = search.getKeyword();
-		}
-		
-		if(search.getSearchType() != null) {
-			searchType = search.getSearchType();
-		}
-		
-		int startListNum = 0;
-		int listSize = 0;
-		
-		if(paging.getstartListNum() != 0) {
-			startListNum = paging.getstartListNum();
-		}
-		
-		if(paging.getListSize() != 0) {
-			listSize = paging.getListSize();
-		}
-		
-		System.out.println("페이지 시작 번호 : "+listSize + ", 페이지 사이즈 : "+ listSize);
-
-		map.put("keyword", keyword);
-		map.put("searchType", searchType);
-		map.put("startListNum", startListNum);
-		map.put("listSize", listSize);
-		
-		
-		return sqlSession.selectList("csCenter.faqSelectAll", map);
+	public List<CsVo> faqSelectAll(Search search) throws SQLException {
+	
+		return sqlSession.selectList("csCenter.faqSelectAll", search);
 	}
 
 	

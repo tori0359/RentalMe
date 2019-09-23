@@ -13,7 +13,7 @@ public interface CsDao {
 
 	//faq 리스트
 	List<CsVo> faqSelectAll() throws SQLException;
-	List<CsVo> faqSelectAll(Search search, Paging paging) throws SQLException;
+	List<CsVo> faqSelectAll(Search search) throws SQLException;
 	List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//공지 리스트
