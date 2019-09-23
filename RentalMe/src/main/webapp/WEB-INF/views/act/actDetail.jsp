@@ -180,7 +180,7 @@
 		z-index:100;
 		text-align:center;
 		width:95%;
-		
+		top:0px;
 	}
 	#winnerView{
 		text-align:center;
@@ -237,13 +237,21 @@
 			$('#nowPrice').append("현재 가격<br/> <span class='moneyIn'>"+text+"</span>원");
 			$('#bidList').empty();
 		}else if(typeof(msg)=='number'){
-			$('#countView').text('');
+			var heightpx=$('#actLive').scrollTop();
+			heightpx +='px'
+			
+			$('#countView').css('top',heightpx);
+			
+			$('img').remove('#countimg');
 			$('#countView').append('<img id="countimg" alt="count" src="/imgs/'+msg+'.png">');
 			if(msg==0){
 				$('#sendMsg').attr('disabled', true);
 				$('#winnerView').append('축하합니다');
 			}
 		}else if(type=='endMsg'){
+			var heightpx=$('#actLive').scrollTop()+180;
+			heightpx +='px'
+			$('#winnerView').css('top',heightpx);	
 			$('#sendMsg').attr('disabled', true);
 			$('#winnerView').text('');
 			$('#winnerView').append("<div style='background-color:black; color:white;'>"+text+"님 입찰되었습니다.</div>");

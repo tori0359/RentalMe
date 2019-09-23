@@ -367,7 +367,7 @@
 		
 		<div class="col-md-5 eventlist2" style="border:1px solid #E6E6E6; display:inline-block; padding:0; height:165px; margin-left:15px;">
 			<div style="border:0px solid red; display:inline-block;" >
-				<a href="/act/"><img id="auctionimg" src="imgs/self.png"/></a>
+				<img id="auctionimg" src="imgs/self.png"/>
 			</div>
 	
 		

@@ -283,6 +283,7 @@ public class UserController {
 		
 		int refund2 = Integer.parseInt(refund);
 		int remnDeposit2 = Integer.parseInt(remnDeposit);
+		//System.out.println(remnDeposit2 > refund2);
 		
 		//예치금이 환불 요청 금액보다 클때만 중복 확인
 		if(remnDeposit2 > refund2) {

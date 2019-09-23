@@ -95,9 +95,10 @@
 	}
 	
 	.used_modelNm{
-		font-size: 2em;
+		font-size: 13pt;
 		font-weight: bold;
 		margin-left: 10px;
+		padding:0;
 	}
 	.used_price{
 		font-size: 1.5em;
@@ -106,7 +107,7 @@
 		margin-left: 10px;
 	}
 	.whattab{
-		font-size: 1em;
+		font-size: 11pt;
 		color: gray;
 		margin-bottom: 10px;
 		margin-left: 10px;
@@ -155,9 +156,12 @@
 		margin-left: 5px;
 	}
 	.used_brandNm{
-		font-size: 20px;
-		margin-bottom: 10px;
-		margin-left: 15px;
+		font-size: 11pt;
+		margin-bottom: 3px;
+		margin-left: 10px;
+		font-weight:bolder;
+		color: #A4A4A4;
+		
 	}
 	.used_thing_img{
 		width: 200px;

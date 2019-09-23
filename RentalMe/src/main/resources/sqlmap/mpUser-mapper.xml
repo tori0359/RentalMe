@@ -199,7 +199,7 @@ encoding="UTF-8"?>
 					B.GDS_ST_PRICE
 				FROM TB_ACT100 A, 
 					 TB_GDS300 B
-				WHERE A.MB_NO = '19000035'
+				WHERE A.MB_NO = #{mbNo}
 				AND A.GDS_CD = B.GDS_CD
 				ORDER BY A.GDS_CD DESC
 		) AA LEFT OUTER JOIN (
@@ -211,7 +211,7 @@ encoding="UTF-8"?>
 				from TB_ODR100 A,
 					TB_ODR110 B
 				WHERE A.ODR_NO = B.ODR_NO
-				AND A.MB_NO = '19000035'
+				AND A.MB_NO = #{mbNo}
 		) BB
 		ON AA.GDS_CD = BB.GDS_CD
 		ORDER BY AA.GDS_CD2 DESC
