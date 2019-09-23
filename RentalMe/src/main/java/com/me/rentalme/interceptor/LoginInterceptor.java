@@ -53,7 +53,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		
 		//기존의 로그인 정보를 제거
-		if(session.getAttribute("loginUserId") != null && session.getAttribute("loginMbNo") != null) {
+		if(session.getAttribute("loginUserId") != null && session.getAttribute("loginMbNo") != null && session.getAttribute("loginSts") != null) {
+			session.removeAttribute("loginSts");
 			session.removeAttribute("loginUserId");
 			session.removeAttribute("loginMbNo");
 		}
