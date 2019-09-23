@@ -38,6 +38,7 @@ public class RentalAppliVo {
 	private int gdsPrice		;		// 상품가격
 	private String sortGbCd		;		// 정렬구분코드
 	private Date regDt			;		// 등록일자
+	private int gdsStPrice		;		// 경매초기값
 	
 	/* RequestParm session 사용 변수 */
 	private String sts               ;
@@ -481,6 +482,12 @@ public class RentalAppliVo {
 	}
 	public void setOdrNo(String odrNo) {
 		this.odrNo = odrNo;
+	}
+	public int getGdsStPrice() {
+		return gdsStPrice;
+	}
+	public void setGdsStPrice(int gdsStPrice) {
+		this.gdsStPrice = gdsStPrice;
 	}
 
 }

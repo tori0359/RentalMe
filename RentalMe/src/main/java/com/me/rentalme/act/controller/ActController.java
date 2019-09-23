@@ -84,7 +84,6 @@ public class ActController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list1", actService.actDetail(gdsCd));
 		mav.addObject("list2", actService.actDetailAuction(gdsCd));
-		
 		mav.setViewName("act/actDetail");
 		return mav;
 	}

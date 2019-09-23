@@ -232,7 +232,7 @@ li.col-sm-3:hover {
 	height: 250px;
 	text-align: center;
 }
-.thumbnailDiv img{
+.thumbnailDiv a img{
 	display: block;
 	height: 240px;
 	max-height: 240px;
@@ -1078,8 +1078,7 @@ input::-moz-focus-inner { border: 0; }
 									<ul class="thumbnails">
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
-											<div class="thumbnail thumbnailDiv media-middle">
-												<%-- <a href="${menu }/detail/${list5.gdsCd }" ></a> --%>
+											<div style="cursor: pointer;" class="thumbnail thumbnailDiv media-middle" onclick="location.href='${menu }/detail/${list5.gdsCd }'">
 												<img src=${list5.img1 } alt="">
 											</div>
 											<div class="caption-box">

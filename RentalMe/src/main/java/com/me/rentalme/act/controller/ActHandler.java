@@ -31,11 +31,10 @@ public class ActHandler extends TextWebSocketHandler{
 	//채팅서버
 	Map<String,WebSocketSession> map=new HashMap<String,WebSocketSession>();			//소켓에 연결된 client
 	Map<String,Map<String, Integer>> premap=new HashMap<String, Map<String, Integer>>();//응찰한 사람 전부 아이디, 시간,가격 넣음
-	Map<String,Integer> pricemap=new LinkedHashMap<String, Integer>();			//아이디 가격 넣음
+	Map<String,Integer> pricemap=new LinkedHashMap<String, Integer>();					//아이디 가격 넣음
 	List<Object> prebidList=new ArrayList<Object>();									//이전 낙찰가에 응찰한 사람
 	List<Object> bidList=new ArrayList<Object>();										//현재 낙찰가에 응찰한 사람
 	SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//	String list;
 	int totalprice;							//낙찰가
 	boolean interup=true;					//중간에 응찰시 스레드를 끊음
 	int currentCnt;							//현재 응찰중인 사람들
@@ -128,14 +127,6 @@ public class ActHandler extends TextWebSocketHandler{
 		
 	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	//이중 맵을 받아서 가격별로 분류시켜 리스트에 넣기
-//	public List<Map<String,Map<String, Integer>>> priceSet(Map<String,Map<String, Integer>> premap){
-//		List<Map<String,Map<String, Integer>>> priceSetList = new ArrayList<Map<String,Map<String,Integer>>>();
-//		Map<String,Integer> idpriMap=idpriceMap(premap);
-//		idpriMap= funcAsc2(idpriMap);
-//		
-//		return priceSetList;
-//	}
 	
 	
 	public Map<String,String> idtimeMap(Map<String,Map<String, Integer>> premap) {					//맵안에 맵뽑아 아이디,시간 맵만들기
@@ -298,27 +289,5 @@ public class ActHandler extends TextWebSocketHandler{
 		};
 		m_timer.schedule(m_task, 1000, 1000);
 	}
-	
-//	//별도의 스태틱 함수로 구현 // 맵 순서주는 함수
-//
-//	public static List sortByValue(final Map map) {
-//
-//	        List<String> list = new ArrayList();
-//	        list.addAll(map.keySet());
-//	        
-//	        Collections.sort(list,new Comparator() {
-//	            
-//	            public int compare(Object o1,Object o2) {
-//	                Object v1 = map.get(o1);
-//	                Object v2 = map.get(o2);
-//
-//
-//	                return ((Comparable) v2).compareTo(v1);
-//	            }
-//	        });
-//	        Collections.reverse(list); // 주석시 오름차순
-//	        return list;
-//	    }
-	
 }
 

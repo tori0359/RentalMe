@@ -163,6 +163,10 @@
 		color: #A4A4A4;
 		
 	}
+	.usedSts{
+		display:inline-block;
+		margin-left: 10px;
+	}
 	.used_thing_img{
 		width: 200px;
 		height: 200px;
@@ -285,6 +289,11 @@
 		if(checkMbno==''){
 			$('#hideBtnMbno').hide();
 		}
+		for(var i=0;i<$('.usedSts').length;i++){
+			if($('.usedSts').eq(i).text().indexOf('판매중') == -1){
+				$('.usedSts').eq(i).css('color', 'red');
+			}
+		}
 		
 	});
 		function removeCls(who){ //탭활성화
@@ -361,6 +370,14 @@
 			<div class="used_brandNm">${bean.brandNm }</div>
 			<div class="used_modelNm">${bean.modelNm }</div>
 			<div class="used_price">${bean.usedGdsPrice } 원</div>
+			<div class="usedSts">
+			<c:if test="${bean.usedGdsResStsCd eq 1}">
+				판매중
+			</c:if>
+			<c:if test="${bean.usedGdsResStsCd eq 2}">
+				판매완료
+			</c:if>
+			</div>
 		</div>
 	</c:forEach>
 	</div>
