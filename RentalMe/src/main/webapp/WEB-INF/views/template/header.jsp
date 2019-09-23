@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
         <meta http-equiv="Expires" content="0"/>
    <meta http-equiv="Pragma" content="no-cache"/>
+   <link rel="icon"  href="/imgs/faviconimg.ico">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
    <style type="text/css">

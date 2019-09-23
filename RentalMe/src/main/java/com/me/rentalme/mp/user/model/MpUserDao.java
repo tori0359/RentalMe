@@ -82,6 +82,9 @@ public interface MpUserDao {
 	//사용자 비밀번호 변경
 	int updPw(String userId, String hashPw);
 
+	//회원 탈퇴
+	int deleteMember(String mbNo) throws SQLException;
+
 	
 
 

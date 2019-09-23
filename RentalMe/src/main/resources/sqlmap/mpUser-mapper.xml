@@ -161,7 +161,7 @@ encoding="UTF-8"?>
 
   	
   	<select id="selectMyInfo" parameterType="String" resultType="com.me.rentalme.model.entity.UserVo" >
-  		SELECT USER_NM,EMAIL,ADDR,ADDR_DETAIL FROM TB_USER100 WHERE MB_NO=#{mbNo};
+  		SELECT USER_NM,EMAIL,ADDR,ADDR_DETAIL,HP FROM TB_USER100 WHERE MB_NO=#{mbNo};
 
   	</select>
   	
@@ -228,6 +228,10 @@ encoding="UTF-8"?>
 				CHG_DT = DATE_FORMAT(NOW(), '%Y-%m-%d'), 
 				CHG_ID='system'
 		WHERE 	USER_ID=#{userId}
+  	</update>
+  	
+  	<update id="deleteMember">
+  		UPDATE TB_USER100 SET USER_STS_CD='3' WHERE MB_NO=#{mbNo}
   	</update>
   
   </mapper>

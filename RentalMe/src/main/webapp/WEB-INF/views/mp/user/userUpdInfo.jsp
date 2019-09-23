@@ -71,6 +71,15 @@
       .table tr{
       		font-family:"nanumB";
       }
+      #drop{
+      	color: grey;
+      	font-size:10pt;
+      	margin-top:10px;
+      	cursor: pointer;
+      }
+      #drop:hover{
+      	color:grey;
+      }
  
 </style>
 <script type="text/javascript">
@@ -230,10 +239,22 @@
 				type: "post",
 				data: { "userPw" : newpw},
 				success : function(){
-					alert("비밀번호가 변경되었습니다!");
+					alert("비밀번호가 성공적으로 변경되었습니다!");
+					location.href="/mp/updInfo";
 				}
 			});
         });
+
+
+
+/* 		 $('#dropconfirm').click(function(){
+            $.ajax({
+				
+				url: "dropMember",
+				type: "GET"
+		
+			}); 
+       	}); */
 
      } 
 
@@ -279,7 +300,7 @@
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">연락처</th>
-     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value=""></td>
+     		<td><input style="width:300px;" type="text" readonly="readonly" name="email" value="${userVo.hp}"></td>
      	</tr>
      	<tr>
      		<th class="active" style="text-align: center">비밀번호 변경</th>
@@ -292,20 +313,20 @@
 	     		<div>
 	     			<label for="pw">현재 비밀번호</label>
 	     			
-	     			<input style="margin-left:32px;" type="text" name="inputPw" id="inputPw">
+	     			<input style="margin-left:32px;" type="password" name="inputPw" id="inputPw">
 	     			<div style="color: #04B404;" class="pw-chk" id="pw-success">비밀번호가 일치합니다</div>
 	     			<div class="pw-chk" id="pw-notsuccess">현재 비밀번호와 일치하지 않습니다.</div>
 	     		</div>
 	     		<div>
 	     			<label for="newpw">신규 비밀번호</label>
-	     			<input style="margin-left:32px;" type="text" name="newpw" id="newpw"> 
+	     			<input style="margin-left:32px;" type="password" name="newpw" id="newpw"> 
 	     			<div class="pw-chk" id="pw-danger">비밀번호가 다릅니다</div>
 	     			<div class="pw-chk" id="pw-danger2">8~20자 영문+숫자+특수문자 조합하여 입력해주세요.</div>
 	     		
 	     		</div>
 	     		<div>
 	     			<label for="newpwre">신규 비밀번호 확인</label>
-	     			<input style="margin-left:4px;" type="text" name="newpwre" id="newpwre">
+	     			<input style="margin-left:4px;" type="password" name="newpwre" id="newpwre">
 	     			<button type="button" class="delete_btn1 btn" id="pwchange">비밀번호 변경</button><br>
 	     		</div>
 				
@@ -330,10 +351,44 @@
      </div>
      <div id="infobtn">
 	     <button type="submit" id="update" class="delete_btn2 btn">확인</button>
+	     <a id="drop">&emsp;회원 탈퇴하기></a>
      </div>
      </form>
-      
-      
+     <script>
+     	$('#drop').click(function(){
+			$('#myModal').modal('show');
+
+        });
+
+     
+     </script>
+     
+
+    <!-- <form action="/mp/deposit/refund" method="post"> -->
+	<!-- Modal -->
+	<form action="dropMember" method="get">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="height:10px;" aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"></h4>
+	      </div>
+	      <div class="modal-body">
+	      <p style="font-family:'nanumB'">정말 렌탈미를 탈퇴하시겠습니까?</p>
+	       <div style="text-align:center;">
+	       <span id="refundtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
+	       </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button style="background:black;" id="dropconfirm" class="btn btn-primary">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</form>
+	<!-- </form> -->
+
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

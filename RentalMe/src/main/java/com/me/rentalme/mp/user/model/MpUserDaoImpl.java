@@ -253,4 +253,10 @@ public class MpUserDaoImpl implements MpUserDao{
 		return cnt;
 	}
 
+	@Override
+	public int deleteMember(String mbNo) throws SQLException {
+		
+		return sqlSession.update("mpUser.deleteMember",mbNo);
+	}
+
 }

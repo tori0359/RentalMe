@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -11,30 +11,30 @@
 </head>
 <body>
 	<div>
-	<div class="titlediv">
-       <p id="title">╟Ф╦еЁ╩©╙</p>
+	<div style="border:1px solid red;" class="titlediv">
+       <p id="title">Й╡╫К╖╓К┌╢Л≈╜</p>
      </div>
      <div class="hr" style="height:3px; background-color: black;"></div>
        	 <div id="info">
        	 <p>
 	       	 <input type="hidden" value="${loginMbNo}">
 		     <c:if test="${empty loginUserNM}">
-		     	${loginUserId} ╢тюг ╟Ф╦еЁ╩©╙ют╢о╢ы.
+		     	${loginUserId} К▀≤Л²≤ Й╡╫К╖╓К┌╢Л≈╜Л·┘К▀┬К▀╓.
 		     </c:if>
 		     <c:if test="${!empty loginUserNM }">
-		     	${loginUserNM} ╢тюг ╟Ф╦еЁ╩©╙ют╢о╢ы.
+		     	${loginUserNM} К▀≤Л²≤ Й╡╫К╖╓К┌╢Л≈╜Л·┘К▀┬К▀╓.
 		     </c:if>
 		  </p>
        	 </div>
-       <a href="#" id="choosedel">╪╠ец╩Ха╕</a>
+       <a href="#" id="choosedel">Л└═М┐²Л┌╜Л═°</a>
        	<table class="ordtable table">
        	<thead>
        		<tr class="active">
        			<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
-       			<th>╩Сг╟╦М/╪╠ец╩Ггв</th>
-       			<th>╪Ж╥╝</th>
-       			<th>╥╩е╩╠Б╟ё</th>
-       			<th>╩Сг╟╠щ╬в</th>
+       			<th>Л┐│М▓┬К╙┘/Л└═М┐²Л┌╛М∙╜</th>
+       			<th>Л┬≤К÷┴</th>
+       			<th>К═▄М┐┬Й╦╟Й╟└</th>
+       			<th>Л┐│М▓┬Й╦┬Л∙║</th>
        		</tr>
        	</thead>
        	<tbody>
@@ -44,8 +44,8 @@
        			<td><input type="checkbox" class="checkRow" name="checkRow" data-wishNum="${bean.usedGdsNo}"></td>
        			<td><img class="ordimg" src="imgs/bed1.jpg"/>${bean.gdsNm}</td>
        			<td>${bean.odrQty}</td>
-       			<td>${bean.agreeTerm}╟Ё©Ы</td>
-       			<td><fmt:formatNumber pattern="#,###.##">${bean.gdsPrice}</fmt:formatNumber> ©Ь
+       			<td>${bean.agreeTerm}Й╟°Л⌡■</td>
+       			<td><fmt:formatNumber pattern="#,###.##">${bean.gdsPrice}</fmt:formatNumber> Л⌡░
        			</td>
        		</tr>
        	<c:set var="sumPrice" value="${sumPrice +(bean.gdsPrice * bean.odrQty)}"/>
@@ -55,12 +55,12 @@
        </div>
        <div class="hr" style="height:2px;"></div>
        <div class="cartresult">
-       	<p>ця аж╧╝ ╠щ╬в: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> ©Ь</p>
+       	<p>Л╢² Лё╪К╛╦ Й╦┬Л∙║: <fmt:formatNumber value="${sumPrice}" pattern="#,###.##"/> Л⌡░</p>
        </div>
        <div class="hr" style="height:2px; margin-top:100px;"></div>
 		<div class="cartbtn">
-			<button type="button" class="delete_btn1 btn">╟Х╪с ╪Нгнго╠Б</button>
-			<button type="button" class="delete_btn2 btn">аж╧╝го╠Б</button>
+			<button type="button" class="delete_btn1 btn">ЙЁ└Л├█ Л┤╪М∙▒М∙≤Й╦╟</button>
+			<button type="button" class="delete_btn2 btn">Лё╪К╛╦М∙≤Й╦╟</button>
 		</div>
       
 </body>

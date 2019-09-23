@@ -85,6 +85,9 @@ public interface MpUserService {
 	//비밀번호 변경
 	int changePw(String userId, String userPw);
 
+	//회원 탈퇴
+	int dropMember(String mbNo) throws SQLException;
+
 	
 
 	

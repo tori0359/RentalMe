@@ -160,18 +160,17 @@
 			var refundinput = $('#refundinput').val();
 
 			//현재 예치금 
-			var remnDepositInput = $('#remnDepositInput').val();
+			var remnDeposit = $('#remnDeposit').val();
 
 		
 			var refund;
-			var remnDeposit;
 			//환불 요청 금액이 공백이 아닐 때
 			if(refundinput != ""){
 				$('#refund').val(refundinput);
 				refund = $('#refund').val();
 
-				$('#remnDeposit').val(refundinput);
-				remnDeposit = $('#remnDeposit').val();
+				$('#remnDeposit').val(remnDeposit);
+				
 				 
 
 				$.ajax({
@@ -188,6 +187,8 @@
 						}else{
 							$('#refundtext').text("예치금이 부족합니다.");
 						}
+							$('#refundinput').val('');
+						
 					}				
 				});
 
@@ -308,7 +309,7 @@
        			
        			
        			</fmt:formatNumber> 원
-       			<input type="hidden" name="" value="${remnDeposit}"/>
+       			<input type="hidden" id="" name="" value="${remnDeposit}"/>
        			<input type="hidden" name="" value="${mbNo}"/></td>
        			
        		</tr>
@@ -354,7 +355,7 @@
 						${remnDeposit}
 					</c:if>
        			</fmt:formatNumber> 원
-       			<input type="hidden" id="remnDepositInput" name="remnDepositInput" value="${remnDeposit}"/>
+       			<input type="hidden" id="remnDeposit" name="remnDeposit" value="${remnDeposit}"/>
 				</td>
        			
        		</tr>
@@ -389,7 +390,7 @@
 	      </div>
 	      <div class="modal-body">
 	       <input type="hidden" id="refund" name="refund"/>
-	       <input type="hidden" id="remnDeposit" name="remnDeposit"/>
+	       <input type="hidden" id="remnDeposit2" name="remnDeposit2"/>
 	       <div style="text-align:center;">
 	       <span id="refundtext" style="line-height:16pt; font-family:'nanumB'; font-weight:bolder; font-size:11pt;"></span>
 	       </div>
