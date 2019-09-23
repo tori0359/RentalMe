@@ -24,7 +24,13 @@ $(function(){
 	
 	$('.usedTableTrClick').click(function(){
 		if($(this).find('.delYn').text()=='Y'){
-			alert('삭제된 제품입니다.');
+			Swal.fire({
+				  position: 'top-middle',
+				  type: 'error',
+				  title: '삭제된 제품입니다.',
+				  showConfirmButton: false,
+				  timer: 1500
+				});
 		}
 	});
 	

@@ -25,12 +25,12 @@
         #daeContent tr>td:nth-child(2){
             width:85%;
         }
-        #daeButton input{
+       #daeButton input{
             float:right;
-            margin:5px 10px 5px 10px;
-            background:white;
+             margin:5px 10px 5px 10px;
+            /*background:white;
             border-radius:5px;
-            outline:none;
+            outline:none; */
         }
        
         #daeButton>button:nth-child(1){
@@ -91,9 +91,9 @@
             <tr>
                 <td></td>
                 <td id="daeButton" >
-                  <input id="cancel" type="reset" value="뒤로">
+                  <input class="btn btn-default" id="cancel" type="reset" value="뒤로">
                   <c:if test="${id eq 'minminad'}">
-                	  <input id="updae" type="submit" value="수정">
+                	  <input class="btn btn-primary" id="updae" type="submit" value="수정">
                   </c:if>
                 </td>
             </tr>

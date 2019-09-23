@@ -17,6 +17,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -204,9 +205,14 @@ public class MngServiceImpl implements MngService {
 	}
 
 	@Override
-	public List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException{
+	public List<RentalAppliVo> selectGoodsList() throws SQLException{
 		
-		return mngDao.selectGoodsList(apliPaging);
+		return mngDao.selectGoodsList();
+	}
+	@Override
+	public List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException{
+		
+		return mngDao.selectGoodsList(gdsMclassCd);
 	}
 
 	@Override
@@ -304,6 +310,26 @@ public class MngServiceImpl implements MngService {
 	public void rentalseq() {
 		mngDao.rentalSeq();
 		
+	}
+
+	@Override
+	public List<RefundVo> selectRefundList() throws SQLException {
+		return mngDao.selectRefundList();
+	}
+
+	@Override
+	public int updateRefundConfirm(String mbNo) throws SQLException {
+		return mngDao.updateRefundConfirm(mbNo);
+	}
+
+	@Override
+	public int updateRefundCancel(String mbNo) throws SQLException {
+		return mngDao.updateRefundCancel(mbNo);
+	}
+	
+	@Override
+	public void deleteAppli(String gdsCd) throws SQLException {
+		mngDao.deleteAppli(gdsCd);		
 	}
 	
 

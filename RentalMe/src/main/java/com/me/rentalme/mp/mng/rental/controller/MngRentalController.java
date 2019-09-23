@@ -73,7 +73,7 @@ public class MngRentalController {
 	*/
 	@RequestMapping(value = "/mng/rentalInsert", method = RequestMethod.POST)
 	public ModelAndView getRentalList(
-			MultipartHttpServletRequest mtfRequest,@ModelAttribute RentalAppliVo rentalAppliVo,ProductVo productVo) {
+			MultipartHttpServletRequest mtfRequest,@ModelAttribute RentalAppliVo rentalAppliVo,@ModelAttribute ProductVo productVo) {
 		log.debug("마이페이지(관리자) 상품 등록 컨트롤러");
 		
 		//System.out.println("상품코드"+rentalAppliVo.getGdsCd());
@@ -85,7 +85,7 @@ public class MngRentalController {
 		System.out.println("상품상태"+rentalAppliVo.getGdsGbCd());
 		
 		String product="10";
-		productVo.setPrdCode(product.concat(rentalAppliVo.getGdsLclassCd()).concat(rentalAppliVo.getGdsMclassCd()));	//gds200 상품번호
+		productVo.setPrdCode(product.concat(rentalAppliVo.getGdsMclassCd()).concat(rentalAppliVo.getGdsSclassCd()));	//gds200 상품번호
 		System.out.println(productVo.getPrdCode());
 		System.out.println("상품코드"+productVo.getPrdCode());
 		System.out.println("계약기간"+productVo.getPrdContDate());
@@ -253,7 +253,5 @@ public class MngRentalController {
 	   
 		
 	}
-	
-	
 	
 }

@@ -81,9 +81,11 @@ public class LoginController {
 		/* 로그인 유효성 체크 */
 		//입력한 아이디
 		String userId = userVo.getUserId();
+					
 		
 		/* 입력한 아이디의 정보를 DB로부터 가져온다. */
 		UserVo loginUser = loginService.getId(userId);
+		
 
 		/*
 		 * 비밀번호 조건
@@ -139,10 +141,13 @@ public class LoginController {
 					//로그인 사용자정보를 model 객체에 담는다.(로그인 session은 LoginInterceptor에서 처리한다.)
 					model.addAttribute("loginUser", loginUser);
 					
+					System.out.println("isUseLogin : "+ userVo.isUseLogin());
+					
 					//자동로그인에 체크가 되어있을 경우
 					if(userVo.isUseLogin()) {
 						//세션쿠키값을 가지고 온다.
 						String sessionKey = session.getId();
+						
 						//쿠키세션 시간 설정
 						int sessionCookieTime = 60*60*24*7; //7일
 						Date sessionDt = new Date(System.currentTimeMillis() + (1000 * sessionCookieTime));

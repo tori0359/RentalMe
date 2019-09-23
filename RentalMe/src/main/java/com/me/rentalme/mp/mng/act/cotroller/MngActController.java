@@ -34,6 +34,7 @@ import com.me.rentalme.act.service.ActService;
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.ActVo;
 import com.me.rentalme.model.entity.CallVo;
+import com.me.rentalme.mp.mng.service.MngService;
 
 
 /**
@@ -53,6 +54,9 @@ public class MngActController {
 	@Inject
 	ActService actService;
 	
+	@Inject
+	MngService mngService;
+	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
 	/**
@@ -65,31 +69,13 @@ public class MngActController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/actList", method = RequestMethod.GET)
-	public ModelAndView getAct(Model model,@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException{
+	public ModelAndView getAct(Model model) throws SQLException{
 		
-		pagingPath="/mp/mng";
-		pagingPath+="/actList";
 		System.out.println("actlist 컨트롤러");
-		int listCnt=actService.actListCnt();
-		
-		Paging actPaging=new Paging();
-		actPaging.pageInfo(page, range, listCnt);
-		//csVo.setStartListNum(csPaging.getstartListNum());
-		System.out.println("시작넘버:"+actPaging.getstartListNum());
-		//csVo.setListSize(csPaging.getListSize());
-		System.out.println("게시물 갯수:"+actPaging.getListSize());
-		////////////////////////////////////
-		
-		/////
-		///////
-		//ArrayList<ActVo> list=new ArrayList<ActVo>(actService.mngListAct());
+				
 		ModelAndView mav=new ModelAndView();
 		
-		//mav.addObject("actList", actService.actList() );
-		mav.addObject("actList", actService.mngListAct(actPaging));
-		model.addAttribute("pathPaging", pagingPath);
-		model.addAttribute("paging", actPaging);
-		//System.out.println(actService.mngListAct());	
+		mav.addObject("actList", actService.mngListAct());
 		
 		mav.setViewName("/mp/manager/mngActList");
 		
@@ -134,46 +120,29 @@ public class MngActController {
 	
 	//경매상품등록 
 	@RequestMapping(value = "/actInsert", method = RequestMethod.POST)
-	public String addAct(@RequestParam("actStTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) String actStTime,@RequestParam("actEdTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) 
-	String actEdTime,MultipartHttpServletRequest mtfRequest,@ModelAttribute ActVo actVo) throws SQLException, ParseException {
+
+	public String addAct(@RequestParam("actStTime") @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm" ) String actStTime,
+			MultipartHttpServletRequest mtfRequest,@ModelAttribute ActVo actVo) throws SQLException, ParseException {
 		log.debug("이벤트 경매 등록 컨트롤러");
 		
 		int cnt=1;
+		
+		System.out.println("경매상품번호 출력:"+actVo.getGdsCd());
+		String chaGdsCd=actVo.getGdsCd().substring(0,6);
+		actVo.setGdsCd(chaGdsCd);
+		System.out.println("바꾼상품번호 출력:"+actVo.getGdsCd());
+		
 		String currentTime=System.currentTimeMillis()+"";
 		System.out.println("커런트타임"+currentTime);
 		System.out.println("시작시간"+actStTime.charAt(4));
-		System.out.println("종료시간"+actEdTime.charAt(5));
-		int restTime=0;
 		
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm");
 		
 		String format_time1 = format1.format (System.currentTimeMillis());
 		
-		   int ctime=0;
-		   int actStartTime=0;
-		   int actEndTime=0;
-		for(int i=0;i<actStTime.length();i++) {
-			actStartTime=actStTime.charAt(i);
-			actEndTime=actEdTime.charAt(i);
-			
-			if(i==10) {
-				actEndTime=0;
-			}
-			restTime=actStartTime-actEndTime;
-			ctime=format_time1.charAt(i);
-			System.out.print(actEndTime);
-			System.out.println(ctime);
-		}
-		int restTime2=0;
-		restTime2=actEndTime-ctime;
-		System.out.println(restTime2);
-		
+
 		System.out.println("현재시간"+format_time1);
-		/*
-		 * SimpleDateFormat transFormat=new SimpleDateFormat("yyyy-MM-dd T HH:mm"); Date
-		 * actStTime=(Date)transFormat.parse(startTime); Date
-		 * actEdTime=(Date)transFormat.parse(endTime);
-		 */
+		
 		
 		String uploadDir="C:\\java\\workspace4\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\RentalMe\\imgs\\";
 		String uploadRDS="/imgs/";
@@ -215,6 +184,7 @@ public class MngActController {
 	            }
 	        }
 		 
+		mngService.rentalseq(); 
 		actService.addAct300(actVo);
 		actService.addAct100(actVo);
 		return "redirect:/mp/mng/actList";

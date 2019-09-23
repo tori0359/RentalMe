@@ -35,8 +35,7 @@
 		height: 31px;
 		min-width: 100px;
 	}
-	
-	 #goUsedManager{
+/* 	 #goUsedManager{
 	  background-color: #f4511e;
 	  border: none;
 	  color: white;
@@ -52,7 +51,49 @@
 	#goUsedManager:hover{
 		text-decoration: none;
 		opacity: 1;
+	} */
+	#goUsedManager{
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: #FFC50D;
+	  border: none;
+	  color: #FFFFFF;
+	  text-align: center;
+	  font-size: 20px;
+	  padding: 20px;
+	  width: 200px;
+	  transition: all 0.5s;
+	  cursor: pointer;
+	  margin: 5px;
+	  float: right;
+	  margin-top: -30px;
+	  margin-bottom: 20px;
 	}
+	#goUsedManager span {
+	  cursor: pointer;
+	  display: inline-block;
+	  position: relative;
+	  transition: 0.5s;
+	}
+	
+	#goUsedManager span:after {
+	  content: '\00bb';
+	  position: absolute;
+	  opacity: 0;
+	  top: 0;
+	  right: -20px;
+	  transition: 0.5s;
+	}
+	
+	#goUsedManager:hover span {
+	  padding-right: 25px;
+	}
+
+	#goUsedManager:hover span:after {
+	  opacity: 1;
+	  right: 0;
+	}
+	
 	.used_modelNm{
 		font-size: 2.2em;
 		font-weight: bold;
@@ -68,6 +109,7 @@
 		font-size: 1em;
 		color: gray;
 		margin-bottom: 10px;
+		margin-left: 10px;
 	}
 	#form_tab{
 		margin-top: 50px;
@@ -133,7 +175,14 @@
 		color: #FF976E;
 		background-color: white;
 	}
-	
+	.pagination > .active > a{
+		background-color: #FF654F;
+		border-color: #FF654F;
+	}
+	.pagination > .active > a:hover{
+		background-color: #FF654F;
+		border-color: #FF654F;
+	}
 	
 	
 	.tab_btn{
@@ -228,6 +277,10 @@
 			$(this).children('div').children('img').css('margin-left','0px');
 		});
 
+		var checkMbno=$('#checkMbno').val();
+		if(checkMbno==''){
+			$('#hideBtnMbno').hide();
+		}
 		
 	});
 		function removeCls(who){ //탭활성화
@@ -247,7 +300,7 @@
 </head>
 <body>
 <div class="usedList">
-
+	<input id="checkMbno" type="hidden" value="${loginMbNo }">
 	<h3>중고제품</h3>
 	<form action="/used/search">
 	<div id="search">
@@ -258,11 +311,11 @@
 			<option value="2">낮은 가격순</option>
 			<option value="3">높은 가격순</option>
 		</select>
-		<button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
+		<button id="searchBtn" class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
 	</div>
 	</form>
-	<div>
-	<a href="/used/store/${loginMbNo }" id="goUsedManager">중고거래 관리</a>
+	<div id="hideBtnMbno">
+	<a href="/used/store/${loginMbNo }" id="goUsedManager"><span>중고거래 관리</span></a>
 	</div>
 <div id="form_tab">
 	<form class="tabcl" action="/used/big#btn_top">

@@ -122,7 +122,7 @@
 		     , DATE_FORMAT(JOIN_DT, '%Y-%m-%d') AS JOIN_DT
 		     , DATE_FORMAT(CHG_DT, '%Y-%m-%d') AS CHG_DT
 		  FROM TB_USER100
-		 WHERE USER_STS_CD IN ('1', '2', '3')
+		 WHERE USER_STS_CD IN ('1', '2')
 		 ORDER
 		    BY MB_NO ASC
 	</select>
@@ -174,9 +174,20 @@
 	</update>
 	<!--민수 -->
 	<!--렌탈상품리스트 -->
-	<select id="selectRentalList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
-		SELECT * FROM TB_GDS100 ORDER BY REG_DT DESC
-		LIMIT #{startListNum},#{listSize}
+	<select id="selectRentalAllList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * 
+		  FROM TB_GDS100
+		 WHERE GDS_LCLASS_CD = '10'
+		 ORDER 
+		    BY REG_DT DESC
+	</select>
+	<select id="selectRentalList" parameterType="String" resultType="com.me.rentalme.model.entity.RentalAppliVo">
+		SELECT * 
+		  FROM TB_GDS100
+		 WHERE GDS_LCLASS_CD = '10'
+		   AND GDS_MCLASS_CD = #{gdsMclassCd}
+		 ORDER 
+		    BY REG_DT DESC
 	</select>
 	<!--대형 상품리스트 -->
 	<select id="selectLgoodsList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
@@ -262,4 +273,27 @@
 	<insert id="insertSeq">
 		INSERT INTO SEQ_GDS100 VALUES(NULL);
 	</insert>
+
+	
+	<!-- 관리자 - 회원 환불 리스트 -->
+	<select id="selectRefundList" resultType="com.me.rentalme.model.entity.RefundVo">
+		SELECT MB_NO,DEPOSIT_REFUND_SEQ,DEPOSIT_REFUND_DT,REFUND_DEPOSIT,DEPOSIT_REFUND_GB_CD,FN_NM('USER_NM', MB_NO) AS userNm
+		FROM TB_MB120 
+		WHERE DEPOSIT_REFUND_GB_CD='1'
+	</select>
+	<!-- 관리자 - 회원 환불 확인 -->
+	<update id="updateRefundConfirm">
+		UPDATE TB_MB120
+		SET DEPOSIT_REFUND_GB_CD='2'
+		WHERE DEPOSIT_REFUND_GB_CD='1' AND MB_NO=#{mbNo}
+	</update>
+	<!-- 관리자 - 회원 환불 반려 -->
+	<update id="updateRefundCancel">
+		UPDATE TB_MB120
+		SET DEPOSIT_REFUND_GB_CD='3'
+		WHERE DEPOSIT_REFUND_GB_CD='1' AND MB_NO=#{mbNo}
+	</update>
+	<update id="deleteAppli" parameterType="com.me.rentalme.model.entity.RentalAppliVo">
+		UPDATE TB_GDS100 SET DEL_YN='Y' WHERE GDS_CD=#{GDSCD}
+	</update>
 </mapper>

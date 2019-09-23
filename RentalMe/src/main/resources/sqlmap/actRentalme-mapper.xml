@@ -7,7 +7,6 @@
   	<!--상품 리스트  -->
   	<select id="actList" resultType="com.me.rentalme.model.entity.ActVo"> 
   		SELECT A.GDS_CD,GDS_NM, A.REG_DT, A.ACT_ED_TIME,A.ACT_STS_CD FROM TB_GDS300 AS A INNER JOIN TB_GDS100 AS B ON A.GDS_CD_DETAIL=B.GDS_CD ORDER BY REG_DT DESC
-  		LIMIT #{startListNum}, #{listSize}
   	</select>
   	<select id="goodsList" resultType="com.me.rentalme.model.entity.ActVo">
   		SELECT  GDS_NM,GDS_CD,MODEL_NM,BRAND_NM FROM TB_GDS100 WHERE GDS_SCLASS_CD=#{goodsNum}
@@ -26,7 +25,7 @@
   	<!--상품 등록  -->
   	<insert id="actAdd300"  parameterType="com.me.rentalme.model.entity.ActVo">
   		INSERT INTO TB_GDS300(GDS_CD,GDS_ST_PRICE,UNIT_PRICE,ACT_ST_TIME,ACT_ED_TIME,CONTENT,GDS_CD_DETAIL,IMG1,IMG2,IMG3,IMG4,REG_DT) 
-  		VALUES(#{gdsCd},#{gdsStPrice},#{unitPrice},DATE_FORMAT(#{actStTime},'%Y-%m-%d %H:%i'),DATE_FORMAT(#{actEdTime},'%Y-%m-%d %H:%i'),#{content},#{gdsCdDetail},#{img1},#{img2},#{img3},#{img4},DATE_FORMAT(now(), '%Y%m%d'))
+  		VALUES((SELECT CONCAT(#{gdsCd},(MAX(LPAD(SEQ,6,0)))) FROM SEQ_GDS100 a),#{gdsStPrice},#{unitPrice},DATE_FORMAT(#{actStTime},'%Y-%m-%d %H:%i'),DATE_FORMAT(#{actEdTime},'%Y-%m-%d %H:%i'),#{content},#{gdsCdDetail},#{img1},#{img2},#{img3},#{img4},DATE_FORMAT(now(), '%Y%m%d'))
   	</insert>
   	<insert id="actAdd100" parameterType="com.me.rentalme.model.entity.ActVo">
   		INTO TB_GDS100(GDS_CD,GDS_LCLASS_CD,GDS_MCLASS_CD,GDS_SCLASS_CD,GDS_NM,BRAND_NM,MODEL_NM,GDS_GB_CD) VALUES(#{gdsCd},#{gdsLclassCd},#{gdsMclassCd},#{gdsSclassCd},#{gdsNm},#{brandNm},#{modelNm},#{gdsGbCd})

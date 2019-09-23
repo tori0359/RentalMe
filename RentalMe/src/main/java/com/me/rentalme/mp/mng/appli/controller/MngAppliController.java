@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.appli.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
+import com.me.rentalme.model.entity.RentalAppliVo;
 
 /**
 * 마이페이지(관리자) 리스트 컨트롤러
@@ -33,10 +36,10 @@ public class MngAppliController {
 	
 	Logger log = LoggerFactory.getLogger(getClass());
 
-	
+
 	/**
 	 * @throws SQLException 
-	* 마이페이지(관리자) - 메인 리스트
+	* 마이페이지(관리자) - 렌탈상품 전체 리스트
 	* 
 	* @param  
 	* @return ModelAndView 
@@ -44,26 +47,31 @@ public class MngAppliController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/mng/goodsList",method = RequestMethod.GET)
-	public ModelAndView getMainList(Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		
-		log.debug("마이페이지(관리자) 메인 컨트롤러");
-	 
-		pagingPath="/mp";
-		pagingPath+="/mng/goodsList";
-		
-		int listCnt=MngService.goodsListCnt();
-		System.out.println("컬럼수"+listCnt);
-		
-		Paging apliPaging=new Paging();
-		
-		apliPaging.pageInfo(page, range, listCnt);
-		
+	public ModelAndView getMainList(Model model) throws SQLException {
+		log.debug("마이페이지(관리자) 전체 리스트 컨트롤러");
+				
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("rlist", MngService.selectGoodsList(apliPaging));
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", apliPaging);
+		mav.addObject("rlist", MngService.selectGoodsList());
+		mav.setViewName("mp/manager/mngMainList");
+		return mav;
+	}
+	/**
+	 * @throws SQLException 
+	* 마이페이지(관리자) - [대형가전, 소형가전, 주방가전, 가구, 기타, 패키지 리스트]
+	* 
+	* @param  
+	* @return ModelAndView 
+	* @author 황인준
+	* @exception 
+	*/
+	@RequestMapping(value = "/mng/goodsList/{gdsMclassCd}",method = RequestMethod.GET)
+	public ModelAndView getMainList(Model model, @PathVariable String gdsMclassCd) throws SQLException {
+		log.debug("마이페이지(관리자) 메인 컨트롤러");
+				
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("rlist", MngService.selectGoodsList(gdsMclassCd));
 		mav.setViewName("mp/manager/mngMainList");
 		return mav;
 	}
@@ -248,6 +256,24 @@ public class MngAppliController {
 		mav.setViewName("mp/manager/mngAppliPkgList");
 		return mav;
 	}
+	
+		//렌탈상품 선택삭제
+		@RequestMapping(value = "/mng/deleteAppliList", method = RequestMethod.POST)
+		public ModelAndView deleteCart(@RequestParam(value = "chbox[]") List<String> chArr
+				,RentalAppliVo rentalAppliVo) throws SQLException {
+			System.out.println("렌탈상품 삭제 컨트롤러");
+			
+			ModelAndView mav=new ModelAndView();
+
+			for (String gdsCd : chArr) {
+				rentalAppliVo.setGdsCd(gdsCd);
+				
+				MngService.deleteAppli(gdsCd);
+			}
+
+			mav.setViewName("/mp/manager/mngMainList");
+			return mav;
+		}
 
 	
 }

@@ -10,6 +10,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -53,7 +54,8 @@ public interface MngDao {
 	//추가--------------
 	//렌탈 전체 상품 리스트(카운트)
 	List<RentalAppliVo> searchScGoods(String goodsNum) throws SQLException;
-	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;
@@ -77,5 +79,10 @@ public interface MngDao {
 	
 	//시퀀스 증가
 	void rentalSeq();
+	
+	List<RefundVo> selectRefundList() throws SQLException;						//관리자 회원 환불 리스트출력
+	int updateRefundConfirm(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
+	int updateRefundCancel(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
+	void deleteAppli(String gdsCd) throws SQLException;
 	
 }

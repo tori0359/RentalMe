@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.me.rentalme.cs.entity.CsVo;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalMeVo;
 
@@ -33,5 +34,19 @@ public class RentalMeDaoImpl implements RentalMeDao {
 	public List<CallVo> selectBestList() throws SQLException {
 		return sqlSession.selectList("rentalme.selectBestList");
 	}
+	
+	//새로운 아이템 리스트
+	@Override
+	public List<CallVo> selectNewList() throws SQLException {
+		return sqlSession.selectList("rentalme.selectNewList");
+	}
+	
+	//공지사항 리스트
+	@Override
+	public List<CsVo> selectCsList() throws SQLException {
+		return sqlSession.selectList("rentalme.selectCsList");
+	}
+
+	
 
 }

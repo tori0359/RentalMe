@@ -10,6 +10,7 @@ import com.me.rentalme.model.entity.DeclVo;
 import com.me.rentalme.model.entity.MngOrdDetailVo;
 import com.me.rentalme.model.entity.MngOrdVo;
 import com.me.rentalme.model.entity.ProductVo;
+import com.me.rentalme.model.entity.RefundVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -49,7 +50,8 @@ public interface MngService {
 	long selectNum(String mGoodsNum,String sGoodsNum);
 	
 	//렌탈 상품 리스트 페이징
-	List<RentalAppliVo> selectGoodsList(Paging apliPaging) throws SQLException;
+	List<RentalAppliVo> selectGoodsList() throws SQLException;
+	List<RentalAppliVo> selectGoodsList(String gdsMclassCd) throws SQLException;
 	List<RentalAppliVo> lGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> sGoodsList(Paging apliPaging) throws SQLException;
 	List<RentalAppliVo> kGoodsList(Paging apliPaging) throws SQLException;
@@ -64,6 +66,8 @@ public interface MngService {
 	int otherGoodsListCnt();
 	int pacGoodsListCnt();
 	
+	void deleteAppli(String gdsCd) throws SQLException;
+	
 	//렌탈상품등록
 	int rentalGoodsAdd100(RentalAppliVo rentalAppliVo);
 	int rentalGoodsAdd200(ProductVo productVo);	
@@ -71,4 +75,7 @@ public interface MngService {
 	//시퀀스 증가
 	void rentalseq();
 		
+	List<RefundVo> selectRefundList() throws SQLException;						//관리자 회원 환불 리스트출력
+	int updateRefundConfirm(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
+	int updateRefundCancel(String mbNo) throws SQLException;					//관리자 회원 환불 확인	
 }

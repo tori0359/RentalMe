@@ -1,0 +1,122 @@
+@charset "UTF-8";
+#actContent {
+	
+}
+
+#mpContent {
+	padding-top: 50px;
+}
+
+textarea {
+	width: 85%;
+	height: 120px;
+}
+
+tr>td:nth-child(1) {
+	text-align: center;
+}
+
+#biddingUnit {
+	width: 80px;
+}
+
+#daeButton {
+	float: right;
+	padding-right: 110px;
+}
+
+p {
+	font-size: 4px;
+}
+
+#used_main_img {
+	border: 0.2px solid gray;
+	width: 370px;
+	height: 170px;
+	margin-top: 10px;
+	float: left;
+}
+
+#used_sub_img_group {
+	width: 300px;
+}
+
+.used_sub_img {
+	display: inline-block;
+	border: 0.2px solid gray;
+	width: 60px;
+	height: 60px;
+	margin: 10px 5px 2px 0px;
+	float: left;
+}
+
+.used_sub_img>img {
+	position: absolute;
+}
+
+#imgfile {
+	
+}
+
+#state {
+	width: 110px;
+	height: 25px;
+}
+
+#modalSelect1 {
+	height: 25px;
+	width: 100px;
+}
+
+#modalSelect2 {
+	height: 25px;
+	width: 100px;
+}
+
+#classifi {
+	width: 150px;
+}
+
+#goods {
+	width: 150px;
+}
+
+#left {
+	float: left;
+}
+
+#left2 {
+	float: left;
+	margin-left: 50px;
+	margin-top: 2px;
+	max-height: 133px;
+	width:200px;
+	overflow-y: auto;
+}
+
+#end {
+	margin-top: 200px;
+}
+
+#goodscode {
+	margin-left: 50px;
+}
+
+#goodsBtn {
+	background: white;
+	text-align: left;
+}
+
+#goodsTable {
+	text-align: left;
+}
+
+#listname {
+	cursor: pointer;
+	color: black;
+}
+
+#listname:hover {
+	text-decoration: none;
+	font-weight: bolder;
+}

@@ -23,50 +23,73 @@
 		text-decoration:none;
 		color:blue;
 	}
+	#span2{
+		color:blue;
+	}
+	#tableHead tr>th:nth-child(1){
+		width:10%;
+		text-align:center;
+	}
+	#tableHead tr>th:nth-child(2){
+		width:10%;
+		text-align:center;
+	}
+	#tableHead tr>th:nth-child(3){
+		width:50%;
+		text-align:center;
+	}
+	#tableHead tr>th:nth-child(4){
+		width:20%;
+		text-align:center;
+	}
+	#tableHead tr>th:nth-child(5){
+		width:10%;
+		text-align:center;
+	}
 </style>
 <title>Insert title here</title>
 <jsp:include page="../../template/headerMng.jsp"></jsp:include>
 </head>
 <body>
 <c:choose>
-<c:when test="${id eq 'minminad' }">
+<c:when test="${levelGbCd eq '2'}">
 <!-- 관리자 공지게시판 리스트 -->
-<h1>공지/FAQ</h1>
+<h1><span id="span1">공지</span><span id="span2">/FAQ</span></h1>
 <div id="content" class="col-md-10 col-md-offset-1">
 <div align="right" id="text"><a id="notcH" href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a id="faqH" href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
-	<table class="table table-hover">
+	<table id="tableHead" class="table table-hover">
 		<tr>
 			<th>번호</th>
 			<th>분류</th>
 			<th>제목</th>
 			<th>등록일</th>
-			<th></th>
+			<th>삭제</th>
 		</tr>
 			<c:forEach items="${blist}" var="bean">
 				<tr>
 				<form action="${pageContext.request.contextPath}/mp/mng/faqDelete" method="post">
-					<td><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
+					<td style="text-align: center;"><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
 					<c:if test="${bean.csClassGbCd eq '1'}">
-						<td>주문</td>
+						<td style="text-align: center;">주문</td>
 					</c:if>
 					<c:if test="${bean.csClassGbCd eq '2'}">
-						<td>배송</td>
+						<td style="text-align: center;">배송</td>
 					</c:if>
 					<c:if test="${bean.csClassGbCd eq '3'}">
-						<td>결제</td>
+						<td style="text-align: center;">결제</td>
 					</c:if>
 					<c:if test="${bean.csClassGbCd eq '4'}">
-						<td>교환취소</td>
+						<td style="text-align: center;">교환취소</td>
 					</c:if>
 					<c:if test="${bean.csClassGbCd eq '5'}">
-						<td>회원정보</td>
+						<td style="text-align: center;">회원정보</td>
 					</c:if>
 					<c:if test="${bean.csClassGbCd eq '6'}">
-						<td>기타</td>
+						<td style="text-align: center;">기타</td>
 					</c:if>
 					<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
-					<td>${bean.regDt}</td>
-					<td><input type="submit" value="삭제"/></td>
+					<td style="text-align: center;">${bean.regDt}</td>
+					<td style="text-align: center;"><input class="btn btn-danger" type="submit" value="삭제"/></td>
 				</form>
 				</tr>
 			</c:forEach>

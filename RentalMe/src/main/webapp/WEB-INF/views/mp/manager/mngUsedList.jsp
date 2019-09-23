@@ -28,6 +28,7 @@
     <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMng.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
 </head>

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.CallVo;
 import com.me.rentalme.model.entity.RentalAppliVo;
 import com.me.rentalme.model.entity.UserVo;
@@ -46,6 +47,8 @@ public class UserController {
 	@Inject
 	RentalAppliService rentalAppliService; 
 
+	@Inject
+	CsService csService;
 	/**
 	 * @throws SQLException 주문내역
 	 * 
@@ -266,7 +269,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/deposit/refund", method = RequestMethod.POST)
 	@ResponseBody
-	public String refundtDeposit(@RequestParam String refund, HttpSession session) throws SQLException {
+	public String refundtDeposit(@RequestParam String refund,@RequestParam String remnDeposit , HttpSession session) throws SQLException {
 		log.debug("예치금 환불 컨트롤러...");
 		
 
@@ -277,18 +280,26 @@ public class UserController {
 		
 		//예치금 환불 요청 전 중복 환불 요청인지 확인하기
 		String duplmsg = mpUserService.selectRefund(mbNo);
-			if(duplmsg.equals("duplication")) {
-				
-				duplmsg="duplication";
-				 
-			}else {
-				//중복 환불 요청건이 없으면 요청건 입력하기
-				mpUserService.refundCharge(refund,mbNo);
-				duplmsg="not duplication";
-				
-			}
-
-
+		
+		int refund2 = Integer.parseInt(refund);
+		int remnDeposit2 = Integer.parseInt(remnDeposit);
+		
+		//예치금이 환불 요청 금액보다 클때만 중복 확인
+		if(remnDeposit2 > refund2) {
+					
+				if(duplmsg.equals("duplication")) {
+							
+					duplmsg="duplication";
+							 
+				}else {
+						//중복 환불 요청건이 없으면 요청건 입력하기
+						mpUserService.refundCharge(refund,mbNo);
+						duplmsg="not duplication";
+				}
+		}else {
+			duplmsg="not enough deposit";
+		}
+					
 		return duplmsg;
 	}
 
@@ -462,10 +473,21 @@ public class UserController {
 	 * @param @return ModelAndView @author 강민수 @exception
 	 */
 	@RequestMapping(value = "/mp/questDetail")
-	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo) throws SQLException {
-		String user = (String) session.getAttribute("loginUserId");
+	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
+		
 		ModelAndView mav = new ModelAndView();
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		System.out.println(userLevel);
+		csVo.setPquestNo(pquestNo);
+		
+		csService.selectReply(csVo.getPquestNo());
+		System.out.println("답글은..."+csVo.getReplyContent());
+		mav.addObject("levelGbCd",userLevel);
 		mav.addObject("bean", mpUserService.myInqDetail(csVo));
+		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
 		mav.addObject("id", user);
 		mav.setViewName("mp/user/userQuestDetail");
 		return mav;
