@@ -23,24 +23,37 @@ public class CsServiceImpl implements CsService {
 	
 	HashMap<String, Object> map;
 	
-	//faq게시글 리스트
+	//faq게시글 리스트(관리자)
+	@Override
+	public List<CsVo> csFaqList() throws SQLException {
+		
+		return csDao.faqSelectAll();
+	}
+	
+	//faq게시글 리스트(일반)
 	@Override
 	public List<CsVo> csFaqList(Search search) throws SQLException {
 		
 		return csDao.faqSelectAll(search);
 	}
 	
-	//공지게시글 리스트
+	//공지게시글 리스트(관리자)
 	@Override
-	public List<CsVo> csNoticeList(Paging paging) throws SQLException {
-		return csDao.noticeSelectAll(paging);
+	public List<CsVo> csNoticeList() throws SQLException {
+		return csDao.noticeSelectAll();
+	}
+	
+	//공지게시글 리스트(일반)
+	@Override
+	public List<CsVo> csNoticeList(Paging csPaging) throws SQLException {
+		return csDao.noticeSelectAll(csPaging);
 	}
 
 	//문의
 	@Override
-	public List<CsVo> csInqList(Paging paging) throws SQLException {
+	public List<CsVo> csInqList() throws SQLException {
 		
-		return csDao.inqSelectAll(paging);
+		return csDao.inqSelectAll();
 	}
 	
 	//faq게시글 상세
@@ -77,16 +90,32 @@ public class CsServiceImpl implements CsService {
 	
 	//공지게시물 삭제
 	@Override
-	public int noticDel(String num) throws SQLException {
+	public String noticDel(String num) throws SQLException {
 		
-		return csDao.noticDel(num);
+		int result = csDao.noticDel(num);
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "success";
+		}else {
+			msg = "fail";
+		}
+		
+		return msg;
 	}
 	
 	//faq게시물 삭제
 	@Override
-	public int faqDel(String num) throws SQLException {
-		// TODO Auto-generated method stub
-		return csDao.faqDel(num);
+	public String faqDel(String num) throws SQLException {
+		int result = csDao.faqDel(num);
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "success";
+		}else {
+			msg = "fail";
+		}
+		return msg;
 	}
 
 

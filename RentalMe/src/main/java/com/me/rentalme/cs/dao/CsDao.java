@@ -12,15 +12,17 @@ import com.me.rentalme.model.entity.UserVo;
 public interface CsDao {
 
 	//faq 리스트
+	List<CsVo> faqSelectAll() throws SQLException;
 	List<CsVo> faqSelectAll(Search search) throws SQLException;
 	List<CsVo> faqselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//공지 리스트
-	List<CsVo> noticeSelectAll(Paging paging) throws SQLException;
+	List<CsVo> noticeSelectAll() throws SQLException;
+	List<CsVo> noticeSelectAll(Paging csPaging) throws SQLException;
 	List<CsVo> noticeselectAll(Map<String, Integer> map) throws SQLException;
 	
 	//문의 리스트
-	List<CsVo> inqSelectAll(Paging paging) throws SQLException;
+	List<CsVo> inqSelectAll() throws SQLException;
 	
 	//게시글 총 갯수
 	int faqListCnt(Search search) throws SQLException;

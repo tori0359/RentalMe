@@ -15,16 +15,18 @@ import com.me.rentalme.model.entity.UserVo;
 public interface CsService {
 
 	
-	List<CsVo> csFaqList(Search search) throws SQLException;    //faq리스트페이지
-	List<CsVo> csNoticeList(Paging paging) throws SQLException;	//공지 리스트페이지
-	List<CsVo> csInqList(Paging paging) throws SQLException;	//문의 리스트페이지
+	List<CsVo> csFaqList() throws SQLException;    //faq리스트페이지(관리자)
+	List<CsVo> csFaqList(Search search) throws SQLException;    //faq리스트페이지(일반)
+	List<CsVo> csNoticeList() throws SQLException;	//공지 리스트페이지(관리자)
+	List<CsVo> csNoticeList(Paging csPaging) throws SQLException;	//공지 리스트페이지(일반)
+	List<CsVo> csInqList() throws SQLException;	//문의 리스트페이지
 	
 	CsVo csFaqDetail(CsVo csVo) throws SQLException;  //faq 상세페이지
 	CsVo csNoticeDetail(CsVo csVo) throws SQLException;	//공지 상세페이지
 
 	int csUpdateOne(CsVo csVo) throws SQLException;
-	int noticDel(String num) throws SQLException;
-	int faqDel(String num) throws SQLException;
+	String noticDel(String num) throws SQLException;
+	String faqDel(String num) throws SQLException;
 	
 	//공지,Faq,문의게시판 시퀀스
 	int seqNocUp() throws SQLException;
