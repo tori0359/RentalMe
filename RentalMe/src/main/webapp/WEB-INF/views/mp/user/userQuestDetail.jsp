@@ -67,6 +67,86 @@
         	font-size:18px;
         	font-weight:lighter;
         }
+        @-webkit-keyframes bounceInDown {
+		  from,
+		  60%,
+		  75%,
+		  90%,
+		  to {
+		    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		  }
+		
+		  0% {
+		    opacity: 0;
+		    -webkit-transform: translate3d(0, -3000px, 0);
+		    transform: translate3d(0, -3000px, 0);
+		  }
+		
+		  60% {
+		    opacity: 1;
+		    -webkit-transform: translate3d(0, 25px, 0);
+		    transform: translate3d(0, 25px, 0);
+		  }
+		
+		  75% {
+		    -webkit-transform: translate3d(0, -10px, 0);
+		    transform: translate3d(0, -10px, 0);
+		  }
+		
+		  90% {
+		    -webkit-transform: translate3d(0, 5px, 0);
+		    transform: translate3d(0, 5px, 0);
+		  }
+		
+		  to {
+		    -webkit-transform: translate3d(0, 0, 0);
+		    transform: translate3d(0, 0, 0);
+		  }
+		}
+
+		@keyframes bounceInDown {
+		  from,
+		  60%,
+		  75%,
+		  90%,
+		  to {
+		    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		  }
+		
+		  0% {
+		    opacity: 0;
+		    -webkit-transform: translate3d(0, -3000px, 0);
+		    transform: translate3d(0, -3000px, 0);
+		  }
+		
+		  60% {
+		    opacity: 1;
+		    -webkit-transform: translate3d(0, 25px, 0);
+		    transform: translate3d(0, 25px, 0);
+		  }
+		
+		  75% {
+		    -webkit-transform: translate3d(0, -10px, 0);
+		    transform: translate3d(0, -10px, 0);
+		  }
+		
+		  90% {
+		    -webkit-transform: translate3d(0, 5px, 0);
+		    transform: translate3d(0, 5px, 0);
+		  }
+		
+		  to {
+		    -webkit-transform: translate3d(0, 0, 0);
+		    transform: translate3d(0, 0, 0);
+		  }
+		}
+
+		.hihi {
+		  -webkit-animation-name: bounceInDown;
+		  animation-name: bounceInDown;
+		}
 	</style>
 </head>
 <body>
@@ -77,7 +157,7 @@
 	        	<form action="/mp/mng/answer"><div id="answer" align="right"><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/><button>답변처리</button></div></form>
 			</c:if>
 		</c:if> --%>
-			<div id="comment" >
+			<div id="comment" class="hihi">
 					Inquiries
         	</div>
         <table class="table" id="daeContent">

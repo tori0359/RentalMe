@@ -140,6 +140,57 @@
 		.bt{padding:10px 20px;}
 		.infinite{-webkit-animation-iteration-count:infinite;}
 		 */
+		@-webkit-keyframes flash {
+		  from,
+		  50%,
+		  to {
+		    opacity: 1;
+		  }
+		
+		  25%,
+		  75% {
+		    opacity: 0;
+		  }
+		}
+		
+		@keyframes flash {
+		  from,
+		  50%,
+		  to {
+		    opacity: 1;
+		  }
+		
+		  25%,
+		  75% {
+		    opacity: 0;
+		  }
+		}
+
+		h2 {
+		  -webkit-animation-name: flash;
+		    -webkit-animation-duration: 3s;
+		  animation-name: flash;
+		  animation-duration: 3s;
+		}
+		  h4 {
+
+		        -webkit-animation-name: movingPara;
+		
+		        -webkit-animation-duration: 3s;
+		
+		        animation-name: movingPara;
+		
+		        animation-duration: 3s;
+		
+		    }
+		
+		    @keyframes movingPara {
+		
+		        from { margin-left: 100%; }
+		
+		        to { margin-left: 0%; }
+		
+		    }
 	</style>
 </head>
 <body>
@@ -159,7 +210,7 @@
 	</div>
 	<div id="contentcenter">
 		<div id="content1" class="col-md-10 col-md-offset-2">
-			<h1>1:1문의</h1>
+			<h1 style="font-weight: bold;">1:1문의</h1>
 			<br/><br/><br/><br/><br/><br/>
 		</div>
 		<div>
