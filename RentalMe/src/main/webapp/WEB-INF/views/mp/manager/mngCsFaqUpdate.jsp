@@ -5,7 +5,7 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>RentalMe - 경매상품관리 등록</title>
+   <title>RentalMe -테스트 ㅇㅇㅇㅇㅇ</title>
    <jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
