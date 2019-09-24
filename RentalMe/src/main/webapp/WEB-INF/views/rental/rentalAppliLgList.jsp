@@ -174,10 +174,11 @@ ul.thumbnails {
 }
 li.col-sm-3 {
 	padding: 2px 2px 2px 2px;
+	margin-top:10px;
 }
 li.col-sm-3:hover {
 	border: 2px solid black;
-	margin: -2px -0px;
+	margin-top:10px;
 }
 .caption-box h4 {
     font-size: 1.50rem;
