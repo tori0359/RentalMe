@@ -41,9 +41,6 @@
 	     	text-align:right;
 	     	padding:8px 180px 8px 8px;
 	     }
-	     h2{
-	     	padding:0px 0px 35px 20px;
-	     }
 	     #daeContent tr>td:nth-child(1){
 	     	width:250px;
 	     	text-align:center;
@@ -78,7 +75,7 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="page-header">
-						<h2 class="pageheader-title">공지사항 수정 폼</h2>
+						<h2 class="pageheader-title">공지사항 수정</h2>
 						<div class="page-breadcrumb">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
@@ -107,7 +104,6 @@
 						<div class="card">
 							<h5 class="card-header"></h5>
 							<div id="csContent">
-								<h2>공지/FAQ등록</h2>
 								<table class="table" id="daeContent">
 									<tr>
 										<td><label for="">작 성 자</label></td>
