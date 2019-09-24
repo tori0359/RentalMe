@@ -124,7 +124,7 @@ $(function(){
 	            			}
 	            		});
             		});
-            		if(chkIdnull==''){
+            		if(chkIdnull!=chkMbNo){
             			$('.usedSts').find('button').attr('disabled', 'disabled');
             		}
             		

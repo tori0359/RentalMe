@@ -11,7 +11,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/select.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
-	
+	<style type="text/css">
+		.deleteform,.deleteform2,.deleteno{
+			display: inline-block;
+		}
+	</style>
 	<script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="http://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
@@ -33,7 +37,22 @@
 	
 	
 	<script>
-
+		$(function(){
+			for(var i=0; i<$('.clearnot').length; i++){
+				if($('.clearnot').eq(i).text().indexOf('처리완료') != -1){
+					$('.clearnot').eq(i).next().find('button').attr('disabled','disabled');
+				}
+			}
+			for(var i=0; i<$('.ugn').length; i++){
+				if($('.ugn').eq(i).text()==""){
+					$('.ugn').eq(i).parent().find('.deleteform').hide();
+				}
+				if($('.srn').eq(i).text()==""){
+					$('.srn').eq(i).parent().find('.deleteform2').hide();
+				}
+				
+			}
+		});
 	</script>
 </head>
 <body>
@@ -77,7 +96,6 @@
 									<table id="dt" class="table table-striped table-bordered first">
 										<thead>
 											<tr>
-												<th></th>
 												<th>신고번호</th>
 												<th>신고구분</th>
 												<th>중고상품번호</th>
@@ -86,12 +104,12 @@
 												<th>상점후기번호</th>
 												<th>신고날짜</th>
 												<th>신고상태</th>
+												<th>처리구분</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach items="${alist }" var="bean">
 												<tr class="usedTableTrClick">
-													<td><input type="checkbox" name="declNo" value="${bean.declNo }"></td>
 													<td id="${bean.declNo }">${bean.declNo }</td>
 													<td>
 														<c:if test="${bean.usedReGbCd eq 'R1'}">
@@ -103,16 +121,34 @@
 														</c:if>
 													</td>
 													<td><a href="/used/detail/${bean.usedGdsNo }">${bean.usedGdsNo }</a></td>
-													<td>${bean.usedGdsComtNo }</td>
+													<td class="ugn">${bean.usedGdsComtNo }</td>
 													<td><a href="/used/store/${bean.storeNo }">${bean.storeNo }</a></td>
-													<td>${bean.storeReviewNo }</td>
+													<td class="srn">${bean.storeReviewNo }</td>
 													<td>${bean.chgDt }</td>
-													<td>
+													<td class="clearnot">
 														<c:if test="${bean.declResStsCd eq '1'}">
 															처리완료
 														</c:if> <c:if test="${bean.declResStsCd eq '2'}">
 															미완료
 														</c:if>
+													</td>
+													<td class="deleteTd">
+													<form class="deleteno" action="/mp/mng/decl/deleteno" method="POST">
+														<input type="hidden" name="declNo" value="${bean.declNo }">
+														<button class="btn btn-info noDelBtn">미삭제</button>
+													</form>
+													<form class="deleteform" action="/mp/mng/decl/delete" method="POST">
+														<input type="hidden" name="declNo" value="${bean.declNo }">
+														<input type="hidden" name="usedGdsNo" value="${bean.usedGdsNo }">
+														<input type="hidden" name="usedGdsComtNo" value="${bean.usedGdsComtNo }">
+														<button class="btn btn-danger delBtn">삭제</button>
+													</form>
+													<form class="deleteform2" action="/mp/mng/decl/delete2" method="POST">
+														<input type="hidden" name="declNo" value="${bean.declNo }">
+														<input type="hidden" name="storeNo" value="${bean.storeNo }">
+														<input type="hidden" name="storeReviewNo" value="${bean.storeReviewNo }">
+														<button class="btn btn-danger delBtn">삭제</button>
+													</form>
 													</td>
 												</tr>
 											</c:forEach>

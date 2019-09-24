@@ -60,7 +60,7 @@
 	<select id="seletCmt" resultType="com.me.rentalme.model.entity.UsedCmtVo">
 		SELECT tb_used110.*, tb_user100.USER_ID
 		FROM tb_used110,tb_user100
-		WHERE tb_used110.MB_NO=tb_user100.MB_NO AND USED_GDS_NO=#{usedGdsNo}
+		WHERE tb_used110.MB_NO=tb_user100.MB_NO AND TB_USED110.USED_GDS_NO=#{usedGdsNo} AND TB_USED110.DEL_YN='N'
 		ORDER BY USED_GDS_COMT_NO DESC
 	</select>
 	
@@ -154,4 +154,14 @@
 		WHERE USED_GDS_NO=#{usedGdsNo}
 	</update>
 	
+	<update id="delComt">
+		UPDATE TB_USED110
+		SET DEL_YN='Y'
+		WHERE USED_GDS_NO=#{usedGdsNo} AND USED_GDS_COMT_NO=#{usedGdsComtNo}
+	</update>
+	<update id="delStoreComt">
+		UPDATE TB_USED200
+		SET DEL_YN='Y'
+		WHERE STORE_NO=#{storeNo} AND STORE_REVIEW_NO=#{storeReviewNo}
+	</update>
 </mapper>

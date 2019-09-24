@@ -25,8 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
 import com.me.rentalme.model.entity.DeclVo;
+import com.me.rentalme.model.entity.UsedCmtVo;
+import com.me.rentalme.model.entity.UsedStoreVo;
 import com.me.rentalme.model.entity.UsedVo;
 import com.me.rentalme.mp.mng.service.MngService;
+import com.me.rentalme.used.service.UsedService;
 
 @Controller
 @RequestMapping("/mp/mng/decl")
@@ -36,6 +39,8 @@ public class MngDeclController {
 	@Inject
 	MngService mngService;
 	
+	@Inject
+	UsedService usedService;
 		
 	/**
 	* 신고접수관리 - 리스트
@@ -67,6 +72,38 @@ public class MngDeclController {
 	public String getMngDeclUdt(@RequestBody List<String> declList) throws SQLException, IOException{
 				
 		mngService.changeDeclSts(declList);
+		
+		return "redirect:/mp/mng/decl";
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String getMngDeclDel(@RequestParam("declNo") String declNo,
+			@RequestParam("usedGdsNo") String usedGdsNo,
+			@RequestParam("usedGdsComtNo") String usedGdsComtNo) throws SQLException, IOException{
+		UsedCmtVo bean=new UsedCmtVo();
+		bean.setUsedGdsNo(usedGdsNo);
+		bean.setUsedGdsComtNo(usedGdsComtNo);
+		mngService.updateDeclOne(declNo);
+		usedService.delComt(bean);
+		return "redirect:/mp/mng/decl";
+	}
+	
+	@RequestMapping(value = "/delete2", method = RequestMethod.POST)
+	public String getMngDeclDel2(@RequestParam("declNo") String declNo,
+			@RequestParam("storeNo") String storeNo,
+			@RequestParam("storeReviewNo") String storeReviewNo) throws SQLException, IOException{
+		UsedStoreVo bean=new UsedStoreVo();
+		bean.setStoreNo(storeNo);
+		bean.setStoreReviewNo(storeReviewNo);
+		mngService.updateDeclOne(declNo);
+		usedService.delStoreComt(bean);
+		
+		return "redirect:/mp/mng/decl";
+	}
+	
+	@RequestMapping(value = "/deleteno", method = RequestMethod.POST)
+	public String getMngDeclDelNo(@RequestParam("declNo") String declNo) throws SQLException, IOException{
+		mngService.updateDeclOne(declNo);
 		
 		return "redirect:/mp/mng/decl";
 	}

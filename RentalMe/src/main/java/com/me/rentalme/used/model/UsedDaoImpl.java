@@ -183,6 +183,14 @@ public class UsedDaoImpl implements UsedDao {
 	public int updateStoreSts(String usedGdsNo) throws SQLException {
 		return sqlSession.update("used.updateStoreSts", usedGdsNo);
 	}
+	@Override
+	public int delComt(UsedCmtVo bean) throws SQLException {
+		return sqlSession.update("used.delComt", bean);
+	}
+	@Override
+	public int delStoreComt(UsedStoreVo bean) throws SQLException {
+		return sqlSession.update("used.delStoreComt", bean);
+	}
 
 
 

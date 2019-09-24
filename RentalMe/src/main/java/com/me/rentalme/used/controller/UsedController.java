@@ -200,7 +200,7 @@ public class UsedController {
 		System.out.println(bean.getStoreNo()+","+bean.getStoreReviewDt()+","+bean.getStoreReviewNo());
 		usedService.usedStoreDecl(bean);
 		
-		return "redirect:/used/store/"+bean.getMbNo();
+		return "redirect:/used/store/"+bean.getStoreNo();
 	}
 	
 	@RequestMapping(value = "/store/del/{idx}", method = RequestMethod.POST)

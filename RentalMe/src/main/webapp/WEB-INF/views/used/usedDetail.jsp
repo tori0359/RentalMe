@@ -81,7 +81,7 @@
 	</div>
 	<ul class="tabs">
 		<li class="tab">상품설명</li>
-		<li class="tab">상점문의</li>	
+		<li class="tab">상품문의</li>	
 	</ul>
 
 	<div id="bigInfo" class="row">

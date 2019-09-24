@@ -34,4 +34,6 @@ public interface UsedService {
 	int usedcount(UsedVo bean) throws SQLException;
 	int delMyStoreListOne(String usedGdsNo) throws SQLException; // 내가 올린 목록 중 한개 지우기
 	int updateStoreSts(String usedGdsNo) throws SQLException; // 중고상품 판매완료
+	int delComt(UsedCmtVo bean) throws SQLException;			//중고댓글삭제
+	int delStoreComt(UsedStoreVo bean) throws SQLException;		//중고상점후기삭제
 }
