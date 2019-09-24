@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>RentalMe - 관리자 경매</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">
 	#headAct{

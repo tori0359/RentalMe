@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 중고물품 등록</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css" >
 <jsp:include page="../template/header.jsp"></jsp:include>
 <script type="text/javascript"

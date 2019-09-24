@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 렌탈</title>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
@@ -174,12 +174,12 @@ ul.thumbnails {
 }
 li.col-sm-3 {
 	padding: 2px 2px 2px 2px;
-	margin-top:10px;
 }
-li.col-sm-3:hover {
+.imglist:hover{
 	border: 2px solid black;
-	margin-top:10px;
+	margin: -2px -0px;
 }
+
 .caption-box h4 {
     font-size: 1.50rem;
     color: #444;
@@ -982,6 +982,7 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
+											<div class="imglist">
 												<div class="thumbnail" style="border:0px solid red; height:290px;">
 													<a href="${menu }/detail/${list4.gdsCd }"><img style="height:100%;" src=${list4.img1 } alt="" ></a>
 												</div>
@@ -994,7 +995,7 @@ input::-moz-focus-inner { border: 0; }
 														<h5><fmt:formatNumber type="currency" value="${list4.gdsPrice }"></fmt:formatNumber>(월)</h5>
 													</a>
 												</div>
-												
+												</div>
 											</li>
 											
 											</c:forEach>
@@ -1006,6 +1007,7 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 											<c:forEach items="${list4 }" var="list4" begin="4" end="7">
 											<li class="col-sm-3">
+											<div class="imglist">
 												<div class="thumbnail">
 													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt=""></a>
 												</div>
@@ -1018,6 +1020,7 @@ input::-moz-focus-inner { border: 0; }
 														<h5><fmt:formatNumber type="currency" value="${list4.gdsPrice }"></fmt:formatNumber>(월)</h5>
 													</a>
 												</div>
+											</div>
 											</li>
 											</c:forEach>
 										</ul>
@@ -1079,6 +1082,7 @@ input::-moz-focus-inner { border: 0; }
 									<ul class="thumbnails">
 										<c:forEach items="${list5 }" var="list5">
 										<li class="col-sm-3">
+										<div class="imglist">
 											<div style="cursor: pointer;" class="thumbnail thumbnailDiv media-middle" onclick="location.href='${menu }/detail/${list5.gdsCd }'">
 												<img style="height:100%;" src=${list5.img1 } alt="">
 											</div>
@@ -1092,6 +1096,7 @@ input::-moz-focus-inner { border: 0; }
 													<br>
 												</a>
 											</div>
+										</div>
 										</li>
 										</c:forEach>
 									</ul>

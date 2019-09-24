@@ -393,7 +393,7 @@
            </tr>
            <tr>
               <td><label>배송비용</label></td>
-              <td><input style="width:75%;height:40px;" class="form-control" type="text" name="prdDeliveryCost" value="5000"/></td>
+              <td><input style="width:75%;height:40px;" class="form-control" type="text" name="prdDeliveryCost" value="무료"/></td>
               <td><label>설치비용</label></td>
               <td>
                  <input style="width:75%;height:40px;" class="form-control" type="text" value="무료" name="prdInstCost"/>

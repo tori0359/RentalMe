@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 회원가입</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <!-- datepicker 라이브러리(3개) -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />

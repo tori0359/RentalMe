@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 실시간 경매</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">
 

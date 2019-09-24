@@ -7,7 +7,7 @@
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 내 문의</title>
 <style type="text/css">	
 	#uptext{
 		height:130px;

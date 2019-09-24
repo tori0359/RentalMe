@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 경매리스트</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">
 #actList {

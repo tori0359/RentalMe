@@ -77,7 +77,7 @@ encoding="UTF-8"?>
 		INNER JOIN TB_GDS200 B
 		ON 		B.GDS_CD = A.GDS_CD
 		WHERE	MB_NO = #{mbNo}
-		ORDER BY A.GDS_CD, A.CART_SEQ, A.REG_DT
+		ORDER BY A.REG_DT DESC, A.GDS_CD, A.CART_SEQ
   	</select>
   	
   	<delete id="deleteCart">

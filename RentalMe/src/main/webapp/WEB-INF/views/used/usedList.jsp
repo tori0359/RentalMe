@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 중고거래</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css" >
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style type="text/css">

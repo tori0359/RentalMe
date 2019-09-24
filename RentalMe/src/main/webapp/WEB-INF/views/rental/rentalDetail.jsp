@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe</title>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
@@ -1183,15 +1183,15 @@ input::-moz-focus-inner { border: 0; }
 													<div id="detailNm2" class="col-md-8">
 												    	<input type="text" class="form-control" id="realGdsCd" name="gdsCd" value="${list1.gdsCd }" style="display: none;">
 												    	<input type="text" class="form-control" id="realGdsSclassCd" name="realGdsSclassCd" value="${list1.gdsSclassCd }" style="display: none;">
-														<input type="text" class="btn btn-defalut" id="realGdsNm" disabled="disabled" style="background-color:white; margin-top:3px; text-align:left;" name="gdsNm" value="${list1.gdsNm }"  >
+														<input type="text" class="btn btn-defalut" id="realGdsNm" disabled="disabled" style="background-color:white; margin-top:5px; width:360px; text-align:left;" name="gdsNm" value="${list1.gdsNm }"  >
 														<input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${list1.gdsPrice }" style="display: none;" >
 														<fmt:setLocale value="ko_KR"></fmt:setLocale>
-														<input type="text" class="btn btn-defalut" id="realGdsPrice2" disabled="disabled" style="background-color:white; margin-top:3px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "  >
-														<input type="text" class="btn btn-defalut" id="realAgreeTerm" disabled="disabled" style="background-color:white; margin-top:2px; text-align:left;" name="agreeTerm" value="${list1.agreeTerm }"  >
-														<input type="text" class="btn btn-defalut" id="realDeliverCost" disabled="disabled" style="background-color:white; margin-top:1px; text-align:left;" name="deliverCost" value="${list1.deliverCost }"  >
-														<input type="text" class="btn btn-defalut" id="realInstalCost" disabled="disabled" style="background-color:white; text-align:left;" name="instalCost" value="${list1.instalCost }"  >
-														<input type="text" class="btn btn-defalut" id="realAsCondition" disabled="disabled" style="background-color:white; margin-top:2px; text-align:left;" name="asCondition" value="${list1.asCondition }"  >
-												    	<input type="text" class="btn btn-defalut" id="realOdrQty" disabled="disabled" style="background-color:white; margin-top:3px; text-align:left;" name="odrQty" value="1">
+														<input type="text" class="btn btn-defalut" id="realGdsPrice2" disabled="disabled" style="background-color:white; margin-top:12px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${list1.gdsPrice }" pattern="#,###" />원 "  >
+														<input type="text" class="btn btn-defalut" id="realAgreeTerm" disabled="disabled" style="background-color:white; margin-top:11px; text-align:left;" name="agreeTerm" value="${list1.agreeTerm }"  >
+														<input type="text" class="btn btn-defalut" id="realDeliverCost" disabled="disabled" style="background-color:white; margin-top:10px; text-align:left;" name="deliverCost" value="${list1.deliverCost }"  >
+														<input type="text" class="btn btn-defalut" id="realInstalCost" disabled="disabled" style="background-color:white; margin-top:12px; text-align:left;" name="instalCost" value="${list1.instalCost }"  >
+														<input type="text" class="btn btn-defalut" id="realAsCondition" disabled="disabled" style="background-color:white; margin-top:11px; text-align:left;" name="asCondition" value="${list1.asCondition }"  >
+												    	<input type="text" class="btn btn-defalut" id="realOdrQty" disabled="disabled" style="background-color:white; margin-top:12px; text-align:left;" name="odrQty" value="1">
 													</div>
 												</div>
 												<div class="row" style="border:0px solid orange;">

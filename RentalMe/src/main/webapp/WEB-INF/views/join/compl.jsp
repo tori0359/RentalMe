@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 회원가입</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/join.css">
 <jsp:include page="../template/header.jsp"></jsp:include>

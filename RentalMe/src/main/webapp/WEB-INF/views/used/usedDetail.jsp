@@ -13,7 +13,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>RentalMe - 중고물품 상세보기</title>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/used.css" >
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/used.js"></script>

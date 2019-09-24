@@ -309,7 +309,7 @@
 	<select id="selectQuestList" resultType="com.me.rentalme.model.entity.QuestVo">
 		SELECT QUEST_NO,QUEST_DT,GDS_CD,QUEST_NM,HP,EMAIL,QUEST_STS_CD
 		FROM TB_QUEST100
-		ORDER BY CHG_DT DESC
+		ORDER BY QUEST_NO DESC
 	</select>
 	<!-- 관리자 - 회원 상담 완료 -->
 	<update id="updateQuest">
