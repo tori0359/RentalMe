@@ -60,4 +60,8 @@ $(function(){
 	});
 	
 	
+	$('.delBtn').click(function(){
+		
+	});
+	
 });

@@ -83,5 +83,5 @@ public interface MngService {
 	
 	List<QuestVo> selectQuestList() throws SQLException;						//관리자 회원 상담관리 리스트 출력
 	int updateQuest(String questNo) throws SQLException;						//관리자 회원 상담 확인
-	
+	int updateDeclOne(String declNo) throws SQLException;						//신고처리완료
 }

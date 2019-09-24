@@ -104,7 +104,7 @@
         	<input id="declSNo" type="hidden" name="storeNo" value="${mbNo}">
         	<input id="declRNo" type="hidden" name="storeReviewNo" >
         	<input id="declRDt" type="hidden" name="storeReviewDt">
-        	<input id="declMbNo" type="text" name="mbNo">
+        	<input id="declMbNo" type="text" name="mbNo" readonly="readonly">
         </div>
         <div> 
 			<input type="text" id="declReason" class="form-control" placeholder="신고사유">

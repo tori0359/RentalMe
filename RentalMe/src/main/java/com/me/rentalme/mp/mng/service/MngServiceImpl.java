@@ -367,4 +367,9 @@ public class MngServiceImpl implements MngService {
 		return mngDao.updateQuest(questNo);
 	}
 
+	@Override
+	public int updateDeclOne(String declNo) throws SQLException {
+		return mngDao.updateDeclOne(declNo);
+	}
+
 }

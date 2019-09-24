@@ -120,4 +120,14 @@ public class UsedServiceImpl implements UsedService {
 		return usedDao.updateStoreSts(usedGdsNo);
 	}
 
+	@Override
+	public int delComt(UsedCmtVo bean) throws SQLException {
+		return usedDao.delComt(bean);
+	}
+
+	@Override
+	public int delStoreComt(UsedStoreVo bean) throws SQLException {
+		return usedDao.delStoreComt(bean);
+	}
+
 }

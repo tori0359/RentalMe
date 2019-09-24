@@ -355,6 +355,11 @@ public class MngDaoImpl implements MngDao{
 		return sqlSession.update("mpMng.updateQuest", questNo);
 	}
 
+	@Override
+	public int updateDeclOne(String declNo) throws SQLException {
+		return sqlSession.update("mpMng.updateDeclOne", declNo);
+	}
+
 
 	
 }

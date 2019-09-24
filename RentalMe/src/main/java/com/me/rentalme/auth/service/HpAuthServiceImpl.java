@@ -41,8 +41,8 @@ public class HpAuthServiceImpl implements HpAuthService {
 		String key = mailAuthService.getKey(false, 6);
 				
 		//coolsms에서 받은 apikey 세팅
-		String 	apiKey 		= "";						//git에 올라갈시 api키 공개되면 안되므로 삭제(담당자에게 문의)
-		String 	apiSecret 	= "";		//git에 올라갈시 secret키 공개되면 안되므로 삭제(담당자에게 문의)
+		String 	apiKey 		= "NCSKEDEQPFGCT67L";						//git에 올라갈시 api키 공개되면 안되므로 삭제(담당자에게 문의)
+		String 	apiSecret 	= "GZH4QB14H8QD9QAGIJE6DB16L6HVQTDD";		//git에 올라갈시 secret키 공개되면 안되므로 삭제(담당자에게 문의)
 		Message coolsms 	= new Message(apiKey, apiSecret);
 		
 		String result = "";
@@ -50,7 +50,7 @@ public class HpAuthServiceImpl implements HpAuthService {
 		
 		Map<String, String> params = new HashMap<String, String>();
 	    params.put("to", hp);									//수신번호 입력 (콤마[,]로 구분된 수신번호 입력가능)
-	    params.put("from", "");						//등록한 발신번호만 해당됨(다른번호 집어넣으면 안됨!)
+	    params.put("from", "01025550359");						//등록한 발신번호만 해당됨(다른번호 집어넣으면 안됨!)
 	    params.put("type", "SMS");								//단문메시지(장문[2000자] : LMS)
 	    params.put("text", "렌탈미 회원가입 인증코드 : "+key);	//전송될 문자내용
 //	    params.put("app_version", "test app 1.2"); 				// application name and version		

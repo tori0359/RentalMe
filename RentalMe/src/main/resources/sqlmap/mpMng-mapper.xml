@@ -317,4 +317,11 @@
 		SET QUEST_STS_CD='2'
 		WHERE QUEST_NO=#{questNo}
 	</update>
+	
+	<!-- 신고처리완료 -->
+	<update id="updateDeclOne">
+		UPDATE TB_DECL100
+		SET DECL_RES_STS_CD = '1'
+		WHERE DECL_NO=#{declNo}
+	</update>
 </mapper>
