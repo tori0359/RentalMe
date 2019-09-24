@@ -502,7 +502,7 @@
 								<c:forEach items="${alist }" var="alist" varStatus="status">
 									<c:if test="${status.index eq '0' }">
 								    	<!-- <input type="text" class="form-control" id="realGdsCd" disabled="disabled" style="background-color:white;" name="gdsCd" value="${alist.gdsCd }" style="display: none;">  -->
-										<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; border:solid 0px; margin-top:5px; text-align:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
+										<input type="text" class="btn btn-default" id="realGdsNm" disabled="disabled" style="background-color:white; width:330px; border:solid 0px; margin-top:5px; text-align:left;" name="gdsNm" value="${alist.gdsNm } 외 ${alistLength-1 }건"  >
 										<!-- <input type="text" class="form-control" id="realGdsPrice" name="gdsPrice" value="${alist.gdsPrice }" > -->
 										<fmt:setLocale value="ko_KR"></fmt:setLocale>
 										<input type="text" class="btn btn-default" id="realGdsPrice2" disabled="disabled" style="background-color:white; border:solid 0px; margin-top:4px; text-align:left;" name="gdsPrice2" value="<fmt:formatNumber value="${alist.gdsPrice }" pattern="#,###" />원 "  >
