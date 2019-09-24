@@ -199,6 +199,30 @@ public class MngServiceImpl implements MngService {
 	public int getMngUserListCnt() {
 		return mngDao.selectMngUserListCnt();
 	}
+	
+	/**
+	* 사용자관리 - 계정초기화
+	* 
+	* @param  String mbNo : 회원번호
+	* @return String : 결과값
+	* @author 황인준
+	* 등록일자 : 2019.09.24
+	*/
+	@Override
+	public String initUserInfo(String mbNo) {
+		
+		//사용자계정 초기화
+		int result = mngDao.updateUserInfoInit(mbNo);
+		String msg = "";
+		
+		if(result > 0) {
+			msg="success";
+		}else {
+			msg="fail";
+		}
+		
+		return msg;
+	}
 
 	@Override
 	public int selectDeclListCnt(DeclVo bean) {
@@ -342,6 +366,5 @@ public class MngServiceImpl implements MngService {
 	public int updateQuest(String questNo) throws SQLException {
 		return mngDao.updateQuest(questNo);
 	}
-	
 
 }

@@ -95,6 +95,7 @@
 													<td>${info.chgDt }</td>
 													<td>
 														<input type="button" id="${info.mbNo }" onclick="userDatail(this.id)" class="userDetail btn btn-info btn-sm"   value="상세정보"/>
+														<input type="button" id="${info.mbNo }" onclick="userInit(this.id)" class="userDetail btn btn-success btn-sm"   value="초기화"/>
 														<input type="button" id="${info.mbNo }" onclick="userLeave(this.id)"  class="userLeave btn btn-danger btn-sm"  value="탈퇴">
 													</td>
 												</tr>

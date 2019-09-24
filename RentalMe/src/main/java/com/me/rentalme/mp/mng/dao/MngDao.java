@@ -28,28 +28,25 @@ public interface MngDao {
 
 	List<UsedVo> selectUsed() throws SQLException;							//전체 중고 리스트
 	List<UsedVo> selectUsedSearch(String usedGdsNo) throws SQLException;	//중고 하나 선택
-	int selectusedListCnt(UsedVo bean);												//전체 중고 리스트 총갯수
+	int selectusedListCnt(UsedVo bean);										//전체 중고 리스트 총갯수
 	
 	List<MngOrdVo> selectReturn() throws SQLException;						//전체 반품 리스트
 	int updateStsRtn(String ordNo) throws SQLException;						//상품상태 반품확정으로 바꾸기
 	
 	List<DeclVo> selectDecl() throws SQLException;							//전체 신고 리스트
-	int changeDeclSts(String declNo) throws SQLException;		//신고상태 처리완료로 바꾸기
+	int changeDeclSts(String declNo) throws SQLException;					//신고상태 처리완료로 바꾸기
 	
 	int selectusedListCnt();												//전체 중고 리스트 총갯수
 	
-	//2019.09.11 추가
-	List<UserVo> selectUserList();											//사용자관리 - 사용자정보 리스트
-	
-	//2019.09.15 추가
+	List<UserVo> selectUserList();											//사용자관리 - 사용자정보 리스트	
 	int updUserinfo(String mbNo);											//사용자관리 - 회원탈퇴
 	UserVo selectUserDetail(String mbNo);									//사용자관리 - 사용자 상세정보
-	
-	//2019.09.16 추가
 	int selectMngUserListCnt();												//사용자관리 - 회원 총 인원 수
 	int selectDeclListCnt(DeclVo bean);										//전체 신고 수
+	
+	//2019.09.24 추가
+	int updateUserInfoInit(String mbNo);									//사용자관리 - 계정초기화
 		
-	//민수(메서드 추가 주석 할것)
 	//렌탈 전체 상품 리스트
 
 	//추가--------------
@@ -88,4 +85,5 @@ public interface MngDao {
 	
 	List<QuestVo> selectQuestList() throws SQLException;						//관리자 회원 상담관리 리스트 출력
 	int updateQuest(String questNo) throws SQLException;						//관리자 회원 상담 확인
+	
 }

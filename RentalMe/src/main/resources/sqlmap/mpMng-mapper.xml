@@ -172,6 +172,14 @@
 		     , REG_DT		= '0000-00-00 00:00:00'
 		 WHERE MB_NO = #{mbNo}
 	</update>
+	<update id="updUserInfoInit" parameterType="String">
+		UPDATE TB_USER100
+		   SET PW_FAIL_CNT	= 0
+		     , USER_STS_CD	= '1'
+		     , CHG_ID		= 'system'
+		     , CHG_DT		= DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+		 WHERE MB_NO = #{mbNo}
+	</update>
 	<!--민수 -->
 	<!--렌탈상품리스트 -->
 	<select id="selectRentalAllList" resultType="com.me.rentalme.model.entity.RentalAppliVo">
