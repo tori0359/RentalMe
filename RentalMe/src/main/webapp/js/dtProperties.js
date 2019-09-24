@@ -13,6 +13,10 @@ $(function(){
 		sort =  [ [ 0, "asc" ] ];
 	}
 	
+	if(path == '/mp/mng/csFaqList'){
+		sort =  [ [ 0, "desc" ] ];
+	}
+	
 	$('#dt').DataTable({
 		/*기본 속성 적용*/
 		'paging' 		: true,					//페이징 사용 여부
