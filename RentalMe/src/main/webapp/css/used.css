@@ -155,6 +155,10 @@
 		width: 120px;
 		height: 30px;
 	}
+	.tab{
+		font-size:13pt;
+		font-weight:bolder;
+	}
 	.tabs{
 		margin-top: 20px;
 		width: 100%;
@@ -163,8 +167,8 @@
 	.tabs>li{
 		display: inline-block;
 		width: 20.5%;
-		height: 30px;
-		line-height: 30px;
+		height: 45px;
+		line-height: 45px;
 		background-color: lightgray;
 		text-align: center;
 		cursor:pointer;
@@ -379,5 +383,6 @@
            }
            #imgfile{
            }
+           
         
 /*  usedMng end */

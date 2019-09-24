@@ -80,17 +80,17 @@
 		<img src="${UsedVo.img4 }"style="width: 100px; height: 100px;">
 	</div>
 	<ul class="tabs">
-		<li class="tab">상품설명</li>
-		<li class="tab">상점문의</li>	
+		<li class="tab">상품 설명</li>
+		<li class="tab">상품 문의</li>	
 	</ul>
 
 	<div id="bigInfo" class="row">
-		<div id="detailInfo" class="col-md-5" style="border:1px solid red;">
-			<p style="font-size:18pt;">상품정보</p>
-			<div><p style="font-size:12pt;">${UsedVo.content }</p></div>
+		<div id="detailInfo" class="col-md-5" style="border-right:2px solid lightgrey;">
+			<p style="font-size:18pt; padding:10px;">상품 정보</p>
+			<div><pre style="font-size:12pt; font-family:'nanumB'; font-weight:normal;">${UsedVo.content }</pre></div>
 		</div>
-		<div id="sellInfo" class="col-md-5" style="border:1px solid blue;">
-			<p style="font-size:18pt;">판매자 정보</p>
+		<div id="sellInfo" class="col-md-5" style="border:0px solid blue;">
+			<p style="font-size:18pt; padding:10px;">판매자 정보</p>
 			<div id="sellManId"><p style="font-size:12pt;">${UsedVo.userId }</p></div>
 			<div id="hiddenNM">${UsedVo.mbNo }</div>
 		</div>
@@ -113,7 +113,7 @@
 	<c:forEach items="${cmt }" var="cmet">
 	<div class="cmtContent">
 		<div class="secretCmt">${cmet.secretYn }</div>
-		<div class="cmtUserId">${cmet.userId }</div>
+		<div class="cmtUserId"><p>${cmet.userId }</p></div>
 		<div>${cmet.chgDt }</div>
 		<div>${cmet.content }</div>
 		<input class="cmtNo" type="hidden" value="${cmet.usedGdsComtNo }">
@@ -135,23 +135,23 @@
 <div id="declmodal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">신고하기</h5>
+      <div style="height:50px;" class="modal-header">
+        <h4 style="font-weight:bolder;"class="modal-title">신고하기</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <form action="/used/cmtDecl" method="post">
       <div class="modal-body">
-        <div>
-        	신고대상
-        	<span id="declId"></span>
-        	<input id="declNo" type="hidden" name="usedGdsComtNo">
-        	<input id="declDt" type="hidden" name="usedGdsComtDt">
-        	<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
-        </div>
+	        <div>
+	        	<p style="font-weight:bolder;">신고대상: 
+	        	<span id="declId"></span></p>
+	        	<input id="declNo" type="hidden" name="usedGdsComtNo">
+	        	<input id="declDt" type="hidden" name="usedGdsComtDt">
+	        	<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
+	        </div>
         <div> 
-			<textarea rows="5" placeholder="신고사유"></textarea>
+			<textarea style="width:70%;" rows="5" placeholder="신고사유"></textarea>
 		</div>
       </div>
       <div class="modal-footer">
