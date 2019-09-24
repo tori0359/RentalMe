@@ -39,7 +39,7 @@ $(function(){
 			Swal.fire({
 				  position: 'top-middle',
 				  type: 'warning',
-				  title: '처리완료 할 데이터를 선택 해주시기 바랍니다.',
+				  title: '삭제 할 데이터를 선택 해주시기 바랍니다.',
 				  showConfirmButton: false,
 				  timer: 1500
 				});

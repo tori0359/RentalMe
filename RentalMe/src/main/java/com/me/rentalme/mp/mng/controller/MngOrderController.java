@@ -63,7 +63,7 @@ public class MngOrderController {
 		model.addAttribute("ordNo", ordNo);
 		model.addAttribute("alist", mngService.selectOrdOne(ordNo));
 		model.addAttribute("info", mngService.selectOrdOneInfo(ordNo));
-		return "mp/manager/mngOrdDetail2";
+		return "mp/manager/mngOrdDetail";
 	}
 	
 	/**
