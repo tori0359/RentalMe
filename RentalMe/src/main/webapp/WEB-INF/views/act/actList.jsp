@@ -162,7 +162,7 @@
 	<div id="actList">
 		<div id="actMenuDiv">
 			<div class="actMenu" id="actRun">
-				<p>경매 진행중</p>
+				<p>경매 진행</p>
 			</div>
 			<div class="actMenu" id="actEnd">
 				<p>경매 종료</p>

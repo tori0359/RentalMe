@@ -143,7 +143,7 @@ public class UsedController {
 	*/
 	@RequestMapping(value = "/detail/{idx}", method = RequestMethod.GET)
 	public String getUsedDetail(Model model, @PathVariable("idx") String usedGdsNo) throws SQLException {
-		
+		System.out.println("µî·Ï:"+usedGdsNo);
 		model.addAttribute("UsedVo", usedService.detail(usedGdsNo));
 		model.addAttribute("cmt", usedService.cmtList(usedGdsNo));
 		return "used/usedDetail";
@@ -243,8 +243,8 @@ public class UsedController {
 		
 		String currentTime=System.currentTimeMillis()+"";
 		//String uploadDir="C:\\Users\\USER\\git\\RentalMe\\RentalMe\\src\\main\\webapp\\imgs\\";
-		String uploadDir="C:\\java\\3rdProject\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\RentalMe\\imgs\\";
-//		String uploadDir="/var/lib/tomcat8/webapps/rentalme/imgs/";
+//		String uploadDir="C:\\java\\3rdProject\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\RentalMe\\imgs\\";
+		String uploadDir="/var/lib/tomcat8/webapps/rentalme/imgs/";
 		String uploadRDS="/imgs/";
 		List<MultipartFile> fileList = mtfRequest.getFiles("imgfile");
         String src = mtfRequest.getParameter("src");
