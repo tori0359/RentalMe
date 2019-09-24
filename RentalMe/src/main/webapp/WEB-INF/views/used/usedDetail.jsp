@@ -151,7 +151,7 @@
         	<input type="hidden" name="usedGdsNo" value="${UsedVo.usedGdsNo }">
         </div>
         <div> 
-			<textarea rows="5" placeholder="신고사유"></textarea>
+			<input type="text" id="declReason" class="form-control" placeholder="신고사유">
 		</div>
       </div>
       <div class="modal-footer">
