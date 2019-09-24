@@ -88,7 +88,7 @@
 											<tr>
 												<td><input type="hidden" name="num" value="${bean.noticNo}"/>${bean.noticNo}</td>
 												<td>공지</td>
-												<td>
+												<td style="text-align:left;">
 													<a style="text-decoration:none" href="mngCsNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">
 														${bean.sub}
 													</a>

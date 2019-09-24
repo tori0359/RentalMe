@@ -1,3 +1,5 @@
+mngCsNoticeUpdate
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -5,7 +7,7 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>RentalMe -테스트 ㅇㅇㅇㅇㅇ</title>
+   <title>RentalMe - 경매상품관리 등록</title>
    <jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -38,8 +40,7 @@
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/actImg.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngActAdd.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
-<script type="text/javascript">
-
+   <script type="text/javascript">
    function csselect(csGbCd){
             console.log(csGbCd);
          $.ajax({
@@ -59,9 +60,8 @@
             erro:function(jqXHR,testStatus,errorThrown){
                alert('오류가 발생했습니다');
             }
-
          });
-      }
+      } 
    window.onload=function(){
       $("#faq").click(function(){
          console.log("dd");
@@ -103,7 +103,7 @@
                               class="breadcrumb-link">고객센터관리</a></li>
                            <li class="breadcrumb-item"><a href="#"
                               class="breadcrumb-link">공지사항/FAQ관리</a></li>
-                           <li class="breadcrumb-item active" aria-current="page">FAQ 관리</li>
+                           <li class="breadcrumb-item active" aria-current="page">공지사항 관리</li>
                         </ol>
                      </nav>
                   </div>
@@ -139,48 +139,37 @@
                       
                    <div id="csContent" >
 <form action="/mp/mng/csFaqUpdate" method="post">
-      <h2>공지/FAQ수정</h2>
-        <table class="table" id="daeContent">
+      <h2>FAQ 수정</h2>
+        <table class="table" id="daeContent" >
             <tr>
-                <td><label for="" >작 성 자</label></td>
+                <td><label>작 성 자</label></td>
                 <td style="text-align:left;">관 리 자</td>
             </tr>
-            <tr>
+             <tr>
                <td><label>글 번 호</label></td>
-               <td style="text-align:left;"><input type="hidden" value="${qdetail.faqNo}" name="faqNo">${qdetail.faqNo}</td>
+               <td style="text-align:left;"><input style="text-align:left;" type="hidden" value="${qdetail.faqNo}" name="faqNo">${qdetail.faqNo}</td>
             </tr>
             <tr>
-                <td><label>분류</label></td>
+																<td><label>분류</label></td>
+																<td><select style="height: 35px; width: 118px;"
+																	name="csGbCd" id="select"
+																	onchange="csselect(this.value);" class="form-control">
+																		<option>선택하세요</option>
+																		<option value="10" id="notic">공지사항</option>
+																		<option value="20" id="faq">FAQ</option>
+																</select></td>
+															</tr>
+															<tr id="selected">
+															</tr>
+            <tr>
+                <td style="vertical-align: middle;"><label>제목</label></td>
+                <td style="text-align:left;"><input type="text" name="sub" value="${qdetail.sub}" id="text" class="form-control"></td>
+            </tr>
+            <tr>
+                <td><label>내용</label></td>
                 <td>
-                    <select style="height:35px; width:118px;" name="csGbCd" id="select" onchange="csselect(this.value);" class="form-control">
-                       <option>선택하세요</option>
-                       <option value="20" id="faq">FAQ</option>
-                    </select>
-                </td>
-            </tr>
-            <tr id="selected">
-               <!-- <td><label for="">FAQ분류</label></td>
-                  <td>
-                   <select style="height:26px; width:85px;" name="csClassGbCd">
-                        <option value="" selected="selected">FAQ항목</option>
-                        <option value="1">주문</option>
-                       <option value="2">배송</option>
-                       <option value="3">결제</option>
-                       <option value="4">교환취소</option>
-                       <option value="5">회원정보</option>
-                       <option value="6">기타</option>
-                 </select> 
-               </td> -->
-            </tr>
-            <tr>
-                <td style="vertical-align: middle;"><label for="sub" >제목</label></td>
-                <td style="text-align:left;"><input type="text" class="form-control" name="sub" id="text" value="${qdetail.sub }"/></td>
-            </tr>
-            <tr>
-                <td><label for="id" >내용</label></td>
-                <td style="text-align:left;">
-                   <textarea id="editor" name="content" class="form-control" style="resize:none; height:250px;width:100%;"></textarea>
-                   <!-- <script>
+                   <textarea class="form-control" id="editor" name="content" style="resize:none; height:250px;width:100%;"></textarea>
+                <!--    <script>
                          ClassicEditor
                        .create( document.querySelector( '#editor' ),{removePlugins: [ 'ImageUpload' ]
                      })
@@ -192,7 +181,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="text-align:right; width:200px;" >
+                <td style="text-align:right; width:200px;">
                    <input class="btn btn-primary" type="submit" value="수정"/>
                    <input class="btn btn-default" id="cancel" type="reset" value="취소">
                 </td>

@@ -86,7 +86,7 @@ public class MngActController {
 	* 
 	* @param  ProductVo - 상품
 	* @return ModelAndView 
-	* @author 황인준
+	* @author 강민수
 	* @exception 
 	*/
 	@RequestMapping(value = "/actInsertPage")
