@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				<div id="right_align" class="col-xs-6">
-					<a data-toggle="modal" data-target="#id_pw_find" href="#">아이디/비밀번호찾기</a>
+					<a id="findid" style="color:black;" data-toggle="modal" data-target="#id_pw_find" href="#">아이디/비밀번호찾기</a>
 				</div>
 			</div>
 
@@ -67,7 +67,7 @@
 					<h4 class="modal-title" id="idPwFindTitle">계정 정보 찾기</h4>
 				</div>
 				<div class="modal-body">
-					<div id="find_tab">
+					<div style="inline-block" id="find_tab">
 						<button id="id_tab" type="button" class="btn btn-default" disabled>아이디 찾기</button>
 						<button id="pw_tab" type="button" class="btn btn-default">비밀번호 찾기</button>
 					</div>
@@ -163,15 +163,17 @@
 						<h4 class="modal-title">비밀번호 변경</h4>
 					</div>
 					<div class="modal-body">
-						<div>
-							<input type="password" placeholder="비밀번호" name="pw1" id="pw1"/>
+						<div style="display:inline-block;" class="pwdiv">
+							<div style="padding:3px; font-weight:bolder;">새로운 비밀번호 </div>
+							<div style="padding:3px; font-weight:bolder;">비밀번호 확인 </div>		
 						</div>
-						<div>
-							<input type="password" placeholder="비밀번호확인" name="pw2" id="pw2"/>
+						<div style="display:inline-block;" class="pwdiv">
+							<div style="margin-bottom:2px;"><input  type="password" placeholder="비밀번호" name="pw1" id="pw1"/></div>
+							<div><input  type="password" placeholder="비밀번호확인" name="pw2" id="pw2"/></div>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button id="pw_change_btn" type="button" class="btn btn-default btn-block"">비밀번호 변경</button>
+						<button style="background-color:black; color:white;" id="pw_change_btn" type="button" class="btn btn-default btn-block">비밀번호 변경</button>
 					</div>
 				</div>
 				<!-- /.modal-content -->

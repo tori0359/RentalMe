@@ -84,6 +84,9 @@
 		font-size: 15pt;
 		font-weight: bolder;
 	}
+	.titlediv{
+            height:40px;
+      }
 </style>
 <jsp:include page="../../template/headerMp.jsp"></jsp:include>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -232,6 +235,7 @@
 </script>
 </head>
 <body>
+<div style="height:100%;">
 	<div>
 	<div class="titlediv">
        <p id="title2">경매내역</p>
@@ -306,6 +310,7 @@
        	</tbody>
        	</table>
        </div>
+       </div>
        <div class="hr" style="height:2px;"></div>
        <c:forEach items="${alist }" var="bean" varStatus="status">
       <!-- 결제하기 모달 -->
@@ -356,6 +361,7 @@
 			</div>
     	</div>
 	</div>
+	
 	<!-- 모달 끝 -->		
 	</c:forEach>
 	<!-- 포기 모달 -->

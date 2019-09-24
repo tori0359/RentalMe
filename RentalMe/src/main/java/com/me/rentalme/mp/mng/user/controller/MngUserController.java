@@ -42,12 +42,6 @@ public class MngUserController {
 	@Inject
 	MngService mngService; 
 	
-	@Inject
-	CsService csService;
-	
-	@Inject
-	MpUserService mpUserService;
-	
 	/**
 	* 사용자 리스트
 	* 
@@ -89,34 +83,9 @@ public class MngUserController {
 	}
 	
 	/**
-	 * @throws SQLException 내 문의 상세
-	 * 
-	 * @param @return ModelAndView @author 강민수 @exception
-	 */
-	@RequestMapping(value = "/questDetail")
-	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
-		
-		ModelAndView mav = new ModelAndView();
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		csVo.setPquestNo(pquestNo);
-		
-		csService.selectReply(csVo.getPquestNo());
-		System.out.println("답글은..."+csVo.getReplyContent());
-		mav.addObject("levelGbCd",userLevel);
-		mav.addObject("bean", mpUserService.myInqDetail(csVo));
-		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
-		mav.addObject("id", user);
-		mav.setViewName("mp/manager/mngQuestDetail");
-		return mav;
-	}
-	
-	/**
 	* 사용자 탈퇴하기
 	* (이슈사항 : id를 primarykey로 잡고 있기 때문에 ''로 업데이트 시 키중복 오류가 남)
+	* 
 	* @param  String mbNo - 회원번호
 	* @return String  
 	* @author 황인준
@@ -132,5 +101,23 @@ public class MngUserController {
 		
 		return msg;
 	}
-
+	
+	/**
+	* 사용자 초기화(정지된 사용자 계정해제)
+	* 
+	* @param  String mbNo - 회원번호
+	* @return String  
+	* @author 황인준
+	* 등록일자 : 2019-09-24
+	* 
+	*/
+	@RequestMapping(value="/userInit", method = RequestMethod.POST)
+	public @ResponseBody String initUserInfo(@RequestParam String mbNo) {
+		log.debug("정지된 사용자 계정해제");
+		
+		//계정 초기화
+		String msg = mngService.initUserInfo(mbNo);
+		
+		return msg;
+	}
 }

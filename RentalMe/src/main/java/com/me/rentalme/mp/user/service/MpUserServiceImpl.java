@@ -219,4 +219,10 @@ public class MpUserServiceImpl implements MpUserService{
 		return mpUserDao.myInquiryListCnt(session);
 	}
 
+	//È¸¿ø Å»Åð
+	@Override
+	public int dropMember(String mbNo) throws SQLException {
+		return mpUserDao.deleteMember(mbNo);
+	}
+
 }

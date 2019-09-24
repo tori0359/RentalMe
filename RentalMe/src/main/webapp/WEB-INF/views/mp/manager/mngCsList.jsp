@@ -88,7 +88,11 @@
 											<tr>
 												<td><input type="hidden" name="num" value="${bean.noticNo}"/>${bean.noticNo}</td>
 												<td>공지</td>
-												<td><a style="text-decoration:none" href="${pageContext.request.contextPath}/cs/csNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">${bean.sub}</a></td>
+												<td>
+													<a style="text-decoration:none" href="mngCsNoticeDetail?noticNo=${bean.noticNo}&csGbCd=${bean.csGbCd}">
+														${bean.sub}
+													</a>
+												</td>
 												<td>${bean.regDt}</td>
 												<td><input id="${bean.noticNo }" class="btn btn-danger btn-sm" onclick="delNotice(this.id)" value="삭제"/></td>
 											</tr>

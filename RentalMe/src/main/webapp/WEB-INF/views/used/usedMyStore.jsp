@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="usedStore">
-	<h2 id="topStore">${userNm }님의 상점</h2>
+	<h2 id="topStore"><span>${userNm }&nbsp;</span>님의 상점</h2>
 	<div>
 		<div class="hideenMbNo">${mbNo }</div>
 		<div class="hiddenLoginId">${loginMbNo}</div>
@@ -72,7 +72,7 @@
 			<div id="textAreaInput" >
 			<textarea class="form-control" name="content" rows="3"></textarea>
 			</div>
-			<button id="rviBtn" class="btn btn-default btn-lg btn-block" type="submit">후기등록</button>
+			<button style="background-color:black; margin-top:20px; color:white;" id="rviBtn" class="btn btn-lg btn-block" type="submit">후기등록</button>
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
 		<div class="storeCmtList">
