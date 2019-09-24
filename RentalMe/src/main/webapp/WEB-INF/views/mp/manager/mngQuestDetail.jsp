@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>RentalMe - 공지사항 수정하기</title>
+	<title>RentalMe - 1:1문의 상세보기</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -26,45 +27,72 @@
     <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMng.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
-	<style type="text/css">
-		 
-	     #text{
-	     	width:80%;
-	     }
-	     #csContent{
-	     		margin-top:100px;
-	     }
-	     #daeButton{
-	     	text-align:right;
-	     	padding:8px 180px 8px 8px;
-	     }
-	     h2{
-	     	padding:0px 0px 35px 20px;
-	     }
-	     #daeContent tr>td:nth-child(1){
-	     	width:250px;
-	     	text-align:center;
-	     }
-	     #selected{
-	     	display:visible;
-	     }
-	    .ck-editor__editable {
-	  			  min-height: 250px;
-		}
-		.ck.ck-editor {
-		    max-width: 690px;
-		}
-	</style>
-	<script type="text/javascript">
-		window.onload=function(){
-			$("#cancel").click(function(){
-				history.back();
+	
+<script type="text/javascript">
+	 	$(document).ready(function(){
+			$("#back").click(function(){
+					window.history.back();
 			})
-		};
+			$("#list").click(function(){
+					location.href="/mp/mng/InqList";
+			})
+		})
 	</script>
+<style type="text/css">
+        #daeContent{
+        	margin-top:70px;
+        }
+       
+        #daeContent tr>td:nth-child(1){
+            width:15%;
+        }
+        #daeContent tr>td:nth-child(2){
+            width:85%;
+        }
+        #daeButton input{
+            float:right;
+            margin:5px 10px 5px 10px;
+        }
+       
+        #daeButton>button:nth-child(1){
+        
+        }
+        textarea{
+            width:100%;
+            height:250px;
+        }
+        #content{
+        	height:600px;
+        }
+        #answer{
+        	margin-top:20px;
+        	margin-right:10px;
+        	padding-top:-20px;
+        	margin-bottom:-55px;
+        	
+        }
+        #answer button{
+        	border-radius:5px;
+        	background:white;
+        	color:red;
+        	border-radius:5px;
+        	
+        }
+        #comment{
+        	font-size:2em;
+        	font-style: italic;
+        	font-weight: bold;
+        	border-bottom:1px solid;
+        	
+        }
+        #replyed{
+        	font-size:18px;
+        	font-weight:lighter;
+        }
+	</style>
 </head>
 <body>
 	<!-- ============================================================== -->
@@ -78,17 +106,15 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="page-header">
-						<h2 class="pageheader-title">공지사항 수정 폼</h2>
+						<h2 class="pageheader-title">1:1문의 상세보기</h2>
 						<div class="page-breadcrumb">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#"
 										class="breadcrumb-link">고객센터관리</a></li>
 									<li class="breadcrumb-item"><a href="#"
-										class="breadcrumb-link">공지사항</a></li>
-									<li class="breadcrumb-item"><a href="#"
-										class="breadcrumb-link">공지사항 상세보기</a></li>
-									<li class="breadcrumb-item active" aria-current="page">공지사항 상세보기</li>
+										class="breadcrumb-link">1:1문의관리</a></li>
+									<li class="breadcrumb-item active" aria-current="page">1:1문의관리 상세보기</li>
 								</ol>
 							</nav>
 						</div>
@@ -103,49 +129,85 @@
 				<!-- start table  -->
 				<!-- ============================================================== -->
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<form action="/mp/mng/csNoticeUpdate" method="post">
-						<div class="card">
-							<h5 class="card-header"></h5>
-							<div id="csContent">
-								<h2>공지/FAQ등록</h2>
+					<div class="card">
+						<h5 class="card-header"></h5>
+						<div id="content">
+							<div class="col-md-10 col-md-offset-1">
+								<div id="comment">Inquiries</div>
 								<table class="table" id="daeContent">
 									<tr>
-										<td><label for="">작 성 자</label></td>
-										<td>관 리 자</td>
+										<td align="center"><label for="id">글 번 호</label></td>
+										<td><input type="hidden" name="mbNo" value="${bean.mbNo}"><input
+											type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
+
 									</tr>
 									<tr>
-										<td><label>글 번 호</label></td>
-										<td><input type="hidden" value="${detail.noticNo}"
-											name="noticNo">${detail.noticNo}</td>
+										<td align="center"><label>분류</label></td>
+										<c:if test="${bean.csClassGbCd eq '1'}">
+											<td>주문</td>
+										</c:if>
+										<c:if test="${bean.csClassGbCd eq '2'}">
+											<td>배송</td>
+										</c:if>
+										<c:if test="${bean.csClassGbCd eq '3'}">
+											<td>결제</td>
+										</c:if>
+										<c:if test="${bean.csClassGbCd eq '4'}">
+											<td>교환취소</td>
+										</c:if>
+										<c:if test="${bean.csClassGbCd eq '5'}">
+											<td>회원정보</td>
+										</c:if>
+										<c:if test="${bean.csClassGbCd eq'6'}">
+											<td>기타</td>
+										</c:if>
 									</tr>
 									<tr>
-										<td><label>분류</label></td>
-										<td><input type="hidden" name="csGbCd"
-											value="${detail.csGbCd}"> 공지사항</td>
+										<td align="center"><label>제목</label></td>
+										<td>${bean.sub}</td>
 									</tr>
 									<tr>
-										<td style="vertical-align: middle;"><label>제목</label></td>
-										<td><input type="text" name="sub" value="${detail.sub}"
-											id="text" class="form-control"></td>
-									</tr>
-									<tr>
-										<td><label>내용</label></td>
-										<td><textarea id="editor" name="content" class="form-control"
-												style="resize: none"></textarea> 
-												<script>
-												   		 ClassicEditor
-												        .create( document.querySelector( '#editor' ),{removePlugins: [ 'ImageUpload' ]
-												      }).catch( error => {
-												            console.error( error );
-												        } );
-												 </script></td>
+										<td style="padding-top: 70px;" align="center"><label>내용</label></td>
+										<td style="height: 150px; padding-top: 70px;">${bean.content}</td>
 									</tr>
 								</table>
+								<br />
+								<div>
+									<c:if test="${reply.replyContent ne null }">
+									</c:if>
+									<div id="comment">Comment</div>
+									<c:if test="${levelGbCd=='2'}">
+										<c:if test="${bean.questStsCd=='1'}">
+											<form action="/mp/mng/csInqReply" method="get">
+												<div class="col-md-10 col-md-offset-1">
+													<br /> <br /> <br /> <input
+														style="width: 100%; margin-top: -10px;" type="text"
+														class="form-control" id="repleContentInput"
+														name="replyContent" placeholder="답글을 달아주세요(엔터로 입력)" />
+												</div>
+												<input type="hidden" name="pquestNo"
+													value="${bean.pquestNo}" /> <input type="hidden"
+													name="mbNo" value="${bean.mbNo}" />
+											</form>
+										</c:if>
+									</c:if>
+
+									<div id="replyed" class="col-md-offset-2">
+										<br /> <br /> <span></span><span style="font-weight: bold;">${reply.replyContent}</span><span></span>
+									</div>
+								</div>
 							</div>
 						</div>
-						<input class="btn btn-primary" type="submit" value="수정" style="float:right;margin-left: 5px;"/> 
-						<input class="btn btn-default" id="cancel" type="reset" value="취소" style="float:right;"/>
-					</form>
+					</div>
+					<div id="daeButton">
+						<c:if test="${levelGbCd=='1'}">
+							<input class="btn btn-primary" type="reset" id="back" value="뒤로">
+						</c:if>
+						<c:if test="${levelGbCd=='2'}">
+							<input class="btn btn-primary" type="reset" id="list"
+								value="목록으로">
+						</c:if>
+					</div>
 				</div>
 				<!-- ============================================================== -->
 				<!-- end table  -->
@@ -161,6 +223,5 @@
 	<!-- ============================================================== -->
 	<!-- end main wrapper  -->
 	<!-- ============================================================== -->
-
 </body>
 </html>

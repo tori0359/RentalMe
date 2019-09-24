@@ -266,7 +266,6 @@
 		window.location.href='/act/';
 	};
 	$(function(){
-		$('#sendMsg').attr('disabled', true);
 		if($('#hiddenStsCd').val()=='1'){
 			alert('아직 경매가 열리지않았습니다');
 			window.location.href="/act/";

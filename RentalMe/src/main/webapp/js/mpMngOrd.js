@@ -1,4 +1,5 @@
 $(function(){
+	
 	  
 	// 입금확인 모달
     $('#myModal').on('shown.bs.modal', function (e) {
@@ -17,6 +18,7 @@ $(function(){
 		$(e.currentTarget).find('input[name="odrNo"]').val(odrNo);
 		//$(e.currentTarget).find('input[name="odrStsGbCd"]').val("PC");
     });		
+   
 });
 /**************************/
 /**** 전역변수 선언시작 ***/

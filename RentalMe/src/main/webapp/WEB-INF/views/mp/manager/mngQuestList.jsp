@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>RentalMe - 회원 상담 리스트</title>
+	<title>RentalMe - 상담 리스트</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -49,12 +49,12 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">회원상담관리</h2>
+                            <h2 class="pageheader-title">상담관리</h2>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">고객센터관리</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">회원상담관리관리</li>
+                                        <li class="breadcrumb-item active" aria-current="page">상담관리</li>
                                     </ol>
                                 </nav>
                             </div>

@@ -23,9 +23,16 @@ public class CsDaoImpl implements CsDao {
 	SqlSession sqlSession; 
 	
 	@Override
-	public List<CsVo> faqSelectAll(Search search) throws SQLException {
+	public List<CsVo> faqSelectAll() throws SQLException {
 		
-		return sqlSession.selectList("csCenter.faqSelectAll",search);
+		
+		return sqlSession.selectList("csCenter.faqSelectAll");
+	}
+	
+	@Override
+	public List<CsVo> faqSelectAll(Search search) throws SQLException {
+	
+		return sqlSession.selectList("csCenter.faqSelectAll", search);
 	}
 
 	
@@ -89,15 +96,19 @@ public class CsDaoImpl implements CsDao {
 
 
 	@Override
-	public List<CsVo> noticeSelectAll(Paging paging) throws SQLException {
-		return sqlSession.selectList("csCenter.noticeSelectAll",paging);
+	public List<CsVo> noticeSelectAll() throws SQLException {
+		return sqlSession.selectList("csCenter.noticeSelectAll");
+	}
+	
+	@Override
+	public List<CsVo> noticeSelectAll(Paging csPaging) throws SQLException {
+		return sqlSession.selectList("csCenter.noticeSelectAll", csPaging);
 	}
 
 
 	@Override
-	public List<CsVo> inqSelectAll(Paging paging) throws SQLException {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("csCenter.inqSelectAll",paging);
+	public List<CsVo> inqSelectAll() throws SQLException {
+		return sqlSession.selectList("csCenter.inqSelectAll");
 	}
 
 	@Override
@@ -214,7 +225,6 @@ public class CsDaoImpl implements CsDao {
 
 	@Override
 	public UserVo userLevel(String userLevel) {
-		System.out.println("´Ù¿ì");
 		return sqlSession.selectOne("csCenter.userLevel",userLevel);
 	}
 

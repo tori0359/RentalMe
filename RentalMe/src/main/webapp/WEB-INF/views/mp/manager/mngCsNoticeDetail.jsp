@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="true" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>RentalMe - 주문상세</title>
+<meta charset="UTF-8">
+	<title>RentalMe - 공지사항 상세보기</title>
 	<jsp:include page="../../template/main.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
@@ -29,14 +28,54 @@
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMng.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.pagination').remove();
-			$('.dataTables_info').remove();
-		});
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
+
+<script type="text/javascript">
+	 	$(document).ready(function(){
+			$("#cancel").click(function(){
+					window.history.back();
+			})
+			
+		})
 	</script>
+<style type="text/css">
+        #daeContent{
+        	margin-top:70px;
+        }
+       
+        #daeContent tr>td:nth-child(1){
+            width:15%;
+        }
+        #daeContent tr>td:nth-child(2){
+            width:85%;
+        }
+        #daeButton input{
+            float:right;
+             margin:5px 10px 5px 10px;
+            /*background:white;
+            border-radius:5px;
+            outline:none; */
+        } 
+       
+        
+        textarea{
+            width:100%;
+            height:250px;
+        }
+        #content{
+        	height:600px;
+        }
+        #content tr>td:nth-child(1){
+        	text-align:center;
+        }
+        #comment{
+        	font-size:2em;
+        	font-style: italic;
+        	font-weight: bold;
+        	border-bottom:1px solid;
+        }
+	</style>
 </head>
 <body>
 	<!-- ============================================================== -->
@@ -50,83 +89,69 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="page-header">
-						<h2 class="pageheader-title">주문 상세보기</h2>
-                        <div class="page-breadcrumb">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">주문관리</a></li>
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">주문관리</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">주문관리 상세보기</li>
-                                </ol>
-                            </nav>
-                        </div>
+						<h2 class="pageheader-title">공지사항 상세보기</h2>
+						<div class="page-breadcrumb">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#"
+										class="breadcrumb-link">고객센터관리</a></li>
+									<li class="breadcrumb-item"><a href="#"
+										class="breadcrumb-link">공지사항</a></li>
+									<li class="breadcrumb-item active" aria-current="page">공지사항 상세보기</li>
+								</ol>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
 			<!-- ============================================================== -->
 			<!-- end pageheader -->
 			<!-- ============================================================== -->
-
 			<div class="row">
-			<div class="titlediv">
-		       <p id="title""><span>&nbsp;&nbsp;&nbsp;&nbsp;결제번호:${ordNo }</span></p>
-		     </div>
 				<!-- ============================================================== -->
 				<!-- start table  -->
 				<!-- ============================================================== -->
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<form action="/mp/mng/csNoticeUpdatePage">
 						<div class="card">
-							<h5 class="card-header">주문 상세보기</h5>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
+							<h5 class="card-header"></h5>
+							<div id="content">
+								<div class="col-md-10 col-md-offset-1">
+									<div id="comment">Notice-Content</div>
+									
+										<table class="table" id="daeContent">
 											<tr>
-												<th>주문상품</th>
-												<th>개당금액</th>
-												<th>수량</th>
-												<th>금액</th>
+												<td><label for="id">작 성 자</label></td>
+												<td>관리자</td>
 											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${alist }" var="bean">
-									     	<tr>
-									     		<td>${bean.gdsNm }</td>
-									     		<td><fmt:formatNumber value="${bean.gdsPrice }" pattern="#,###.##"/>원</td>
-									     		<td>${bean.odrQty }</td>
-									     		<td><fmt:formatNumber value="${bean.odrAmt }" pattern="#,###.##"/>원 </td> 
-									     	</tr>
-									     	<c:set var="total" value="${total +bean.odrAmt }"/>
-									     	</c:forEach>
-									     	<tr>
-									     		<td></td>
-									     		<td></td>     		
-									     		<th>총합</th>
-									     		<th><fmt:formatNumber value="${total }" pattern="#,###.##"/>원</th> 
-									     	</tr>
-										</tbody>
-									</table>
-									<div>
-										배송정보
-									</div>
-									<table class="table table-bordered">
-							             <tr>
-							             	<th>이름</th>
-							             	<td>${info.userNM }</td>
-							             </tr>
-							             <tr>
-							             	<th>전화번호</th>
-							             	<td>${info.hp }</td>
-							             </tr>
-							             <tr>
-							             	<th>주소</th>
-							             	<td>${info.addr }<br/>${info.addrDetail }</td>
-							             </tr>
-							          </table>
+											<tr>
+												<td><label for="id">글 번 호</label></td>
+												<td><input type="hidden" name="noticNo"
+													value="${adetail.noticNo}">${adetail.noticNo}</td>
+												<td><input type="hidden" name="csGbCd"
+													value="${adetail.csGbCd}"></td>
+											</tr>
+											<tr>
+												<td><label>작성일</label></td>
+												<td>${adetail.regDt}</td>
+											</tr>
+											<tr>
+												<td><label>제목</label></td>
+												<td><input type="hidden" value="${adetail.sub}">${adetail.sub}</td>
+											</tr>
+											<tr>
+												<td style="height: 120px; vertical-align: middle;"><label>내용</label></td>
+												<td style="vertical-align: middle;"><input
+													type="hidden" value="${adetail.content}">${adetail.content}</td>
+											</tr>
+										</table>
 								</div>
 							</div>
 						</div>
-						<a href="/mp/mng/list" class="btn btn-success btn-sm" style="float: right;">목록으로</a>
+						<input class="btn btn-primary btn-lg" id="cancel" type="reset" value="뒤로" style="float:right;margin-left: 5px;" />
+						<input class="btn btn-primary btn-lg" id="updae" type="submit" value="수정" style="float:right;"  />
+					</form>
+					
 				</div>
 				<!-- ============================================================== -->
 				<!-- end table  -->

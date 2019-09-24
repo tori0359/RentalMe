@@ -30,8 +30,8 @@
    <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
    <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
    
-   <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngOrd.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
+   <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngOrd.js"></script>
 </head>
 <body>
  		<!-- ============================================================== -->
@@ -80,7 +80,9 @@
 								                <th>회원명</th>
 								                <th>주문금액</th>
 								                <th>주문상태</th>
-								                <th>상세보기</th>
+								                <c:if test="${sub eq '주문'}">
+								                	<th>상세보기</th>
+								                </c:if>
                                             </tr>
                                         </thead>
 	                                    <tbody>
@@ -132,11 +134,13 @@
 																disabled="disabled">반품완료</button>
 														</c:if>
 													</td>
+													<c:if test="${sub eq '주문'}">
 													<td style="vertical-align: middle;">
-													<a style="background: #151515; color: white;" type="button"
-														class="btn" style="font-size: 9pt;"
-														href="/mp/mng/detail/${bean.odrNo }">상세보기</a>
+														<a style="background: #151515; color: white;" type="button"
+															class="btn" style="font-size: 9pt;"
+															href="/mp/mng/detail/${bean.odrNo }">상세보기</a>
 													</td>
+													</c:if>
 												</tr>
 											</c:forEach>
 									</tbody>

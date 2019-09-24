@@ -240,6 +240,19 @@ public class MngDaoImpl implements MngDao{
 	public int updUserinfo(String mbNo) {
 		return sqlSession.update("mpMng.updUserInfo", mbNo);
 	}
+	
+	/**
+	* 사용자 관리 - 계정 초기화
+	* 
+	* @param  String mbNo - 회원번호
+	* @return int - 결과값(성공 : 1, 실패 : 0)
+	* @author 황인준
+	* 등록일자 : 2019.09.24
+	*/	
+	@Override
+	public int updateUserInfoInit(String mbNo) {
+		return sqlSession.update("mpMng.updUserInfoInit", mbNo);
+	}
 
 	/**
 	* 사용자 상세정보 Dao
@@ -341,5 +354,7 @@ public class MngDaoImpl implements MngDao{
 	public int updateQuest(String questNo) throws SQLException {
 		return sqlSession.update("mpMng.updateQuest", questNo);
 	}
+
+
 	
 }

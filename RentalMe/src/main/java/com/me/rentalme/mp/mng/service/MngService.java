@@ -42,7 +42,8 @@ public interface MngService {
 	List<UserVo> getUserInfo();												//사용자관리 - 사용자 리스트 
 	String delUserInfo(String mbNo);										//사용자관리 - 사용자 탈퇴하기
 	UserVo getUserDetail(String mbNo);										//사용자관리 - 사용자 상세정보	
-	int getMngUserListCnt();												//사용자관리 - 사용자관리 총인원 조회			
+	int getMngUserListCnt();												//사용자관리 - 사용자관리 총인원 조회		
+	String initUserInfo(String mbNo);										//사용자관리 - 계정초기화
 
 	////추가--------------
 	//상품 리스트
@@ -82,4 +83,5 @@ public interface MngService {
 	
 	List<QuestVo> selectQuestList() throws SQLException;						//관리자 회원 상담관리 리스트 출력
 	int updateQuest(String questNo) throws SQLException;						//관리자 회원 상담 확인
+	
 }

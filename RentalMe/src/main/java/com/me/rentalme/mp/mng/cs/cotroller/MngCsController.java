@@ -1,6 +1,7 @@
 package com.me.rentalme.mp.mng.cs.cotroller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,7 @@ import com.me.rentalme.cs.paging.Search;
 import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.ProductVo;
 import com.me.rentalme.model.entity.UserVo;
+import com.me.rentalme.mp.user.service.MpUserService;
 
 
 /**
@@ -42,6 +44,9 @@ public class MngCsController {
 	@Inject
 	CsService csService;
 	
+	@Inject
+	MpUserService mpUserService;
+	
 	Logger log = LoggerFactory.getLogger(getClass());
 	
 	/**
@@ -54,35 +59,11 @@ public class MngCsController {
 	* @exception 
 	*/
 	@RequestMapping(value = "/csNoticeList", method = RequestMethod.GET)
-	public ModelAndView getCsNotice(HttpSession session,Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		log.debug("공지/FAQ 컨트롤러");
+	public ModelAndView getCsNotice() throws SQLException {
+		log.debug("공지 리스트 컨트롤러");
 		ModelAndView mav = new ModelAndView();
-		pagingPath="/mp/mng";
-		pagingPath+="/csNoticeList";
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		mav.addObject("levelGbCd",userLevel);
-		int listCnt=csService.noticListCnt();
 		
-		Paging csPaging=new Paging();
-		
-		csPaging.pageInfo(page, range, listCnt);
-		
-	
-		
-		System.out.println("mapping..");
-		
-		// 세션받아오기
-		String userId=(String)session.getAttribute("loginUserId");
-		mav.addObject("id", userId);
-		
-		mav.addObject("alist", csService.csNoticeList(csPaging));
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", csPaging);
+		mav.addObject("alist", csService.csNoticeList());
 		
 		mav.setViewName("/mp/manager/mngCsList");
 		return mav;
@@ -90,37 +71,12 @@ public class MngCsController {
 	
 	//FAQ리스트
 	@RequestMapping(value = "/csFaqList", method = RequestMethod.GET)
-	public ModelAndView getCsFaq(HttpSession session,Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
-		log.debug("공지/FAQ 컨트롤러");
-		
-		pagingPath="/mp/mng";
-		pagingPath+="/csFaqList";
+	public ModelAndView getCsFaq() throws SQLException {
+		log.debug("FAQ 리스트 컨트롤러");
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		mav.addObject("levelGbCd",userLevel);
-		
-		Search search=new Search();
-		int listCnt=csService.faqListCnt1(search);
-		
-		Paging csPaging=new Paging();
-		
-		csPaging.pageInfo(page, range, listCnt);
-		
-		String userId=(String)session.getAttribute("loginUserId");
-		mav.addObject("id", userId);
-		
-		
-		System.out.println("mapping..");
-		mav.addObject("blist", csService.csFaqList(search));
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", csPaging);
+		mav.addObject("blist", csService.csFaqList());
 		
 		mav.setViewName("/mp/manager/mngCsFaqList");
 		return mav;
@@ -136,41 +92,15 @@ public class MngCsController {
 	 * @exception 
 	 */
 	@RequestMapping(value = "/InqList", method = RequestMethod.GET)
-	public ModelAndView getQuestList(HttpSession session,CsVo csVo,Model model,
-			@RequestParam(required = false, defaultValue = "1")int page, @RequestParam(required = false, defaultValue = "1")int range) throws SQLException {
+	public ModelAndView getQuestList(HttpSession session,CsVo csVo,Model model) throws SQLException {
 		log.debug("문의 보기 컨트롤러...");
-		
-		pagingPath="/mp/mng";
-		pagingPath+="/InqList";
 		
 		ModelAndView mav = new ModelAndView();
 		
-		String user = (String) session.getAttribute("loginUserId");
-		String mbNo = (String) session.getAttribute("loginMbNo");
-		UserVo userVo = csService.userLevel(mbNo);
-		String userLevel = userVo.getLevelGbCd();
-		System.out.println(userLevel);
-		mav.addObject("levelGbCd",userLevel);
+		mav.addObject("inqlist", csService.csInqList());
 		
-		
-		
-		int listCnt=csService.inquiryListCnt();
-		System.out.println("inq리스트 갯수:"+listCnt);
-		
-		Paging csPaging=new Paging();
-		
-		csPaging.pageInfo(page, range, listCnt);
-		
-		
-		mav.addObject("inqlist", csService.csInqList(csPaging));
-		
-		System.out.println("list뽑고 넘기기");
-		String userId=(String)session.getAttribute("loginUserId");
-		mav.addObject("id", userId);
-		
-		model.addAttribute("pathPaging",pagingPath);
-		model.addAttribute("paging", csPaging);
 		mav.setViewName("mp/manager/mngCsQuestList");
+		
 		return mav;
 	}
 	
@@ -214,40 +144,50 @@ public class MngCsController {
 	
 	/**
 	 * @throws SQLException 
-	*  공지/FAQ 삭제
+	*  공지 삭제
 	* 
-	* @param  ProductVo - 상품
-	* @return ModelAndView 
+	* @param  String num - 게시판번호
+	* @return String msg - 성공 실패 msg
 	* @author 강민수
-	* @exception 
+	* 수정자   : 황인준
+	* 수정일자 : 2019-09-23 
 	*/
 	@RequestMapping(value="/noticeDelete", method=RequestMethod.POST)
-	public ModelAndView nolistdel(@RequestParam("num") String num) throws SQLException {
-		System.out.println(num);
-		csService.noticDel(num);
-		ModelAndView  mav=new ModelAndView("redirect:/mp/mng/csNoticeList");
-		return mav;
+	public @ResponseBody String nolistdel(@RequestParam("noticNo") String num) throws SQLException {
+
+		String msg = csService.noticDel(num);
+	
+		return msg;
 	}
 	
+	/**
+	 * @throws SQLException 
+	*  FAQ 삭제
+	* 
+	* @param  String num - 게시판번호
+	* @return String msg - 성공 실패 msg
+	* @author 강민수
+	* 수정자   : 황인준
+	* 수정일자 : 2019-09-23 
+	*/
 	@RequestMapping(value="/faqDelete", method=RequestMethod.POST)
-	public ModelAndView falistdel(@RequestParam("num") String num) throws SQLException {
-		System.out.println(num);
-		csService.faqDel(num);
-		ModelAndView  mav=new ModelAndView("redirect:/mp/mng/csFaqList");
-		return mav;
+	public @ResponseBody String falistdel(@RequestParam("faqNo") String num) throws SQLException {
+		String msg = csService.faqDel(num);
+		return msg;
 	}
 	
 	
 	/**
-	 * @throws SQLException 
-	*  공지/FAQ 수정
+	*  공지사항 수정
 	* 
-	* @param  ProductVo - 상품
+	* @param HttpSession session
+	* @param CsVo csVo
 	* @return ModelAndView 
 	* @author 강민수
-	* @exception 
+	* 수정자 : 황인준
+	* 수정일자 : 2019-09-24
+	* @exception SQLException
 	*/
-	//notic수정페이지로 이동
 	@RequestMapping(value="/csNoticeUpdatePage")
 	public ModelAndView noticup(HttpSession session,CsVo csVo) throws SQLException{
 		
@@ -382,8 +322,59 @@ public class MngCsController {
 		csService.insertReply(csVo);
 		csService.inqAnswer(pquestNo);
 		
-		mav.setViewName("redirect:/mp/mp/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
+		mav.setViewName("redirect:/mp/mng/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
 		return mav;
+	}
+	
+	/**
+	 * 1:1문의 상세보기
+	 * 
+	 * @param  HttpSession session  
+	 * @param  CsVo csVo
+	 * @param  String pquestNo
+	 * @return ModelAndView 
+	 * @author 황인준 
+	 * 등록일자 : 2019-09-24
+	 */
+	@RequestMapping(value = "/questDetail")
+	public ModelAndView myQuestDetail(HttpSession session, CsVo csVo,@RequestParam("pquestNo") String pquestNo) throws SQLException {
+		
+		ModelAndView mav = new ModelAndView();
+		String user = (String) session.getAttribute("loginUserId");
+		String mbNo = (String) session.getAttribute("loginMbNo");
+		UserVo userVo = csService.userLevel(mbNo);
+		String userLevel = userVo.getLevelGbCd();
+		csVo.setPquestNo(pquestNo);
+		
+		csService.selectReply(csVo.getPquestNo());
+		mav.addObject("levelGbCd",userLevel);
+		mav.addObject("bean", mpUserService.myInqDetail(csVo));
+		mav.addObject("reply", csService.selectReply(csVo.getPquestNo()));
+		mav.addObject("id", user);
+		mav.setViewName("mp/manager/mngQuestDetail");
+		return mav;
+	}
+	
+	/**
+	 * 공지사항 상세보기
+	 * 
+	 * @param HttpSession session : get userId
+	 * @param CsVo csVo 
+	 * @return ModelAndView 
+	 * @author 황인준
+	 * 등록일자 : 2019-09-24
+	 */
+	@RequestMapping(value = "/mngCsNoticeDetail", method = RequestMethod.GET)
+	public ModelAndView csNoticeDetail(HttpSession session, CsVo csVo) throws Exception {
+
+		ModelAndView mav = new ModelAndView("mp/manager/mngCsNoticeDetail");
+		String userId = (String) session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
+		csService.csNoticeDetail(csVo);
+		mav.addObject("adetail", csService.csNoticeDetail(csVo));
+
+		return mav;
+
 	}
 	
 	

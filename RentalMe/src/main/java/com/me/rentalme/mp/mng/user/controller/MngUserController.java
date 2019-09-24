@@ -1,8 +1,10 @@
 package com.me.rentalme.mp.mng.user.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.me.rentalme.common.Paging;
+import com.me.rentalme.cs.entity.CsVo;
+import com.me.rentalme.cs.service.CsService;
 import com.me.rentalme.model.entity.UserVo;
 import com.me.rentalme.mp.mng.service.MngService;
+import com.me.rentalme.mp.user.service.MpUserService;
 
 /**
 * 마이페이지(관리자) - 사용자관리
@@ -80,6 +85,7 @@ public class MngUserController {
 	/**
 	* 사용자 탈퇴하기
 	* (이슈사항 : id를 primarykey로 잡고 있기 때문에 ''로 업데이트 시 키중복 오류가 남)
+	* 
 	* @param  String mbNo - 회원번호
 	* @return String  
 	* @author 황인준
@@ -95,5 +101,23 @@ public class MngUserController {
 		
 		return msg;
 	}
-
+	
+	/**
+	* 사용자 초기화(정지된 사용자 계정해제)
+	* 
+	* @param  String mbNo - 회원번호
+	* @return String  
+	* @author 황인준
+	* 등록일자 : 2019-09-24
+	* 
+	*/
+	@RequestMapping(value="/userInit", method = RequestMethod.POST)
+	public @ResponseBody String initUserInfo(@RequestParam String mbNo) {
+		log.debug("정지된 사용자 계정해제");
+		
+		//계정 초기화
+		String msg = mngService.initUserInfo(mbNo);
+		
+		return msg;
+	}
 }

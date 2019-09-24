@@ -4,13 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../../template/headerMp.jsp"></jsp:include>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
+<jsp:include page="../../template/headerMng.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">	
 	#uptext{
-		height:130px;
+		height:100px;
+		
 	}
 	#ansNo{
 		color:red;
@@ -18,71 +19,44 @@
 	#ansYe{
 		color:blue;
 	}
-	#contentTable th{
-		text-align:center;
-	}
-	#subText{
+	#aSub{
 		text-decoration:none;
 		color:black;
 	}
-	#subText:hover{
+	#aSub:hover{
 		color:red;
-		font-weight: bold;
 	}
-	#info{
-			width:93%;
-			margin:20px 0px 10px 20px;
-			border:4px solid #A4A4A4;
-			padding: 10px;
-		}
-	.titlediv{
-            height:40px;
-      }
-      #title2{
-	   		font-size: 15pt;
-	   		font-weight: bolder;
-	   		font-family: "nanumB";
-	   		margin: 60px 0 50px 0;;
-	   }
-      
+	#upMenu>th{
+		text-align:center;
+	}
 </style>
-<script>
-window.onload=function(){
-	$('#choosedel').click(function(){
-		
-		
-	 });
-}
-</script>
 </head>
 <body>
-<div style="height:100%;">
-	<div class="titlediv">
-		    <p id="title2">내 문의 보기</p>
-	</div>
-	<div class="hr" style="height:3px; background-color: black;"></div>
-	<div id="info">
-     <p class=" col-md-offset-1">
-     	<input type="hidden" value="${id}">
-	     	<p style="font-weight: bold;">연락 드리겠습니다</p>
-     </div>
+<c:choose>
+<c:when test="${levelGbCd eq '2'}">
+<div id="content" class="col-md-10 col-md-offset-1">
+<div  id="uptext">
+<h1>1:1 문의 관리</h1>
+		<div class="hr" style="height:3px; background-color: #2E2E2E;"></div>
+
+</div>
+
 	
 	
-	<table class="table table-hover" id="contentTable">
-		<tr class="active">
-			<th style="width:15%;">번호</th>
+	<table class="table table-hover">
+		<tr id="upMenu">
+			<th>회원번호</th>
+			<th>번호</th>
 			<th>제목</th>
 			<th>등록일</th>
 			<th>답변유무</th>
-			<th>삭제</th>
 		</tr>
 			<!-- <form action="" method="get"> -->
-			<c:forEach items="${mylist}" var="bean">
+			<c:forEach items="${inqlist}" var="bean">
 				<tr align="center">
-						<form action="/mp/mp/QuestDelete" method="get">
-						<td><input type="hidden" name="pquestNo" value="${bean.pquestNo}"/>
-						<input type="hidden" name="mbNo" value="${bean.mbNo}"/>${bean.pquestNo}</td>
-						<td style="text-align:left;"><a id="subText" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
+						<td>${bean.mbNo}</td>
+						<td><input type="hidden" name="num" value=""/>${bean.pquestNo}</td>
+						<td style="text-align:left"><a id="aSub" href="${pageContext.request.contextPath}/mp/mp/questDetail?pquestNo=${bean.pquestNo}&mbNo=${bean.mbNo}">${bean.sub }</a></td>
 						<td>${bean.regDt}</td>
 						<c:if test="${bean.questStsCd eq '1'}">
 							<td id="ansNo">N</td>
@@ -90,8 +64,6 @@ window.onload=function(){
 						<c:if test="${bean.questStsCd eq '2'}">
 							<td id="ansYe">Y</td>
 						</c:if>
-							<td style="text-align: center;"><input id="choosedel" class="btn btn-danger" type="submit" value="삭제"/></td>
-						</form>
 				</tr>
 			</c:forEach>
 			<!-- </form> -->
@@ -108,7 +80,7 @@ window.onload=function(){
 							</c:if>
 							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
 								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a style="cursor:pointer;" class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
+									<a class="page-link" onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
 										${idx} 
 									</a>
 								</li>
@@ -125,6 +97,11 @@ window.onload=function(){
 	</div>
 			
 </div>
+</c:when>
+<c:otherwise>
+<h1>관리자 전용</h1>
+</c:otherwise>
+</c:choose>
 </body>
 <jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>

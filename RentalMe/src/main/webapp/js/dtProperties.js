@@ -1,4 +1,18 @@
 $(function(){	
+	
+	var path 	= window.location.pathname;
+	
+	var sort   = '';
+	
+	//주문관리인경우
+	if(path == '/mp/mng/list'){
+		sort =  [ [ 1, "desc" ] ];
+	}
+	
+	if(path == '/mp/mng/userList'){
+		sort =  [ [ 0, "asc" ] ];
+	}
+	
 	$('#dt').DataTable({
 		/*기본 속성 적용*/
 		'paging' 		: true,					//페이징 사용 여부
@@ -33,6 +47,7 @@ $(function(){
 					        				},
 						},
 		
+						
 		/* 테이블 컬럼 표시 설정 */
 	    // 표시 건수를 10건 단위로 설정
 	    lengthMenu		: [ 10, 20, 30 ],
@@ -52,6 +67,8 @@ $(function(){
 //	    buttons			: [
 //	        'excel'
 //	    ]
+	        			
+	    order			: sort
 	        			
 	});
 });
