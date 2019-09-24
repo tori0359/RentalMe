@@ -55,12 +55,11 @@
 	#goUsedManager{
 	  display: inline-block;
 	  border-radius: 4px;
-	  background-color: #FFC50D;
+	  background-color: #151515;
 	  border: none;
 	  color: #FFFFFF;
 	  text-align: center;
 	  font-size: 20px;
-	  padding: 20px;
 	  width: 200px;
 	  transition: all 0.5s;
 	  cursor: pointer;
@@ -68,6 +67,8 @@
 	  float: right;
 	  margin-top: -30px;
 	  margin-bottom: 20px;
+	  height:40px;
+	  line-height:40px;
 	}
 	#goUsedManager span {
 	  cursor: pointer;
@@ -113,9 +114,9 @@
 		margin-left: 10px;
 	}
 	#form_tab{
-		margin-top: 50px;
+		margin-top: 60px;
 		clear: both;
-		margin-bottom: 100px;
+		margin-bottom: 50px;
 	}
 	#form_tab .tabcl:last-child .tab_btn{
 		border-right: 1px solid black;
@@ -130,7 +131,10 @@
 		outline: 0;
 		background-color: white;
 		color: black;
+		height:35px;
 		border-left: 1px solid black;
+		font-size: 13pt;
+		font-weight:bolder;
 	}
 
 
@@ -229,6 +233,12 @@
   width:100%;
   transition:800ms ease all;
 }
+#titletag{
+	color:black;
+}
+#titletag:hover{
+	text-decoration:none;
+}
 
 </style>
 <script type="text/javascript">
@@ -312,9 +322,17 @@
 </script>
 </head>
 <body>
-<div class="usedList">
+<div style="border: 0px solid green;"class="usedList container">
 	<input id="checkMbno" type="hidden" value="${loginMbNo }">
-	<h3>중고제품</h3>
+	<div style="display:inline-block; font-size:20pt; font-weight:bolder;"><a id="titletag" href="/used/big">중고 제품</a></div><br>
+	
+	<div id="hideBtnMbno" style="display:inline-block; float:right; margin-bottom:10px;">
+		<a href="/used/store/${loginMbNo }" id="goUsedManager"><span>중고거래 관리</span></a>
+	</div>
+	<br>
+	<div class="hr" style="height:2px; background-color:black;"></div><br><br>
+	
+	
 	<form action="/used/search">
 	<div id="search">
 		<input type="hidden" name="gdsMclassCd" value="${gdsMclassCd }">
@@ -327,42 +345,40 @@
 		<button id="searchBtn" class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
 	</div>
 	</form>
-	<div id="hideBtnMbno">
-	<a href="/used/store/${loginMbNo }" id="goUsedManager"><span>중고거래 관리</span></a>
+	
+	<div id="form_tab">
+		<form class="tabcl" action="/used/big#btn_top">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm">
+			<input type="hidden" name="align" value="1">			
+			<button id="btn_top" class="tab_btn" type="submit">대형가전</button>
+		</form>
+		<form class="tabcl" action="/used/sml#btn_top">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm">
+			<input type="hidden" name="align" value="1">			
+			<button class="tab_btn" type="submit">소형가전</button>
+		</form>
+		<form class="tabcl" action="/used/kit#btn_top">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm">
+			<input type="hidden" name="align" value="1">			
+			<button class="tab_btn" type="submit">주방가전</button>
+		</form>
+		<form class="tabcl" action="/used/app#btn_top">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm">
+			<input type="hidden" name="align" value="1">			
+			<button class="tab_btn" type="submit">가구</button>
+		</form>
+		<form class="tabcl" action="/used/etc#btn_top">
+			<input type="hidden" name="startPage" value="0">
+			<input type="hidden" name="modelNm">
+			<input type="hidden" name="align" value="1">			
+			<button class="tab_btn" type="submit">기타</button>
+		</form>
 	</div>
-<div id="form_tab">
-	<form class="tabcl" action="/used/big#btn_top">
-		<input type="hidden" name="startPage" value="0">
-		<input type="hidden" name="modelNm">
-		<input type="hidden" name="align" value="1">			
-		<button id="btn_top" class="tab_btn" type="submit">대형가전</button>
-	</form>
-	<form class="tabcl" action="/used/sml#btn_top">
-		<input type="hidden" name="startPage" value="0">
-		<input type="hidden" name="modelNm">
-		<input type="hidden" name="align" value="1">			
-		<button class="tab_btn" type="submit">소형가전</button>
-	</form>
-	<form class="tabcl" action="/used/kit#btn_top">
-		<input type="hidden" name="startPage" value="0">
-		<input type="hidden" name="modelNm">
-		<input type="hidden" name="align" value="1">			
-		<button class="tab_btn" type="submit">주방가전</button>
-	</form>
-	<form class="tabcl" action="/used/app#btn_top">
-		<input type="hidden" name="startPage" value="0">
-		<input type="hidden" name="modelNm">
-		<input type="hidden" name="align" value="1">			
-		<button class="tab_btn" type="submit">가구</button>
-	</form>
-	<form class="tabcl" action="/used/etc#btn_top">
-		<input type="hidden" name="startPage" value="0">
-		<input type="hidden" name="modelNm">
-		<input type="hidden" name="align" value="1">			
-		<button class="tab_btn" type="submit">기타</button>
-	</form>
-</div>
-	<div class="used_thing">
+	<div style="width:100%; border:0px solid red;" class="used_thing">
 	<c:forEach items="${alist1 }" var="bean">
 		<div class="line_thing" onclick="location.href='/used/detail/${bean.usedGdsNo }'">
 			<div class="used_thing_img"><img src="${bean.img1 }" style="width: 100%; height: 100%; padding: 4px;"></div>

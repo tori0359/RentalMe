@@ -173,7 +173,7 @@
                       <input type="text" class="form-control" name="usedGdsPrice" id="price" placeholder="숫자로만 입력">
                     </div>
                   </div>
-                  <textarea class="form-control" id="explain" name="content" rows="5" placeholder="설명"></textarea>
+                  <pre><textarea class="form-control" id="explain" name="content" rows="5" placeholder="설명"></textarea></pre>
                   <br>
                   
                   <div class="form-group">

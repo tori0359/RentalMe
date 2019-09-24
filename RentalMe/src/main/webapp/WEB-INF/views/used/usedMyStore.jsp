@@ -28,10 +28,10 @@
 		</form>
 	</div><br><br>
 	
-	<a href="/used/mng" id="insertThing">물품등록</a>
+	<a href="/used/mng" id="insertThing">물품 등록</a>
 	<ul class="tabs">
-		<li class="tab">상품목록</li>
-		<li class="tab">상점후기</li>	
+		<li class="tab">상품 목록</li>
+		<li class="tab">상점 후기</li>	
 	</ul>
 	<div id="myUsedList">
 		<ul>
@@ -64,26 +64,28 @@
 		</ul>
 		</c:forEach>
 	</div>
-	<div id="myUsedReview">
+	<div style="border:0px solid red;" id="myUsedReview">
 		<form action="/used/store/reviewinsert" method="post">
 			<input type="hidden" name="storeNo" value="${mbNo }">
 			<input type="hidden" name="mbNo" value="${loginMbNo }">
 			<input type="hidden" name="grade" value="1">
 			<div id="textAreaInput" >
-			<textarea class="form-control" name="content" rows="3"></textarea>
+			<pre><textarea class="form-control" name="content" rows="5" placeholder="상점에 관한 후기를 써주세요."></textarea></pre>
 			</div>
-			<button style="background-color:black; margin-top:20px; color:white;" id="rviBtn" class="btn btn-lg btn-block" type="submit">후기등록</button>
+			<br>
+			<button style="background-color:black; color:white;" id="rviBtn" class="btn btn-lg btn-block" type="submit">후기등록</button>
 		</form>
 		<c:forEach items="${cmtlist }" var="bean">
-		<div class="storeCmtList">
-			<div class="mbNo">${bean.userNm }</div>
+		<div style="border-bottom:1px solid lightgrey; margin-top:20px;" class="storeCmtList">
+			<div class="mbNo"><p style="font-weight:bold; font-size:13pt">${bean.userNm }</p></div>
 			<div class="storeReviewDt">${bean.storeReviewDt }</div>
-			<div class="content">${bean.content }</div>
+			<div style="margin-bottom:30px; font-size:13pt;" class="content"><pre>${bean.content}</pre></div>
 			<input type="hidden" class="hiddenStoreNo" value="${bean.storeNo }">
 			<input type="hidden" class="hiddenStoreReNo" value="${bean.storeReviewNo }">
-			<button class="btn btn-danger declaration" data-toggle="modal" href="#declmodal">신고하기</button>
+			<button  class="btn btn-danger declaration" data-toggle="modal" href="#declmodal">신고하기</button><br>
 		</div>
 		</c:forEach>
+		<br>
 	</div>
 	
 </div>
@@ -91,8 +93,8 @@
 <div id="declmodal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">신고하기</h5>
+      <div style="height:50px;" class="modal-header">
+        <h5 style="font-weight:bolder;" class="modal-title">신고하기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -100,14 +102,13 @@
       <form action="/used/store/cmtDecl" method="post">
       <div class="modal-body">
         <div>
-        	신고대상
-        	<input id="declSNo" type="hidden" name="storeNo" value="${mbNo}">
-        	<input id="declRNo" type="hidden" name="storeReviewNo" >
-        	<input id="declRDt" type="hidden" name="storeReviewDt">
-        	<input id="declMbNo" type="text" name="mbNo" readonly="readonly">
+        	<p>신고대상: <input style="border:none;" id="declMbNo" type="text" name="mbNo" readonly="readonly"></p>
+        	<input id="declSNo" type="hidden" name="storeNo" value="${mbNo}"/>
+        	<input id="declRNo" type="hidden" name="storeReviewNo" />
+        	<input id="declRDt" type="hidden" name="storeReviewDt"/>
         </div>
         <div> 
-			<input type="text" id="declReason" class="form-control" placeholder="신고사유">
+			<input style="width:70%;" type="text" id="declReason" class="form-control" placeholder="신고사유">
 		</div>
       </div>
       <div class="modal-footer">
