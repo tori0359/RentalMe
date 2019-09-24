@@ -104,7 +104,7 @@
 												<c:if test="${bean.csClassGbCd eq '6'}">
 													<td style="text-align: center;">기타</td>
 												</c:if>
-												<td><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
+												<td style="text-align:left;"><a href="${pageContext.request.contextPath}/mp/mng/mngCsFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
 												<td>${bean.regDt}</td>
 												<td>
 													<input id="${bean.faqNo }" class="btn btn-danger btn-sm" onclick="delFaq(this.id)" value="삭제"/>

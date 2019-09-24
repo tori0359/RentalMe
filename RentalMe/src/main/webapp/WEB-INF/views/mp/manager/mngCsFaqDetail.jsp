@@ -89,15 +89,15 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="page-header">
-						<h2 class="pageheader-title">공지사항 상세보기</h2>
+						<h2 class="pageheader-title">FAQ 상세보기</h2>
 						<div class="page-breadcrumb">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#"
 										class="breadcrumb-link">고객센터관리</a></li>
 									<li class="breadcrumb-item"><a href="#"
-										class="breadcrumb-link">공지사항</a></li>
-									<li class="breadcrumb-item active" aria-current="page">공지사항 상세보기</li>
+										class="breadcrumb-link">FAQ</a></li>
+									<li class="breadcrumb-item active" aria-current="page">FAQ 상세보기</li>
 								</ol>
 							</nav>
 						</div>
@@ -112,32 +112,53 @@
 				<!-- start table  -->
 				<!-- ============================================================== -->
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-					<form action="/mp/mng/csNoticeUpdatePage">
+					<form action="/mp/mng/csFaqUpdatePage">
 						<div class="card">
 							<h5 class="card-header"></h5>
 							<div id="content">
 								<div class="col-md-10 col-md-offset-1">
-									<div id="comment">Notice-Content</div>
+									<div id="comment">FAQ-Content</div>
 									
 										<table class="table" id="daeContent">
 											<tr>
 												<td><label for="id">작 성 자</label></td>
 												<td style="text-align:left;">관리자</td>
 											</tr>
-											<tr>
-												<td><label for="id">글 번 호</label></td>
-												<td style="text-align:left;" ><input type="hidden" name="noticNo"
-													value="${adetail.noticNo}">${adetail.noticNo}</td>
-												<td><input type="hidden" name="csGbCd"
-													value="${adetail.csGbCd}"></td>
-											</tr>
-											<tr>
+												<tr>
 												<td><label>작성일</label></td>
 												<td style="text-align:left;">${adetail.regDt}</td>
 											</tr>
 											<tr>
+												<td><label for="id">글 번 호</label></td>
+												<td style="text-align:left;" ><input type="hidden" name="faqNo"
+													value="${adetail.faqNo}">${adetail.faqNo}</td>
+												<td><input type="hidden" name="csGbCd"
+													value="${adetail.csGbCd}"></td>
+											</tr>
+											<tr>
+								                <td><label for="">분류</label></td>
+								                <c:if test="${adetail.csClassGbCd eq '1'}">
+								                <td style="text-align:left;">주문</td>
+								                </c:if>
+								                <c:if test="${adetail.csClassGbCd eq '2'}">
+								                <td style="text-align:left;">배송</td>
+								                </c:if>
+								                <c:if test="${adetail.csClassGbCd eq '3'}">
+								                <td style="text-align:left;">결제</td>
+								                </c:if>
+								                <c:if test="${adetail.csClassGbCd eq '4'}">
+								                <td style="text-align:left;">교환취소</td>
+								                </c:if>
+								                <c:if test="${adetail.csClassGbCd eq '5'}">
+								                <td style="text-align:left;">회원정보</td>
+								                </c:if>
+								                <c:if test="${adetail.csClassGbCd eq'6'}">
+								                <td style="text-align:left;">기타</td>
+								                </c:if>
+								            </tr>
+											<tr>
 												<td><label>제목</label></td>
-												<td style="text-align:left;"><input type="hidden" value="${adetail.sub}">${adetail.sub}</td>
+												<td style="text-align:left;"><input type="hidden" value="${adetail.sub}" name="sub">${adetail.sub}</td>
 											</tr>
 											<tr>
 												<td style="height: 120px; vertical-align: middle;" ><label>내용</label></td>
@@ -148,7 +169,7 @@
 								</div>
 							</div>
 						</div>
-						<input class="btn btn-primary btn-lg" id="cancel" type="reset" value="뒤로" style="float:right;margin-left: 5px;" />
+						<input class="btn btn-primary btn-lg" id="cancel" type="reset" value="뒤로" style="float:right; margin-left: 5px;" />
 						<input class="btn btn-primary btn-lg" id="updae" type="submit" value="수정" style="float:right;"  />
 					</form>
 					

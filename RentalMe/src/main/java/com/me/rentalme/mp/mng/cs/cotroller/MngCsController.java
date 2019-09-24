@@ -333,7 +333,7 @@ public class MngCsController {
 	 * @param  CsVo csVo
 	 * @param  String pquestNo
 	 * @return ModelAndView 
-	 * @author 황인준 
+	 * @author 강민수 
 	 * 등록일자 : 2019-09-24
 	 */
 	@RequestMapping(value = "/questDetail")
@@ -375,6 +375,29 @@ public class MngCsController {
 
 		return mav;
 
+	}
+	
+
+	/**
+	 * 공지사항 상세보기
+	 * 
+	 * @param HttpSession session : get userId
+	 * @param CsVo csVo 
+	 * @return ModelAndView 
+	 * @author 강민수
+	 * 등록일자 : 2019-09-24
+	 */
+	@RequestMapping(value = "/mngCsFaqDetail", method = RequestMethod.GET)
+	public ModelAndView csFaqDetail(HttpSession session, CsVo csVo) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("mp/manager/mngCsFaqDetail");
+		String userId = (String) session.getAttribute("loginUserId");
+		mav.addObject("id", userId);
+		csService.csFaqDetail(csVo);
+		mav.addObject("adetail", csService.csFaqDetail(csVo));
+		
+		return mav;
+		
 	}
 	
 	

@@ -137,38 +137,38 @@
 								<table class="table" id="daeContent">
 									<tr>
 										<td align="center"><label for="id">글 번 호</label></td>
-										<td><input type="hidden" name="mbNo" value="${bean.mbNo}"><input
+										<td style="text-align:left;"><input type="hidden" name="mbNo" value="${bean.mbNo}"><input
 											type="hidden" name="pquestNo" value="${bean.pquestNo}">${bean.pquestNo}</td>
 
 									</tr>
 									<tr>
 										<td align="center"><label>분류</label></td>
 										<c:if test="${bean.csClassGbCd eq '1'}">
-											<td>주문</td>
+											<td style="text-align:left;">주문</td>
 										</c:if>
 										<c:if test="${bean.csClassGbCd eq '2'}">
-											<td>배송</td>
+											<td style="text-align:left;">배송</td>
 										</c:if>
 										<c:if test="${bean.csClassGbCd eq '3'}">
-											<td>결제</td>
+											<td style="text-align:left;">결제</td>
 										</c:if>
 										<c:if test="${bean.csClassGbCd eq '4'}">
-											<td>교환취소</td>
+											<td style="text-align:left;">교환취소</td>
 										</c:if>
 										<c:if test="${bean.csClassGbCd eq '5'}">
-											<td>회원정보</td>
+											<td style="text-align:left;" >회원정보</td>
 										</c:if>
 										<c:if test="${bean.csClassGbCd eq'6'}">
-											<td>기타</td>
+											<td style="text-align:left;">기타</td>
 										</c:if>
 									</tr>
 									<tr>
 										<td align="center"><label>제목</label></td>
-										<td>${bean.sub}</td>
+										<td style="text-align:left;">${bean.sub}</td>
 									</tr>
 									<tr>
 										<td style="padding-top: 70px;" align="center"><label>내용</label></td>
-										<td style="height: 150px; padding-top: 70px;">${bean.content}</td>
+										<td style="height: 150px; padding-top: 70px; text-align:left;">${bean.content}</td>
 									</tr>
 								</table>
 								<br />
