@@ -513,7 +513,7 @@ input::-moz-focus-inner { border: 0; }
 		var boxSelect = document.getElementById("agreeTermBox");
 		var vBoxSelect = boxSelect.options[boxSelect.selectedIndex].value;		// 장바구니 모달 수량 변경
 		var boxValue = boxSelect.options[boxSelect.selectedIndex].value;
-		if(boxValue == 6) {
+		if(boxValue == 3) {
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);		// 장바구니 모달 가격 변경
@@ -524,7 +524,43 @@ input::-moz-focus-inner { border: 0; }
 			$('#realAgreeTerm').val(vBoxSelect);	// 결제 모달 계약기간 변경
 			vRealGdsPrice = parseInt(realGdsPrice);
 		}
+		else if(boxValue == 6) {
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);	
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}
+		else if(boxValue == 9) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.95)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);	
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}
 		else if(boxValue == 12) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.95)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);	
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");	
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}
+		else if(boxValue == 15) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.90)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);	
@@ -536,7 +572,7 @@ input::-moz-focus-inner { border: 0; }
 			vRealGdsPrice = parseInt(realGdsPrice);
 		}
 		else if(boxValue == 18) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.90)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -546,8 +582,9 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 24) {
-			gdsPriceTemp = String((gdsPriceTemp*0.95));
+		}
+		else if(boxValue == 21) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.85)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -557,8 +594,9 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 30) {
-			gdsPriceTemp = String((gdsPriceTemp*0.90));
+		}
+		else if(boxValue == 24) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.85)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -568,8 +606,54 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 36) {
-			gdsPriceTemp = String((gdsPriceTemp*0.90));
+		}else if(boxValue == 27) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.80)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} 
+		 else if(boxValue == 30) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.80)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}  else if(boxValue == 33) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.75)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}
+		else if(boxValue == 36) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.75)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		}else if(boxValue == 39) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.70)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -580,7 +664,7 @@ input::-moz-focus-inner { border: 0; }
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
 		} else if(boxValue == 42) {
-			gdsPriceTemp = String((gdsPriceTemp*0.85));
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.70)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -590,8 +674,8 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 48) {
-			gdsPriceTemp = String((gdsPriceTemp*0.85));
+		} else if(boxValue == 45) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.65)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -601,8 +685,9 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 54) {
-			gdsPriceTemp = String((gdsPriceTemp*0.80));
+		} 
+		else if(boxValue == 48) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.65)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -612,8 +697,45 @@ input::-moz-focus-inner { border: 0; }
 			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
 			$('#realAgreeTerm').val(vBoxSelect);
 			vRealGdsPrice = parseInt(realGdsPrice);
-		} else if(boxValue == 60) {
-			gdsPriceTemp = String((gdsPriceTemp*0.80));
+		} 
+		else if(boxValue == 51) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.60)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} 
+		else if(boxValue == 54) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.60)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} 
+		else if(boxValue == 57) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.55)));
+			vGdsPriceTemp = gdsPriceTemp;
+			realGdsPrice = vGdsPriceTemp;
+			$('#gdsPrice').val(vGdsPriceTemp);
+			$('#disPrice').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#agreeTerm').val(vBoxSelect);
+			$('#realGdsPrice').val(vGdsPriceTemp);
+			$('#realGdsPrice2').val(vGdsPriceTemp.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,')+"원");
+			$('#realAgreeTerm').val(vBoxSelect);
+			vRealGdsPrice = parseInt(realGdsPrice);
+		} 
+		else if(boxValue == 60) {
+			gdsPriceTemp = String(Math.round((gdsPriceTemp*0.55)));
 			vGdsPriceTemp = gdsPriceTemp;
 			realGdsPrice = vGdsPriceTemp;
 			$('#gdsPrice').val(vGdsPriceTemp);
@@ -895,6 +1017,17 @@ input::-moz-focus-inner { border: 0; }
 										<option value="${list1.agreeTerm*8 }">${list1.agreeTerm*8 }개월</option>
 										<option value="${list1.agreeTerm*9 }">${list1.agreeTerm*9 }개월</option>
 										<option value="${list1.agreeTerm*10 }">${list1.agreeTerm*10 }개월</option>
+										<option value="${list1.agreeTerm*11 }">${list1.agreeTerm*11 }개월</option>
+										<option value="${list1.agreeTerm*12 }">${list1.agreeTerm*12 }개월</option>
+										<option value="${list1.agreeTerm*13 }">${list1.agreeTerm*13 }개월</option>
+										<option value="${list1.agreeTerm*14 }">${list1.agreeTerm*14 }개월</option>
+										<option value="${list1.agreeTerm*15 }">${list1.agreeTerm*15 }개월</option>
+										<option value="${list1.agreeTerm*16 }">${list1.agreeTerm*16 }개월</option>
+										<option value="${list1.agreeTerm*17 }">${list1.agreeTerm*17 }개월</option>
+										<option value="${list1.agreeTerm*18 }">${list1.agreeTerm*18 }개월</option>
+										<option value="${list1.agreeTerm*19 }">${list1.agreeTerm*19 }개월</option>
+										<option value="${list1.agreeTerm*20 }">${list1.agreeTerm*20 }개월</option>
+										
 									</select>
 								</div><br>
 								<h4>${list1.deliverCost }</h4><h6><br></h6>
