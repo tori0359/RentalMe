@@ -98,14 +98,14 @@ csAdd
                <div class="page-header">
                   
                   <div class="page-breadcrumb">
-                  <h2 class="pageheader-title">상품관리</h2>
+                  <h2 class="pageheader-title">고객센터관리</h2>
                      <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                            <li class="breadcrumb-item"><a href="#"
-                              class="breadcrumb-link">상품관리</a></li>
+                              class="breadcrumb-link">게시글 관리</a></li>
                            <li class="breadcrumb-item"><a href="#"
-                              class="breadcrumb-link">경매상품관리</a></li>
-                           <li class="breadcrumb-item active" aria-current="page">경매상품관리 등록</li>
+                              class="breadcrumb-link">고객센터관리</a></li>
+                           <li class="breadcrumb-item active" aria-current="page">공지/FAQ 등록</li>
                         </ol>
                      </nav>
                   </div>
@@ -121,7 +121,7 @@ csAdd
                <!-- ============================================================== -->
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                    <div class="card">
-                       <h5 class="card-header">경매상품 등록</h5>
+                       <h5 class="card-header">공지/FAQ 등록</h5>
                        <div class="card-body">
                              <div class="container-fluid  dashboard-content">
          <!-- ============================================================== -->
@@ -141,7 +141,7 @@ csAdd
                <!-- ============================================================== -->
                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                    <div class="card">
-                       <h5 class="card-header">경매상품 등록</h5>
+                       <h5 class="card-header">게시글 등록</h5>
                        <div class="card-body">
                     <form action="/mp/mng/csNoticeAdd" method="post">
       <h2>공지/FAQ등록</h2>
@@ -195,9 +195,10 @@ csAdd
             </tr>
             <tr>
                 <td></td>
-                <td id="daeButton" style="text-align:right;">
-                   <input type="submit" class="btn btn-primary" value="등록"/>
-                   <input id="cancel" class="btn btn-danger" type="reset" value="취소">
+                <td style="text-align:right;">
+	               
+	                   <input type="submit" class="btn btn-primary" value="등록"/>
+	                   <input id="cancel" class="btn btn-danger" type="reset" value="취소">
                 </td>
             </tr>
         </table>

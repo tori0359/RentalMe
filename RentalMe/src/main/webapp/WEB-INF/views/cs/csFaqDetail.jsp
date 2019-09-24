@@ -106,9 +106,9 @@
                 <td></td>
                 <td id="daeButton" >
                   <input class="btn btn-default" id="cancel" type="reset" value="뒤로">
-                  <c:if test="${id eq 'minminad'}">
+                 <%--  <c:if test="${id eq 'minminad'}">
                 	  <input class="btn btn-primary" id="updae" type="submit" value="수정">
-                  </c:if>
+                  </c:if> --%>
                 </td>
             </tr>
         </table>

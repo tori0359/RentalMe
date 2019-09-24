@@ -37,148 +37,147 @@ mngRentalAdd
     <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-   <script type="text/javascript" src="${pageContext.request.contextPath}/js/actImg.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngActAdd.js"></script>
    <script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
-   <script type="text/javascript">
+  <script type="text/javascript">
 
-      window.onload=function(){
-         $('#cancel').click(function(){
-            window.history.back();
-          })
-          
-      }
-      //selectbox
-      function selectMcGoods(gdsMclassCd){
-         console.log("getget함수 호출");
-         console.log(gdsMclassCd);
-             $.ajax({
-               url:'searchSelect',
-               type:'GET',
-               dataType:'json',
-               data:{param:gdsMclassCd},
-            //   console.log(param);
-            success:function(result){
-                  //select box 초기화
-                  $('#secSelect').find('option').remove().end().append('<option value="">상품을 선택</option>');
-                  //option 추가
-                  $.each(result, function(i){
-                     console.log(result[i]);
+		window.onload=function(){
+			$('#cancel').click(function(){
+				window.history.back();
+		    })
+		    
+		}
+		//selectbox
+		function selectMcGoods(gdsMclassCd){
+			console.log("getget함수 호출");
+			console.log(gdsMclassCd);
+			 	$.ajax({
+					url:'searchSelect',
+					type:'GET',
+					dataType:'json',
+					data:{param:gdsMclassCd},
+				//	console.log(param);
+				success:function(result){
+	               //select box 초기화
+	               $('#secSelect').find('option').remove().end().append('<option value="">상품을 선택</option>');
+	               //option 추가
+	               $.each(result, function(i){
+		               console.log(result[i]);
 
-                     //대형가전
-                     if(result[i]=='에어컨'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+11+'">'+result[i]+'</option>');}
-                     if(result[i]=='냉난방기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+12+'">'+result[i]+'</option>');}
-                     if(result[i]=='냉장고'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+13+'">'+result[i]+'</option>');}
-                     if(result[i]=='TV'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+14+'">'+result[i]+'</option>');}
-                     if(result[i]=='세탁기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+15+'">'+result[i]+'</option>');}
-                     if(result[i]=='빨래건조기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+16+'">'+result[i]+'</option>');}
-                     if(result[i]=='정수기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+17+'">'+result[i]+'</option>');}
-                     if(result[i]=='공기청정기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+18+'">'+result[i]+'</option>');}
-                     if(result[i]=='복합기/프린터'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+19+'">'+result[i]+'</option>');}
+		               //대형가전
+		               if(result[i]=='에어컨'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+11+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉난방기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+12+'">'+result[i]+'</option>');}
+		               if(result[i]=='냉장고'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+13+'">'+result[i]+'</option>');}
+		               if(result[i]=='TV'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+14+'">'+result[i]+'</option>');}
+		               if(result[i]=='세탁기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+15+'">'+result[i]+'</option>');}
+		               if(result[i]=='빨래건조기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+16+'">'+result[i]+'</option>');}
+		               if(result[i]=='정수기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+17+'">'+result[i]+'</option>');}
+		               if(result[i]=='공기청정기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+18+'">'+result[i]+'</option>');}
+		               if(result[i]=='복합기/프린터'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+19+'">'+result[i]+'</option>');}
 
-                  //소형가전
-                     if(result[i]=='커피머신'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+21+'">'+result[i]+'</option>');}
-                     if(result[i]=='제습기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+22+'">'+result[i]+'</option>');}
-                     if(result[i]=='청소기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+23+'">'+result[i]+'</option>');}
-                     if(result[i]=='드라이어'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+24+'">'+result[i]+'</option>');}
-                     if(result[i]=='빔프로젝터'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+25+'">'+result[i]+'</option>');}
-                     if(result[i]=='컴퓨터/노트북'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+26+'">'+result[i]+'</option>');}
-                     if(result[i]=='무선스피커'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+27+'">'+result[i]+'</option>');}
-                     if(result[i]=='비데'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+28+'">'+result[i]+'</option>');}
-                     if(result[i]=='면도기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+29+'">'+result[i]+'</option>');}
+						//소형가전
+		               if(result[i]=='커피머신'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+21+'">'+result[i]+'</option>');}
+		               if(result[i]=='제습기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+22+'">'+result[i]+'</option>');}
+		               if(result[i]=='청소기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+23+'">'+result[i]+'</option>');}
+		               if(result[i]=='드라이어'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+24+'">'+result[i]+'</option>');}
+		               if(result[i]=='빔프로젝터'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+25+'">'+result[i]+'</option>');}
+		               if(result[i]=='컴퓨터/노트북'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+26+'">'+result[i]+'</option>');}
+		               if(result[i]=='무선스피커'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+27+'">'+result[i]+'</option>');}
+		               if(result[i]=='비데'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+28+'">'+result[i]+'</option>');}
+		               if(result[i]=='면도기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+29+'">'+result[i]+'</option>');}
 
-               //주방
-                     if(result[i]=='음식물처리기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+31+'">'+result[i]+'</option>');}
-                     if(result[i]=='제빙기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+32+'">'+result[i]+'</option>');}
-                     if(result[i]=='전자레인지'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+33+'">'+result[i]+'</option>');}
-                     if(result[i]=='에어프라이어'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+34+'">'+result[i]+'</option>');}
-                     if(result[i]=='오븐'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+35+'">'+result[i]+'</option>');}
+					//주방
+		               if(result[i]=='음식물처리기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+31+'">'+result[i]+'</option>');}
+		               if(result[i]=='제빙기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+32+'">'+result[i]+'</option>');}
+		               if(result[i]=='전자레인지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+33+'">'+result[i]+'</option>');}
+		               if(result[i]=='에어프라이어'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+34+'">'+result[i]+'</option>');}
+		               if(result[i]=='오븐'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+35+'">'+result[i]+'</option>');}
 
-               //가구
-                     if(result[i]=='침대(매트리스+프레임)'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+41+'">'+result[i]+'</option>');}
-                     if(result[i]=='침대'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+42+'">'+result[i]+'</option>');}
-                     if(result[i]=='쇼파'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+43+'">'+result[i]+'</option>');}
-                     if(result[i]=='책상'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+44+'">'+result[i]+'</option>');}
+					//가구
+		               if(result[i]=='침대(매트리스+프레임)'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+41+'">'+result[i]+'</option>');}
+		               if(result[i]=='침대'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+42+'">'+result[i]+'</option>');}
+		               if(result[i]=='쇼파'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+43+'">'+result[i]+'</option>');}
+		               if(result[i]=='책상'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+44+'">'+result[i]+'</option>');}
 
-               //기타
-                  if(result[i]=='악기'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+51+'">'+result[i]+'</option>');}
-                     if(result[i]=='명품'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+52+'">'+result[i]+'</option>');}
-                     if(result[i]=='귀금속'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+53+'">'+result[i]+'</option>');}
+					//기타
+			         if(result[i]=='악기'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+51+'">'+result[i]+'</option>');}
+		               if(result[i]=='명품'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+52+'">'+result[i]+'</option>');}
+		               if(result[i]=='귀금속'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+53+'">'+result[i]+'</option>');}
 
-               //패키지
-                     if(result[i]=='침실패키지'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+61+'">'+result[i]+'</option>');}
-                     if(result[i]=='주방패키지'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+62+'">'+result[i]+'</option>');}
-                     if(result[i]=='욕실패키지'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+63+'">'+result[i]+'</option>');}
-                     if(result[i]=='기타패키지'){
-                     $('#secSelect').append('<option name="gdsSclassCd" value="'+64+'">'+result[i]+'</option>');}
-                        
-                  });
-                 
-               },
-               erro:function(jqXHR, textStatus, errorThrown){
-                  alert('오류가 발생했습니다');
-               }
-            })
-      }
+					//패키지
+		               if(result[i]=='침실패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+61+'">'+result[i]+'</option>');}
+		               if(result[i]=='주방패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+62+'">'+result[i]+'</option>');}
+		               if(result[i]=='욕실패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+63+'">'+result[i]+'</option>');}
+		               if(result[i]=='기타패키지'){
+	                  $('#secSelect').append('<option name="gdsSclassCd" value="'+64+'">'+result[i]+'</option>');}
+		                  
+	               });
+	              
+	            },
+	            erro:function(jqXHR, textStatus, errorThrown){
+	               alert('오류가 발생했습니다');
+	            }
+				})
+		}
 
-      function selectScGoods(gdsSclassCd){
-         console.log("들어옴"+$("#secSelect option:selected").val());
-         $.ajax({
-            url:'searchScSelect',
-            type:'GET',
-            data:{'param':$("#secSelect option:selected").val(),'param2':$("#firSelect option:selected").val()},
-            success:function(result){
-               $('#ajax').find('td').remove();
-               //$('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly=readonly value="'+"10"+$("#secSelect option:selected").val()+result+'""/></td>');
-               $('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly="readonly" value="'+result+'"/></td>');
-               //document.getElementById('gdsCd').setAttribute('value',result);
-               //console.log('ff');
+		function selectScGoods(gdsSclassCd){
+			console.log("들어옴"+$("#secSelect option:selected").val());
+			$.ajax({
+				url:'searchScSelect',
+				type:'GET',
+				data:{'param':$("#secSelect option:selected").val(),'param2':$("#firSelect option:selected").val()},
+				success:function(result){
+					$('#ajax').find('td').remove();
+					//$('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly=readonly value="'+"10"+$("#secSelect option:selected").val()+result+'""/></td>');
+					$('#ajax').append('<td><label>상품코드</label></td><td><input type="text" name="gdsCd" readonly="readonly" value="'+result+'"/></td>');
+					//document.getElementById('gdsCd').setAttribute('value',result);
+					//console.log('ff');
 
-               
-            }
+					
+				}
 
-         })
-      }
-        
-         
+			})
+		}
+	     
+	      
 
-        //이미지 등록
-           var cnt=0;
+		  //이미지 등록
+	        var cnt=0;
             var sel_files = [];
-           $(function(){ 
+	        $(function(){ 
                 $("#imgfile").on("change", handleImgsFilesSelect);
                 
                 //가격: 숫자만 입력
@@ -197,15 +196,15 @@ mngRentalAdd
             });
             
 
-           
+	        
         function handleImgsFilesSelect(e) {
-           var imgCnt = document.getElementById("imgfile");
-           if(imgCnt.files.length>12){
-              alert('13개 이상 선택할 수 없습니다.');
-              $('#imgfile').val("");
-              $('img').remove();
-              return false;
-           }
+        	var imgCnt = document.getElementById("imgfile");
+        	if(imgCnt.files.length>12){
+        		alert('13개 이상 선택할 수 없습니다.');
+        		$('#imgfile').val("");
+        		$('img').remove();
+        		return false;
+        	}
             var files = e.target.files;
             var filesArr = Array.prototype.slice.call(files);
             $('img').remove();
@@ -256,11 +255,33 @@ mngRentalAdd
                 }
                 reader.readAsDataURL(f);
             });
-        }    
+        } 	
        
-      
+		
 </script>
-
+<style>
+			#used_main_img{
+                border: 0.2px solid gray;
+                width: 385px;
+                height: 170px;
+                margin-top:10px;
+                float:left;
+            }
+            #used_sub_img_grouping{
+                width: 420px;
+            }
+            .used_sub_imging{
+                display: inline-block;
+                border: 0.1px solid gray;
+                width: 60px;
+                height: 60px;
+                margin:10px 5px 2px 0px;
+                float:left;
+            }
+            .used_sub_imging>img{
+                
+            }
+</style>
 </head>
 <body>
    <!-- ============================================================== -->
@@ -268,7 +289,7 @@ mngRentalAdd
    <!-- ============================================================== -->
    <div>
    <div class="dashboard-wrapper">
-      <div class="container-fluid  dashboard-content" style="width:1200px;margin-right:120px;">
+      <div class="container-fluid  dashboard-content" style="width:1000px; text-align:center;">
          <!-- ============================================================== -->
          <!-- start pageheader -->
          <!-- ============================================================== -->
@@ -305,7 +326,7 @@ mngRentalAdd
                          <table class="table" id="daeContent">
             <tr>
                 <td><label>작 성 자</label></td>
-                <td style="width:center">관 리 자</td>
+                <td style="text-align:left">관 리 자</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -313,7 +334,7 @@ mngRentalAdd
    <form action="/mp/mng/rentalInsert" enctype="multipart/form-data" method="post">
             <tr>
                <td><label>상품-대분류</label></td>
-               <td style="width:center">
+               <td style="text-align:left">
                   <input type="hidden" value="10" name="gdsLclassCd">렌탈상품
                </td>
                <td></td>
@@ -385,11 +406,9 @@ mngRentalAdd
                  새상품<input style="width:40px;" type="checkbox" checked="checked" name="gdsGbCd" value="N">중고상품&nbsp&nbsp<input style="width:40px;" type="checkbox" name="gdsGbCd" value="Y">
                </td>
            </tr>
-           <tr>
-           </tr>
              <tr>
                 <td  style="vertical-align:middle;"><label>이미지 업로드</label></td>
-                <td colspan="3">
+                <td colspan="3" style="text-align:center;">
                    <p>* 상품이미지는 640x640에 최적화 되어 있습니다.<br/>
                     - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br/>
                     - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
@@ -399,42 +418,41 @@ mngRentalAdd
                       <div id="used_imgUpload">
                            <input type="file" id="imgfile" name="imgfile" multiple="multiple" accept=".jpg,.jpeg,.png,.gif,.bmp">
                        </div>
-                       <div id="used_main_img">
+                       <div style="text-align:center;" id="used_main_img">
                        
-                         </div>
-                       <div id="used_sub_img_group">
-                         <br/><br/><br/><br/><br/><br/><br/><br/>
-                           <div class="used_sub_img" id="sub_img1">
+                       </div>
+                       <div style="margin-left:10px;" id="used_sub_img_grouping">
+                           <div class="used_sub_imging" id="sub_img1">
                            
                            </div>
-                           <div class="used_sub_img" id="sub_img2">
+                           <div class="used_sub_imging" id="sub_img2">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img3">
+                           <div class="used_sub_imging" id="sub_img3">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img4">
+                           <div class="used_sub_imging" id="sub_img4">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img5">
+                           <div class="used_sub_imging" id="sub_img5">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img6">
+                           <div class="used_sub_imging" id="sub_img6">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img7">
+                           <div class="used_sub_imging" id="sub_img7">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img8">
+                           <div class="used_sub_imging" id="sub_img8">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img9">
+                           <div class="used_sub_imging" id="sub_img9">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img10">
+                           <div class="used_sub_imging" id="sub_img10">
    
                            </div>
-                           <div class="used_sub_img" id="sub_img11">
+                           <div class="used_sub_imging" id="sub_img11">
    
                            </div>
                       </div>
@@ -443,9 +461,9 @@ mngRentalAdd
             <tr>
                <td></td>
                <td></td>
-               <td style="text-align:right;">
+               <td>
                </td>
-                <td>
+                <td style="text-align:right;">
                    <input class="btn btn-primary" type="submit" value="등록"/>
                    <input id="cancel" class="btn btn-danger" type="reset" value="취소">
                 </td>

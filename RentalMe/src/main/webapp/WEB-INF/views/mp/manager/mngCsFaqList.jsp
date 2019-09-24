@@ -1,143 +1,136 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
-
-<script type="text/javascript">
+	<title>RentalMe - FAQ 리스트</title>
+	<jsp:include page="../../template/main.jsp"></jsp:include>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/buttons.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/select.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/vendor/datatables/css/fixedHeader.bootstrap4.css">
 	
-</script>
-<style type="text/css">
-	#btn00{
-		text-align:right;
-	}
-	#notcH{
-		text-decoration:none;
-		color:red;
-	}
-	#faqH{
-		text-decoration:none;
-		color:blue;
-	}
-	#span2{
-		color:blue;
-	}
-	#tableHead tr>th:nth-child(1){
-		width:10%;
-		text-align:center;
-	}
-	#tableHead tr>th:nth-child(2){
-		width:10%;
-		text-align:center;
-	}
-	#tableHead tr>th:nth-child(3){
-		width:50%;
-		text-align:center;
-	}
-	#tableHead tr>th:nth-child(4){
-		width:20%;
-		text-align:center;
-	}
-	#tableHead tr>th:nth-child(5){
-		width:10%;
-		text-align:center;
-	}
-	#aasub:hover{
-	color:red;
-	}
-</style>
-<title>Insert title here</title>
-<jsp:include page="../../template/headerMng.jsp"></jsp:include>
+	<script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="http://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendor/datatables/js/data-table.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="http://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="http://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="http://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="http://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
+    <script src="http://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+    <script src="http://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/mpMngCs.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dtProperties.js"></script>
 </head>
 <body>
-<c:choose>
-<c:when test="${levelGbCd eq '2'}">
-<!-- 관리자 공지게시판 리스트 -->
-<h1><span id="span1">공지</span><span id="span2">/FAQ</span></h1>
-<div id="content" class="col-md-10 col-md-offset-1">
-<div align="right" id="text"><a id="notcH" href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>&nbsp&nbsp&nbsp<a id="faqH" href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a></div>
-	<table id="tableHead" class="table table-hover">
-		<tr>
-			<th>번호</th>
-			<th>분류</th>
-			<th>제목</th>
-			<th>등록일</th>
-			<th>삭제</th>
-		</tr>
-			<c:forEach items="${blist}" var="bean">
-				<tr>
-				<form action="${pageContext.request.contextPath}/mp/mng/faqDelete" method="post">
-					<td style="text-align: center;"><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
-					<c:if test="${bean.csClassGbCd eq '1'}">
-						<td style="text-align: center;">주문</td>
-					</c:if>
-					<c:if test="${bean.csClassGbCd eq '2'}">
-						<td style="text-align: center;">배송</td>
-					</c:if>
-					<c:if test="${bean.csClassGbCd eq '3'}">
-						<td style="text-align: center;">결제</td>
-					</c:if>
-					<c:if test="${bean.csClassGbCd eq '4'}">
-						<td style="text-align: center;">교환취소</td>
-					</c:if>
-					<c:if test="${bean.csClassGbCd eq '5'}">
-						<td style="text-align: center;">회원정보</td>
-					</c:if>
-					<c:if test="${bean.csClassGbCd eq '6'}">
-						<td style="text-align: center;">기타</td>
-					</c:if>
-					<td><a id="aasub" style="color:black; text-decoration:none;" href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
-					<td style="text-align: center;">${bean.regDt}</td>
-					<td style="text-align: center;"><input class="btn btn-danger" type="submit" value="삭제"/></td>
-				</form>
-				</tr>
-			</c:forEach>
-	</table>
-	<div align="center" width="100%">
-				<div id="paginationBox">
-						<ul class="pagination">
-							<c:if test="${paging.prev}">
-								<li class="page-item">
-									<a class="page-link" onClick="prevEvent('${pathPaging}','${paging.page}', '${paging.range}', '${paging.rangeSize}')">
-										&lt;
-									</a>
-								</li>
-							</c:if>
-							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
-								<li class="page-item <c:out value="${paging.page == idx ? 'active' : ''}"/> " >
-									<a class="page-link" style="cursor: pointer;"onClick="pageChange('${pathPaging}','${idx}', '${paging.range}', '${paging.rangeSize}')"> 
-										${idx} 
-									</a>
-								</li>
-							</c:forEach>
-							<c:if test="${paging.next}">
-								<li class="page-item">
-									<a class="page-link" onClick="nextEvent('${pathPaging}','${paging.range}', '${paging.range}', '${paging.rangeSize}')" >
-										&gt;
-									</a>
-								</li>
-							</c:if>
-						</ul>
+	<!-- ============================================================== -->
+	<!-- start wrapper  -->
+	<!-- ============================================================== -->
+	<div class="dashboard-wrapper">
+		<div class="container-fluid  dashboard-content">
+			<!-- ============================================================== -->
+			<!-- start pageheader -->
+			<!-- ============================================================== -->
+			<div class="row">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="page-header">
+						<h2 class="pageheader-title">고객센터관리</h2>
+						<div class="page-breadcrumb">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#"
+										class="breadcrumb-link">고객센터관리</a></li>
+									<li class="breadcrumb-item active" aria-current="page">FAQ</li>
+								</ol>
+							</nav>
+						</div>
 					</div>
+				</div>
+			</div>
+			<!-- ============================================================== -->
+			<!-- end pageheader -->
+			<!-- ============================================================== -->
+            <div align="right" id="headMenu">
+				<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/csNoticeList">[공지사항]</a>
+				<a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/mp/mng/csFaqList">[FAQ]</a>
+			</div>
+			<div class="row">
+				<!-- ============================================================== -->
+				<!-- start table  -->
+				<!-- ============================================================== -->
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="card">
+						<h5 class="card-header">FAQ 목록</h5>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="dt" class="table table-striped table-bordered first">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+											<th>등록일</th>
+											<th>삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${blist}" var="bean">
+											<tr>
+												<td style="text-align: center;"><input type="hidden" name="num" value="${bean.faqNo}"/>${bean.faqNo}</td>
+												<c:if test="${bean.csClassGbCd eq '1'}">
+													<td style="text-align: center;">주문</td>
+												</c:if>
+												<c:if test="${bean.csClassGbCd eq '2'}">
+													<td style="text-align: center;">배송</td>
+												</c:if>
+												<c:if test="${bean.csClassGbCd eq '3'}">
+													<td style="text-align: center;">결제</td>
+												</c:if>
+												<c:if test="${bean.csClassGbCd eq '4'}">
+													<td style="text-align: center;">교환취소</td>
+												</c:if>
+												<c:if test="${bean.csClassGbCd eq '5'}">
+													<td style="text-align: center;">회원정보</td>
+												</c:if>
+												<c:if test="${bean.csClassGbCd eq '6'}">
+													<td style="text-align: center;">기타</td>
+												</c:if>
+												<td style="text-align:left;"><a href="${pageContext.request.contextPath}/cs/csFaqDetail?csGbCd=${bean.csGbCd}&faqNo=${bean.faqNo}&csClassGbCd=${bean.csClassGbCd}" style="text-decoration:none">${bean.sub}</a></td>
+												<td>${bean.regDt}</td>
+												<td>
+													<input id="${bean.faqNo }" class="btn btn-danger btn-sm" onclick="delFaq(this.id)" value="삭제"/>
+												</td>
+											</tr>
+										</c:forEach>										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div id="btn00"><a href="/mp/mng/csAdd"><input type="button" class="btn btn-primary btn-sm" id="btn00" value="등록"></a></div>
+				</div>
+				<!-- ============================================================== -->
+				<!-- end table  -->
+				<!-- ============================================================== -->
+			</div>
+		</div>
+		<jsp:include page="../../template/footerAdmin.jsp"></jsp:include>
 	</div>
-				<div id="btn00"><a href="/mp/mng/csAdd"><input type="button" id="btn00" value="등록"></a></div>
-</div>
-</c:when>
-<c:otherwise>
-<h1>관리자 전용</h1>
-</c:otherwise>
-</c:choose>
+	<!-- ============================================================== -->
+	<!-- end wrapper  -->
+	<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- end main wrapper  -->
+	<!-- ============================================================== -->
 </body>
-<jsp:include page="../../template/footerMp.jsp"></jsp:include>
 </html>
-
-
-
-
-
-
-

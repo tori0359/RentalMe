@@ -192,7 +192,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td id="daeButton" >
+                <td style="text-align:right; width:200px;" >
                    <input class="btn btn-primary" type="submit" value="수정"/>
                    <input class="btn btn-default" id="cancel" type="reset" value="취소">
                 </td>
