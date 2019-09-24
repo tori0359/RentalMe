@@ -1,5 +1,3 @@
-mngRentalAdd
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -261,18 +259,21 @@ mngRentalAdd
 </script>
 <style>
 			#used_main_img{
-                border: 0.2px solid gray;
+                border: 0.1px solid lightgray;
                 width: 385px;
                 height: 170px;
                 margin-top:10px;
-                float:left;
+                margin-left:200px;
+              /*   float:left; */
             }
             #used_sub_img_grouping{
-                width: 420px;
+                width: 600px;
+                padding-left:190px;
+                float:left;
             }
             .used_sub_imging{
                 display: inline-block;
-                border: 0.1px solid gray;
+                border: 0.1px solid lightgray;
                 width: 60px;
                 height: 60px;
                 margin:10px 5px 2px 0px;
@@ -333,7 +334,7 @@ mngRentalAdd
         
    <form action="/mp/mng/rentalInsert" enctype="multipart/form-data" method="post">
             <tr>
-               <td><label>상품-대분류</label></td>
+               <td style="width:120px;"><label>상품-대분류</label></td>
                <td style="text-align:left">
                   <input type="hidden" value="10" name="gdsLclassCd">렌탈상품
                </td>
