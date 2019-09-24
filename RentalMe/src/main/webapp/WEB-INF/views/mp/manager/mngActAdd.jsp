@@ -119,6 +119,10 @@
 	                                <input type="hidden" value="80" name="GdsMclassCd"> <!-- 중분류코드 : 이벤트경매 -->
 	                            </div>
 	                            <div class="form-group">
+	                                <label for="gdsStPrice" class="col-form-label">시작가</label>
+	                                <input id="gdsStPrice"  type="text" name="gdsStPrice" class="form-control form-control-sm">
+	                            </div>
+	                            <div class="form-group">
 	                                <label for="actStTime" class="col-form-label">시작시간</label>
 	                                <input id="actStTime"  type="datetime-local" name="actStTime" class="form-control form-control-sm">
 	                            </div>
