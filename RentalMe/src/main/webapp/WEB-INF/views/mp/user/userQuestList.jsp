@@ -32,11 +32,7 @@
 	#info{
 			width:93%;
 			margin:20px 0px 10px 20px;
-<<<<<<< HEAD
-			border:5px solid #E6E6E6;
-=======
 			border:4px solid #A4A4A4;
->>>>>>> refs/remotes/origin/hij
 			padding: 10px;
 		}
 	.titlediv{

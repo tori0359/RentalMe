@@ -322,7 +322,7 @@ public class MngCsController {
 		csService.insertReply(csVo);
 		csService.inqAnswer(pquestNo);
 		
-		mav.setViewName("redirect:/mp/mp/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
+		mav.setViewName("redirect:/mp/mng/questDetail?pquestNo="+pquestNo+"&mbNo="+mbNo+"");
 		return mav;
 	}
 	
