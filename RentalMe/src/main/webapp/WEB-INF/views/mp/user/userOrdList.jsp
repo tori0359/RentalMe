@@ -414,7 +414,7 @@ span em.warning{
                 <td style="vertical-align:middle;"><p class="tdtext">
                  <c:choose>
                   	<c:when test="${bean.cnt == 0}">
-                		<button style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
+                		<button id="reviewbtn" style="background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" data-toggle="modal" data-target="#myModal" data-gds-nm="${bean.gdsNm}" data-gds-cd="${bean.gdsCd}" data-odr-no="${bean.odrNo}">후기쓰기</button>
               		</c:when>
                 	<c:otherwise>
                			<button id="disabled" style="opacity:0.3; background:#151515; color:white;" type="button" class="btn" style="font-size: 9pt;" disabled="disabled">등록완료</button>

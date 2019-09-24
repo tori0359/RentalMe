@@ -981,8 +981,8 @@ input::-moz-focus-inner { border: 0; }
 										<ul class="thumbnails">
 										<c:forEach items="${list4 }" var="list4" end="3">	
 											<li class="col-sm-3">
-												<div class="thumbnail">
-													<a href="${menu }/detail/${list4.gdsCd }"><img src=${list4.img1 } alt="" ></a>
+												<div class="thumbnail" style="border:1px solid red; height:290px;">
+													<a href="${menu }/detail/${list4.gdsCd }"><img style="height:100%;" src=${list4.img1 } alt="" ></a>
 												</div>
 												<div class="caption-box">
 													<a href="${menu }/detail/${list4.gdsCd }">

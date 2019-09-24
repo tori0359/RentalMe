@@ -163,6 +163,7 @@
 						<h4 class="modal-title">비밀번호 변경</h4>
 					</div>
 					<div class="modal-body">
+					<div style="text-align:center;">
 						<div style="display:inline-block;" class="pwdiv">
 							<div style="padding:3px; font-weight:bolder;">새로운 비밀번호 </div>
 							<div style="padding:3px; font-weight:bolder;">비밀번호 확인 </div>		
@@ -171,6 +172,7 @@
 							<div style="margin-bottom:2px;"><input  type="password" placeholder="비밀번호" name="pw1" id="pw1"/></div>
 							<div><input  type="password" placeholder="비밀번호확인" name="pw2" id="pw2"/></div>
 						</div>
+					</div>
 					</div>
 					<div class="modal-footer">
 						<button style="background-color:black; color:white;" id="pw_change_btn" type="button" class="btn btn-default btn-block">비밀번호 변경</button>

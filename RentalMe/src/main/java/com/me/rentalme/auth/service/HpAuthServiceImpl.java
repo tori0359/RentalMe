@@ -44,7 +44,6 @@ public class HpAuthServiceImpl implements HpAuthService {
 		String 	apiKey 		= "NCSKEDEQPFGCT67L";						//git에 올라갈시 api키 공개되면 안되므로 삭제(담당자에게 문의)
 		String 	apiSecret 	= "GZH4QB14H8QD9QAGIJE6DB16L6HVQTDD";		//git에 올라갈시 secret키 공개되면 안되므로 삭제(담당자에게 문의)
 		Message coolsms 	= new Message(apiKey, apiSecret);
-		
 		String result = "";
 		String msg = "";
 		
