@@ -19,7 +19,7 @@
 		WHERE A.GDS_CD = B.GDS_CD AND A.GDS_CD = C.GDS_CD
 		GROUP BY GDS_CD 
 		ORDER BY cnt DESC 
-		LIMIT 	12
+		LIMIT 	12   
 	</select>
 	
 	<select id="selectNewList" resultType="com.me.rentalme.model.entity.CallVo">

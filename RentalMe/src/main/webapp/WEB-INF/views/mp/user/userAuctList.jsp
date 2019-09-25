@@ -349,9 +349,9 @@
 				    	<input type="hidden"  id="realTotPrice" style="border:0px;" name="bidPrice" readonly="readonly"  value="${bean.bidPrice }">
 				    	<fmt:setLocale value="ko_KR"></fmt:setLocale>
 				    	<h2><input type="text"  id="realTotPriceTxt" style="border:0px;" name="bidPrice" readonly="readonly" value="<fmt:formatNumber value="${bean.bidPrice }" /> "></h2>
-				    	<input type="text" id="realGdsCd" name="gdsCd" value="gdsCd"/>
-				    	<input type="text" id="realGdsNm" name="gdsNm" value="gdsNm"/>
-				    	<input type="text" id="realBidPrice" name="realBidPrice" value="realBidPrice"/>
+				    	<input type="hidden" id="realGdsCd" name="gdsCd" value="gdsCd"/>
+				    	<input type="hidden" id="realGdsNm" name="gdsNm" value="gdsNm"/>
+				    	<input type="hidden" id="realBidPrice" name="realBidPrice" value="realBidPrice"/>
 					</div>
 				    <div class="modal-footer">
 				    	<button type="button" id="realSubmit" class="btn btn-danger">주문하기</button>

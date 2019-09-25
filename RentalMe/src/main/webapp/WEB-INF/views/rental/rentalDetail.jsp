@@ -112,6 +112,45 @@ body h4{
 	.star-rating,.star-rating span { display:inline-block; height:20px; overflow:hidden; background-image: url('/imgs/star8.jpg'); background-repeat: no-repeat; }
 	.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; width:0%;}
 	/* 별점 끝 */
+	
+#orderby1{ 
+   margin-top: 6px;
+}
+#orderby2{ 
+   margin-top: -12px;
+}
+#orderby3{ 
+   margin-top: -16px;
+}
+#orderby4{ 
+   margin-top: -8px;
+}
+#orderby5{ 
+   margin-top: -10px;
+}
+#orderby6{ 
+   margin-top: -5px;
+}	
+
+#orderby1{ 
+   margin-top: 6px;
+}
+#orderby2{ 
+   margin-top: -12px;
+}
+#orderby3{ 
+   margin-top: -16px;
+}
+#orderby4{ 
+   margin-top: -8px;
+}
+#orderby5{ 
+   margin-top: -10px;
+}
+#orderby6{ 
+   margin-top: -5px;
+}
+
 
 /* ---------- 상세정보 영역 끝 -------- */
 
@@ -1038,12 +1077,12 @@ input::-moz-focus-inner { border: 0; }
 										
 									</select>
 								</div><br>
-								<h4>${list1.deliverCost }</h4><h6><br></h6>
-								<h4>${list1.instalCost }</h4><h6><br></h6>
-								<h4>${list1.asCondition }</h4><h6><br></h6>
-								<h4>${list1.modelNm }</h4><h6><br></h6>
-								<h4>${list1.gdsCd }</h4><h6><br></h6>
-								<div class="box box-primary">
+								<h4 id="orderby1" >${list1.deliverCost }</h4><h6><br></h6>
+								<h4 id="orderby2" >${list1.instalCost }</h4><h6><br></h6>
+								<h4 id="orderby3" >${list1.asCondition }</h4><h6><br></h6>
+								<h4 id="orderby4" >${list1.modelNm }</h4><h6><br></h6>
+								<h4 id="orderby5" >${list1.gdsCd }</h4><h6><br></h6>
+								<div id="orderby6"  class="box box-primary">
 									<select id="selectOerQty" onchange="selectOerQty()">
 										<option value=1>&nbsp;1대&nbsp;&nbsp;</option>
 										<option value=2>2대</option>
