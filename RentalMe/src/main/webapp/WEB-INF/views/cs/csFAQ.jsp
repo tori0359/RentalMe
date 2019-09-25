@@ -25,7 +25,22 @@
 				location.replace("/cs/csNotice");
 			});
 			$("#noticeBar td:nth-child(3)").click(function(){
-				location.replace("/cs/csInquiry");
+				<%
+			    String userId=(String)session.getAttribute("loginUserId");
+			   	System.out.println("1대1 질문"+userId);
+		    
+			   	if(userId==null){
+			   		
+				%>alert('회원전용 페이지 입니다.');<%
+				
+			   	}else if(userId!=null){
+			   		
+				%>location.replace("/cs/csInquiry");<%
+				
+				}
+				
+				%>
+				
 			});
 			$(".list0").hide(); 
 			//전체보기
