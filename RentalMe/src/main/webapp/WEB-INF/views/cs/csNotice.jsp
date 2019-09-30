@@ -20,7 +20,21 @@
 				$(this).css("background", "white").css("color","black"),$("#noticeBar td:nth-child(1)").css("background","black").css("color","white");
 			});
 			$("#noticeBar td:nth-child(3)").click(function(){
-				location.replace("/cs/csInquiry");
+				<%
+			    String userId=(String)session.getAttribute("loginUserId");
+			   	System.out.println("1대1 질문"+userId);
+		    
+			   	if(userId==null){
+			   		
+				%>alert('회원전용 페이지 입니다.');<%
+				
+			   	}else if(userId!=null){
+			   		
+				%>location.replace("/cs/csInquiry");<%
+				
+				}
+				
+				%>
 			});
 			$("#noticeBar td:nth-child(2)").click(function(){
 				location.replace("/cs/csFAQ");
@@ -112,7 +126,7 @@
 </div>
 <div id="content" class="col-md-10 col-md-offset-1">
 	<div>
-	<table class="table table-condensed" >
+	<table class="table table-hover" >
 		<tr>
 			<th style="height:40px;">번호</th>
 			<th>제목</th>

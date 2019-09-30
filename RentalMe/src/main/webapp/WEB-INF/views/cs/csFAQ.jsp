@@ -9,7 +9,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-
 			var i=0;
 			$("#noticeBar td:nth-child(1)").mouseover(function(){
 			  $(this).css("background", "black").css("color","white");
@@ -26,7 +25,22 @@
 				location.replace("/cs/csNotice");
 			});
 			$("#noticeBar td:nth-child(3)").click(function(){
-				location.replace("/cs/csInquiry");
+				<%
+			    String userId=(String)session.getAttribute("loginUserId");
+			   	System.out.println("1대1 질문"+userId);
+		    
+			   	if(userId==null){
+			   		
+				%>alert('회원전용 페이지 입니다.');<%
+				
+			   	}else if(userId!=null){
+			   		
+				%>location.replace("/cs/csInquiry");<%
+				
+				}
+				
+				%>
+				
 			});
 			$(".list0").hide(); 
 			//전체보기
@@ -37,7 +51,6 @@
 				$(".list0").show();
 				$(".list1 ,.list2, .list3, .list4, .list5, .list6").hide();
 				i=0;
-
 			})
 			//주문
 			$("#noticeMenuBar td:nth-child(2)").click(function(){
@@ -88,17 +101,13 @@
 				//$(".list0, .list1, .list2, .list3,.list4, .list5").hide();
 				$("#paginationBox").hide();
 			}); 
-
 			$('#btnSearch').click(function(e){
-
 				e.preventDefault();
-
 				var url = "${pageContext.request.contextPath}/cs/csFAQ";
 				url = url + "?searchType=" + $('#searchType').val();
 				url = url + "&keyword=" + $('#keyword').val();
 				location.href = url;
 				console.log(url);
-
 			});
 	
 		})
@@ -114,7 +123,6 @@
 					var goodsList = result;
 					console.log('삭제');
 					$('.hihi').remove();
-
 					console.log(goodsList);
 					$('.hi').empty();
 					for(var i=0; i<goodsList.length; i++){
@@ -129,7 +137,6 @@
 				erro:function(jqXHR,testStatus,errorThrown){
 					alert('오류가 발생했습니다');
 				}
-
 			}) 
 		}
 	</script>
@@ -277,11 +284,11 @@
 					<td onclick="menuClick('5');">회원정보</td>
 					<td onclick="menuClick('6');">기타</td>
 					<td>
-						<select style="height:25px;" name="searchType" id="searchType">
+						<select style="height:23px;" name="searchType" id="searchType">
 							<option>선택하기</option>
 							<option value="title">제목</option>
 						</select>
-						<input type="text" name="keyword" id="keyword">
+						<input  style="height:100%;" type="text" name="keyword" id="keyword">
 						<button name="btnSearch" id="btnSearch">검색</button>
 					</td>
 				</tr>
@@ -440,4 +447,3 @@
 </body>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </html>
-
